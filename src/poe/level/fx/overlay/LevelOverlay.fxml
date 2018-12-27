@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="49.0" prefWidth="831.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.overlay.LevelOverlay_Controller">
+   <children>
+      <FlowPane alignment="CENTER" hgap="100.0" prefHeight="49.0" prefWidth="736.0" style="-fx-background-color: rgba(0, 0, 0, 0);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="player" style="-fx-border-color: white;" text="Current Level :" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Alegreya Sans SC Medium" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="2.0" right="2.0" />
+               </padding>
+            </Label>
+            <Label fx:id="zone" layoutX="334.0" layoutY="25.0" style="-fx-border-color: white;" text="Monster Level :" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Alegreya Sans SC Medium" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="2.0" right="2.0" />
+               </padding>
+            </Label>
+            <Label fx:id="safezone" layoutX="428.0" layoutY="25.0" style="-fx-border-color: white;" text="Safezone :" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Alegreya Sans SC Medium" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="2.0" right="2.0" />
+               </padding>
+            </Label>
+            <Label layoutX="523.0" layoutY="25.0" style="-fx-border-color: white;" text="XP Multiplier :" textAlignment="CENTER" textFill="WHITE" fx:id="xpmulti">
+               <font>
+                  <Font name="Alegreya Sans SC Medium" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="2.0" right="2.0" />
+               </padding>
+            </Label>
+         </children>
+      </FlowPane>
+   </children>
+</AnchorPane>

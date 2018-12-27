@@ -1,0 +1,60 @@
+{
+    color: transparent;
+    background-color:  rgba(58, 44, 189, 0.4);
+    color2: transparent;
+    background-color2:  rgba(215, 44, 44, 0.4);
+    
+    background-pane-color-1: black;
+    background-pane-color-2: yellow;
+    color3: transparent;
+}
+
+.buildPanel{
+    -fx-border-style: solid;
+    -fx-background-color: color;
+}
+
+.buildPanel:hover{
+    -fx-background-color: background-color;
+}
+
+.gemPanel{
+    -fx-background-color: color2;
+}
+
+.gemPanel:hover{
+    -fx-border-style: solid;
+}
+
+.jfx-tab-pane
+{
+  
+}
+
+.jfx-tab-pane .headers-region
+{
+  -fx-background-color: #3F826D;
+}
+
+.jfx-tab-pane .tab-header-background
+{
+  -fx-background-color: #3F826D;
+}
+
+.jfx-tab-pane .tab-header-area .jfx-rippler
+{
+  -jfx-rippler-fill: orange;
+}
+
+.jfx-tab-pane .tab-header-area .tab-selected-line
+{
+  -fx-stroke: red;
+}
+
+.jfx-tab-pane:top .depth-container .tab-header-area .headers-region .tab-selected-line {
+    -fx-background-color: #F2D0A4;
+}
+
+.backgroundPane{
+    -fx-background-color: color3;
+}

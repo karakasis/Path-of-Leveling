@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="503.0" prefWidth="709.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.AddGem_Controller">
+   <children>
+      <JFXTabPane fx:id="tabpane" prefHeight="401.0" prefWidth="601.0" stylesheets="@../../../../resources/styles/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab text="Act I">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="340.0" prefWidth="573.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                          <content>
+                              <VBox fx:id="actIbox" prefHeight="436.0" prefWidth="666.0" />
+                          </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Act II">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane prefHeight="340.0" prefWidth="573.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <content>
+                              <VBox fx:id="actIIbox" prefHeight="436.0" prefWidth="666.0" />
+                           </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Act III">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane prefHeight="340.0" prefWidth="573.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <content>
+                              <VBox fx:id="actIIIbox" prefHeight="436.0" prefWidth="666.0" />
+                           </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: C0321;" text="Act IV">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane prefHeight="340.0" prefWidth="573.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <content>
+                              <VBox fx:id="actIVbox" prefHeight="436.0" prefWidth="666.0" />
+                           </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Other gems">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane prefHeight="340.0" prefWidth="573.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <content>
+                              <VBox fx:id="otherVBox" prefHeight="436.0" prefWidth="666.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <Label text="as Scion" textFill="WHITE" visible="false" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="searchArea" layoutX="546.0" layoutY="7.0" onAction="#onEnter" promptText="Search gem" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="4.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

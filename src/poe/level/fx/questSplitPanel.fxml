@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane fx:id="container" dividerPositions="0.1532" minHeight="118.0" prefHeight="118.0" prefWidth="557.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.QuestSplitPanel_Controller">
+   <items>
+      <AnchorPane maxWidth="82.0" minHeight="0.0" minWidth="0.0" prefHeight="116.0" prefWidth="85.0">
+         <children>
+            <Label fx:id="quest_label" layoutY="29.0" prefHeight="60.0" prefWidth="84.0" style="-fx-background-color: F7F7FF;" text="Enemy at the gate" textAlignment="CENTER" textFill="#545e75" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </Label>
+            <Label fx:id="level_label" layoutY="6.0" prefHeight="17.0" prefWidth="83.0" style="-fx-background-color: #545E75;" text="Level 1" textAlignment="CENTER" textFill="#f7f7ff" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="17.0" right="2.0" top="2.0" />
+               </padding>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <ScrollPane vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <content>
+                  <AnchorPane prefHeight="102.0" prefWidth="465.0">
+                     <children>
+                        <HBox fx:id="gemBox" prefHeight="72.0" prefWidth="465.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <padding>
+                              <Insets left="5.0" right="5.0" top="3.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </items>
+</SplitPane>

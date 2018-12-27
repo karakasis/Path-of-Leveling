@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="138.0" minHeight="138.0" prefHeight="138.0" prefWidth="322.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.overlay.Add_gem_overlay_Controller">
+   <children>
+      <ImageView fitHeight="104.0" fitWidth="108.0" layoutX="218.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../icons/icons8-line-80color.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="socketGroupImage" fitHeight="47.0" fitWidth="200.0" layoutX="265.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../GemIcons/Additional%20Accuracy.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="gemAddedImage" fitHeight="47.0" fitWidth="200.0" layoutX="21.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../GemIcons/Arctic%20Armour.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="gemAddedName" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="64.0" layoutY="14.0" prefHeight="47.0" prefWidth="195.0" text="Arctic Armour" textAlignment="CENTER" textFill="#ebebeb" wrapText="true">
+         <font>
+            <Font name="Fontin Regular" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="act" alignment="CENTER" layoutX="205.0" layoutY="66.0" prefHeight="38.0" prefWidth="65.0" text="Act II" textAlignment="CENTER" textFill="#ebebeb" wrapText="true" AnchorPane.bottomAnchor="34.0">
+         <font>
+            <Font name="Fontin Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="quest" alignment="CENTER" layoutY="86.0" prefHeight="47.0" prefWidth="138.0" text="Root of the Problem" textAlignment="CENTER" textFill="#ebebeb" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0">
+         <font>
+            <Font name="Fontin Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="npc" layoutX="149.0" layoutY="91.0" prefHeight="47.0" prefWidth="138.0" text="Petarus and Yenja" textAlignment="CENTER" textFill="#ebebeb" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="35.0">
+         <font>
+            <Font name="Fontin Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="5.0" layoutY="66.0" prefHeight="38.0" prefWidth="83.0" text="Quest :" textAlignment="CENTER" textFill="#ebebeb" wrapText="true">
+         <font>
+            <Font name="Fontin Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="135.0" layoutY="66.0" prefHeight="38.0" prefWidth="83.0" text="NPC :" textAlignment="CENTER" textFill="#ebebeb" wrapText="true">
+         <font>
+            <Font name="Fontin Regular" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

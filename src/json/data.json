@@ -1,0 +1,2030 @@
+{  
+   "acts":[  
+      {  
+         "act":"Act I",
+         "actid":1,
+         "zones":[  
+            {  
+               "name":"The Twilight Strand",
+               "level":1,
+               "image":[  
+                  "none"
+               ],
+               "altimage":"Your nightmare lies ahead.",
+               "note":"Just follow the coastline.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"Enemy at the Gate",
+               "questRewardsSkills":true
+            },
+            {  
+               "name":"The Coast",
+               "level":2,
+               "image":[  
+                  "Coast_Seed_1",
+                  "Coast_Seed_2",
+                  "Coast_Seed_3"
+               ],
+               "altimage":"none",
+               "note":"Stick to the right side, following the wall.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"none",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Tidal Island",
+               "level":3,
+               "image":[  
+                  "none"
+               ],
+               "altimage":"This layout is always a circle.",
+               "note":"The side without a cliff is the shortest way.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"Mercy Mission",
+               "questRewardsSkills":true
+            },
+            {  
+               "name":"The Mud Flats",
+               "level":4,
+               "image":[  
+                  "Mud_Seed_1",
+                  "Mud_Seed_2"
+               ],
+               "altimage":"Green circles indicate the area in which the quest items are grouped. Little rivers connect the three items.",
+               "note":"Collect all the glyphs, to unlock the next area.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"Breaking Some Eggs",
+               "questRewardsSkills":true
+            },
+            {  
+               "name":"The Fetid Pool",
+               "level":5,
+               "image":[  
+                  "none"
+               ],
+               "altimage":"This layout is always a circle.",
+               "note":"Kill everything.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"A Dirty Job",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Submerged Passage",
+               "level":5,
+               "image":[  
+                  "Sub_Seed_1",
+                  "Sub_Seed_2",
+                  "Sub_Seed_3"
+               ],
+               "altimage":"none",
+               "note":"Find the bridge and place a portal. You will use this later to get the passive point from Deep Dweller",
+               "haspassive":true,
+               "hastrial":false,
+               "quest":"Dweller of the Deep",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Flooded Depths",
+               "level":6,
+               "image":[  
+                  "Flood_Seed_1",
+                  "Flood_Seed_2",
+                  "Flood_Seed_3"
+               ],
+               "altimage":"none",
+               "note":"Kill the crab to get a passive point.",
+               "haspassive":true,
+               "hastrial":false,
+               "quest":"Dweller of the Deep",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Ledge",
+               "level":6,
+               "image":[  
+                  "none"
+               ],
+               "altimage":"This layout is always linear, there are little totems on one side of the waypoint, this side will always be the side at which the exit is located.",
+               "note":"Go to the town at the waypoint, take the portal and find the Flooded Depths.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"none",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Climb",
+               "level":7,
+               "image":[  
+                  "Climb_Seed_1",
+                  "Climb_Seed_2"
+               ],
+               "altimage":"none",
+               "note":" Run top right and free Navali.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"none",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Lower Prison",
+               "level":8,
+               "image":[  
+                  "LP_Seed_1",
+                  "LP_Seed_2",
+                  "LP_Seed_3",
+                  "LP_Seed_4"
+               ],
+               "altimage":"none",
+               "note":"Usually go right to find the exit, there is a trial in this zone that you can do later thanks to the waypoint.",
+               "haspassive":false,
+               "hastrial":true,
+               "quest":"The Caged Brute",
+               "questRewardsSkills":true
+            },
+            {  
+               "name":"The Upper Prison",
+               "level":9,
+               "image":[  
+                  "UP_Seed_1",
+                  "UP_Seed_2",
+                  "UP_Seed_3",
+                  "UP_Seed_4",
+                  "UP_Seed_5"
+               ],
+               "altimage":"none",
+               "note":"More linear, almost 50/50 with advantage for left side, log out after Brutus. ",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"The Caged Brute",
+               "questRewardsSkills":true
+            },
+            {  
+               "name":"Prisoner's Gate",
+               "level":10,
+               "image":[  
+                  "PG_Seed_1",
+                  "PG_Seed_2",
+                  "PG_Seed_3",
+                  "PG_Seed_4"
+               ],
+               "altimage":"none",
+               "note":"Look for the side of the road that has the ledge down, usually on the right side.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"none",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Ship Graveyard",
+               "level":11,
+               "image":[  
+                  "Ship_Seed_1",
+                  "Ship_Seed_2",
+                  "Ship_Seed_3",
+                  "Ship_Seed_4"
+               ],
+               "altimage":"none",
+               "note":"Look for waypoint first, then find Fairgraves, and move away from the plateau, generally up or down. Find the Cave entrance, leave a portal for later and find the next waypoint in Cavern of Wrath. 2nd visit: After killing Fairgraves go back to the Cavern of Wrath.",
+               "haspassive":true,
+               "hastrial":false,
+               "quest":"The Marooned Mariner",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Ship Graveyard Cave",
+               "level":12,
+               "image":[  
+                  "none"
+               ],
+               "altimage":"This layout is always linear, with some deadends.",
+               "note":"Find the end of the cave, take the quest item and you can ignore the mini boss.",
+               "haspassive":true,
+               "hastrial":false,
+               "quest":"The Marooned Mariner",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Cavern of Wrath",
+               "level":12,
+               "image":[  
+                  "Wrath_Seed_1",
+                  "Wrath_Seed_2",
+                  "Wrath_Seed_3"
+               ],
+               "altimage":"none",
+               "note":"Take the waypoint to town, and then the portal to the entrance of the cave. 2nd visit: move mostly up",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"The Siren's Cadence",
+               "questRewardsSkills":true
+            },
+            {  
+               "name":"The Cavern of Anger",
+               "level":13,
+               "image":[  
+                  "Anger_Seed_1",
+                  "Anger_Seed_2"
+               ],
+               "altimage":"none",
+               "note":"Often bottom right, you can follow the spirits, if you see piles of gold you’re close to Merveil.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"The Siren's Cadence",
+               "questRewardsSkills":true
+            }
+         ]
+      },
+      {  
+         "act":"Act II",
+         "actid":2,
+         "zones":[  
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Follow the right wall.",
+               "level":13,
+               "name":"The Southern Forest",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Follow the road.",
+               "level":14,
+               "name":"The Old Fields",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"If you kill the White Beast, take as a quest reward a 2n Quicksilver Flask.",
+               "level":15,
+               "name":"The Den",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"A branching maze of tunnels ends at a large chamber.",
+               "quest":"The Great White Beast"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Travel straight from the way you enter, stay on the road. You will find the Waypoint. From this way upwards is always the Wetlands.Keep traveling of the stone road. When you reach a broken bridge, make sure to jump over it with your moving ability.",
+               "level":15,
+               "name":"The Riverways",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout if you manage to stay on the stone road.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"When you reach the waypoint, you have 3 options. Up is the Chamber of sins, down is the Fellshrine Ruins, and straight ahead is Broken bridge(Kraityn)",
+               "level":15,
+               "name":"The Crossroads",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout if you manage to stay on the stone road.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Chamber1_Seed_1",
+                  "Chamber1_Seed_2",
+                  "Chamber1_Seed_3"
+               ],
+               "note":"Go to the center of the zone, always left or right. Activate waypoint and follow the hallway next to the waypoint. The gray circles indicate the center area.",
+               "level":15,
+               "name":"The Chamber of Sins Level 1",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Intruders in Black"
+            },
+            {  
+               "hastrial":true,
+               "image":[  
+                  "Chamber2_Seed_1"
+               ],
+               "note":"Always go up and right, do the trial in top left or do it later when you need it and are faster",
+               "level":16,
+               "name":"The Chamber of Sins Level 2",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Intruders in Black"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Travel on the road upwards, until you reach the waypoint. From there travel on the road but to the right and reach Kraityn.",
+               "level":16,
+               "name":"The Broken Bridge",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"Linear if you stay on the road",
+               "quest":"Deal with the Bandits"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Follow the road until you find a big Crypt.",
+               "level":16,
+               "name":"The Fellshrine Ruins",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout",
+               "quest":"none"
+            },
+            {  
+               "hastrial":true,
+               "image":[  
+                  "none"
+               ],
+               "note":"If you want to do the trial, usually try to go up and right.",
+               "level":17,
+               "name":"The Crypt Level 1",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Maze",
+               "quest":"Through Sacred Ground"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"",
+               "level":18,
+               "name":"The Crypt Level 2",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Maze",
+               "quest":"Through Sacred Ground"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Follow the road, Alira is on the side of the waypoint where the road has a broken section. Go back to the road for The Way Forward quest. The entrance to The Weaver's Chambers can be found on the opposite side of the road from Alira, trees covered in spiderwebs indicate that you're close to the entrance.",
+               "level":17,
+               "name":"The Western Forest",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout if you stay on the road and find waypoint, then everything is in a cross shape.",
+               "quest":"Deal with the Bandits"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Weaver_Seed_1",
+                  "Weaver_Seed_2",
+                  "Weaver_Seed_3"
+               ],
+               "note":"Go left when the left path spawns, otherwise loop around right side. Kill Weaver for the reward, then claim The Way Forward skillpoint.",
+               "level":18,
+               "name":"The Weaver's Chambers",
+               "haspassive":false,
+               "questRewardsSkills":true,
+               "altimage":"none",
+               "quest":"Sharp and Cruel"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Wetlands_Seed_1",
+                  "Wetlands_Seed_2",
+                  "Wetlands_Seed_3"
+               ],
+               "note":"Kill Oak in center, then go to the left side until the Waypoint is visible with the passage next to it, sometimes it’s on the right side. Oftentimes the side at which you enter Oak’s fort will tell you that the waypoint is on the opposite side of the fort.",
+               "level":19,
+               "name":"The Wetlands",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Deal with the Bandits"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Vaal_Seed_1",
+                  "Vaal_Seed_2",
+                  "Vaal_Seed_3"
+               ],
+               "note":"Try to determine the direction, then zig and zag accordingly through the ruins.",
+               "level":20,
+               "name":"The Vaal Ruins",
+               "haspassive":false,
+               "questRewardsSkills":true,
+               "altimage":"none",
+               "quest":"The Root of the Problem"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Go to the top right by following the shoreline.",
+               "level":21,
+               "name":"The Northern Forest",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout, waypoint is adjacent to the shoreline.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Go away there is nothing here.",
+               "level":21,
+               "name":"The Dread Thicket",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"I dont even know what this looks like.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Caverns_Seed_1",
+                  "Caverns_Seed_2",
+                  "Caverns_Seed_3",
+                  "Caverns_Seed_4"
+               ],
+               "note":"Pretty much guessing where the exit spawned.",
+               "level":22,
+               "name":"The Caverns",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Exits are usually diagonal from entrance.",
+               "level":23,
+               "name":"The Ancient Pyramid",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Somewhat linear layout.",
+               "quest":"Shadow of the Vaal"
+            }
+         ]
+      },
+      {  
+         "act":"Act III",
+         "actid":3,
+         "zones":[  
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Don’t forget to talk to Clarissa.",
+               "level":23,
+               "name":"The City of Sarn",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Slums_Seed_1",
+                  "Slums_Seed_2",
+                  "Slums_Seed_3",
+                  "Slums_Seed_4"
+               ],
+               "note":"Find the grates to the sewers, then take the stairs down, follow it until you have stairs up, then it’s fairly linear.",
+               "level":24,
+               "name":"The Slums",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":true,
+               "image":[  
+                  "Crematorium_Seed_1",
+                  "Crematorium_Seed_2",
+                  "Crematorium_Seed_3",
+                  "Crematorium_Seed_4",
+                  "Crematorium_Seed_5"
+               ],
+               "note":"Going left generally has a higher chance of success. There is a trial here.",
+               "level":25,
+               "name":"The Crematorium",
+               "haspassive":false,
+               "questRewardsSkills":true,
+               "altimage":"none",
+               "quest":"Lost in Love"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Sewers_Seed_1"
+               ],
+               "note":"Pick up the bust before the waypoint, after it is another, up and left is the last bust, up and right is the exit.",
+               "level":26,
+               "name":"The Sewers",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Victario's Secrets"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Marketplace_Seed_1",
+                  "Marketplace_Seed_2",
+                  "Marketplace_Seed_3",
+                  "Marketplace_Seed_4",
+                  "Marketplace_Seed_5"
+               ],
+               "note":"Usually up and right, go through the statue hall, check the waypoint (trial nearby it) and move on to find the exit.Stick to the wall and check for wreckages. If there are none in the wall to your right move to left. If you find them follow the wall to find the entrance to Battlefields.",
+               "level":26,
+               "name":"The Marketplace",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"A Swing of Hope"
+            },
+            {  
+               "hastrial":true,
+               "image":[  
+                  "none"
+               ],
+               "note":"There is a trial in this area.",
+               "level":27,
+               "name":"The Catacombs",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Maze of rooms that ends at a large bridge",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Battlefront_Seed_1",
+                  "Battlefront_Seed_2"
+               ],
+               "note":"First image is to spool and docks, second to Solaris.",
+               "level":27,
+               "name":"The Battlefront",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Ribbon Spool"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Solaris1_Seed_1",
+                  "Solaris1_Seed_2",
+                  "Solaris1_Seed_3"
+               ],
+               "note":"Linear layout, follow the carpet until the exit.",
+               "level":27,
+               "name":"The Solaris Temple Level 1",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Gemling Queen"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Solaris2_Seed_1",
+                  "Solaris2_Seed_2",
+                  "Solaris2_Seed_3"
+               ],
+               "note":"Somewhat linear, follow carpet, can have dead ends.",
+               "level":28,
+               "name":"The Solaris Temple Level 2",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Gemling Queen"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Docks_Seed_1",
+                  "Docks_Seed_2",
+                  "Docks_Seed_3",
+                  "Docks_Seed_4"
+               ],
+               "note":"Usually left side, sulphite is down some stairs.",
+               "level":29,
+               "name":"The Docks",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Fiery Dust/Swing of Hope"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Ebony_Seed_1",
+                  "Ebony_Seed_2"
+               ],
+               "note":"First image is to Lunaris, second to The Sceptre of God.",
+               "level":29,
+               "name":"The Ebony Barracks",
+               "haspassive":false,
+               "questRewardsSkills":true,
+               "altimage":"none",
+               "quest":"Sever the Right Hand"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Lunaris1_Seed_1",
+                  "Lunaris1_Seed_2"
+               ],
+               "note":"Pretty linear, follow the carpet, don’t forget waypoint.",
+               "level":29,
+               "name":"The Lunaris Temple Level 1",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Piety's Pets"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Lunaris2_Seed_1",
+                  "Lunaris2_Seed_2"
+               ],
+               "note":"Layout differs a lot, very generic map drawing. If you see stairs, go up these as this is the right path, then find more stairs, until you reach a larger area, there will be carts on both sides, pick the side where there is only one.",
+               "level":30,
+               "name":"The Lunaris Temple Level 2",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":true,
+               "image":[  
+                  "Imperial_Seed_1"
+               ],
+               "note":"Follow the road until the end",
+               "level":30,
+               "name":"The Imperial Garden",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"A Swing of Hope"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Try to go up and right, until you reach some parallel walls, there you should find Siosa. Go through the only opening at Siosa and search the next area for a Candle switch in a wall.",
+               "level":30,
+               "name":"The Library",
+               "haspassive":false,
+               "questRewardsSkills":true,
+               "altimage":"Seems like a maze.",
+               "quest":"A Fixture of Fate"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Try to find the first corner of the room, where you should usually find a small room with a page. Do the same for the next 3.",
+               "level":31,
+               "name":"The Archives",
+               "haspassive":false,
+               "questRewardsSkills":true,
+               "altimage":"This area is a square, with 4 corners that usually hold 1 page each.",
+               "quest":"A Fixture of Fate"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"The exits can often be found by travelling diagonally.",
+               "level":32,
+               "name":"The Sceptre of God",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Layout is generally always the same looking, but exits spawn in a random corner.",
+               "quest":"Sceptre of God"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Go up diagonally until you spot barricades at exit.",
+               "level":33,
+               "name":"The Upper Sceptre of God",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Layout is generally always the same looking, but exits spawn in a random corner.",
+               "quest":"Sceptre of God"
+            }
+         ]
+      },
+      {  
+         "act":"Act IV",
+         "actid":4,
+         "zones":[  
+            {  
+               "hastrial":false,
+               "image":[  
+
+               ],
+               "note":"Go upstream and cross over when the path ends.",
+               "level":33,
+               "name":"The Aqueduct",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Pretty much linear.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "DriedLake_Seed_1",
+                  "DriedLake_Seed_2",
+                  "DriedLake_Seed_3",
+                  "DriedLake_Seed_4"
+               ],
+               "note":"Kill Voll on one of the three spawns",
+               "level":34,
+               "name":"The Dried Lake",
+               "haspassive":false,
+               "questRewardsSkills":true,
+               "altimage":"none",
+               "quest":"Breaking the Seal"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Mines1_Seed_1",
+                  "Mines1_Seed_2"
+               ],
+               "note":"Fairly linear, exit is usually in top left corner.",
+               "level":34,
+               "name":"The Mines Level 1",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Mines2_Seed_1",
+                  "Mines2_Seed_2",
+                  "Mines2_Seed_3",
+                  "Mines2_Seed_4"
+               ],
+               "note":"Varied layout, and many dead ends and you should look for the spirit too, if you found the exit before the spirit, leave a portal and continue.",
+               "level":35,
+               "name":"The Mines Level 2",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"An Indomitable Spirit"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Crystal_Seed_1",
+                  "Crystal_Seed_2",
+                  "Crystal_Seed_3"
+               ],
+               "note":"Loop around bottom right to go to the top left end. Use waypoint to go to Highgate if you made a portal to search for the spirit.",
+               "level":36,
+               "name":"The Crystal Veins",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Move towards the top right, some dead ends.",
+               "level":37,
+               "name":"Daresso's Dream",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Fairly linear.",
+               "quest":"The King of Desire"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Move down left from waypoint, then follow path.",
+               "level":38,
+               "name":"The Grand Arena",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout.",
+               "quest":"The King of Desire"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Kaoms1_Seed_1"
+               ],
+               "note":"Look for passages and bridges, follow those.",
+               "level":37,
+               "name":"Kaom's Dream",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The King of Fury"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Kaoms2_Seed_1"
+               ],
+               "note":"Look for stairs and bridges, follow those.",
+               "level":38,
+               "name":"Kaom's Stronghold",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The King of Fury"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Belly1_Seed_1",
+                  "Belly1_Seed_2",
+                  "Belly1_Seed_3",
+                  "Belly1_Seed_4"
+               ],
+               "note":"Aim for top left, many dead ends.",
+               "level":38,
+               "name":"The Belly of the Beast Level 1",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Belly2_Seed_1",
+                  "Belly2_Seed_2",
+                  "Belly2_Seed_3"
+               ],
+               "note":"Aim for top left, many dead ends.",
+               "level":39,
+               "name":"The Belly of the Beast Level 2",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Harvest_Seed_1"
+               ],
+               "note":"Always one boss on right side, two on the left(one low and one higher in the map), waypoint is number 1, bosses are 2, 3 and 4.",
+               "level":40,
+               "name":"The Harvest",
+               "haspassive":false,
+               "questRewardsSkills":true,
+               "altimage":"none",
+               "quest":"The Eternal Nightmare"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Ascent_Seed_1"
+               ],
+               "note":"Go up and right, cross the bridge and follow the road to a small passage to the exit.",
+               "level":40,
+               "name":"The Ascent",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            }
+         ]
+      },
+      {  
+         "act":"Act V",
+         "actid":5,
+         "zones":[  
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Slave_Pens_Seed_1",
+                  "Slave_Pens_Seed_2"
+               ],
+               "note":"Go all the way down, then left.",
+               "level":41,
+               "name":"The Slave Pens",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Return to Oriath"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Control_Blocks"
+               ],
+               "note":"Go top left for the miasmeter, then up and right.",
+               "level":41,
+               "name":"The Control Blocks",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"In Serive to Science/They Key to Freedom"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Oriath_Square"
+               ],
+               "note":"Go top right until you cross the bridge, then down.",
+               "level":42,
+               "name":"Oriath Square",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Templar_Courts"
+               ],
+               "note":"Loop around clockwise.",
+               "level":42,
+               "name":"The Templar Courts",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Chamber_of_Innocence"
+               ],
+               "note":"Go up and left, and spiral counterclockwise.",
+               "level":43,
+               "name":"The Chamber of Innocence",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Death to Purity"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Torched_Courts"
+               ],
+               "note":"Loop around counterclockwise.",
+               "level":44,
+               "name":"The Torched Courts",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Ruined_Square"
+               ],
+               "note":"One layout, multiple stops, in following steps.",
+               "level":44,
+               "name":"The Ruined Square",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The King's Feast"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Ossuary"
+               ],
+               "note":"Loop around clockwise.",
+               "level":44,
+               "name":"The Ossuary",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Ravenous God"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "The_Reliquary"
+               ],
+               "note":"Find multiple quest items in corners of the zone.",
+               "level":44,
+               "name":"The Reliquary",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Kitava's Torments"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Before accessing this, and killing Kitava, consider running your first labyrinth before the resistance penalty, making sure your fire resistances will be (close to) capped for act six is recommended as well.",
+               "level":45,
+               "name":"The Cathedral Rooftop",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear zone, run top left and kill Kitava.",
+               "quest":"The Ravenous God"
+            }
+         ]
+      },
+      {  
+         "act":"Act VI",
+         "actid":6,
+         "zones":[  
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"This area and doing the quest is optional, this opens a level 1 gem vendor, I suggest to skip this unless you are solo self-found or do not want to trade for some gems.",
+               "level":45,
+               "name":"The Twilight Strand",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout with some small rooms in the cliffs possible.",
+               "quest":"Fallen from Grace"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Coast_Seed_1",
+                  "Coast_Seed_2",
+                  "Coast_Seed_3"
+               ],
+               "note":"Go to the right side of the zone, and go to the top right corner of the zone. You might need to go up or down a bit.",
+               "level":45,
+               "name":"The Coast",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Pick one side and find boss.",
+               "level":45,
+               "name":"The Tidal Island",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"This area is a circle",
+               "quest":"Bestel's Epic"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Mud_Flats_Seed_1",
+                  "Mud_Flats_Seed_2"
+               ],
+               "note":"Kill the Dishonoured Queen (1) on the right side to get the key to open the gate to the next zone (2) on the left side.",
+               "level":46,
+               "name":"The Mud Flats",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Father of War"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Karui_Fortress_Seed_1"
+               ],
+               "note":"Follow the path until you can go right, then follow that path until you have a long path up left.",
+               "level":46,
+               "name":"The Karui Fortress",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Father of War"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Ridge_Seed_1",
+                  "Ridge_Seed_2"
+               ],
+               "note":"",
+               "level":46,
+               "name":"The Ridge",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":true,
+               "image":[  
+                  "Lower_Prison_Seed_1",
+                  "Lower_Prison_Seed_2",
+                  "Lower_Prison_Seed_3",
+                  "Lower_Prison_Seed_4"
+               ],
+               "note":"You usually want to go down or left towards the exit, there is a trial here, but it is fairly close to the waypoint if you want to do it later.",
+               "level":47,
+               "name":"The Lower Prison",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Essence of Umbra"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Capped lightning resistance and a good life pool is strongly suggested to fight Brutus and Shavronne, having physical mitigation helps as well.",
+               "level":47,
+               "name":"Shavronne's Tower",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"This zone has multiple variations, but they’re all fairly linear, made up out of four mini zones. 1. Follow the halls 2. Travel around or over the center thin bridge 3. Travel around and over the thin bridge 4. Travel around and reach the middle bridge area to find the ladder to the rooftop.",
+               "quest":"Essence of Umbra"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Prisoners_Gate_Seed_1",
+                  "Prisoners_Gate_Seed_2",
+                  "Prisoners_Gate_Seed_3"
+               ],
+               "note":"If you want to fight the Aberrath, go down the side of the road that has the cliff, otherwise follow the road into the next area.",
+               "level":47,
+               "name":"Prisoner's Gate",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Cloven One"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"There is a waypoint in this zone, this is optional but might be useful.",
+               "level":48,
+               "name":"The Western Forest",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Follow the road to the Riverways.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Riverways_Seed_1"
+               ],
+               "note":"Follow the road and when you reach the encampment, go down and right. If you want to kill Ryslatha, follow the path up at the waypoint.",
+               "level":48,
+               "name":"The Riverways",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Stick to the left hand side and find the entrance to the Spawning Ground. Having some physical mitigation and good life flasks is useful.",
+               "level":48,
+               "name":"The Wetlands",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"Linear zone.",
+               "quest":"The Puppet Mistress"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Follow the right hand wall until you find The Cavern of Anger.",
+               "level":49,
+               "name":"The Southern Forest",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear but huge zone.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Cavern_Anger_Seed_1",
+                  "Cavern_Anger_Seed_2"
+               ],
+               "note":"Don’t forget the black flag upon entering this zone. Head down then up first, then go right, the exit can be up or down.",
+               "level":49,
+               "name":"The Cavern of Anger",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Follow the shoreline until you reach the beacons.",
+               "level":49,
+               "name":"The Beacon",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear zone but pretty big",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Brine_King_Seed_1",
+                  "Brine_King_Seed_2"
+               ],
+               "note":"Follow the left hand shoreline to the boss arena. Capped cold and lightning resistance is strongly recommended. Physical mitigation is very useful too.",
+               "level":50,
+               "name":"The Brine King's Reef",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Brine King"
+            }
+         ]
+      },
+      {  
+         "act":"Act VII",
+         "actid":7,
+         "zones":[  
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Follow the road to the left to the exit.",
+               "level":50,
+               "name":"The Broken Bridge",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout",
+               "quest":"The Silver Locket"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "The_Crossroads_Seed_1"
+               ],
+               "note":"",
+               "level":51,
+               "name":"The Crossroads",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Follow the road until you find a big Crypt.",
+               "level":51,
+               "name":"The Fellshrine Ruins",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout",
+               "quest":"none"
+            },
+            {  
+               "hastrial":true,
+               "image":[  
+                  "Crypt_Level_1_Seed_1",
+                  "Crypt_Level_1_Seed_2",
+                  "Crypt_Level_1_Seed_3"
+               ],
+               "note":"Open the sarcophagus for the exit. Then search this area for Maligaro's Map. Once you find it teleport to town and use the waypoint for the Crossroads.",
+               "level":51,
+               "name":"The Crypt",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Essence of the Artist"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Chamber1_Seed_1",
+                  "Chamber1_Seed_2",
+                  "Chamber1_Seed_3"
+               ],
+               "note":"This is works just like in act two, loop around to the center, then activate the waypoint and use your map in the map device and continue through the portals. After killing Maligaro, you return here and go through the hall behind the waypoint to find the exit.",
+               "level":52,
+               "name":"The Chamber of Sins Level 1",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Essence of the Artist/Web of Secrets"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Chamber2_Seed_1"
+               ],
+               "note":"There is a trial in this zone on the left side. Go to the top right side, until you find the narrow long hallway, move to the end where you fought Fidelitas in act two, then go right up and right down afterwards",
+               "level":52,
+               "name":"The Chamber of Sins Level 2",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Follow the edges of the zone, and cross the bridges you encounter until you find the arena (Maligaro’s Workshop). Capped lightning resistance is recommended. Use a portal scroll to port out to Silk.",
+               "level":52,
+               "name":"Maligaro's Sanctum",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Somewhat linear.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "The_Den_Seed_1",
+                  "The_Den_Seed_2",
+                  "The_Den_Seed_3",
+                  "The_Den_Seed_4"
+               ],
+               "note":"Fairly simple, you will usually want to go to the top left or right to find the exit to The Ashen Fields.",
+               "level":53,
+               "name":"The Den",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Follow the road to the left. Physical mitigation and bleed removal are recommended.",
+               "level":53,
+               "name":"The Ashen Fields",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout.",
+               "quest":"The Master of a Million Faces"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Wall-follow the left side for The Dread Thicket, wall-follow the right side for The Causeway.",
+               "level":53,
+               "name":"The Northern Forest",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout.",
+               "quest":"In Memory of Greust"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Explore the zone and find the fireflies, Gruthkul is in this zone, physical mitigation recommended.",
+               "level":53,
+               "name":"The Dread Thicket",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"Varied zone with dead ends.",
+               "quest":"Queen of Despair/Lighting the Way"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Go top right to the exit, loot Kishara’s star near the exit.",
+               "level":54,
+               "name":"The Causeway",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout.",
+               "quest":"Kishara's Star"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "The_Vaal_City_Seed_1"
+               ],
+               "note":"Find and follow the thick walls to guide you to the exit.",
+               "level":54,
+               "name":"The Vaal City",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Just like the pyramid in act two, go diagonally to exits. Boss fight at the end, capped lightning resistance is recommended.",
+               "level":54,
+               "name":"The Temple of Decay Level 1",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Long zone, with multiple levels.",
+               "quest":"The Mother of Spiders"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"You can skip large portions of this area if you have an airial gap close ability. You will find those big square areas, if you go to the other end there will be a gap in the map and you actually see the other side on the minimap. If you spam your ability you can jump over it. Do this for all 3-4 square areas you find.",
+               "level":55,
+               "name":"The Temple of Decay Level 2",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Long zone, with multiple levels.",
+               "quest":"The Mother of Spiders"
+            }
+         ]
+      },
+      {  
+         "act":"Act VIII",
+         "actid":8,
+         "zones":[  
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Left hand wall-follow to the stairs, go up the stairs and follow the wall to the end.",
+               "level":55,
+               "name":"The Sarn Ramparts",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Toxic_Conduits_Seed_1",
+                  "Toxic_Conduits_Seed_2"
+               ],
+               "note":"Watch the black paint on the floor as you enter the zone to see in which direction it points you.",
+               "level":56,
+               "name":"The Toxic Conduits",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Essence of the Hag"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Doedre_Cesspool_Seed_1",
+                  "Doedre_Cesspool_Seed_2",
+                  "Doedre_Cesspool_Seed_3"
+               ],
+               "note":"Try to find the path that doesn’t have a dead end, this should lead you all the way to the exit.After you kill Doedre, find the waypoint. The Grand Promenade is on the left, The Quay on the right.",
+               "level":56,
+               "name":"Doedre's Cesspool",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Essence of the Hag"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Wall-follow the right hand side.",
+               "level":56,
+               "name":"The Grand Promenade",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Fairly static and linear zone.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Quay_Seed_1",
+                  "Quay_Seed_2"
+               ],
+               "note":"Pick up the quest item at (1), to use in the arena (2), then leave the arena and find the exit at (3).",
+               "level":57,
+               "name":"The Quay",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Love is Dead"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Grain_Gate_Seed_1",
+                  "Grain_Gate_Seed_2"
+               ],
+               "note":"This zone has many buildings, only enter and leave buildings through openings that have a guard’s corpse next to it, they lead the way, kill the gemlings.",
+               "level":57,
+               "name":"The Grain Gate",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Gemling Legion"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Follow the road until the end, then keep on going that direction.",
+               "level":58,
+               "name":"The Imperial Fields",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout if you stay in the road until it ends.",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Solaris_1_Seed_1",
+                  "Solaris_1_Seed_2"
+               ],
+               "note":"Go down and left, then up and left, there is a waypoint on the path.",
+               "level":59,
+               "name":"The Solaris Temple Level 1",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Solar Eclipse"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Solaris_2_Seed_1",
+                  "Solaris_2_Seed_2"
+               ],
+               "note":"Follow the carpets, quest boss Dawn at the end, capped fire resistance is recommended.",
+               "level":59,
+               "name":"The Solaris Temple Level 2",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Solar Eclipse"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Usually take the waypoint, and either proceed to boss, or go back to town and clear the Lunaris area.",
+               "level":58,
+               "name":"The Solaris Concourse",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout",
+               "quest":"none"
+            },
+            {  
+               "hastrial":true,
+               "image":[  
+                  "Bath_House_Seed_1",
+                  "Bath_House_Seed_2"
+               ],
+               "note":"There is a trial here, and the Wings of Vastiri quest, there is also a way to the Yugul god fight (2), but I would suggest doing this later. The exit is always on the right side",
+               "level":57,
+               "name":"The Bath House",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Wings of Vastiri"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Run to the end of the area and fight the boss for a passive minor and pantheon node.",
+               "level":58,
+               "name":"The High Gardens",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout",
+               "quest":"Reflection of Terror"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Lunaris_Concourse_Seed_1",
+                  "Lunaris_Concourse_Seed_2"
+               ],
+               "note":"Go up and right for the waypoint, then up and left for the entrance. If this is your second visit go down and right to the exit.",
+               "level":58,
+               "name":"The Lunaris Concourse",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Lunaris_1_Seed_1",
+                  "Lunaris_1_Seed_2",
+                  "Lunaris_1_Seed_3"
+               ],
+               "note":"",
+               "level":59,
+               "name":"The Lunaris Temple Level 1",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Lunar Eclipse"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Lunaris_2_Seed_1",
+                  "Lunaris_2_Seed_2"
+               ],
+               "note":"",
+               "level":59,
+               "name":"The Lunaris Temple Level 2",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Lunar Eclipse"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Go top right(or left depends from where you enter) to find the arena with Solaris and Lunaris, capped fire and cold resistance is recommended.",
+               "level":60,
+               "name":"The Harbour Bridge",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout.",
+               "quest":"none"
+            }
+         ]
+      },
+      {  
+         "act":"Act IX",
+         "actid":9,
+         "zones":[  
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Go to the top left, cross the bridges on dead ends. As a league start you probably want to farm this zone for Humility cards -> Tabula Rasa. If you are past level 73-74, and havent completed your Humility, you are better off buying the cards you are missing.(ssf-btw)",
+               "level":61,
+               "name":"The Blood Aqueduct",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Descent_Seed_1"
+               ],
+               "note":"Go up right to the supply hoist, then down left to another hoist, then up right to The Vastiri Desert.",
+               "level":61,
+               "name":"The Descent",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Vastiri_Seed_1"
+               ],
+               "note":" Go right to the waypoint, then top left (1) for the Foothills. If you want to kill Shakari, go right to (2) for the Oasis, then get the quest item in town and enter the zone.",
+               "level":61,
+               "name":"The Vastiri Desert",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Storm Blade"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Oasis_Seed_1",
+                  "Oasis_Seed_2"
+               ],
+               "note":"Left or right hand wall follow, depending on bottom or top being the dead end at the entrance. Physical mitigation recommended.",
+               "level":61,
+               "name":"The Oasis",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Queen of the Sands"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Foothills_Seed_1"
+               ],
+               "note":" Head up to find the waypoint, go to (1) to get the quest item in The Boiling Lake, then to (2) for The Tunnel to continue the story.",
+               "level":62,
+               "name":"The Foothills",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Fastis Fortuna"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Go to the top right zone for the quest boss, if you spot petrified men, you are close. After killing the Basilisk, go to town and teleport to the waypoint in The Foothills and go to the top left corner of the zone.",
+               "level":62,
+               "name":"The Boiling Lake",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear layout",
+               "quest":"Recurring Nightmare"
+            },
+            {  
+               "hastrial":true,
+               "image":[  
+                  "Tunnel_Seed_1",
+                  "Tunnel_Seed_2",
+                  "Tunnel_Seed_3"
+               ],
+               "note":"There is a trial in this zone. Go up left, if you come across the waypoint you’re on the right path",
+               "level":62,
+               "name":"The Tunnel",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"none"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Quarry_Seed_1"
+               ],
+               "note":"Activate the waypoint at the center, go to Shrine of the Winds first (2), then the refinery (1).",
+               "level":63,
+               "name":"The Quarry",
+               "haspassive":true,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"The Ruler of Highgate"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Refinery_Seed_1"
+               ],
+               "note":"Follow the cart tracks to the building top right for the quest boss, capped lightning resistance is recommended. Portal to town and waypoint back to The Quarry.",
+               "level":63,
+               "name":"The Refinery",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Recurring Nightmare"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "Belly_Seed_1",
+                  "Belly_Seed_2",
+                  "Belly_Seed_3"
+               ],
+               "note":" Try to reach the top left part of the zone in The Belly of The Beast, this leads to The Rotting core which is fairly static, and where you will want to go top left again, then you have The Black Heart where there are three boss zones with a linear path to them. Kill ‘em all, then fight the Depraved Trinity act boss after entering at the center.",
+               "level":63,
+               "name":"The Belly of the Beast",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"none",
+               "quest":"Recurring Nightmare"
+            },
+            {  
+               "hastrial":false,
+               "image":[  
+                  "none"
+               ],
+               "note":"Find the boss arena.",
+               "level":64,
+               "name":"The Rotting Core",
+               "haspassive":false,
+               "questRewardsSkills":false,
+               "altimage":"Linear with deadends.",
+               "quest":"Recurring Nightmare"
+            }
+         ]
+      },
+      {  
+         "act":"Act X",
+         "actid":10,
+         "zones":[  
+            {  
+               "name":"The Cathedral Rooftop",
+               "level":64,
+               "image":[  
+                  "none"
+               ],
+               "altimage":"Linear layout.",
+               "note":"Go up to save Bannon, back to town, then go to down right.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"Safe Passage",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Ravaged Square",
+               "level":64,
+               "image":[  
+                  "Ravaged_Square"
+               ],
+               "altimage":"none",
+               "note":"Left hand wall-follow, skip the first opening, take the second and cross the bridge (red part), left hand wall-follow to the waypoint. Then go to the Ossuary (1), after that the Torched Courts (2). Optional are the Reliquary (3, quest for rare belt) and the Control Blocks (4), quest with boss for a passive point. Finish by going through The Canals (5). Do your cruel labyrinth before going to the Canals as killing Kitava will lower your resistances.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Torched Courts",
+               "level":65,
+               "image":[  
+                  "Torched_Courts"
+               ],
+               "altimage":"none",
+               "note":"Left hand wall-follow.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Desecrated Chambers",
+               "level":65,
+               "image":[  
+                  "Desecrated_Chambers"
+               ],
+               "altimage":"none",
+               "note":"Right hand wall-follow until you come to a crossroads with four pillars, then go straight and up.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"Death and Rebirth",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Control Blocks",
+               "level":66,
+               "image":[  
+                  "none"
+               ],
+               "altimage":"Optional, static layout, quest boss for a skill point.",
+               "note":"Right hand wall-follow all the way to the end. Use movement skills to jump through fences.",
+               "haspassive":true,
+               "hastrial":false,
+               "quest":"Vilenta's Vengeance",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Ossuary",
+               "level":67,
+               "image":[  
+                  "none"
+               ],
+               "altimage":"Linear Layout",
+               "note":"There is a trial here. Left hand wall follow to find the quest item and trial. The trial entrance is in the opening in the wall, the quest item is close to that opening, but you move away from the wall to find it.",
+               "haspassive":false,
+               "hastrial":true,
+               "quest":"No Love for Old Ghosts",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Reliquary",
+               "level":67,
+               "image":[  
+                  "none"
+               ],
+               "altimage":"Large fairly static layout, random quest item spawn location, movement skills that can cross gaps recommended.",
+               "note":"The item is always on the edge or a corner, to my experience it’s mostly the right side.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"Map to Tsoatha",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Canals",
+               "level":66,
+               "image":[  
+                  "none"
+               ],
+               "altimage":"Fairly linear layout",
+               "note":"Move top left, follow the road, cross bridges when you see them.",
+               "haspassive":false,
+               "hastrial":false,
+               "quest":"",
+               "questRewardsSkills":false
+            },
+            {  
+               "name":"The Feeding Trough",
+               "level":67,
+               "image":[  
+                  "none"
+               ],
+               "altimage":"Linear layout.",
+               "note":"Move top left, there shouldn’t be any diversions, kill Kitava at the end to unlock maps.",
+               "haspassive":true,
+               "hastrial":false,
+               "quest":"An End to Hunger",
+               "questRewardsSkills":false
+            }
+         ]
+      }
+   ]
+}

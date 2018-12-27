@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.MainApp_Controller">
+   <children>
+      <AnchorPane>
+         <children>
+          <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+              <Menu mnemonicParsing="false" text="File">
+                <items>
+                        <MenuItem mnemonicParsing="false" text="Import from Pastebin" />
+                  <MenuItem mnemonicParsing="false" text="Import from Clipboard" />
+                        <MenuItem mnemonicParsing="false" text="Export to Pastebin" />
+                  <MenuItem mnemonicParsing="false" text="Export to clipboard" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveAllBuilds" text="Save all builds" />
+                  <MenuItem mnemonicParsing="false" text="Save current build" />
+                </items>
+              </Menu>
+                  <Menu mnemonicParsing="false" text="Run">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#validateBuild" text="Validate and view leveling progress" />
+                        <MenuItem mnemonicParsing="false" onAction="#validateToLauncher" text="Validate and return to Launcher" />
+                    </items>
+                  </Menu>
+              <Menu mnemonicParsing="false" text="View">
+                <items>
+                        <Menu mnemonicParsing="false" text="Skin">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Night Mode - Soon" />
+                          </items>
+                        </Menu>
+                </items>
+              </Menu>
+              <Menu mnemonicParsing="false" text="About">
+                <items>
+                  <MenuItem mnemonicParsing="false" onAction="#about" text="Credits" />
+                        <MenuItem mnemonicParsing="false" text="Version" />
+                </items>
+              </Menu>
+            </menus>
+          </MenuBar>
+          <SplitPane dividerPositions="0.2, 0.8" focusTraversable="true" layoutY="25.0" prefHeight="-1.0" prefWidth="-1.0">
+            <items>
+              <AnchorPane fx:id="socketGroupsAnchorPane" minWidth="150.0" prefHeight="544.0" prefWidth="177.0" />
+                  <AnchorPane fx:id="gemsPanelAnchorPane" minWidth="500.0" />
+              <AnchorPane fx:id="buildsAnchorPane" minWidth="150.0" prefHeight="551.0" prefWidth="245.0" />
+            </items>
+          </SplitPane>
+            <AnchorPane layoutY="578.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="578.0">
+               <children>
+              <Label layoutX="3.0" layoutY="3.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" AnchorPane.leftAnchor="3.0">
+                <font>
+                  <Font size="11.0" fx:id="x3" />
+                </font>
+                <textFill>
+                  <Color blue="0.625" green="0.625" red="0.625" fx:id="x4" />
+                </textFill>
+              </Label>
+              <Label font="$x3" layoutX="63.0" layoutY="3.0" maxWidth="-1.0" text="Right status" textFill="$x4" AnchorPane.rightAnchor="3.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

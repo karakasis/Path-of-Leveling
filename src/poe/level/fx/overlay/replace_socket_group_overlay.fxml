@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="138.0" minHeight="138.0" prefHeight="138.0" prefWidth="322.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.overlay.Replace_socket_group_overlay_Controller">
+   <children>
+      <ImageView fx:id="gemAddedImage" fitHeight="47.0" fitWidth="200.0" layoutX="74.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="24.0">
+         <image>
+            <Image url="@../../../../GemIcons/Arctic%20Armour.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="act" alignment="CENTER" layoutX="243.0" layoutY="66.0" prefHeight="38.0" prefWidth="65.0" text="Act II" textAlignment="CENTER" textFill="#ebebeb" wrapText="true" AnchorPane.bottomAnchor="34.0">
+         <font>
+            <Font name="Fontin Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="quest" alignment="CENTER" layoutY="86.0" prefHeight="47.0" prefWidth="138.0" text="Root of the Problem" textAlignment="CENTER" textFill="#ebebeb" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0">
+         <font>
+            <Font name="Fontin Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="npc" layoutX="168.0" layoutY="91.0" prefHeight="47.0" prefWidth="138.0" text="Petarus and Yenja" textAlignment="CENTER" textFill="#ebebeb" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="16.0">
+         <font>
+            <Font name="Fontin Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="5.0" layoutY="66.0" prefHeight="38.0" prefWidth="83.0" text="Quest :" textAlignment="CENTER" textFill="#ebebeb" wrapText="true">
+         <font>
+            <Font name="Fontin Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="154.0" layoutY="66.0" prefHeight="38.0" prefWidth="83.0" text="NPC :" textAlignment="CENTER" textFill="#ebebeb" wrapText="true">
+         <font>
+            <Font name="Fontin Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="gemAddedName" alignment="CENTER" layoutX="5.0" layoutY="5.0" prefHeight="47.0" prefWidth="106.0" text="Arctic Armour" textAlignment="CENTER" textFill="#ebebeb" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="Fontin Regular" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="gemRemovedName" alignment="CENTER" layoutX="217.0" layoutY="4.0" prefHeight="47.0" prefWidth="106.0" text="Toxic Rain" textAlignment="CENTER" textFill="#ebebeb" wrapText="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="Fontin Regular" size="17.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="gemRemovedImage" fitHeight="47.0" fitWidth="200.0" layoutX="177.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="24.0">
+         <image>
+            <Image url="@../../../../GemIcons/Damage%20on%20Full%20Life%20Support.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="47.0" fitWidth="200.0" layoutX="138.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="24.0">
+         <image>
+            <Image url="@../../../../icons/replace_group.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="rootPane" minWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.GemsPanel_Controller">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="10.0" prefHeight="147.0" prefWidth="504.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <JFXToggleButton fx:id="replaceGroup" layoutX="8.0" layoutY="48.0" onAction="#toggleReplaceGroup" prefHeight="34.0" prefWidth="185.0" size="8.0" text="Replace group later" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-10.0" />
+            <Label layoutX="14.0" layoutY="46.0" prefHeight="17.0" prefWidth="147.0" text="Use this Group from level" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="47.0" />
+            <Label fx:id="untilLevelLabel" layoutX="14.0" layoutY="82.0" prefHeight="17.0" prefWidth="147.0" text="Use this Group until level" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="14.0" />
+            <JFXComboBox fx:id="replaceGroupBox" editable="true" layoutX="227.0" layoutY="59.0" onAction="#groupReplaceValueChanged" prefHeight="25.0" prefWidth="226.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="47.0" />
+            <Label layoutX="14.0" layoutY="14.0" text="Select main Gem" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+            <JFXComboBox fx:id="activeSkillGroup" editable="true" layoutX="224.0" layoutY="10.0" onAction="#mainGemValueChanged" prefHeight="25.0" prefWidth="226.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="2.0" />
+            <JFXSlider fx:id="untilLevelSlider" blockIncrement="1.0" indicatorPosition="RIGHT" layoutX="231.0" layoutY="76.0" majorTickUnit="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="226.0" snapToTicks="true" value="1.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="47.0" />
+            <JFXSlider fx:id="fromLevelSlider" blockIncrement="1.0" layoutX="231.0" layoutY="51.0" majorTickUnit="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="226.0" snapToTicks="true" value="1.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="48.0" />
+            <Label fx:id="fromLevelLabel" layoutX="212.0" layoutY="47.0" text="1" />
+            <Label fx:id="untilLevelLabel2" layoutX="212.0" layoutY="82.0" text="1" />
+         </children>
+      </AnchorPane>
+      <Separator layoutX="14.0" layoutY="156.0" prefHeight="2.0" prefWidth="504.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <AnchorPane layoutX="51.0" layoutY="169.0" prefHeight="367.0" prefWidth="467.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="169.0">
+         <children>
+            <ScrollPane fitToWidth="true" layoutY="-3.0" prefHeight="376.0" prefWidth="510.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <content>
+                  <HBox prefHeight="365.0" prefWidth="465.0">
+                     <children>
+                        <VBox fx:id="leftGemBox" prefHeight="365.0" prefWidth="251.0" spacing="8.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="rightGemBox" prefHeight="365.0" prefWidth="251.0" spacing="8.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="addGemPanel_button" alignment="CENTER" cache="true" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" layoutX="9.0" layoutY="176.0" onAction="#addGemPanel" text=" " AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="176.0">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../../../icons/icons8-plus-math-50.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </JFXButton>
+      <JFXButton fx:id="removeGemPanel_button" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" layoutX="9.0" layoutY="221.0" onAction="#removeGemPanel" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="220.0">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../../../icons/icons8-subtract-50.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="root" minHeight="250.0" minWidth="210.0" prefHeight="250.0" prefWidth="230.0" styleClass="gemPanel" stylesheets="@../../../../resources/styles/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.GemEntry_Controller">
+   <children>
+      <Button fx:id="selectGemButton" layoutX="4.0" layoutY="8.0" mnemonicParsing="false" onAction="#gemPress" prefHeight="38.0" prefWidth="221.0" text="Select Gem" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="8.0">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../icons/icons8-plus-math-50.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <AnchorPane fx:id="disablePanel" disable="true" layoutX="4.0" layoutY="46.0" prefHeight="211.0" prefWidth="214.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+         <children>
+            <Label layoutX="28.0" layoutY="22.0" text="Level :" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="22.0" />
+            <Label layoutX="28.0" layoutY="60.0" text="Act :" AnchorPane.leftAnchor="18.0" />
+            <Label layoutX="28.0" layoutY="96.0" text="Sold :" AnchorPane.leftAnchor="18.0" />
+            <Label fx:id="label_with" layoutX="28.0" layoutY="177.0" text="with :" AnchorPane.leftAnchor="18.0" />
+            <JFXButton fx:id="backButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" layoutY="6.0" onAction="#onClick" prefHeight="205.0" prefWidth="230.0" ripplerFill="#111111" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+            <JFXToggleButton fx:id="replaceToggle" layoutX="28.0" layoutY="132.0" onAction="#toggleReplace" prefHeight="38.0" prefWidth="123.0" size="6.0" text="Replace later" AnchorPane.leftAnchor="8.0" />
+            <JFXComboBox fx:id="replaceGem" editable="true" layoutX="85.0" layoutY="173.0" onAction="#replaceChanged" prefHeight="25.0" prefWidth="147.0" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="10.0" />
+            <JFXTextField fx:id="act" editable="false" layoutX="85.0" layoutY="52.0" prefHeight="25.0" prefWidth="147.0" AnchorPane.rightAnchor="10.0" />
+            <JFXTextField fx:id="soldBy" editable="false" layoutX="85.0" layoutY="92.0" prefHeight="25.0" prefWidth="147.0" AnchorPane.rightAnchor="10.0" />
+            <JFXSlider fx:id="levelSlider" blockIncrement="1.0" layoutX="85.0" layoutY="21.0" majorTickUnit="1.0" minorTickCount="0" prefHeight="25.0" prefWidth="147.0" snapToTicks="true" value="1.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="19.0" />
+            <Label fx:id="levelLabel" layoutX="63.0" layoutY="25.0" text="1" AnchorPane.leftAnchor="57.0" AnchorPane.topAnchor="22.0" />
+         </children>
+         <effect>
+            <BoxBlur>
+               <input>
+                  <Blend />
+               </input>
+            </BoxBlur>
+         </effect>
+      </AnchorPane>
+   </children>
+</AnchorPane>

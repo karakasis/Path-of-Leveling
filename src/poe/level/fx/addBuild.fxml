@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="198.0" prefWidth="416.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.AddBuild_Controller">
+   <children>
+      <JFXTextField fx:id="buildName" layoutX="47.0" layoutY="23.0" prefHeight="25.0" prefWidth="316.0" promptText="Build name" />
+      <JFXComboBox fx:id="select" layoutX="185.0" layoutY="68.0" onAction="#classChanged" prefHeight="25.0" prefWidth="181.0" />
+      <Label layoutX="47.0" layoutY="72.0" text="Choose class :" />
+      <Label layoutX="47.0" layoutY="115.0" text="Choose ascendancy :" />
+      <JFXComboBox fx:id="selectAsc" layoutX="185.0" layoutY="111.0" onAction="#ascChanged" prefHeight="25.0" prefWidth="181.0" />
+      <JFXButton fx:id="addButton" layoutX="314.0" layoutY="161.0" onAction="#handleButtonAction" text="Add" />
+   </children>
+</AnchorPane>

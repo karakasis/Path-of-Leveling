@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/data/GemHolder.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/overlay/LevelOverlay_Stage.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/GemsPanel_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/BuildEntry_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/data/Zone.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/preferences.fxml</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/BuildsPanel_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/data/Tail.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/data/Logger.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/data/SocketGroupToString.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/overlay/ZoneOverlay_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/data/Build.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/MainApp_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/overlay/LevelOverlay_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/overlay/ZoneOverlay_Stage.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/BuildProgressPreview_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/POELevelFx.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/GemEntry_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/Loading_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/build.xml</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/Preferences_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/QuestSplitPanel_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/data/GemListCell.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/Main_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/data/Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/SocketGroupsPanel_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/SelectBuild_PopupController.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/AddGem_Controller.java</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/BuildProgressPreview.fxml</file>
+            <file>file:/C:/Users/Christos/Documents/NetBeansProjects/POE-level-fx/src/poe/level/fx/Main_Stage.java</file>
+        </group>
+    </open-files>
+</project-private>

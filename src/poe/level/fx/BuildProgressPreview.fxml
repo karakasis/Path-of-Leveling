@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="550.0" maxWidth="800.0" minHeight="350.0" minWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.BuildProgressPreview_Controller">
+   <children>
+      <FlowPane layoutX="11.0" layoutY="9.0" maxHeight="11.0" prefHeight="11.0" prefWrapLength="0.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="2.0">
+         <children>
+            <Label style="-fx-border-color: black;" text="Build: Sunderboy " textAlignment="CENTER">
+               <font>
+                  <Font name="Alegreya Sans SC Medium" size="13.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="2.0" right="2.0" />
+               </padding>
+               <FlowPane.margin>
+                  <Insets bottom="4.0" left="10.0" right="10.0" top="4.0" />
+               </FlowPane.margin>
+            </Label>
+            <Label layoutX="20.0" layoutY="14.0" style="-fx-border-color: black;" text="Class: Marauder" textAlignment="CENTER">
+               <font>
+                  <Font name="Alegreya Sans SC Medium" size="13.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="2.0" right="2.0" />
+               </padding>
+               <FlowPane.margin>
+                  <Insets right="8.0" />
+               </FlowPane.margin>
+            </Label>
+            <Label layoutX="96.0" layoutY="14.0" style="-fx-border-color: black;" text="Ascendancy: Juggernaut" textAlignment="CENTER">
+               <font>
+                  <Font name="Alegreya Sans SC Medium" size="13.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="2.0" right="2.0" />
+               </padding>
+               <FlowPane.margin>
+                  <Insets right="8.0" />
+               </FlowPane.margin>
+            </Label>
+            <Label layoutX="162.0" layoutY="14.0" style="-fx-border-color: black;" text="Level: 96" textAlignment="CENTER">
+               <font>
+                  <Font name="Alegreya Sans SC Medium" size="13.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="2.0" right="2.0" />
+               </padding>
+            </Label>
+         </children>
+      </FlowPane>
+      <ScrollPane hbarPolicy="ALWAYS" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+         <content>
+            <AnchorPane>
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" layoutY="59.0" maxHeight="350.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                     <content>
+                        <AnchorPane fx:id="timeline_pane" />
+                     </content>
+                  </ScrollPane>
+                  <AnchorPane fx:id="level_axis_pane" layoutX="1.0" layoutY="30.0" prefHeight="32.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Line fx:id="baseline" endX="450.0" endY="30.0" layoutX="60.0" startY="30.0" />
+                        <Line endX="39.0" endY="30.0" layoutX="20.0" startY="30.0" />
+                        <Line fx:id="tail_line" endX="480.0" endY="30.0" layoutX="60.0" startX="451.0" startY="30.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <FlowPane alignment="TOP_RIGHT" maxHeight="11.0" prefHeight="11.0" prefWidth="200.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="-5.0">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="@../../../icons/replace_group.png" />
+               </image>
+            </ImageView>
+            <Label text=": Replace Socket Group">
+               <font>
+                  <Font name="Alegreya Sans SC Medium" size="13.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="@../../../icons/replace_normal.png" />
+               </image>
+            </ImageView>
+            <Label text=": Replace Gem">
+               <font>
+                  <Font name="Alegreya Sans SC Medium" size="13.0" />
+               </font>
+               <FlowPane.margin>
+                  <Insets right="10.0" />
+               </FlowPane.margin>
+            </Label>
+         </children>
+      </FlowPane>
+      <Label text="Level: " AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0">
+         <font>
+            <Font name="Alegreya Sans SC Medium" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

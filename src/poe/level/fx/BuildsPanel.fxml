@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="150.0" prefHeight="551.0" prefWidth="245.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.BuildsPanel_Controller">
+   <children>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="Builds :" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="18.0" fx:id="x1" />
+         </font>
+         <textFill>
+            <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
+         </textFill>
+      </Label>
+      <JFXButton fx:id="addBuild_button" alignment="CENTER" cache="true" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" onAction="#addNewBuild" text=" " AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../../../icons/icons8-plus-math-50.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </JFXButton>
+      <JFXButton fx:id="removeBuild_button" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" onAction="#deleteBuild" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../../../icons/icons8-subtract-50.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <ScrollPane fitToWidth="true" layoutY="41.0" prefHeight="393.0" prefWidth="177.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+         <content>
+            <VBox fx:id="buildsBox" spacing="7.0" style="-fx-background-color: white;">
+               <padding>
+                  <Insets left="-2.0" right="-2.0" top="2.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

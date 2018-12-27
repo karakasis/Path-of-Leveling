@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="150.0" prefHeight="200.0" prefWidth="183.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.SocketGroupsPanel_Controller">
+   <children>
+      <Label alignment="CENTER" layoutX="20.0" layoutY="7.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Socket Group :" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="18.0" fx:id="x1" />
+         </font>
+         <textFill>
+            <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
+         </textFill>
+      </Label>
+      <JFXListView fx:id="socketGroupView" layoutY="37.0" minHeight="-Infinity" prefHeight="444.0" prefWidth="222.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
+      <JFXButton fx:id="addSocketGroup_button" alignment="CENTER" cache="true" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" layoutX="20.0" layoutY="500.0" onAction="#addSocketGroup" text=" " AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../../../icons/icons8-plus-math-50.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </JFXButton>
+      <JFXButton fx:id="removeSocketGroup_button" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" layoutX="111.0" layoutY="500.0" onAction="#removeSocketGroup" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <graphic>
+            <ImageView disable="true" fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../../../icons/icons8-subtract-50.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>

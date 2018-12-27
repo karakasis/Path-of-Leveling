@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="root" maxHeight="144.0" maxWidth="-Infinity" minHeight="144.0" minWidth="-Infinity" prefHeight="144.0" style="-fx-background-color: rgba(0, 0, 0, 0);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.overlay.ZoneOverlay_Controller">
+   <children>
+      <HBox fx:id="container" layoutY="2.0" maxHeight="144.0" minHeight="144.0" prefHeight="144.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label maxHeight="144.0" maxWidth="256.0" minHeight="144.0" minWidth="-Infinity" prefHeight="144.0" prefWidth="256.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" text="Look for waypoint first, then find Fairgraves, and move away from the plateau, generally up or down. Find the Cave entrance, leave a portal for later and find the next wack to the Cavern of Wrath." textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Alegreya Sans SC" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" maxHeight="144.0" maxWidth="256.0" minHeight="144.0" minWidth="-Infinity" prefHeight="144.0" prefWidth="256.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" text="Look for waypoint first, then find Fairgraves, and move away from the plateau, generally up or down. Find the Cave entrance, leave a portal for later and find the next wack to the Cavern of Wrath." textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Alegreya Sans SC" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
