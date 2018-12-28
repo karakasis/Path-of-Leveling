@@ -25,8 +25,9 @@ This programm currently does three things!
 
 ## How do I use the Editor?
 *Will be updating this with a better write-down*
--Make sure to click Run > Validate and view leveling progress, to get a visual representation of your gem setup.
--Make sure to click Run > Validate and return to Launcher, to return to Launcher (Humility panel) and select your build to continue.
+
+- Make sure to click Run > Validate and view leveling progress, to get a visual representation of your gem setup.
+- Make sure to click Run > Validate and return to Launcher, to return to Launcher (Humility panel) and select your build to continue.
 
 ## Known bugs
 *Will be updating this*
