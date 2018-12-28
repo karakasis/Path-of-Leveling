@@ -7,7 +7,7 @@
 
 ## What does it do
 
-This programm currently does three things!
+This program currently does three things!
 - **Plan your leveling by selecting gems and links.** You can create complicated transitions between your gem setup, swap a gem for another one, or completely remove a Skill group for a different one. Get a popup on your in-game overlay when you reach certain levels.
 - **Navigate through the game's acts, with graphic representations from [Engineering Eternity](https://www.youtube.com/channel/UCaFHfrY-6uGSAvmczp_7a6Q/featured)** You can move the overlay around to suit your own needs. *Supporting only 1080p at this moment*
 - **Track your XP and find out when you are under/overleveled**. You can move the overlay around to suit your own needs. 
