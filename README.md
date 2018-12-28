@@ -34,7 +34,7 @@ This programm currently does three things!
 
 ## Support me
 
-[![](https://cdn.iconscout.com/icon/free/png-256/paypal-5-226456.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XKQ7R4AWWVFR4)
+[![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XKQ7R4AWWVFR4)
 
 *Some final words,*
   
