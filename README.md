@@ -14,13 +14,13 @@ This programm currently does three things!
 
 ## Launch
 
-- Run PathOfLeveling.jar (Java 8 required) - **[download java](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) jre-8u191-windows-x64.exe at the time of writting this**
+- Run PathOfLeveling.jar (Java 8 required) - *[download java](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) jre-8u191-windows-x64.exe at the time of writting this*
 - Click the preferences gear button.
 - Select this file : Client.txt located within your Steam or Grinding Gear Games folder. 
 
 **C:\Program Files (x86)\Grinding Gear Games\Path of Exile\logs**
 - Save changes.
-- Decide which features you want to run. **If you want to use the leveling part, you have to create a build first at the editor and then select the build.**
+- Decide which features you want to run. *If you want to use the leveling part, you have to create a build first at the editor and then select the build.*
 - Adjust your overlays in-game by drag and drop.
 
 ## How do I use the Editor?
