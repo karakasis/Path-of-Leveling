@@ -3,7 +3,7 @@
 
 *Assisting program written on Java for [Path of Exile](https://www.pathofexile.com/game).*
 
-*Get the [latest Version](https://github.com/karakasis/Path-of-Leveling/releases/tag/v0.4-alpha), updated December 28th 2018.*
+*Get the [latest Version](https://github.com/karakasis/Path-of-Leveling/releases/tag/v0.5-alpha), updated January 3rd 2019, Happy new year.*
 
 ## What does it do
 
@@ -31,6 +31,20 @@ This program currently does three things!
 
 ## Known bugs
 *Will be updating this*
+
+## Changelog in v0.5
+New in this release:
+- Pastebin support
+- Exporting and importing one or all builds
+- Keybindings with JNA Hooks
+- Now gems are properly distributed in each class. 
+- - You can now find some of the gems in Act 6 tab, and the drop-only gems on Drop only tab.
+- Added a pop-up before starting a session that holds your character name and current level.
+- - This is a fix to an issue, where when leveling in a party your level would get updated when other people leveled up.
+- - The in-game character name is now persistent and saved within a build. You can change it at any time.
+- Added save-checkpoints , before closing the application to save the current level to the active build.
+- Added a tray icon, that globally closes the app.(bottom right corner in windows)
+- Fixed various minor bugs
 
 ## Support me
 
