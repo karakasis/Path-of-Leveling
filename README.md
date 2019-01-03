@@ -15,10 +15,16 @@ This program currently does three things!
 ## How does it work
 
 Opens the log the Path of Exile produces, attaches it to a Tailer, that triggers on certain lines.
+
 This does not change, or interact with in-game files, only **reads lines**, so afaik this is not against TOS.
+
 Basically the images displayed, are pre-generated and are not in any way dependent with the game's zone creation.
+
 This can be done by using pen and paper.
-The Tailer is reading the log, and triggers on "entered zone .. " and " is now level .." . That's all. Everything else is code.
+
+The Tailer is reading the log, and triggers on "entered zone .. " and " is now level .." . 
+
+That's all. Everything else is code.
 
 ## Launch
 
