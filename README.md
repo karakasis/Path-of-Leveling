@@ -1,7 +1,7 @@
 # Path of Leveling
 **This is an alpha version, bugs included**
 
-*Assisting program written on Java for [Path of Exile](https://www.pathofexile.com/game).*
+*Assisting overlay with an advanced GUI editor written in Java for [Path of Exile](https://www.pathofexile.com/game).*
 
 *Get the [latest Version](https://github.com/karakasis/Path-of-Leveling/releases/tag/v0.5-alpha), updated January 3rd 2019, Happy new year.*
 
