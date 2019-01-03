@@ -39,6 +39,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -72,6 +73,14 @@ public class MainApp_Controller implements Initializable {
     private Label label;
     @FXML
     private StackPane rootPane;
+    @FXML
+    private MenuItem export_pastebin_active;
+    @FXML
+    private MenuItem export_pastebin_all;
+    @FXML
+    private MenuItem export_clipboard_active;
+    @FXML
+    private MenuItem export_clipboard_all;
     
     
     JFXDialog addBuildPopup;
@@ -107,7 +116,9 @@ public class MainApp_Controller implements Initializable {
         buildToSocketGroupMap = new HashMap<>();
         
         //inflate buildspanel
-    
+        if(POELevelFx.buildsLoaded.isEmpty()){ //toggle all builds
+            toggleAllBuilds(false);
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("BuildsPanel.fxml"));
         try {
             buildsAnchorPane.getChildren().add(loader.load());
@@ -228,6 +239,74 @@ public class MainApp_Controller implements Initializable {
             }
         } catch (IOException ex) {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    Pastebin_import_Controller paste_controller;
+    
+    @FXML
+    private void importFromPastebin(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("pastebin_import.fxml"));
+            AnchorPane con = null;
+            try {
+                con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            paste_controller = loader.<Pastebin_import_Controller>getController();
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            //controller.passDialog(mLoad);
+            paste_controller.hook(this);
+            buildPreviewPopup.show();
+    }
+    
+    @FXML
+    private void exportToPastebinAll(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("export_pastebin.fxml"));
+            AnchorPane con = null;
+            try {
+                con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            loader.<Export_pastebin_Controller>getController().initPasteText(buildspanel_controller.allTo64());
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            buildPreviewPopup.show();
+    }
+    
+    @FXML
+    private void exportToPastebinActive(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("export_pastebin.fxml"));
+            AnchorPane con = null;
+            try {
+                con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            loader.<Export_pastebin_Controller>getController().initPasteText(buildspanel_controller.activeTo64());
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            buildPreviewPopup.show();
+    }
+    
+    public void toggleActiveBuilds(boolean toggle){
+        export_pastebin_active.setDisable(!toggle);
+        export_clipboard_active.setDisable(!toggle);
+    }
+    
+    public void toggleAllBuilds(boolean toggle){
+        export_pastebin_all.setDisable(!toggle);
+        export_clipboard_all.setDisable(!toggle);
+    }
+    
+    public void fetchPaste(String pasteRaw){
+        if(buildspanel_controller.loadBuildsFromPastebin(pasteRaw)){
+            paste_controller.success();
+            buildPreviewPopup.close();
+        }else{
+            paste_controller.failed();
         }
     }
     

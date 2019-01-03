@@ -68,6 +68,8 @@ public class AddGem_Controller implements Initializable {
     @FXML
     private VBox actIVbox;
     @FXML
+    private VBox actVIbox;
+    @FXML
     private VBox otherVBox;
     @FXML
     private JFXTabPane tabpane;
@@ -161,6 +163,8 @@ public class AddGem_Controller implements Initializable {
         
         ArrayList<Zone> reorder4 = new ArrayList<>();
         
+        ArrayList<Zone> reorder6 = new ArrayList<>();
+        
         ArrayList<Gem> reorderOther = new ArrayList<>();
         HashSet<Integer> distinctLevels = new HashSet<>();
         
@@ -175,6 +179,9 @@ public class AddGem_Controller implements Initializable {
         }
         for(Zone z : all.get(3).keySet()){
             reorder4.add(z);
+        }
+        for(Zone z : all.get(4).keySet()){
+            reorder6.add(z);
         }
         
         
@@ -204,6 +211,7 @@ public class AddGem_Controller implements Initializable {
         reorder2.sort(Comparator.comparing(Zone::getZoneLevel));
         reorder3.sort(Comparator.comparing(Zone::getZoneLevel));
         reorder4.sort(Comparator.comparing(Zone::getZoneLevel));
+        reorder6.sort(Comparator.comparing(Zone::getZoneLevel));
         reorderOther.sort(Comparator.comparing(Gem::getLevelAdded));
         
         tablinkers = new ArrayList<>();
@@ -261,6 +269,19 @@ public class AddGem_Controller implements Initializable {
             controller.load(z,all.get(3).get(z), this);
             tablinkers.add(new TabLinker(controller,z,3));
         }
+        for(Zone z : reorder6){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("questSplitPanel.fxml"));
+            SplitPane con = null;
+            try {
+                con = (SplitPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(QuestSplitPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            QuestSplitPanel_Controller controller = loader.<QuestSplitPanel_Controller>getController();
+            actVIbox.getChildren().add(con);
+            controller.load(z,all.get(4).get(z), this);
+            tablinkers.add(new TabLinker(controller,z,4));
+        }
         tablinkersOther = new ArrayList<>();
         for(Integer a : distinctLevels_order){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("questSplitPanel.fxml"));
@@ -273,7 +294,7 @@ public class AddGem_Controller implements Initializable {
             QuestSplitPanel_Controller controller = loader.<QuestSplitPanel_Controller>getController();
             otherVBox.getChildren().add(con);
             controller.loadOther(map.get(a), a , this);
-            tablinkersOther.add(new TabLinker(controller,4, map.get(a)));
+            tablinkersOther.add(new TabLinker(controller,5, map.get(a)));
         }
         
         

@@ -28,7 +28,30 @@ import poe.level.fx.overlay.ZoneOverlay_Stage;
  */
 public class Controller {
 
+    public static Controller instance;
+    
+    public void zones_hotkey_show_hide_key_event(){
+        if(!zone_stage_lock)
+            Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        zone_stage.event_show_hide();
+                    }
+                });
+    }
+    
+    public void level_hotkey_remind_key_event(){
+        if(!level_stage_lock)
+            Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        level_stage.event_remind();
+                    }
+                });
+    }
+    
     public int playerLevel;
+    public String playerName;
     public int monsterLevel;
     public String currentZone;
     private Tail _tObj;
@@ -87,6 +110,7 @@ public class Controller {
 
     //public Controller(Stage zone, Stage xp, Stage level, Build build) {
     public Controller(boolean zone_b, boolean xp, boolean level, Build build) {
+        instance = this;
         if(zone_b){
             zone_stage = new ZoneOverlay_Stage();
         }
@@ -100,6 +124,7 @@ public class Controller {
         skipActs = false;
         releaseLock = true;
         playerLevel = Main_Stage.playerLevel;
+        playerName = Main_Stage.characterName;
         monsterLevel = 1;
         //zone_stage = (ZoneOverlay_Stage) zone;
         //xp_stage = (LevelOverlay_Stage) xp;
@@ -152,6 +177,11 @@ public class Controller {
         _tObj = new Tail();
         //_tObj.setUpTailer(new File("C:\\Users\\Christos\\Documents\\NetBeansProjects\\POE-level-fx\\src\\a.txt"), this);
         _tObj.setUpTailer(new File(path), this);
+        
+        //manually input the level 1 gems
+        if(playerLevel == 1 && !level_stage_lock){
+            level_stage.update(playerLevel);
+        }
     }
     
     
@@ -164,6 +194,9 @@ public class Controller {
         }
         if(!level_stage_lock){
             level_stage.update(playerLevel);
+        }
+        if(build!=null){
+            build.level = playerLevel;
         }
     }
 

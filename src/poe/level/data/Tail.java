@@ -123,20 +123,35 @@ public class Tail implements LoggerListener {
             mappedInput = true;
         }
         if (line.contains("is now level ")) {
-            int padding = line.indexOf("is now level");
-            String plvl = "";
-            for(int i=padding + 13; i<line.length(); i++){
-                plvl += line.charAt(i);
+            int sufPad = line.lastIndexOf(':');
+            String charname = "";
+            for(int j = sufPad + 2; j<line.length() ; j++){
+                char a = line.charAt(j);
+                if(a == ' ')
+                    break;
+                else
+                    charname+= a;
             }
-            int plvlint = Integer.parseInt(plvl);
-            parent.playerLevel = plvlint;
-            mapFound = true;
-            Platform.runLater(new Runnable(){
-                @Override
-                public void run() {
-                    parent.lvlupdate();
+            if(charname.equals(parent.playerName)){
+                int padding = line.indexOf("is now level");
+                String plvl = "";
+                for(int i=padding + 13; i<line.length(); i++){
+                    plvl += line.charAt(i);
                 }
-            });
+                int plvlint = Integer.parseInt(plvl);
+                parent.playerLevel = plvlint;
+                mapFound = true;
+                System.out.println(charname + " is now level "+ plvlint+ ".");
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        parent.lvlupdate();
+                    }
+                });
+                
+            }
+            
+            
             
         }
         /*

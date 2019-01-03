@@ -61,7 +61,20 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab text="Other gems">
+            <Tab style="-fx-background-color: C0321;" text="Act VI">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane prefHeight="340.0" prefWidth="573.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <content>
+                              <VBox fx:id="actVIbox" prefHeight="436.0" prefWidth="666.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Drop Only">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

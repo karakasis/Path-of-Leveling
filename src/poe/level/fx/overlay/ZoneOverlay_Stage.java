@@ -29,6 +29,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import poe.level.data.Controller;
 import poe.level.data.Zone;
+import static poe.level.fx.POELevelFx.saveBuildsToMemory;
 import poe.level.fx.Preferences_Controller;
 
 /**
@@ -50,6 +51,15 @@ public class ZoneOverlay_Stage  extends Stage{
         primScreenBounds.getMinY();
         prefX = 200.0;
         prefY = primScreenBounds.getMinY();
+        this.setOnCloseRequest(event -> {
+            System.out.println("Closing level:: ");
+            if(saveBuildsToMemory()){
+                System.out.println("Successfully saved checkpoint");
+            }else{
+                System.out.println("Checkpoint save failed");
+            }
+            System.exit(10);
+        });
     }
     
     public void hookController(Controller c){
@@ -172,6 +182,14 @@ public class ZoneOverlay_Stage  extends Stage{
     public void reset(){
         if(!Preferences_Controller.zones_toggle || isVisible){
             hidePanel();
+        }
+    }
+    
+    public void event_show_hide(){
+        if(isVisible){
+            hidePanel();
+        }else{
+            showPanel();
         }
     }
     

@@ -6,64 +6,57 @@
 package poe.level.fx;
 
 import com.sun.javafx.application.LauncherImpl;
+import java.awt.AWTException;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
+import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Properties;
 import java.util.Scanner;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.SequentialTransition;
-import javafx.animation.Timeline;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.WritableValue;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-import javafx.util.Duration;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import net.harawata.appdirs.AppDirs;
-import net.harawata.appdirs.AppDirsFactory;
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.lwjgl.glfw.GLFWKeyCallback;
 import poe.level.data.Act;
 import poe.level.data.ActHandler;
 import poe.level.data.Build;
 import poe.level.data.Controller;
 import poe.level.data.Gem;
+import poe.level.data.Gem.Info;
 import poe.level.data.GemHolder;
 import poe.level.data.SocketGroup;
-import poe.level.data.Tail;
 import poe.level.data.Zone;
-import poe.level.fx.overlay.GemOverlay_Stage;
-import poe.level.fx.overlay.LevelOverlay_Stage;
-import poe.level.fx.overlay.ZoneOverlay_Stage;
-import poe.level.fx.overlay.ZoneOverlay_Controller;
+import poe.level.keybinds.GlobalKeyListener;
+import poe.level.keybinds.Hook;
 
 /**
  *
@@ -79,12 +72,15 @@ public class POELevelFx extends Application {
     private Stage main;
     private Stage editor;
     private Stage leveling;
+    private GLFWKeyCallback keyCallback;
     
     @Override
     public void init() throws Exception {
+        addTrayIcon();
         
+        System.out.println(org.lwjgl.Version.getVersion());
         POELevelFx.directory = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
-        /*
+       /*
         AppDirs appDirs = AppDirsFactory.getInstance();
         POELevelFx.directory = appDirs.getUserDataDir("POE-Level-FX", "0.1", "rainy");
         
@@ -215,8 +211,68 @@ public class POELevelFx extends Application {
         loadActsFromMemory();
         loadGemsFromMemory();
         loadBuildsFromMemory();
-
         
+     /*   
+        StringBuilder hack = hack();
+        String[] split = hack.toString().split("\r\n|\t");
+        
+        ArrayList<String> s = new ArrayList<>();
+        ArrayList<ArrayList<String>> s_col = new ArrayList<>();
+        GemHolder.getInstance().pool();
+        for(int i=0; i<split.length;i++){
+            String name = split[i];
+            s.add(name.replace("\\", ""));
+            if(name.equals("Act 6 after Fallen from Grace from Lilly Roth with any character.")){
+                s_col.add(s);
+                GemHolder.getInstance().updateGemInfo(s);
+                s = new ArrayList<>();
+            }
+            
+        }
+        
+        GemHolder.getInstance().init_remaining_in_pool();
+        
+        
+        s_col.size();
+        */
+    }
+    
+    private StringBuilder hack(){
+        BufferedReader br = null;
+        StringBuilder sb = null;
+        try {
+            br = new BufferedReader(new FileReader("gem.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            sb = new StringBuilder();
+            String line = null;
+            try {
+                line = br.readLine();
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                try {
+                    line = br.readLine();
+                } catch (IOException ex) {
+                    Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            String everything = sb.toString();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return sb;
     }
     
     public void close(){
@@ -285,42 +341,93 @@ public class POELevelFx extends Application {
             
             gem.name= gemObj.getString("name");
             System.out.println(gem.name);
-            try{
-                gem.quest_name= gemObj.getString("quest_name");
-            }catch(JSONException e){
-                
-            }
-            try{
-            gem.npc= gemObj.getString("npc");
-            }catch(JSONException e){
-                
-            }
-            try{
-            gem.act = gemObj.getInt("act");
-            }catch(JSONException e){
-                
-            }
-            try{
-            gem.town= gemObj.getString("town");
-            }catch(JSONException e){
-                
-            }
+            
             gem.required_lvl= gemObj.getInt("required_lvl");
             gem.isVaal=gemObj.getBoolean("isVaal");
             //gem.id = gemObj.getInt("id");
             gem.id = -1;
             gem.color= gemObj.getString("color");
             gem.iconPath= gemObj.getString("iconPath");
+            gem.isRewarded = gemObj.getBoolean("isReward");
             
-            try{
-                JSONArray chars = gemObj.getJSONArray("available_to");
-                for(int j=0;j<chars.length();j++){
-                    gem.putChar(chars.getString(j));
+            if(gem.isRewarded){
+                JSONObject rewardObj  = gemObj.getJSONObject("reward");
+                gem.reward = gem.new Info();
+                try{
+                    JSONArray chars = rewardObj.getJSONArray("available_to");
+                    ArrayList<String> chars_list = new ArrayList<>();
+                    for(int j=0;j<chars.length();j++){
+                        chars_list.add(chars.getString(j));
+                        //gem.putChar(chars.getString(j));
+
+                    }
+                    gem.reward.available_to = chars_list;
+                }catch(JSONException e){
+
                 }
-            }catch(JSONException e){
-                
+                try{
+                    gem.reward.quest_name= rewardObj.getString("quest_name");
+                }catch(JSONException e){
+
+                }
+                try{
+                    gem.reward.npc= rewardObj.getString("npc");
+                }catch(JSONException e){
+
+                }
+                try{
+                    gem.reward.act = rewardObj.getInt("act");
+                }catch(JSONException e){
+
+                }
+                try{
+                    gem.reward.town= rewardObj.getString("town");
+                }catch(JSONException e){
+
+                }
             }
-            /*
+            JSONArray buy_arrays = gemObj.getJSONArray("buy");
+            gem.buy = new ArrayList<>();
+            for(int j=0;j<buy_arrays.length();j++){
+                JSONObject buyObj  = buy_arrays.getJSONObject(j);
+                Info buy_info = gem.new Info();
+                try{
+                    JSONArray chars = buyObj.getJSONArray("available_to");
+                    ArrayList<String> chars_list = new ArrayList<>();
+                    for(int k=0;k<chars.length();k++){
+                        chars_list.add(chars.getString(k));
+                        //gem.putChar(chars.getString(j));
+                        
+                    }
+                    buy_info.available_to = chars_list;
+                }catch(JSONException e){
+                    e.printStackTrace();
+                    System.out.println(gem.getGemName());
+                }
+                try{
+                    buy_info.quest_name= buyObj.getString("quest_name");
+                }catch(JSONException e){
+
+                }
+                try{
+                    buy_info.npc= buyObj.getString("npc");
+                }catch(JSONException e){
+
+                }
+                try{
+                    buy_info.act = buyObj.getInt("act");
+                }catch(JSONException e){
+
+                }
+                try{
+                    buy_info.town= buyObj.getString("town");
+                }catch(JSONException e){
+
+                }
+                gem.buy.add(buy_info);
+            }
+           
+            /* uncomment to download images. also uncomment gemdir on top of class
             //CHECK cached images
             if (!new File(gemDir+""+gem.name+".png").exists()) {
                 BufferedImage image = null;
@@ -335,7 +442,7 @@ public class POELevelFx extends Application {
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
-                System.err.println("Image not found and redownloaded: " + gemDir+""+gem.name+".png");
+                System.err.println("Image not found and redownloaded: "+gemDir+""+gem.name+".png");
                 
             }else{
                 BufferedImage img = null;
@@ -347,8 +454,8 @@ public class POELevelFx extends Application {
                     catch (IOException e) {
                         e.printStackTrace();
                     }
-            }*/
-            
+            }
+            */
             BufferedImage img = null;
                 try {
                     img = ImageIO.read(getClass().getResource("/gems/"+gem.name+".png"));
@@ -393,8 +500,18 @@ public class POELevelFx extends Application {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            
-        byte[] byteValueBase64Decoded = Base64.getDecoder().decode(stringValueBase64Encoded);
+            byte[] byteValueBase64Decoded = null;
+            try{
+            byteValueBase64Decoded = Base64.getDecoder().decode(stringValueBase64Encoded);
+        }catch(java.lang.IllegalArgumentException e){
+            e.printStackTrace();
+            return;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return;
+        }
+        //byte[] byteValueBase64Decoded = Base64.getDecoder().decode(stringValueBase64Encoded);
         String stringValueBase64Decoded = new String(byteValueBase64Decoded);
         
         //JSONArray obj = new JsonParser().parse(stringValueBase64Encoded).getAsJsonArray();
@@ -406,6 +523,8 @@ public class POELevelFx extends Application {
                         bObj.getString("className"),
                         bObj.getString("ascendancyName")
                 );
+                build.characterName = bObj.getString("characterName");
+                build.level = bObj.getInt("level");
                 GemHolder.getInstance().className = build.getClassName();
                 JSONArray socket_group_array = bObj.getJSONArray("socketGroup");
                 //build.level
@@ -431,7 +550,13 @@ public class POELevelFx extends Application {
                     for(int k = 0 ; k<gems_array.length(); k++ ){
                         JSONObject gObj = gems_array.getJSONObject(k);
                         String gemName = gObj.getString("name");
-                        Gem gem = GemHolder.getInstance().createGemFromCache(gemName);
+                        if(gemName.equals("Detonate Mines")){
+                            System.out.println();
+                        }
+                        Gem gem = GemHolder.getInstance().createGemFromCache(gemName,build.getClassName());
+                        if(gem == null){
+                            System.out.println();
+                        }
                         gem.id = gObj.getInt("id");
                         gem.level_added = gObj.getInt("level_added");
                         gem.replaced = gObj.getBoolean("replaced");
@@ -509,6 +634,127 @@ public class POELevelFx extends Application {
         }
     }
     
+    private static int sign_jsons(HashSet<Integer> unique_ids){
+        if(unique_ids == null) unique_ids = new HashSet<>();
+        int ran;
+        do{
+            ran = ThreadLocalRandom.current().nextInt(1,999999);
+        }while(unique_ids.contains(ran));
+        unique_ids.add(ran);
+        return ran;
+    }
+    
+    public static boolean saveBuildsToMemory(){
+         
+        JSONArray builds_array = new JSONArray();
+        HashSet<Integer> unique_ids = new HashSet<>();
+        for( Build build : buildsLoaded){
+            JSONObject bObj = new JSONObject();
+            bObj.put("buildName",build.getName());
+            bObj.put("className",build.getClassName());
+            bObj.put("ascendancyName",build.getAsc());
+            bObj.put("level", build.level); //<change
+            bObj.put("characterName",build.characterName);
+            JSONArray socket_group_array = new JSONArray();
+            bObj.put("socketGroup", socket_group_array);
+            for(SocketGroup sg : build.getSocketGroup()){
+                JSONObject sObj = new JSONObject();
+                if(sg.id == -1)
+                    sg.id = sign_jsons(unique_ids);
+                sObj.put("id",sg.id);
+                if(sg.getActiveGem().id == -1){
+                    sg.getActiveGem().id = sign_jsons(unique_ids);
+                }
+                sObj.put("active", sg.getActiveGem().id);
+                sObj.put("fromGroupLevel", sg.getFromGroupLevel());
+                sObj.put("untilGroupLevel", sg.getUntilGroupLevel());
+                sObj.put("replaceGroup", sg.replaceGroup());
+                sObj.put("replacesGroup", sg.replacesGroup());
+                if(sg.replaceGroup()){
+                    if(sg.getGroupReplaced().id == -1){
+                        sg.getGroupReplaced().id = sign_jsons(unique_ids);
+                    }
+                    sObj.put("socketGroupReplace", sg.getGroupReplaced().id);
+                }
+                if(sg.replacesGroup()){
+                    if(sg.getGroupThatReplaces().id == -1){
+                        sg.getGroupThatReplaces().id = sign_jsons(unique_ids);
+                    }
+                    sObj.put("socketGroupThatReplaces", sg.getGroupThatReplaces().id);
+                }
+                JSONArray gems_array = new JSONArray();
+                for(Gem g : sg.getGems()){
+                    JSONObject gObj = new JSONObject();
+                    if(g.id == -1){
+                        g.id = sign_jsons(unique_ids);
+                    }
+                    gObj.put("id",g.id);
+                    gObj.put("name", g.getGemName());
+                    gObj.put("level_added", g.getLevelAdded());
+                    gObj.put("replaced", g.replaced);
+                    gObj.put("replaces", g.replaces);
+                    if(g.replaced){
+                        if(g.replacedWith.id == -1){
+                            g.replacedWith.id  = sign_jsons(unique_ids);
+                        }
+                        gObj.put("replaceWith", g.replacedWith.id);
+                    }
+                    if(g.replaces){
+                        if(g.replacesGem.id == -1){
+                            g.replacesGem.id = sign_jsons(unique_ids);
+                        }
+                        gObj.put("replacesGem", g.replacesGem.id);
+                    }
+                    gems_array.put(gObj);
+                }
+                sObj.put("gem", gems_array);
+                socket_group_array.put(sObj);
+                
+            }
+            //now we need to connect data 
+            
+            
+            builds_array.put(bObj);
+        }
+        
+        String build_to_json = builds_array.toString();
+        
+        
+        
+        
+        
+        
+        //Gson gson = new Gson();
+        //String build_to_json = gson.toJson(linker.get(activeBuildID).build);
+        System.out.println(build_to_json);
+        String stringValueBase64Encoded = Base64.getEncoder().encodeToString(build_to_json.getBytes());
+        System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        boolean done = false;
+        try {
+            fw = new FileWriter(POELevelFx.directory+"\\Path of Leveling\\Builds\\builds.txt");
+            bw = new BufferedWriter(fw);
+            bw.write(stringValueBase64Encoded);
+            System.out.println("Done");
+            done = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            done = false;
+        } finally {
+            try {
+                if (bw != null)
+                    bw.close();
+                if (fw != null)
+                    fw.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+        return done;
+    }
+    
     @Override
     public void start(Stage stage) throws Exception {
         main = new Main_Stage(this);
@@ -552,8 +798,59 @@ public class POELevelFx extends Application {
          });   
         */
         main.close();
+        Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    //Hook.run();
+                    GlobalKeyListener.run();
+                }
+        });
         Controller controller = new Controller(zone_b, xp, level, Main_Stage.buildLoaded);
+        
     }
+    
+    private void addTrayIcon() throws AWTException {
+    final TrayIcon trayIcon = new TrayIcon(new ImageIcon(getClass().getResource("/icons/humility.png")).getImage(), "Path of Leveling");
+
+    // Create a pop-up menu components
+    final PopupMenu popup = new PopupMenu();
+    final MenuItem shutdownItem = new MenuItem("Exit");
+
+    //Add components to pop-up menu
+    popup.add(shutdownItem);
+
+    trayIcon.setPopupMenu(popup);
+    trayIcon.setImageAutoSize(true); //So the icon auto-sizes
+
+    SystemTray.getSystemTray().add(trayIcon);
+    
+    trayIcon.addMouseListener(new MouseAdapter() {
+        @Override public void mouseClicked(java.awt.event.MouseEvent e) {
+            if (e.getButton() == java.awt.event.MouseEvent.BUTTON1) { //Left click on tray icon (single click !)
+                Platform.runLater(() -> {
+                    //code to show things...
+                });
+            }
+        }
+    });
+    
+    shutdownItem.addActionListener(evnt -> {
+        //code to exit the program
+        //save stuff
+        if(saveBuildsToMemory()){
+            System.out.println("Successfully saved checkpoint");
+        }else{
+            System.out.println("Checkpoint save failed");
+        }
+        try {
+                GlobalScreen.unregisterNativeHook();
+        } catch (NativeHookException e1) {
+                e1.printStackTrace();
+        }
+        System.exit(20);
+    });
+}
+    
     /**
      * @param args the command line arguments
      */

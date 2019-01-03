@@ -19,13 +19,31 @@
             <menus>
               <Menu mnemonicParsing="false" text="File">
                 <items>
-                        <MenuItem mnemonicParsing="false" text="Import from Pastebin" />
-                  <MenuItem mnemonicParsing="false" text="Import from Clipboard" />
-                        <MenuItem mnemonicParsing="false" text="Export to Pastebin" />
-                  <MenuItem mnemonicParsing="false" text="Export to clipboard" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#saveAllBuilds" text="Save all builds" />
-                  <MenuItem mnemonicParsing="false" text="Save current build" />
+                        <Menu mnemonicParsing="false" text="Export to..">
+                          <items>
+                              <Menu mnemonicParsing="false" text="Pastebin..">
+                                <items>
+                                    <MenuItem fx:id="export_pastebin_active" disable="true" mnemonicParsing="false" onAction="#exportToPastebinActive" text="Active build" />
+                              <MenuItem fx:id="export_pastebin_all" mnemonicParsing="false" onAction="#exportToPastebinAll" text="All builds" />
+                                </items>
+                              </Menu>
+                              <Menu disable="true" mnemonicParsing="false" text="Clipboard..">
+                                 <items>
+                                    <MenuItem fx:id="export_clipboard_active" disable="true" mnemonicParsing="false" text="Active build" />
+                                    <MenuItem fx:id="export_clipboard_all" mnemonicParsing="false" text="All builds" />
+                                 </items>
+                              </Menu>
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Import from..">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#importFromPastebin" text="Import from Pastebin" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Import from Clipboard" />
+                          </items>
+                        </Menu>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveAllBuilds" text="Save builds state" />
+                  <MenuItem disable="true" mnemonicParsing="false" text="Save active build" />
                 </items>
               </Menu>
                   <Menu mnemonicParsing="false" text="Run">
@@ -38,7 +56,7 @@
                 <items>
                         <Menu mnemonicParsing="false" text="Skin">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Night Mode - Soon" />
+                            <MenuItem disable="true" mnemonicParsing="false" text="Night Mode - Soon" />
                           </items>
                         </Menu>
                 </items>
@@ -46,7 +64,7 @@
               <Menu mnemonicParsing="false" text="About">
                 <items>
                   <MenuItem mnemonicParsing="false" onAction="#about" text="Credits" />
-                        <MenuItem mnemonicParsing="false" text="Version" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Version" />
                 </items>
               </Menu>
             </menus>

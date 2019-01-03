@@ -2,6 +2,22 @@ package poe.level.data;
 import java.util.ArrayList;
 
 public class Zone {
+    public static String[] questline = new String[]{
+        "Enemy at the Gate",
+        "Mercy Mission",
+        "Breaking Some Eggs",
+        "The Caged Brute",
+        "The Siren's Cadence",
+        "Intruders in Black",
+        "Sharp and Cruel",
+        "The Root of the Problem",
+        "Lost in Love",
+        "Sever the Right Hand",
+        "A Fixture of Fate",
+        "Breaking the Seal",
+        "The Eternal Nightmare",
+        "Fallen from Grace"
+        };
     int level;
     String name;
     boolean hasPassive;

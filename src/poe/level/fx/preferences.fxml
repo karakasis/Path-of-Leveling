@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="486.0" prefWidth="499.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="poe.level.fx.Preferences_Controller">
+<AnchorPane id="AnchorPane" prefHeight="486.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Preferences_Controller">
    <children>
       <Label layoutX="29.0" layoutY="17.0" text="Zones :">
          <font>
@@ -27,8 +26,8 @@
             <Font name="Alegreya Sans SC" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="show_hide_hotkey_zone" editable="false" layoutX="391.0" layoutY="61.0" prefHeight="25.0" prefWidth="79.0" />
-      <Label layoutX="320.0" layoutY="65.0" text="Show/Hide" />
+      <TextField fx:id="show_hide_hotkey_zone" editable="false" layoutX="388.0" layoutY="74.0" prefHeight="25.0" prefWidth="79.0" />
+      <Label layoutX="317.0" layoutY="78.0" text="Show/Hide" />
       <Label layoutX="28.0" layoutY="228.0" text="Leveling :">
          <font>
             <Font name="Alegreya Sans SC" size="16.0" />
@@ -52,5 +51,10 @@
       <Separator layoutX="19.0" layoutY="424.0" prefHeight="8.0" prefWidth="462.0" />
       <JFXToggleButton fx:id="toggle1" layoutX="7.0" layoutY="126.0" onAction="#onToggle" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Alert when zone has passive point" />
       <JFXToggleButton fx:id="toggle11" layoutX="7.0" layoutY="160.0" onAction="#onToggle" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Alert when zone has labyrinth trial" />
+      <Label layoutX="335.0" layoutY="40.0" prefHeight="17.0" prefWidth="150.0" text="Support only Ctrl/Shift combinations">
+         <font>
+            <Font name="System Italic" size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

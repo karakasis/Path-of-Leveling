@@ -1103,7 +1103,7 @@
                "level":45,
                "name":"The Twilight Strand",
                "haspassive":false,
-               "questRewardsSkills":false,
+               "questRewardsSkills":true,
                "altimage":"Linear layout with some small rooms in the cliffs possible.",
                "quest":"Fallen from Grace"
             },

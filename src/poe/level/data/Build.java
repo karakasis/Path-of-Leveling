@@ -18,6 +18,7 @@ public class Build {
     String buildName;
     String className;
     String ascendancyName;
+    public String characterName;
     public int level;
     ArrayList<SocketGroup> gems;
     
@@ -27,7 +28,8 @@ public class Build {
         this.className = className;
         this.ascendancyName = ascendancyName;
         gems = new ArrayList<>();
-        level = 1;
+        level = -1;
+        characterName = "";
     }
     
     public String getName(){

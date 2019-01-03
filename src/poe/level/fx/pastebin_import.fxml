@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="121.0" prefWidth="254.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="poe.level.fx.Pastebin_import_Controller">
+   <children>
+      <TextField fx:id="paste_area" layoutX="26.0" layoutY="48.0" prefHeight="25.0" prefWidth="202.0" promptText="https://pastebin.com/Rb234tX0" />
+      <Label layoutX="43.0" layoutY="14.0" text="Paste a valid Pastebin link">
+         <font>
+            <Font name="Alegreya Sans SC" size="15.0" />
+         </font>
+      </Label>
+      <JFXButton buttonType="RAISED" layoutX="140.0" layoutY="82.0" onAction="#paste_fetch" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Fetch" textFill="WHITE" />
+      <Label fx:id="paste_error" layoutX="29.0" layoutY="86.0" prefHeight="17.0" prefWidth="88.0" text="Invalid pastebin" textFill="#d72929" visible="false" />
+   </children>
+</AnchorPane>

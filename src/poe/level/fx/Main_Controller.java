@@ -73,6 +73,7 @@ public class Main_Controller implements Initializable {
     
     Main_Stage parent;
     private JFXDialog addBuildPopup;
+    private JFXDialog editCharacterPopup;
     private Build buildLoaded;
     
     public void hookStage(Main_Stage stage){
@@ -110,24 +111,23 @@ public class Main_Controller implements Initializable {
             alert.showAndWait();
         }else{
             if(leveling.isSelected() && buildLoaded!=null){
-                Main_Stage.buildLoaded = buildLoaded;
-                buildLoaded.level = temp_alert();
-                Main_Stage.playerLevel = buildLoaded.level;
-                parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());
+                characterInfoPopup();
+                //buildLoaded.level = temp_alert();
+            }else if(leveling.isSelected() && buildLoaded == null){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Build not set");
+                alert.setContentText("Select a build or create a new one in the Editor panel.");
+                alert.initOwner(parent);
+                alert.showAndWait();
             }else{
-                if(!leveling.isSelected()){
-                    Main_Stage.playerLevel = temp_alert();
-                    parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());
+                if(xp.isSelected()){
+                    characterInfoPopup();
                 }else{
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Build not set");
-                    alert.setContentText("Select a build or create a new one in the Editor panel.");
-                    alert.initOwner(parent);
-                    alert.showAndWait();
+                    parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());
                 }
             }
+               
         }
-        
     }
     
     public int temp_alert(){
@@ -186,6 +186,23 @@ public class Main_Controller implements Initializable {
         addBuildPopup.show();
     }
     
+    public void characterInfoPopup() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("characterInfo.fxml"));
+        AnchorPane con = null;
+        try {
+            con = (AnchorPane) loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        loader.<CharacterInfo_Controller>getController().hook(this);
+        if(buildLoaded!=null)
+            loader.<CharacterInfo_Controller>getController().init(buildLoaded);
+        
+        editCharacterPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+        //controller.passDialog(mLoad);
+        editCharacterPopup.show();
+    }
+    
     public void buildPopup() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectBuild_Popup.fxml"));
         AnchorPane con = null;
@@ -195,7 +212,6 @@ public class Main_Controller implements Initializable {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         loader.<SelectBuild_PopupController>getController().hook(this);
-        
         addBuildPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
         //controller.passDialog(mLoad);
         addBuildPopup.show();
@@ -209,6 +225,23 @@ public class Main_Controller implements Initializable {
     
     public void closePrefPopup(){
         addBuildPopup.close();
+    }
+    
+    public void closeCharacterPopup(String characterName, int level){
+        if(xp.isSelected()){
+            Main_Stage.playerLevel = level;
+            Main_Stage.characterName = characterName;
+            //Main_Stage.playerLevel = temp_alert();
+        }
+        if(leveling.isSelected()){
+            Main_Stage.buildLoaded = buildLoaded;
+            buildLoaded.characterName = characterName;
+            buildLoaded.level = level;
+        }
+        
+        editCharacterPopup.close();
+        
+        parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());
     }
     
     private void decorateSelectButton(){

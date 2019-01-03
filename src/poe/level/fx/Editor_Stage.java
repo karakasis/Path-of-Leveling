@@ -26,6 +26,10 @@ public class Editor_Stage extends Stage{
     public Editor_Stage(POELevelFx parent){
         this.parent = parent;
         this.launcher();
+        
+        this.setOnCloseRequest(event -> {
+            System.exit(40);
+        });
     }
     
     public void launcher(){

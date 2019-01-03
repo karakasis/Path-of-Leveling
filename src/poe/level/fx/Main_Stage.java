@@ -30,6 +30,7 @@ public class Main_Stage extends Stage{
     POELevelFx parent;
     public static Build buildLoaded;
     public static int playerLevel;
+    public static String characterName;
     
     public Main_Stage(POELevelFx parent){
         this.parent = parent;
@@ -69,7 +70,8 @@ public class Main_Stage extends Stage{
     }
     
     public void closeApp(){
-        parent.close();
+        System.exit(30);
+        //parent.close();
     }
 
 }

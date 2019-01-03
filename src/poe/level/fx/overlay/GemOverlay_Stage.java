@@ -32,6 +32,7 @@ import javafx.util.Duration;
 import poe.level.data.Build;
 import poe.level.data.Gem;
 import poe.level.data.SocketGroup;
+import static poe.level.fx.POELevelFx.saveBuildsToMemory;
 import poe.level.fx.Preferences_Controller;
 import static poe.level.fx.overlay.ZoneOverlay_Stage.prefX;
 import static poe.level.fx.overlay.ZoneOverlay_Stage.prefY;
@@ -43,6 +44,7 @@ import static poe.level.fx.overlay.ZoneOverlay_Stage.prefY;
 public class GemOverlay_Stage extends Stage{
     
     ArrayList<Integer> level_list;
+    ArrayList<Gem> gemsOnThisLevel_local;
     HashSet<Integer> totalLevels;
     HashMap<Integer,ArrayList<Gem>> gemsOnLevelsMap;
     HashMap<Gem,SocketGroup> gemToSocket_map;
@@ -51,6 +53,8 @@ public class GemOverlay_Stage extends Stage{
     
     public static double prefX;
     public static double prefY;
+    
+    private boolean isPlaying;
     
     public GemOverlay_Stage(Build build){
         
@@ -62,6 +66,17 @@ public class GemOverlay_Stage extends Stage{
         double screenRightEdge = primScreenBounds.getMaxX() ;
         prefX = screenRightEdge;
         prefY = primScreenBounds.getMinY();
+        gemsOnThisLevel_local = new ArrayList<>();
+        loadFXML();
+        this.setOnCloseRequest(event -> {
+            System.out.println("Closing gem:: ");
+            if(saveBuildsToMemory()){
+                System.out.println("Successfully saved checkpoint");
+            }else{
+                System.out.println("Checkpoint save failed");
+            }
+            System.exit(11);
+        });
     }
     
     public void generateLevels(Build build){
@@ -149,6 +164,12 @@ public class GemOverlay_Stage extends Stage{
         this.setScene(scene);
         controller.hookStage(this);
         
+        this.show();
+    }
+    
+    public void animate(){
+        
+        
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         double screenRightEdge = primScreenBounds.getMaxX() ;
         this.setX(prefX);
@@ -181,18 +202,19 @@ public class GemOverlay_Stage extends Stage{
         KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 0.0));
         slideOut.getKeyFrames().add(kf_slideOut);
         
-        slideOut.setOnFinished(e -> Platform.runLater(() -> System.out.println("Ending")));
+        slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending");isPlaying = false;}));
         slideIn.setOnFinished(e -> Platform.runLater(() -> slideOut.play()));
         
         slideIn.play();
+        isPlaying = true;
         this.show();
     }
     
     public void update(int level){
-        loadFXML();
         if(level_list.contains(level)){
             controller.reset();
-            ArrayList<Gem> gemsOnThisLevel_local = gemsOnLevelsMap.get(level);
+            gemsOnThisLevel_local.clear();
+            gemsOnThisLevel_local = gemsOnLevelsMap.get(level);
             for(Gem g : gemsOnThisLevel_local){
                 //THE REPLACE IS HERE for socket group
                 if(gemToSocket_map.get(g).getActiveGem().equals(g) && gemToSocket_map.get(g).replacesGroup()){
@@ -212,6 +234,33 @@ public class GemOverlay_Stage extends Stage{
                 }
             }
             
+            animate();
+        }
+    }
+    
+    public void event_remind(){
+        if(!isPlaying){
+            controller.reset();
+            for(Gem g : gemsOnThisLevel_local){
+                //THE REPLACE IS HERE for socket group
+                if(gemToSocket_map.get(g).getActiveGem().equals(g) && gemToSocket_map.get(g).replacesGroup()){
+                    //IF THIS GEM IS AN ACTIVE GEM AND ITS SOCKET GROUP REPLACES ANOTHER ONE
+                    Gem add_this = g;
+                    Gem remove_this = gemToSocket_map.get(g).getGroupThatReplaces().getActiveGem();
+                    controller.socketGroupReplace(add_this,remove_this);
+                    
+                }
+                if(g.replaces){
+                    Gem add_this = g;
+                    Gem remove_this = g.replacesGem;
+                    controller.gemReplace(add_this,remove_this,gemToSocket_map.get(g).getActiveGem());
+                    //IF THIS GEM replaces another gem
+                }else{
+                    controller.addGem(g,gemToSocket_map.get(g).getActiveGem());
+                }
+            }
+            
+            animate();
         }
     }
     

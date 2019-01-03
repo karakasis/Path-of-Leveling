@@ -20,6 +20,15 @@ import javax.imageio.ImageIO;
  * @author Christos
  */
 public class Gem {
+    
+    public class Info{
+        public String quest_name;
+        public String npc;
+        public int act;
+        public String town;
+        public ArrayList<String> available_to;
+    }
+    
     public transient Image gemIcon;
     public transient Image smallGemIcon;
     public int id;
@@ -47,6 +56,18 @@ public class Gem {
     //IDS FOR JSON CONVERTION
     public int id_replaced;
     public int id_replaces;
+    
+    public boolean isRewarded;
+    public Info reward;
+    public ArrayList<Info> buy;
+    
+    public boolean isBought(){
+        if(buy.size()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
      public Gem(){
         available_to = new ArrayList<>();

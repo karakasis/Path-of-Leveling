@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="172.0" prefWidth="329.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.CharacterInfo_Controller">
+   <children>
+      <Label layoutX="29.0" layoutY="17.0" text="Character :">
+         <font>
+            <Font name="Alegreya Sans SC" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="name" layoutX="133.0" layoutY="49.0" prefHeight="25.0" prefWidth="178.0" promptText="Your in-game character name." />
+      <Label layoutX="31.0" layoutY="53.0" text="Character Name :" />
+      <Label layoutX="30.0" layoutY="84.0" prefHeight="25.0" prefWidth="92.0" text="Character Level :" textAlignment="CENTER" wrapText="true" />
+      <TextField fx:id="level" layoutX="133.0" layoutY="84.0" prefHeight="25.0" prefWidth="178.0" promptText="The level of your character." />
+      <JFXButton buttonType="RAISED" layoutX="222.0" layoutY="121.0" onAction="#start" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Start" textFill="WHITE" AnchorPane.rightAnchor="19.0" />
+      <Label fx:id="error" alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="121.0" prefHeight="25.0" prefWidth="178.0" text="Character Level :" textAlignment="CENTER" textFill="#e82222" visible="false" wrapText="true" />
+   </children>
+</AnchorPane>

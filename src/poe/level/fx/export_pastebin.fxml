@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="279.0" prefWidth="462.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="poe.level.fx.Export_pastebin_Controller">
+   <children>
+      <Label layoutX="33.0" layoutY="20.0" text="Copy the following text">
+         <font>
+            <Font name="Alegreya Sans SC" size="15.0" />
+         </font>
+      </Label>
+      <JFXButton buttonType="RAISED" layoutX="349.0" layoutY="180.0" onAction="#pastebin_url" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Pastebin" textFill="WHITE" />
+      <TextArea fx:id="paste_area" editable="false" layoutX="25.0" layoutY="51.0" prefHeight="99.0" prefWidth="412.0" wrapText="true">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextArea>
+      <Label layoutX="33.0" layoutY="182.0" text="Open Pastebin and paste the text">
+         <font>
+            <Font name="Alegreya Sans SC" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="239.0" text="Share the Pastebin url with others">
+         <font>
+            <Font name="Alegreya Sans SC" size="15.0" />
+         </font>
+      </Label>
+      <Separator layoutX="14.0" layoutY="157.0" prefHeight="6.0" prefWidth="438.0" />
+      <Separator layoutX="12.0" layoutY="220.0" prefHeight="6.0" prefWidth="438.0" />
+   </children>
+</AnchorPane>

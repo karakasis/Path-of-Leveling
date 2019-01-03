@@ -8,6 +8,7 @@ package poe.level.fx.overlay;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -15,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import poe.level.fx.Main_Stage;
+import static poe.level.fx.POELevelFx.saveBuildsToMemory;
 
 /**
  *
@@ -37,7 +39,15 @@ public class LevelOverlay_Stage extends Stage{
         Scene scene = new Scene(ap);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         scene.setFill(Color.TRANSPARENT);
-
+        this.setOnCloseRequest(event -> {
+            System.out.println("Closing level:: ");
+            if(saveBuildsToMemory()){
+                System.out.println("Successfully saved checkpoint");
+            }else{
+                System.out.println("Checkpoint save failed");
+            }
+            System.exit(10);
+        });
         
         this.setScene(scene);
         this.setAlwaysOnTop(true);
