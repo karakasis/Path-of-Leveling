@@ -51,7 +51,7 @@ That's all. Everything else is code.
  - Support for more resolutions, and/or custom sized overlays
  - Find a more suitable way to place the overlays
 
-If you have a suggestion start an issue.
+If you have a suggestion I encourage you start an issue.
 
 ## Changelog in v0.5
 New in this release:
