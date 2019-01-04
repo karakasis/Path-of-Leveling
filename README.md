@@ -3,7 +3,11 @@
 
 *Assisting overlay with an advanced GUI editor written in Java for [Path of Exile](https://www.pathofexile.com/game).*
 
-*Get the [latest Version](https://github.com/karakasis/Path-of-Leveling/releases/tag/v0.5-alpha), updated January 3rd 2019, Happy new year.*
+*Get the [latest Version](https://github.com/karakasis/Path-of-Leveling/releases/tag/v0.6-alpha), updated January 4th 2019, Happy new year.*
+
+*Pastebin build example : [pastebin](https://pastebin.com/BDzwRww9)*
+
+*A quick overview of the application running can be found in this [video.](https://www.youtube.com/watch?v=xxiOxnJZM-A)*
 
 ## What does it do
 
@@ -53,8 +57,20 @@ That's all. Everything else is code.
 
 If you have a suggestion I encourage you to start an issue.
 
+## Changelog in v0.6
+New on this release:
+ - Implemented a custom updater, when there is a new release and you launch the application you get a different loader that downloads the newest release, then places it in the same folder as this .jar. You can then rename the new one and delete the old one.
+ - Added support for trials and passives in the acts. Now you can select in the preferences if you want those to pop up, and with the normal Zone overlay you get 2 more icons.
+ - Added an extra option in the Zones overlay, you can now select if you want the images or not , and the same for the textual guides.
+ - Removed some hardcoded text.
+ - Fixed a typo in Ascendancy Berserker.
+ - Implemented a custom logger. All outputs are now redirected in the log.txt, within your Path of Leveling folder. (That would be "My Documents/Path of Leveling" in Windows)
+ - - If you find your app, crashing or not interacting properly take a look at your log file for any errors and post them for bug report (on reddit for example).
+ - Fixed minor bug that needed you to restart the application to run properly.
+ - Fixed and added more feautures that I have already forgotten.
+
 ## Changelog in v0.5
-New in this release:
+New on this release:
 - Pastebin support
 - Exporting and importing one or all builds
 - Keybindings with JNA Hooks
