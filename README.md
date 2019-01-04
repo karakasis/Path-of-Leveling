@@ -55,6 +55,7 @@ That's all. Everything else is code.
  - Link your leveling-build with your Path of Building tree, or a different planner
  - Support for more resolutions, and/or custom sized overlays
  - Find a more suitable way to place the overlays
+ 
 Mentioned by users :
  - ~~Do something so we can see the rewards of quest so we can skip the quest that don’t give passive points / respect points~~ done
 If you have a suggestion I encourage you to start an issue.
