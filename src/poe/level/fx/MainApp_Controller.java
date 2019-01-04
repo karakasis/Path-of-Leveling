@@ -217,6 +217,19 @@ public class MainApp_Controller implements Initializable {
             //controller.passDialog(mLoad);
             controller.start(buildspanel_controller.getCurrentBuild());
             buildPreviewPopup.show();
+        }else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ValidateErrorPopup.fxml"));
+            AnchorPane con = null;
+            try {
+                con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            //controller.passDialog(mLoad);
+            loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.getCurrentBuild().getName(), buildspanel_controller.validateError());
+            buildPreviewPopup.show();
         }
     }
     
@@ -225,6 +238,20 @@ public class MainApp_Controller implements Initializable {
         try {
             if(buildspanel_controller.validateAll())
                 buildspanel_controller.saveBuild();
+            else{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ValidateErrorPopup.fxml"));
+                AnchorPane con = null;
+                try {
+                    con = (AnchorPane) loader.load();
+                } catch (IOException ex) {
+                    Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+                //controller.passDialog(mLoad);
+                loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated, buildspanel_controller.validateAllError());
+                buildPreviewPopup.show();
+            }
         } catch (IOException ex) {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -236,6 +263,19 @@ public class MainApp_Controller implements Initializable {
             if(buildspanel_controller.validateAll()){
                 buildspanel_controller.saveBuild();
                 parent.returnToLauncher();
+            }else{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ValidateErrorPopup.fxml"));
+                AnchorPane con = null;
+                try {
+                    con = (AnchorPane) loader.load();
+                } catch (IOException ex) {
+                    Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+                //controller.passDialog(mLoad);
+                loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated, buildspanel_controller.validateAllError());
+                buildPreviewPopup.show();
             }
         } catch (IOException ex) {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);

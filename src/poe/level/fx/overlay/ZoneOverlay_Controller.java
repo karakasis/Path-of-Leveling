@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import poe.level.data.Zone;
+import poe.level.fx.Preferences_Controller;
 
 /**
  * FXML Controller class
@@ -38,6 +39,10 @@ public class ZoneOverlay_Controller implements Initializable {
     private AnchorPane root;
     @FXML
     private HBox container;
+    @FXML
+    private ImageView passive_book;
+    @FXML
+    private ImageView trial;
     
     private double initialX;
     private double initialY;
@@ -70,27 +75,51 @@ public class ZoneOverlay_Controller implements Initializable {
     public void init(Zone zone){
         
         BufferedImage img = null;
-        if(zone.getImages().get(0).equals("none")){
-            cacheLabelAlt.setText(zone.altImage());
-            container.getChildren().add(cacheLabelAlt);
+        if(Preferences_Controller.zones_trial_toggle){
+            if(zone.hasTrial){
+                trial.setVisible(true);
+            }else{
+                trial.setVisible(false);
+            }
         }else{
-            for(String s : zone.getImages()){
-                    try {
-                        //img = ImageIO.read(getClass().getResource("/zones/"+zone.getActName()+" - Overlay/"+s+".png"));
-                        img = ImageIO.read(getClass().getResource("/zones/"+zone.getActName()+"/"+s+".png"));
-                        Image iv = SwingFXUtils.toFXImage(img, null);
-                        ImageView iv_res = new ImageView(iv);
-                        iv_res.setFitWidth(256);
-                        iv_res.setFitHeight(144);
-                        container.getChildren().add(iv_res);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            trial.setVisible(false);
+        }
+        if(Preferences_Controller.zones_passive_toggle){
+            if(zone.hasPassive){
+                passive_book.setVisible(true);
+            }else{
+                passive_book.setVisible(false);
+            }
+        }else{
+            passive_book.setVisible(false);
+        }
+        if(Preferences_Controller.zones_images_toggle){
+            if(zone.getImages().get(0).equals("none")){
+                cacheLabelAlt.setText(zone.altImage());
+                container.getChildren().add(cacheLabelAlt);
+            }else{
+                for(String s : zone.getImages()){
+                        try {
+                            //img = ImageIO.read(getClass().getResource("/zones/"+zone.getActName()+" - Overlay/"+s+".png"));
+                            img = ImageIO.read(getClass().getResource("/zones/"+zone.getActName()+"/"+s+".png"));
+                            System.out.println("Loaded image.");
+                            Image iv = SwingFXUtils.toFXImage(img, null);
+                            ImageView iv_res = new ImageView(iv);
+                            iv_res.setFitWidth(256);
+                            iv_res.setFitHeight(144);
+                            container.getChildren().add(iv_res);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                }
             }
         }
+        if(Preferences_Controller.zones_text_toggle){
+                            System.out.println("Loaded text.");
+            cacheLabel.setText(zone.getZoneNote());
+            container.getChildren().add(cacheLabel);
+        }
         
-        cacheLabel.setText(zone.getZoneNote());
-        container.getChildren().add(cacheLabel);
     }
     
     @Override

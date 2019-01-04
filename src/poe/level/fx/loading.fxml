@@ -6,8 +6,8 @@
 
 <AnchorPane id="AnchorPane" prefHeight="100.0" prefWidth="261.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Loading_Controller">
    <children>
-      <JFXProgressBar fx:id="progressbar" layoutX="31.0" layoutY="52.0" progress="0.78" />
+      <JFXProgressBar fx:id="progressbar" layoutX="31.0" layoutY="52.0" progress="0.0" />
       <Label layoutX="71.0" layoutY="14.0" prefHeight="39.0" prefWidth="120.0" text="Running to Hillock ..." textAlignment="CENTER" wrapText="true" />
-      <Label fx:id="label" layoutX="103.0" layoutY="65.0" text="12 %" />
+      <Label fx:id="label" layoutX="111.0" layoutY="63.0" text="0 %" />
    </children>
 </AnchorPane>

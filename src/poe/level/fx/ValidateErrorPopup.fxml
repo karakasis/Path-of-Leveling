@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="586.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="poe.level.fx.ValidateErrorPopupController">
+   <children>
+      <FlowPane hgap="40.0" layoutX="14.0" layoutY="29.0" prefHeight="47.0" prefWidth="558.0">
+         <children>
+            <Label text="You have some errors in build : ">
+               <font>
+                  <Font name="Alegreya Sans SC" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="build_label" layoutX="10.0" layoutY="18.0" text="elehitele1elehitele1..">
+               <font>
+                  <Font name="Alegreya Sans SC" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="37.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../icons/icons8-cancel-64.png" />
+               </image>
+            </ImageView>
+         </children>
+      </FlowPane>
+      <TextArea fx:id="paste_error" editable="false" layoutX="29.0" layoutY="76.0" prefHeight="298.0" prefWidth="524.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="29.0" />
+   </children>
+</AnchorPane>

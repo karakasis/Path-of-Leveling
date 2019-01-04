@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.UpdateFinishedController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="100.0" prefWidth="261.0">
+         <children>
+            <Label layoutX="16.0" layoutY="9.0" prefHeight="83.0" prefWidth="229.0" text="The newest version has been downloaded. You may find it in the same folder as this application. Please close this window and use the newest version!" wrapText="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

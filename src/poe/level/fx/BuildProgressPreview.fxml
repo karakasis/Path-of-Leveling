@@ -10,11 +10,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="550.0" maxWidth="800.0" minHeight="350.0" minWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.BuildProgressPreview_Controller">
+<AnchorPane maxHeight="550.0" maxWidth="800.0" minHeight="350.0" minWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.BuildProgressPreview_Controller">
    <children>
       <FlowPane layoutX="11.0" layoutY="9.0" maxHeight="11.0" prefHeight="11.0" prefWrapLength="0.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="2.0">
          <children>
-            <Label style="-fx-border-color: black;" text="Build: Sunderboy " textAlignment="CENTER">
+            <Label fx:id="build_label" style="-fx-border-color: black;" text="Build: Sunderboy" textAlignment="CENTER">
                <font>
                   <Font name="Alegreya Sans SC Medium" size="13.0" />
                </font>
@@ -28,7 +28,7 @@
                   <Insets bottom="4.0" left="10.0" right="10.0" top="4.0" />
                </FlowPane.margin>
             </Label>
-            <Label layoutX="20.0" layoutY="14.0" style="-fx-border-color: black;" text="Class: Marauder" textAlignment="CENTER">
+            <Label fx:id="class_label" layoutX="20.0" layoutY="14.0" style="-fx-border-color: black;" text="Class: Marauder" textAlignment="CENTER">
                <font>
                   <Font name="Alegreya Sans SC Medium" size="13.0" />
                </font>
@@ -42,7 +42,7 @@
                   <Insets right="8.0" />
                </FlowPane.margin>
             </Label>
-            <Label layoutX="96.0" layoutY="14.0" style="-fx-border-color: black;" text="Ascendancy: Juggernaut" textAlignment="CENTER">
+            <Label fx:id="ascend_label" layoutX="96.0" layoutY="14.0" style="-fx-border-color: black;" text="Ascendancy: Juggernaut" textAlignment="CENTER">
                <font>
                   <Font name="Alegreya Sans SC Medium" size="13.0" />
                </font>
@@ -56,7 +56,7 @@
                   <Insets right="8.0" />
                </FlowPane.margin>
             </Label>
-            <Label layoutX="162.0" layoutY="14.0" style="-fx-border-color: black;" text="Level: 96" textAlignment="CENTER">
+            <Label layoutX="162.0" layoutY="14.0" style="-fx-border-color: black;" text="Level: 96" textAlignment="CENTER" visible="false">
                <font>
                   <Font name="Alegreya Sans SC Medium" size="13.0" />
                </font>

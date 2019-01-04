@@ -49,6 +49,15 @@ public class Preferences_Controller implements Initializable {
     private TextField remind_gems;
     @FXML
     private JFXTextField poe_installation;
+    
+    @FXML
+    private JFXToggleButton text_toggle;
+    @FXML
+    private JFXToggleButton images_toggle;
+    @FXML
+    private JFXToggleButton passive_toggle;
+    @FXML
+    private JFXToggleButton trial_toggle;
     /**
      * Initializes the controller class.
      */
@@ -60,6 +69,13 @@ public class Preferences_Controller implements Initializable {
     private String directory;
     
     public static boolean zones_toggle;
+    
+    public static boolean zones_text_toggle;
+    public static boolean zones_images_toggle;
+    
+    public static boolean zones_passive_toggle;
+    public static boolean zones_trial_toggle;
+    
     public static double zones_slider;
     public static double level_slider;
     
@@ -84,13 +100,20 @@ public class Preferences_Controller implements Initializable {
 		// load a properties file
 		prop.load(input);
                 zones_toggle = Boolean.parseBoolean(prop.getProperty("zones-toggle"));
+                zones_text_toggle = Boolean.parseBoolean(prop.getProperty("zones-text-toggle"));
+                zones_images_toggle = Boolean.parseBoolean(prop.getProperty("zones-images-toggle"));
+                zones_trial_toggle = Boolean.parseBoolean(prop.getProperty("zones-trial-toggle"));
+                zones_passive_toggle = Boolean.parseBoolean(prop.getProperty("zones-passive-toggle"));
                 zones_slider = Double.parseDouble(prop.getProperty("zones-slider"));
                 zones_hotkey_show_hide = prop.getProperty("zones-hotkey-show_hide");
                 level_slider = Double.parseDouble(prop.getProperty("level-slider"));
                 level_hotkey_remind = prop.getProperty("level-hotkey-remind");
                 directory = prop.getProperty("poe-dir");
-                poe_log_dir = directory + "\\logs\\Client.txt";
-                poe_installation.setText(directory);
+                if(!(directory==null || directory.equals(""))){
+                    poe_log_dir = directory + "\\logs\\Client.txt";
+                    poe_installation.setText(directory);
+                }
+                
 
                 try{
                     KeyCombination keyCombination = KeyCombination.keyCombination(zones_hotkey_show_hide);
@@ -118,6 +141,10 @@ public class Preferences_Controller implements Initializable {
                             input.close();
                             
                             toggle.setSelected(zones_toggle);
+                            text_toggle.setSelected(zones_text_toggle);
+                            images_toggle.setSelected(zones_images_toggle);
+                            trial_toggle.setSelected(zones_trial_toggle);
+                            passive_toggle.setSelected(zones_passive_toggle);
                             if(zones_toggle){
                                 sliderZones.setVisible(true);
                                 hideText.setVisible(true);
@@ -249,7 +276,6 @@ public class Preferences_Controller implements Initializable {
 
             try {
 
-                    output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
 
                     // set the properties value
                     String toggleS;
@@ -260,13 +286,50 @@ public class Preferences_Controller implements Initializable {
                         toggleS = "false";
                         zones_toggle = false;
                     }
+                    String toggleS_text;
+                    if(text_toggle.isSelected()){
+                        toggleS_text = "true";
+                        zones_text_toggle = true;
+                    }else{
+                        toggleS_text = "false";
+                        zones_text_toggle = false;
+                    }
+                    String toggleS_images;
+                    if(images_toggle.isSelected()){
+                        toggleS_images = "true";
+                        zones_images_toggle = true;
+                    }else{
+                        toggleS_images = "false";
+                        zones_images_toggle = false;
+                    }
+                    String toggleS_trial;
+                    if(trial_toggle.isSelected()){
+                        toggleS_trial = "true";
+                        zones_trial_toggle = true;
+                    }else{
+                        toggleS_trial = "false";
+                        zones_trial_toggle = false;
+                    }
+                    String toggleS_passive;
+                    if(passive_toggle.isSelected()){
+                        toggleS_passive = "true";
+                        zones_passive_toggle = true;
+                    }else{
+                        toggleS_passive = "false";
+                        zones_passive_toggle = false;
+                    }
                     zones_slider = sliderZones.getValue();
                     level_slider = sliderLevel.getValue();
                     prop.setProperty("zones-toggle", toggleS);
+                    prop.setProperty("zones-text-toggle", toggleS_text);
+                    prop.setProperty("zones-images-toggle", toggleS_images);
+                    prop.setProperty("zones-trial-toggle", toggleS_trial);
+                    prop.setProperty("zones-passive-toggle", toggleS_passive);
                     prop.setProperty("zones-slider", String.valueOf(zones_slider));
                     prop.setProperty("zones-hotkey-show_hide", show_hide_hotkey_zone.getText());
                     prop.setProperty("level-slider", String.valueOf(level_slider));
                     prop.setProperty("level-hotkey-remind", remind_gems.getText());
+                    poe_log_dir = directory + "\\logs\\Client.txt";
                     prop.setProperty("poe-dir",directory);
                     try{
                         KeyCombination keyCombination = KeyCombination.keyCombination(show_hide_hotkey_zone.getText());
@@ -286,6 +349,7 @@ public class Preferences_Controller implements Initializable {
                         level_hotkey_remind_key = KeyCombination.NO_MATCH;
                     }
                     
+                    output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
                     // save properties to project root folder
                     prop.store(output, null);
 

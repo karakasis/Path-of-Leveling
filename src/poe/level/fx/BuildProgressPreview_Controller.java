@@ -45,6 +45,13 @@ public class BuildProgressPreview_Controller implements Initializable {
     @FXML
     private AnchorPane timeline_pane;
     
+    @FXML
+    private Label build_label;
+    @FXML
+    private Label class_label;
+    @FXML
+    private Label ascend_label;
+    
     public void start(Build build){
         
         //reverse the replacements::
@@ -364,6 +371,29 @@ public class BuildProgressPreview_Controller implements Initializable {
                 alternateCounter = true;
             }
         }
+        if(build.getName()!=null){
+            String build_con = "";
+            if(build.getName().length()>=20){
+                build_con = build.getName().substring(0, 20);
+                build_con+="..";
+            }else{
+                build_con = build.getName();
+            }
+            build_label.setText("Build: "+build_con);
+        }else{
+            build_label.setText("Build: no_name");
+        }
+        if(build.getAsc()!=null){
+            ascend_label.setText("Ascendancy: "+build.getAsc());
+        }else{
+            ascend_label.setText("Ascendancy: no_ascendancy");
+        }
+        if(build.getClassName()!=null){
+            class_label.setText("Class: "+build.getClassName());
+        }else{
+            class_label.setText("Class: no_class");
+        }
+        
     }
     
     /**

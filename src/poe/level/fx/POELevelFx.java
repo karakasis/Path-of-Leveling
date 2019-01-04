@@ -13,6 +13,8 @@ import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,10 +25,24 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -36,16 +52,20 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.lwjgl.glfw.GLFWKeyCallback;
 import poe.level.data.Act;
 import poe.level.data.ActHandler;
 import poe.level.data.Build;
@@ -55,8 +75,11 @@ import poe.level.data.Gem.Info;
 import poe.level.data.GemHolder;
 import poe.level.data.SocketGroup;
 import poe.level.data.Zone;
+import static poe.level.fx.Preferences_Controller.zones_images_toggle;
+import static poe.level.fx.Preferences_Controller.zones_passive_toggle;
+import static poe.level.fx.Preferences_Controller.zones_text_toggle;
+import static poe.level.fx.Preferences_Controller.zones_trial_toggle;
 import poe.level.keybinds.GlobalKeyListener;
-import poe.level.keybinds.Hook;
 
 /**
  *
@@ -72,38 +95,77 @@ public class POELevelFx extends Application {
     private Stage main;
     private Stage editor;
     private Stage leveling;
-    private GLFWKeyCallback keyCallback;
+    private static String update_path_prefix = "https://github.com/karakasis/Path-of-Leveling/releases/download/";
+    private static String update_path_suffix = "/PathOfLeveling.jar";
+    private static String version = "v0.6-alpha";
+    private static boolean is_new_version;
+    //v0.5-alpha <- between
+    
+    public void update() {
+
+
+            URL url;
+            
+            try{
+            url = new URL(update_path_prefix + "" + version + "" + update_path_suffix);
+            HttpURLConnection httpConnection = (HttpURLConnection) (url.openConnection());
+            long completeFileSize = httpConnection.getContentLength();
+            UpdaterController.finalSize = completeFileSize;
+            java.io.BufferedInputStream in = new java.io.BufferedInputStream(httpConnection.getInputStream());
+            java.io.FileOutputStream fos = new java.io.FileOutputStream(
+            "PathOfLeveling-"+version+".jar");
+            java.io.BufferedOutputStream bout = new BufferedOutputStream(
+            fos, 1024);
+            byte[] data = new byte[1024];
+            long downloadedFileSize = 0;
+            int x = 0;
+            while ((x = in.read(data, 0, 1024)) >= 0) {
+            downloadedFileSize += x;
+            
+            notifyPreloader(new UpdatePreloader.ProgressNotification(downloadedFileSize));
+            
+            
+            //System.out.println(downloadedFileSize);
+            bout.write(data, 0, x);
+            }
+            bout.close();
+            in.close();
+            } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            } catch (IOException e) {
+            e.printStackTrace();
+            }
+        
+            
+    }
     
     @Override
     public void init() throws Exception {
-        addTrayIcon();
+       
         
-        System.out.println(org.lwjgl.Version.getVersion());
-        POELevelFx.directory = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
-       /*
-        AppDirs appDirs = AppDirsFactory.getInstance();
-        POELevelFx.directory = appDirs.getUserDataDir("POE-Level-FX", "0.1", "rainy");
-        
-        if (!new File(POELevelFx.directory + "\\GemIcons").exists()) {
-            new File(POELevelFx.directory + "\\GemIcons").mkdirs();
-        }
-        if (!new File(POELevelFx.directory + "\\Builds").exists()) {
-            new File(POELevelFx.directory + "\\Builds").mkdirs();
-        }
-        POELevelFx.gemDir = POELevelFx.directory;
-        gemDir+="\\GemIcons\\";
-*/
-        System.out.println(POELevelFx.directory + "\\Path of Leveling");
-        if (!new File(POELevelFx.directory + "\\Path of Leveling").exists()) {
-            new File(POELevelFx.directory + "\\Path of Leveling").mkdirs();
-        }
-        if (!new File(POELevelFx.directory + "\\Path of Leveling\\Builds").exists()) {
-            new File(POELevelFx.directory + "\\Path of Leveling\\Builds").mkdirs();
-        }
-        if (!new File(POELevelFx.directory + "\\Path of Leveling\\settings.txt").isFile()) {
-            new File(POELevelFx.directory + "\\Path of Leveling\\settings.txt").createNewFile();
-        }
-        if (!new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").isFile()) {
+        if(is_new_version){
+            update();
+            
+            //System.exit(-10);
+        }else{
+            addTrayIcon();
+            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Regular.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Italic.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Bold.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-SmallCaps.ttf").toExternalForm(), 10);
+            
+            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Thin.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-ThinItalic.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Regular.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-ThinItalic.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-MediumItalic.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Medium.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Light.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-LightItalic.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Italic.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Bold.ttf").toExternalForm(), 10);
+            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-BoldItalic.ttf").toExternalForm(), 10);
+            if (!new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").isFile()) {
             new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").createNewFile();
             
             Properties prop = new Properties();
@@ -116,6 +178,14 @@ public class POELevelFx extends Application {
                     // set the properties value
                     prop.setProperty("zones-toggle", "false");
                     Preferences_Controller.zones_toggle = false;
+                    prop.setProperty("zones-text-toggle", "true");
+                    Preferences_Controller.zones_text_toggle = true;
+                    prop.setProperty("zones-trial-toggle", "false");
+                    Preferences_Controller.zones_trial_toggle = false;
+                    prop.setProperty("zones-passive-toggle", "true");
+                    Preferences_Controller.zones_passive_toggle = true;
+                    prop.setProperty("zones-images-toggle", "true");
+                    Preferences_Controller.zones_images_toggle = true;
                     double a = 10;
                     prop.setProperty("zones-slider", String.valueOf(a));
                     Preferences_Controller.zones_slider = a;
@@ -146,71 +216,79 @@ public class POELevelFx extends Application {
                     // save properties to project root folder
                     prop.store(output, null);
 
-            } catch (IOException io) {
-                    io.printStackTrace();
-            } finally {
-                    if (output != null) {
-                            try {
-                                    output.close();
-                            } catch (IOException e) {
-                                    e.printStackTrace();
-                            }
-                    }
-
-            }
-      }else{
-            
-            Properties prop = new Properties();
-            InputStream input = null;
-            String zones_hotkey_show_hide = "";
-            String level_hotkey_remind = "";
-            try {
-
-                    input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
-
-                    // load a properties file
-                    prop.load(input);
-                    Preferences_Controller.zones_toggle = Boolean.parseBoolean(prop.getProperty("zones-toggle"));
-                    Preferences_Controller.zones_slider = Double.parseDouble(prop.getProperty("zones-slider"));
-                    zones_hotkey_show_hide = prop.getProperty("zones-hotkey-show_hide");
-                    Preferences_Controller.level_slider = Double.parseDouble(prop.getProperty("level-slider"));
-                    level_hotkey_remind = prop.getProperty("level-hotkey-remind");
-                    
-                    Preferences_Controller.poe_log_dir = prop.getProperty("poe-dir") + "\\logs\\Client.txt";
-            } catch (IOException ex) {
-                    ex.printStackTrace();
-            } finally {
-                if (input != null) {
-                        try {
-                                input.close();
-                        } catch (IOException e) {
-                                e.printStackTrace();
+                } catch (IOException io) {
+                        io.printStackTrace();
+                } finally {
+                        if (output != null) {
+                                try {
+                                        output.close();
+                                } catch (IOException e) {
+                                        e.printStackTrace();
+                                }
                         }
+
                 }
+            }else{
+
+                  Properties prop = new Properties();
+                  InputStream input = null;
+                  String zones_hotkey_show_hide = "";
+                  String level_hotkey_remind = "";
+                  try {
+
+                          input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
+
+                          // load a properties file
+                          prop.load(input);
+                          Preferences_Controller.zones_toggle = Boolean.parseBoolean(prop.getProperty("zones-toggle"));
+                          Preferences_Controller.zones_text_toggle = Boolean.parseBoolean(prop.getProperty("zones-text-toggle"));
+                          Preferences_Controller.zones_images_toggle = Boolean.parseBoolean(prop.getProperty("zones-images-toggle"));
+                          Preferences_Controller.zones_trial_toggle = Boolean.parseBoolean(prop.getProperty("zones-trial-toggle"));
+                          Preferences_Controller.zones_passive_toggle = Boolean.parseBoolean(prop.getProperty("zones-passive-toggle"));
+                          Preferences_Controller.zones_slider = Double.parseDouble(prop.getProperty("zones-slider"));
+                          zones_hotkey_show_hide = prop.getProperty("zones-hotkey-show_hide");
+                          Preferences_Controller.level_slider = Double.parseDouble(prop.getProperty("level-slider"));
+                          level_hotkey_remind = prop.getProperty("level-hotkey-remind");
+                            if(!(prop.getProperty("poe-dir")==null || prop.getProperty("poe-dir").equals(""))){
+                                Preferences_Controller.poe_log_dir = prop.getProperty("poe-dir") + "\\logs\\Client.txt";
+                            }
+                  } catch (IOException ex) {
+                          ex.printStackTrace();
+                  } finally {
+                      if (input != null) {
+                              try {
+                                      input.close();
+                              } catch (IOException e) {
+                                      e.printStackTrace();
+                              }
+                      }
+                  }
+
+                  try{
+                      KeyCombination keyCombination = KeyCombination.keyCombination(zones_hotkey_show_hide);
+                      System.out.println("key code : " + keyCombination.getName());
+                      Preferences_Controller.zones_hotkey_show_hide_key = keyCombination;
+                  }catch(IllegalArgumentException e){
+                      System.out.println(":incorect:");
+                      Preferences_Controller.zones_hotkey_show_hide_key = KeyCombination.NO_MATCH;
+                  }
+
+                  try{
+                      KeyCombination keyCombination = KeyCombination.keyCombination(level_hotkey_remind);
+                      System.out.println("key code : " + keyCombination.getName());
+                      Preferences_Controller.level_hotkey_remind_key = keyCombination;
+                  }catch(IllegalArgumentException e){
+                      System.out.println(":incorect:");
+                      Preferences_Controller.level_hotkey_remind_key = KeyCombination.NO_MATCH;
+                  }
             }
-            
-            try{
-                KeyCombination keyCombination = KeyCombination.keyCombination(zones_hotkey_show_hide);
-                System.out.println("key code : " + keyCombination.getName());
-                Preferences_Controller.zones_hotkey_show_hide_key = keyCombination;
-            }catch(IllegalArgumentException e){
-                System.out.println(":incorect:");
-                Preferences_Controller.zones_hotkey_show_hide_key = KeyCombination.NO_MATCH;
-            }
-            
-            try{
-                KeyCombination keyCombination = KeyCombination.keyCombination(level_hotkey_remind);
-                System.out.println("key code : " + keyCombination.getName());
-                Preferences_Controller.level_hotkey_remind_key = keyCombination;
-            }catch(IllegalArgumentException e){
-                System.out.println(":incorect:");
-                Preferences_Controller.level_hotkey_remind_key = KeyCombination.NO_MATCH;
-            }
-      }
+
+              loadActsFromMemory();
+              loadGemsFromMemory();
+              loadBuildsFromMemory();
+
+        }
         
-        loadActsFromMemory();
-        loadGemsFromMemory();
-        loadBuildsFromMemory();
         
      /*   
         StringBuilder hack = hack();
@@ -757,7 +835,11 @@ public class POELevelFx extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        main = new Main_Stage(this);
+        if(is_new_version){
+            UpdaterStage updaterStage = new UpdaterStage();
+        }else{
+            main = new Main_Stage(this);
+        }
         //zone = new ZoneOverlay_Stage();
         //exp = new LevelOverlay_Stage();
     }
@@ -855,8 +937,152 @@ public class POELevelFx extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, args);
+        setUpDirectories();
+        setUpLog();
+        if(checkForNewVersion()){
+            is_new_version = true;
+            LauncherImpl.launchApplication(POELevelFx.class, UpdatePreloader.class, args);
+        }else{
+            is_new_version = false;
+            LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, args);
+        }
        
+    }
+    
+    public static void setUpDirectories(){
+        POELevelFx.directory = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
+        System.out.println(POELevelFx.directory + "\\Path of Leveling");
+        if (!new File(POELevelFx.directory + "\\Path of Leveling").exists()) {
+            new File(POELevelFx.directory + "\\Path of Leveling").mkdirs();
+        }
+        if (!new File(POELevelFx.directory + "\\Path of Leveling\\Builds").exists()) {
+            new File(POELevelFx.directory + "\\Path of Leveling\\Builds").mkdirs();
+        }
+        if (!new File(POELevelFx.directory + "\\Path of Leveling\\settings.txt").isFile()) {
+            try {
+                new File(POELevelFx.directory + "\\Path of Leveling\\settings.txt").createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (!new File(POELevelFx.directory + "\\Path of Leveling\\log.txt").isFile()) {
+            try {
+                new File(POELevelFx.directory + "\\Path of Leveling\\log.txt").createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public static void setUpLog(){
+        File f = new File(POELevelFx.directory + "\\Path of Leveling\\log.txt");
+        System.out.println(f.length());
+        if(f.length()>= 53287796 ){//that would be about 50mbs
+            /* implement a good delete top N lines to empty some space.
+            BufferedReader br = null;
+            FileReader fr = null;
+                ArrayList<String> restoffile = new ArrayList<>();
+            try {
+
+                fr = new FileReader(POELevelFx.directory + "\\Path of Leveling\\log.txt");
+                br = new BufferedReader(fr);
+
+                String sCurrentLine;
+
+                br = new BufferedReader(fr);
+                int counter = 0;
+                while ((sCurrentLine = br.readLine()) != null) {
+                    //System.out.println(sCurrentLine);
+                    counter++;
+                    if(counter >= 50000){
+                        restoffile.add(sCurrentLine);
+                        restoffile.
+                        //System.out.println(restoffile.size());
+                    }
+                }
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+
+            } finally {
+
+                try {
+                    
+                    if (br != null)
+                        br.close();
+
+                    if (fr != null)
+                        fr.close();
+
+                } catch (IOException ex) {
+
+                    ex.printStackTrace();
+
+                }
+
+            }
+            */ //until then just delete all.
+            PrintWriter writer = null;
+            try {
+                writer = new PrintWriter(f);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            writer.print("");
+            writer.close();
+        }
+        //remove this for debuging.
+        PrintStream printStream= null;
+        try {
+            printStream = new PrintStream(new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\log.txt", true));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.setOut(printStream);
+        System.setErr(printStream);
+        //System.setOut(new PrintStream(f));
+        System.out.println();
+        System.out.println();
+        System.out.println("=====new launch=====");
+        System.out.println(new Timestamp(System.currentTimeMillis()).toString());
+        System.out.println();
+        System.out.println();
+    }
+    
+    public static boolean checkForNewVersion(){
+        URL url;
+            String input = "";
+            try {
+                // get URL content
+                
+                String a="https://raw.githubusercontent.com/karakasis/Path-of-Leveling/master/version.txt";
+                url = new URL(a);
+                URLConnection conn = url.openConnection();
+                
+                // open the stream and put it into BufferedReader
+                BufferedReader br = new BufferedReader(
+                        new InputStreamReader(conn.getInputStream()));
+                
+                input = br.readLine();
+                br.close();
+                
+                System.out.println("Done");
+                
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return false;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+            
+            final String version = input;
+            if(version.equals(POELevelFx.version)){
+                return false;
+            }else{
+                return true;
+            }
     }
     
 }

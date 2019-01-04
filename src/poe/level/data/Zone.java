@@ -20,8 +20,8 @@ public class Zone {
         };
     int level;
     String name;
-    boolean hasPassive;
-    boolean hasTrial;
+    public boolean hasPassive;
+    public boolean hasTrial;
     ArrayList<String> image;
     String altimage;
     String note;

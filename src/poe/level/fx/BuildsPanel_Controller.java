@@ -115,6 +115,7 @@ public class BuildsPanel_Controller implements Initializable {
     private SocketGroupsPanel_Controller sgc;
     private HashMap<Integer,BuildLinker> linker;
     private int activeBuildID;
+    public String lastbuild_invalidated;
     
     public void hook(MainApp_Controller root){
         this.root = root;
@@ -163,6 +164,25 @@ public class BuildsPanel_Controller implements Initializable {
             }
         }
         return true;
+    }
+    
+    public String validateError(){
+        Build active_build = linker.get(activeBuildID).build;
+        lastbuild_invalidated = active_build.getName();
+        return active_build.validate_failed_string();
+    }
+    
+    public String validateAllError(){
+        
+        lastbuild_invalidated = "";
+        for(BuildLinker bl : linker.values()){
+            Build active_build = bl.build;
+            if(!active_build.validate()){
+                lastbuild_invalidated = active_build.getName();
+                return active_build.validate_failed_string();
+            }
+        }
+        return null;
     }
     
     public Build getCurrentBuild(){

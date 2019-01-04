@@ -52,7 +52,8 @@ public class BuildEntry_Controller implements Initializable {
         banner.setImage(iv);
         
         this.buildName.setText(buildName);
-        this.ascendAndLevel.setText(ascendAndLevel+" lvl.95");
+        //this.ascendAndLevel.setText(ascendAndLevel+" lvl.95");
+        this.ascendAndLevel.setText(ascendAndLevel);
         this.parent = parent;
     }
     
@@ -60,7 +61,8 @@ public class BuildEntry_Controller implements Initializable {
         banner.setImage(iv);
         
         this.buildName.setText(buildName);
-        this.ascendAndLevel.setText(ascendAndLevel+" lvl.95");
+        //this.ascendAndLevel.setText(ascendAndLevel+" lvl.95");
+        this.ascendAndLevel.setText(ascendAndLevel);
         this.parent2 = parent;
         this.id_for_popup = id;
     }

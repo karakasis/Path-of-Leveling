@@ -103,7 +103,7 @@ public class Main_Controller implements Initializable {
     
     @FXML
     private void startButton(){
-        if(Preferences_Controller.poe_log_dir.equals("") || Preferences_Controller.poe_log_dir == null){
+        if(Preferences_Controller.poe_log_dir == null || Preferences_Controller.poe_log_dir.equals("")){
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Directory not set");
             alert.setContentText("Select the options button, and locate your Path of Exile installation folder!");

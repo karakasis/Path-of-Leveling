@@ -97,7 +97,7 @@ public class AddBuild_Controller implements Initializable {
             className = "Marauder";
             selectAsc.getItems().clear();
             selectAsc.getItems().add("Juggernaut");
-            selectAsc.getItems().add("Berseker");
+            selectAsc.getItems().add("Berserker");
             selectAsc.getItems().add("Chieftain");
         }else if(selectedClassIndex == 1){
             className = "Ranger";
