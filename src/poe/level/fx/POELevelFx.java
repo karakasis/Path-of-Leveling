@@ -97,7 +97,8 @@ public class POELevelFx extends Application {
     private Stage leveling;
     private static String update_path_prefix = "https://github.com/karakasis/Path-of-Leveling/releases/download/";
     private static String update_path_suffix = "/PathOfLeveling.jar";
-    private static String version = "v0.6-alpha";
+    private static String version = "v0.5-alpha";
+    private static String new_version;
     private static boolean is_new_version;
     //v0.5-alpha <- between
     
@@ -113,7 +114,7 @@ public class POELevelFx extends Application {
             UpdaterController.finalSize = completeFileSize;
             java.io.BufferedInputStream in = new java.io.BufferedInputStream(httpConnection.getInputStream());
             java.io.FileOutputStream fos = new java.io.FileOutputStream(
-            "PathOfLeveling-"+version+".jar");
+            "PathOfLeveling-"+new_version+".jar");
             java.io.BufferedOutputStream bout = new BufferedOutputStream(
             fos, 1024);
             byte[] data = new byte[1024];
@@ -1081,6 +1082,7 @@ public class POELevelFx extends Application {
             if(version.equals(POELevelFx.version)){
                 return false;
             }else{
+                new_version = version;
                 return true;
             }
     }
