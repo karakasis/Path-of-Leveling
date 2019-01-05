@@ -52,12 +52,26 @@ That's all. Everything else is code.
  - This may or may not be a bug im still trying to figure it out, just make sure you always have the XP option selected.
 
 ## Future additions
- - Link your leveling-build with your Path of Building tree, or a different planner
- - Support for more resolutions, and/or custom sized overlays
- - Find a more suitable way to place the overlays
- 
-Mentioned by users :
- - ~~Do something so we can see the rewards of quest so we can skip the quest that don’t give passive points / respect points~~ done
+
+* ~~Link your leveling-build with your Path of Building tree, or a different planner~~ done check changelog v0.65 for more details on PoB import.
+* Support for more resolutions, and/or custom sized overlays
+* Find a more suitable way to place the overlays
+
+Mentioned in the comments :
+
+>~~Is it possible to add notes to the socket groups (e.g. off hand corruption purposes, writing down how much dps increase a 3-4 link is in comparison~~ done  
+>  
+>~~A confirmation button if you accidentally press the minus for build creation~~ done  
+>  
+>~~Do something so we can see the rewards of quest so we can skip the quest that don’t give passive points / respect points~~  done  
+>  
+>~~Add the ability to "clone" a socket group~~ done  
+>  
+>The "socket group" name should include the levels for which it is active  
+>  
+>~~I recommend putting a box around "Start". Similar to how there is one around "Build" and "Editor"~~. done  
+>  
+>There is no way to get back to the options menu once the start button has been pushed
 If you have a suggestion I encourage you to start an issue.
 
 ## Changelog in v0.65
@@ -81,6 +95,7 @@ of the left panel in the editor.
 - There is now a box surrounding Start in the launcher to make it look more like a button.
 - You now get prompts when deleting a build, and when you close the editor from the X icon.
    Also the application no longers terminates, instead it returns to the Launcher screen.
+ - Slightly moved the Poets pen that was blocking the Editor button, and placed it below the button.
    
  __Bug fixes__
 - Fixed a bug, where you had to select XP option, no matter what, or you would get no overlays.
