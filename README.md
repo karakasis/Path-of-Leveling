@@ -86,6 +86,7 @@ of the left panel in the editor.
 - Fixed a bug, where you had to select XP option, no matter what, or you would get no overlays.
  - - Now every option is independent, but running only the Zones options, now requests for
  character name and player level.
+ - Fixed major bug, that forced application to update to itself, falling into a loop.  Hopefully, it is solved now.
  
  __Changes__
 - Adjusted logs to provide less and more useful information
