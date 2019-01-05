@@ -97,7 +97,7 @@ public class POELevelFx extends Application {
     private Stage leveling;
     private static String update_path_prefix = "https://github.com/karakasis/Path-of-Leveling/releases/download/";
     private static String update_path_suffix = "/PathOfLeveling.jar";
-    private static String version = "v0.5-alpha";
+    private static String version = "v0.65-alpha";
     private static String new_version;
     private static boolean is_new_version;
     //v0.5-alpha <- between
@@ -149,6 +149,7 @@ public class POELevelFx extends Application {
             
             //System.exit(-10);
         }else{
+            Platform.setImplicitExit( false );
             addTrayIcon();
             Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Regular.ttf").toExternalForm(), 10);
             Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Italic.ttf").toExternalForm(), 10);
@@ -419,7 +420,7 @@ public class POELevelFx extends Application {
             Gem gem = new Gem();
             
             gem.name= gemObj.getString("name");
-            System.out.println(gem.name);
+            //System.out.println(gem.name);
             
             gem.required_lvl= gemObj.getInt("required_lvl");
             gem.isVaal=gemObj.getBoolean("isVaal");
@@ -604,6 +605,16 @@ public class POELevelFx extends Application {
                 );
                 build.characterName = bObj.getString("characterName");
                 build.level = bObj.getInt("level");
+                try{
+                    //bObj.get("hasPob");
+                    build.hasPob = bObj.getBoolean("hasPob");
+                    if(build.hasPob){
+                        build.pobLink = bObj.getString("pobLink");
+                    }
+                }catch(org.json.JSONException e){
+                    build.hasPob = false;
+                    build.pobLink = "";
+                }
                 GemHolder.getInstance().className = build.getClassName();
                 JSONArray socket_group_array = bObj.getJSONArray("socketGroup");
                 //build.level
@@ -615,6 +626,12 @@ public class POELevelFx extends Application {
                     sg.setUntilGroupLevel(sObj.getInt("untilGroupLevel"));
                     sg.setReplaceGroup(sObj.getBoolean("replaceGroup"));
                     sg.setReplacesGroup(sObj.getBoolean("replacesGroup"));
+                    try{
+                        //bObj.get("hasPob");
+                        sg.addNote(sObj.getString("note"));
+                    }catch(org.json.JSONException e){
+                        sg.addNote("");
+                    }
                     if(sg.replaceGroup()){
                         int id_replace = sObj.getInt("socketGroupReplace");
                         sg.id_replace = id_replace;
@@ -734,6 +751,10 @@ public class POELevelFx extends Application {
             bObj.put("ascendancyName",build.getAsc());
             bObj.put("level", build.level); //<change
             bObj.put("characterName",build.characterName);
+            
+            bObj.put("hasPob",build.hasPob);
+            bObj.put("pobLink",build.pobLink);
+        
             JSONArray socket_group_array = new JSONArray();
             bObj.put("socketGroup", socket_group_array);
             for(SocketGroup sg : build.getSocketGroup()){
@@ -749,6 +770,7 @@ public class POELevelFx extends Application {
                 sObj.put("untilGroupLevel", sg.getUntilGroupLevel());
                 sObj.put("replaceGroup", sg.replaceGroup());
                 sObj.put("replacesGroup", sg.replacesGroup());
+                sObj.put("note",sg.getNote());
                 if(sg.replaceGroup()){
                     if(sg.getGroupReplaced().id == -1){
                         sg.getGroupReplaced().id = sign_jsons(unique_ids);

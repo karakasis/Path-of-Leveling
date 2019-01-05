@@ -7,6 +7,8 @@ package poe.level.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -29,6 +31,45 @@ public class SocketGroup {
     public int id_replace;
     public int id_replaces;
     public int active_id;
+    
+    private String note;
+    
+    public void addNote(String note){
+        this.note = note;
+    }
+    
+    public String getNote(){
+        return note;
+    }
+    
+    public static int sign(HashSet<Integer> randomIDs){
+        int ran;
+        do{
+            ran = ThreadLocalRandom.current().nextInt(1,999999);
+        }while(randomIDs.contains(ran));
+        randomIDs.add(ran);
+        return ran;
+    }
+    
+    public SocketGroup dupe(HashSet<Integer> s_id, HashSet<Integer> g_id){
+        SocketGroup duped = new SocketGroup();
+        Gem old_active = this.active;
+        duped.id = sign(s_id);
+        duped.fromGroupLevel = this.fromGroupLevel;
+        duped.untilGroupLevel = this.untilGroupLevel;
+        duped.addNote(this.note);
+        for(Gem g : gems){
+            Gem duped_gem = g.dupeGem();
+            duped_gem.level_added = g.level_added;
+            duped_gem.id = sign(g_id);
+            duped.getGems().add(duped_gem);
+            if(g.equals(old_active)){
+                duped.active = duped_gem;
+                duped.active_id = duped_gem.id;
+            }
+        }
+        return duped;
+    }
     
     public SocketGroup(){
         gems = new ArrayList<>();

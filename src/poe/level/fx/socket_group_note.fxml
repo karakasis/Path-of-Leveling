@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="322.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="poe.level.fx.Socket_group_noteController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Leave a note for this Socket Group">
+         <font>
+            <Font name="Alegreya Sans SC" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="note_area" layoutX="14.0" layoutY="45.0" prefHeight="343.0" prefWidth="293.0" />
+   </children>
+</AnchorPane>

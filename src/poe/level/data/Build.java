@@ -21,6 +21,8 @@ public class Build {
     public String characterName;
     public int level;
     ArrayList<SocketGroup> gems;
+    public boolean hasPob;
+    public String pobLink;
     
     public Build(String buildName,String className
             , String ascendancyName){

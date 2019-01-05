@@ -151,7 +151,7 @@ public class ZoneOverlay_Stage  extends Stage{
 
         Timeline slideIn = new Timeline();
        
-        KeyValue kv = new KeyValue(writableWidth, 256d);
+        KeyValue kv = new KeyValue(writableWidth, 169d);
         KeyFrame kf_slideIn = new KeyFrame(Duration.millis(500), kv);
         slideIn.getKeyFrames().addAll(kf_slideIn);
         slideIn.play();

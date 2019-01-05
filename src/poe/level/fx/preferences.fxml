@@ -35,7 +35,7 @@
       </Label>
       <Label layoutX="50.0" layoutY="331.0" text="Set gem panel slide out timer in seconds :" />
       <JFXSlider fx:id="sliderLevel" blockIncrement="1.0" layoutX="28.0" layoutY="365.0" max="30.0" min="4.0" minorTickCount="10" prefHeight="14.0" prefWidth="272.0" value="6.0" />
-      <Label layoutX="315.0" layoutY="298.0" prefHeight="36.0" prefWidth="68.0" text="Remind me previous" textAlignment="CENTER" wrapText="true" />
+      <Label layoutX="315.0" layoutY="298.0" prefHeight="36.0" prefWidth="68.0" text="Show gems again" textAlignment="CENTER" wrapText="true" />
       <TextField fx:id="remind_gems" editable="false" layoutX="392.0" layoutY="303.0" prefHeight="25.0" prefWidth="79.0" />
       <Separator layoutX="310.0" layoutY="12.0" orientation="VERTICAL" prefHeight="263.0" prefWidth="6.0" />
       <Separator layoutX="310.0" layoutY="297.0" orientation="VERTICAL" prefHeight="102.0" prefWidth="6.0" />
@@ -51,12 +51,22 @@
       <Separator layoutX="19.0" layoutY="494.0" prefHeight="8.0" prefWidth="462.0" />
       <JFXToggleButton fx:id="passive_toggle" layoutX="7.0" layoutY="126.0" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Alert when zone has passive point" />
       <JFXToggleButton fx:id="trial_toggle" layoutX="7.0" layoutY="162.0" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Alert when zone has labyrinth trial" />
-      <Label layoutX="335.0" layoutY="40.0" prefHeight="17.0" prefWidth="150.0" text="Support only Ctrl/Shift combinations">
+      <Label layoutX="335.0" layoutY="40.0" prefHeight="36.0" prefWidth="150.0" text="You can use any combination with Shift or Control" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Italic" size="9.0" />
          </font>
       </Label>
       <JFXToggleButton fx:id="images_toggle" layoutX="7.0" layoutY="198.0" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" text="Show images " />
       <JFXToggleButton fx:id="text_toggle" layoutX="143.0" layoutY="198.0" prefHeight="47.0" prefWidth="150.0" selected="true" size="6.0" text="Show text" />
+      <Label layoutX="321.0" layoutY="340.0" prefHeight="36.0" prefWidth="150.0" text="Pressing this hotkey will show the last gems that showed up" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Italic" size="9.0" />
+         </font>
+      </Label>
+      <Label layoutX="331.0" layoutY="108.0" prefHeight="47.0" prefWidth="150.0" text="You can set custom hotkeys by clicking on this box and typing the Keys" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Italic" size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

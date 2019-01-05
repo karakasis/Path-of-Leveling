@@ -215,6 +215,8 @@ public class Controller {
             skipActs = true;
             releaseLock = false;
         }
+        
+        System.out.println("Trying to identify zone.");
         //add a reset thing for when zone in uknown
         //System.out.println("New zone is "+ currentZone+".");
         boolean skippedFirstPart = false;
@@ -229,12 +231,12 @@ public class Controller {
                     zone_checkpoint = zone;
                     monsterLevel = zone.level;
                     zoneDetect = true;
-                    
+                    System.out.println("Zone identified.");
                     if(zone.hasPassive){
-                        //System.out.println("This zone contains a passive skill quest.");
+                        System.out.println("This zone contains a passive skill quest.");
                     }
                     if(zone.hasTrial){
-                        //System.out.println("This zone contains a lab trial.");
+                        System.out.println("This zone contains a lab trial.");
                     }
 
                     break outerloop;

@@ -82,6 +82,15 @@ public class Gem {
     }
     
     public Gem(Gem dupe){
+        available_to = new ArrayList<>();
+        level_added = -1;
+        replaced = false;
+        replacedWith = null;
+        replaces = false;
+        replacesGem = null;
+        id = -1;
+        id_replaced = -1;
+        id_replaces = -1;
         this.gemIcon = dupe.getIcon();
         this.smallGemIcon = dupe.getSmallIcon();
         this.name = dupe.getGemName();
@@ -98,11 +107,7 @@ public class Gem {
         this.iconPath = dupe.iconPath;
         this.cachedLabel= dupe.cachedLabel;
         this.iconDirPath = dupe.iconDirPath;
-        level_added = -1;
-        replaced = false;
-        replacedWith = null;
-        replaces = false;
-        replacesGem = null;
+        this.isRewarded = dupe.isRewarded;
     }
     
     public int getLevelAdded(){

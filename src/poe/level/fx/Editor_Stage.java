@@ -28,7 +28,10 @@ public class Editor_Stage extends Stage{
         this.launcher();
         
         this.setOnCloseRequest(event -> {
-            System.exit(40);
+            if(!editor_controller.custom_editor_exit_with_validate()){
+                event.consume();
+            }
+            //System.exit(40);
         });
     }
     

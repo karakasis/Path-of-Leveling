@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
@@ -36,6 +37,9 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -214,6 +218,10 @@ public class BuildsPanel_Controller implements Initializable {
             bObj.put("ascendancyName",build.getAsc());
             bObj.put("level", build.level); //<change
             bObj.put("characterName",build.characterName);
+            
+            bObj.put("hasPob",build.hasPob);
+            bObj.put("pobLink",build.pobLink);
+        
             JSONArray socket_group_array = new JSONArray();
             bObj.put("socketGroup", socket_group_array);
             for(SocketGroup sg : build.getSocketGroup()){
@@ -241,6 +249,8 @@ public class BuildsPanel_Controller implements Initializable {
                     }
                     sObj.put("socketGroupThatReplaces", sg.getGroupThatReplaces().id);
                 }
+                
+                sObj.put("note",sg.getNote());
                 JSONArray gems_array = new JSONArray();
                 for(Gem g : sg.getGems()){
                     JSONObject gObj = new JSONObject();
@@ -327,6 +337,10 @@ public class BuildsPanel_Controller implements Initializable {
             bObj.put("ascendancyName",build.getAsc());
             bObj.put("level", build.level); //<change
             bObj.put("characterName",build.characterName);
+            
+            bObj.put("hasPob",build.hasPob);
+            bObj.put("pobLink",build.pobLink);
+            
             JSONArray socket_group_array = new JSONArray();
             bObj.put("socketGroup", socket_group_array);
             for(SocketGroup sg : build.getSocketGroup()){
@@ -342,6 +356,7 @@ public class BuildsPanel_Controller implements Initializable {
                 sObj.put("untilGroupLevel", sg.getUntilGroupLevel());
                 sObj.put("replaceGroup", sg.replaceGroup());
                 sObj.put("replacesGroup", sg.replacesGroup());
+                sObj.put("note",sg.getNote());
                 if(sg.replaceGroup()){
                     if(sg.getGroupReplaced().id == -1){
                         sg.getGroupReplaced().id = sign_jsons(unique_ids);
@@ -409,6 +424,10 @@ public class BuildsPanel_Controller implements Initializable {
         bObj.put("ascendancyName",build.getAsc());
         bObj.put("level", build.level); //<change
         bObj.put("characterName",build.characterName);
+        
+        bObj.put("hasPob",build.hasPob);
+        bObj.put("pobLink",build.pobLink);
+                
         JSONArray socket_group_array = new JSONArray();
         bObj.put("socketGroup", socket_group_array);
         for(SocketGroup sg : build.getSocketGroup()){
@@ -436,6 +455,7 @@ public class BuildsPanel_Controller implements Initializable {
                 }
                 sObj.put("socketGroupThatReplaces", sg.getGroupThatReplaces().id);
             }
+            sObj.put("note",sg.getNote());
             JSONArray gems_array = new JSONArray();
             for(Gem g : sg.getGems()){
                 JSONObject gObj = new JSONObject();
@@ -512,6 +532,16 @@ public class BuildsPanel_Controller implements Initializable {
                     );
                     build.characterName = "";
                     build.level = 0;
+                    try{
+                        //bObj.get("hasPob");
+                        build.hasPob = bObj.getBoolean("hasPob");
+                        if(build.hasPob){
+                            build.pobLink = bObj.getString("pobLink");
+                        }
+                    }catch(org.json.JSONException e){
+                        build.hasPob = false;
+                        build.pobLink = "";
+                    }
                     GemHolder.getInstance().className = build.getClassName();
                     JSONArray socket_group_array = bObj.getJSONArray("socketGroup");
                     //build.level
@@ -533,6 +563,12 @@ public class BuildsPanel_Controller implements Initializable {
                         }
                         int active_id = sObj.getInt("active");
                         sg.active_id = active_id;
+                        try{
+                            //bObj.get("hasPob");
+                            sg.addNote(sObj.getString("note"));
+                        }catch(org.json.JSONException e){
+                            sg.addNote("");
+                        }
                         JSONArray gems_array = sObj.getJSONArray("gem");
                         for(int k = 0 ; k<gems_array.length(); k++ ){
                             JSONObject gObj = gems_array.getJSONObject(k);
@@ -647,6 +683,8 @@ public class BuildsPanel_Controller implements Initializable {
         bl.pec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
         bl.pec.init(charToImage(className,ascendancyName), buildName, ascendancyName, bl);
         bl.build = new Build(buildName,className,ascendancyName);
+        bl.build.hasPob = false;
+        bl.build.pobLink = "";
         for(SocketGroup sg : bl.build.getSocketGroup()){
             SocketGroupLinker sgl = sgc.new SocketGroupLinker(sg);
             //sgl.sg = sg;
@@ -688,19 +726,28 @@ public class BuildsPanel_Controller implements Initializable {
     
     @FXML
     private void deleteBuild(){
-        BuildLinker bl = linker.get(activeBuildID);
-        POELevelFx.buildsLoaded.remove(bl.build);
-        sgc.reset();
-        buildsBox.getChildren().remove(bl.pec.getRoot()); // remove from the UI
-        linker.remove(bl.id); //remove from data
-        root.toggleActiveBuilds(false);
-        if(POELevelFx.buildsLoaded.isEmpty()){
-            root.toggleAllBuilds(false);
-        }
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Build delete");
+        alert.setHeaderText("You are about to delete Build : "+ linker.get(activeBuildID).build.getName());
+        alert.setContentText("Are you ok with this?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+           BuildLinker bl = linker.get(activeBuildID);
+            POELevelFx.buildsLoaded.remove(bl.build);
+            sgc.reset();
+            buildsBox.getChildren().remove(bl.pec.getRoot()); // remove from the UI
+            linker.remove(bl.id); //remove from data
+            root.toggleActiveBuilds(false);
+            if(POELevelFx.buildsLoaded.isEmpty()){
+                root.toggleAllBuilds(false);
+            }
+        } 
+        
         // and also remove from file system?
         
     }
-    
+   
     public void update(int id){
         if(id!=activeBuildID){
             activeBuildID = id;

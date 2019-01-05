@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="364.0" prefWidth="581.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="215.0" text="Path of Leveling is on alpha" textAlignment="CENTER" textFill="#432da1" wrapText="true">
+         <font>
+            <Font name="Alegreya Sans SC" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="49.0" prefHeight="35.0" prefWidth="215.0" text="latest version : v0.65-alpha" textAlignment="CENTER" textFill="#432da1" wrapText="true">
+         <font>
+            <Font name="Alegreya Sans SC" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="383.0" layoutY="333.0" text="© 2018 rainy, under MIT License">
+         <font>
+            <Font name="Alegreya Sans SC" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="84.0" prefHeight="35.0" prefWidth="215.0" text="New in this release :" textAlignment="CENTER" textFill="#432da1" wrapText="true">
+         <font>
+            <Font name="Alegreya Sans SC" size="15.0" />
+         </font>
+      </Label>
+      <TextArea editable="false" layoutX="14.0" layoutY="112.0" prefHeight="214.0" prefWidth="554.0" text=" __New features__&#10;- Added Path of Building support.&#10;- - Select your Path of Leveling build on the editor and link it with the Path of Building.&#10;You need to provide a valid pastebin link from PoB. You can then export this PoB to your clipboard&#10;when you need it, or view it directly in https://poe.technology/poebuddy/ .&#10;I have no affiliation whatsoever with the developers.&#10;- Now if you export your build, and it is linked to Path of Building, the pastebin IS INCLUDED.&#10;That means that you only need 1 pastebin link that will contain both a PoL build and a PoB build.&#10;&#10; &#10; __Reddit requests__&#10;- It is now possible to add notes to the socket groups. You can find the new icon on &#10;the top of the left panel in the editor.&#10;- It is now possible to duplicate socket groups. You can find the new icon on the top&#10;of the left panel in the editor.&#10;- There is now a box surrounding Start in the launcher to make it look more like a button.&#10;- You now get prompts when deleting a build, and when you close the editor from the X icon.&#10;   Also the application no longers terminates, instead it returns to the Launcher screen.&#10;   &#10; __Bug fixes__&#10;- Fixed a bug, where you had to select XP option, no matter what, or you would get no overlays.&#10; - - Now every option is independent, but running only the Zones options, now requests for&#10; character name and player level.&#10; &#10; __Changes__&#10;- Adjusted logs to provide less and more useful information" />
+   </children>
+</AnchorPane>

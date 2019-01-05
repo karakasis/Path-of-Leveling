@@ -295,6 +295,21 @@ public class GemsPanel_Controller implements Initializable {
         current_sgl.gpl.gl_map.get(current_sgl.gpl.popup_id).controller.callback(g);
     }
     
+    public void requestNotePopup(){
+        Socket_group_noteController notepop = root.notePopup();
+        //notepop.start(this,current_sgl.sg.getNote());
+    }
+    
+    public void noteChange(String newNote){
+        current_sgl.sg.addNote(newNote);
+    }
+    
+    /*
+    public void closeNotePopup(String note){
+        root.noteClosePopup();
+        current_sgl.sg.addNote(note);
+    }*/
+    
     private boolean lockClear = false;
     
     //this will get called from within the listener of the listview.
@@ -454,6 +469,17 @@ public class GemsPanel_Controller implements Initializable {
         }else{
             return 0;
         }
+    }
+    
+    @FXML
+    private void addNote(){
+        requestNotePopup();
+    }
+    
+    @FXML
+    private void duplicateGroup(){
+        //current_sgl.sg;
+        //sgc.duplicate(current_sgl);
     }
     
     @FXML 
@@ -631,7 +657,11 @@ public class GemsPanel_Controller implements Initializable {
             fromLevelLabel.setText(current_sgl.sg.getFromGroupLevel()+"");
             if(current_sgl.sg.getActiveGem()!=null){
                 current_sgl.sg.getActiveGem().level_added = newValue;
-                current_sgl.gpl.currentMain.controller.groupLevelChanged(newValue);
+                System.out.println("current Main testing :");
+                if(current_sgl.gpl.currentMain!=null){
+                    System.out.println("entered this time :");
+                    current_sgl.gpl.currentMain.controller.groupLevelChanged(newValue);
+                }
             }
             untilLevelSlider.setMin(newValue);
             if(untilLevelSlider.getValue()<=newValue){

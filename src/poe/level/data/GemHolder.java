@@ -137,9 +137,6 @@ public class GemHolder {
             boolean classCanGetIt;
             for(String class_ : mm.keySet()){
                 classCanGetIt = false;
-                if(class_.equals("Marauder") && a.getGemName().equals("Blood Magic")){
-                    System.out.println();
-                }
                 String[] questline = Zone.questline;
                 for(int i=0; i<questline.length; i++){
                     if(mm.get(class_).contains(questline[i])){
@@ -159,12 +156,12 @@ public class GemHolder {
                     }
                 }
                 if(!classCanGetIt){
-                System.err.println("CLASS : "+class_+" GEM : "+a.getGemName());
+                    //System.err.println("CLASS : "+class_+" GEM : "+a.getGemName());
                 }
             }
             
         }else{
-            System.err.println(" GEM : "+a.getGemName() + " not asssigned to any class");
+            //System.err.println(" GEM : "+a.getGemName() + " not asssigned to any class");
             dropOnly.add(a);
         }
         

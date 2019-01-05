@@ -5,33 +5,23 @@
  */
 package poe.level.fx;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXListCell;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXSlider;
-import com.jfoenix.controls.JFXToggleButton;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import com.sun.deploy.net.HttpResponse;
+import com.sun.javafx.tk.Toolkit;
+import java.awt.Desktop;
+import java.awt.datatransfer.StringSelection;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -43,17 +33,13 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.util.Callback;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import poe.level.data.Build;
-import poe.level.data.Gem;
-import poe.level.data.GemHolder;
-import poe.level.data.SocketGroup;
+import sun.net.www.http.HttpClient;
 
 /**
  *
@@ -81,6 +67,12 @@ public class MainApp_Controller implements Initializable {
     private MenuItem export_clipboard_active;
     @FXML
     private MenuItem export_clipboard_all;
+    @FXML
+    private MenuItem get_pob_link;
+    @FXML
+    private MenuItem open_pob_view;
+    @FXML
+    private MenuItem link_active_pob;
     
     
     JFXDialog addBuildPopup;
@@ -201,6 +193,26 @@ public class MainApp_Controller implements Initializable {
         addGemPopup.close();
     }
     
+    public Socket_group_noteController notePopup() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("socket_group_note.fxml"));
+        AnchorPane con = null;
+        try {
+            con = (AnchorPane) loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Socket_group_noteController controller = loader.<Socket_group_noteController>getController();
+        
+        addGemPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+        //controller.passDialog(mLoad);
+        addGemPopup.show();
+        return controller;
+    }
+    
+    public void noteClosePopup(){
+        addGemPopup.close();
+    }
+    
     @FXML
     private void validateBuild(){
         if(buildspanel_controller.validate()){
@@ -258,11 +270,12 @@ public class MainApp_Controller implements Initializable {
     }
     
     @FXML
-    private void validateToLauncher(){
+    private boolean validateToLauncher(){
         try {
             if(buildspanel_controller.validateAll()){
                 buildspanel_controller.saveBuild();
                 parent.returnToLauncher();
+                return true;
             }else{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ValidateErrorPopup.fxml"));
                 AnchorPane con = null;
@@ -276,13 +289,20 @@ public class MainApp_Controller implements Initializable {
                 //controller.passDialog(mLoad);
                 loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated, buildspanel_controller.validateAllError());
                 buildPreviewPopup.show();
+                return false;
             }
         } catch (IOException ex) {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
+    }
+    
+    public boolean custom_editor_exit_with_validate(){
+        return validateToLauncher();
     }
     
     Pastebin_import_Controller paste_controller;
+    Pastebin_import_pobController paste_pob_controller;
     
     @FXML
     private void importFromPastebin(){
@@ -334,6 +354,8 @@ public class MainApp_Controller implements Initializable {
     public void toggleActiveBuilds(boolean toggle){
         export_pastebin_active.setDisable(!toggle);
         export_clipboard_active.setDisable(!toggle);
+        link_active_pob.setDisable(!toggle);
+        togglePobMenus(toggle);
     }
     
     public void toggleAllBuilds(boolean toggle){
@@ -350,9 +372,109 @@ public class MainApp_Controller implements Initializable {
         }
     }
     
+    public void fetch_pob_paste(String pasteLink){
+        buildspanel_controller.getCurrentBuild().hasPob = true;
+        buildspanel_controller.getCurrentBuild().pobLink = pasteLink;
+        buildPreviewPopup.close();
+        togglePobMenus(true);
+    }
+    
+    private void togglePobMenus(boolean toggle){
+        if(toggle){
+            if(buildspanel_controller.getCurrentBuild().hasPob){
+                get_pob_link.setDisable(!toggle);
+                open_pob_view.setDisable(!toggle);
+            }else{
+                get_pob_link.setDisable(true);
+                open_pob_view.setDisable(true);
+            }
+        }else{
+            get_pob_link.setDisable(true);
+            open_pob_view.setDisable(true);
+        }
+    }
+    
+    @FXML
+    private void getPOB(){
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("clipboard_verify.fxml"));
+            AnchorPane con = null;
+            try {
+                con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            buildPreviewPopup.show();
+            final Clipboard clipboard = Clipboard.getSystemClipboard();
+            final ClipboardContent content = new ClipboardContent();
+            content.putString(buildspanel_controller.getCurrentBuild().pobLink);
+            clipboard.setContent(content);
+    }
+    
+    @FXML
+    private void linkPOB(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("pastebin_import_pob.fxml"));
+            AnchorPane con = null;
+            try {
+                con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            loader.<Pastebin_import_pobController>getController().hook(this);
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            //controller.passDialog(mLoad);
+            //paste_pob_controller.hook(this);
+            buildPreviewPopup.show();
+    }
+    
+    @FXML
+    private void openPOBwebview(){
+       
+            /*
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("POB_webview.fxml"));
+            AnchorPane con = null;
+            try {
+            con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            loader.<POB_webviewController>getController().open("https://poe.technology/poebuddy/SSGAJpNZ");
+            //loader.<POB_webviewController>getController().open("https://www.reddit.com/r/pathofexile/comments/aca7vl/path_of_leveling_a_tool_written_in_java_with_an/");
+            
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            //controller.passDialog(mLoad);
+            buildPreviewPopup.show();
+            */
+            String prefix = "https://poe.technology/poebuddy/?pastebin=";
+            if(buildspanel_controller.getCurrentBuild().hasPob){
+                try {
+                    Desktop.getDesktop().browse(new URL(prefix+buildspanel_controller.getCurrentBuild().pobLink).toURI());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            
+    }
+    
+    
     @FXML
     private void about(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AboutPage.fxml"));
+        AnchorPane con = null;
+        try {
+            con = (AnchorPane) loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER).show();
+    }
+    
+    @FXML
+    private void version(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("version.fxml"));
         AnchorPane con = null;
         try {
             con = (AnchorPane) loader.load();

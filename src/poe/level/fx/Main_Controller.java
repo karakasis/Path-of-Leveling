@@ -120,7 +120,7 @@ public class Main_Controller implements Initializable {
                 alert.initOwner(parent);
                 alert.showAndWait();
             }else{
-                if(xp.isSelected()){
+                if(xp.isSelected() || zones.isSelected()){
                     characterInfoPopup();
                 }else{
                     parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());
@@ -228,7 +228,7 @@ public class Main_Controller implements Initializable {
     }
     
     public void closeCharacterPopup(String characterName, int level){
-        if(xp.isSelected()){
+        if(xp.isSelected() || zones.isSelected()){
             Main_Stage.playerLevel = level;
             Main_Stage.characterName = characterName;
             //Main_Stage.playerLevel = temp_alert();
@@ -238,7 +238,8 @@ public class Main_Controller implements Initializable {
             buildLoaded.characterName = characterName;
             buildLoaded.level = level;
         }
-        
+        System.out.println("Character : " + characterName);
+        System.out.println("Level : " + level);
         editCharacterPopup.close();
         
         parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());

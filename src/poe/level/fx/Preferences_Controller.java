@@ -333,7 +333,7 @@ public class Preferences_Controller implements Initializable {
                     prop.setProperty("poe-dir",directory);
                     try{
                         KeyCombination keyCombination = KeyCombination.keyCombination(show_hide_hotkey_zone.getText());
-                        System.out.println("key code : " + keyCombination.getName());
+                        System.out.println(" Saved key code : " + keyCombination.getName());
                         zones_hotkey_show_hide_key = keyCombination;
                     }catch(IllegalArgumentException e){
                         System.out.println(":incorect:");
@@ -342,7 +342,7 @@ public class Preferences_Controller implements Initializable {
 
                     try{
                         KeyCombination keyCombination = KeyCombination.keyCombination(remind_gems.getText());
-                        System.out.println("key code : " + keyCombination.getName());
+                        System.out.println(" Saved key code : " + keyCombination.getName());
                         level_hotkey_remind_key = keyCombination;
                     }catch(IllegalArgumentException e){
                         System.out.println(":incorect:");

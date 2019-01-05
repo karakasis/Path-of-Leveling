@@ -42,6 +42,14 @@
                           </items>
                         </Menu>
                         <SeparatorMenuItem mnemonicParsing="false" />
+                        <Menu mnemonicParsing="false" text="Path of Building">
+                          <items>
+                            <MenuItem fx:id="get_pob_link" disable="true" mnemonicParsing="false" onAction="#getPOB" text="Get the pastebin" />
+                              <MenuItem fx:id="open_pob_view" disable="true" mnemonicParsing="false" onAction="#openPOBwebview" text="Open the PoB build" />
+                              <MenuItem fx:id="link_active_pob" disable="true" mnemonicParsing="false" onAction="#linkPOB" text="Link active build with PoB" />
+                          </items>
+                        </Menu>
+                        <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#saveAllBuilds" text="Save builds state" />
                   <MenuItem disable="true" mnemonicParsing="false" text="Save active build" />
                 </items>
@@ -64,7 +72,7 @@
               <Menu mnemonicParsing="false" text="About">
                 <items>
                   <MenuItem mnemonicParsing="false" onAction="#about" text="Credits" />
-                        <MenuItem disable="true" mnemonicParsing="false" text="Version" />
+                        <MenuItem mnemonicParsing="false" onAction="#version" text="Version" />
                 </items>
               </Menu>
             </menus>
@@ -78,7 +86,7 @@
           </SplitPane>
             <AnchorPane layoutY="578.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="578.0">
                <children>
-              <Label layoutX="3.0" layoutY="3.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" AnchorPane.leftAnchor="3.0">
+              <Label layoutX="3.0" layoutY="3.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Find source code on Github" visible="false" AnchorPane.leftAnchor="3.0">
                 <font>
                   <Font size="11.0" fx:id="x3" />
                 </font>
@@ -86,7 +94,7 @@
                   <Color blue="0.625" green="0.625" red="0.625" fx:id="x4" />
                 </textFill>
               </Label>
-              <Label font="$x3" layoutX="63.0" layoutY="3.0" maxWidth="-1.0" text="Right status" textFill="$x4" AnchorPane.rightAnchor="3.0" />
+              <Label font="$x3" layoutX="63.0" layoutY="3.0" maxWidth="-1.0" text="Path-of-Leveling_v0.65-alpha" textFill="$x4" AnchorPane.rightAnchor="3.0" />
                </children>
             </AnchorPane>
          </children>

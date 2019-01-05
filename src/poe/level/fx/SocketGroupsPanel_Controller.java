@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -38,6 +39,11 @@ public class SocketGroupsPanel_Controller implements Initializable {
         public SocketGroupLinker(SocketGroup sgroup){
             sg = sgroup;
             generateLabel();
+        }
+        
+        public SocketGroupLinker dupe(HashSet<Integer> s_id, HashSet<Integer> g_id){
+            SocketGroupLinker sgl = new SocketGroupLinker(sg.dupe(s_id,g_id));
+            return sgl;
         }
         
         public void generateLabel(){
@@ -90,6 +96,11 @@ public class SocketGroupsPanel_Controller implements Initializable {
     @FXML
     private JFXListView<Label> socketGroupView;
     
+    @FXML
+    private JFXButton duplicate_button;
+    @FXML
+    private JFXButton add_note_button;
+    
     
     private MainApp_Controller root;
     private GemsPanel_Controller gpc;
@@ -112,6 +123,36 @@ public class SocketGroupsPanel_Controller implements Initializable {
     
     public ArrayList<SocketGroupLinker> getLinker(){
         return linker;
+    }
+    
+    public void requestNotePopup(){
+        Socket_group_noteController notepop = root.notePopup();
+        notepop.start(this,linker.get(activeSocketGroupID).sg.getNote());
+    }
+    
+    public void noteChange(String newNote){
+        linker.get(activeSocketGroupID).sg.addNote(newNote);
+    }
+    
+    public void duplicate(){
+        SocketGroupLinker sgl = linker.get(activeSocketGroupID);
+        HashSet<Integer> sg_ids = new HashSet<>(); //receating all ids so far in this build...
+        HashSet<Integer> gem_ids = new HashSet<>();
+        for(SocketGroupLinker a : linker){
+            if(!sg_ids.add(a.sg.id)){
+                System.out.println("problems in duping potentially");
+            }
+            for(Gem g : a.sg.getGems()){
+                if(!gem_ids.add(g.id)){
+                    System.out.println("problems in duping potentially : gem section");
+                }
+            }
+        }
+        SocketGroupLinker duped_sgl = sgl.dupe(sg_ids,gem_ids);
+        socketGroupView.getItems().add(duped_sgl.sgLabel); //add label to the socket groups on the left panel // this would be a new label cause we cant place 1 ref to 2 items
+        linker.add(duped_sgl);
+        bpc.addNewSocketGroup(duped_sgl.sg);
+        socketGroupView.getSelectionModel().selectLast();
     }
     
     public void update(ArrayList<SocketGroupLinker> sgl_list){
@@ -190,11 +231,16 @@ public class SocketGroupsPanel_Controller implements Initializable {
                     activeSocketGroupID = id;
                     if(activeSocketGroupID!= -1){
                         removeSocketGroup_button.setDisable(false); //active remove button
+                        duplicate_button.setDisable(false);
+                        add_note_button.setDisable(false);
                         gpc.hookSG_Controller(self);
+                        System.out.println("+_+++++++++++++++++++");
                         gpc.update(linker.get(activeSocketGroupID));
                         //gemVisiblePane.setVisible(true);
                     }else{
                         removeSocketGroup_button.setDisable(true); // disable remove button
+                        duplicate_button.setDisable(true);
+                        add_note_button.setDisable(true);
                         //gemVisiblePane.setVisible(false);
                     }
                 }
