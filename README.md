@@ -62,14 +62,15 @@ If you have a suggestion I encourage you to start an issue.
 
 ## Changelog in v0.65
 New in this release:
+  *New features*
 - Added Path of Building support.
 - - Select your Path of Leveling build on the editor and link it with the Path of Building.
 You need to provide a valid pastebin link from PoB. You can then export this PoB to your clipboard
-    when you need it, or view it directly in https://poe.technology/poebuddy/ .
-    I have no affiliation whatsoever with the developers.
+when you need it, or view it directly in https://poe.technology/poebuddy/ .
+I have no affiliation whatsoever with the developers.
 - Now if you export your build, and it is linked to Path of Building, the pastebin IS INCLUDED.
-   That means that you only need 1 pastebin link that will contain both a PoL build and a PoB build.
-- Adjusted logs to provide less and more useful information
+That means that you only need 1 pastebin link that will contain both a PoL build and a PoB build.
+
  
   *Reddit requests*
 - It is now possible to add notes to the socket groups. You can find the new icon on 
@@ -79,10 +80,14 @@ of the left panel in the editor.
 - There is now a box surrounding Start in the launcher to make it look more like a button.
 - You now get prompts when deleting a build, and when you close the editor from the X icon.
    Also the application no longers terminates, instead it returns to the Launcher screen.
-   *Bug fixes*
+   
+  *Bug fixes*
 - Fixed a bug, where you had to select XP option, no matter what, or you would get no overlays.
  - - Now every option is independent, but running only the Zones options, now requests for
  character name and player level.
+ 
+  *Changes*
+- Adjusted logs to provide less and more useful information
 
 
 
