@@ -1,4 +1,16 @@
 # Path of Leveling
+
+**read this**
+>Since a lot of people seem to have the misconception that this is a Path of Building reader.  
+>  
+>Don't try to import a Pastebin that contains a Path of Building file via Import ..  
+>  
+>**it will not work**.  
+>  
+>This application **loads its own files**. You can import pastebin's that contain **ONLY** a Path of Leveling file, either  **created by you within the editor, or distributed by someone else in the community** .  
+>  
+>If you wish to simply **link** your Path of Building file with a certain build, please **use option Path of Building> Link active build with POB**. Once you have done this you can share your **Path of Leveling** build buy exporting it to Pastebin. The new Pastebin link will contain both of the "files" and it can only be opened with Path of Leveling. Thank you.
+
 **This is an alpha version, bugs included**
 
 *Assisting overlay with an advanced GUI editor written in Java for [Path of Exile](https://www.pathofexile.com/game).*
