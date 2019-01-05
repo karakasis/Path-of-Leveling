@@ -57,7 +57,7 @@ That's all. Everything else is code.
 * Support for more resolutions, and/or custom sized overlays
 * Find a more suitable way to place the overlays
 
-Mentioned in the comments :
+Mentioned in the reddit comments :
 
 >~~Is it possible to add notes to the socket groups (e.g. off hand corruption purposes, writing down how much dps increase a 3-4 link is in comparison~~ done  
 >  
@@ -72,6 +72,7 @@ Mentioned in the comments :
 >~~I recommend putting a box around "Start". Similar to how there is one around "Build" and "Editor"~~. done  
 >  
 >There is no way to get back to the options menu once the start button has been pushed
+
 If you have a suggestion I encourage you to start an issue.
 
 ## Changelog in v0.65
