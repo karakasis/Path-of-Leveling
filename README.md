@@ -60,8 +60,34 @@ Mentioned by users :
  - ~~Do something so we can see the rewards of quest so we can skip the quest that don’t give passive points / respect points~~ done
 If you have a suggestion I encourage you to start an issue.
 
+## Changelog in v0.65
+New in this release:
+- Added Path of Building support.
+- - Select your Path of Leveling build on the editor and link it with the Path of Building.
+You need to provide a valid pastebin link from PoB. You can then export this PoB to your clipboard
+    when you need it, or view it directly in https://poe.technology/poebuddy/ .
+    I have no affiliation whatsoever with the developers.
+- Now if you export your build, and it is linked to Path of Building, the pastebin IS INCLUDED.
+   That means that you only need 1 pastebin link that will contain both a PoL build and a PoB build.
+- Adjusted logs to provide less and more useful information
+ 
+  *Reddit requests*
+- It is now possible to add notes to the socket groups. You can find the new icon on 
+the top of the left panel in the editor.
+- It is now possible to duplicate socket groups. You can find the new icon on the top
+of the left panel in the editor.
+- There is now a box surrounding Start in the launcher to make it look more like a button.
+- You now get prompts when deleting a build, and when you close the editor from the X icon.
+   Also the application no longers terminates, instead it returns to the Launcher screen.
+   *Bug fixes*
+- Fixed a bug, where you had to select XP option, no matter what, or you would get no overlays.
+ - - Now every option is independent, but running only the Zones options, now requests for
+ character name and player level.
+
+
+
 ## Changelog in v0.6
-New on this release:
+New in this release:
  - Implemented a custom updater, when there is a new release and you launch the application you get a different loader that downloads the newest release, then places it in the same folder as this .jar. You can then rename the new one and delete the old one.
  - Added support for trials and passives in the acts. Now you can select in the preferences if you want those to pop up, and with the normal Zone overlay you get 2 more icons.
  - Added an extra option in the Zones overlay, you can now select if you want the images or not , and the same for the textual guides.
@@ -73,7 +99,7 @@ New on this release:
  - Fixed and added more feautures that I have already forgotten.
 
 ## Changelog in v0.5
-New on this release:
+New in this release:
 - Pastebin support
 - Exporting and importing one or all builds
 - Keybindings with JNA Hooks
