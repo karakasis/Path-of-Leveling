@@ -62,7 +62,8 @@ If you have a suggestion I encourage you to start an issue.
 
 ## Changelog in v0.65
 New in this release:
-  *New features*
+
+ __New features__
 - Added Path of Building support.
 - - Select your Path of Leveling build on the editor and link it with the Path of Building.
 You need to provide a valid pastebin link from PoB. You can then export this PoB to your clipboard
@@ -72,7 +73,7 @@ I have no affiliation whatsoever with the developers.
 That means that you only need 1 pastebin link that will contain both a PoL build and a PoB build.
 
  
-  *Reddit requests*
+ __Reddit requests__
 - It is now possible to add notes to the socket groups. You can find the new icon on 
 the top of the left panel in the editor.
 - It is now possible to duplicate socket groups. You can find the new icon on the top
@@ -81,12 +82,12 @@ of the left panel in the editor.
 - You now get prompts when deleting a build, and when you close the editor from the X icon.
    Also the application no longers terminates, instead it returns to the Launcher screen.
    
-  *Bug fixes*
+ __Bug fixes__
 - Fixed a bug, where you had to select XP option, no matter what, or you would get no overlays.
  - - Now every option is independent, but running only the Zones options, now requests for
  character name and player level.
  
-  *Changes*
+ __Changes__
 - Adjusted logs to provide less and more useful information
 
 
