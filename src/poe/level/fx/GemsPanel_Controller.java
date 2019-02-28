@@ -125,6 +125,10 @@ public class GemsPanel_Controller implements Initializable {
             }
         }
         
+        public void autoSelectActiveGem(Gem g){
+            root.activeSkillGroup.setValue(g);
+        }
+        
         public void updateGemData(Gem g, int id){
             root.gemUpdate(g, id);
         }
@@ -178,6 +182,10 @@ public class GemsPanel_Controller implements Initializable {
             }
             this.gem = gem;
             root.updateGemData(gem, id);
+            //here we have access to the socket group so we can do this from within
+            if(root.sg.getActiveGem() == null && gem.isActive){
+               root.autoSelectActiveGem(this.gem);
+            }
             root.root.updateAllComboBox();
         }
         

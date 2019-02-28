@@ -176,6 +176,7 @@ public class GemEntry_Controller implements Initializable {
         
         //add open window gem selection pop up functionallity
         parent.requestPopup();
+        
     }
     
     public void load(GemLinker parent,int id, Gem g){
@@ -268,6 +269,8 @@ public class GemEntry_Controller implements Initializable {
            replaceGem.setVisible(false);
            replaceToggle.setSelected(false);
         }
+        
+        
         parent.updateGemData(selectedGem);
     }
     

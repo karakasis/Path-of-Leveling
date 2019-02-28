@@ -340,9 +340,49 @@ public class POELevelFx extends Application {
               loadActsFromMemory();
               loadGemsFromMemory();
               loadBuildsFromMemory();
-
+              
         }
         
+        /*
+              ArrayList<String[]> mergeTags = mergeTags();
+              ArrayList<Gem> gems = GemHolder.getInstance().gems;
+              boolean active = false;
+              for(int i=0; i<mergeTags.size(); i++){
+                  if(mergeTags.get(i)[0].equals("Abyssal Cry")){
+                      active = true;
+                  }
+                  boolean found = false;
+                  for(int j=0; j<gems.size(); j++){
+                      if(mergeTags.get(i)[0].equals(gems.get(j).name)){
+                          gems.get(j).isActive = active;
+                          gems.get(j).isSupport = !active;
+                          for(int k = 1 ; k< mergeTags.get(i).length; k++){
+                              gems.get(j).tags.add( mergeTags.get(i)[k]);
+                          }
+                          found = true;
+                          break;
+                      }
+                  }
+                  if(!found){
+                      System.out.println("not found : " + mergeTags.get(i)[0]);
+                  }
+                  found = false;
+              }
+              
+              ArrayList<Gem> gems2 = GemHolder.getInstance().gems;
+              for(Gem g : gems2){
+                  if(g.isActive == g.isSupport){
+                      System.out.println("same active : " + g.name);
+                      
+                  }
+                  if(g.tags == null || g.tags.size() == 0){
+                      System.out.println("no tag : " + g.name);
+                  }
+              }
+              System.out.println(gems2);
+              
+              GemHolder.getInstance().init_remaining_in_pool();
+              */
         
      /*   
         StringBuilder hack = hack();
@@ -405,6 +445,38 @@ public class POELevelFx extends Application {
         }
         
         return sb;
+    }
+    
+    private ArrayList<String[]> mergeTags(){
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("tags.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ArrayList<String[]> list_tags = new ArrayList<>();
+        try {
+            String line = null;
+            try {
+                
+                line = br.readLine();
+                while(line != null){
+                    String[] tags = line.split(",");
+                    list_tags.add(tags);
+                    line = br.readLine();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } finally {
+            try {
+                br.close();
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return list_tags;
     }
     
     public void close(){
@@ -597,6 +669,15 @@ public class POELevelFx extends Application {
                 }
             
             gem.resizeImage();
+            
+            //load tags - new feature
+            gem.isActive = gemObj.getBoolean("isActive");
+            gem.isSupport = gemObj.getBoolean("isSupport");
+            JSONArray tags = gemObj.getJSONArray("gemTags");
+            //new arraylist is in constructor
+            for(int j=0;j<tags.length();j++){
+                gem.tags.add(tags.getString(j));
+            }
             
             GemHolder.getInstance().putGem(gem);
             double a = (double)i/arrG.length();
