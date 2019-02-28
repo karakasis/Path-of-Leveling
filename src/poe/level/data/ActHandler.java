@@ -1,28 +1,29 @@
 package poe.level.data;
+
 import java.util.ArrayList;
 
 public class ActHandler {
-    
+
     private static ActHandler mInstance;
-  
+
     public static synchronized ActHandler getInstance() {
-    if (mInstance == null ) {
-      mInstance = new ActHandler();
+        if (mInstance == null) {
+            mInstance = new ActHandler();
+        }
+        return mInstance;
     }
-    return mInstance;
-  }
-    
+
     public ArrayList<Act> acts;
 
-    public ActHandler(){
+    public ActHandler() {
         acts = new ArrayList<>();
     }
 
-    public void putAct(Act a){
+    public void putAct(Act a) {
         acts.add(a);
     }
 
-    public ArrayList<Act> getActs(){
+    public ArrayList<Act> getActs() {
         return acts;
     }
 }

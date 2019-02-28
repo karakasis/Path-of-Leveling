@@ -13,24 +13,24 @@ import javafx.scene.image.ImageView;
  *
  * @author Christos
  */
-public class GemListCell extends ListCell<Gem>{
-    
+public class GemListCell extends ListCell<Gem> {
+
     @Override
     protected void updateItem(Gem gem, boolean empty) {
-        super.updateItem(gem, empty) ;
+        super.updateItem(gem, empty);
         if (empty) {
             setText(null);
         } else {
             Label l = new Label();
-            if(!gem.getGemName().equals("<empty group>")){
+            if (!gem.getGemName().equals("<empty group>")) {
                 l.setGraphic(new ImageView(gem.getSmallIcon()));
                 l.setText(gem.getGemName());
-            }else{
+            } else {
                 setText(null);
             }
             setGraphic(l);
 
         }
     }
-    
+
 }

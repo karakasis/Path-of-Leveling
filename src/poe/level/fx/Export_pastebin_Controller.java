@@ -8,6 +8,7 @@ package poe.level.fx;
 import java.awt.Desktop;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
@@ -21,12 +22,12 @@ public class Export_pastebin_Controller implements Initializable {
 
     @FXML
     private TextArea paste_area;
-    
+
     @FXML
-    private void pastebin_url(){
+    private void pastebin_url() {
         openWebpage("https://pastebin.com/");
     }
-    
+
     public void openWebpage(String urlString) {
         try {
             Desktop.getDesktop().browse(new URL(urlString).toURI());
@@ -34,11 +35,11 @@ public class Export_pastebin_Controller implements Initializable {
             e.printStackTrace();
         }
     }
-    
-    public void initPasteText(String paste){
+
+    public void initPasteText(String paste) {
         paste_area.setText(paste);
     }
-    
+
     /**
      * Initializes the controller class.
      */
@@ -48,6 +49,6 @@ public class Export_pastebin_Controller implements Initializable {
         paste_area.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             paste_area.selectAll();
         });
-    }    
-    
+    }
+
 }

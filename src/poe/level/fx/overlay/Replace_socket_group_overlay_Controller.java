@@ -7,6 +7,7 @@ package poe.level.fx.overlay;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -34,16 +35,16 @@ public class Replace_socket_group_overlay_Controller implements Initializable {
     private Label npc;
     @FXML
     private Label act;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-    public void load(Gem add, Gem remove){
+    }
+
+    public void load(Gem add, Gem remove) {
         gemAddedImage.setImage(add.getIcon());
         gemRemovedImage.setImage(remove.getIcon());
         gemAddedName.setText(add.getGemName());
@@ -52,5 +53,5 @@ public class Replace_socket_group_overlay_Controller implements Initializable {
         npc.setText(add.npc);
         act.setText("Act " + add.act);
     }
-    
+
 }
