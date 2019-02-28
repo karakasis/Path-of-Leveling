@@ -176,7 +176,8 @@ public class Controller {
     public void start(){
         _tObj = new Tail();
         //_tObj.setUpTailer(new File("C:\\Users\\Christos\\Documents\\NetBeansProjects\\POE-level-fx\\src\\a.txt"), this);
-        _tObj.setUpTailer(new File(path), this);
+        _tObj.setUpTailer(new File("src/logs.txt"), this);
+        //_tObj.setUpTailer(new File(path), this);
         
         //manually input the level 1 gems
         if(playerLevel == 1 && !level_stage_lock){
@@ -194,6 +195,9 @@ public class Controller {
         }
         if(!level_stage_lock){
             level_stage.update(playerLevel);
+            if(playerLevel == 2){
+                level_stage.update(1); //remind gems on hillock kill
+            }
         }
         if(build!=null){
             build.level = playerLevel;

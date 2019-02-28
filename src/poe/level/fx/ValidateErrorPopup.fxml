@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
@@ -8,8 +9,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="586.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="poe.level.fx.ValidateErrorPopupController">
+<AnchorPane id="AnchorPane" prefHeight="425.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.ValidateErrorPopupController">
    <children>
       <FlowPane hgap="40.0" layoutX="14.0" layoutY="29.0" prefHeight="47.0" prefWidth="558.0">
          <children>
@@ -31,5 +31,12 @@
          </children>
       </FlowPane>
       <TextArea fx:id="paste_error" editable="false" layoutX="29.0" layoutY="76.0" prefHeight="298.0" prefWidth="524.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="29.0" />
+      <Label layoutX="14.0" layoutY="383.0" text="Continue and set this build to Non-Validated?">
+         <font>
+            <Font name="Alegreya Sans SC" size="16.0" />
+         </font>
+      </Label>
+      <JFXButton buttonType="RAISED" layoutX="365.0" layoutY="381.0" onAction="#sayYesToValidation" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Yes" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="469.0" layoutY="381.0" onAction="#sayNoToValidation" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="No" textFill="WHITE" />
    </children>
 </AnchorPane>

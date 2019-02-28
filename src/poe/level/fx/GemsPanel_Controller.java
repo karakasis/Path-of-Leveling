@@ -328,7 +328,7 @@ public class GemsPanel_Controller implements Initializable {
         lockClear = true;
         activeSkillGroup.getItems().clear();
         replaceGroupBox.getItems().clear();
-        lockClear = false;
+        //lockClear = false;
         System.out.println("Clearing... end");
         
         ArrayList<Gem> gems = current_sgl.sg.getGems();
@@ -459,7 +459,9 @@ public class GemsPanel_Controller implements Initializable {
         }
         fromLevelSlider.setValue( sg.getFromGroupLevel());
         fromLevelLabel.setText(sg.getFromGroupLevel()+"");
+        //lockClear = true;
         untilLevelSlider.setValue( sg.getUntilGroupLevel());
+        lockClear = false;
 
     }
     
@@ -582,6 +584,7 @@ public class GemsPanel_Controller implements Initializable {
         //Label selection = (Label)replaceGroupBox.getSelectionModel().getSelectedItem();
         //String text = selection.getText();
         if(!lockClear){
+            StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
             current_sgl.sg.setGroupReplaced(replaceGroupBox.getValue());
             current_sgl.sg.setReplaceGroup(true);
             /*for(SocketGroupLinker sgl: linker){

@@ -23,6 +23,7 @@ public class Build {
     ArrayList<SocketGroup> gems;
     public boolean hasPob;
     public String pobLink;
+    public boolean isValid;
     
     public Build(String buildName,String className
             , String ascendancyName){
@@ -99,6 +100,7 @@ public class Build {
                 }
             }
         }
+        //isValid = true;
         return true;
     }
     

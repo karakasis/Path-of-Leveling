@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import poe.level.data.Controller;
+import poe.level.fx.Preferences_Controller;
 
 /**
  * FXML Controller class
@@ -54,6 +55,9 @@ public class LevelOverlay_Controller implements Initializable {
           @Override public void handle(MouseEvent mouseEvent) {
             stage.setX(mouseEvent.getScreenX() + dragDelta.x);
             stage.setY(mouseEvent.getScreenY() + dragDelta.y);
+            LevelOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
+            LevelOverlay_Stage.prefY = mouseEvent.getScreenY() + dragDelta.y;
+            Preferences_Controller.updateLevelPos(LevelOverlay_Stage.prefX, LevelOverlay_Stage.prefY);
           }
         });
     }

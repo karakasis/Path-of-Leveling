@@ -173,6 +173,9 @@ public class GemEntry_Controller implements Initializable {
         replaceGem.setCellFactory(lv -> new GemListCell());
         replaceGem.setButtonCell(new GemListCell());
         replaceGem.setConverter(new GemToString());
+        
+        //add open window gem selection pop up functionallity
+        parent.requestPopup();
     }
     
     public void load(GemLinker parent,int id, Gem g){
