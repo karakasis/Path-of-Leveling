@@ -21,44 +21,45 @@ import javafx.scene.control.Label;
  */
 public class UpdaterController implements Initializable {
 
-     @FXML
+    @FXML
     private JFXProgressBar progressbar;
     @FXML
     private Label label;
     @FXML
     private Label final_label;
-    
+
     public static long finalSize;
-    
+
     private static double SPACE_KB = 1024;
     private static double SPACE_MB = 1024 * SPACE_KB;
     private static double SPACE_GB = 1024 * SPACE_MB;
     private static double SPACE_TB = 1024 * SPACE_GB;
 
     private boolean initialized;
-    
+
     public static String bytes2String(long sizeInBytes) {
 
         NumberFormat nf = new DecimalFormat();
         nf.setMaximumFractionDigits(2);
 
         try {
-            if ( sizeInBytes < SPACE_KB ) {
+            if (sizeInBytes < SPACE_KB) {
                 return nf.format(sizeInBytes) + " Byte(s)";
-            } else if ( sizeInBytes < SPACE_MB ) {
-                return nf.format(sizeInBytes/SPACE_KB) + " KB";
-            } else if ( sizeInBytes < SPACE_GB ) {
-                return nf.format(sizeInBytes/SPACE_MB) + " MB";
-            } else if ( sizeInBytes < SPACE_TB ) {
-                return nf.format(sizeInBytes/SPACE_GB) + " GB";
+            } else if (sizeInBytes < SPACE_MB) {
+                return nf.format(sizeInBytes / SPACE_KB) + " KB";
+            } else if (sizeInBytes < SPACE_GB) {
+                return nf.format(sizeInBytes / SPACE_MB) + " MB";
+            } else if (sizeInBytes < SPACE_TB) {
+                return nf.format(sizeInBytes / SPACE_GB) + " GB";
             } else {
-                return nf.format(sizeInBytes/SPACE_TB) + " TB";
+                return nf.format(sizeInBytes / SPACE_TB) + " TB";
             }
         } catch (Exception e) {
             return sizeInBytes + " Byte(s)";
         }
 
     }
+
     /**
      * Initializes the controller class.
      */
@@ -66,19 +67,18 @@ public class UpdaterController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         initialized = false;
-    }    
-    
-    
-    public void notify(Double prog){
-        if(!initialized){
+    }
+
+    public void notify(Double prog) {
+        if (!initialized) {
             final_label.setText("/" + (bytes2String(finalSize)));
             initialized = true;
         }
-        String done = (bytes2String((long)(double)prog));
+        String done = (bytes2String((long) (double) prog));
         label.setText(done);
-        Double progress_made = prog/finalSize;
+        Double progress_made = prog / finalSize;
         progressbar.setProgress(progress_made);
-        //label.setText(prog.intValue() + " %");
-    }   
-    
+        // label.setText(prog.intValue() + " %");
+    }
+
 }

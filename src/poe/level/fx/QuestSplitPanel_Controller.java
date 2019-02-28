@@ -36,78 +36,77 @@ public class QuestSplitPanel_Controller implements Initializable {
     private HBox gemBox;
     @FXML
     private Label level_label;
-    @FXML 
+    @FXML
     private Label quest_label;
     @FXML
     private SplitPane container;
-    //private JFXButton gemButton;
+    // private JFXButton gemButton;
     /**
      * Initializes the controller class.
      */
     private AddGem_Controller parent;
-    
-    public void loadOther(ArrayList<Gem> gems ,int order, AddGem_Controller parent){
+
+    public void loadOther(ArrayList<Gem> gems, int order, AddGem_Controller parent) {
         this.parent = parent;
-        level_label.setText("Level "+order);
-        //quest_label.setText(z.getZoneQuest());
+        level_label.setText("Level " + order);
+        // quest_label.setText(z.getZoneQuest());
         quest_label.setText("");
         int counter = 0;
-        for(Gem g : gems){
+        for (Gem g : gems) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gemButton.fxml"));
-            //gemButton con = null;
-            JFXButton gemButton= null;
+            // gemButton con = null;
+            JFXButton gemButton = null;
             try {
                 gemButton = (JFXButton) loader.load();
             } catch (IOException ex) {
                 Logger.getLogger(QuestSplitPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
             GemButton_Controller controller = loader.<GemButton_Controller>getController();
-            controller.load(g,this);
+            controller.load(g, this);
             gemBox.getChildren().add(gemButton);
             counter++;
             /*
-            if(counter%5 == 0){
-                RowConstraints row = new RowConstraints();
-                gemBox.getRowConstraints().add(row);
-            }*/
+             * if(counter%5 == 0){ RowConstraints row = new RowConstraints();
+             * gemBox.getRowConstraints().add(row); }
+             */
         }
     }
-    
-    public void load(Zone z, ArrayList<Gem> gems, AddGem_Controller parent){
+
+    public void load(Zone z, ArrayList<Gem> gems, AddGem_Controller parent) {
         this.parent = parent;
-        level_label.setText("Level "+z.getZoneLevel());
+        level_label.setText("Level " + z.getZoneLevel());
         quest_label.setText(z.getZoneQuest());
-        for(Gem g : gems){
+        for (Gem g : gems) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gemButton.fxml"));
-            //gemButton con = null;
-            JFXButton gemButton= null;
+            // gemButton con = null;
+            JFXButton gemButton = null;
             try {
                 gemButton = (JFXButton) loader.load();
             } catch (IOException ex) {
                 Logger.getLogger(QuestSplitPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
             GemButton_Controller controller = loader.<GemButton_Controller>getController();
-            controller.load(g,this);
+            controller.load(g, this);
             gemBox.getChildren().add(gemButton);
         }
     }
-    
-    public void callback(Gem g){
+
+    public void callback(Gem g) {
         parent.callback(g);
     }
-    
-    public void requestBorder(){
+
+    public void requestBorder() {
         container.setStyle("-fx-border-color: red;");
     }
-    
-    public void resetBorder(){
+
+    public void resetBorder() {
         container.setStyle(null);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         // TODO
-    }    
-    
+    }
+
 }

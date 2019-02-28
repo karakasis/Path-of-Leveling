@@ -52,62 +52,62 @@ import poe.level.fx.BuildEntry_Controller;
 import poe.level.fx.MainApp_Controller;
 import poe.level.fx.SocketGroupsPanel_Controller.SocketGroupLinker;
 
-
 /**
  * FXML Controller class
  *
  * @author Christos
  */
 public class SelectBuild_PopupController implements Initializable {
-    
-    private static Image charToImage(String className, String asc){
+
+    private static Image charToImage(String className, String asc) {
         BufferedImage img = null;
         try {
-            img = ImageIO.read(BuildsPanel_Controller.class.getResource("/classes/"+className+"/"+asc+".png"));
+            img = ImageIO.read(BuildsPanel_Controller.class.getResource("/classes/" + className + "/" + asc + ".png"));
         } catch (IOException ex) {
             Logger.getLogger(BuildsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return SwingFXUtils.toFXImage(img, null);
     }
-    
+
     @FXML
     private VBox buildsBox;
-    
+
     private Main_Controller root;
-    
-    public void hook(Main_Controller root){
+
+    public void hook(Main_Controller root) {
         this.root = root;
     }
-    
-    public void update(int id){
-        
+
+    public void update(int id) {
+
         Build selected = POELevelFx.buildsLoaded.get(id);
         root.closePopup(selected);
     }
 
-     /**
+    /**
      * Initializes the controller class.
      */
     ArrayList<Build> bec_list;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         bec_list = new ArrayList<>();
-        for(int i=0; i<POELevelFx.buildsLoaded.size(); i++ ){ //this might require to update the buildsLoaded on each new build added and removed
+        for (int i = 0; i < POELevelFx.buildsLoaded.size(); i++) { // this might require to update the buildsLoaded on
+                                                                   // each new build added and removed
             Build b = POELevelFx.buildsLoaded.get(i);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("buildEntry.fxml"));
             try {
-                //this will add the AnchorPane to the VBox
+                // this will add the AnchorPane to the VBox
                 buildsBox.getChildren().add(loader.load());
             } catch (IOException ex) {
                 Logger.getLogger(SelectBuild_PopupController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            BuildEntry_Controller bec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
-            bec.init_for_popup(charToImage(b.getClassName(),b.getAsc())
-                , b.getName(), b.getAsc(), i ,this);
+            BuildEntry_Controller bec = loader.<BuildEntry_Controller>getController(); // add controller to the linker
+                                                                                       // class
+            bec.init_for_popup(charToImage(b.getClassName(), b.getAsc()), b.getName(), b.getAsc(), i, this);
         }
-    }  
+    }
 
-    
 }

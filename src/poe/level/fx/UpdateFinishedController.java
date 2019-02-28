@@ -19,16 +19,16 @@ import javafx.fxml.Initializable;
 public class UpdateFinishedController implements Initializable {
 
     @FXML
-    private void close(){
+    private void close() {
         System.exit(60);
     }
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

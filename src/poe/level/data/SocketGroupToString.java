@@ -13,9 +13,9 @@ import javafx.util.StringConverter;
  * @author Christos
  */
 public class SocketGroupToString<T> extends StringConverter<T> {
-    
+
     private HashMap<String, T> map = new HashMap<>();
-    
+
     @Override
     public T fromString(String string) {
         if (!map.containsKey(string)) {

@@ -21,46 +21,46 @@ public class ValidateErrorPopupController implements Initializable {
 
     @FXML
     private TextArea paste_error;
-    @FXML 
+    @FXML
     private Label build_label;
-    
+
     private MainApp_Controller root;
-    
-    public void setUp(String build_name, String error, MainApp_Controller root){
-        
+
+    public void setUp(String build_name, String error, MainApp_Controller root) {
+
         this.root = root;
-        if(build_name!=null){
+        if (build_name != null) {
             String build_con = "";
-            if(build_name.length()>=20){
+            if (build_name.length() >= 20) {
                 build_con = build_name.substring(0, 20);
-                build_con+="..";
-            }else{
+                build_con += "..";
+            } else {
                 build_con = build_name;
             }
             build_label.setText(build_con);
-        }else{
+        } else {
             build_label.setText("no_name");
         }
-        
+
         paste_error.setText(error);
     }
-    
+
     @FXML
-    private void sayNoToValidation(){
+    private void sayNoToValidation() {
         root.sayNoToValidation();
     }
-    
+
     @FXML
-    private void sayYesToValidation(){
+    private void sayYesToValidation() {
         root.sayYesToValidation();
     }
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

@@ -46,8 +46,8 @@ import poe.level.fx.SocketGroupsPanel_Controller.SocketGroupLinker;
  */
 public class GemsPanel_Controller implements Initializable {
 
-    public class GemsPanelLinker{
-        HashMap<Integer,GemLinker> gl_map;
+    public class GemsPanelLinker {
+        HashMap<Integer, GemLinker> gl_map;
         GemsPanel_Controller root;
         int id;
         ArrayList<Integer> leftid;
@@ -56,12 +56,12 @@ public class GemsPanel_Controller implements Initializable {
         int popup_id;
         SocketGroup sg;
         GemLinker currentMain;
-        
-        public int hook(GemsPanel_Controller root, SocketGroup sg){
+
+        public int hook(GemsPanel_Controller root, SocketGroup sg) {
             this.root = root;
             this.sg = sg;
             id = GemsPanel_Controller.sign();
-            //acts as constructor
+            // acts as constructor
             leftid = new ArrayList<>();
             rightid = new ArrayList<>();
             active_gemLinker = -1;
@@ -69,169 +69,171 @@ public class GemsPanel_Controller implements Initializable {
             currentMain = null;
             return id;
         }
-        
-        public void loadGemPanel(int rootId, int gemId){
-            if(rootId == 0){
+
+        public void loadGemPanel(int rootId, int gemId) {
+            if (rootId == 0) {
                 leftid.add(gemId);
-            }else if(rootId == 1){
+            } else if (rootId == 1) {
                 rightid.add(gemId);
             }
         }
-        
-        public void setActiveLinker(GemLinker gl){
+
+        public void setActiveLinker(GemLinker gl) {
             currentMain = gl;
         }
-        
-        public void setActiveGemLinker(int gemId){
-            
-            if(active_gemLinker!=gemId){
+
+        public void setActiveGemLinker(int gemId) {
+
+            if (active_gemLinker != gemId) {
                 active_gemLinker = gemId;
                 for (GemLinker gl : gl_map.values()) {
-                    //if(!gl.gem.getGemName().equals("<empty group>")){
-                        if(gl.id!=active_gemLinker){
-                            gl.resetUI();
-                        }
-                    //}
+                    // if(!gl.gem.getGemName().equals("<empty group>")){
+                    if (gl.id != active_gemLinker) {
+                        gl.resetUI();
+                    }
+                    // }
                 }
             }
             root.removeGemPanel_button.setDisable(false);
         }
-        
-        public void offsetVBox(int code){
-            
-            if( code == 0){
-                leftid.add(rightid.remove(rightid.size()-1));
-            }else if( code == 1){
-                rightid.add(leftid.remove(leftid.size()-1));
+
+        public void offsetVBox(int code) {
+
+            if (code == 0) {
+                leftid.add(rightid.remove(rightid.size() - 1));
+            } else if (code == 1) {
+                rightid.add(leftid.remove(leftid.size() - 1));
             }
             active_gemLinker = -1;
         }
-        
-        public void removeVBox(int code){
-            if( code == 0){
-                for(int i=0; i<leftid.size();i++){
-                    if(leftid.get(i) == active_gemLinker){
+
+        public void removeVBox(int code) {
+            if (code == 0) {
+                for (int i = 0; i < leftid.size(); i++) {
+                    if (leftid.get(i) == active_gemLinker) {
                         leftid.remove(i);
                         break;
                     }
                 }
-            }else if( code == 1){
-                for(int i=0; i<rightid.size();i++){
-                    if(rightid.get(i) == active_gemLinker){
+            } else if (code == 1) {
+                for (int i = 0; i < rightid.size(); i++) {
+                    if (rightid.get(i) == active_gemLinker) {
                         rightid.remove(i);
                         break;
                     }
                 }
             }
         }
-        
-        public void autoSelectActiveGem(Gem g){
+
+        public void autoSelectActiveGem(Gem g) {
             root.activeSkillGroup.setValue(g);
         }
-        
-        public void updateGemData(Gem g, int id){
+
+        public void updateGemData(Gem g, int id) {
             root.gemUpdate(g, id);
         }
-        
-        public void requestPopup(int id){
+
+        public void requestPopup(int id) {
             popup_id = id;
             root.requestPopup();
         }
     }
-    
-    public class GemLinker{
+
+    public class GemLinker {
         Gem gem;
         int id;
         GemsPanelLinker root;
         GemEntry_Controller controller;
-        
-        public int hook(GemsPanelLinker root){
+
+        public int hook(GemsPanelLinker root) {
             this.root = root;
             id = GemsPanel_Controller.sign();
             return id;
         }
-        
-        public void hookController(GemEntry_Controller controller){
+
+        public void hookController(GemEntry_Controller controller) {
             this.controller = controller;
         }
-        
-        public void start(){
+
+        public void start() {
             controller.input(this, id);
         }
-        
-        public void load(){
-            controller.load(this,id,gem);
+
+        public void load() {
+            controller.load(this, id, gem);
         }
-        
-        public void updateGemData(Gem gem){
-            for(Gem g : root.sg.getGems()){
-                if(g.replaced){
-                    System.out.println(g.getGemName()+" has replacement.");
-                    //if any gem was replaced with the old one
-                    if(g.replacedWith.equals(this.gem)){
-                        
-                        System.out.println(g.getGemName()+" replaces with old gem :" + this.gem.getGemName());
-                        //it will now replace the new one
+
+        public void updateGemData(Gem gem) {
+            for (Gem g : root.sg.getGems()) {
+                if (g.replaced) {
+                    System.out.println(g.getGemName() + " has replacement.");
+                    // if any gem was replaced with the old one
+                    if (g.replacedWith.equals(this.gem)) {
+
+                        System.out.println(g.getGemName() + " replaces with old gem :" + this.gem.getGemName());
+                        // it will now replace the new one
                         g.replacedWith = gem;
-                        System.out.println(g.getGemName()+" replaces with new gem :" + gem.getGemName());
-                        
-                    }else{
-                       System.out.println(g.getGemName()+" has replacement, but not "+this.gem.getGemName()); 
+                        System.out.println(g.getGemName() + " replaces with new gem :" + gem.getGemName());
+
+                    } else {
+                        System.out.println(g.getGemName() + " has replacement, but not " + this.gem.getGemName());
                     }
                 }
             }
             this.gem = gem;
             root.updateGemData(gem, id);
-            //here we have access to the socket group so we can do this from within
-            if(root.sg.getActiveGem() == null && gem.isActive){
-               root.autoSelectActiveGem(this.gem);
+            // here we have access to the socket group so we can do this from within
+            if (root.sg.getActiveGem() == null && gem.isActive) {
+                root.autoSelectActiveGem(this.gem);
             }
             root.root.updateAllComboBox();
         }
-        
-        public void levelChanged(){
-            if(root.sg.getActiveGem()!=null){
-                if(root.sg.getActiveGem().equals(gem)){
+
+        public void levelChanged() {
+            if (root.sg.getActiveGem() != null) {
+                if (root.sg.getActiveGem().equals(gem)) {
                     root.root.levelChanged(root.sg.getActiveGem().getLevelAdded());
                 }
             }
         }
-        
-        public void clicked(){
+
+        public void clicked() {
             root.setActiveGemLinker(id);
         }
-        
-        public void resetUI(){
+
+        public void resetUI() {
             controller.reset();
         }
-        
-        public void requestPopup(){
+
+        public void requestPopup() {
             root.requestPopup(id);
         }
-        
-        public SocketGroup getSiblings(){
+
+        public SocketGroup getSiblings() {
             return root.sg;
         }
     }
-    
+
     private static HashSet<Integer> randomIDs;
-    public static int sign(){
-        if(randomIDs == null) randomIDs = new HashSet<>();
+
+    public static int sign() {
+        if (randomIDs == null)
+            randomIDs = new HashSet<>();
         int ran;
-        do{
-            ran = ThreadLocalRandom.current().nextInt(1,999999);
-        }while(randomIDs.contains(ran));
+        do {
+            ran = ThreadLocalRandom.current().nextInt(1, 999999);
+        } while (randomIDs.contains(ran));
         randomIDs.add(ran);
         return ran;
     }
-    
-    public static ObservableList<Label> getMainGems(SocketGroup selected){
+
+    public static ObservableList<Label> getMainGems(SocketGroup selected) {
         ObservableList<Label> listG = FXCollections.observableArrayList();
-        for(Gem g : selected.getGems()){
-            if(!g.getGemName().equals("<empty group>")){
+        for (Gem g : selected.getGems()) {
+            if (!g.getGemName().equals("<empty group>")) {
                 Label l = new Label();
                 Image img = g.getIcon();
-                if(img!=null){
+                if (img != null) {
                     l.setGraphic(new ImageView(img));
                 }
                 l.setText(g.getGemName().toString());
@@ -240,17 +242,16 @@ public class GemsPanel_Controller implements Initializable {
         }
         return listG;
     }
-    
-    public static ArrayList<SocketGroup> getReplaceableGroups(
-            ArrayList<SocketGroupLinker> sgl_list){
-        ArrayList<SocketGroup> sg_list= new ArrayList<>();
-        for(SocketGroupLinker a : sgl_list){
-           sg_list.add(a.sg);
+
+    public static ArrayList<SocketGroup> getReplaceableGroups(ArrayList<SocketGroupLinker> sgl_list) {
+        ArrayList<SocketGroup> sg_list = new ArrayList<>();
+        for (SocketGroupLinker a : sgl_list) {
+            sg_list.add(a.sg);
         }
         return sg_list;
     }
-    
-    @FXML 
+
+    @FXML
     private AnchorPane rootPane;
     @FXML
     private JFXToggleButton replaceGroup;
@@ -276,130 +277,125 @@ public class GemsPanel_Controller implements Initializable {
     private Label fromLevelLabel;
     @FXML
     private Label untilLevelLabel2;
-    
-    
+
     private MainApp_Controller root;
     private SocketGroupsPanel_Controller sgc;
     private ArrayList<SocketGroupLinker> linker;
     private int count;
     private SocketGroupLinker current_sgl;
-    
-    public void hook(MainApp_Controller root){
+
+    public void hook(MainApp_Controller root) {
         this.root = root;
     }
-    
-    public void hookSG_Controller(SocketGroupsPanel_Controller sgc){
+
+    public void hookSG_Controller(SocketGroupsPanel_Controller sgc) {
         this.sgc = sgc;
     }
-    
-    public void requestPopup(){
+
+    public void requestPopup() {
         AddGem_Controller gemPopup = root.gemPopup();
         gemPopup.start(this);
     }
-    
-    
-    public void closePopup(Gem g){
+
+    public void closePopup(Gem g) {
         root.gemClosePopup();
         current_sgl.gpl.gl_map.get(current_sgl.gpl.popup_id).controller.callback(g);
     }
-    
-    public void requestNotePopup(){
+
+    public void requestNotePopup() {
         Socket_group_noteController notepop = root.notePopup();
-        //notepop.start(this,current_sgl.sg.getNote());
+        // notepop.start(this,current_sgl.sg.getNote());
     }
-    
-    public void noteChange(String newNote){
+
+    public void noteChange(String newNote) {
         current_sgl.sg.addNote(newNote);
     }
-    
+
     /*
-    public void closeNotePopup(String note){
-        root.noteClosePopup();
-        current_sgl.sg.addNote(note);
-    }*/
-    
+     * public void closeNotePopup(String note){ root.noteClosePopup();
+     * current_sgl.sg.addNote(note); }
+     */
+
     private boolean lockClear = false;
-    
-    //this will get called from within the listener of the listview.
-    //and is responsible for loading previously created gem panels.
-    public void update(SocketGroupLinker sgl){
+
+    // this will get called from within the listener of the listview.
+    // and is responsible for loading previously created gem panels.
+    public void update(SocketGroupLinker sgl) {
         current_sgl = sgl;
-        
+
         leftGemBox.getChildren().clear();
         rightGemBox.getChildren().clear();
         removeGemPanel_button.setDisable(true);
-        
+
         rootPane.setVisible(true);
-        linker = sgc.getLinker(); //<<< fix
-        
+        linker = sgc.getLinker(); // <<< fix
+
         System.out.println("Clearing... start");
         lockClear = true;
         activeSkillGroup.getItems().clear();
         replaceGroupBox.getItems().clear();
-        //lockClear = false;
+        // lockClear = false;
         System.out.println("Clearing... end");
-        
+
         ArrayList<Gem> gems = current_sgl.sg.getGems();
         activeSkillGroup.getItems().addAll(gems);
         activeSkillGroup.setCellFactory(lv -> new GemListCell());
         activeSkillGroup.setButtonCell(new GemListCell());
         activeSkillGroup.setConverter(new GemToString());
-        
-        ArrayList<SocketGroup> sg_list= new ArrayList<>();
-        for(SocketGroupLinker a : linker){
-            if(!a.equals(sgl))
+
+        ArrayList<SocketGroup> sg_list = new ArrayList<>();
+        for (SocketGroupLinker a : linker) {
+            if (!a.equals(sgl))
                 sg_list.add(a.sg);
         }
-                
+
         replaceGroupBox.getItems().addAll(sg_list);
         replaceGroupBox.setCellFactory(lv -> new SocketGroupListCell());
         replaceGroupBox.setButtonCell(new SocketGroupListCell());
         replaceGroupBox.setConverter(new SocketGroupToString());
-        
 
-        
-        if(sgl.gpl==null){
+        if (sgl.gpl == null) {
             sgl.gpl = new GemsPanelLinker();
-            sgl.gpl.hook(this,sgl.sg);
+            sgl.gpl.hook(this, sgl.sg);
             sgl.gpl.gl_map = new HashMap<>();
-            
+
             count = 0;
-            for(Gem g : sgl.sg.getGems()){
+            for (Gem g : sgl.sg.getGems()) {
                 GemLinker gl = new GemLinker();
                 sgl.gpl.gl_map.put(gl.hook(sgl.gpl), gl);
                 gl.gem = g;
-                
-                //if(!g.getGemName().equals("<empty group>")){
 
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("gemEntry.fxml"));
-                        if(count == 0){
-                            leftGemBox.getChildren().add(loader.load());
-                            sgl.gpl.loadGemPanel(0,gl.id);
-                            count = 1;
+                // if(!g.getGemName().equals("<empty group>")){
 
-                        }else{
-                            rightGemBox.getChildren().add(loader.load());
-                            sgl.gpl.loadGemPanel(1,gl.id);
-                            //gem_c.loadGemPanel(controller,1,g);
-                            count = 0;
-                        }
-                        gl.hookController(loader.<GemEntry_Controller>getController());
-                        if(gl.gem.getGemName().equals("<empty group>")){
-                            gl.start();
-                        }else{
-                            sgl.gpl.sg.linkGem(g,gl.id);
-                            gl.load();
-                        }
-                        
-                    } catch (IOException ex) {
-                        Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("gemEntry.fxml"));
+                    if (count == 0) {
+                        leftGemBox.getChildren().add(loader.load());
+                        sgl.gpl.loadGemPanel(0, gl.id);
+                        count = 1;
+
+                    } else {
+                        rightGemBox.getChildren().add(loader.load());
+                        sgl.gpl.loadGemPanel(1, gl.id);
+                        // gem_c.loadGemPanel(controller,1,g);
+                        count = 0;
+                    }
+                    gl.hookController(loader.<GemEntry_Controller>getController());
+                    if (gl.gem.getGemName().equals("<empty group>")) {
+                        gl.start();
+                    } else {
+                        sgl.gpl.sg.linkGem(g, gl.id);
+                        gl.load();
                     }
 
-               // }
+                } catch (IOException ex) {
+                    Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                // }
             }
-        }else{
-            for(int gem_id : sgl.gpl.leftid){
+        } else {
+            for (int gem_id : sgl.gpl.leftid) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("gemEntry.fxml"));
                 try {
                     leftGemBox.getChildren().add(loader.load());
@@ -407,10 +403,10 @@ public class GemsPanel_Controller implements Initializable {
                     Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 sgl.gpl.gl_map.get(gem_id).hookController(loader.<GemEntry_Controller>getController());
-                //loader.setController(sgl.gpl.gl_map.get(gem_id).controller);
+                // loader.setController(sgl.gpl.gl_map.get(gem_id).controller);
                 sgl.gpl.gl_map.get(gem_id).load();
             }
-            for(int gem_id : sgl.gpl.rightid){
+            for (int gem_id : sgl.gpl.rightid) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("gemEntry.fxml"));
                 try {
                     rightGemBox.getChildren().add(loader.load());
@@ -418,166 +414,161 @@ public class GemsPanel_Controller implements Initializable {
                     Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 sgl.gpl.gl_map.get(gem_id).hookController(loader.<GemEntry_Controller>getController());
-                //loader.setController(sgl.gpl.gl_map.get(gem_id).controller);
+                // loader.setController(sgl.gpl.gl_map.get(gem_id).controller);
                 sgl.gpl.gl_map.get(gem_id).load();
             }
 
         }
-        
-        
-        
+
         SocketGroup sg = sgl.sg;
-        
-        if(sg.replaceGroup()){
+
+        if (sg.replaceGroup()) {
 
             untilLevelLabel.setVisible(true);
             untilLevelLabel2.setVisible(true);
             untilLevelSlider.setVisible(true);
             replaceGroup.setSelected(true);
             replaceGroupBox.setVisible(true);
-            //replaceGroupBox.getItems().addAll(GemsPanel_Controller.getReplaceableGroups(linker));
-            
-            if(sg.getGroupReplaced()!=null){
+            // replaceGroupBox.getItems().addAll(GemsPanel_Controller.getReplaceableGroups(linker));
+
+            if (sg.getGroupReplaced() != null) {
                 replaceGroupBox.setValue(sg.getGroupReplaced());
-                untilLevelLabel2.setText(sg.getGroupReplaced().getFromGroupLevel()+"");
-                //replaceGroupBox.getEditor().setText(sg.getGroupReplaced().getActiveGem().getGemName());
+                untilLevelLabel2.setText(sg.getGroupReplaced().getFromGroupLevel() + "");
+                // replaceGroupBox.getEditor().setText(sg.getGroupReplaced().getActiveGem().getGemName());
             }
-        }else{
-                replaceGroup.setSelected(false);
-                replaceGroupBox.setVisible(false);
-                untilLevelLabel.setVisible(false);
-                untilLevelLabel2.setVisible(false);
-                untilLevelSlider.setVisible(false);
+        } else {
+            replaceGroup.setSelected(false);
+            replaceGroupBox.setVisible(false);
+            untilLevelLabel.setVisible(false);
+            untilLevelLabel2.setVisible(false);
+            untilLevelSlider.setVisible(false);
         }
-        //activeSkillGroup.getItems().addAll(current_sgl.sg.getGems());
-        
+        // activeSkillGroup.getItems().addAll(current_sgl.sg.getGems());
+
         System.out.println("Im out");
-        if(sg.getActiveGem()!=null){
-        System.out.println("Now im in..");
+        if (sg.getActiveGem() != null) {
+            System.out.println("Now im in..");
             activeSkillGroup.setValue(sg.getActiveGem());
-            
+
             current_sgl.changeLabel();
-            for(GemLinker gl : current_sgl.gpl.gl_map.values()){
-                if(gl.gem.equals(sg.getActiveGem())){
+            for (GemLinker gl : current_sgl.gpl.gl_map.values()) {
+                if (gl.gem.equals(sg.getActiveGem())) {
                     current_sgl.gpl.setActiveLinker(gl);
                     break;
                 }
             }
-            //activeSkillGroup.getEditor().setText(sg.getActiveGem().getGemName());
+            // activeSkillGroup.getEditor().setText(sg.getActiveGem().getGemName());
         }
-        fromLevelSlider.setValue( sg.getFromGroupLevel());
-        fromLevelLabel.setText(sg.getFromGroupLevel()+"");
-        //lockClear = true;
-        untilLevelSlider.setValue( sg.getUntilGroupLevel());
+        fromLevelSlider.setValue(sg.getFromGroupLevel());
+        fromLevelLabel.setText(sg.getFromGroupLevel() + "");
+        // lockClear = true;
+        untilLevelSlider.setValue(sg.getUntilGroupLevel());
         lockClear = false;
 
     }
-    
-    private int findNextVBox(){
-        if(current_sgl.gpl.leftid.size()>current_sgl.gpl.rightid.size()){
+
+    private int findNextVBox() {
+        if (current_sgl.gpl.leftid.size() > current_sgl.gpl.rightid.size()) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
-    
+
     @FXML
-    private void addNote(){
+    private void addNote() {
         requestNotePopup();
     }
-    
+
     @FXML
-    private void duplicateGroup(){
-        //current_sgl.sg;
-        //sgc.duplicate(current_sgl);
+    private void duplicateGroup() {
+        // current_sgl.sg;
+        // sgc.duplicate(current_sgl);
     }
-    
-    @FXML 
-    private void addGemPanel(){
+
+    @FXML
+    private void addGemPanel() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gemEntry.fxml"));
         GemLinker gl = new GemLinker();
         current_sgl.gpl.gl_map.put(gl.hook(current_sgl.gpl), gl);
         gl.gem = GemHolder.getInstance().tossDummie();
-        if(findNextVBox() == 0){
-            try { 
+        if (findNextVBox() == 0) {
+            try {
                 leftGemBox.getChildren().add(loader.load());
-                current_sgl.gpl.loadGemPanel(0,gl.id);
-                } catch (IOException ex) {
-                    Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }else {
+                current_sgl.gpl.loadGemPanel(0, gl.id);
+            } catch (IOException ex) {
+                Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
             try {
                 rightGemBox.getChildren().add(loader.load());
-                current_sgl.gpl.loadGemPanel(1,gl.id);
-                } catch (IOException ex) {
-                    Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                current_sgl.gpl.loadGemPanel(1, gl.id);
+            } catch (IOException ex) {
+                Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         gl.hookController(loader.<GemEntry_Controller>getController());
         gl.start();
     }
-    
-    @FXML 
-    private void removeGemPanel(){
+
+    @FXML
+    private void removeGemPanel() {
         int vbox = -1;
-        if(current_sgl.gpl.leftid.contains(current_sgl.gpl.active_gemLinker)){
+        if (current_sgl.gpl.leftid.contains(current_sgl.gpl.active_gemLinker)) {
             vbox = 0;
-        }else if (current_sgl.gpl.rightid.contains(current_sgl.gpl.active_gemLinker)){
+        } else if (current_sgl.gpl.rightid.contains(current_sgl.gpl.active_gemLinker)) {
             vbox = 1;
         }
-        
-        if(vbox != -1){
+
+        if (vbox != -1) {
             GemLinker get = current_sgl.gpl.gl_map.get(current_sgl.gpl.active_gemLinker);
             GemEntry_Controller thisiswrong = get.controller;
-            removeGem(get.gem); //remove gem from socketGroup class
-            current_sgl.gpl.gl_map.remove(current_sgl.gpl.active_gemLinker);//let go of the GemLinker reference
-            //current.sgl//remove from the vbox lists
-            if(thisiswrong!=null){
-                if(vbox == 0){
+            removeGem(get.gem); // remove gem from socketGroup class
+            current_sgl.gpl.gl_map.remove(current_sgl.gpl.active_gemLinker);// let go of the GemLinker reference
+            // current.sgl//remove from the vbox lists
+            if (thisiswrong != null) {
+                if (vbox == 0) {
                     leftGemBox.getChildren().remove(thisiswrong.getRoot());
-                }else if(vbox == 1){
+                } else if (vbox == 1) {
                     rightGemBox.getChildren().remove(thisiswrong.getRoot());
                 }
             }
             removeGemPanel_button.setDisable(true);
 
-            //offset
-            if(vbox == 0){//if we removed an L.
-                //we need to check if the L's are smaller than R's.
-                
-                    current_sgl.gpl.removeVBox(vbox);
-                if(leftGemBox.getChildren().size()<rightGemBox.getChildren().size()){
-                    //in this case we need to offset the lowest R to become an L.
-                    leftGemBox.getChildren().add(
-                            rightGemBox.getChildren().remove(
-                                    rightGemBox.getChildren().size()-1));
-                    
+            // offset
+            if (vbox == 0) {// if we removed an L.
+                // we need to check if the L's are smaller than R's.
+
+                current_sgl.gpl.removeVBox(vbox);
+                if (leftGemBox.getChildren().size() < rightGemBox.getChildren().size()) {
+                    // in this case we need to offset the lowest R to become an L.
+                    leftGemBox.getChildren()
+                            .add(rightGemBox.getChildren().remove(rightGemBox.getChildren().size() - 1));
+
                     current_sgl.gpl.offsetVBox(vbox);
                 }
-            }else if(vbox == 1){ //if we removed an R
-                
-                    current_sgl.gpl.removeVBox(vbox);
-                //we need to check if the L's are bigger than R's by 2.
-                if(leftGemBox.getChildren().size()>rightGemBox.getChildren().size() + 1){
-                    //in this case we need to offset the lowest L to become an R.
-                    rightGemBox.getChildren().add(
-                            leftGemBox.getChildren().remove(
-                                    leftGemBox.getChildren().size()-1));
-                    
+            } else if (vbox == 1) { // if we removed an R
+
+                current_sgl.gpl.removeVBox(vbox);
+                // we need to check if the L's are bigger than R's by 2.
+                if (leftGemBox.getChildren().size() > rightGemBox.getChildren().size() + 1) {
+                    // in this case we need to offset the lowest L to become an R.
+                    rightGemBox.getChildren().add(leftGemBox.getChildren().remove(leftGemBox.getChildren().size() - 1));
+
                     current_sgl.gpl.offsetVBox(vbox);
                 }
             }
         }
     }
-    
-    @FXML 
-    private void toggleReplaceGroup(){
-        if(replaceGroup.isSelected()){
+
+    @FXML
+    private void toggleReplaceGroup() {
+        if (replaceGroup.isSelected()) {
             replaceGroupBox.setVisible(true);
             untilLevelLabel.setVisible(true);
             untilLevelLabel2.setVisible(true);
             untilLevelSlider.setVisible(true);
-        }else{
+        } else {
             replaceGroupBox.setVisible(false);
             untilLevelLabel.setVisible(false);
             untilLevelLabel2.setVisible(false);
@@ -585,207 +576,191 @@ public class GemsPanel_Controller implements Initializable {
             current_sgl.sg.setReplaceGroup(false);
         }
     }
-    
+
     @FXML
-    private void groupReplaceValueChanged(){
-        //this will prob change cuase of new combo box ><<<<<><><>
-        //Label selection = (Label)replaceGroupBox.getSelectionModel().getSelectedItem();
-        //String text = selection.getText();
-        if(!lockClear){
+    private void groupReplaceValueChanged() {
+        // this will prob change cuase of new combo box ><<<<<><><>
+        // Label selection =
+        // (Label)replaceGroupBox.getSelectionModel().getSelectedItem();
+        // String text = selection.getText();
+        if (!lockClear) {
             StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
             current_sgl.sg.setGroupReplaced(replaceGroupBox.getValue());
             current_sgl.sg.setReplaceGroup(true);
-            /*for(SocketGroupLinker sgl: linker){
-                if(sgl.sg.equals(replaceGroupBox.getValue())){
-                    sgl.sg.setReplacesGroup(true);
-                    sgl.sg.setGroupThatReplaces(current_sgl.sg);
-                }
-            }*/
-            groupSliderChange(current_sgl.sg.getGroupReplaced().getFromGroupLevel(),1);
+            /*
+             * for(SocketGroupLinker sgl: linker){
+             * if(sgl.sg.equals(replaceGroupBox.getValue())){ sgl.sg.setReplacesGroup(true);
+             * sgl.sg.setGroupThatReplaces(current_sgl.sg); } }
+             */
+            groupSliderChange(current_sgl.sg.getGroupReplaced().getFromGroupLevel(), 1);
             untilLevelSlider.setValue(current_sgl.sg.getGroupReplaced().getFromGroupLevel());
-            
+
         }
-        
+
         /*
-        for(SocketGroupLinker sgl : linker){
-            if(sgl.sg.getActiveGem().getGemName().equals(text)){
-                current_sgl.sg.setActiveGem(sgl.sg.getActiveGem());
-                current_sgl.sg.setReplaceGroup(true);
-                current_sgl.sg.setGroupReplaced(sgl.getSocketGroup());
-                break;
-            }
-        }*/
+         * for(SocketGroupLinker sgl : linker){
+         * if(sgl.sg.getActiveGem().getGemName().equals(text)){
+         * current_sgl.sg.setActiveGem(sgl.sg.getActiveGem());
+         * current_sgl.sg.setReplaceGroup(true);
+         * current_sgl.sg.setGroupReplaced(sgl.getSocketGroup()); break; } }
+         */
     }
-    
+
     @FXML
-    private void mainGemValueChanged(){
-            System.out.println("Triggered ! ");
-        //this will prob change cuase of new combo box ><<<<<><><>
-        //Label selection = (Label)activeSkillGroup.getSelectionModel().getSelectedItem();
-        //String text = selection.getText();
-        if(current_sgl.sg.getActiveGem() == null){
+    private void mainGemValueChanged() {
+        System.out.println("Triggered ! ");
+        // this will prob change cuase of new combo box ><<<<<><><>
+        // Label selection =
+        // (Label)activeSkillGroup.getSelectionModel().getSelectedItem();
+        // String text = selection.getText();
+        if (current_sgl.sg.getActiveGem() == null) {
             System.out.println("Active1: null");
-        }else{
-            System.out.println("Active1: "+current_sgl.sg.getActiveGem().toString());
+        } else {
+            System.out.println("Active1: " + current_sgl.sg.getActiveGem().toString());
         }
-        if(!lockClear)
+        if (!lockClear)
             current_sgl.sg.setActiveGem(activeSkillGroup.getValue());
-        if(current_sgl.sg.getActiveGem() == null){
+        if (current_sgl.sg.getActiveGem() == null) {
             System.out.println("Active2: null");
-        }else{
-            System.out.println("Active2: "+current_sgl.sg.getActiveGem().toString());
+        } else {
+            System.out.println("Active2: " + current_sgl.sg.getActiveGem().toString());
         }
-        //activeSkillGroup.
-        if(!lockClear){
-            for(GemLinker gl : current_sgl.gpl.gl_map.values()){
-                if(gl.gem.equals(current_sgl.sg.getActiveGem())){
+        // activeSkillGroup.
+        if (!lockClear) {
+            for (GemLinker gl : current_sgl.gpl.gl_map.values()) {
+                if (gl.gem.equals(current_sgl.sg.getActiveGem())) {
                     current_sgl.gpl.setActiveLinker(gl);
                     break;
                 }
             }
             current_sgl.changeLabel();
-            groupSliderChange(current_sgl.sg.getActiveGem().getLevelAdded(),0);
+            groupSliderChange(current_sgl.sg.getActiveGem().getLevelAdded(), 0);
             fromLevelSlider.setValue(current_sgl.sg.getActiveGem().getLevelAdded());
-            if(current_sgl.sg.replaceGroup()){
-                groupSliderChange(current_sgl.sg.getGroupReplaced().getFromGroupLevel(),1);
+            if (current_sgl.sg.replaceGroup()) {
+                groupSliderChange(current_sgl.sg.getGroupReplaced().getFromGroupLevel(), 1);
                 untilLevelSlider.setValue(current_sgl.sg.getGroupReplaced().getFromGroupLevel());
             }
         }
         /*
-        for(Gem g : current_sgl.sg.getGems()){
-            if(g.getGemName().equals(text)){
-                current_sgl.sg.setActiveGem(g);
-                activeSkillGroup.getEditor().setText(text);
-                current_sgl.generateLabel();
-                break;
-            }
-        }*/
+         * for(Gem g : current_sgl.sg.getGems()){ if(g.getGemName().equals(text)){
+         * current_sgl.sg.setActiveGem(g); activeSkillGroup.getEditor().setText(text);
+         * current_sgl.generateLabel(); break; } }
+         */
     }
-    
-    private void groupSliderChange(int newValue, int code){
-        if(code == 0){
+
+    private void groupSliderChange(int newValue, int code) {
+        if (code == 0) {
             current_sgl.sg.setFromGroupLevel(newValue);
-            fromLevelLabel.setText(current_sgl.sg.getFromGroupLevel()+"");
-            if(current_sgl.sg.getActiveGem()!=null){
+            fromLevelLabel.setText(current_sgl.sg.getFromGroupLevel() + "");
+            if (current_sgl.sg.getActiveGem() != null) {
                 current_sgl.sg.getActiveGem().level_added = newValue;
                 System.out.println("current Main testing :");
-                if(current_sgl.gpl.currentMain!=null){
+                if (current_sgl.gpl.currentMain != null) {
                     System.out.println("entered this time :");
                     current_sgl.gpl.currentMain.controller.groupLevelChanged(newValue);
                 }
             }
             untilLevelSlider.setMin(newValue);
-            if(untilLevelSlider.getValue()<=newValue){
-                untilLevelSlider.setValue(newValue+1);
+            if (untilLevelSlider.getValue() <= newValue) {
+                untilLevelSlider.setValue(newValue + 1);
             }
-            untilLevelLabel2.setText((newValue+1)+"");
-        }else if(code == 1){
+            untilLevelLabel2.setText((newValue + 1) + "");
+        } else if (code == 1) {
             current_sgl.sg.setUntilGroupLevel(newValue);
-            untilLevelLabel2.setText(newValue+"");
+            untilLevelLabel2.setText(newValue + "");
         }
     }
-    
-    //this is probably when u select  a new gem from the list
-    public void gemUpdate(Gem gem, int id){
-        
-        Gem old = current_sgl.sg.putGem(gem,id);
-        if(old!=null){
-            
+
+    // this is probably when u select a new gem from the list
+    public void gemUpdate(Gem gem, int id) {
+
+        Gem old = current_sgl.sg.putGem(gem, id);
+        if (old != null) {
+
             activeSkillGroup.getItems().clear();
             activeSkillGroup.getItems().addAll(current_sgl.sg.getGems());
-            
-            //if it was an active gem.
+
+            // if it was an active gem.
             current_sgl.sg.setActiveGem(gem);
             activeSkillGroup.setValue(gem);
             current_sgl.changeLabel();
             /*
-            for(SocketGroupLinker a : linker){
-                if(a.sg.replaceGroup()){
-                    if(a.sg.getGroupReplaced().getActiveGem().equals(old))//if another group replaces with this one
-                        a.sg.setActiveGem(gem);
-                }
-            }
-            current_sgl.sg.setActiveGem(gem);
-            activeSkillGroup.setValue(gem);
-            current_sgl.changeLabel();*/
-        }else{
+             * for(SocketGroupLinker a : linker){ if(a.sg.replaceGroup()){
+             * if(a.sg.getGroupReplaced().getActiveGem().equals(old))//if another group
+             * replaces with this one a.sg.setActiveGem(gem); } }
+             * current_sgl.sg.setActiveGem(gem); activeSkillGroup.setValue(gem);
+             * current_sgl.changeLabel();
+             */
+        } else {
             int change = current_sgl.sg.doubleCheck();
-            if(change!=-1)
+            if (change != -1)
                 activeSkillGroup.getItems().set(change, gem);
             else
                 activeSkillGroup.getItems().add(gem);
         }
         /*
-        if(current_sgl.sg.getActiveGem() == null){
-            System.out.println("Active: null");
-        }else{
-            
-        System.out.println("Active: "+current_sgl.sg.getActiveGem().toString());
-        }*/
-        //activeSkillGroup.setItems(GemsPanel_Controller.getMainGems(current_sgl.sg));
+         * if(current_sgl.sg.getActiveGem() == null){
+         * System.out.println("Active: null"); }else{
+         * 
+         * System.out.println("Active: "+current_sgl.sg.getActiveGem().toString()); }
+         */
+        // activeSkillGroup.setItems(GemsPanel_Controller.getMainGems(current_sgl.sg));
     }
-    
-    //this is when you actually delete the gem panel?
-    public void removeGem(Gem gem){
-        
-        
-        
-        if(current_sgl.sg.getActiveGem()!=null){
-            if(current_sgl.sg.getActiveGem().equals(gem)){
 
-                for(SocketGroupLinker a : linker){
-                    if(a.sg.replaceGroup()){
-                        if(a.sg.getGroupReplaced().equals(current_sgl.sg))//if another group replaces with this one
+    // this is when you actually delete the gem panel?
+    public void removeGem(Gem gem) {
+
+        if (current_sgl.sg.getActiveGem() != null) {
+            if (current_sgl.sg.getActiveGem().equals(gem)) {
+
+                for (SocketGroupLinker a : linker) {
+                    if (a.sg.replaceGroup()) {
+                        if (a.sg.getGroupReplaced().equals(current_sgl.sg))// if another group replaces with this one
                             a.sg.setReplaceGroup(false);
                     }
                 }
             }
         }
-        
 
-        
         current_sgl.sg.getGems().remove(gem);
         activeSkillGroup.getItems().remove(gem);
 
-        //activeSkillGroup.setItems(GemsPanel_Controller.getMainGems(current_sgl.sg));
+        // activeSkillGroup.setItems(GemsPanel_Controller.getMainGems(current_sgl.sg));
         /*
-        if(current_sgl.sg.getActiveGem().getGemName()
-                .equals(gem.getGemName())){
-            activeSkillGroup.getSelectionModel().clearSelection();
-            current_sgl.sg.setActiveGem(null);
-            activeSkillGroup.getEditor().setText("");
-            current_sgl.generateLabel();
-        }*/
-        
-                        
-        for(Gem g : current_sgl.sg.getGems()){
-            if(g.replaced){
-                if(g.replacedWith.equals(gem)){
+         * if(current_sgl.sg.getActiveGem().getGemName() .equals(gem.getGemName())){
+         * activeSkillGroup.getSelectionModel().clearSelection();
+         * current_sgl.sg.setActiveGem(null); activeSkillGroup.getEditor().setText("");
+         * current_sgl.generateLabel(); }
+         */
+
+        for (Gem g : current_sgl.sg.getGems()) {
+            if (g.replaced) {
+                if (g.replacedWith.equals(gem)) {
                     g.replaced = false;
                     g.replacedWith = null;
                     updateAllComboBox();
                     break;
                 }
             }
-            
+
         }
     }
-    
-    public void updateAllComboBox(){
-        for(GemLinker  gl : current_sgl.gpl.gl_map.values()){
+
+    public void updateAllComboBox() {
+        for (GemLinker gl : current_sgl.gpl.gl_map.values()) {
             gl.controller.updateComboBox();
         }
     }
-    
-    public void hidePanel(){
+
+    public void hidePanel() {
         rootPane.setVisible(false);
     }
-    
-    public void levelChanged(int level){
-        groupSliderChange(level,0);
+
+    public void levelChanged(int level) {
+        groupSliderChange(level, 0);
         fromLevelSlider.setValue(level);
     }
-    
+
     /**
      * Initializes the controller class.
      */
@@ -793,24 +768,24 @@ public class GemsPanel_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         rootPane.setVisible(false);
-        
+
         fromLevelSlider.valueProperty().addListener(new ChangeListener() {
 
             @Override
             public void changed(ObservableValue arg0, Object arg1, Object arg2) {
-               groupSliderChange((int)fromLevelSlider.getValue(),0);
+                groupSliderChange((int) fromLevelSlider.getValue(), 0);
 
             }
         });
-        
+
         untilLevelSlider.valueProperty().addListener(new ChangeListener() {
 
             @Override
             public void changed(ObservableValue arg0, Object arg1, Object arg2) {
-               groupSliderChange((int)untilLevelSlider.getValue(),1);
+                groupSliderChange((int) untilLevelSlider.getValue(), 1);
 
             }
         });
-    }    
-    
+    }
+
 }

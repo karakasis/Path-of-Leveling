@@ -1,23 +1,12 @@
 package poe.level.data;
+
 import java.util.ArrayList;
 
 public class Zone {
-    public static String[] questline = new String[]{
-        "Enemy at the Gate",
-        "Mercy Mission",
-        "Breaking Some Eggs",
-        "The Caged Brute",
-        "The Siren's Cadence",
-        "Intruders in Black",
-        "Sharp and Cruel",
-        "The Root of the Problem",
-        "Lost in Love",
-        "Sever the Right Hand",
-        "A Fixture of Fate",
-        "Breaking the Seal",
-        "The Eternal Nightmare",
-        "Fallen from Grace"
-        };
+    public static String[] questline = new String[] { "Enemy at the Gate", "Mercy Mission", "Breaking Some Eggs",
+            "The Caged Brute", "The Siren's Cadence", "Intruders in Black", "Sharp and Cruel",
+            "The Root of the Problem", "Lost in Love", "Sever the Right Hand", "A Fixture of Fate", "Breaking the Seal",
+            "The Eternal Nightmare", "Fallen from Grace" };
     int level;
     String name;
     public boolean hasPassive;
@@ -30,43 +19,42 @@ public class Zone {
     String actName;
     int actID;
 
-    public Zone(String zoneName, int zoneLevel, ArrayList<String> images, String altimage
-            , String note, boolean hasPassive, boolean hasTrial , String quest ,boolean questRewardsSkills
-            , String actName, int actID){
+    public Zone(String zoneName, int zoneLevel, ArrayList<String> images, String altimage, String note,
+            boolean hasPassive, boolean hasTrial, String quest, boolean questRewardsSkills, String actName, int actID) {
         this.level = zoneLevel;
         this.name = zoneName;
         this.hasPassive = hasPassive;
         this.hasTrial = hasTrial;
         this.note = note;
         this.altimage = altimage;
-        this.image = images; //maybe new list
-        this.quest= quest;
+        this.image = images; // maybe new list
+        this.quest = quest;
         this.questRewardsSkills = questRewardsSkills;
         this.actName = actName;
         this.actID = actID;
     }
-    
-    public int getZoneLevel(){
+
+    public int getZoneLevel() {
         return level;
     }
-    
-    public String getZoneQuest(){
+
+    public String getZoneQuest() {
         return quest;
     }
-    
-    public ArrayList<String> getImages(){
+
+    public ArrayList<String> getImages() {
         return image;
     }
-    
-    public String getActName(){
+
+    public String getActName() {
         return actName;
     }
-    
-    public String getZoneNote(){
+
+    public String getZoneNote() {
         return note;
     }
-    
-    public String altImage(){
+
+    public String altImage() {
         return altimage;
     }
 }

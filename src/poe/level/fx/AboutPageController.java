@@ -30,6 +30,7 @@ public class AboutPageController implements Initializable {
     Hyperlink arias;
     @FXML
     Hyperlink rainy;
+
     /**
      * Initializes the controller class.
      */
@@ -54,9 +55,9 @@ public class AboutPageController implements Initializable {
                 openWebpage("https://github.com/karakasis");
             }
         });
-        
-    }    
-    
+
+    }
+
     public void openWebpage(String urlString) {
         try {
             Desktop.getDesktop().browse(new URL(urlString).toURI());
@@ -64,10 +65,10 @@ public class AboutPageController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
     @FXML
-    private void paypal(){
+    private void paypal() {
         openWebpage("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XKQ7R4AWWVFR4");
     }
-    
+
 }

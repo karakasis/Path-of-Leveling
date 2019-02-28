@@ -22,27 +22,28 @@ public class GemButton_Controller implements Initializable {
 
     @FXML
     private JFXButton gemButton;
-    
+
     private Gem gem;
     private QuestSplitPanel_Controller parent;
+
     /**
      * Initializes the controller class.
      */
-    public void load(Gem g,QuestSplitPanel_Controller parent){
+    public void load(Gem g, QuestSplitPanel_Controller parent) {
         this.parent = parent;
         gem = g;
         gemButton.setGraphic(new ImageView(g.gemIcon));
         gemButton.setText(g.getGemName());
     }
-    
+
     @FXML
-    private void gemClick(){
+    private void gemClick() {
         parent.callback(gem);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

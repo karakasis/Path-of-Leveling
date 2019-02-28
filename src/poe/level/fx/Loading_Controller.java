@@ -23,17 +23,18 @@ public class Loading_Controller implements Initializable {
     private JFXProgressBar progressbar;
     @FXML
     private Label label;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-    public void notify(Double prog){
-        progressbar.setProgress(prog/100.0);
+    }
+
+    public void notify(Double prog) {
+        progressbar.setProgress(prog / 100.0);
         label.setText(prog.intValue() + " %");
     }
-    
+
 }

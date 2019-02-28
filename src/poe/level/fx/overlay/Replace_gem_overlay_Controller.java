@@ -31,28 +31,29 @@ public class Replace_gem_overlay_Controller implements Initializable {
     @FXML
     private Label gemRemovedName;
     @FXML
-    private Label quest;//scaffed names
+    private Label quest;// scaffed names
     @FXML
     private Label npc;
     @FXML
     private Label act;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-    public void load(Gem add, Gem remove, Gem sg){
+    }
+
+    public void load(Gem add, Gem remove, Gem sg) {
         sgImage.setImage(sg.getIcon());
         gemAddedImage.setImage(add.getIcon());
         gemRemovedImage.setImage(remove.getIcon());
         gemAddedName.setText(add.getGemName());
         gemRemovedName.setText(remove.getGemName());
         quest.setText("Quest: " + add.quest_name);
-        npc.setText("NPC: "+add.npc);
+        npc.setText("NPC: " + add.npc);
         act.setText("Act " + add.act);
     }
-    
+
 }

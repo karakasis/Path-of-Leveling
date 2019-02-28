@@ -26,61 +26,61 @@ public class CharacterInfo_Controller implements Initializable {
     private TextField level;
     @FXML
     private Label error;
-    
+
     private Main_Controller root;
-    
-    public void hook(Main_Controller root){
+
+    public void hook(Main_Controller root) {
         this.root = root;
     }
-    
-    public void init(Build build){
-        if(build.characterName.equals("")){
+
+    public void init(Build build) {
+        if (build.characterName.equals("")) {
             name.setPromptText("Your in-game character name.");
-        }else{
+        } else {
             name.setPromptText("");
             name.setText(build.characterName);
         }
-        
-        if(build.level == -1){
+
+        if (build.level == -1) {
             level.setPromptText("The level of your character.");
-        }else{
+        } else {
             level.setPromptText("");
-            level.setText(build.level+"");
+            level.setText(build.level + "");
         }
     }
-    
+
     @FXML
-    private void start(){
+    private void start() {
         error.setVisible(false);
         boolean start = true;
         int parseInt = 1;
-        try{
+        try {
             parseInt = Integer.parseInt(level.getText());
-            if(parseInt > 100 || parseInt <=0){
+            if (parseInt > 100 || parseInt <= 0) {
                 throw new NumberFormatException();
             }
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             error.setText("Character Level is invalid.");
             error.setVisible(true);
             start = false;
         }
-        
-        if(name.getText().equals("")){
+
+        if (name.getText().equals("")) {
             name.setPromptText("Your in-game character name.");
             start = false;
         }
-        
-        if(start){
+
+        if (start) {
             root.closeCharacterPopup(name.getText(), parseInt);
         }
     }
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

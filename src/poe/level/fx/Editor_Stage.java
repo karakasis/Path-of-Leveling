@@ -18,24 +18,24 @@ import javafx.stage.StageStyle;
  *
  * @author Christos
  */
-public class Editor_Stage extends Stage{
-    
+public class Editor_Stage extends Stage {
+
     POELevelFx parent;
     MainApp_Controller editor_controller;
-    
-    public Editor_Stage(POELevelFx parent){
+
+    public Editor_Stage(POELevelFx parent) {
         this.parent = parent;
         this.launcher();
-        
+
         this.setOnCloseRequest(event -> {
-            if(!editor_controller.custom_editor_exit_with_validate()){
+            if (!editor_controller.custom_editor_exit_with_validate()) {
                 event.consume();
             }
-            //System.exit(40);
+            // System.exit(40);
         });
     }
-    
-    public void launcher(){
+
+    public void launcher() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainApp.fxml"));
         StackPane sp = null;
         try {
@@ -48,11 +48,11 @@ public class Editor_Stage extends Stage{
         Scene scene = new Scene(sp);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         this.setScene(scene);
-        
+
         this.show();
     }
-    
-    public void returnToLauncher(){
+
+    public void returnToLauncher() {
         parent.launcher();
     }
 }

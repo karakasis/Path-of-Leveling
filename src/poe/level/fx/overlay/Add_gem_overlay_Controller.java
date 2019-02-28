@@ -33,16 +33,16 @@ public class Add_gem_overlay_Controller implements Initializable {
     private Label npc;
     @FXML
     private Label act;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-    public void load(Gem add, Gem sg){
+    }
+
+    public void load(Gem add, Gem sg) {
         gemAddedImage.setImage(add.getIcon());
         socketGroupImage.setImage(sg.getIcon());
         gemAddedName.setText(add.getGemName());

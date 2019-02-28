@@ -24,27 +24,26 @@ public class POB_webviewController implements Initializable {
 
     @FXML
     private WebView pob;
-    
-    public void open(String url){
-        //final WebEngine webEngine = pob.getEngine();
+
+    public void open(String url) {
+        // final WebEngine webEngine = pob.getEngine();
         WebEngine engine = pob.getEngine();
         engine.load(url);
         /*
-        Hyperlink hpl = new Hyperlink(url);
-        
-        hpl.setOnAction(new EventHandler<ActionEvent>() {
-          @Override public void handle(ActionEvent e) {
-              webEngine.load(url);
-          }
-      });*/
+         * Hyperlink hpl = new Hyperlink(url);
+         * 
+         * hpl.setOnAction(new EventHandler<ActionEvent>() {
+         * 
+         * @Override public void handle(ActionEvent e) { webEngine.load(url); } });
+         */
     }
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

@@ -25,58 +25,58 @@ import javafx.stage.StageStyle;
  * @author Christos
  */
 public class UpdatePreloader extends Preloader {
-    
+
     ProgressBar bar;
     Stage stage;
     UpdaterController controller;
-    
+
     private Scene createPreloaderScene() {
-       bar = new ProgressBar();
-        //BorderPane p = new BorderPane();
+        bar = new ProgressBar();
+        // BorderPane p = new BorderPane();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("updater.fxml"));
         AnchorPane p = null;
         try {
             p = loader.load();
-            
+
         } catch (IOException ex) {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        //at this point this class has done enough, and we need to contact with the 
-        //appropriate controllers.
+
+        // at this point this class has done enough, and we need to contact with the
+        // appropriate controllers.
         controller = loader.<UpdaterController>getController();
-        return new Scene(p);           
+        return new Scene(p);
     }
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(createPreloaderScene());        
+        stage.setScene(createPreloaderScene());
         stage.show();
     }
-    
+
     @Override
     public void handleStateChangeNotification(StateChangeNotification scn) {
         if (scn.getType() == StateChangeNotification.Type.BEFORE_START) {
             stage.hide();
         }
     }
-    
+
     @Override
     public void handleProgressNotification(ProgressNotification pn) {
-        //System.out.println(pn.getProgress());
-        //controller.notify(pn.getProgress());
-        //bar.setProgress(pn.getProgress());
-    }    
-    
+        // System.out.println(pn.getProgress());
+        // controller.notify(pn.getProgress());
+        // bar.setProgress(pn.getProgress());
+    }
+
     @Override
-   public void handleApplicationNotification(PreloaderNotification arg0) {
-          
-          if (arg0 instanceof ProgressNotification) {
-             ProgressNotification pn= (ProgressNotification) arg0;
-                controller.notify(pn.getProgress());
-          }
-    }   
-    
+    public void handleApplicationNotification(PreloaderNotification arg0) {
+
+        if (arg0 instanceof ProgressNotification) {
+            ProgressNotification pn = (ProgressNotification) arg0;
+            controller.notify(pn.getProgress());
+        }
+    }
+
 }

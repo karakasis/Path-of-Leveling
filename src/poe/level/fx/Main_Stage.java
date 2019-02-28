@@ -24,20 +24,20 @@ import poe.level.fx.overlay.ZoneOverlay_Stage;
  *
  * @author Christos
  */
-public class Main_Stage extends Stage{
-    
+public class Main_Stage extends Stage {
+
     Main_Controller controller;
     POELevelFx parent;
     public static Build buildLoaded;
     public static int playerLevel;
     public static String characterName;
-    
-    public Main_Stage(POELevelFx parent){
+
+    public Main_Stage(POELevelFx parent) {
         this.parent = parent;
         this.launcher();
     }
- 
-    public void launcher(){
+
+    public void launcher() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
         StackPane sp = null;
         try {
@@ -46,32 +46,31 @@ public class Main_Stage extends Stage{
             Logger.getLogger(Main_Stage.class.getName()).log(Level.SEVERE, null, ex);
         }
         controller = loader.<Main_Controller>getController();
-        
+
         Scene scene = new Scene(sp);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         scene.setFill(Color.TRANSPARENT);
 
-
         this.setScene(scene);
         this.setAlwaysOnTop(true);
         this.initStyle(StageStyle.TRANSPARENT);
-        
+
         controller.hookStage(this);
-        
+
         this.show();
     }
-    
-    public void editor(){
+
+    public void editor() {
         parent.editor();
     }
-    
-    public void start(boolean zone, boolean xp, boolean level){
-        parent.start(zone,xp,level);
+
+    public void start(boolean zone, boolean xp, boolean level) {
+        parent.start(zone, xp, level);
     }
-    
-    public void closeApp(){
+
+    public void closeApp() {
         System.exit(30);
-        //parent.close();
+        // parent.close();
     }
 
 }

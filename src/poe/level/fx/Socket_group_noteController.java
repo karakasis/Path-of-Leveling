@@ -24,13 +24,13 @@ public class Socket_group_noteController implements Initializable {
     private String note;
     @FXML
     private TextArea note_area;
-    
-    public void start(SocketGroupsPanel_Controller parent, String note){
+
+    public void start(SocketGroupsPanel_Controller parent, String note) {
         this.parent = parent;
         this.note = note;
         note_area.setText(note);
     }
-    
+
     /**
      * Initializes the controller class.
      */
@@ -39,12 +39,13 @@ public class Socket_group_noteController implements Initializable {
         // TODO
         note_area.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+            public void changed(final ObservableValue<? extends String> observable, final String oldValue,
+                    final String newValue) {
                 // this will run whenever text is changed
-                note= newValue;
+                note = newValue;
                 parent.noteChange(newValue);
             }
-});
-    }    
-    
+        });
+    }
+
 }

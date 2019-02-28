@@ -17,21 +17,20 @@ import javafx.stage.Stage;
  *
  * @author Christos
  */
-public class UpdaterStage extends Stage{
-    
-    
+public class UpdaterStage extends Stage {
+
     POELevelFx parent;
     MainApp_Controller editor_controller;
-    
-    public UpdaterStage(){
+
+    public UpdaterStage() {
         this.launcher();
-        
+
         this.setOnCloseRequest(event -> {
             System.exit(50);
         });
     }
-    
-    public void launcher(){
+
+    public void launcher() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UpdateFinished.fxml"));
         StackPane sp = null;
         try {
@@ -42,10 +41,8 @@ public class UpdaterStage extends Stage{
         Scene scene = new Scene(sp);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         this.setScene(scene);
-        
+
         this.show();
     }
-    
-}
-    
 
+}
