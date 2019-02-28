@@ -5,16 +5,10 @@
  */
 package poe.level.data;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
+
 import javafx.application.Platform;
-import javafx.stage.Stage;
 import poe.level.fx.Main_Stage;
 import poe.level.fx.Preferences_Controller;
 import poe.level.fx.overlay.GemOverlay_Stage;

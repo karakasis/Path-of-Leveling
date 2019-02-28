@@ -14,6 +14,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ResourceBundle;
+
+import javax.imageio.ImageIO;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,11 +26,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
-import javax.imageio.ImageIO;
 import poe.level.data.Build;
 import poe.level.data.Gem;
 import poe.level.data.SocketGroup;
-import poe.level.data.Zone;
 
 /**
  * FXML Controller class

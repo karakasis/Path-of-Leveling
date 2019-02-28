@@ -5,9 +5,12 @@
  */
 package poe.level.fx.overlay;
 
+import static poe.level.fx.POELevelFx.saveBuildsToMemory;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -16,20 +19,16 @@ import javafx.beans.value.WritableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import poe.level.data.Controller;
 import poe.level.data.Zone;
-import static poe.level.fx.POELevelFx.saveBuildsToMemory;
 import poe.level.fx.Preferences_Controller;
 
 /**

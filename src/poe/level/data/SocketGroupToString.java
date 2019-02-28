@@ -6,6 +6,7 @@
 package poe.level.data;
 
 import java.util.HashMap;
+
 import javafx.util.StringConverter;
 
 /**

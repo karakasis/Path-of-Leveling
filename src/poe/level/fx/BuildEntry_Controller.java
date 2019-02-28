@@ -7,7 +7,7 @@ package poe.level.fx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import poe.level.fx.BuildsPanel_Controller.BuildLinker;
 
 /**

@@ -7,13 +7,15 @@ package poe.level.fx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.besaba.revonline.pastebinapi.Pastebin;
+import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
+import com.besaba.revonline.pastebinapi.response.Response;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import com.besaba.revonline.pastebinapi.*;
-import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
-import com.besaba.revonline.pastebinapi.response.Response;
 
 /**
  * FXML Controller class

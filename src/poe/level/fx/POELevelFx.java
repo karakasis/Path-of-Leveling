@@ -5,7 +5,6 @@
  */
 package poe.level.fx;
 
-import com.sun.javafx.application.LauncherImpl;
 import java.awt.AWTException;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
@@ -13,7 +12,6 @@ import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -33,39 +31,34 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.sun.javafx.application.LauncherImpl;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
-import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeHookException;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import poe.level.data.Act;
 import poe.level.data.ActHandler;
 import poe.level.data.Build;
@@ -75,10 +68,6 @@ import poe.level.data.Gem.Info;
 import poe.level.data.GemHolder;
 import poe.level.data.SocketGroup;
 import poe.level.data.Zone;
-import static poe.level.fx.Preferences_Controller.zones_images_toggle;
-import static poe.level.fx.Preferences_Controller.zones_passive_toggle;
-import static poe.level.fx.Preferences_Controller.zones_text_toggle;
-import static poe.level.fx.Preferences_Controller.zones_trial_toggle;
 import poe.level.keybinds.GlobalKeyListener;
 
 /**

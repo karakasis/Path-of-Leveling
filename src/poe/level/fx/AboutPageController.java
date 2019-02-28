@@ -5,10 +5,12 @@
  */
 package poe.level.fx;
 
-import com.jfoenix.controls.JFXButton;
 import java.awt.Desktop;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

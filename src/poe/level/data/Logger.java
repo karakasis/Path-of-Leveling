@@ -1,7 +1,11 @@
 package poe.level.data;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * A log file tailer is designed to monitor a log file and send notifications

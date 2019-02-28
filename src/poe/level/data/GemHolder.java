@@ -9,16 +9,15 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import poe.level.data.Gem.Info;
-import poe.level.fx.BuildsPanel_Controller;
 import poe.level.fx.POELevelFx;
 
 /**

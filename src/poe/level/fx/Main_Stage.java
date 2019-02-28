@@ -5,20 +5,17 @@
  */
 package poe.level.fx;
 
-import com.jfoenix.controls.JFXDialog;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import poe.level.data.Build;
-import poe.level.fx.overlay.ZoneOverlay_Controller;
-import poe.level.fx.overlay.ZoneOverlay_Stage;
 
 /**
  *

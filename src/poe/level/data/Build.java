@@ -7,8 +7,6 @@ package poe.level.data;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  *
