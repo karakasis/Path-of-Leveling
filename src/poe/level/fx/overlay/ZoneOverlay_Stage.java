@@ -27,7 +27,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import poe.level.data.Controller;
 import poe.level.data.Zone;
 import poe.level.fx.Preferences_Controller;
 
@@ -37,7 +36,6 @@ import poe.level.fx.Preferences_Controller;
  */
 public class ZoneOverlay_Stage extends Stage {
 
-    private Controller parent;
     private boolean isVisible;
     public static double prefX;
     public static double prefY;
@@ -70,11 +68,6 @@ public class ZoneOverlay_Stage extends Stage {
             }
             System.exit(10);
         });
-    }
-
-    public void hookController(Controller c) {
-        parent = c;
-
     }
 
     public void queue(Zone currentZone) {

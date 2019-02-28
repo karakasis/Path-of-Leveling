@@ -46,8 +46,6 @@ public class ZoneOverlay_Controller implements Initializable {
     @FXML
     private ImageView trial;
 
-    private double initialX;
-    private double initialY;
     private Label cacheLabel;
     private Label cacheLabelAlt;
 
@@ -106,8 +104,6 @@ public class ZoneOverlay_Controller implements Initializable {
             } else {
                 for (String s : zone.getImages()) {
                     try {
-                        // img = ImageIO.read(getClass().getResource("/zones/"+zone.getActName()+" -
-                        // Overlay/"+s+".png"));
                         img = ImageIO.read(getClass().getResource("/zones/" + zone.getActName() + "/" + s + ".png"));
                         System.out.println("Loaded image.");
                         Image iv = SwingFXUtils.toFXImage(img, null);

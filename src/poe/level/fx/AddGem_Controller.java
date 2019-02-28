@@ -105,7 +105,6 @@ public class AddGem_Controller implements Initializable {
                     }
                 }
             }
-
         }
 
         if (zoneFound == null) {

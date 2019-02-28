@@ -31,28 +31,17 @@ public class GlobalKeyListener implements NativeKeyListener {
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent e) {
-        // System.out.println("Key Pressed: " +
-        // NativeKeyEvent.getKeyText(e.getKeyCode()));
         mapper.add(e.getKeyCode());
-        String input = "Key Pressed: ";
-        for (Integer a : mapper) {
-            input += "+ " + NativeKeyEvent.getKeyText(a);
-        }
-        // System.out.println(input);
         handle();
     }
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent e) {
         mapper.remove(e.getKeyCode());
-        // System.out.println("Key Released: " +
-        // NativeKeyEvent.getKeyText(e.getKeyCode()));
     }
 
     @Override
     public void nativeKeyTyped(NativeKeyEvent e) {
-        // System.out.println("Key Typed: " +
-        // NativeKeyEvent.getKeyText(e.getKeyCode()));
     }
 
     public void handle() {

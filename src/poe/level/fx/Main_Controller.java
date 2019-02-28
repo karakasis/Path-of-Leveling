@@ -8,7 +8,6 @@ package poe.level.fx;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +25,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -133,22 +131,6 @@ public class Main_Controller implements Initializable {
             }
 
         }
-    }
-
-    public int temp_alert() {
-        TextInputDialog dialog = new TextInputDialog("walter");
-        dialog.setTitle("Temporary level check");
-        dialog.setContentText("Enter the level of this character:");
-
-        dialog.initOwner(parent);
-        // Traditional way to get the response value.
-        Optional<String> result = dialog.showAndWait();
-        if (result.isPresent()) {
-            System.out.println("Your name: " + result.get());
-        }
-        return Integer.parseInt(result.get());
-        // The Java 8 way to get the response value (with lambda expression).
-        // result.ifPresent(name -> System.out.println("Your name: " + name));
     }
 
     @FXML

@@ -8,7 +8,6 @@ package poe.level.fx;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,7 +15,6 @@ import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXDialog;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,7 +28,6 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import poe.level.data.Build;
 
 /**
  *
@@ -71,18 +68,6 @@ public class MainApp_Controller implements Initializable {
     JFXDialog addGemPopup;
     JFXDialog buildPreviewPopup;
 
-    // Controllers
-
-    String build;
-    String className;
-    String ascendancy;
-    ObservableList<Build> buildList;
-    HashMap<BuildEntry_Controller, ObservableList<Label>> buildToSocketGroupMap;
-
-    int count;
-    int buildId;
-    int socketGroupId;
-
     BuildsPanel_Controller buildspanel_controller;
     SocketGroupsPanel_Controller socketgroups_controller;
     GemsPanel_Controller gemspanel_controller;
@@ -94,8 +79,6 @@ public class MainApp_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        buildToSocketGroupMap = new HashMap<>();
         // option to reload builds from memory on start
         POELevelFx.reloadBuilds();
         // inflate buildspanel
@@ -181,26 +164,6 @@ public class MainApp_Controller implements Initializable {
     }
 
     public void gemClosePopup() {
-        addGemPopup.close();
-    }
-
-    public Socket_group_noteController notePopup() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("socket_group_note.fxml"));
-        AnchorPane con = null;
-        try {
-            con = (AnchorPane) loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Socket_group_noteController controller = loader.<Socket_group_noteController>getController();
-
-        addGemPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
-        // controller.passDialog(mLoad);
-        addGemPopup.show();
-        return controller;
-    }
-
-    public void noteClosePopup() {
         addGemPopup.close();
     }
 
@@ -333,7 +296,6 @@ public class MainApp_Controller implements Initializable {
     }
 
     Pastebin_import_Controller paste_controller;
-    Pastebin_import_pobController paste_pob_controller;
 
     @FXML
     private void importFromPastebin() {

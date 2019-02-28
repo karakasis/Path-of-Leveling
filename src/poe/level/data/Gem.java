@@ -25,7 +25,6 @@ public class Gem {
         public String quest_name;
         public String npc;
         public int act;
-        public String town;
         public ArrayList<String> available_to;
     }
 
@@ -145,10 +144,6 @@ public class Gem {
 
     public ArrayList<String> getChar() {
         return available_to;
-    }
-
-    public void putChar(String z) {
-        available_to.add(z);
     }
 
     public String getGemColor() {

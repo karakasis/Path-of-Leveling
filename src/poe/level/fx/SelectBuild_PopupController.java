@@ -8,7 +8,6 @@ package poe.level.fx;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,15 +55,9 @@ public class SelectBuild_PopupController implements Initializable {
         root.closePopup(selected);
     }
 
-    /**
-     * Initializes the controller class.
-     */
-    ArrayList<Build> bec_list;
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        bec_list = new ArrayList<>();
         for (int i = 0; i < POELevelFx.buildsLoaded.size(); i++) { // this might require to update the buildsLoaded on
                                                                    // each new build added and removed
             Build b = POELevelFx.buildsLoaded.get(i);

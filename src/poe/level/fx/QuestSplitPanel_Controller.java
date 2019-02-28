@@ -38,7 +38,6 @@ public class QuestSplitPanel_Controller implements Initializable {
     private Label quest_label;
     @FXML
     private SplitPane container;
-    // private JFXButton gemButton;
     /**
      * Initializes the controller class.
      */
@@ -47,12 +46,9 @@ public class QuestSplitPanel_Controller implements Initializable {
     public void loadOther(ArrayList<Gem> gems, int order, AddGem_Controller parent) {
         this.parent = parent;
         level_label.setText("Level " + order);
-        // quest_label.setText(z.getZoneQuest());
         quest_label.setText("");
-        int counter = 0;
         for (Gem g : gems) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gemButton.fxml"));
-            // gemButton con = null;
             JFXButton gemButton = null;
             try {
                 gemButton = (JFXButton) loader.load();
@@ -62,11 +58,6 @@ public class QuestSplitPanel_Controller implements Initializable {
             GemButton_Controller controller = loader.<GemButton_Controller>getController();
             controller.load(g, this);
             gemBox.getChildren().add(gemButton);
-            counter++;
-            /*
-             * if(counter%5 == 0){ RowConstraints row = new RowConstraints();
-             * gemBox.getRowConstraints().add(row); }
-             */
         }
     }
 
@@ -76,7 +67,6 @@ public class QuestSplitPanel_Controller implements Initializable {
         quest_label.setText(z.getZoneQuest());
         for (Gem g : gems) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gemButton.fxml"));
-            // gemButton con = null;
             JFXButton gemButton = null;
             try {
                 gemButton = (JFXButton) loader.load();

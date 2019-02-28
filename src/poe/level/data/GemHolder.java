@@ -5,20 +5,11 @@
  */
 package poe.level.data;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import poe.level.data.Gem.Info;
-import poe.level.fx.POELevelFx;
 
 /**
  *
@@ -35,14 +26,6 @@ public class GemHolder {
     private ArrayList<Gem> marauder;
     private ArrayList<Gem> scion;
 
-    private ArrayList<Gem> witchO;
-    private ArrayList<Gem> shadowO;
-    private ArrayList<Gem> templarO;
-    private ArrayList<Gem> rangerO;
-    private ArrayList<Gem> duelistO;
-    private ArrayList<Gem> marauderO;
-    private ArrayList<Gem> scionO;
-
     private ArrayList<Gem> dropOnly;
 
     private static GemHolder mInstance;
@@ -50,8 +33,6 @@ public class GemHolder {
     public String className;
     private HashMap<String, ArrayList<HashMap<Zone, ArrayList<Gem>>>> the_ultimate_map;
     private ArrayList<HashMap<Zone, ArrayList<Gem>>> zone_gems;
-
-    private HashSet<Gem> gem_pool;
 
     public static synchronized GemHolder getInstance() {
         if (mInstance == null) {
@@ -69,14 +50,6 @@ public class GemHolder {
         duelist = new ArrayList<>();
         marauder = new ArrayList<>();
         scion = new ArrayList<>();
-
-        witchO = new ArrayList<>();
-        shadowO = new ArrayList<>();
-        templarO = new ArrayList<>();
-        rangerO = new ArrayList<>();
-        duelistO = new ArrayList<>();
-        marauderO = new ArrayList<>();
-        scionO = new ArrayList<>();
 
         dropOnly = new ArrayList<>();
 
@@ -163,182 +136,6 @@ public class GemHolder {
             dropOnly.add(a);
         }
 
-    }
-
-    public void pool() {
-        gem_pool = new HashSet<>();
-        for (Gem g : gems) {
-            gem_pool.add(g);
-        }
-    }
-
-    public void init_remaining_in_pool() {
-        /*
-         * for(Gem g : gem_pool){ g.isRewarded = false; g.reward = null; g.buy = new
-         * ArrayList<>(); System.out.println(g.getGemName()); }
-         */
-
-        JSONArray gems = new JSONArray();
-        Collections.sort(this.gems, new Comparator<Gem>() {
-            @Override
-            public int compare(Gem s1, Gem s2) {
-                return s1.getGemName().compareToIgnoreCase(s2.getGemName());
-            }
-        });
-        int counter = 0;
-        for (Gem g : this.gems) {
-            JSONObject bObj = new JSONObject();
-            bObj.put("id", counter);
-            bObj.put("name", g.getGemName());
-            bObj.put("required_lvl", g.required_lvl);
-            bObj.put("color", g.getGemColor());
-            bObj.put("iconPath", g.iconPath);
-            bObj.put("isReward", g.isRewarded);
-            bObj.put("isVaal", g.isVaal);
-            JSONObject rewardObj = new JSONObject();
-            if (g.isRewarded) {
-                rewardObj.put("quest_name", g.reward.quest_name);
-                rewardObj.put("npc", g.reward.npc);
-                rewardObj.put("act", g.reward.act);
-                rewardObj.put("town", g.reward.town);
-                JSONArray av_array = new JSONArray();
-                for (String s : g.reward.available_to) {
-                    av_array.put(s);
-                }
-                rewardObj.put("available_to", av_array);
-            }
-            bObj.put("reward", rewardObj);
-            JSONArray buy_array = new JSONArray();
-            for (Info gInf : g.buy) {
-                JSONObject bInfObj = new JSONObject();
-                bInfObj.put("quest_name", gInf.quest_name);
-                bInfObj.put("npc", gInf.npc);
-                bInfObj.put("act", gInf.act);
-                bInfObj.put("town", gInf.town);
-                JSONArray av_array = new JSONArray();
-                for (String s : gInf.available_to) {
-                    av_array.put(s);
-                }
-                bInfObj.put("available_to", av_array);
-                buy_array.put(bInfObj);
-            }
-            bObj.put("buy", buy_array);
-            bObj.put("isActive", g.isActive);
-            bObj.put("isSupport", g.isSupport);
-            JSONArray tags = new JSONArray();
-            for (String gInf : g.tags) {
-                tags.put(gInf);
-            }
-            bObj.put("gemTags", tags);
-            gems.put(bObj);
-            counter++;
-        }
-
-        String gem_to_json = gems.toString();
-
-        // Gson gson = new Gson();
-        // String build_to_json = gson.toJson(linker.get(activeBuildID).build);
-        BufferedWriter bw = null;
-        FileWriter fw = null;
-
-        try {
-            fw = new FileWriter(POELevelFx.directory + "\\Path of Leveling\\Gems\\gems_new.json");
-            bw = new BufferedWriter(fw);
-            bw.write(gem_to_json);
-            System.out.println("Done");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (bw != null)
-                    bw.close();
-                if (fw != null)
-                    fw.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
-    public void updateGemInfo(ArrayList<String> gemlist) {
-        String gemname = gemlist.get(0);
-        if (gemname.equals("Siphoning Trap")) {
-            System.out.println();
-        }
-        if (gemname.endsWith("Support")) {
-            int lastIndexOf = gemname.lastIndexOf("Support");
-            gemname = gemname.substring(0, lastIndexOf - 1);
-        }
-        boolean found = false;
-        for (Gem g : gems) {
-            // if(gemname.contains(g.getGemName()) || g.getGemName().contains(gemname)){
-            if (gemname.equals(g.getGemName())) {
-                found = true;
-
-                if (gemlist.get(1).equals("N/A")) {
-                    g.isRewarded = false;
-                    g.reward = null;
-                } else {
-                    String rew_string = gemlist.get(1);
-                    int rew_act = Integer.parseInt(rew_string.charAt(4) + "");
-                    int indexOf = rew_string.indexOf("with");
-                    String rew_act_str = rew_string.substring(12, indexOf).trim();
-                    rew_string = rew_string.trim();
-                    String classes_str = rew_string.substring(indexOf + 5, rew_string.length() - 1);
-                    String[] split = classes_str.split(",");
-                    ArrayList<String> av_list = new ArrayList<>();
-                    for (int i = 0; i < split.length; i++) {
-                        av_list.add(split[i].trim());
-                    }
-
-                    g.reward = g.new Info();
-                    g.reward.act = rew_act;
-                    g.reward.npc = "Unknown";
-                    g.reward.quest_name = rew_act_str;
-                    g.reward.town = "Unknwon";
-                    g.reward.available_to = new ArrayList<>(av_list);
-                }
-
-                g.buy = new ArrayList<>();
-
-                for (int k = 2; k < gemlist.size(); k++) {
-
-                    String rew_string = gemlist.get(k);
-                    int rew_act = Integer.parseInt(rew_string.charAt(4) + "");
-                    int indexOf = rew_string.indexOf("with");
-                    int indexOf_from = rew_string.lastIndexOf("from");
-                    String rew_act_str = rew_string.substring(12, indexOf_from).trim();
-                    String npc_name = rew_string.substring(indexOf_from + 5, indexOf - 1).trim();
-                    rew_string = rew_string.trim();
-                    String classes_str = rew_string.substring(indexOf + 5, rew_string.length() - 1).trim();
-                    String[] split;
-                    if (classes_str.equals("any character")) {
-                        split = new String[] { "Marauder", "Witch", "Scion", "Ranger", "Duelist", "Shadow", "Templar" };
-                    } else {
-                        split = classes_str.split(",");
-                    }
-                    ArrayList<String> av_list = new ArrayList<>();
-                    for (int i = 0; i < split.length; i++) {
-                        av_list.add(split[i].trim());
-                    }
-
-                    Info inf = g.new Info();
-                    inf.act = rew_act;
-                    inf.npc = npc_name;
-                    inf.quest_name = rew_act_str;
-                    inf.town = "Unknwon";
-                    inf.available_to = new ArrayList<>(av_list);
-                    g.buy.add(inf);
-
-                }
-
-                gem_pool.remove(g);
-                break;
-            }
-        }
-        if (!found) {
-            System.out.println("gem : " + gemname + " not found.");
-        }
     }
 
     public ArrayList<Gem> getGems() {
@@ -472,17 +269,5 @@ public class GemHolder {
             }
         }
         return null;
-    }
-
-    public ArrayList<Gem> custom(String query) {
-        String query_lower = query.toLowerCase();
-        ArrayList<Gem> list = new ArrayList<>();
-        for (Gem g : getGemsClass()) {
-            String gem_lower = g.getGemName().toLowerCase();
-            if (gem_lower.contains(query_lower)) {
-                list.add(g);
-            }
-        }
-        return list;
     }
 }

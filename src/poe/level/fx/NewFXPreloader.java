@@ -24,13 +24,11 @@ import javafx.stage.StageStyle;
  */
 public class NewFXPreloader extends Preloader {
 
-    ProgressBar bar;
     Stage stage;
     Loading_Controller controller;
 
     private Scene createPreloaderScene() {
-        bar = new ProgressBar();
-        // BorderPane p = new BorderPane();
+        new ProgressBar();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("loading.fxml"));
         AnchorPane p = null;
         try {
@@ -63,9 +61,6 @@ public class NewFXPreloader extends Preloader {
 
     @Override
     public void handleProgressNotification(ProgressNotification pn) {
-        // System.out.println(pn.getProgress());
-        // controller.notify(pn.getProgress());
-        // bar.setProgress(pn.getProgress());
     }
 
     @Override

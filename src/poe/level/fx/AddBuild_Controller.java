@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 
 import javafx.event.ActionEvent;
@@ -27,15 +26,13 @@ public class AddBuild_Controller implements Initializable {
     @FXML
     JFXTextField buildName;
     @FXML
-    JFXComboBox select;
+    JFXComboBox<String> select;
     @FXML
-    JFXComboBox selectAsc;
+    JFXComboBox<String> selectAsc;
     @FXML
     JFXButton addButton;
 
-    JFXDialog parentDialog;
     int selectedClassIndex;
-    String build;
     String className;
     String ascendancy;
 
@@ -150,9 +147,4 @@ public class AddBuild_Controller implements Initializable {
             addButton.setDisable(true);
         }
     }
-
-    public void passDialog(JFXDialog parent) {
-        this.parentDialog = parent;
-    }
-
 }

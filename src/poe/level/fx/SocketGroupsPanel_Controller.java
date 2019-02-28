@@ -7,7 +7,6 @@ package poe.level.fx;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -22,7 +21,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import poe.level.data.Gem;
 import poe.level.data.SocketGroup;
 import poe.level.fx.GemsPanel_Controller.GemsPanelLinker;
 
@@ -41,11 +39,6 @@ public class SocketGroupsPanel_Controller implements Initializable {
         public SocketGroupLinker(SocketGroup sgroup) {
             sg = sgroup;
             generateLabel();
-        }
-
-        public SocketGroupLinker dupe(HashSet<Integer> s_id, HashSet<Integer> g_id) {
-            SocketGroupLinker sgl = new SocketGroupLinker(sg.dupe(s_id, g_id));
-            return sgl;
         }
 
         public void generateLabel() {
@@ -103,7 +96,6 @@ public class SocketGroupsPanel_Controller implements Initializable {
     @FXML
     private JFXButton add_note_button;
 
-    private MainApp_Controller root;
     private GemsPanel_Controller gpc;
     private SocketGroupsPanel_Controller self;
     private BuildsPanel_Controller bpc;
@@ -111,7 +103,6 @@ public class SocketGroupsPanel_Controller implements Initializable {
     private int activeSocketGroupID;
 
     public void hook(MainApp_Controller root) {
-        this.root = root;
     }
 
     public void hookGem_Controller(GemsPanel_Controller gpc) {
@@ -126,40 +117,11 @@ public class SocketGroupsPanel_Controller implements Initializable {
         return linker;
     }
 
-    public void requestNotePopup() {
-        Socket_group_noteController notepop = root.notePopup();
-        notepop.start(this, linker.get(activeSocketGroupID).sg.getNote());
-    }
-
     public void noteChange(String newNote) {
         linker.get(activeSocketGroupID).sg.addNote(newNote);
     }
 
-    public void duplicate() {
-        SocketGroupLinker sgl = linker.get(activeSocketGroupID);
-        HashSet<Integer> sg_ids = new HashSet<>(); // receating all ids so far in this build...
-        HashSet<Integer> gem_ids = new HashSet<>();
-        for (SocketGroupLinker a : linker) {
-            if (!sg_ids.add(a.sg.id)) {
-                System.out.println("problems in duping potentially");
-            }
-            for (Gem g : a.sg.getGems()) {
-                if (!gem_ids.add(g.id)) {
-                    System.out.println("problems in duping potentially : gem section");
-                }
-            }
-        }
-        SocketGroupLinker duped_sgl = sgl.dupe(sg_ids, gem_ids);
-        socketGroupView.getItems().add(duped_sgl.sgLabel); // add label to the socket groups on the left panel // this
-                                                           // would be a new label cause we cant place 1 ref to 2 items
-        linker.add(duped_sgl);
-        bpc.addNewSocketGroup(duped_sgl.sg);
-        socketGroupView.getSelectionModel().selectLast();
-    }
-
     public void update(ArrayList<SocketGroupLinker> sgl_list) {
-        // leftGemBox.getChildren().clear();
-        // rightGemBox.getChildren().clear();
         gpc.hidePanel();
         addSocketGroup_button.setDisable(false); // enable UI Button
         linker = sgl_list; // and this is by reference so that any change that will
@@ -169,12 +131,6 @@ public class SocketGroupsPanel_Controller implements Initializable {
             list.add(sgl.sgLabel);
         }
         socketGroupView.setItems(list);
-        /*
-         * if(list.isEmpty()){ //removeSocketGroup_button.setDisable(true);
-         * socketGroupView.getItems().clear(); // weird call? }else{
-         * //removeSocketGroup_button.setDisable(false); }
-         */
-
     }
 
     @FXML

@@ -17,7 +17,6 @@ public class Zone {
     String quest;
     boolean questRewardsSkills;
     String actName;
-    int actID;
 
     public Zone(String zoneName, int zoneLevel, ArrayList<String> images, String altimage, String note,
             boolean hasPassive, boolean hasTrial, String quest, boolean questRewardsSkills, String actName, int actID) {
@@ -31,7 +30,6 @@ public class Zone {
         this.quest = quest;
         this.questRewardsSkills = questRewardsSkills;
         this.actName = actName;
-        this.actID = actID;
     }
 
     public int getZoneLevel() {

@@ -25,13 +25,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashSet;
@@ -77,13 +74,9 @@ import poe.level.keybinds.GlobalKeyListener;
 public class POELevelFx extends Application {
 
     public static String directory;
-    public static String gemDir;
     public static ArrayList<Build> buildsLoaded;
-    private Stage zone;
-    private Stage exp;
     private Stage main;
     private Stage editor;
-    private Stage leveling;
     private static String update_path_prefix = "https://github.com/karakasis/Path-of-Leveling/releases/download/";
     private static String update_path_suffix = "/PathOfLeveling.jar";
     private static String version = "v0.65-alpha";
@@ -111,7 +104,6 @@ public class POELevelFx extends Application {
 
                 notifyPreloader(new UpdatePreloader.ProgressNotification(downloadedFileSize));
 
-                // System.out.println(downloadedFileSize);
                 bout.write(data, 0, x);
             }
             bout.close();
@@ -129,8 +121,6 @@ public class POELevelFx extends Application {
 
         if (is_new_version) {
             update();
-
-            // System.exit(-10);
         } else {
             Platform.setImplicitExit(false);
             addTrayIcon();
@@ -334,128 +324,14 @@ public class POELevelFx extends Application {
             loadBuildsFromMemory();
 
         }
-
-        /*
-         * ArrayList<String[]> mergeTags = mergeTags(); ArrayList<Gem> gems =
-         * GemHolder.getInstance().gems; boolean active = false; for(int i=0;
-         * i<mergeTags.size(); i++){ if(mergeTags.get(i)[0].equals("Abyssal Cry")){
-         * active = true; } boolean found = false; for(int j=0; j<gems.size(); j++){
-         * if(mergeTags.get(i)[0].equals(gems.get(j).name)){ gems.get(j).isActive =
-         * active; gems.get(j).isSupport = !active; for(int k = 1 ; k<
-         * mergeTags.get(i).length; k++){ gems.get(j).tags.add( mergeTags.get(i)[k]); }
-         * found = true; break; } } if(!found){ System.out.println("not found : " +
-         * mergeTags.get(i)[0]); } found = false; }
-         * 
-         * ArrayList<Gem> gems2 = GemHolder.getInstance().gems; for(Gem g : gems2){
-         * if(g.isActive == g.isSupport){ System.out.println("same active : " + g.name);
-         * 
-         * } if(g.tags == null || g.tags.size() == 0){ System.out.println("no tag : " +
-         * g.name); } } System.out.println(gems2);
-         * 
-         * GemHolder.getInstance().init_remaining_in_pool();
-         */
-
-        /*
-         * StringBuilder hack = hack(); String[] split =
-         * hack.toString().split("\r\n|\t");
-         * 
-         * ArrayList<String> s = new ArrayList<>(); ArrayList<ArrayList<String>> s_col =
-         * new ArrayList<>(); GemHolder.getInstance().pool(); for(int i=0;
-         * i<split.length;i++){ String name = split[i]; s.add(name.replace("\\", ""));
-         * if(name.
-         * equals("Act 6 after Fallen from Grace from Lilly Roth with any character.")){
-         * s_col.add(s); GemHolder.getInstance().updateGemInfo(s); s = new
-         * ArrayList<>(); }
-         * 
-         * }
-         * 
-         * GemHolder.getInstance().init_remaining_in_pool();
-         * 
-         * 
-         * s_col.size();
-         */
-    }
-
-    private StringBuilder hack() {
-        BufferedReader br = null;
-        StringBuilder sb = null;
-        try {
-            br = new BufferedReader(new FileReader("gem.txt"));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            sb = new StringBuilder();
-            String line = null;
-            try {
-                line = br.readLine();
-            } catch (IOException ex) {
-                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                try {
-                    line = br.readLine();
-                } catch (IOException ex) {
-                    Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            String everything = sb.toString();
-        } finally {
-            try {
-                br.close();
-            } catch (IOException ex) {
-                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return sb;
-    }
-
-    private ArrayList<String[]> mergeTags() {
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader("tags.txt"));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ArrayList<String[]> list_tags = new ArrayList<>();
-        try {
-            String line = null;
-            try {
-
-                line = br.readLine();
-                while (line != null) {
-                    String[] tags = line.split(",");
-                    list_tags.add(tags);
-                    line = br.readLine();
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } finally {
-            try {
-                br.close();
-            } catch (IOException ex) {
-                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return list_tags;
-    }
-
-    public void close() {
-        // exp.close();
-        main.close();
-        // zone.close();
     }
 
     private void loadActsFromMemory() {
         InputStream in = POELevelFx.class.getResourceAsStream("/json/data.json");
-        Scanner s = new Scanner(in).useDelimiter("\\A");
+        Scanner s = new Scanner(in);
+        s.useDelimiter("\\A");
         String jsonstring = s.hasNext() ? s.next() : "";
+        s.close();
 
         JSONObject obj = new JSONObject(jsonstring);
         JSONArray arr = obj.getJSONArray("acts");
@@ -487,23 +363,20 @@ public class POELevelFx extends Application {
     private void loadGemsFromMemory() {
 
         InputStream inG = POELevelFx.class.getResourceAsStream("/json/gems.json");
-        Scanner sG = new Scanner(inG).useDelimiter("\\A");
+        Scanner sG = new Scanner(inG);
+        sG.useDelimiter("\\A");
         String jsonstringG = sG.hasNext() ? sG.next() : "";
+        sG.close();
 
-        // JSONObject objG = new JSONObject(jsonstringG);
         JSONArray arrG = new JSONArray(jsonstringG);
 
-        // GemHolder gemsH = new GemHolder();
         for (int i = 0; i < arrG.length(); i++) {
             JSONObject gemObj = arrG.getJSONObject(i);
             Gem gem = new Gem();
 
             gem.name = gemObj.getString("name");
-            // System.out.println(gem.name);
-
             gem.required_lvl = gemObj.getInt("required_lvl");
             gem.isVaal = gemObj.getBoolean("isVaal");
-            // gem.id = gemObj.getInt("id");
             gem.id = -1;
             gem.color = gemObj.getString("color");
             gem.iconPath = gemObj.getString("iconPath");
@@ -517,32 +390,12 @@ public class POELevelFx extends Application {
                     ArrayList<String> chars_list = new ArrayList<>();
                     for (int j = 0; j < chars.length(); j++) {
                         chars_list.add(chars.getString(j));
-                        // gem.putChar(chars.getString(j));
-
                     }
                     gem.reward.available_to = chars_list;
-                } catch (JSONException e) {
-
-                }
-                try {
                     gem.reward.quest_name = rewardObj.getString("quest_name");
-                } catch (JSONException e) {
-
-                }
-                try {
                     gem.reward.npc = rewardObj.getString("npc");
-                } catch (JSONException e) {
-
-                }
-                try {
                     gem.reward.act = rewardObj.getInt("act");
                 } catch (JSONException e) {
-
-                }
-                try {
-                    gem.reward.town = rewardObj.getString("town");
-                } catch (JSONException e) {
-
                 }
             }
             JSONArray buy_arrays = gemObj.getJSONArray("buy");
@@ -555,57 +408,18 @@ public class POELevelFx extends Application {
                     ArrayList<String> chars_list = new ArrayList<>();
                     for (int k = 0; k < chars.length(); k++) {
                         chars_list.add(chars.getString(k));
-                        // gem.putChar(chars.getString(j));
-
                     }
                     buy_info.available_to = chars_list;
+                    buy_info.quest_name = buyObj.getString("quest_name");
+                    buy_info.npc = buyObj.getString("npc");
+                    buy_info.act = buyObj.getInt("act");
                 } catch (JSONException e) {
                     e.printStackTrace();
                     System.out.println(gem.getGemName());
                 }
-                try {
-                    buy_info.quest_name = buyObj.getString("quest_name");
-                } catch (JSONException e) {
-
-                }
-                try {
-                    buy_info.npc = buyObj.getString("npc");
-                } catch (JSONException e) {
-
-                }
-                try {
-                    buy_info.act = buyObj.getInt("act");
-                } catch (JSONException e) {
-
-                }
-                try {
-                    buy_info.town = buyObj.getString("town");
-                } catch (JSONException e) {
-
-                }
                 gem.buy.add(buy_info);
             }
 
-            /*
-             * uncomment to download images. also uncomment gemdir on top of class //CHECK
-             * cached images if (!new File(gemDir+""+gem.name+".png").exists()) {
-             * BufferedImage image = null; try {
-             * 
-             * URL url = new URL(gem.iconPath); image = ImageIO.read(url);
-             * 
-             * ImageIO.write(image, "png",new File(gemDir+""+gem.name+".png"));
-             * 
-             * gem.gemIcon = SwingFXUtils.toFXImage(image, null); } catch (IOException e) {
-             * e.printStackTrace(); }
-             * System.err.println("Image not found and redownloaded: "+gemDir+""+gem.name+
-             * ".png");
-             * 
-             * }else{ BufferedImage img = null; try { img = ImageIO.read(new
-             * File(gemDir+""+gem.name+".png"));
-             * 
-             * gem.gemIcon = SwingFXUtils.toFXImage(img, null); } catch (IOException e) {
-             * e.printStackTrace(); } }
-             */
             BufferedImage img = null;
             try {
                 img = ImageIO.read(getClass().getResource("/gems/" + gem.name + ".png"));
@@ -672,19 +486,14 @@ public class POELevelFx extends Application {
                 e.printStackTrace();
                 return;
             }
-            // byte[] byteValueBase64Decoded =
-            // Base64.getDecoder().decode(stringValueBase64Encoded);
             String stringValueBase64Decoded = new String(byteValueBase64Decoded);
 
-            // JSONArray obj = new
-            // JsonParser().parse(stringValueBase64Encoded).getAsJsonArray();
             JSONArray builds_array = new JSONArray(stringValueBase64Decoded);
             for (int i = 0; i < builds_array.length(); i++) {
                 JSONObject bObj = builds_array.getJSONObject(i);
                 Build build = new Build(bObj.getString("buildName"), bObj.getString("className"),
                         bObj.getString("ascendancyName"));
                 try {
-                    // bObj.get("hasPob");
                     build.isValid = bObj.getBoolean("isValid");
                 } catch (org.json.JSONException e) {
                     // if it doesnt exist prob its valid from earlier versions
@@ -693,7 +502,6 @@ public class POELevelFx extends Application {
                 build.characterName = bObj.getString("characterName");
                 build.level = bObj.getInt("level");
                 try {
-                    // bObj.get("hasPob");
                     build.hasPob = bObj.getBoolean("hasPob");
                     if (build.hasPob) {
                         build.pobLink = bObj.getString("pobLink");
@@ -704,7 +512,6 @@ public class POELevelFx extends Application {
                 }
                 GemHolder.getInstance().className = build.getClassName();
                 JSONArray socket_group_array = bObj.getJSONArray("socketGroup");
-                // build.level
                 for (int j = 0; j < socket_group_array.length(); j++) {
                     JSONObject sObj = socket_group_array.getJSONObject(j);
                     SocketGroup sg = new SocketGroup();
@@ -714,7 +521,6 @@ public class POELevelFx extends Application {
                     sg.setReplaceGroup(sObj.getBoolean("replaceGroup"));
                     sg.setReplacesGroup(sObj.getBoolean("replacesGroup"));
                     try {
-                        // bObj.get("hasPob");
                         sg.addNote(sObj.getString("note"));
                     } catch (org.json.JSONException e) {
                         sg.addNote("");
@@ -753,7 +559,7 @@ public class POELevelFx extends Application {
                             int id_replaces = gObj.getInt("replacesGem");
                             gem.id_replaces = id_replaces;
                         }
-                        sg.getGems().add(gem);// ***check line 324 in GemsPanel_Controller;
+                        sg.getGems().add(gem);
                     }
                     build.getSocketGroup().add(sg);
                 }
@@ -907,8 +713,6 @@ public class POELevelFx extends Application {
 
         String build_to_json = builds_array.toString();
 
-        // Gson gson = new Gson();
-        // String build_to_json = gson.toJson(linker.get(activeBuildID).build);
         System.out.println(build_to_json);
         String stringValueBase64Encoded = Base64.getEncoder().encodeToString(build_to_json.getBytes());
         System.out.println(build_to_json + " when Base64 encoded is: " + stringValueBase64Encoded);
@@ -941,12 +745,10 @@ public class POELevelFx extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         if (is_new_version) {
-            UpdaterStage updaterStage = new UpdaterStage();
+            new UpdaterStage();
         } else {
             main = new Main_Stage(this);
         }
-        // zone = new ZoneOverlay_Stage();
-        // exp = new LevelOverlay_Stage();
     }
 
     public void editor() {
@@ -960,20 +762,6 @@ public class POELevelFx extends Application {
     }
 
     public void start(boolean zone_b, boolean xp, boolean level) {
-        /*
-         * main.close(); if(zone_b){ this.zone = new ZoneOverlay_Stage(); } if(xp){
-         * this.exp = new LevelOverlay_Stage(); } if(level){ this.leveling = new
-         * GemOverlay_Stage(Main_Stage.buildLoaded); }
-         * 
-         * 
-         * 
-         * 
-         * Platform.runLater(new Runnable(){
-         * 
-         * 
-         * @Override public void run() { Controller controller = new Controller(zone,
-         * exp, leveling, Main_Stage.buildLoaded); } });
-         */
         main.close();
         Platform.runLater(new Runnable() {
             @Override
@@ -982,8 +770,7 @@ public class POELevelFx extends Application {
                 GlobalKeyListener.run();
             }
         });
-        Controller controller = new Controller(zone_b, xp, level, Main_Stage.buildLoaded);
-
+        new Controller(zone_b, xp, level, Main_Stage.buildLoaded);
     }
 
     private void addTrayIcon() throws AWTException {
@@ -1071,72 +858,6 @@ public class POELevelFx extends Application {
                 Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-
-    public static void setUpLog() {
-        File f = new File(POELevelFx.directory + "\\Path of Leveling\\log.txt");
-        System.out.println(f.length());
-        if (f.length() >= 53287796) {// that would be about 50mbs
-            /*
-             * implement a good delete top N lines to empty some space. BufferedReader br =
-             * null; FileReader fr = null; ArrayList<String> restoffile = new ArrayList<>();
-             * try {
-             * 
-             * fr = new FileReader(POELevelFx.directory + "\\Path of Leveling\\log.txt"); br
-             * = new BufferedReader(fr);
-             * 
-             * String sCurrentLine;
-             * 
-             * br = new BufferedReader(fr); int counter = 0; while ((sCurrentLine =
-             * br.readLine()) != null) { //System.out.println(sCurrentLine); counter++;
-             * if(counter >= 50000){ restoffile.add(sCurrentLine); restoffile.
-             * //System.out.println(restoffile.size()); } }
-             * 
-             * } catch (IOException e) {
-             * 
-             * e.printStackTrace();
-             * 
-             * } finally {
-             * 
-             * try {
-             * 
-             * if (br != null) br.close();
-             * 
-             * if (fr != null) fr.close();
-             * 
-             * } catch (IOException ex) {
-             * 
-             * ex.printStackTrace();
-             * 
-             * }
-             * 
-             * }
-             */ // until then just delete all.
-            PrintWriter writer = null;
-            try {
-                writer = new PrintWriter(f);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            writer.print("");
-            writer.close();
-        }
-        PrintStream printStream = null;
-        try {
-            printStream = new PrintStream(
-                    new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\log.txt", true));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.setOut(printStream);
-        System.setErr(printStream);
-        // System.setOut(new PrintStream(f));
-        System.out.println();
-        System.out.println();
-        System.out.println("=====new launch=====");
-        System.out.println(new Timestamp(System.currentTimeMillis()).toString());
-        System.out.println();
-        System.out.println();
     }
 
     public static boolean checkForNewVersion() {

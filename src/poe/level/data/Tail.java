@@ -43,6 +43,7 @@ public class Tail implements LoggerListener {
      * @param line
      *            The new line that has been added to the tailed log file
      */
+    @Override
     public void newLogFileLine(String line) {
         log.add(line);
         if (line.contains("You have entered ")) {
@@ -92,24 +93,7 @@ public class Tail implements LoggerListener {
                         parent.lvlupdate();
                     }
                 });
-
             }
-
         }
-
     }
-
-    public void _startTailing() {
-
-        tailer = new Logger(file, 1000, false);
-        tailer.addLogFileTailerListener(this);
-
-        tailer.start();
-
-    }
-
-    public void _stopTailing() {
-        tailer.stopTailing();
-    }
-
 }

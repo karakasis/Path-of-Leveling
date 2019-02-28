@@ -24,7 +24,6 @@ public class SocketGroup {
     boolean replacesGroup;
     SocketGroup socketGroupReplace;
     SocketGroup socketGroupThatReplaces;
-    // int indexOfReplaceGroup;
     transient HashMap<Integer, Integer> linkerToListIndex;
     public int id;
     // IDS FOR JSON CONVERTION
@@ -51,38 +50,15 @@ public class SocketGroup {
         return ran;
     }
 
-    public SocketGroup dupe(HashSet<Integer> s_id, HashSet<Integer> g_id) {
-        SocketGroup duped = new SocketGroup();
-        Gem old_active = this.active;
-        duped.id = sign(s_id);
-        duped.fromGroupLevel = this.fromGroupLevel;
-        duped.untilGroupLevel = this.untilGroupLevel;
-        duped.addNote(this.note);
-        for (Gem g : gems) {
-            Gem duped_gem = g.dupeGem();
-            duped_gem.level_added = g.level_added;
-            duped_gem.id = sign(g_id);
-            duped.getGems().add(duped_gem);
-            if (g.equals(old_active)) {
-                duped.active = duped_gem;
-                duped.active_id = duped_gem.id;
-            }
-        }
-        return duped;
-    }
-
     public SocketGroup() {
         gems = new ArrayList<>();
         active = null;
-        // gems.add(GemHolder.getInstance().tossDummie());
-        // active.add(GemHolder.getInstance().tossDummie());
         fromGroupLevel = 2;
         untilGroupLevel = 36;
         replaceGroup = false;
         socketGroupReplace = null;
         replacesGroup = false;
         socketGroupThatReplaces = null;
-        // indexOfReplaceGroup= -1;
         linkerToListIndex = new HashMap<>();
         id = -1;
         id_replace = -1;
@@ -93,7 +69,6 @@ public class SocketGroup {
     int switche;
 
     public Gem putGem(Gem gem, int id) {
-        boolean switcher = false;
         switche = -1;
         Gem g = null;
         if (linkerToListIndex.containsKey(id)) {
@@ -117,10 +92,6 @@ public class SocketGroup {
     public int doubleCheck() {
 
         return switche;
-    }
-
-    public void removeGem(Gem gem, int id) {
-
     }
 
     public Gem getActiveGem() {

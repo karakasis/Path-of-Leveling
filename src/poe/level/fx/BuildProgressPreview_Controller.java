@@ -113,9 +113,6 @@ public class BuildProgressPreview_Controller implements Initializable {
             }
         }
 
-        // int totalLevelPoints = totalLevels.size();
-        // int baselineSize = totalLevelPoints*100;
-
         // now we need to implement the visual offset for each level.
         ArrayList<Integer> level_list = new ArrayList<>();
         level_list.addAll(totalLevels);
@@ -128,7 +125,7 @@ public class BuildProgressPreview_Controller implements Initializable {
             HashMap<SocketGroup, Integer> helper_map = new HashMap<>();
             for (Gem g : get) {
                 if (helper_map.containsKey(gemToSocket_map.get(g))) {
-                    int get1 = (int) helper_map.get(gemToSocket_map.get(g));
+                    int get1 = helper_map.get(gemToSocket_map.get(g));
                     get1++;
                     helper_map.put(gemToSocket_map.get(g), get1);
                 } else {
@@ -199,9 +196,6 @@ public class BuildProgressPreview_Controller implements Initializable {
 
             // i will assume this list is ordered actually. and this is very important!
             ArrayList<Gem> gemsOnThisLevel_local = gemsOnLevelsMap.get(level);
-            int y_value_for_line = 0;
-            int y_value_total = 0;
-            int counter_for_firstSocketGroup = 0;
             int total_y = 0;
             HashMap<SocketGroup, Integer> miniCounters = new HashMap<>();
             for (Gem g : gemsOnThisLevel_local) {
@@ -228,7 +222,6 @@ public class BuildProgressPreview_Controller implements Initializable {
                 line_hor.setLayoutX(60);
                 line_hor.setLayoutY(0);
                 line_hor.setStartY(final_y + 10 * current_mini_counter + 47 * (current_mini_counter - 1) + 47 / 2);
-                // line.setEndY(10 * y_value_total + 47 * y_value_total);
                 line_hor.setEndY(final_y + 10 * current_mini_counter + 47 * (current_mini_counter - 1) + 47 / 2);
                 line_hor.setStartX(levelToX_Location.get(level));
                 line_hor.setEndX(levelToX_Location.get(level) + 15);
@@ -306,35 +299,9 @@ public class BuildProgressPreview_Controller implements Initializable {
                 }
 
                 // if the gem belongs to the 1st socket group
-                /*
-                 * if(sorted_sg.indexOf(gemToSocket_map.get(g)) == 0){
-                 * counter_for_firstSocketGroup++; //we can actually use this variable to
-                 * determine where gems will be placed in the 1st socket group
-                 * iv.setLayoutY(10*counter_for_firstSocketGroup +
-                 * 47*(counter_for_firstSocketGroup-1)); }
-                 */
-                total_y = final_y + 10 * current_mini_counter + 47 * current_mini_counter;// + 10; //+10 is end offset
-                                                                                          // on the y axis.
-                /*
-                 * int y_value = (int) highestYValuePerSocketGroup.get(gemToSocket_map.get(g));
-                 * if(y_value>y_value_for_line){ y_value_for_line = y_value; } int y_value_t =
-                 * draw_previous_y.get(gemToSocket_map.get(g)); // this will return the total y
-                 * value of a socket group if(y_value_t >y_value_total ){ y_value_total =
-                 * y_value_t; //the so far biggest y. }
-                 * if(sorted_sg.indexOf(gemToSocket_map.get(g)) != 0){
-                 * 
-                 * }
-                 */
+                total_y = final_y + 10 * current_mini_counter + 47 * current_mini_counter; // +10 is end offset on the y
+                                                                                           // axis.
             }
-            /*
-             * if(y_value_total <= draw_previous_y.get(sorted_sg.get(0))){ y_value_total =
-             * counter_for_firstSocketGroup; }
-             */
-            // y_value_total has the biggest y for this line so we can draw it
-            // f,e if y = 8 we need to set some offset values
-            // formula is 10 * y_value_total + 47 * y_value_total
-            // ** this offset should only apply on sg other than the 1st one.. << im here
-            // stuck <<<<<<
 
             // and the lines?
             Line line = new Line();
@@ -342,7 +309,6 @@ public class BuildProgressPreview_Controller implements Initializable {
             line.setLayoutX(60);
             line.setLayoutY(0);
             line.setStartY(0);
-            // line.setEndY(10 * y_value_total + 47 * y_value_total);
             line.setEndY(total_y);
             line.setStartX(levelToX_Location.get(level));
             line.setEndX(levelToX_Location.get(level));
@@ -353,7 +319,6 @@ public class BuildProgressPreview_Controller implements Initializable {
             timeline_pane.getChildren().add(p);
             AnchorPane.setLeftAnchor(p, Double.valueOf(0));
             AnchorPane.setRightAnchor(p, Double.valueOf(0));
-            // int layouty = draw_previous_y.get(sg) - highestYValuePerSocketGroup.get(sg);
             int layouty = draw_previous_y.get(sg);
             p.setLayoutX(0);
             p.setLayoutY(10 * layouty + 47 * layouty);
@@ -364,7 +329,6 @@ public class BuildProgressPreview_Controller implements Initializable {
                 p.setPrefHeight(10 * highestYValuePerSocketGroup.get(sg) + 47 * highestYValuePerSocketGroup.get(sg));
             }
             p.setOpacity(0.1);
-            // p.getStyleClass().add("backgroundPane");
             if (alternateCounter) {
                 p.setStyle("-fx-background-color: black;");
                 alternateCounter = false;

@@ -10,7 +10,6 @@ import java.util.HashSet;
 
 import javafx.application.Platform;
 import poe.level.fx.Main_Stage;
-import poe.level.fx.Preferences_Controller;
 import poe.level.fx.overlay.GemOverlay_Stage;
 import poe.level.fx.overlay.LevelOverlay_Stage;
 import poe.level.fx.overlay.ZoneOverlay_Stage;
@@ -45,10 +44,8 @@ public class Controller {
 
     public int playerLevel;
     public String playerName;
-    public int monsterLevel;
     public String currentZone;
     private Tail _tObj;
-    String path;
 
     private ZoneOverlay_Stage zone_stage;
     private LevelOverlay_Stage xp_stage;
@@ -101,7 +98,6 @@ public class Controller {
         return a;
     }
 
-    // public Controller(Stage zone, Stage xp, Stage level, Build build) {
     public Controller(boolean zone_b, boolean xp, boolean level, Build build) {
         instance = this;
         if (zone_b) {
@@ -118,20 +114,11 @@ public class Controller {
         releaseLock = true;
         playerLevel = Main_Stage.playerLevel;
         playerName = Main_Stage.characterName;
-        monsterLevel = 1;
-        // zone_stage = (ZoneOverlay_Stage) zone;
-        // xp_stage = (LevelOverlay_Stage) xp;
-        // level_stage = (GemOverlay_Stage) level;
         this.build = build;
 
-        // zone_stage_lock = zone_stage == null;
-        // xp_stage_lock = xp_stage == null;
-        // level_stage_lock = level_stage == null;
         zone_stage_lock = !zone_b;
         xp_stage_lock = !xp;
         level_stage_lock = !level;
-
-        path = Preferences_Controller.poe_log_dir;
 
         duplicates = new HashSet<>();
         duplicates.add("The Reliquary");
@@ -216,7 +203,6 @@ public class Controller {
 
         System.out.println("Trying to identify zone.");
         // add a reset thing for when zone in uknown
-        // System.out.println("New zone is "+ currentZone+".");
         boolean skippedFirstPart = false;
         outerloop: for (Act a : ActHandler.getInstance().getActs()) {
             for (Zone zone : a.getZones()) {
@@ -226,7 +212,6 @@ public class Controller {
                         continue;
                     }
                     zone_checkpoint = zone;
-                    monsterLevel = zone.level;
                     zoneDetect = true;
                     System.out.println("Zone identified.");
                     if (zone.hasPassive) {

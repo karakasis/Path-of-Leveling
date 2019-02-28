@@ -175,8 +175,6 @@ public class GemOverlay_Stage extends Stage {
     public void animate() {
 
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        // double screenRightEdge = primScreenBounds.getMaxX() ;
-        double screenRightEdge = primScreenBounds.getMinX();
         this.setX(prefX);
         this.setY(prefY);
         this.setWidth(0);
@@ -190,7 +188,6 @@ public class GemOverlay_Stage extends Stage {
 
             @Override
             public void setValue(Double value) {
-                // setX(screenRightEdge + value);
                 setWidth(value);
             }
         };

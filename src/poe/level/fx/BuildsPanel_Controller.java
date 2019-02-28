@@ -62,10 +62,6 @@ public class BuildsPanel_Controller implements Initializable {
             return id;
         }
 
-        public void delete() {
-            root.deleteBuild();
-        }
-
         public void update() {
             root.update(id);
         }
@@ -795,11 +791,6 @@ public class BuildsPanel_Controller implements Initializable {
             // root.buildChanged(id);
 
         }
-    }
-
-    public ArrayList<SocketGroup> getSocketGroups(int id) {
-        BuildLinker bl = linker.get(id);
-        return bl.build.getSocketGroup();
     }
 
     public String getCurrentClass(int id) {

@@ -41,15 +41,7 @@ public class Logger extends Thread {
     /**
      * Set of listeners
      */
-    private Set listeners = new HashSet();
-
-    /**
-     * Creates a new log file tailer that tails an existing file and checks the file
-     * for updates every 5000ms
-     */
-    public Logger(File file) {
-        this.logfile = file;
-    }
+    private Set<LoggerListener> listeners = new HashSet<LoggerListener>();
 
     /**
      * Creates a new log file tailer
@@ -72,21 +64,14 @@ public class Logger extends Thread {
         this.listeners.add(l);
     }
 
-    public void removeLogFileTailerListener(LoggerListener l) {
-        this.listeners.remove(l);
-    }
-
     protected void fireNewLogFileLine(String line) {
-        for (Iterator i = this.listeners.iterator(); i.hasNext();) {
-            LoggerListener l = (LoggerListener) i.next();
+        for (Iterator<LoggerListener> i = this.listeners.iterator(); i.hasNext();) {
+            LoggerListener l = i.next();
             l.newLogFileLine(line);
         }
     }
 
-    public void stopTailing() {
-        this.tailing = false;
-    }
-
+    @Override
     public void run() {
         // The file pointer keeps track of where we are in the file
         long filePointer = 0;
@@ -101,7 +86,6 @@ public class Logger extends Thread {
         try {
             // Start tailing
             this.tailing = true;
-            int c = 0;
             RandomAccessFile file = new RandomAccessFile(logfile, "r");
             while (this.tailing) {
                 try {

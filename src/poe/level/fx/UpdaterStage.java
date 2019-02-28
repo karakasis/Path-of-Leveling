@@ -20,9 +20,6 @@ import javafx.stage.Stage;
  */
 public class UpdaterStage extends Stage {
 
-    POELevelFx parent;
-    MainApp_Controller editor_controller;
-
     public UpdaterStage() {
         this.launcher();
 
