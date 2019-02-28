@@ -1,4 +1,16 @@
 # Path of Leveling
+
+**read this**
+>Since a lot of people seem to have the misconception that this is a Path of Building reader.  
+>  
+>Don't try to import a Pastebin that contains a Path of Building file via Import ..  
+>  
+>**it will not work**.  
+>  
+>This application **loads its own files**. You can import pastebin's that contain **ONLY** a Path of Leveling file, either  **created by you within the editor, or distributed by someone else in the community** .  
+>  
+>If you wish to simply **link** your Path of Building file with a certain build, please **use option Path of Building> Link active build with POB**. Once you have done this you can share your **Path of Leveling** build buy exporting it to Pastebin. The new Pastebin link will contain both of the "files" and it can only be opened with Path of Leveling. Thank you.
+
 **This is an alpha version, bugs included**
 
 *Assisting overlay with an advanced GUI editor written in Java for [Path of Exile](https://www.pathofexile.com/game).*
@@ -34,9 +46,9 @@ That's all. Everything else is code.
 
 - Run PathOfLeveling.jar (Java 8 required) - *[download java](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) jre-8u191-windows-x64.exe at the time of writting this*
 - Click the preferences gear button.
-- Select this file : Client.txt located within your Steam or Grinding Gear Games folder. 
+- Select your Path of Exile folder located in Steam or Grinding Gear Games folder. 
 
-**C:\Program Files (x86)\Grinding Gear Games\Path of Exile\logs**
+**C:\Program Files (x86)\Grinding Gear Games\Path of Exile**
 - Save changes.
 - Decide which features you want to run. *If you want to use the leveling part, you have to create a build first at the editor and then select the build.*
 - Adjust your overlays in-game by drag and drop.
@@ -52,12 +64,27 @@ That's all. Everything else is code.
  - This may or may not be a bug im still trying to figure it out, just make sure you always have the XP option selected.
 
 ## Future additions
- - Link your leveling-build with your Path of Building tree, or a different planner
- - Support for more resolutions, and/or custom sized overlays
- - Find a more suitable way to place the overlays
- 
-Mentioned by users :
- - ~~Do something so we can see the rewards of quest so we can skip the quest that don’t give passive points / respect points~~ done
+
+* ~~Link your leveling-build with your Path of Building tree, or a different planner~~ done check changelog v0.65 for more details on PoB import.
+* Support for more resolutions, and/or custom sized overlays
+* Find a more suitable way to place the overlays
+
+Mentioned in the reddit comments :
+
+>~~Is it possible to add notes to the socket groups (e.g. off hand corruption purposes, writing down how much dps increase a 3-4 link is in comparison~~ done  
+>  
+>~~A confirmation button if you accidentally press the minus for build creation~~ done  
+>  
+>~~Do something so we can see the rewards of quest so we can skip the quest that don’t give passive points / respect points~~  done  
+>  
+>~~Add the ability to "clone" a socket group~~ done  
+>  
+>The "socket group" name should include the levels for which it is active  
+>  
+>~~I recommend putting a box around "Start". Similar to how there is one around "Build" and "Editor"~~. done  
+>  
+>There is no way to get back to the options menu once the start button has been pushed
+
 If you have a suggestion I encourage you to start an issue.
 
 ## Changelog in v0.65
@@ -81,11 +108,13 @@ of the left panel in the editor.
 - There is now a box surrounding Start in the launcher to make it look more like a button.
 - You now get prompts when deleting a build, and when you close the editor from the X icon.
    Also the application no longers terminates, instead it returns to the Launcher screen.
+ - Slightly moved the Poets pen that was blocking the Editor button, and placed it below the button.
    
  __Bug fixes__
 - Fixed a bug, where you had to select XP option, no matter what, or you would get no overlays.
  - - Now every option is independent, but running only the Zones options, now requests for
  character name and player level.
+ - Fixed major bug, that forced application to update to itself, falling into a loop.  Hopefully, it is solved now.
  
  __Changes__
 - Adjusted logs to provide less and more useful information
