@@ -64,9 +64,19 @@ public class GemOverlay_Stage extends Stage{
         this.initStyle(StageStyle.TRANSPARENT);
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         //double screenRightEdge = primScreenBounds.getMaxX() ;
-        double screenRightEdge = primScreenBounds.getMinX();
-        prefX = screenRightEdge;
-        prefY = primScreenBounds.getMinY();
+        //if the settings are on default load the optimized settings based on screen measurements
+        if(Preferences_Controller.gem_overlay_pos[0] == -200 
+                && Preferences_Controller.gem_overlay_pos[1] == -200){
+            
+            double screenRightEdge = primScreenBounds.getMinX();
+            prefX = screenRightEdge;
+            prefY = primScreenBounds.getMinY();
+            
+            Preferences_Controller.updateGemsPos(prefX, prefY);
+        }else{
+            prefX = Preferences_Controller.gem_overlay_pos[0];
+            prefY = Preferences_Controller.gem_overlay_pos[1];
+        }
         gemsOnThisLevel_local = new ArrayList<>();
         loadFXML();
         this.setOnCloseRequest(event -> {

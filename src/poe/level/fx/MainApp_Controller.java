@@ -18,6 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -38,6 +42,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import poe.level.data.Build;
 import sun.net.www.http.HttpClient;
 
@@ -73,6 +78,8 @@ public class MainApp_Controller implements Initializable {
     private MenuItem open_pob_view;
     @FXML
     private MenuItem link_active_pob;
+    @FXML
+    private Label footerValid;
     
     
     JFXDialog addBuildPopup;
@@ -106,7 +113,8 @@ public class MainApp_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         buildToSocketGroupMap = new HashMap<>();
-        
+        //option to reload builds from memory on start
+        POELevelFx.reloadBuilds();
         //inflate buildspanel
         if(POELevelFx.buildsLoaded.isEmpty()){ //toggle all builds
             toggleAllBuilds(false);
@@ -213,6 +221,29 @@ public class MainApp_Controller implements Initializable {
         addGemPopup.close();
     }
     
+    private boolean revalidation_switch = false;
+    private boolean launcher_switch = false;
+    
+    public void sayNoToValidation(){
+        buildPreviewPopup.close();
+    }
+    
+    public void sayYesToValidation(){
+        buildPreviewPopup.close();
+        buildspanel_controller.setBuildToNonValid();
+        if(revalidation_switch){
+            if(launcher_switch){
+                revalidation_switch = false;
+                launcher_switch = false;
+                validateToLauncher();
+            }else{
+                revalidation_switch = false;
+                launcher_switch = false;
+                saveAllBuilds();
+            }
+        }
+    }
+    
     @FXML
     private void validateBuild(){
         if(buildspanel_controller.validate()){
@@ -240,7 +271,8 @@ public class MainApp_Controller implements Initializable {
 
             buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
             //controller.passDialog(mLoad);
-            loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.getCurrentBuild().getName(), buildspanel_controller.validateError());
+            loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated
+                    , buildspanel_controller.validateError(),this);
             buildPreviewPopup.show();
         }
     }
@@ -251,6 +283,7 @@ public class MainApp_Controller implements Initializable {
             if(buildspanel_controller.validateAll())
                 buildspanel_controller.saveBuild();
             else{
+                revalidation_switch = true;
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ValidateErrorPopup.fxml"));
                 AnchorPane con = null;
                 try {
@@ -261,7 +294,8 @@ public class MainApp_Controller implements Initializable {
 
                 buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
                 //controller.passDialog(mLoad);
-                loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated, buildspanel_controller.validateAllError());
+                loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated,
+                        buildspanel_controller.validateAllError(),this);
                 buildPreviewPopup.show();
             }
         } catch (IOException ex) {
@@ -277,6 +311,8 @@ public class MainApp_Controller implements Initializable {
                 parent.returnToLauncher();
                 return true;
             }else{
+                revalidation_switch = true;
+                launcher_switch=true;
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ValidateErrorPopup.fxml"));
                 AnchorPane con = null;
                 try {
@@ -287,7 +323,8 @@ public class MainApp_Controller implements Initializable {
 
                 buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
                 //controller.passDialog(mLoad);
-                loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated, buildspanel_controller.validateAllError());
+                loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated,
+                        buildspanel_controller.validateAllError(),this);
                 buildPreviewPopup.show();
                 return false;
             }
@@ -298,7 +335,18 @@ public class MainApp_Controller implements Initializable {
     }
     
     public boolean custom_editor_exit_with_validate(){
-        return validateToLauncher();
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Save changes");
+        alert.setHeaderText("Any changes you made will be saved upon exit.");
+        alert.setContentText("Are you ok with this?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            return validateToLauncher();
+        }else{
+            parent.returnToLauncher();
+            return true;
+        }
     }
     
     Pastebin_import_Controller paste_controller;
@@ -361,6 +409,14 @@ public class MainApp_Controller implements Initializable {
     public void toggleAllBuilds(boolean toggle){
         export_pastebin_all.setDisable(!toggle);
         export_clipboard_all.setDisable(!toggle);
+    }
+    
+    public void toggleFooterVisibility(boolean valid){
+        if(!valid){
+            footerValid.setVisible(true);
+        }else{
+            footerValid.setVisible(false);
+        }
     }
     
     public void fetchPaste(String pasteRaw){

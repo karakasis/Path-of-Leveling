@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import poe.level.data.Gem;
+import poe.level.fx.Preferences_Controller;
 
 /**
  * FXML Controller class
@@ -46,6 +47,8 @@ public class GemOverlay_Controller implements Initializable {
             stage.setY(mouseEvent.getScreenY() + dragDelta.y);
             GemOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
             GemOverlay_Stage.prefY = mouseEvent.getScreenY() + dragDelta.y;
+            //update the prop file
+            Preferences_Controller.updateGemsPos(GemOverlay_Stage.prefX, GemOverlay_Stage.prefY);
           }
         });
     }

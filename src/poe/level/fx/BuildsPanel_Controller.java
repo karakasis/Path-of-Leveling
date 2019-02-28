@@ -120,6 +120,7 @@ public class BuildsPanel_Controller implements Initializable {
     private HashMap<Integer,BuildLinker> linker;
     private int activeBuildID;
     public String lastbuild_invalidated;
+    public int lastbuild_invalidatedID;
     
     public void hook(MainApp_Controller root){
         this.root = root;
@@ -152,9 +153,15 @@ public class BuildsPanel_Controller implements Initializable {
         Build active_build = linker.get(activeBuildID).build;
         if(active_build.validate()){
             System.out.println("Success.");
+            if(!active_build.isValid){
+                //signal a graphic change
+                active_build.isValid = true;
+                updateBuildValidationBanner(activeBuildID);
+            }
             return true;
         }else{
             System.out.println("Build invalidate.");
+            lastbuild_invalidatedID = activeBuildID;
             return false;
         }
     }
@@ -163,15 +170,26 @@ public class BuildsPanel_Controller implements Initializable {
         for(BuildLinker bl : linker.values()){
             Build active_build = bl.build;
             if(!active_build.validate()){
-                System.out.println("Build invalidate.");
-                return false;
+                if(active_build.isValid){
+                    //active_build.isValid = false;
+                    System.out.println("Build invalidate.");
+                    lastbuild_invalidatedID = bl.id;
+                    //updateBuildValidationBanner(bl.id);
+                    return false;
+                }
+                
+            }else if(active_build.validate() && !active_build.isValid){
+                //if it passed validation but was marked as non valid
+                //signal a graphic change
+                active_build.isValid = true;
+                updateBuildValidationBanner(bl.id);
             }
         }
         return true;
     }
     
     public String validateError(){
-        Build active_build = linker.get(activeBuildID).build;
+        Build active_build = linker.get(lastbuild_invalidatedID).build;
         lastbuild_invalidated = active_build.getName();
         return active_build.validate_failed_string();
     }
@@ -183,10 +201,22 @@ public class BuildsPanel_Controller implements Initializable {
             Build active_build = bl.build;
             if(!active_build.validate()){
                 lastbuild_invalidated = active_build.getName();
+                lastbuild_invalidatedID = bl.id; //not sure what this one does in this method.
                 return active_build.validate_failed_string();
             }
         }
         return null;
+    }
+    
+    //for better update-ability i need to make this client sided and not attached to json.
+    //some thoughts: if you try to open the app and not visit editor, a non-valid build will not show up as non valid.
+    //so basically since it will not be saved the app will not know that its not valid.
+    //if i save the non valid tag to builds, all users will have valid builds b4 the update, so it wont mess up anything.
+    //i just need to check again with null exceptions
+    public void setBuildToNonValid(){
+        Build active_build = linker.get(lastbuild_invalidatedID).build;
+        active_build.isValid = false;
+        updateBuildValidationBanner(lastbuild_invalidatedID);
     }
     
     public Build getCurrentBuild(){
@@ -213,6 +243,7 @@ public class BuildsPanel_Controller implements Initializable {
         for( BuildLinker bl : linker.values()){
             Build build = bl.build;
             JSONObject bObj = new JSONObject();
+            bObj.put("isValid", build.isValid);
             bObj.put("buildName",build.getName());
             bObj.put("className",build.getClassName());
             bObj.put("ascendancyName",build.getAsc());
@@ -335,6 +366,7 @@ public class BuildsPanel_Controller implements Initializable {
             bObj.put("buildName",build.getName());
             bObj.put("className",build.getClassName());
             bObj.put("ascendancyName",build.getAsc());
+            bObj.put("isValid", build.isValid);
             bObj.put("level", build.level); //<change
             bObj.put("characterName",build.characterName);
             
@@ -422,6 +454,7 @@ public class BuildsPanel_Controller implements Initializable {
         bObj.put("buildName",build.getName());
         bObj.put("className",build.getClassName());
         bObj.put("ascendancyName",build.getAsc());
+        bObj.put("isValid", build.isValid);
         bObj.put("level", build.level); //<change
         bObj.put("characterName",build.characterName);
         
@@ -530,8 +563,16 @@ public class BuildsPanel_Controller implements Initializable {
                             bObj.getString("className"),
                             bObj.getString("ascendancyName")
                     );
+                    //when importing character name will not be passed.
                     build.characterName = "";
                     build.level = 0;
+                    try{
+                        //bObj.get("hasPob");
+                        build.isValid = bObj.getBoolean("isValid");
+                    }catch(org.json.JSONException e){
+                        //if it doesnt exist prob its valid from earlier versions
+                        build.isValid = true;
+                    }
                     try{
                         //bObj.get("hasPob");
                         build.hasPob = bObj.getBoolean("hasPob");
@@ -683,6 +724,8 @@ public class BuildsPanel_Controller implements Initializable {
         bl.pec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
         bl.pec.init(charToImage(className,ascendancyName), buildName, ascendancyName, bl);
         bl.build = new Build(buildName,className,ascendancyName);
+        //every new build should be considered non-valid?
+        bl.build.isValid = false;
         bl.build.hasPob = false;
         bl.build.pobLink = "";
         for(SocketGroup sg : bl.build.getSocketGroup()){
@@ -714,6 +757,7 @@ public class BuildsPanel_Controller implements Initializable {
         bl.pec.init(charToImage(build.getClassName(),build.getAsc())
                 , build.getName(), build.getAsc(), bl);
         bl.build = build;
+        //bl.build.isValid = true;
         for(SocketGroup sg : bl.build.getSocketGroup()){
             SocketGroupLinker sgl = sgc.new SocketGroupLinker(sg);
             //sgl.sg = sg;
@@ -734,6 +778,9 @@ public class BuildsPanel_Controller implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
            BuildLinker bl = linker.get(activeBuildID);
+            if(!bl.build.isValid){
+                root.toggleFooterVisibility(true);
+            }
             POELevelFx.buildsLoaded.remove(bl.build);
             sgc.reset();
             buildsBox.getChildren().remove(bl.pec.getRoot()); // remove from the UI
@@ -747,6 +794,12 @@ public class BuildsPanel_Controller implements Initializable {
         // and also remove from file system?
         
     }
+    
+    private void updateBuildValidationBanner(int id){
+        BuildLinker bl = linker.get(id);
+        bl.pec.setValidBackgroundColor(bl.build.isValid , id==activeBuildID);
+        root.toggleFooterVisibility(bl.build.isValid);
+    }
    
     public void update(int id){
         if(id!=activeBuildID){
@@ -754,12 +807,13 @@ public class BuildsPanel_Controller implements Initializable {
             root.toggleActiveBuilds(true);
             for (BuildLinker bl : linker.values()) {
                 if(bl.id!=id){
-                    bl.pec.reset();
+                    bl.pec.reset(bl.build.isValid);
                 }else{
                     //update the sgroup controller with new build info
                     GemHolder.getInstance().className = getCurrentClass(id);
                     sgc.hookBuild_Controller(this);
                     sgc.update(bl.sgl_list);
+                    root.toggleFooterVisibility(bl.build.isValid);
                 }
             }
             //root.buildChanged(id);

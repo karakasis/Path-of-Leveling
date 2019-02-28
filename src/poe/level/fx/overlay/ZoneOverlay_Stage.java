@@ -47,10 +47,21 @@ public class ZoneOverlay_Stage  extends Stage{
         
         this.setAlwaysOnTop(true);
         this.initStyle(StageStyle.TRANSPARENT);
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        primScreenBounds.getMinY();
-        prefX = 200.0;
-        prefY = primScreenBounds.getMinY();
+        
+        if(Preferences_Controller.zones_overlay_pos[0] == -200 
+                && Preferences_Controller.zones_overlay_pos[1] == -200){
+            
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            primScreenBounds.getMinY();
+            prefX = 200.0;
+            prefY = primScreenBounds.getMinY();
+            
+            Preferences_Controller.updateZonesPos(prefX, prefY);
+        }else{
+            prefX = Preferences_Controller.zones_overlay_pos[0];
+            prefY = Preferences_Controller.zones_overlay_pos[1];
+        }
+        
         this.setOnCloseRequest(event -> {
             System.out.println("Closing level:: ");
             if(saveBuildsToMemory()){

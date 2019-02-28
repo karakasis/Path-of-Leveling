@@ -71,11 +71,25 @@ public class BuildEntry_Controller implements Initializable {
         return root;
     }
     
-    public void reset(){
+    public void reset(boolean validationColor){
         //root.setStyle("-fx-background-color: transparent;"
                 //+"-fx-border-style: solid;");
+        if(validationColor)
+            root.setStyle("color: transparent;");
+        else
+            root.setStyle("color: rgba(217, 215, 215, 0.8);");
+    }
+    
+    public void setValidBackgroundColor(boolean validationColor,boolean isBuildActive){
+        //root.setStyle("-fx-background-color: transparent;"
+                //+"-fx-border-style: solid;");
+        if(!isBuildActive){//so if build is not active set to transparent or gray.
+            if(validationColor)
+                root.setStyle("color: transparent;");
+            else
+                root.setStyle("color: rgba(217, 215, 215, 0.8);");
+        }
         
-        root.setStyle("color: transparent;");
     }
     
     

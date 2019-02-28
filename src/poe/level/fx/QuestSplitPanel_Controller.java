@@ -18,7 +18,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.TilePane;
 import poe.level.data.Gem;
 import poe.level.data.Zone;
 
@@ -48,6 +51,7 @@ public class QuestSplitPanel_Controller implements Initializable {
         level_label.setText("Level "+order);
         //quest_label.setText(z.getZoneQuest());
         quest_label.setText("");
+        int counter = 0;
         for(Gem g : gems){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gemButton.fxml"));
             //gemButton con = null;
@@ -60,6 +64,12 @@ public class QuestSplitPanel_Controller implements Initializable {
             GemButton_Controller controller = loader.<GemButton_Controller>getController();
             controller.load(g,this);
             gemBox.getChildren().add(gemButton);
+            counter++;
+            /*
+            if(counter%5 == 0){
+                RowConstraints row = new RowConstraints();
+                gemBox.getRowConstraints().add(row);
+            }*/
         }
     }
     

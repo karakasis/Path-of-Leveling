@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +18,8 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -83,10 +86,150 @@ public class Preferences_Controller implements Initializable {
     public static KeyCombination level_hotkey_remind_key;
     public static String poe_log_dir;
     
+    public static double[] zones_overlay_pos;
+    public static double[] level_overlay_pos;
+    public static double[] gem_overlay_pos;
+    
+    public static void updateZonesPos(double x, double y){
+        if(zones_overlay_pos == null){
+            zones_overlay_pos = new double[2];
+        }
+        zones_overlay_pos[0] = x;
+        zones_overlay_pos[1] = y;
+        
+        //replace the changes in prop file
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Properties props = new Properties();
+        try {
+            props.load(in);
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            in.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        props.setProperty("zones-overlay-pos", zones_overlay_pos[0] + "," + zones_overlay_pos[1]);
+        try {
+            props.store(out, null);
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            out.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void updateLevelPos(double x, double y){
+        if(level_overlay_pos == null){
+            level_overlay_pos = new double[2];
+        }
+        level_overlay_pos[0] = x;
+        level_overlay_pos[1] = y;
+        
+        //replace the changes in prop file
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Properties props = new Properties();
+        try {
+            props.load(in);
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            in.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        props.setProperty("level-overlay-pos", level_overlay_pos[0] + "," + level_overlay_pos[1]);
+        try {
+            props.store(out, null);
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            out.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void updateGemsPos(double x, double y){
+        if(gem_overlay_pos == null){
+            gem_overlay_pos = new double[2];
+        }
+        gem_overlay_pos[0] = x;
+        gem_overlay_pos[1] = y;
+        
+        //replace the changes in prop file
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Properties props = new Properties();
+        try {
+            props.load(in);
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            in.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        props.setProperty("gems-overlay-pos", gem_overlay_pos[0] + "," + gem_overlay_pos[1]);
+        try {
+            props.store(out, null);
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            out.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void hook(Main_Controller root){
         this.root = root;
     }
     
+    //i think i dont need to load and save overlay positions here.
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -389,6 +532,8 @@ public class Preferences_Controller implements Initializable {
 
         if(selectedDirectory == null){
              //No Directory selected
+             //do something ?
+             
         }else{
              directory = selectedDirectory.getAbsolutePath();
              System.out.println(selectedDirectory.getAbsolutePath());

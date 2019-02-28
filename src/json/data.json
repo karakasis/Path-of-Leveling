@@ -771,7 +771,7 @@
             {  
                "hastrial":false,
                "image":[  
-
+                   "none"
                ],
                "note":"Go upstream and cross over when the path ends.",
                "level":33,
@@ -786,8 +786,7 @@
                "image":[  
                   "DriedLake_Seed_1",
                   "DriedLake_Seed_2",
-                  "DriedLake_Seed_3",
-                  "DriedLake_Seed_4"
+                  "DriedLake_Seed_3"
                ],
                "note":"Kill Voll on one of the three spawns",
                "level":34,

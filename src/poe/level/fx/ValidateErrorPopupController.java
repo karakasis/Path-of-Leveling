@@ -24,7 +24,11 @@ public class ValidateErrorPopupController implements Initializable {
     @FXML 
     private Label build_label;
     
-    public void setUp(String build_name, String error){
+    private MainApp_Controller root;
+    
+    public void setUp(String build_name, String error, MainApp_Controller root){
+        
+        this.root = root;
         if(build_name!=null){
             String build_con = "";
             if(build_name.length()>=20){
@@ -39,6 +43,16 @@ public class ValidateErrorPopupController implements Initializable {
         }
         
         paste_error.setText(error);
+    }
+    
+    @FXML
+    private void sayNoToValidation(){
+        root.sayNoToValidation();
+    }
+    
+    @FXML
+    private void sayYesToValidation(){
+        root.sayYesToValidation();
     }
     
     /**
