@@ -68,6 +68,7 @@ public class ZoneOverlay_Controller implements Initializable {
             stage.setY(mouseEvent.getScreenY() + dragDelta.y);
             ZoneOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
             ZoneOverlay_Stage.prefY = mouseEvent.getScreenY() + dragDelta.y;
+            Preferences_Controller.updateZonesPos(ZoneOverlay_Stage.prefX, ZoneOverlay_Stage.prefY);
           }
         });
     }

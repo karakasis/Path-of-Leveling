@@ -28,7 +28,7 @@
          <children>
             <Label layoutX="28.0" layoutY="22.0" text="Level :" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="22.0" />
             <Label layoutX="28.0" layoutY="60.0" text="Act :" AnchorPane.leftAnchor="18.0" />
-            <Label layoutX="28.0" layoutY="96.0" text="Sold :" AnchorPane.leftAnchor="18.0" />
+            <Label layoutX="28.0" layoutY="96.0" text="Sold by :" AnchorPane.leftAnchor="18.0" />
             <Label fx:id="label_with" layoutX="28.0" layoutY="177.0" text="with :" AnchorPane.leftAnchor="18.0" />
             <JFXButton fx:id="backButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" layoutY="6.0" onAction="#onClick" prefHeight="205.0" prefWidth="230.0" ripplerFill="#111111" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
             <JFXToggleButton fx:id="replaceToggle" layoutX="28.0" layoutY="132.0" onAction="#toggleReplace" prefHeight="38.0" prefWidth="123.0" size="6.0" text="Replace later" AnchorPane.leftAnchor="8.0" />

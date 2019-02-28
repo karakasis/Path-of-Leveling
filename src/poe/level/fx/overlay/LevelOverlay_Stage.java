@@ -10,13 +10,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import poe.level.fx.Main_Stage;
 import static poe.level.fx.POELevelFx.saveBuildsToMemory;
+import poe.level.fx.Preferences_Controller;
+import static poe.level.fx.overlay.ZoneOverlay_Stage.prefX;
+import static poe.level.fx.overlay.ZoneOverlay_Stage.prefY;
 
 /**
  *
@@ -25,6 +30,8 @@ import static poe.level.fx.POELevelFx.saveBuildsToMemory;
 public class LevelOverlay_Stage extends Stage{
     
     private LevelOverlay_Controller controller;
+    public static double prefX;
+    public static double prefY;
     
     public LevelOverlay_Stage(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/LevelOverlay.fxml"));
@@ -52,6 +59,22 @@ public class LevelOverlay_Stage extends Stage{
         this.setScene(scene);
         this.setAlwaysOnTop(true);
         this.initStyle(StageStyle.TRANSPARENT);
+        
+        if(Preferences_Controller.level_overlay_pos[0] == -200 
+                && Preferences_Controller.level_overlay_pos[1] == -200){
+            
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            prefX = primScreenBounds.getWidth()/2 - 736/2;
+            prefY = primScreenBounds.getMaxY() - 100;
+            
+            Preferences_Controller.updateLevelPos(prefX, prefY);
+        }else{
+            prefX = Preferences_Controller.level_overlay_pos[0];
+            prefY = Preferences_Controller.level_overlay_pos[1];
+        }
+        
+        this.setX(prefX);
+        this.setY(prefY);
         
         controller.hookStage(this);
         controller.setPlayerLevel(Main_Stage.playerLevel);

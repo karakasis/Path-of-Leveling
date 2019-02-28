@@ -98,7 +98,6 @@ public class POELevelFx extends Application {
     private static String update_path_prefix = "https://github.com/karakasis/Path-of-Leveling/releases/download/";
     private static String update_path_suffix = "/PathOfLeveling.jar";
     private static String version = "v0.65-alpha";
-    private static String new_version;
     private static boolean is_new_version;
     //v0.5-alpha <- between
     
@@ -108,13 +107,13 @@ public class POELevelFx extends Application {
             URL url;
             
             try{
-            url = new URL(update_path_prefix + "" + version + "" + update_path_suffix);
+            url = new URL(update_path_prefix + "" + POELevelFx.version + "" + update_path_suffix);
             HttpURLConnection httpConnection = (HttpURLConnection) (url.openConnection());
             long completeFileSize = httpConnection.getContentLength();
             UpdaterController.finalSize = completeFileSize;
             java.io.BufferedInputStream in = new java.io.BufferedInputStream(httpConnection.getInputStream());
             java.io.FileOutputStream fos = new java.io.FileOutputStream(
-            "PathOfLeveling-"+new_version+".jar");
+            "PathOfLeveling-"+POELevelFx.version+".jar");
             java.io.BufferedOutputStream bout = new BufferedOutputStream(
             fos, 1024);
             byte[] data = new byte[1024];
@@ -215,6 +214,15 @@ public class POELevelFx extends Application {
                         Preferences_Controller.level_hotkey_remind_key = KeyCombination.NO_MATCH;
                     }
 
+                    //new changes
+                    
+                    prop.setProperty("gems-overlay-pos", "-200.0,-200.0");
+                    Preferences_Controller.updateGemsPos(-200.0, -200.0);
+                    prop.setProperty("level-overlay-pos", "-200.0,-200.0");
+                    Preferences_Controller.updateLevelPos(-200.0, -200.0);
+                    prop.setProperty("zones-overlay-pos", "-200.0,-200.0");
+                    Preferences_Controller.updateZonesPos(-200.0, -200.0);
+                    
                     // save properties to project root folder
                     prop.store(output, null);
 
@@ -254,6 +262,49 @@ public class POELevelFx extends Application {
                             if(!(prop.getProperty("poe-dir")==null || prop.getProperty("poe-dir").equals(""))){
                                 Preferences_Controller.poe_log_dir = prop.getProperty("poe-dir") + "\\logs\\Client.txt";
                             }
+                            //new changes
+                            //a bug is introduced at this point. users with older versions will not have
+                            //those lines in their prop files and a null error will pop up
+                            //quick fix if null add the line manually from code.
+                            String[] zones_pos = null;
+                            try{
+                                zones_pos = prop.getProperty("zones-overlay-pos").toString().split(",");
+                            }catch(NullPointerException e){
+                                //hopefully the update..Pos method will write the values without crashing.
+                                //my only issue is that i am already opening the prop file in read mode, and then from within
+                                //im calling a write function.
+                                System.out.println("zones-overlay-pos was missing from config.properties and is manually added.");
+                                zones_pos= new String[2];
+                                zones_pos[0] = "-200.0";
+                                zones_pos[1] = "-200.0";
+                            }
+                            Preferences_Controller.updateZonesPos(Double.parseDouble(zones_pos[0])
+                                    , Double.parseDouble(zones_pos[1]));
+                            
+                            String[] level_pos = null;
+                            try{
+                                 level_pos = prop.getProperty("level-overlay-pos").toString().split(",");
+                            }catch(NullPointerException e){
+                                System.out.println("level-overlay-pos was missing from config.properties and is manually added.");
+                                level_pos= new String[2];
+                                level_pos[0] = "-200.0";
+                                level_pos[1] = "-200.0";
+                            }   
+                            Preferences_Controller.updateLevelPos(Double.parseDouble(level_pos[0])
+                                    , Double.parseDouble(level_pos[1]));
+                            
+                            String[] gem_pos = null;
+                            try{
+                                gem_pos = prop.getProperty("gems-overlay-pos").toString().split(",");
+                            }catch(NullPointerException e){
+                                System.out.println("gems-overlay-pos was missing from config.properties and is manually added.");
+                                gem_pos= new String[2];
+                                gem_pos[0] = "-200.0";
+                                gem_pos[1] = "-200.0";
+                            } 
+                            Preferences_Controller.updateGemsPos(Double.parseDouble(gem_pos[0])
+                                    , Double.parseDouble(gem_pos[1]));
+                            
                   } catch (IOException ex) {
                           ex.printStackTrace();
                   } finally {
@@ -283,6 +334,7 @@ public class POELevelFx extends Application {
                       System.out.println(":incorect:");
                       Preferences_Controller.level_hotkey_remind_key = KeyCombination.NO_MATCH;
                   }
+                  
             }
 
               loadActsFromMemory();
@@ -554,7 +606,11 @@ public class POELevelFx extends Application {
         }
     }
     
-    private void loadBuildsFromMemory(){
+    public static void reloadBuilds(){
+        loadBuildsFromMemory();
+    }
+    
+    private static void loadBuildsFromMemory(){
         //pseudo for loop loads builds and panels put them
         //into buildlinker and add buildlinker to the list
         //TODO: remember to sign the build with the static method
@@ -603,6 +659,13 @@ public class POELevelFx extends Application {
                         bObj.getString("className"),
                         bObj.getString("ascendancyName")
                 );
+                try{
+                    //bObj.get("hasPob");
+                    build.isValid = bObj.getBoolean("isValid");
+                }catch(org.json.JSONException e){
+                    //if it doesnt exist prob its valid from earlier versions
+                    build.isValid = true;
+                }
                 build.characterName = bObj.getString("characterName");
                 build.level = bObj.getInt("level");
                 try{
@@ -751,7 +814,7 @@ public class POELevelFx extends Application {
             bObj.put("ascendancyName",build.getAsc());
             bObj.put("level", build.level); //<change
             bObj.put("characterName",build.characterName);
-            
+            bObj.put("isValid", build.isValid);
             bObj.put("hasPob",build.hasPob);
             bObj.put("pobLink",build.pobLink);
         
@@ -961,7 +1024,8 @@ public class POELevelFx extends Application {
      */
     public static void main(String[] args) {
         setUpDirectories();
-        setUpLog();
+        //remove below for debuging.
+        //setUpLog();
         if(checkForNewVersion()){
             is_new_version = true;
             LauncherImpl.launchApplication(POELevelFx.class, UpdatePreloader.class, args);
@@ -1055,7 +1119,6 @@ public class POELevelFx extends Application {
             writer.print("");
             writer.close();
         }
-        //remove this for debuging.
         PrintStream printStream= null;
         try {
             printStream = new PrintStream(new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\log.txt", true));
@@ -1100,12 +1163,14 @@ public class POELevelFx extends Application {
                 return false;
             }
             
-            final String version = input;
-            if(version.equals(POELevelFx.version)){
-                return false;
-            }else{
-                new_version = version;
+            String new_git_version = input;
+            System.out.println("Current Version: "+POELevelFx.version);
+            System.out.println("New Version: "+new_git_version);
+            if(!POELevelFx.version.equals(new_git_version)){
+                POELevelFx.version = new_git_version;
                 return true;
+            }else{
+                return false;
             }
     }
     
