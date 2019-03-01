@@ -46,14 +46,12 @@ public class Logger extends Thread {
     /**
      * Creates a new log file tailer
      * 
-     * @param file
-     *            The file to tail
-     * @param sampleInterval
-     *            How often to check for updates to the log file (default = 5000ms)
-     * @param startAtBeginning
-     *            Should the tailer simply tail or should it process the entire file
-     *            and continue tailing (true) or simply start tailing from the end
-     *            of the file
+     * @param file             The file to tail
+     * @param sampleInterval   How often to check for updates to the log file
+     *                         (default = 5000ms)
+     * @param startAtBeginning Should the tailer simply tail or should it process
+     *                         the entire file and continue tailing (true) or simply
+     *                         start tailing from the end of the file
      */
     public Logger(File file, long sampleInterval, boolean startAtBeginning) {
         this.logfile = file;

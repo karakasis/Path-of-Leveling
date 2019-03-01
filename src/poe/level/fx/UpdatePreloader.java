@@ -57,6 +57,9 @@ public class UpdatePreloader extends Preloader {
         if (scn.getType() == StateChangeNotification.Type.BEFORE_START) {
             stage.hide();
         }
+        POELevelFx application = (POELevelFx) scn.getApplication();
+        if (application != null)
+            controller.hookMain(application);
     }
 
     @Override

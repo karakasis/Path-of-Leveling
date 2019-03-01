@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,19 +26,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Base64;
+//import java.util.Base64;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.util.zip.DataFormatException;
+import java.util.zip.Inflater;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -84,7 +88,6 @@ public class POELevelFx extends Application {
     // v0.5-alpha <- between
 
     public void update() {
-
         URL url;
 
         try {
@@ -100,6 +103,18 @@ public class POELevelFx extends Application {
             long downloadedFileSize = 0;
             int x = 0;
             while ((x = in.read(data, 0, 1024)) >= 0) {
+                if (UpdaterController.cancelDownload) {
+                    bout.close();
+                    in.close();
+                    File file = new File("PathOfLeveling-" + POELevelFx.version + ".jar");
+                    file.delete();
+                    try {
+                        init();
+                    } catch (Exception ex) {
+                        Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                }
                 downloadedFileSize += x;
 
                 notifyPreloader(new UpdatePreloader.ProgressNotification(downloadedFileSize));
@@ -116,11 +131,40 @@ public class POELevelFx extends Application {
 
     }
 
+    public void declineUpdateFromPreload() {
+        is_new_version = false;
+        try {
+            init();
+        } catch (Exception ex) {
+            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("test");
+    }
+
     @Override
     public void init() throws Exception {
 
+        boolean restart = false;
         if (is_new_version) {
-            update();
+            
+            while(true){
+                    System.err.println("");
+                if(UpdaterController.allowUpdate){
+                    System.out.println("allowed");
+                    UpdaterController.allowUpdate = false;
+                    update();
+                    break;
+                }
+                if(UpdaterController.declUpdate){
+                    is_new_version = false;
+                    restart = true;
+                    break;
+                }
+            }
+            if(restart) {
+                //LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, null);
+                init();
+            }
         } else {
             Platform.setImplicitExit(false);
             addTrayIcon();
@@ -319,11 +363,133 @@ public class POELevelFx extends Application {
 
             }
 
+            StringBuilder raw = readRawToString();
+            String replace = raw.toString().replace('-','+').replace('_','/').trim();
+            //save the replaced-values base64 string - optional
+            PrintWriter out = new PrintWriter("decoded.txt");
+            out.println(replace);
+            out.close();
+            //read into byte array using apache commons base64
+            byte[] byteValueBase64Decoded = null;
+            try{
+                byteValueBase64Decoded = org.apache.commons.codec.binary.Base64.decodeBase64(replace);
+            }catch(java.lang.IllegalArgumentException e){
+                e.printStackTrace();
+                return;
+            }
+            String inflatedXML = "";
+            try{
+                //inflate 
+                inflatedXML = inflate(byteValueBase64Decoded);
+            }catch(IOException e){
+                
+            }catch(DataFormatException e){
+                
+            }
+            System.out.println(inflatedXML);
+            out = new PrintWriter("pathofbuilding.txt");
+            out.println(inflatedXML);
+            out.close();
+        //JSONArray obj = new JsonParser().parse(stringValueBase64Encoded).getAsJsonArray();
+        //JSONArray builds_array = new JSONArray(stringValueBase64Decoded);
+        
             loadActsFromMemory();
             loadGemsFromMemory();
             loadBuildsFromMemory();
 
         }
+    }
+
+    private String inflate(byte[] data) throws IOException, DataFormatException {
+        Inflater inflater = new Inflater();
+        inflater.setInput(data);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] buffer = new byte[1024];
+        while (!inflater.finished()) {
+            int count = inflater.inflate(buffer);
+            outputStream.write(buffer, 0, count);
+        }
+        outputStream.close();
+        byte[] output = outputStream.toByteArray();
+        System.out.println("Original: " + data.length);
+        System.out.println("Compressed: " + output.length);
+        return new String(output);
+    }
+
+    private StringBuilder readRawToString() {
+        BufferedReader br = null;
+        StringBuilder sb = null;
+        try {
+            br = new BufferedReader(new FileReader("raw.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            sb = new StringBuilder();
+            String line = null;
+            try {
+                line = br.readLine();
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                try {
+                    line = br.readLine();
+                } catch (IOException ex) {
+                    Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            String everything = sb.toString();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return sb;
+    }
+
+    private ArrayList<String[]> mergeTags() {
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("tags.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ArrayList<String[]> list_tags = new ArrayList<>();
+        try {
+            String line = null;
+            try {
+
+                line = br.readLine();
+                while (line != null) {
+                    String[] tags = line.split(",");
+                    list_tags.add(tags);
+                    line = br.readLine();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } finally {
+            try {
+                br.close();
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return list_tags;
+    }
+
+    public void close() {
+        // exp.close();
+        main.close();
+        // zone.close();
     }
 
     private void loadActsFromMemory() {
@@ -818,20 +984,19 @@ public class POELevelFx extends Application {
     }
 
     /**
-     * @param args
-     *            the command line arguments
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
         setUpDirectories();
         // remove below for debuging.
         // setUpLog();
-        if (checkForNewVersion()) {
-            is_new_version = true;
-            LauncherImpl.launchApplication(POELevelFx.class, UpdatePreloader.class, args);
-        } else {
-            is_new_version = false;
-            LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, args);
-        }
+//        if (checkForNewVersion()) {
+        is_new_version = true;
+        LauncherImpl.launchApplication(POELevelFx.class, UpdatePreloader.class, args);
+//        } else {
+        is_new_version = false;
+        LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, args);
+//        }
 
     }
 

@@ -40,8 +40,7 @@ public class Tail implements LoggerListener {
     /**
      * A new line has been added to the tailed log file
      *
-     * @param line
-     *            The new line that has been added to the tailed log file
+     * @param line The new line that has been added to the tailed log file
      */
     @Override
     public void newLogFileLine(String line) {
@@ -78,7 +77,7 @@ public class Tail implements LoggerListener {
                 else
                     charname += a;
             }
-            if (charname.equals(parent.playerName)) {
+            if (charname.toLowerCase().equals(parent.playerName.toLowerCase())) {
                 int padding = line.indexOf("is now level");
                 String plvl = "";
                 for (int i = padding + 13; i < line.length(); i++) {
