@@ -9,30 +9,29 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javax.imageio.ImageIO;
 
 /**
  *
  * @author Christos
  */
 public class Gem {
-    
-    public class Info{
+
+    public class Info {
         public String quest_name;
         public String npc;
         public int act;
-        public String town;
         public ArrayList<String> available_to;
     }
-    
+
     public transient Image gemIcon;
     public transient Image smallGemIcon;
     public int id;
-    
+
     public String name;
     public String quest_name;
     public String npc;
@@ -45,35 +44,35 @@ public class Gem {
     public String color;
     public String iconPath;
     public transient Label cachedLabel;
-    
+
     public String iconDirPath;
-    
+
     public boolean replaced;
     public Gem replacedWith;
     public boolean replaces;
     public Gem replacesGem;
-    
-    //IDS FOR JSON CONVERTION
+
+    // IDS FOR JSON CONVERTION
     public int id_replaced;
     public int id_replaces;
-    
+
     public boolean isRewarded;
     public Info reward;
     public ArrayList<Info> buy;
-    
+
     public boolean isActive;
     public boolean isSupport;
     public ArrayList<String> tags;
-    
-    public boolean isBought(){
-        if(buy.size()>0){
+
+    public boolean isBought() {
+        if (buy.size() > 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
-     public Gem(){
+
+    public Gem() {
         available_to = new ArrayList<>();
         level_added = -1;
         replaced = false;
@@ -85,8 +84,8 @@ public class Gem {
         id_replaces = -1;
         tags = new ArrayList<>();
     }
-    
-    public Gem(Gem dupe){
+
+    public Gem(Gem dupe) {
         available_to = new ArrayList<>();
         level_added = -1;
         replaced = false;
@@ -99,7 +98,7 @@ public class Gem {
         this.gemIcon = dupe.getIcon();
         this.smallGemIcon = dupe.getSmallIcon();
         this.name = dupe.getGemName();
-        //more
+        // more
         this.id = dupe.id;
         this.quest_name = dupe.quest_name;
         this.npc = dupe.npc;
@@ -110,59 +109,55 @@ public class Gem {
         this.town = dupe.town;
         this.color = dupe.color;
         this.iconPath = dupe.iconPath;
-        this.cachedLabel= dupe.cachedLabel;
+        this.cachedLabel = dupe.cachedLabel;
         this.iconDirPath = dupe.iconDirPath;
         this.isRewarded = dupe.isRewarded;
         this.tags = new ArrayList<>(dupe.tags);
         this.isActive = dupe.isActive;
         this.isSupport = dupe.isSupport;
     }
-    
-    public int getLevelAdded(){
-        if(level_added!=-1){
+
+    public int getLevelAdded() {
+        if (level_added != -1) {
             return level_added;
-        }else
+        } else
             return required_lvl;
     }
-    
-    public Image getIcon(){
-        //hopefully resized
+
+    public Image getIcon() {
+        // hopefully resized
         return gemIcon;
     }
-    
-    public Image getSmallIcon(){
-        //hopefully resized
+
+    public Image getSmallIcon() {
+        // hopefully resized
         return smallGemIcon;
     }
-    
-    public String getGemName(){
+
+    public String getGemName() {
         return name;
     }
-    
-    public Gem dupeGem(){
+
+    public Gem dupeGem() {
         return new Gem(this);
     }
-    
-    public ArrayList<String> getChar(){
+
+    public ArrayList<String> getChar() {
         return available_to;
     }
 
-    public void putChar(String z){
-        available_to.add(z);
-    }
-    
-    public String getGemColor(){
+    public String getGemColor() {
         return color;
     }
 
-    public Label getLabel(){
+    public Label getLabel() {
         cachedLabel = new Label();
         cachedLabel.setText(name);
         cachedLabel.setGraphic(new ImageView(gemIcon));
         return cachedLabel;
     }
-    
-    public void resizeImage(){
+
+    public void resizeImage() {
         BufferedImage before = SwingFXUtils.fromFXImage(gemIcon, null);
         int w = before.getWidth();
         int h = before.getHeight();
@@ -171,12 +166,11 @@ public class Gem {
         int h2 = (int) (h * 0.7);
         BufferedImage after = new BufferedImage(w2, h2, BufferedImage.TYPE_INT_ARGB);
         AffineTransform scaleInstance = AffineTransform.getScaleInstance(0.7, 0.7);
-        AffineTransformOp scaleOp 
-            = new AffineTransformOp(scaleInstance, AffineTransformOp.TYPE_BILINEAR);
+        AffineTransformOp scaleOp = new AffineTransformOp(scaleInstance, AffineTransformOp.TYPE_BILINEAR);
 
         after = scaleOp.filter(before, after);
         smallGemIcon = SwingFXUtils.toFXImage(after, null);
-        //ImageIcon imageIcon = new ImageIcon(dimg);
+        // ImageIcon imageIcon = new ImageIcon(dimg);
     }
-    
+
 }

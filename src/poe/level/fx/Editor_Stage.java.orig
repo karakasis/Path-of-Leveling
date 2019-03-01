@@ -8,7 +8,11 @@ package poe.level.fx;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
 
+=======
+import javafx.beans.value.ChangeListener;
+>>>>>>> origin/development
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -53,12 +57,20 @@ public class Editor_Stage extends Stage {
         this.show();
         sp.prefWidthProperty().bind(scene.widthProperty());
         sp.prefHeightProperty().bind(scene.heightProperty());
-
-        this.widthProperty().addListener(e -> editor_controller.resize(this.getHeight(), this.getWidth()));
-        this.heightProperty().addListener(e -> editor_controller.resize(this.getHeight(), this.getWidth()));
+        
+        
+        this.widthProperty().addListener(e -> editor_controller.resize(this.getHeight(),this.getWidth()));
+        this.heightProperty().addListener(e -> editor_controller.resize(this.getHeight(),this.getWidth())); 
     }
+<<<<<<< HEAD
 
     public void returnToLauncher() {
+=======
+    
+    
+    
+    public void returnToLauncher(){
+>>>>>>> origin/development
         parent.launcher();
     }
 }

@@ -13,27 +13,26 @@ import javafx.scene.image.ImageView;
  *
  * @author Christos
  */
-public class SocketGroupListCell extends ListCell<SocketGroup>{
-    
+public class SocketGroupListCell extends ListCell<SocketGroup> {
+
     @Override
     protected void updateItem(SocketGroup sg, boolean empty) {
-        super.updateItem(sg, empty) ;
+        super.updateItem(sg, empty);
         if (empty) {
             setText(null);
         } else {
             Label l = new Label();
-            if(sg.getActiveGem()!=null){
-                if(!sg.getActiveGem().getGemName().equals("<empty group>")){
+            if (sg.getActiveGem() != null) {
+                if (!sg.getActiveGem().getGemName().equals("<empty group>")) {
                     l.setGraphic(new ImageView(sg.getActiveGem().getSmallIcon()));
                     l.setText(sg.getActiveGem().getGemName());
                 }
-            }
-            else{
+            } else {
                 setText(null);
             }
             setGraphic(l);
 
         }
     }
-    
+
 }
