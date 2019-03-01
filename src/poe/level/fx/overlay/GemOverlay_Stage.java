@@ -211,10 +211,10 @@ public class GemOverlay_Stage extends Stage{
         slideIn.getKeyFrames().addAll(kf_slideIn,kf_delay);
 
         Timeline slideOut = new Timeline();
-        KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 0.0));
+        KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 20.0));
         slideOut.getKeyFrames().add(kf_slideOut);
         
-        slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending");isPlaying = false;}));
+        slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending");isPlaying = false; this.hide();}));
         slideIn.setOnFinished(e -> Platform.runLater(() -> slideOut.play()));
         
         slideIn.play();

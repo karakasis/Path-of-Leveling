@@ -16,4 +16,14 @@ You have entered The Crypt.
 You have entered The Crypt.
 You have entered The Crypt.
 You have entered The Crypt.
+: debug (Scion) is now level 10
 You have entered The Crypt.
+: debug (Scion) is now level 10
+You have entered The Crypt.
+: debug (Scion) is now level 2
+: debug (Scion) is now level 2rrrrrrrr
+: debug (Scion) is now level 2rr
+You have entered The Crypt.eeeeeeeeee
+: debug (Scion) is now level 2rr
+You have entered The Crypt.eeeeeeeeeeeee
+: debug (Scion) is now level 2

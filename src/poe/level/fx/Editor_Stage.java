@@ -8,7 +8,9 @@ package poe.level.fx;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -45,12 +47,20 @@ public class Editor_Stage extends Stage{
         }
         editor_controller = loader.<MainApp_Controller>getController();
         editor_controller.hook(this);
-        Scene scene = new Scene(sp);
+        Scene scene = new Scene(new Group(sp));
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         this.setScene(scene);
         
         this.show();
+        sp.prefWidthProperty().bind(scene.widthProperty());
+        sp.prefHeightProperty().bind(scene.heightProperty());
+        
+        
+        this.widthProperty().addListener(e -> editor_controller.resize(this.getHeight(),this.getWidth()));
+        this.heightProperty().addListener(e -> editor_controller.resize(this.getHeight(),this.getWidth())); 
     }
+    
+    
     
     public void returnToLauncher(){
         parent.launcher();

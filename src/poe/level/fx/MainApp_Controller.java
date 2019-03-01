@@ -53,6 +53,8 @@ import sun.net.www.http.HttpClient;
 public class MainApp_Controller implements Initializable {
     
     @FXML
+    private AnchorPane container;
+    @FXML
     private AnchorPane buildsAnchorPane;
     @FXML
     private AnchorPane socketGroupsAnchorPane;
@@ -107,6 +109,12 @@ public class MainApp_Controller implements Initializable {
     
     public void hook(Editor_Stage parent){
         this.parent = parent;
+    }
+    
+    public void resize(double h, double w){
+        System.out.println(h + "" + w);
+        container.prefWidth(w);
+        container.prefHeight(h);
     }
     
     @Override

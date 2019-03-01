@@ -129,6 +129,7 @@ public class ZoneOverlay_Stage  extends Stage{
             Timeline slideOut = new Timeline();
             KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 0.0));
             slideOut.getKeyFrames().add(kf_slideOut);
+            slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending"); this.hide();}));
             slideIn.setOnFinished(e -> Platform.runLater(() -> slideOut.play()));
         }else{
             slideIn.getKeyFrames().addAll(kf_slideIn);
@@ -187,6 +188,7 @@ public class ZoneOverlay_Stage  extends Stage{
         Timeline timeline = new Timeline();
         KeyFrame endFrame = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 0.0));
         timeline.getKeyFrames().add(endFrame);
+        timeline.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending"); this.hide();}));
         timeline.play();
     }
     

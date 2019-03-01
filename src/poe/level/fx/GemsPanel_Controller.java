@@ -29,6 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import poe.level.data.Gem;
 import poe.level.data.GemHolder;
@@ -95,34 +96,6 @@ public class GemsPanel_Controller implements Initializable {
                 }
             }
             root.removeGemPanel_button.setDisable(false);
-        }
-        
-        public void offsetVBox(int code){
-            
-            if( code == 0){
-                leftid.add(rightid.remove(rightid.size()-1));
-            }else if( code == 1){
-                rightid.add(leftid.remove(leftid.size()-1));
-            }
-            active_gemLinker = -1;
-        }
-        
-        public void removeVBox(int code){
-            if( code == 0){
-                for(int i=0; i<leftid.size();i++){
-                    if(leftid.get(i) == active_gemLinker){
-                        leftid.remove(i);
-                        break;
-                    }
-                }
-            }else if( code == 1){
-                for(int i=0; i<rightid.size();i++){
-                    if(rightid.get(i) == active_gemLinker){
-                        rightid.remove(i);
-                        break;
-                    }
-                }
-            }
         }
         
         public void autoSelectActiveGem(Gem g){
@@ -249,7 +222,8 @@ public class GemsPanel_Controller implements Initializable {
         }
         return sg_list;
     }
-    
+    @FXML
+    private TilePane gemContainer;
     @FXML 
     private AnchorPane rootPane;
     @FXML
@@ -265,10 +239,6 @@ public class GemsPanel_Controller implements Initializable {
     @FXML
     private JFXComboBox<Gem> activeSkillGroup;
     @FXML
-    private VBox leftGemBox;
-    @FXML
-    private VBox rightGemBox;
-    @FXML
     private JFXButton addGemPanel_button;
     @FXML
     private JFXButton removeGemPanel_button;
@@ -281,7 +251,6 @@ public class GemsPanel_Controller implements Initializable {
     private MainApp_Controller root;
     private SocketGroupsPanel_Controller sgc;
     private ArrayList<SocketGroupLinker> linker;
-    private int count;
     private SocketGroupLinker current_sgl;
     
     public void hook(MainApp_Controller root){
@@ -325,8 +294,9 @@ public class GemsPanel_Controller implements Initializable {
     public void update(SocketGroupLinker sgl){
         current_sgl = sgl;
         
-        leftGemBox.getChildren().clear();
-        rightGemBox.getChildren().clear();
+        //leftGemBox.getChildren().clear();
+        //rightGemBox.getChildren().clear();
+        gemContainer.getChildren().clear();
         removeGemPanel_button.setDisable(true);
         
         rootPane.setVisible(true);
@@ -363,7 +333,6 @@ public class GemsPanel_Controller implements Initializable {
             sgl.gpl.hook(this,sgl.sg);
             sgl.gpl.gl_map = new HashMap<>();
             
-            count = 0;
             for(Gem g : sgl.sg.getGems()){
                 GemLinker gl = new GemLinker();
                 sgl.gpl.gl_map.put(gl.hook(sgl.gpl), gl);
@@ -373,17 +342,10 @@ public class GemsPanel_Controller implements Initializable {
 
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("gemEntry.fxml"));
-                        if(count == 0){
-                            leftGemBox.getChildren().add(loader.load());
-                            sgl.gpl.loadGemPanel(0,gl.id);
-                            count = 1;
-
-                        }else{
-                            rightGemBox.getChildren().add(loader.load());
-                            sgl.gpl.loadGemPanel(1,gl.id);
-                            //gem_c.loadGemPanel(controller,1,g);
-                            count = 0;
-                        }
+                        
+                        gemContainer.getChildren().add(loader.load());
+                        sgl.gpl.loadGemPanel(1,gl.id);
+                        
                         gl.hookController(loader.<GemEntry_Controller>getController());
                         if(gl.gem.getGemName().equals("<empty group>")){
                             gl.start();
@@ -399,21 +361,12 @@ public class GemsPanel_Controller implements Initializable {
                // }
             }
         }else{
-            for(int gem_id : sgl.gpl.leftid){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("gemEntry.fxml"));
-                try {
-                    leftGemBox.getChildren().add(loader.load());
-                } catch (IOException ex) {
-                    Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                sgl.gpl.gl_map.get(gem_id).hookController(loader.<GemEntry_Controller>getController());
-                //loader.setController(sgl.gpl.gl_map.get(gem_id).controller);
-                sgl.gpl.gl_map.get(gem_id).load();
-            }
+            
+            
             for(int gem_id : sgl.gpl.rightid){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("gemEntry.fxml"));
                 try {
-                    rightGemBox.getChildren().add(loader.load());
+                    gemContainer.getChildren().add(loader.load());
                 } catch (IOException ex) {
                     Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -473,14 +426,6 @@ public class GemsPanel_Controller implements Initializable {
 
     }
     
-    private int findNextVBox(){
-        if(current_sgl.gpl.leftid.size()>current_sgl.gpl.rightid.size()){
-            return 1;
-        }else{
-            return 0;
-        }
-    }
-    
     @FXML
     private void addNote(){
         requestNotePopup();
@@ -498,6 +443,7 @@ public class GemsPanel_Controller implements Initializable {
         GemLinker gl = new GemLinker();
         current_sgl.gpl.gl_map.put(gl.hook(current_sgl.gpl), gl);
         gl.gem = GemHolder.getInstance().tossDummie();
+        /*
         if(findNextVBox() == 0){
             try { 
                 leftGemBox.getChildren().add(loader.load());
@@ -512,6 +458,11 @@ public class GemsPanel_Controller implements Initializable {
                 } catch (IOException ex) {
                     Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
+        }*/
+        try {
+            gemContainer.getChildren().add(loader.load());
+        } catch (IOException ex) {
+            Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         gl.hookController(loader.<GemEntry_Controller>getController());
         gl.start();
@@ -531,42 +482,13 @@ public class GemsPanel_Controller implements Initializable {
             GemEntry_Controller thisiswrong = get.controller;
             removeGem(get.gem); //remove gem from socketGroup class
             current_sgl.gpl.gl_map.remove(current_sgl.gpl.active_gemLinker);//let go of the GemLinker reference
+            
             //current.sgl//remove from the vbox lists
             if(thisiswrong!=null){
-                if(vbox == 0){
-                    leftGemBox.getChildren().remove(thisiswrong.getRoot());
-                }else if(vbox == 1){
-                    rightGemBox.getChildren().remove(thisiswrong.getRoot());
-                }
+                gemContainer.getChildren().remove(thisiswrong.getRoot());
             }
             removeGemPanel_button.setDisable(true);
 
-            //offset
-            if(vbox == 0){//if we removed an L.
-                //we need to check if the L's are smaller than R's.
-                
-                    current_sgl.gpl.removeVBox(vbox);
-                if(leftGemBox.getChildren().size()<rightGemBox.getChildren().size()){
-                    //in this case we need to offset the lowest R to become an L.
-                    leftGemBox.getChildren().add(
-                            rightGemBox.getChildren().remove(
-                                    rightGemBox.getChildren().size()-1));
-                    
-                    current_sgl.gpl.offsetVBox(vbox);
-                }
-            }else if(vbox == 1){ //if we removed an R
-                
-                    current_sgl.gpl.removeVBox(vbox);
-                //we need to check if the L's are bigger than R's by 2.
-                if(leftGemBox.getChildren().size()>rightGemBox.getChildren().size() + 1){
-                    //in this case we need to offset the lowest L to become an R.
-                    rightGemBox.getChildren().add(
-                            leftGemBox.getChildren().remove(
-                                    leftGemBox.getChildren().size()-1));
-                    
-                    current_sgl.gpl.offsetVBox(vbox);
-                }
-            }
         }
     }
     
