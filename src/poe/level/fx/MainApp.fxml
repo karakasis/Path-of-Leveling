@@ -43,7 +43,8 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <Menu mnemonicParsing="false" text="Path of Building">
                           <items>
-                            <MenuItem fx:id="get_pob_link" disable="true" mnemonicParsing="false" onAction="#getPOB" text="Get the pastebin" />
+                              <MenuItem mnemonicParsing="false" onAction="#createFromPOB" text="Create build from Pastebin" />
+                            <MenuItem fx:id="get_pob_link" disable="true" mnemonicParsing="false" onAction="#getPOB" text="Get the Pastebin" />
                               <MenuItem fx:id="open_pob_view" disable="true" mnemonicParsing="false" onAction="#openPOBwebview" text="Open the PoB build" />
                               <MenuItem fx:id="link_active_pob" disable="true" mnemonicParsing="false" onAction="#linkPOB" text="Link active build with PoB" />
                           </items>

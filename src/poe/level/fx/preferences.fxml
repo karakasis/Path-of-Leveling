@@ -26,8 +26,8 @@
             <Font name="Alegreya Sans SC" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="show_hide_hotkey_zone" editable="false" layoutX="388.0" layoutY="74.0" prefHeight="25.0" prefWidth="79.0" />
-      <Label layoutX="317.0" layoutY="78.0" text="Show/Hide" />
+      <TextField fx:id="show_hide_hotkey_zone" editable="false" layoutX="388.0" layoutY="137.0" prefHeight="25.0" prefWidth="79.0" />
+      <Label layoutX="317.0" layoutY="126.0" prefHeight="47.0" prefWidth="64.0" text="Show/Hide Zone" textAlignment="CENTER" wrapText="true" />
       <Label layoutX="28.0" layoutY="298.0" text="Leveling :">
          <font>
             <Font name="Alegreya Sans SC" size="16.0" />
@@ -56,17 +56,20 @@
             <Font name="System Italic" size="9.0" />
          </font>
       </Label>
-      <JFXToggleButton fx:id="images_toggle" layoutX="7.0" layoutY="198.0" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" text="Show images " />
-      <JFXToggleButton fx:id="text_toggle" layoutX="143.0" layoutY="198.0" prefHeight="47.0" prefWidth="150.0" selected="true" size="6.0" text="Show text" />
+      <JFXToggleButton fx:id="images_toggle" layoutX="7.0" layoutY="228.0" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" text="Show images " />
+      <JFXToggleButton fx:id="text_toggle" layoutX="143.0" layoutY="228.0" prefHeight="47.0" prefWidth="150.0" selected="true" size="6.0" text="Show text" />
       <Label layoutX="321.0" layoutY="340.0" prefHeight="36.0" prefWidth="150.0" text="Pressing this hotkey will show the last gems that showed up" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Italic" size="9.0" />
          </font>
       </Label>
-      <Label layoutX="331.0" layoutY="108.0" prefHeight="47.0" prefWidth="150.0" text="You can set custom hotkeys by clicking on this box and typing the Keys" textAlignment="CENTER" wrapText="true">
+      <Label layoutX="331.0" layoutY="78.0" prefHeight="47.0" prefWidth="150.0" text="You can set custom hotkeys by clicking on this box and typing the Keys" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Italic" size="9.0" />
          </font>
       </Label>
+      <JFXToggleButton fx:id="trial_toggle1" layoutX="15.0" layoutY="198.0" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Alert when zone has a crafting recipe" />
+      <Label layoutX="317.0" layoutY="175.0" prefHeight="47.0" prefWidth="64.0" text="Mark recipe as found" textAlignment="CENTER" wrapText="true" />
+      <TextField fx:id="mark_recipe_hotkey" editable="false" layoutX="388.0" layoutY="186.0" prefHeight="25.0" prefWidth="79.0" />
    </children>
 </AnchorPane>

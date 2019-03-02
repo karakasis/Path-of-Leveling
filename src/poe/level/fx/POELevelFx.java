@@ -30,6 +30,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -65,11 +66,18 @@ import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import poe.level.data.Act;
 import poe.level.data.ActHandler;
 import poe.level.data.Build;
@@ -379,36 +387,8 @@ public class POELevelFx extends Application {
                   
             }
 
-            StringBuilder raw = readRawToString();
-            String replace = raw.toString().replace('-','+').replace('_','/').trim();
-            //save the replaced-values base64 string - optional
-            PrintWriter out = new PrintWriter("decoded.txt");
-            out.println(replace);
-            out.close();
-            //read into byte array using apache commons base64
-            byte[] byteValueBase64Decoded = null;
-            try{
-                byteValueBase64Decoded = org.apache.commons.codec.binary.Base64.decodeBase64(replace);
-            }catch(java.lang.IllegalArgumentException e){
-                e.printStackTrace();
-                return;
-            }
-            String inflatedXML = "";
-            try{
-                //inflate 
-                inflatedXML = inflate(byteValueBase64Decoded);
-            }catch(IOException e){
-                
-            }catch(DataFormatException e){
-                
-            }
-            System.out.println(inflatedXML);
-            out = new PrintWriter("pathofbuilding.txt");
-            out.println(inflatedXML);
-            out.close();
-        //JSONArray obj = new JsonParser().parse(stringValueBase64Encoded).getAsJsonArray();
-        //JSONArray builds_array = new JSONArray(stringValueBase64Decoded);
-        
+            //StringBuilder raw = readRawToString();
+            
               loadActsFromMemory();
               loadGemsFromMemory();
               loadBuildsFromMemory();
@@ -481,22 +461,6 @@ public class POELevelFx extends Application {
         
         s_col.size();
         */
-    }
-    
-    private String inflate(byte[] data) throws IOException, DataFormatException {  
-        Inflater inflater = new Inflater();   
-        inflater.setInput(data);  
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);  
-        byte[] buffer = new byte[1024];  
-        while (!inflater.finished()) {  
-         int count = inflater.inflate(buffer);  
-         outputStream.write(buffer, 0, count);  
-        }  
-        outputStream.close();  
-        byte[] output = outputStream.toByteArray();  
-        System.out.println("Original: " + data.length);  
-        System.out.println("Compressed: " + output.length);  
-        return new String(output);  
     }
     
     private StringBuilder readRawToString(){
@@ -1199,7 +1163,7 @@ public class POELevelFx extends Application {
         //remove below for debuging.
         //setUpLog();
         //checkForNewVersion()
-        if(true){
+        if(checkForNewVersion()){
             is_new_version = true;
             LauncherImpl.launchApplication(POELevelFx.class, UpdatePreloader.class, args);
         }else{

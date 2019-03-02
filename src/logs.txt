@@ -27,3 +27,6 @@ You have entered The Crypt.eeeeeeeeee
 : debug (Scion) is now level 2rr
 You have entered The Crypt.eeeeeeeeeeeee
 : debug (Scion) is now level 2
+You have entered The Crypt Level 1.
+You have entered The Crypt Level 1.
+You have entered The Crypt Level 2.
