@@ -17,7 +17,7 @@ public class RecipeMerger {
     private static final String outputFilepath = "RecipeMerge\\newData.json";
     private Map<String, Recipe> recipes;
     private JSONArray zones;
-    private JSONArray acts;
+    private JSONObject data;
 
     public static void main(String[] args) {
         new RecipeMerger().merge();
@@ -33,7 +33,7 @@ public class RecipeMerger {
     private void writeNewData() {
         try (FileWriter file = new FileWriter(outputFilepath)) {
 
-            file.write(acts.toJSONString().replace("\\/", "/"));
+            file.write(data.toJSONString().replace("\\/", "/"));
             file.flush();
 
         } catch (IOException e) {
@@ -71,7 +71,8 @@ public class RecipeMerger {
     private void parseJsons() {
         JSONArray recipesJSON = (JSONArray) Objects.requireNonNull(parseFileAtPath(recipeFilepath)).get("recipes");
         recipes = parseRecipes(recipesJSON);
-        acts = (JSONArray) Objects.requireNonNull(parseFileAtPath(dataFilepath)).get("acts");
+        data = parseFileAtPath(dataFilepath);
+        JSONArray acts = (JSONArray) data.get("acts");
         zones = getAllZones(acts);
     }
 
