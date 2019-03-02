@@ -26,13 +26,14 @@ public class RecipeMerger {
     private void merge() {
         parseJsons();
         updateZoneData();
+        warnAboutUnassignedRecipes();
         writeNewData();
     }
 
     private void writeNewData() {
         try (FileWriter file = new FileWriter(outputFilepath)) {
 
-            file.write(acts.toJSONString().replace("\\/","/"));
+            file.write(acts.toJSONString().replace("\\/", "/"));
             file.flush();
 
         } catch (IOException e) {
@@ -54,6 +55,15 @@ public class RecipeMerger {
                 recipes.remove(name);
             } else {
                 zone.put("hasRecipe", false);
+            }
+        }
+    }
+
+    private void warnAboutUnassignedRecipes() {
+        if(!recipes.isEmpty()){
+            System.out.println("WARNING! There are unassigned recipes! Probably some missing zones or typos in location names.");
+            for (Map.Entry<String,Recipe> recipe: recipes.entrySet()) {
+                System.out.println(recipe.getKey()+" - "+recipe.getValue().getTooltip());
             }
         }
     }

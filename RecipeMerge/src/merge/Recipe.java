@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Recipe {
+    public String getTooltip() {
+        return tooltip;
+    }
+
     private String tooltip;
     private final List<String> mods = new ArrayList<>();
 
