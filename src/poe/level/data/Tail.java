@@ -75,7 +75,7 @@ public class Tail implements LoggerListener {
                 else
                     charname+= a;
             }
-            if(charname.equalsIgnoreCase(parent.playerName)){
+            if(charname.equals(parent.playerName)){
                 int padding = line.indexOf("is now level");
                 String plvl = "";
                 for(int i=padding + 13; i<line.length(); i++){
