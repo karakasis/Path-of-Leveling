@@ -2490,5 +2490,31 @@
         "hasRecipe": true
       }
     ]
+  },
+  {
+    "act": "Epilogue",
+    "actid": 11,
+    "zones": [
+      {
+        "hastrial": false,
+        "image": [
+          "none"
+        ],
+        "note": "Have fun with end game :)",
+        "level": 69,
+        "name": "Oriath",
+        "haspassive": false,
+        "recipe": {
+          "mods": [
+            "(20\u201324)% increased Movement Speed"
+          ],
+          "tooltip": "Movement Speed - Rank 3"
+        },
+        "questRewardsSkills": false,
+        "altimage": "Town.",
+        "quest": "From Nightmare into Dream",
+        "hasRecipe": true
+      }
+    ]
   }
 ]
