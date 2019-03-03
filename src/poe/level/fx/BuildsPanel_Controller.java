@@ -512,7 +512,6 @@ public class BuildsPanel_Controller implements Initializable {
     }
 
     public boolean loadBuildsFromPastebin(String rawPaste){
-        String replace = rawPaste.replace('-','+').replace('_','/').trim();
         //pseudo for loop loads builds and panels put them
         //into buildlinker and add buildlinker to the list
         //TODO: remember to sign the build with the static method
@@ -520,7 +519,7 @@ public class BuildsPanel_Controller implements Initializable {
 
         byte[] byteValueBase64Decoded = null;
         try{
-            byteValueBase64Decoded = Base64.getDecoder().decode(replace);
+            byteValueBase64Decoded = Base64.getDecoder().decode(rawPaste.trim());
         }catch(java.lang.IllegalArgumentException e){
             e.printStackTrace();
             return false;
@@ -530,6 +529,7 @@ public class BuildsPanel_Controller implements Initializable {
             return false;
         }
         String stringValueBase64Decoded = new String(byteValueBase64Decoded);
+//        System.out.println(stringValueBase64Decoded);
 
         //JSONArray obj = new JsonParser().parse(stringValueBase64Encoded).getAsJsonArray();
         try{
