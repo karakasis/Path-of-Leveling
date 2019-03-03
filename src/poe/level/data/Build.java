@@ -20,11 +20,12 @@ public class Build {
     String ascendancyName;
     public String characterName;
     public int level;
+    public String leagueName;
     ArrayList<SocketGroup> gems;
     public boolean hasPob;
     public String pobLink;
     public boolean isValid;
-    
+
     public Build(String buildName,String className
             , String ascendancyName){
         this.buildName = buildName;
@@ -34,11 +35,11 @@ public class Build {
         level = -1;
         characterName = "";
     }
-    
+
     public String getName(){
         return buildName;
     }
-    
+
     public String getClassName(){
         return className;
     }
@@ -50,7 +51,7 @@ public class Build {
     public ArrayList<SocketGroup> getSocketGroup(){
         return gems;
     }
-    
+
     public boolean validate(){
         System.out.println(">>>>Validating build :"+this.buildName+"... <<<<");
         for(SocketGroup sg : getSocketGroup()){
@@ -73,7 +74,7 @@ public class Build {
                     System.out.println("- Replace at level: "+sg.untilGroupLevel);
                     System.out.println("- Replace with : -"+sg.getGroupReplaced().getActiveGem().getGemName()+"- .");
                 }
-                
+
                 //inner loop
                 ArrayList<Gem> sorted = new ArrayList<>(sg.getGems());
                 sorted.sort(Comparator.comparing(Gem::getLevelAdded));
@@ -103,7 +104,7 @@ public class Build {
         //isValid = true;
         return true;
     }
-    
+
     public String validate_failed_string(){
         String error = "";
         System.out.println(">>>>Validating build :"+this.buildName+"... <<<<");
@@ -136,7 +137,7 @@ public class Build {
                     System.out.println("- Replace with : -"+sg.getGroupReplaced().getActiveGem().getGemName()+"- .");
                     error+="- Replace with : -"+sg.getGroupReplaced().getActiveGem().getGemName()+"- .\n";
                 }
-                
+
                 //inner loop
                 ArrayList<Gem> sorted = new ArrayList<>(sg.getGems());
                 sorted.sort(Comparator.comparing(Gem::getLevelAdded));

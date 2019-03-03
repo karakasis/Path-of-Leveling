@@ -42,7 +42,7 @@ import poe.level.data.Build;
  */
 public class Main_Controller implements Initializable {
 
-    @FXML 
+    @FXML
     private JFXButton selectBuild;
     @FXML
     private StackPane rootPane;
@@ -59,7 +59,7 @@ public class Main_Controller implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
+
     private static Image charToImage(String className, String asc){
         BufferedImage img = null;
         try {
@@ -67,21 +67,21 @@ public class Main_Controller implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(BuildsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return SwingFXUtils.toFXImage(img, null);
     }
-    
+
     Main_Stage parent;
     private JFXDialog addBuildPopup;
     private JFXDialog editCharacterPopup;
     private Build buildLoaded;
-    
+
     public void hookStage(Main_Stage stage){
         parent = stage;
     }
-    
+
     class Delta { double x, y; }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -99,8 +99,8 @@ public class Main_Controller implements Initializable {
             parent.setY(mouseEvent.getScreenY() + dragDelta.y);
           }
         });
-    }    
-    
+    }
+
     @FXML
     private void startButton(){
         if(Preferences_Controller.poe_log_dir == null || Preferences_Controller.poe_log_dir.equals("")){
@@ -126,10 +126,10 @@ public class Main_Controller implements Initializable {
                     parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());
                 }
             }
-               
+
         }
     }
-    
+
     public int temp_alert(){
         TextInputDialog dialog = new TextInputDialog("walter");
         dialog.setTitle("Temporary level check");
@@ -145,32 +145,32 @@ public class Main_Controller implements Initializable {
         // The Java 8 way to get the response value (with lambda expression).
         //result.ifPresent(name -> System.out.println("Your name: " + name));
     }
-    
+
     @FXML
     private void launchEditor(){
         parent.editor();
     }
-    
+
     @FXML
     private void selectBuild(){
         buildPopup();
     }
-    
+
     @FXML
     private void preferences(){
         preferencesPopup();
     }
-    
+
     @FXML
     private void close(){
         parent.closeApp();
     }
-    
+
     @FXML
     private void minimize(){
         parent.setIconified(true);
     }
-    
+
     public void preferencesPopup() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("preferences.fxml"));
         AnchorPane con = null;
@@ -180,12 +180,12 @@ public class Main_Controller implements Initializable {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         loader.<Preferences_Controller>getController().hook(this);
-        
+
         addBuildPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
         //controller.passDialog(mLoad);
         addBuildPopup.show();
     }
-    
+
     public void characterInfoPopup() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("characterInfo.fxml"));
         AnchorPane con = null;
@@ -197,12 +197,12 @@ public class Main_Controller implements Initializable {
         loader.<CharacterInfo_Controller>getController().hook(this);
         if(buildLoaded!=null)
             loader.<CharacterInfo_Controller>getController().init(buildLoaded);
-        
+
         editCharacterPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
         //controller.passDialog(mLoad);
         editCharacterPopup.show();
     }
-    
+
     public void buildPopup() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectBuild_Popup.fxml"));
         AnchorPane con = null;
@@ -216,18 +216,18 @@ public class Main_Controller implements Initializable {
         //controller.passDialog(mLoad);
         addBuildPopup.show();
     }
-    
+
     public void closePopup(Build build){
         buildLoaded = build;
         addBuildPopup.close();
         decorateSelectButton();
     }
-    
+
     public void closePrefPopup(){
         addBuildPopup.close();
     }
-    
-    public void closeCharacterPopup(String characterName, int level){
+
+    public void closeCharacterPopup(String characterName, int level, String leagueName){
         if(xp.isSelected() || zones.isSelected()){
             Main_Stage.playerLevel = level;
             Main_Stage.characterName = characterName;
@@ -237,14 +237,15 @@ public class Main_Controller implements Initializable {
             Main_Stage.buildLoaded = buildLoaded;
             buildLoaded.characterName = characterName;
             buildLoaded.level = level;
+            buildLoaded.leagueName = leagueName;
         }
         System.out.println("Character : " + characterName);
         System.out.println("Level : " + level);
         editCharacterPopup.close();
-        
+
         parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());
     }
-    
+
     private void decorateSelectButton(){
         //selectBuild.setGraphic(new ImageView(charToImage(buildLoaded.getClassName(),buildLoaded.getAsc())));
         //ImageView graphic = (ImageView) selectBuild.getGraphic();

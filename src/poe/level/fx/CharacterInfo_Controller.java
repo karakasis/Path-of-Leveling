@@ -9,9 +9,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import poe.level.data.Build;
+import poeapi.POEAPIHelper;
 
 /**
  * FXML Controller class
@@ -26,13 +28,15 @@ public class CharacterInfo_Controller implements Initializable {
     private TextField level;
     @FXML
     private Label error;
-    
+    @FXML
+    private ComboBox<String> cmbLeague;
+
     private Main_Controller root;
-    
+
     public void hook(Main_Controller root){
         this.root = root;
     }
-    
+
     public void init(Build build){
         if(build.characterName.equals("")){
             name.setPromptText("Your in-game character name.");
@@ -40,7 +44,7 @@ public class CharacterInfo_Controller implements Initializable {
             name.setPromptText("");
             name.setText(build.characterName);
         }
-        
+
         if(build.level == -1){
             level.setPromptText("The level of your character.");
         }else{
@@ -48,7 +52,7 @@ public class CharacterInfo_Controller implements Initializable {
             level.setText(build.level+"");
         }
     }
-    
+
     @FXML
     private void start(){
         error.setVisible(false);
@@ -64,23 +68,24 @@ public class CharacterInfo_Controller implements Initializable {
             error.setVisible(true);
             start = false;
         }
-        
+
         if(name.getText().equals("")){
             name.setPromptText("Your in-game character name.");
             start = false;
         }
-        
+
         if(start){
-            root.closeCharacterPopup(name.getText(), parseInt);
+            root.closeCharacterPopup(name.getText(), parseInt, cmbLeague.getValue());
         }
     }
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+        cmbLeague.getItems().addAll(POEAPIHelper.getPOEActiveLeagues());
+    }
+
 }
