@@ -2,9 +2,8 @@ package poe.level.data;
 // Import the Java classes
 import java.util.*;
 import java.io.*;
-import java.util.logging.Level;
+
 import javafx.application.Platform;
-import javax.swing.JFrame;
 
 /**
  * Implements console-based log file tailing, or more specifically, tail

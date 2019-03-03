@@ -7,11 +7,9 @@ package poe.level.fx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 

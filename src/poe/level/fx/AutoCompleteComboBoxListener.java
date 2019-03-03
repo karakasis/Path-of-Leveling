@@ -12,8 +12,6 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.StringConverter;
-import poe.level.data.Gem;
-import poe.level.data.GemHolder;
 
 /**
  *

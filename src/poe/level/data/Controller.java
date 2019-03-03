@@ -5,20 +5,14 @@
  */
 package poe.level.data;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import javafx.application.Platform;
-import javafx.stage.Stage;
 import poe.level.fx.Main_Stage;
 import poe.level.fx.Preferences_Controller;
 import poe.level.fx.overlay.GemOverlay_Stage;
 import poe.level.fx.overlay.LevelOverlay_Stage;
+import poe.level.fx.overlay.Settings_Stage;
 import poe.level.fx.overlay.ZoneOverlay_Stage;
 
 
@@ -67,6 +61,23 @@ public class Controller {
         }
     }
     
+    public void settings_event(){
+        if(settings_stage == null)
+        Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    settings_stage = new Settings_Stage();
+                }
+            });
+         Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        settings_stage.show();
+                    }
+                });
+        
+    }
+    
     public int playerLevel;
     public String playerName;
     public int monsterLevel;
@@ -77,6 +88,7 @@ public class Controller {
     private ZoneOverlay_Stage zone_stage;
     private LevelOverlay_Stage xp_stage;
     private GemOverlay_Stage level_stage;
+    private Settings_Stage settings_stage;
     private boolean zone_stage_lock;
     private boolean xp_stage_lock;
     private boolean level_stage_lock;

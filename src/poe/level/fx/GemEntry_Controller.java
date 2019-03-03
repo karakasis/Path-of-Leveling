@@ -5,20 +5,15 @@
  */
 package poe.level.fx;
 
-import com.jfoenix.controls.JFXAutoCompletePopup;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
-import java.awt.Color;
+
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import javafx.application.Platform;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,13 +22,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.StringConverter;
-import org.controlsfx.control.textfield.TextFields;
 import poe.level.data.Gem;
-import poe.level.data.GemHolder;
 import poe.level.data.GemListCell;
 import poe.level.data.GemToString;
 import poe.level.fx.GemsPanel_Controller.GemLinker;

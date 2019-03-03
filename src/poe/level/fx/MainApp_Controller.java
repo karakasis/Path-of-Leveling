@@ -5,31 +5,12 @@
  */
 package poe.level.fx;
 
-import com.besaba.revonline.pastebinapi.Pastebin;
-import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
-import com.besaba.revonline.pastebinapi.response.Response;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.events.JFXDialogEvent;
-import com.sun.deploy.net.HttpResponse;
-import com.sun.javafx.tk.Toolkit;
-import java.awt.Desktop;
-import java.awt.datatransfer.StringSelection;
-import java.io.BufferedReader;
+
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 import javafx.collections.ObservableList;
@@ -47,7 +28,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -60,6 +41,7 @@ import poe.level.data.Build;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -511,7 +493,7 @@ public class MainApp_Controller implements Initializable {
         //read into byte array using apache commons base64
         byte[] byteValueBase64Decoded = null;
         try{
-            byteValueBase64Decoded = org.apache.commons.codec.binary.Base64.decodeBase64(replace);
+            byteValueBase64Decoded = Base64.getDecoder().decode(replace);
         }catch(java.lang.IllegalArgumentException e){
             e.printStackTrace();
             return null;

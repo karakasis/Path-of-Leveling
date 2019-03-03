@@ -2,3 +2,9 @@ build/
 dist/
 .DS_Store
 
+.idea/*
+out/*
+nbproject/*
+Path-of-Leveling.iml
+
+
