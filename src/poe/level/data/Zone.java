@@ -19,7 +19,7 @@ public class Zone {
         "Fallen from Grace"
         };
     int level;
-    String name;
+    public String name;
     public boolean hasPassive;
     public boolean hasTrial;
     ArrayList<String> image;
@@ -29,6 +29,11 @@ public class Zone {
     boolean questRewardsSkills;
     String actName;
     int actID;
+    public boolean hasRecipe;
+    public class recipeInfo{
+        public String tooltip;
+        public ArrayList<String> mods;
+    }
 
     public Zone(String zoneName, int zoneLevel, ArrayList<String> images, String altimage
             , String note, boolean hasPassive, boolean hasTrial , String quest ,boolean questRewardsSkills

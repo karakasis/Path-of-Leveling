@@ -33,5 +33,10 @@
             <Image url="@../../../../icons/50px-AspirantTrialBefore.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="recipe" fitHeight="55.0" fitWidth="56.0" layoutX="322.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="114.0">
+         <image>
+            <Image url="@../../../../icons/5a1d1fda14de03.2056359715118581380855.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

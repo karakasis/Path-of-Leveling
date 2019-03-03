@@ -20,7 +20,7 @@
             <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
          </textFill>
       </Label>
-      <JFXListView fx:id="socketGroupView" layoutY="37.0" minHeight="-Infinity" prefHeight="444.0" prefWidth="222.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0" />
+      <JFXListView fx:id="socketGroupView" layoutY="37.0" prefHeight="444.0" prefWidth="222.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0" />
       <JFXButton fx:id="addSocketGroup_button" alignment="CENTER" cache="true" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" layoutX="20.0" layoutY="500.0" onAction="#addSocketGroup" text=" " AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0">
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">

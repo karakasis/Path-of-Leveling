@@ -1,0 +1,1336 @@
+{
+  "recipes": [
+    {
+      "mod": "Minions have (11\u201315)% increased maximum Life",
+      "cost": "4x Orb of Augmentation",
+      "unlock": "The Lunaris Temple Level 2[L59]",
+      "tooltip": "Minions - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, MinionLife",
+      "itemClasses": "Helmet",
+      "master": "Helena"
+    },
+    {
+      "mod": "Minions deal (9\u201316)% increased Damage",
+      "cost": "4x Orb of Augmentation",
+      "unlock": "The Lunaris Temple Level 2[L59]",
+      "tooltip": "Minions - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, MinionDamageOnWeapon",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Minions deal (14\u201325)% increased Damage",
+      "cost": "4x Orb of Augmentation",
+      "unlock": "The Lunaris Temple Level 2[L59]",
+      "tooltip": "Minions - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, MinionDamageOnWeapon",
+      "itemClasses": "Two Hand Melee, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Minions deal (10\u201320)% increased Damage",
+      "cost": "3x Chaos Orb",
+      "unlock": "The Lunaris Temple Level 2[L59]",
+      "tooltip": "Minions - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, MinionDamage",
+      "itemClasses": "Gloves",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (9\u201312) to (18\u201321) Physical Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Sewers[L26]",
+      "tooltip": "Physical Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamage",
+      "itemClasses": "Two Hand Melee, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (8\u201311) to (16\u201320) Fire Damage to Attacks",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Crematorium[L25]",
+      "tooltip": "Fire Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, FireDamage",
+      "itemClasses": "Ring, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (7\u201311) to (16\u201319) Physical Damage",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Ossuary[L44]",
+      "tooltip": "Physical Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (6\u20138) to (14\u201318) Cold Damage to Attacks",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Solaris Temple Level 2[L28]",
+      "tooltip": "Cold Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, ColdDamage",
+      "itemClasses": "Ring, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (6\u20138) to (14\u201318) Chaos Damage to Attacks",
+      "cost": "6x Orb of Transmutation",
+      "unlock": "The Belly of the Beast Level 2[L39]",
+      "tooltip": "Chaos Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, ChaosDamage",
+      "itemClasses": "Ring, Amulet, Quiver, Gloves",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (6\u20138) to (13\u201315) Physical Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Sewers[L26]",
+      "tooltip": "Physical Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (50\u201360) to (63\u201373) Fire Damage",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Dread Thicket[L53]",
+      "tooltip": "Fire Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalFireDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (50\u201360) to (63\u201373) Cold Damage",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Causeway[L54]",
+      "tooltip": "Cold Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalColdDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (5\u20138) to (90\u2013120) Lightning Damage",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Chamber of Sins Level 1[L52]",
+      "tooltip": "Lightning Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalLightningDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (5\u20137) to (8\u201310) Physical Damage to Attacks",
+      "cost": "2x Chaos Orb",
+      "unlock": "The Ossuary[L44]",
+      "tooltip": "Physical Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, PhysicalDamage",
+      "itemClasses": "Ring, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (33\u201340) to (42\u201349) Fire Damage",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Dread Thicket[L53]",
+      "tooltip": "Fire Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalFireDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (33\u201340) to (42\u201349) Cold Damage",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Causeway[L54]",
+      "tooltip": "Cold Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalColdDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (3\u20139) to (109\u2013115) Lightning Damage to Spells",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Chamber of Sins Level 1[L52]",
+      "tooltip": "Lightning Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedLightningDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (3\u20135) to (60\u201380) Lightning Damage",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Chamber of Sins Level 1[L52]",
+      "tooltip": "Lightning Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalLightningDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (3\u20135) to (6\u20138) Physical Damage to Attacks",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Sewers[L26]",
+      "tooltip": "Physical Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, PhysicalDamage",
+      "itemClasses": "Ring, Amulet, Quiver, Gloves",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (28\u201338) to (57\u201366) Fire Damage to Spells",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Dread Thicket[L53]",
+      "tooltip": "Fire Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedFireDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (26\u201334) to (52\u201360) Cold Damage to Spells",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Causeway[L54]",
+      "tooltip": "Cold Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedColdDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (24\u201327) to (28\u201335) Fire Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Crematorium[L25]",
+      "tooltip": "Fire Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalFireDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (24\u201327) to (28\u201335) Cold Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Solaris Temple Level 2[L28]",
+      "tooltip": "Cold Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalColdDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (21\u201328) to (42\u201349) Fire Damage to Spells",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Dread Thicket[L53]",
+      "tooltip": "Fire Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedFireDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (2\u20136) to (73\u201377) Lightning Damage to Spells",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Chamber of Sins Level 1[L52]",
+      "tooltip": "Lightning Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedLightningDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (2\u20134) to (40\u201355) Lightning Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Lunaris Temple Level 2[L30]",
+      "tooltip": "Lightning Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalLightningDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (18\u201324) to (36\u201342) Physical Damage",
+      "cost": "4x Chaos Orb",
+      "unlock": "The Quarry[L63]",
+      "tooltip": "Physical Damage - Rank 3",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamage",
+      "itemClasses": "Two Hand Melee, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (17\u201323) to (34\u201340) Cold Damage to Spells",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Causeway[L54]",
+      "tooltip": "Cold Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedColdDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (16\u201321) to (31\u201336) Fire Damage to Spells",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Crematorium[L25]",
+      "tooltip": "Fire Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedFireDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (16\u201318) to (19\u201323) Fire Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Crematorium[L25]",
+      "tooltip": "Fire Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalFireDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (16\u201318) to (19\u201323) Cold Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Solaris Temple Level 2[L28]",
+      "tooltip": "Cold Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalColdDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (14\u201319) to (28\u201333) Cold Damage to Spells",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Solaris Temple Level 2[L28]",
+      "tooltip": "Cold Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedColdDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (13\u201317) to (26\u201330) Physical Damage",
+      "cost": "4x Chaos Orb",
+      "unlock": "The Quarry[L63]",
+      "tooltip": "Physical Damage - Rank 3",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (12\u201317) to (26\u201330) Fire Damage to Attacks",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Dread Thicket[L53]",
+      "tooltip": "Fire Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, FireDamage",
+      "itemClasses": "Ring, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (12\u201316) to (23\u201327) Fire Damage to Spells",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Crematorium[L25]",
+      "tooltip": "Fire Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedFireDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (11\u201315) to (23\u201327) Physical Damage",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Ossuary[L44]",
+      "tooltip": "Physical Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamage",
+      "itemClasses": "Two Hand Melee, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (11\u201315) to (23\u201327) Cold Damage to Attacks",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Causeway[L54]",
+      "tooltip": "Cold Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, ColdDamage",
+      "itemClasses": "Ring, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (11\u201315) to (23\u201327) Chaos Damage to Attacks",
+      "cost": "2x Chaos Orb",
+      "unlock": "The Ossuary[L67]",
+      "tooltip": "Chaos Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, ChaosDamage",
+      "itemClasses": "Ring, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (10\u201313) to (19\u201322) Cold Damage to Spells",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Solaris Temple Level 2[L28]",
+      "tooltip": "Cold Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedColdDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (1\u20135) to (59\u201363) Lightning Damage to Spells",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Lunaris Temple Level 2[L30]",
+      "tooltip": "Lightning Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedLightningDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (1\u20135) to (41\u201348) Lightning Damage to Attacks",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Chamber of Sins Level 1[L52]",
+      "tooltip": "Lightning Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LightningDamage",
+      "itemClasses": "Ring, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (1\u20134) to (39\u201342) Lightning Damage to Spells",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Lunaris Temple Level 2[L30]",
+      "tooltip": "Lightning Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, SpellAddedLightningDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (1\u20134) to (32\u201336) Lightning Damage to Attacks",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Lunaris Temple Level 2[L30]",
+      "tooltip": "Lightning Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LightningDamage",
+      "itemClasses": "Ring, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "Adds (1\u20133) to (27\u201337) Lightning Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Lunaris Temple Level 2[L30]",
+      "tooltip": "Lightning Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalLightningDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(91\u2013120) to Accuracy Rating",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Reliquary[L44]",
+      "tooltip": "Accuracy - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, LocalAccuracyRating",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(91\u2013120) to Accuracy Rating",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Reliquary[L44]",
+      "tooltip": "Accuracy - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, IncreasedAccuracy",
+      "itemClasses": "Gloves, Helmet, Ring, Amulet, Quiver, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(9\u201312)% to all Elemental Resistances",
+      "cost": "1x Chaos Orb",
+      "unlock": "Aspirant's Trial[L75]",
+      "tooltip": "All Resistances - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, AllResistances",
+      "itemClasses": "Ring, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(60\u201380) to Evasion Rating",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Feeding Trough[L67]",
+      "tooltip": "Defences - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalEvasionRating",
+      "itemClasses": "Body Armour, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(60\u201380) to Armour",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Feeding Trough[L67]",
+      "tooltip": "Defences - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamageReductionRating",
+      "itemClasses": "Body Armour, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(6\u20139) to all Attributes",
+      "cost": "3x Orb of Chance",
+      "unlock": "The Imperial Gardens[L30]",
+      "tooltip": "All Attributes - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, AllAttributes",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(5\u20138)% to all Elemental Resistances",
+      "cost": "6x Orb of Alteration",
+      "unlock": "Aspirant's Trial[L33]",
+      "tooltip": "All Resistances - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, AllResistances",
+      "itemClasses": "Ring, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(45\u201354) to maximum Mana",
+      "cost": "2x Chaos Orb",
+      "unlock": "The Desecrated Chambers[L65]",
+      "tooltip": "Life and Mana - Rank 3",
+      "modTooltip": "Upgraded, Prefix, Global, IncreasedMana",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(41\u201355) to maximum Life",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Desecrated Chambers[L65]",
+      "tooltip": "Life and Mana - Rank 3",
+      "modTooltip": "Upgraded, Prefix, Global, IncreasedLife",
+      "itemClasses": "Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(40\u201350) to Evasion Rating",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Karui Fortress[L46]",
+      "tooltip": "Defences - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalEvasionRating",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(40\u201350) to Armour",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Karui Fortress[L46]",
+      "tooltip": "Defences - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamageReductionRating",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(35\u201345) to maximum Energy Shield",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Feeding Trough[L67]",
+      "tooltip": "Defences - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalEnergyShield",
+      "itemClasses": "Body Armour, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(35\u201344) to maximum Mana",
+      "cost": "6x Orb of Augmentation",
+      "unlock": "The Beacon[L49]",
+      "tooltip": "Life and Mana - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, IncreasedMana",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(29\u201335)% to Lightning Resistance",
+      "cost": "3x Chaos Orb",
+      "unlock": "Doedre's Cesspool[L56]",
+      "tooltip": "Elemental Resistances - Rank 3",
+      "modTooltip": "of Craft, Suffix, Global, LightningResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(29\u201335)% to Fire Resistance",
+      "cost": "3x Chaos Orb",
+      "unlock": "Doedre's Cesspool[L56]",
+      "tooltip": "Elemental Resistances - Rank 3",
+      "modTooltip": "of Craft, Suffix, Global, FireResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(29\u201335)% to Cold Resistance",
+      "cost": "3x Chaos Orb",
+      "unlock": "Doedre's Cesspool[L56]",
+      "tooltip": "Elemental Resistances - Rank 3",
+      "modTooltip": "of Craft, Suffix, Global, ColdResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(27\u201334) to maximum Energy Shield",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Karui Fortress[L46]",
+      "tooltip": "Defences - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalEnergyShield",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(26\u201340) to maximum Life",
+      "cost": "6x Orb of Transmutation",
+      "unlock": "The Beacon[L49]",
+      "tooltip": "Life and Mana - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, IncreasedLife",
+      "itemClasses": "Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(26\u201330) to Strength",
+      "cost": "2x Chaos Orb",
+      "unlock": "The Western Forest[L48]",
+      "tooltip": "Attributes - Rank 3",
+      "modTooltip": "of Craft, Suffix, Global, Strength",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(26\u201330) to Intelligence",
+      "cost": "2x Chaos Orb",
+      "unlock": "The Western Forest[L48]",
+      "tooltip": "Attributes - Rank 3",
+      "modTooltip": "of Craft, Suffix, Global, Intelligence",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(26\u201330) to Dexterity",
+      "cost": "2x Chaos Orb",
+      "unlock": "The Western Forest[L48]",
+      "tooltip": "Attributes - Rank 3",
+      "modTooltip": "of Craft, Suffix, Global, Dexterity",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(21\u201328)% to Lightning Resistance",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Crystal Veins[L36]",
+      "tooltip": "Elemental Resistances - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, LightningResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(21\u201328)% to Fire Resistance",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Crystal Veins[L36]",
+      "tooltip": "Elemental Resistances - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, FireResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(21\u201328)% to Cold Resistance",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Crystal Veins[L36]",
+      "tooltip": "Elemental Resistances - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, ColdResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(21\u201325) to Strength",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Ascent[L40]",
+      "tooltip": "Attributes - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, Strength",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(21\u201325) to Intelligence",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Ascent[L40]",
+      "tooltip": "Attributes - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, Intelligence",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(21\u201325) to Dexterity",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Ascent[L40]",
+      "tooltip": "Attributes - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, Dexterity",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(17\u201320)% to Fire and Lightning Resistances",
+      "cost": "3x Chaos Orb",
+      "unlock": "Aspirant's Trial[L68]",
+      "tooltip": "Double Resistances - Rank 3",
+      "modTooltip": "of Craft, Suffix, Global, FireAndLightningResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(17\u201320)% to Fire and Cold Resistances",
+      "cost": "3x Chaos Orb",
+      "unlock": "Aspirant's Trial[L68]",
+      "tooltip": "Double Resistances - Rank 3",
+      "modTooltip": "of Craft, Suffix, Global, FireAndColdResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(17\u201320)% to Cold and Lightning Resistances",
+      "cost": "3x Chaos Orb",
+      "unlock": "Aspirant's Trial[L68]",
+      "tooltip": "Double Resistances - Rank 3",
+      "modTooltip": "of Craft, Suffix, Global, ColdAndLightningResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(13\u201316)% to Fire and Lightning Resistances",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "Aspirant's Trial[L55]",
+      "tooltip": "Double Resistances - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, FireAndLightningResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(13\u201316)% to Fire and Cold Resistances",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "Aspirant's Trial[L55]",
+      "tooltip": "Double Resistances - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, FireAndColdResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(13\u201316)% to Cold and Lightning Resistances",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "Aspirant's Trial[L55]",
+      "tooltip": "Double Resistances - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, ColdAndLightningResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(121\u2013200) to Accuracy Rating",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Temple of Decay Level 2[L55]",
+      "tooltip": "Accuracy - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, LocalAccuracyRating",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(121\u2013150) to Accuracy Rating",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Temple of Decay Level 2[L55]",
+      "tooltip": "Accuracy - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, IncreasedAccuracy",
+      "itemClasses": "Gloves, Helmet, Ring, Amulet, Quiver, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(10\u201313) to all Attributes",
+      "cost": "6x Orb of Chance",
+      "unlock": "The Tunnel[L62]",
+      "tooltip": "All Attributes - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, AllAttributes",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(10\u201312)% to Fire and Lightning Resistances",
+      "cost": "6x Orb of Transmutation",
+      "unlock": "The Lower Prison[L47]",
+      "tooltip": "Double Resistances - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, FireAndLightningResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(10\u201312)% to Fire and Cold Resistances",
+      "cost": "6x Orb of Transmutation",
+      "unlock": "The Lower Prison[L47]",
+      "tooltip": "Double Resistances - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, FireAndColdResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "+(10\u201312)% to Cold and Lightning Resistances",
+      "cost": "6x Orb of Transmutation",
+      "unlock": "The Lower Prison[L47]",
+      "tooltip": "Double Resistances - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, ColdAndLightningResistance",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Body Armour, Gloves, Boots, Helmet, Shield, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "(9\u201312)% increased Lightning Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Lunaris Temple Level 2[L30]",
+      "tooltip": "Lightning Damage - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, LightningDamagePercentage",
+      "itemClasses": "Ring, Amulet, One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(9\u201312)% increased Global Physical Damage",
+      "cost": "3x Orb of Chance",
+      "unlock": "The Sewers[L26]",
+      "tooltip": "Physical Damage - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, PhysicalDamagePercent",
+      "itemClasses": "Shield, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "(9\u201312)% increased Fire Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Crematorium[L25]",
+      "tooltip": "Fire Damage - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, FireDamagePercentage",
+      "itemClasses": "Ring, Amulet, One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(9\u201312)% increased Cold Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Solaris Temple Level 2[L28]",
+      "tooltip": "Cold Damage - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, ColdDamagePercentage",
+      "itemClasses": "Ring, Amulet, One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(9\u201312)% increased Chaos Damage",
+      "cost": "3x Orb of Chance",
+      "unlock": "The Belly of the Beast Level 2[L39]",
+      "tooltip": "Chaos Damage - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, IncreasedChaosDamage",
+      "itemClasses": "Ring, Amulet, One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(9\u201311)% increased Cast Speed",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Dried Lake[L34]",
+      "tooltip": "Attack and Cast Speed - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, IncreasedCastSpeed",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(80\u201399)% increased Physical Damage",
+      "cost": "4x Chaos Orb",
+      "unlock": "The Quarry[L63]",
+      "tooltip": "Physical Damage - Rank 3",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamagePercent",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(8\u201310)% increased Attack Speed",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Dried Lake[L34]",
+      "tooltip": "Attack and Cast Speed - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, LocalIncreasedAttackSpeed",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(7\u201312)% increased Attack Speed",
+      "cost": "2x Chaos Orb",
+      "unlock": "The Dried Lake[L34]",
+      "tooltip": "Attack and Cast Speed - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, IncreasedAttackSpeed",
+      "itemClasses": "Gloves, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "(67\u201381)% increased Spell Damage",
+      "cost": "4x Chaos Orb",
+      "unlock": "The Boiling Lake[L62]",
+      "tooltip": "Spell Damage - Rank 3",
+      "modTooltip": "Upgraded, Prefix, Global, WeaponSpellDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(60\u201379)% increased Physical Damage",
+      "cost": "8x Orb of Alteration",
+      "unlock": "The Ossuary[L44]",
+      "tooltip": "Physical Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamagePercent",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(6\u20138)% increased Trap Throwing Speed",
+      "cost": "6x Orb of Augmentation",
+      "unlock": "The Solaris Temple Level 2[L59]",
+      "tooltip": "Traps and Mines - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, TrapThrowSpeedOnWeapon",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(6\u20138)% increased Mine Laying Speed",
+      "cost": "6x Orb of Augmentation",
+      "unlock": "The Solaris Temple Level 2[L59]",
+      "tooltip": "Traps and Mines - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, MineLayingSpeedOnWeapon",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(6\u20138)% increased Cast Speed",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Dried Lake[L34]",
+      "tooltip": "Attack and Cast Speed - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, IncreasedCastSpeed",
+      "itemClasses": "Shield, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "(52\u201366)% increased Spell Damage",
+      "cost": "8x Orb of Alteration",
+      "unlock": "Shavronne's Tower[L47]",
+      "tooltip": "Spell Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, WeaponSpellDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(52\u201366)% increased Lightning Damage",
+      "cost": "6x Orb of Transmutation",
+      "unlock": "The Chamber of Sins Level 1[L52]",
+      "tooltip": "Lightning Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LightningDamageWeaponPrefix",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(52\u201366)% increased Fire Damage",
+      "cost": "6x Orb of Transmutation",
+      "unlock": "The Dread Thicket[L53]",
+      "tooltip": "Fire Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, FireDamageWeaponPrefix",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(52\u201366)% increased Cold Damage",
+      "cost": "6x Orb of Transmutation",
+      "unlock": "The Causeway[L54]",
+      "tooltip": "Cold Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, ColdDamageWeaponPrefix",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(52\u201366)% increased Chaos Damage",
+      "cost": "4x Orb of Chance",
+      "unlock": "The Ossuary[L67]",
+      "tooltip": "Chaos Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, ChaosDamageWeaponPrefix",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(5\u201310)% increased Flask effect duration",
+      "cost": "2x Glassblower's Bauble",
+      "unlock": "The Bath House[L57]",
+      "tooltip": "Flask Duration - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, BeltIncreasedFlaskDuration",
+      "itemClasses": "Belt",
+      "master": "Helena"
+    },
+    {
+      "mod": "(45\u201355)% increased Evasion Rating",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Feeding Trough[L67]",
+      "tooltip": "Defences - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalEvasionRatingIncreasePercent",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(45\u201355)% increased Evasion and Energy Shield",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Feeding Trough[L67]",
+      "tooltip": "Defences - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalEvasionAndEnergyShield",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(45\u201355)% increased Energy Shield",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Feeding Trough[L67]",
+      "tooltip": "Defences - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalEnergyShieldPercent",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(45\u201355)% increased Armour and Evasion",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Feeding Trough[L67]",
+      "tooltip": "Defences - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalArmourAndEvasion",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(45\u201355)% increased Armour and Energy Shield",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Feeding Trough[L67]",
+      "tooltip": "Defences - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalArmourAndEnergyShield",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(45\u201355)% increased Armour",
+      "cost": "1x Orb of Alchemy",
+      "unlock": "The Feeding Trough[L67]",
+      "tooltip": "Defences - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamageReductionRatingPercent",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(45\u201354)% increased Spell Damage",
+      "cost": "4x Chaos Orb",
+      "unlock": "The Boiling Lake[L62]",
+      "tooltip": "Spell Damage - Rank 3",
+      "modTooltip": "Upgraded, Prefix, Global, WeaponSpellDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(40\u201359)% increased Physical Damage",
+      "cost": "4x Orb of Alteration",
+      "unlock": "The Sewers[L26]",
+      "tooltip": "Physical Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamagePercent",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(37\u201351)% increased Spell Damage",
+      "cost": "4x Orb of Alteration",
+      "unlock": "The Ancient Pyramid[L23]",
+      "tooltip": "Spell Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, WeaponSpellDamage",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(37\u201351)% increased Lightning Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Lunaris Temple Level 2[L30]",
+      "tooltip": "Lightning Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LightningDamageWeaponPrefix",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(37\u201351)% increased Fire Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Crematorium[L25]",
+      "tooltip": "Fire Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, FireDamageWeaponPrefix",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(37\u201351)% increased Cold Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Solaris Temple Level 2[L28]",
+      "tooltip": "Cold Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, ColdDamageWeaponPrefix",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(37\u201351)% increased Chaos Damage",
+      "cost": "2x Orb of Chance",
+      "unlock": "The Belly of the Beast Level 2[L39]",
+      "tooltip": "Chaos Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, ChaosDamageWeaponPrefix",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(35\u201344)% increased Spell Damage",
+      "cost": "8x Orb of Alteration",
+      "unlock": "Shavronne's Tower[L47]",
+      "tooltip": "Spell Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, WeaponSpellDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(35\u201344)% increased Lightning Damage",
+      "cost": "6x Orb of Transmutation",
+      "unlock": "The Chamber of Sins Level 1[L52]",
+      "tooltip": "Lightning Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, LightningDamageWeaponPrefix",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(35\u201344)% increased Fire Damage",
+      "cost": "6x Orb of Transmutation",
+      "unlock": "The Dread Thicket[L53]",
+      "tooltip": "Fire Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, FireDamageWeaponPrefix",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(35\u201344)% increased Cold Damage",
+      "cost": "6x Orb of Transmutation",
+      "unlock": "The Causeway[L54]",
+      "tooltip": "Cold Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, ColdDamageWeaponPrefix",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(35\u201344)% increased Chaos Damage",
+      "cost": "4x Orb of Chance",
+      "unlock": "The Ossuary[L67]",
+      "tooltip": "Chaos Damage - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, ChaosDamageWeaponPrefix",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(34\u201345)% increased Evasion Rating",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Karui Fortress[L46]",
+      "tooltip": "Defences - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalEvasionRatingIncreasePercent",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(34\u201345)% increased Evasion and Energy Shield",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Karui Fortress[L46]",
+      "tooltip": "Defences - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalEvasionAndEnergyShield",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(34\u201345)% increased Energy Shield",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Karui Fortress[L46]",
+      "tooltip": "Defences - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalEnergyShieldPercent",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(34\u201345)% increased Armour and Evasion",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Karui Fortress[L46]",
+      "tooltip": "Defences - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalArmourAndEvasion",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(34\u201345)% increased Armour and Energy Shield",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Karui Fortress[L46]",
+      "tooltip": "Defences - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalArmourAndEnergyShield",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(34\u201345)% increased Armour",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Karui Fortress[L46]",
+      "tooltip": "Defences - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LocalPhysicalDamageReductionRatingPercent",
+      "itemClasses": "Body Armour, Boots, Gloves, Helmet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(3\u20135)% increased Attack Speed",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Dried Lake[L34]",
+      "tooltip": "Attack and Cast Speed - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, IncreasedAttackSpeed",
+      "itemClasses": "Shield, Ring",
+      "master": "Helena"
+    },
+    {
+      "mod": "(25\u201334)% increased Spell Damage",
+      "cost": "4x Orb of Alteration",
+      "unlock": "The Ancient Pyramid[L23]",
+      "tooltip": "Spell Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, WeaponSpellDamage",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(25\u201334)% increased Lightning Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Lunaris Temple Level 2[L30]",
+      "tooltip": "Lightning Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, LightningDamageWeaponPrefix",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(25\u201334)% increased Fire Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Crematorium[L25]",
+      "tooltip": "Fire Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, FireDamageWeaponPrefix",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(25\u201334)% increased Cold Damage",
+      "cost": "4x Orb of Transmutation",
+      "unlock": "The Solaris Temple Level 2[L28]",
+      "tooltip": "Cold Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, ColdDamageWeaponPrefix",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(25\u201334)% increased Chaos Damage",
+      "cost": "2x Orb of Chance",
+      "unlock": "The Belly of the Beast Level 2[L39]",
+      "tooltip": "Chaos Damage - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, ChaosDamageWeaponPrefix",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(20\u201330)% increased Mana Regeneration Rate",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Chamber of Sins Level 2[L52]",
+      "tooltip": "Mana Regen - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, ManaRegeneration",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Ring, Amulet, Shield",
+      "master": "Helena"
+    },
+    {
+      "mod": "(20\u201324)% increased Movement Speed",
+      "cost": "4x Chaos Orb",
+      "unlock": "Oriath[L69]",
+      "tooltip": "Movement Speed - Rank 3",
+      "modTooltip": "Upgraded, Prefix, Global, MovementVelocity",
+      "itemClasses": "Boots",
+      "master": "Helena"
+    },
+    {
+      "mod": "(16\u201320)% increased Cast Speed",
+      "cost": "2x Chaos Orb",
+      "unlock": "The Vastiri Desert[L61]",
+      "tooltip": "Attack and Cast Speed - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, IncreasedCastSpeed",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(15\u201323)% increased Elemental Damage with Attack Skills",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Catacombs[L27]",
+      "tooltip": "Elemental Damage with Attacks - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, IncreasedWeaponElementalDamagePercent",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged, Ring, Amulet, Belt, Quiver",
+      "master": "Helena"
+    },
+    {
+      "mod": "(15\u201319)% increased Movement Speed",
+      "cost": "2x Chaos Orb",
+      "unlock": "The Chamber of Innocence[L43]",
+      "tooltip": "Movement Speed - Rank 2",
+      "modTooltip": "Upgraded, Prefix, Global, MovementVelocity",
+      "itemClasses": "Boots",
+      "master": "Helena"
+    },
+    {
+      "mod": "(13\u201316)% increased Lightning Damage",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Chamber of Sins Level 1[L52]",
+      "tooltip": "Lightning Damage - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, LightningDamagePercentage",
+      "itemClasses": "Ring, Amulet, One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(13\u201316)% increased Global Physical Damage",
+      "cost": "3x Orb of Alchemy",
+      "unlock": "The Ossuary[L44]",
+      "tooltip": "Physical Damage - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, PhysicalDamagePercent",
+      "itemClasses": "Shield, Amulet",
+      "master": "Helena"
+    },
+    {
+      "mod": "(13\u201316)% increased Fire Damage",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Dread Thicket[L53]",
+      "tooltip": "Fire Damage - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, FireDamagePercentage",
+      "itemClasses": "Ring, Amulet, One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(13\u201316)% increased Cold Damage",
+      "cost": "2x Orb of Alchemy",
+      "unlock": "The Causeway[L54]",
+      "tooltip": "Cold Damage - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, ColdDamagePercentage",
+      "itemClasses": "Ring, Amulet, One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(13\u201316)% increased Chaos Damage",
+      "cost": "3x Orb of Alchemy",
+      "unlock": "The Ossuary[L67]",
+      "tooltip": "Chaos Damage - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, IncreasedChaosDamage",
+      "itemClasses": "Ring, Amulet, One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(12\u201315)% increased Cast Speed",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Dried Lake[L34]",
+      "tooltip": "Attack and Cast Speed - Rank 1",
+      "modTooltip": "of Craft, Suffix, Global, IncreasedCastSpeed",
+      "itemClasses": "Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(12\u201314)% increased Cast Speed",
+      "cost": "2x Chaos Orb",
+      "unlock": "The Vastiri Desert[L61]",
+      "tooltip": "Attack and Cast Speed - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, IncreasedCastSpeed",
+      "itemClasses": "One Hand Melee, One Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(11\u201320)% increased Damage over Time",
+      "cost": "6x Orb of Alteration",
+      "unlock": "The Crypt[L51]",
+      "tooltip": "Damage over Time - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, DegenerationDamage",
+      "itemClasses": "One Hand Melee, Two Hand Melee, One Hand Ranged, Two Hand Ranged",
+      "master": "Helena"
+    },
+    {
+      "mod": "(11\u201315)% increased Attack Speed",
+      "cost": "2x Chaos Orb",
+      "unlock": "The Vastiri Desert[L61]",
+      "tooltip": "Attack and Cast Speed - Rank 2",
+      "modTooltip": "of Craft, Suffix, Global, LocalIncreasedAttackSpeed",
+      "itemClasses": "One Hand Melee, Two Hand Melee",
+      "master": "Helena"
+    },
+    {
+      "mod": "(10\u201314)% increased Movement Speed",
+      "cost": "3x Orb of Augmentation",
+      "unlock": "The Caverns[L22]",
+      "tooltip": "Movement Speed - Rank 1",
+      "modTooltip": "Upgraded, Prefix, Global, MovementVelocity",
+      "itemClasses": "Boots",
+      "master": "Helena"
+    }
+  ]
+}

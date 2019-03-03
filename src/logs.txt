@@ -1,18 +1,10 @@
-You have entered The Crypt.
-debug (Scion) is now level 8
-debug (Scion) is now level 9
-
-debug (Scion) is now level 8
-You have entered The Crypt.
-debug (Scion) is now level 8
-debug (Scion) is now level 8
-debug (Scion) is now level 8
-: debug (Scion) is now level 8
-: debug (Scion) is now level 8
-: debug (Scion) is now level 8
-You have entered The Crypt.
-: debug (Scion) is now level 9
-: debug (Scion) is now level 10
-You have entered The Crypt.
-You have entered The Crypt.
-You have entered The Crypt.
+You have entered The Crypt Level 1.
+You have entered Oriath.
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : DEBUG (Scion) is now level 8
+You have entered Oriath.er
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : DEBUG (Scion) is now level 8
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : DEBUG (Scion) is now level 9re
+You have entered Oriath.
+You have entered The Caverns.
+You have entered The Sewers.
+You have entered The Sewers.

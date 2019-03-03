@@ -174,13 +174,15 @@ public class GemHolder {
         }
     }
     
+    
     public void init_remaining_in_pool(){
+        /*
         for(Gem g : gem_pool){
             g.isRewarded = false;
             g.reward = null;
             g.buy = new ArrayList<>();
             System.out.println(g.getGemName());
-        }
+        }*/
         
         JSONArray gems = new JSONArray();
         Collections.sort(this.gems, new Comparator<Gem>() {
@@ -227,6 +229,13 @@ public class GemHolder {
                 buy_array.put(bInfObj);
             }
             bObj.put("buy", buy_array);
+            bObj.put("isActive", g.isActive);
+            bObj.put("isSupport", g.isSupport);
+            JSONArray tags = new JSONArray();
+            for(String gInf : g.tags){
+                tags.put(gInf);
+            }
+            bObj.put("gemTags", tags);
             gems.put(bObj);
             counter++;
         }

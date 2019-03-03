@@ -29,6 +29,8 @@ public class AboutPageController implements Initializable {
     @FXML
     Hyperlink arias;
     @FXML
+    Hyperlink poewiki;
+    @FXML
     Hyperlink rainy;
     /**
      * Initializes the controller class.
@@ -46,6 +48,12 @@ public class AboutPageController implements Initializable {
             @Override
             public void handle(ActionEvent e) {
                 openWebpage("https://github.com/max-arias/poeGems");
+            }
+        });
+        poewiki.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                openWebpage("https://pathofexile.gamepedia.com/Path_of_Exile_Wiki");
             }
         });
         rainy.setOnAction(new EventHandler<ActionEvent>() {

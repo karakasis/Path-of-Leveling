@@ -1,5 +1,6 @@
 package poe.level.data;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ActHandler {
     
@@ -12,10 +13,14 @@ public class ActHandler {
     return mInstance;
   }
     
-    public ArrayList<Act> acts;
+    private ArrayList<Act> acts;
+    private ArrayList<Zone> zonesWithRecipes;
+    public HashMap<Zone,Boolean> recipeMap;
 
     public ActHandler(){
         acts = new ArrayList<>();
+        zonesWithRecipes = new ArrayList<>();
+        recipeMap = new HashMap<>();
     }
 
     public void putAct(Act a){
@@ -24,5 +29,13 @@ public class ActHandler {
 
     public ArrayList<Act> getActs(){
         return acts;
+    }
+    
+    public void putZone(Zone a){
+        zonesWithRecipes.add(a);
+    }
+
+    public ArrayList<Zone> getZonesWithRecipes(){
+        return zonesWithRecipes;
     }
 }

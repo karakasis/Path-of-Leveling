@@ -28,15 +28,19 @@ public class Pastebin_import_pobController implements Initializable {
     private Label paste_error;
     private MainApp_Controller root;
     
+    private int code;
+    private String pasteResponseString;
+    
     @FXML
     private void paste_fetch(){
         String text = paste_area.getText();
         String pasteKey = "";
+        boolean valid = false;
         if(text.startsWith("https://pastebin.com/")){
-            root.fetch_pob_paste(text);
-            //pasteKey = text.substring(21, text.length());
+            valid = true;
+            pasteKey = text.substring(21, text.length());
         }
-        /*
+        
         final PastebinFactory factory = new PastebinFactory();
         final Pastebin pastebin = factory.createPastebin("6843a1b84c4a35f98f5488c8671e9a60");
         //final String pasteKey = "LAZD9ZCs";
@@ -51,11 +55,17 @@ public class Pastebin_import_pobController implements Initializable {
         paste_error.setVisible(false);
         //paste_error.setText("Valid");
         System.out.println(pasteResponse.get());
-        root.fetchPaste(pasteResponse.get());*/
+        pasteResponseString = pasteResponse.get();
+        if(valid) root.fetch_pob_paste(text,code);
     }
     
-    public void hook(MainApp_Controller root){
+    public void hook(MainApp_Controller root, int code){
+        this.code = code; //0 is create , 1 is link
         this.root = root;
+    }
+    
+    public String getResponse(){
+        return pasteResponseString;
     }
     
     public void success(){
@@ -68,6 +78,8 @@ public class Pastebin_import_pobController implements Initializable {
         paste_error.setText("Invalid pastebin");
         paste_area.clear();
     }
+    
+    
     /**
      * Initializes the controller class.
      */

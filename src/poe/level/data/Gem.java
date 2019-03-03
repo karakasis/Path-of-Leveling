@@ -61,6 +61,10 @@ public class Gem {
     public Info reward;
     public ArrayList<Info> buy;
     
+    public boolean isActive;
+    public boolean isSupport;
+    public ArrayList<String> tags;
+    
     public boolean isBought(){
         if(buy.size()>0){
             return true;
@@ -79,6 +83,7 @@ public class Gem {
         id = -1;
         id_replaced = -1;
         id_replaces = -1;
+        tags = new ArrayList<>();
     }
     
     public Gem(Gem dupe){
@@ -108,6 +113,9 @@ public class Gem {
         this.cachedLabel= dupe.cachedLabel;
         this.iconDirPath = dupe.iconDirPath;
         this.isRewarded = dupe.isRewarded;
+        this.tags = new ArrayList<>(dupe.tags);
+        this.isActive = dupe.isActive;
+        this.isSupport = dupe.isSupport;
     }
     
     public int getLevelAdded(){

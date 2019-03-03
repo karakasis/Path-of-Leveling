@@ -176,6 +176,7 @@ public class GemEntry_Controller implements Initializable {
         
         //add open window gem selection pop up functionallity
         parent.requestPopup();
+        
     }
     
     public void load(GemLinker parent,int id, Gem g){
@@ -213,7 +214,11 @@ public class GemEntry_Controller implements Initializable {
                 }
             }*/
             levelSlider.setValue(selectedGem.getLevelAdded());
-            act.setText("Act " + selectedGem.act);
+            if(selectedGem.act == 0){
+                act.setText("Drop only");
+            }else{
+                act.setText("Act " + selectedGem.act);
+            }
             soldBy.setText(selectedGem.npc);
             if(selectedGem.replaced){
                label_with.setVisible(true);
@@ -257,7 +262,11 @@ public class GemEntry_Controller implements Initializable {
         
         selectedGem = g.dupeGem();
         levelSlider.setValue(selectedGem.getLevelAdded());
-        act.setText("Act " + selectedGem.act);
+        if(selectedGem.act == 0){
+            act.setText("Drop only");
+        }else{
+            act.setText("Act " + selectedGem.act);
+        }
         soldBy.setText(selectedGem.npc);
         if(selectedGem.replaced){
            label_with.setVisible(true);
@@ -268,6 +277,8 @@ public class GemEntry_Controller implements Initializable {
            replaceGem.setVisible(false);
            replaceToggle.setSelected(false);
         }
+        
+        
         parent.updateGemData(selectedGem);
     }
     

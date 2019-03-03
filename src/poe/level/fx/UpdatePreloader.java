@@ -8,6 +8,7 @@ package poe.level.fx;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
 import javafx.application.Preloader;
 import javafx.application.Preloader.ProgressNotification;
 import javafx.application.Preloader.StateChangeNotification;
@@ -61,6 +62,9 @@ public class UpdatePreloader extends Preloader {
         if (scn.getType() == StateChangeNotification.Type.BEFORE_START) {
             stage.hide();
         }
+        POELevelFx application = (POELevelFx) scn.getApplication();
+        if(application != null )
+            controller.hookMain(application);
     }
     
     @Override

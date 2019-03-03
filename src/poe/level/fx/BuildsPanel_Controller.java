@@ -5,34 +5,7 @@
  */
 package poe.level.fx;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.sun.deploy.util.StringUtils;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,20 +14,25 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javax.imageio.ImageIO;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import poe.level.data.Build;
 import poe.level.data.Gem;
 import poe.level.data.GemHolder;
 import poe.level.data.SocketGroup;
-import poe.level.fx.AddBuild_Controller;
-import poe.level.fx.BuildEntry_Controller;
-import poe.level.fx.MainApp_Controller;
 import poe.level.fx.SocketGroupsPanel_Controller.SocketGroupLinker;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -63,6 +41,7 @@ import poe.level.fx.SocketGroupsPanel_Controller.SocketGroupLinker;
  * @author Christos
  */
 public class BuildsPanel_Controller implements Initializable {
+    private final Logger m_logger = Logger.getLogger(BuildsPanel_Controller.class.getName());
 
     public class BuildLinker{
         public BuildEntry_Controller pec;
@@ -70,7 +49,7 @@ public class BuildsPanel_Controller implements Initializable {
         public int id;
         public BuildsPanel_Controller root;
         public ArrayList<SocketGroupLinker> sgl_list = new ArrayList<>();
-        
+
         public int hook(BuildsPanel_Controller root){
             this.root = root;
             id = BuildsPanel_Controller.sign();
@@ -80,12 +59,12 @@ public class BuildsPanel_Controller implements Initializable {
         public void delete(){
             root.deleteBuild();
         }
-        
+
         public void update(){
             root.update(id);
         }
     }
-    
+
     private static HashSet<Integer> randomIDs;
     public static int sign(){
         if(randomIDs == null) randomIDs = new HashSet<>();
@@ -96,7 +75,7 @@ public class BuildsPanel_Controller implements Initializable {
         randomIDs.add(ran);
         return ran;
     }
-    
+
     private static Image charToImage(String className, String asc){
         BufferedImage img = null;
         try {
@@ -104,51 +83,51 @@ public class BuildsPanel_Controller implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(BuildsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return SwingFXUtils.toFXImage(img, null);
     }
-    
+
     @FXML
     private JFXButton addBuild_button;
     @FXML
     private JFXButton removeBuild_button;
     @FXML
     private VBox buildsBox;
-    
+
     private MainApp_Controller root;
     private SocketGroupsPanel_Controller sgc;
     private HashMap<Integer,BuildLinker> linker;
     private int activeBuildID;
     public String lastbuild_invalidated;
     public int lastbuild_invalidatedID;
-    
+
     public void hook(MainApp_Controller root){
         this.root = root;
     }
-    
+
     public void hookSG_Controller(SocketGroupsPanel_Controller sgc){
         this.sgc = sgc;
     }
-    
+
     public void loadBuilds(ArrayList<Build> buildsLoaded){
         for(Build b : buildsLoaded){
             loadNewBuild(b);
         }
     }
-    
+
     public void addNewSocketGroup(SocketGroup sg){
         linker.get(activeBuildID).build.getSocketGroup().add(sg);
     }
-    
+
     public void removeSocketGroup(SocketGroup sg){
         linker.get(activeBuildID).build.getSocketGroup().remove(sg);
     }
-    
-    @FXML 
+
+    @FXML
     private void addNewBuild(){
         root.buildPopup();
     }
-    
+
     public boolean validate(){
         Build active_build = linker.get(activeBuildID).build;
         if(active_build.validate()){
@@ -165,7 +144,7 @@ public class BuildsPanel_Controller implements Initializable {
             return false;
         }
     }
-    
+
     public boolean validateAll(){
         for(BuildLinker bl : linker.values()){
             Build active_build = bl.build;
@@ -177,7 +156,7 @@ public class BuildsPanel_Controller implements Initializable {
                     //updateBuildValidationBanner(bl.id);
                     return false;
                 }
-                
+
             }else if(active_build.validate() && !active_build.isValid){
                 //if it passed validation but was marked as non valid
                 //signal a graphic change
@@ -187,15 +166,15 @@ public class BuildsPanel_Controller implements Initializable {
         }
         return true;
     }
-    
+
     public String validateError(){
         Build active_build = linker.get(lastbuild_invalidatedID).build;
         lastbuild_invalidated = active_build.getName();
         return active_build.validate_failed_string();
     }
-    
+
     public String validateAllError(){
-        
+
         lastbuild_invalidated = "";
         for(BuildLinker bl : linker.values()){
             Build active_build = bl.build;
@@ -207,7 +186,7 @@ public class BuildsPanel_Controller implements Initializable {
         }
         return null;
     }
-    
+
     //for better update-ability i need to make this client sided and not attached to json.
     //some thoughts: if you try to open the app and not visit editor, a non-valid build will not show up as non valid.
     //so basically since it will not be saved the app will not know that its not valid.
@@ -218,12 +197,12 @@ public class BuildsPanel_Controller implements Initializable {
         active_build.isValid = false;
         updateBuildValidationBanner(lastbuild_invalidatedID);
     }
-    
+
     public Build getCurrentBuild(){
         return linker.get(activeBuildID).build;
     }
-    
-    
+
+
     public int sign_jsons(HashSet<Integer> unique_ids){
         if(unique_ids == null) unique_ids = new HashSet<>();
         int ran;
@@ -233,11 +212,11 @@ public class BuildsPanel_Controller implements Initializable {
         unique_ids.add(ran);
         return ran;
     }
-    
+
     public void saveBuild() throws IOException{
-        
-        
-        
+
+
+
         JSONArray builds_array = new JSONArray();
         HashSet<Integer> unique_ids = new HashSet<>();
         for( BuildLinker bl : linker.values()){
@@ -249,10 +228,10 @@ public class BuildsPanel_Controller implements Initializable {
             bObj.put("ascendancyName",build.getAsc());
             bObj.put("level", build.level); //<change
             bObj.put("characterName",build.characterName);
-            
+
             bObj.put("hasPob",build.hasPob);
             bObj.put("pobLink",build.pobLink);
-        
+
             JSONArray socket_group_array = new JSONArray();
             bObj.put("socketGroup", socket_group_array);
             for(SocketGroup sg : build.getSocketGroup()){
@@ -280,7 +259,7 @@ public class BuildsPanel_Controller implements Initializable {
                     }
                     sObj.put("socketGroupThatReplaces", sg.getGroupThatReplaces().id);
                 }
-                
+
                 sObj.put("note",sg.getNote());
                 JSONArray gems_array = new JSONArray();
                 for(Gem g : sg.getGems()){
@@ -309,21 +288,21 @@ public class BuildsPanel_Controller implements Initializable {
                 }
                 sObj.put("gem", gems_array);
                 socket_group_array.put(sObj);
-                
+
             }
-            //now we need to connect data 
-            
-            
+            //now we need to connect data
+
+
             builds_array.put(bObj);
         }
-        
+
         String build_to_json = builds_array.toString();
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         //Gson gson = new Gson();
         //String build_to_json = gson.toJson(linker.get(activeBuildID).build);
         System.out.println(build_to_json);
@@ -350,14 +329,14 @@ public class BuildsPanel_Controller implements Initializable {
             }
         }
 
-	
+
         //PrintWriter out = new PrintWriter(POELevelFx.directory+"\\Builds\\builds.txt");
         //out.println(stringValueBase64Encoded);
         //gson.toJson(linker.get(activeBuildID).build,new FileWriter(POELevelFx.directory+"\\Builds\\builds.txt"));
     }
-    
+
     public String allTo64(){
-        
+
         JSONArray builds_array = new JSONArray();
         HashSet<Integer> unique_ids = new HashSet<>();
         for( BuildLinker bl : linker.values()){
@@ -369,10 +348,10 @@ public class BuildsPanel_Controller implements Initializable {
             bObj.put("isValid", build.isValid);
             bObj.put("level", build.level); //<change
             bObj.put("characterName",build.characterName);
-            
+
             bObj.put("hasPob",build.hasPob);
             bObj.put("pobLink",build.pobLink);
-            
+
             JSONArray socket_group_array = new JSONArray();
             bObj.put("socketGroup", socket_group_array);
             for(SocketGroup sg : build.getSocketGroup()){
@@ -428,28 +407,28 @@ public class BuildsPanel_Controller implements Initializable {
                 }
                 sObj.put("gem", gems_array);
                 socket_group_array.put(sObj);
-                
+
             }
-            //now we need to connect data 
-            
-            
+            //now we need to connect data
+
+
             builds_array.put(bObj);
         }
-        
+
         String build_to_json = builds_array.toString();
         System.out.println(build_to_json);
         String stringValueBase64Encoded = Base64.getEncoder().encodeToString(build_to_json.getBytes());
         System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
         return stringValueBase64Encoded;
     }
-    
+
     public String activeTo64(){
         Build build = linker.get(activeBuildID).build;
-        
+
         JSONArray builds_array = new JSONArray();
-        
+
         HashSet<Integer> unique_ids = new HashSet<>();
-        
+
         JSONObject bObj = new JSONObject();
         bObj.put("buildName",build.getName());
         bObj.put("className",build.getClassName());
@@ -457,10 +436,10 @@ public class BuildsPanel_Controller implements Initializable {
         bObj.put("isValid", build.isValid);
         bObj.put("level", build.level); //<change
         bObj.put("characterName",build.characterName);
-        
+
         bObj.put("hasPob",build.hasPob);
         bObj.put("pobLink",build.pobLink);
-                
+
         JSONArray socket_group_array = new JSONArray();
         bObj.put("socketGroup", socket_group_array);
         for(SocketGroup sg : build.getSocketGroup()){
@@ -518,30 +497,30 @@ public class BuildsPanel_Controller implements Initializable {
             socket_group_array.put(sObj);
 
         }
-        //now we need to connect data 
+        //now we need to connect data
 
 
         builds_array.put(bObj);
-        
-        
+
+
         String build_to_json = builds_array.toString();
-        
+
         System.out.println(build_to_json);
         String stringValueBase64Encoded = Base64.getEncoder().encodeToString(build_to_json.getBytes());
         System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
         return stringValueBase64Encoded;
     }
-    
+
     public boolean loadBuildsFromPastebin(String rawPaste){
+        String replace = rawPaste.replace('-','+').replace('_','/').trim();
         //pseudo for loop loads builds and panels put them
         //into buildlinker and add buildlinker to the list
         //TODO: remember to sign the build with the static method
         ArrayList<Build> buildsLoaded = new ArrayList<>();
-        
-        String stringValueBase64Encoded  = rawPaste.trim();
+
         byte[] byteValueBase64Decoded = null;
         try{
-            byteValueBase64Decoded = Base64.getDecoder().decode(stringValueBase64Encoded);
+            byteValueBase64Decoded = Base64.getDecoder().decode(replace);
         }catch(java.lang.IllegalArgumentException e){
             e.printStackTrace();
             return false;
@@ -551,10 +530,10 @@ public class BuildsPanel_Controller implements Initializable {
             return false;
         }
         String stringValueBase64Decoded = new String(byteValueBase64Decoded);
-        
+
         //JSONArray obj = new JsonParser().parse(stringValueBase64Encoded).getAsJsonArray();
         try{
-            
+
             JSONArray builds_array = new JSONArray(stringValueBase64Decoded);
             for (int i = 0; i < builds_array.length(); i++) {
                     JSONObject bObj = builds_array.getJSONObject(i);
@@ -675,7 +654,7 @@ public class BuildsPanel_Controller implements Initializable {
                                 for(Gem g1 : sg.getGems()){
                                     if(g1.id == g.id_replaces){
                                         g.replacesGem = g1;
-                                        break;  
+                                        break;
                                     }
                                 }
                             }
@@ -692,27 +671,56 @@ public class BuildsPanel_Controller implements Initializable {
                     }
                     buildsLoaded.add(build);
             }
-            
+
         }catch(Exception e){
+            m_logger.log(Level.WARNING, "Exception while parsing POB response.", e);
             return false;
         }
-        
+
         for(Build bl : buildsLoaded){
             loadNewBuild(bl);
             POELevelFx.buildsLoaded.add(bl); //this line is extra and not included in the method above
         }
         return true;
-            
-        
+
+
     }
-    
+
+    public Build addNewBuildFromPOB(String buildName, String className, String ascendancyName, ArrayList<ArrayList<String>> info){
+        //addNewBuild(buildName,className,ascendancyName);
+        Build pobBuild = new Build(buildName,className,ascendancyName); //make empty build
+
+        pobBuild.characterName = "";
+        pobBuild.level = 0;
+        //main app controller will take care of pob link and hasPob tag
+        pobBuild.isValid = false; //obv needs checking after import from pob.
+
+        GemHolder.getInstance().className = pobBuild.getClassName();
+        for(ArrayList<String> sgList : info){
+            SocketGroup sg = new SocketGroup();
+            for( String gemString : sgList){
+                Gem gem = GemHolder.getInstance().createGemFromCache(gemString,pobBuild.getClassName());
+                if(gem.isActive && sg.getActiveGem() == null){
+                    sg.setActiveGem(gem);
+                }
+                sg.getGems().add(gem);//***check line 324 in GemsPanel_Controller;
+            }
+            pobBuild.getSocketGroup().add(sg);
+        }
+        //but we also need to link the build to the build panel
+        //we do this by load method
+        loadNewBuild(pobBuild);
+        POELevelFx.buildsLoaded.add(pobBuild); //add reference to build list.
+        return pobBuild;
+    }
+
     public void addNewBuild(String buildName, String className, String ascendancyName){
         BuildLinker bl = new BuildLinker();
         int linker_id = bl.hook(this);
         linker.put(linker_id,bl);
-        
+
         removeBuild_button.setDisable(false);
-        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("buildEntry.fxml"));
         try {
             //this will add the AnchorPane to the VBox
@@ -720,7 +728,7 @@ public class BuildsPanel_Controller implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         bl.pec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
         bl.pec.init(charToImage(className,ascendancyName), buildName, ascendancyName, bl);
         bl.build = new Build(buildName,className,ascendancyName);
@@ -737,14 +745,14 @@ public class BuildsPanel_Controller implements Initializable {
         POELevelFx.buildsLoaded.add(bl.build);
         root.toggleAllBuilds(true);
     }
-    
+
     public void loadNewBuild(Build build){
         BuildLinker bl = new BuildLinker();
         int linker_id = bl.hook(this);
         linker.put(linker_id,bl);
-        
+
         removeBuild_button.setDisable(false);
-        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("buildEntry.fxml"));
         try {
             //this will add the AnchorPane to the VBox
@@ -752,7 +760,7 @@ public class BuildsPanel_Controller implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         bl.pec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
         bl.pec.init(charToImage(build.getClassName(),build.getAsc())
                 , build.getName(), build.getAsc(), bl);
@@ -763,11 +771,11 @@ public class BuildsPanel_Controller implements Initializable {
             //sgl.sg = sg;
             //sgl.generateLabel();
             bl.sgl_list.add(sgl);
-        } 
-        
+        }
+
         root.toggleAllBuilds(true);
     }
-    
+
     @FXML
     private void deleteBuild(){
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -789,18 +797,18 @@ public class BuildsPanel_Controller implements Initializable {
             if(POELevelFx.buildsLoaded.isEmpty()){
                 root.toggleAllBuilds(false);
             }
-        } 
-        
+        }
+
         // and also remove from file system?
-        
+
     }
-    
+
     private void updateBuildValidationBanner(int id){
         BuildLinker bl = linker.get(id);
         bl.pec.setValidBackgroundColor(bl.build.isValid , id==activeBuildID);
         root.toggleFooterVisibility(bl.build.isValid);
     }
-   
+
     public void update(int id){
         if(id!=activeBuildID){
             activeBuildID = id;
@@ -817,7 +825,7 @@ public class BuildsPanel_Controller implements Initializable {
                 }
             }
             //root.buildChanged(id);
-            
+
         }
     }
 
@@ -825,7 +833,7 @@ public class BuildsPanel_Controller implements Initializable {
         BuildLinker bl = linker.get(id);
         return bl.build.getSocketGroup();
     }
-    
+
     public String getCurrentClass(int id){
         BuildLinker bl = linker.get(id);
         return bl.build.getClassName();
@@ -836,10 +844,10 @@ public class BuildsPanel_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
         linker = new HashMap<>();
         //loadBuildsFromMemory();
-    }  
+    }
 
-    
+
 }
