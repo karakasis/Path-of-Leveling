@@ -12,12 +12,12 @@ import javafx.util.StringConverter;
  *
  * @author Christos
  */
-public class GemToString<T> extends StringConverter<T> {
+public class GemToString extends StringConverter<Gem> {
 
-    private HashMap<String, T> map = new HashMap<>();
-    
+    private HashMap<String, Gem> map = new HashMap<>();
+
     @Override
-    public T fromString(String string) {
+    public Gem fromString(String string) {
         if (!map.containsKey(string)) {
             return null;
         }
@@ -25,10 +25,9 @@ public class GemToString<T> extends StringConverter<T> {
     }
 
     @Override
-    public String toString(T t) {
+    public String toString(Gem t) {
         if (t != null) {
-            Gem g = (Gem) t;
-            String str = g.getGemName();
+            String str = t.getGemName();
             map.put(str, t);
             return str;
         } else {
