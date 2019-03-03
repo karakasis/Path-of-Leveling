@@ -206,6 +206,14 @@ public class ZoneOverlay_Stage  extends Stage{
         }
     }
     
+    public void event_mark_recipe(){
+        if(isVisible){
+            hidePanel();
+        }else{
+            showPanel();
+        }
+    }
+    
     public void bindKeyEvent(Scene scene){
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override

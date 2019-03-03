@@ -68,7 +68,7 @@
             <Font name="System Italic" size="9.0" />
          </font>
       </Label>
-      <JFXToggleButton fx:id="trial_toggle1" layoutX="15.0" layoutY="198.0" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Alert when zone has a crafting recipe" />
+      <JFXToggleButton fx:id="recipe_toggle" layoutX="15.0" layoutY="198.0" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Alert when zone has a crafting recipe" />
       <Label layoutX="317.0" layoutY="175.0" prefHeight="47.0" prefWidth="64.0" text="Mark recipe as found" textAlignment="CENTER" wrapText="true" />
       <TextField fx:id="mark_recipe_hotkey" editable="false" layoutX="388.0" layoutY="186.0" prefHeight="25.0" prefWidth="79.0" />
    </children>

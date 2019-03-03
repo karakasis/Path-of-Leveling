@@ -43,6 +43,8 @@ public class ZoneOverlay_Controller implements Initializable {
     private ImageView passive_book;
     @FXML
     private ImageView trial;
+    @FXML
+    private ImageView recipe;
     
     private double initialX;
     private double initialY;
@@ -84,6 +86,15 @@ public class ZoneOverlay_Controller implements Initializable {
             }
         }else{
             trial.setVisible(false);
+        }
+        if(Preferences_Controller.zones_recipe_toggle){
+            if(zone.hasRecipe){
+                recipe.setVisible(true);
+            }else{
+                recipe.setVisible(false);
+            }
+        }else{
+            recipe.setVisible(false);
         }
         if(Preferences_Controller.zones_passive_toggle){
             if(zone.hasPassive){

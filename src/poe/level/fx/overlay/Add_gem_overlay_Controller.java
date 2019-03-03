@@ -48,6 +48,10 @@ public class Add_gem_overlay_Controller implements Initializable {
         gemAddedName.setText(add.getGemName());
         quest.setText(add.quest_name);
         npc.setText(add.npc);
-        act.setText("Act " + add.act);
+        if(add.act == 0){
+            act.setText("Drop only");
+        }else{
+            act.setText("Act " + add.act);
+        }
     }
 }

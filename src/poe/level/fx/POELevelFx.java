@@ -87,6 +87,7 @@ import poe.level.data.Gem.Info;
 import poe.level.data.GemHolder;
 import poe.level.data.SocketGroup;
 import poe.level.data.Zone;
+import poe.level.data.Zone.recipeInfo;
 import static poe.level.fx.Preferences_Controller.zones_images_toggle;
 import static poe.level.fx.Preferences_Controller.zones_passive_toggle;
 import static poe.level.fx.Preferences_Controller.zones_text_toggle;
@@ -231,10 +232,12 @@ public class POELevelFx extends Application {
                     Preferences_Controller.zones_toggle = false;
                     prop.setProperty("zones-text-toggle", "true");
                     Preferences_Controller.zones_text_toggle = true;
-                    prop.setProperty("zones-trial-toggle", "false");
-                    Preferences_Controller.zones_trial_toggle = false;
+                    prop.setProperty("zones-trial-toggle", "true");
+                    Preferences_Controller.zones_trial_toggle = true;
                     prop.setProperty("zones-passive-toggle", "true");
                     Preferences_Controller.zones_passive_toggle = true;
+                    prop.setProperty("zones-recipe-toggle", "true");
+                    Preferences_Controller.zones_recipe_toggle = true;
                     prop.setProperty("zones-images-toggle", "true");
                     Preferences_Controller.zones_images_toggle = true;
                     double a = 10;
@@ -243,25 +246,34 @@ public class POELevelFx extends Application {
                     prop.setProperty("zones-hotkey-show_hide", "F5");
                     try{
                         KeyCombination keyCombination = KeyCombination.keyCombination("F5");
-                        System.out.println("key code : " + keyCombination.getName());
+                        System.out.println("key code zones: " + keyCombination.getName());
                         Preferences_Controller.zones_hotkey_show_hide_key = keyCombination;
-                    }catch(IllegalArgumentException e){
-                        System.out.println(":incorect:");
+                    }catch(Exception e){
+                        System.out.println(":key code zones not set:");
                         Preferences_Controller.zones_hotkey_show_hide_key = KeyCombination.NO_MATCH;
                     }
                     a = 15;
                     Preferences_Controller.level_slider = a;
                     prop.setProperty("level-slider", String.valueOf(a));
-                    prop.setProperty("level-hotkey-remind", "F4");
                     prop.setProperty("poe-dir","");
                     Preferences_Controller.poe_log_dir = "";
+                    prop.setProperty("level-hotkey-remind", "F4");
                     try{
                         KeyCombination keyCombination = KeyCombination.keyCombination("F4");
-                        System.out.println("key code : " + keyCombination.getName());
+                        System.out.println("key code gems: " + keyCombination.getName());
                         Preferences_Controller.level_hotkey_remind_key = keyCombination;
-                    }catch(IllegalArgumentException e){
-                        System.out.println(":incorect:");
+                    }catch(Exception e){
+                        System.out.println(":key code gems not set:");
                         Preferences_Controller.level_hotkey_remind_key = KeyCombination.NO_MATCH;
+                    }
+                    prop.setProperty("recipe-hotkey-mark", "F6");
+                    try{
+                        KeyCombination keyCombination = KeyCombination.keyCombination("F6");
+                        System.out.println("key code recipe: " + keyCombination.getName());
+                        Preferences_Controller.recipe_hotkey_mark_key = keyCombination;
+                    }catch(Exception e){
+                        System.out.println(":key code recipe not set:");
+                        Preferences_Controller.recipe_hotkey_mark_key = KeyCombination.NO_MATCH;
                     }
 
                     //new changes
@@ -294,6 +306,7 @@ public class POELevelFx extends Application {
                   InputStream input = null;
                   String zones_hotkey_show_hide = "";
                   String level_hotkey_remind = "";
+                  String recipe_hotkey_mark = "";
                   try {
 
                           input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
@@ -303,12 +316,28 @@ public class POELevelFx extends Application {
                           Preferences_Controller.zones_toggle = Boolean.parseBoolean(prop.getProperty("zones-toggle"));
                           Preferences_Controller.zones_text_toggle = Boolean.parseBoolean(prop.getProperty("zones-text-toggle"));
                           Preferences_Controller.zones_images_toggle = Boolean.parseBoolean(prop.getProperty("zones-images-toggle"));
-                          Preferences_Controller.zones_trial_toggle = Boolean.parseBoolean(prop.getProperty("zones-trial-toggle"));
+                          //this 2 settings were added in later versions so im trying to avoid errors.
+                          String parseRecipe = prop.getProperty("zones-recipe-toggle");
+                          if(parseRecipe == null){
+                              Preferences_Controller.zones_recipe_toggle = true; //default
+                          }else{
+                              Preferences_Controller.zones_recipe_toggle = Boolean.parseBoolean(prop.getProperty("zones-recipe-toggle"));
+                          }
+                          String parseTrial = prop.getProperty("zones-trial-toggle");
+                          if(parseTrial == null){
+                              Preferences_Controller.zones_trial_toggle = true; //default
+                          }else{
+                              Preferences_Controller.zones_trial_toggle = Boolean.parseBoolean(prop.getProperty("zones-trial-toggle"));
+                          }
                           Preferences_Controller.zones_passive_toggle = Boolean.parseBoolean(prop.getProperty("zones-passive-toggle"));
                           Preferences_Controller.zones_slider = Double.parseDouble(prop.getProperty("zones-slider"));
                           zones_hotkey_show_hide = prop.getProperty("zones-hotkey-show_hide");
                           Preferences_Controller.level_slider = Double.parseDouble(prop.getProperty("level-slider"));
                           level_hotkey_remind = prop.getProperty("level-hotkey-remind");
+                          recipe_hotkey_mark = prop.getProperty("recipe-hotkey-mark");
+                          //check if recipe hotkey is null, on older versions
+                          if(recipe_hotkey_mark == null) recipe_hotkey_mark = "F6";
+                          
                             if(!(prop.getProperty("poe-dir")==null || prop.getProperty("poe-dir").equals(""))){
                                 Preferences_Controller.poe_log_dir = prop.getProperty("poe-dir") + "\\logs\\Client.txt";
                             }
@@ -369,29 +398,42 @@ public class POELevelFx extends Application {
 
                   try{
                       KeyCombination keyCombination = KeyCombination.keyCombination(zones_hotkey_show_hide);
-                      System.out.println("key code : " + keyCombination.getName());
+                      System.out.println("key code zones: " + keyCombination.getName());
                       Preferences_Controller.zones_hotkey_show_hide_key = keyCombination;
-                  }catch(IllegalArgumentException e){
+                  }catch(Exception e){
                       System.out.println(":incorect:");
                       Preferences_Controller.zones_hotkey_show_hide_key = KeyCombination.NO_MATCH;
                   }
 
                   try{
                       KeyCombination keyCombination = KeyCombination.keyCombination(level_hotkey_remind);
-                      System.out.println("key code : " + keyCombination.getName());
+                      System.out.println("key code gems: " + keyCombination.getName());
                       Preferences_Controller.level_hotkey_remind_key = keyCombination;
-                  }catch(IllegalArgumentException e){
+                  }catch(Exception e){
                       System.out.println(":incorect:");
                       Preferences_Controller.level_hotkey_remind_key = KeyCombination.NO_MATCH;
                   }
                   
+                  try{
+                      KeyCombination keyCombination = KeyCombination.keyCombination(recipe_hotkey_mark);
+                      System.out.println("key code recipe: " + keyCombination.getName());
+                      Preferences_Controller.recipe_hotkey_mark_key = keyCombination;
+                  }catch(Exception e){
+                      System.out.println(":incorect:");
+                      Preferences_Controller.recipe_hotkey_mark_key = KeyCombination.NO_MATCH;
+                  }
+                  
             }
 
+            
+            
             //StringBuilder raw = readRawToString();
             
               loadActsFromMemory();
               loadGemsFromMemory();
               loadBuildsFromMemory();
+              
+              loadRecipesProperties();
               
         }
         
@@ -539,6 +581,78 @@ public class POELevelFx extends Application {
         //zone.close();
     }
     
+    private void loadRecipesProperties(){
+        if (!new File(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties").isFile()) {
+            try {
+                new File(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties").createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Properties prop = new Properties();
+            OutputStream output = null;
+            try{
+                output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            for(Zone z : ActHandler.getInstance().getZonesWithRecipes()){
+                String thanksGGG = z.name + " [L" + z.getZoneLevel() + "]";
+                System.out.println(thanksGGG);
+                prop.setProperty(thanksGGG, "false");
+                ActHandler.getInstance().recipeMap.put(z, false);
+            }
+            
+            try {
+                // save properties to project root folder
+                prop.store(output, null);
+                System.out.println("Recipe properties file created successfully in " + POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } finally {
+                    if (output != null) {
+                            try {
+                                    output.close();
+                            } catch (IOException e) {
+                                    e.printStackTrace();
+                            }
+                    }
+
+            }
+
+
+        }else{
+            Properties prop = new Properties();
+            InputStream input = null;
+            try {
+
+                    input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+
+                    // load a properties file
+                    prop.load(input);
+                    for(Zone z : ActHandler.getInstance().getZonesWithRecipes()){
+                        String thanksGGG = z.name + " [L" + z.getZoneLevel() + "]";
+                        boolean parseBoolean = Boolean.parseBoolean(prop.getProperty(thanksGGG));
+                        ActHandler.getInstance().recipeMap.put(z, parseBoolean);
+                    }
+
+            } catch (IOException ex) {
+                    ex.printStackTrace();
+            } finally {
+                if (input != null) {
+                        try {
+                                input.close();
+                                System.out.println("Recipe properties loaded successfully ");
+            
+                        } catch (IOException e) {
+                                e.printStackTrace();
+                        }
+                }
+            }
+        }
+    }
+    
     private void loadActsFromMemory(){
         InputStream in = POELevelFx.class.getResourceAsStream("/json/data.json");
         Scanner s = new Scanner(in).useDelimiter("\\A");
@@ -563,22 +677,41 @@ public class POELevelFx extends Application {
                 for(int k=0; k<zonesImagAr.length(); k++){
                     zoneImages.add(zonesImagAr.getString(k));
                 }
-                        Zone z = new Zone(
-                        zoneObj.getString("name"),
-                        zoneObj.getInt("level"),
-                        zoneImages,
-                        zoneObj.getString("altimage"),
-                        zoneObj.getString("note"),
-                        zoneObj.getBoolean("haspassive"),
-                        zoneObj.getBoolean("hastrial"),
-                        zoneObj.getString("quest"),   
-                        zoneObj.getBoolean("questRewardsSkills"),
-                        actname,actid
+                Zone z = new Zone(
+                    zoneObj.getString("name"),
+                    zoneObj.getInt("level"),
+                    zoneImages,
+                    zoneObj.getString("altimage"),
+                    zoneObj.getString("note"),
+                    zoneObj.getBoolean("haspassive"),
+                    zoneObj.getBoolean("hastrial"),
+                    zoneObj.getString("quest"),   
+                    zoneObj.getBoolean("questRewardsSkills"),
+                    actname,actid
                 );
+                //manual zone recipe load
+                z.hasRecipe = zoneObj.getBoolean("hasRecipe");
+                if(z.hasRecipe){
+                    recipeInfo rInfo = z.new recipeInfo();
+                    JSONObject recipeObj = zoneObj.getJSONObject("recipe");
+                    if(recipeObj != null){
+                        rInfo.tooltip = recipeObj.getString("tooltip");
+                        /* // we wont be using this information so we might as well
+                        //not use space for no reason.
+                        JSONArray recipeMods = recipeObj.getJSONArray("mods");
+                        rInfo.mods = new ArrayList<>();
+                        for(int k=0; k<recipeMods.length(); k++){
+                            rInfo.mods.add(recipeMods.getString(k));
+                        }*/
+                    } 
+                    ActHandler.getInstance().putZone(z);
+                }
                 a.putZone(z);
             }
             ActHandler.getInstance().putAct(a);
+            
         }
+        System.out.println("Zone data loaded.");
     }
     
     private void loadGemsFromMemory(){
@@ -621,27 +754,27 @@ public class POELevelFx extends Application {
                     }
                     gem.reward.available_to = chars_list;
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     gem.reward.quest_name= rewardObj.getString("quest_name");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     gem.reward.npc= rewardObj.getString("npc");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     gem.reward.act = rewardObj.getInt("act");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     gem.reward.town= rewardObj.getString("town");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
             }
             JSONArray buy_arrays = gemObj.getJSONArray("buy");
@@ -660,27 +793,27 @@ public class POELevelFx extends Application {
                     buy_info.available_to = chars_list;
                 }catch(JSONException e){
                     e.printStackTrace();
-                    System.out.println(gem.getGemName());
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     buy_info.quest_name= buyObj.getString("quest_name");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     buy_info.npc= buyObj.getString("npc");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     buy_info.act = buyObj.getInt("act");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     buy_info.town= buyObj.getString("town");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 gem.buy.add(buy_info);
             }
@@ -739,6 +872,12 @@ public class POELevelFx extends Application {
             
             notifyPreloader(new NewFXPreloader.ProgressNotification(a));
         }
+        System.out.println("Gem data loaded");
+            
+    }
+    
+    private void logErrorGem(String gemName){
+        System.out.println("Gem : " +gemName+ " had errors in loading.");
     }
     
     public static void reloadBuilds(){
@@ -844,12 +983,13 @@ public class POELevelFx extends Application {
                     for(int k = 0 ; k<gems_array.length(); k++ ){
                         JSONObject gObj = gems_array.getJSONObject(k);
                         String gemName = gObj.getString("name");
+                        /*
                         if(gemName.equals("Detonate Mines")){
                             System.out.println();
-                        }
+                        }*/
                         Gem gem = GemHolder.getInstance().createGemFromCache(gemName,build.getClassName());
                         if(gem == null){
-                            System.out.println();
+                            System.out.println(gem.getGemName()+"was null.");
                         }
                         gem.id = gObj.getInt("id");
                         gem.level_added = gObj.getInt("level_added");
@@ -923,8 +1063,9 @@ public class POELevelFx extends Application {
                 buildsLoaded.add(build);
         }
         
-        System.out.println(stringValueBase64Encoded  + " when decoded is: " + stringValueBase64Decoded);
-            
+        //System.out.println(stringValueBase64Encoded  + " when decoded is: " + stringValueBase64Decoded);
+          System.out.println("Loaded builds successfully from " + POELevelFx.directory + "\\Path of Leveling\\Builds\\builds.txt");
+              
         }
     }
     

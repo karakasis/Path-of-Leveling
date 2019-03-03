@@ -50,6 +50,23 @@ public class Controller {
                 });
     }
     
+    public void recipe_hotkey_mark_key_event(){
+        if(!zone_stage_lock){
+            if(zone_checkpoint!=null){
+                ActHandler.getInstance().recipeMap.replace(zone_checkpoint, false, true);
+                //need to save to file.
+                Preferences_Controller.updateRecipeFile(zone_checkpoint.name + " [L" 
+                        + zone_checkpoint.getZoneLevel() + "]");
+            }
+            Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        zone_stage.event_mark_recipe();
+                    }
+                });
+        }
+    }
+    
     public int playerLevel;
     public String playerName;
     public int monsterLevel;
