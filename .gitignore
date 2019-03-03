@@ -4,7 +4,7 @@ dist/
 
 .idea/*
 out/*
-nbproject/*
+nbproject/
 Path-of-Leveling.iml
 
 
