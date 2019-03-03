@@ -706,6 +706,34 @@ public class BuildsPanel_Controller implements Initializable {
         
     }
     
+    public Build addNewBuildFromPOB(String buildName, String className, String ascendancyName, ArrayList<ArrayList<String>> info){
+        //addNewBuild(buildName,className,ascendancyName);
+        Build pobBuild = new Build(buildName,className,ascendancyName); //make empty build
+
+        pobBuild.characterName = "";
+        pobBuild.level = 0;
+        //main app controller will take care of pob link and hasPob tag
+        pobBuild.isValid = false; //obv needs checking after import from pob.
+
+        GemHolder.getInstance().className = pobBuild.getClassName();
+        for(ArrayList<String> sgList : info){
+            SocketGroup sg = new SocketGroup();
+            for( String gemString : sgList){
+                Gem gem = GemHolder.getInstance().createGemFromCache(gemString,pobBuild.getClassName());
+                if(gem.isActive && sg.getActiveGem() == null){
+                    sg.setActiveGem(gem);
+                }
+                sg.getGems().add(gem);//***check line 324 in GemsPanel_Controller;
+            }
+            pobBuild.getSocketGroup().add(sg);
+        }      
+        //but we also need to link the build to the build panel
+        //we do this by load method
+        loadNewBuild(pobBuild);
+        POELevelFx.buildsLoaded.add(pobBuild); //add reference to build list.
+        return pobBuild;
+    }
+    
     public void addNewBuild(String buildName, String className, String ascendancyName){
         BuildLinker bl = new BuildLinker();
         int linker_id = bl.hook(this);

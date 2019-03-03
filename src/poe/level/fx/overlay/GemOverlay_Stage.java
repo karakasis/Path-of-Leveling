@@ -211,10 +211,10 @@ public class GemOverlay_Stage extends Stage{
         slideIn.getKeyFrames().addAll(kf_slideIn,kf_delay);
 
         Timeline slideOut = new Timeline();
-        KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 0.0));
+        KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 20.0));
         slideOut.getKeyFrames().add(kf_slideOut);
         
-        slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending");isPlaying = false;}));
+        slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending");isPlaying = false; this.hide();}));
         slideIn.setOnFinished(e -> Platform.runLater(() -> slideOut.play()));
         
         slideIn.play();
@@ -223,10 +223,10 @@ public class GemOverlay_Stage extends Stage{
     }
     
     public void update(int level){
-        if(level_list.contains(level)){
+        if(level_list.contains(level) && !isPlaying){
             controller.reset();
             gemsOnThisLevel_local.clear();
-            gemsOnThisLevel_local = gemsOnLevelsMap.get(level);
+            gemsOnThisLevel_local = new ArrayList<>(gemsOnLevelsMap.get(level)); //very important or it will get deleted in the map
             for(Gem g : gemsOnThisLevel_local){
                 //THE REPLACE IS HERE for socket group
                 if(gemToSocket_map.get(g).getActiveGem().equals(g) && gemToSocket_map.get(g).replacesGroup()){
@@ -247,11 +247,16 @@ public class GemOverlay_Stage extends Stage{
             }
             
             animate();
+        }else if(!level_list.contains(level)){
+            System.err.println("No gems available in this level : "+ level);
+        }else if(isPlaying){
+            System.err.println("A level animation is currently playing");
         }
     }
     
     public void event_remind(){
         if(!isPlaying){
+            System.err.println("Reminding gems.");
             controller.reset();
             for(Gem g : gemsOnThisLevel_local){
                 //THE REPLACE IS HERE for socket group
@@ -273,6 +278,8 @@ public class GemOverlay_Stage extends Stage{
             }
             
             animate();
+        }else{
+            System.err.println("Cant remind animation is still playing.");
         }
     }
     

@@ -50,7 +50,11 @@ public class Replace_socket_group_overlay_Controller implements Initializable {
         gemRemovedName.setText(remove.getGemName());
         quest.setText(add.quest_name);
         npc.setText(add.npc);
-        act.setText("Act " + add.act);
+        if(add.act == 0){
+            act.setText("Drop only");
+        }else{
+            act.setText("Act " + add.act);
+        }
     }
     
 }

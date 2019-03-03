@@ -52,7 +52,11 @@ public class Replace_gem_overlay_Controller implements Initializable {
         gemRemovedName.setText(remove.getGemName());
         quest.setText("Quest: " + add.quest_name);
         npc.setText("NPC: "+add.npc);
-        act.setText("Act " + add.act);
+        if(add.act == 0){
+            act.setText("Drop only");
+        }else{
+            act.setText("Act " + add.act);
+        }
     }
     
 }

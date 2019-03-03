@@ -1,0 +1,601 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Licensed to the Apache Software Foundation (ASF) under one or more<a name="line.2"></a>
+<span class="sourceLineNo">003</span> * contributor license agreements.  See the NOTICE file distributed with<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * this work for additional information regarding copyright ownership.<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * The ASF licenses this file to You under the Apache License, Version 2.0<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * (the "License"); you may not use this file except in compliance with<a name="line.6"></a>
+<span class="sourceLineNo">007</span> * the License.  You may obtain a copy of the License at<a name="line.7"></a>
+<span class="sourceLineNo">008</span> *<a name="line.8"></a>
+<span class="sourceLineNo">009</span> *      http://www.apache.org/licenses/LICENSE-2.0<a name="line.9"></a>
+<span class="sourceLineNo">010</span> *<a name="line.10"></a>
+<span class="sourceLineNo">011</span> * Unless required by applicable law or agreed to in writing, software<a name="line.11"></a>
+<span class="sourceLineNo">012</span> * distributed under the License is distributed on an "AS IS" BASIS,<a name="line.12"></a>
+<span class="sourceLineNo">013</span> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<a name="line.13"></a>
+<span class="sourceLineNo">014</span> * See the License for the specific language governing permissions and<a name="line.14"></a>
+<span class="sourceLineNo">015</span> * limitations under the License.<a name="line.15"></a>
+<span class="sourceLineNo">016</span> */<a name="line.16"></a>
+<span class="sourceLineNo">017</span><a name="line.17"></a>
+<span class="sourceLineNo">018</span>package org.apache.commons.codec.language.bm;<a name="line.18"></a>
+<span class="sourceLineNo">019</span><a name="line.19"></a>
+<span class="sourceLineNo">020</span>import java.util.ArrayList;<a name="line.20"></a>
+<span class="sourceLineNo">021</span>import java.util.Arrays;<a name="line.21"></a>
+<span class="sourceLineNo">022</span>import java.util.Collections;<a name="line.22"></a>
+<span class="sourceLineNo">023</span>import java.util.EnumMap;<a name="line.23"></a>
+<span class="sourceLineNo">024</span>import java.util.HashSet;<a name="line.24"></a>
+<span class="sourceLineNo">025</span>import java.util.Iterator;<a name="line.25"></a>
+<span class="sourceLineNo">026</span>import java.util.LinkedHashSet;<a name="line.26"></a>
+<span class="sourceLineNo">027</span>import java.util.List;<a name="line.27"></a>
+<span class="sourceLineNo">028</span>import java.util.Locale;<a name="line.28"></a>
+<span class="sourceLineNo">029</span>import java.util.Map;<a name="line.29"></a>
+<span class="sourceLineNo">030</span>import java.util.Set;<a name="line.30"></a>
+<span class="sourceLineNo">031</span>import java.util.TreeMap;<a name="line.31"></a>
+<span class="sourceLineNo">032</span><a name="line.32"></a>
+<span class="sourceLineNo">033</span>import org.apache.commons.codec.language.bm.Languages.LanguageSet;<a name="line.33"></a>
+<span class="sourceLineNo">034</span>import org.apache.commons.codec.language.bm.Rule.Phoneme;<a name="line.34"></a>
+<span class="sourceLineNo">035</span><a name="line.35"></a>
+<span class="sourceLineNo">036</span>/**<a name="line.36"></a>
+<span class="sourceLineNo">037</span> * Converts words into potential phonetic representations.<a name="line.37"></a>
+<span class="sourceLineNo">038</span> * &lt;p&gt;<a name="line.38"></a>
+<span class="sourceLineNo">039</span> * This is a two-stage process. Firstly, the word is converted into a phonetic representation that takes<a name="line.39"></a>
+<span class="sourceLineNo">040</span> * into account the likely source language. Next, this phonetic representation is converted into a<a name="line.40"></a>
+<span class="sourceLineNo">041</span> * pan-European 'average' representation, allowing comparison between different versions of essentially<a name="line.41"></a>
+<span class="sourceLineNo">042</span> * the same word from different languages.<a name="line.42"></a>
+<span class="sourceLineNo">043</span> * &lt;p&gt;<a name="line.43"></a>
+<span class="sourceLineNo">044</span> * This class is intentionally immutable and thread-safe.<a name="line.44"></a>
+<span class="sourceLineNo">045</span> * If you wish to alter the settings for a PhoneticEngine, you<a name="line.45"></a>
+<span class="sourceLineNo">046</span> * must make a new one with the updated settings.<a name="line.46"></a>
+<span class="sourceLineNo">047</span> * &lt;p&gt;<a name="line.47"></a>
+<span class="sourceLineNo">048</span> * Ported from phoneticengine.php<a name="line.48"></a>
+<span class="sourceLineNo">049</span> *<a name="line.49"></a>
+<span class="sourceLineNo">050</span> * @since 1.6<a name="line.50"></a>
+<span class="sourceLineNo">051</span> * @version $Id$<a name="line.51"></a>
+<span class="sourceLineNo">052</span> */<a name="line.52"></a>
+<span class="sourceLineNo">053</span>public class PhoneticEngine {<a name="line.53"></a>
+<span class="sourceLineNo">054</span><a name="line.54"></a>
+<span class="sourceLineNo">055</span>    /**<a name="line.55"></a>
+<span class="sourceLineNo">056</span>     * Utility for manipulating a set of phonemes as they are being built up. Not intended for use outside<a name="line.56"></a>
+<span class="sourceLineNo">057</span>     * this package, and probably not outside the {@link PhoneticEngine} class.<a name="line.57"></a>
+<span class="sourceLineNo">058</span>     *<a name="line.58"></a>
+<span class="sourceLineNo">059</span>     * @since 1.6<a name="line.59"></a>
+<span class="sourceLineNo">060</span>     */<a name="line.60"></a>
+<span class="sourceLineNo">061</span>    static final class PhonemeBuilder {<a name="line.61"></a>
+<span class="sourceLineNo">062</span><a name="line.62"></a>
+<span class="sourceLineNo">063</span>        /**<a name="line.63"></a>
+<span class="sourceLineNo">064</span>         * An empty builder where all phonemes must come from some set of languages. This will contain a single<a name="line.64"></a>
+<span class="sourceLineNo">065</span>         * phoneme of zero characters. This can then be appended to. This should be the only way to create a new<a name="line.65"></a>
+<span class="sourceLineNo">066</span>         * phoneme from scratch.<a name="line.66"></a>
+<span class="sourceLineNo">067</span>         *<a name="line.67"></a>
+<span class="sourceLineNo">068</span>         * @param languages the set of languages<a name="line.68"></a>
+<span class="sourceLineNo">069</span>         * @return  a new, empty phoneme builder<a name="line.69"></a>
+<span class="sourceLineNo">070</span>         */<a name="line.70"></a>
+<span class="sourceLineNo">071</span>        public static PhonemeBuilder empty(final Languages.LanguageSet languages) {<a name="line.71"></a>
+<span class="sourceLineNo">072</span>            return new PhonemeBuilder(new Rule.Phoneme("", languages));<a name="line.72"></a>
+<span class="sourceLineNo">073</span>        }<a name="line.73"></a>
+<span class="sourceLineNo">074</span><a name="line.74"></a>
+<span class="sourceLineNo">075</span>        private final Set&lt;Rule.Phoneme&gt; phonemes;<a name="line.75"></a>
+<span class="sourceLineNo">076</span><a name="line.76"></a>
+<span class="sourceLineNo">077</span>        private PhonemeBuilder(final Rule.Phoneme phoneme) {<a name="line.77"></a>
+<span class="sourceLineNo">078</span>            this.phonemes = new LinkedHashSet&lt;&gt;();<a name="line.78"></a>
+<span class="sourceLineNo">079</span>            this.phonemes.add(phoneme);<a name="line.79"></a>
+<span class="sourceLineNo">080</span>        }<a name="line.80"></a>
+<span class="sourceLineNo">081</span><a name="line.81"></a>
+<span class="sourceLineNo">082</span>        private PhonemeBuilder(final Set&lt;Rule.Phoneme&gt; phonemes) {<a name="line.82"></a>
+<span class="sourceLineNo">083</span>            this.phonemes = phonemes;<a name="line.83"></a>
+<span class="sourceLineNo">084</span>        }<a name="line.84"></a>
+<span class="sourceLineNo">085</span><a name="line.85"></a>
+<span class="sourceLineNo">086</span>        /**<a name="line.86"></a>
+<span class="sourceLineNo">087</span>         * Creates a new phoneme builder containing all phonemes in this one extended by &lt;code&gt;str&lt;/code&gt;.<a name="line.87"></a>
+<span class="sourceLineNo">088</span>         *<a name="line.88"></a>
+<span class="sourceLineNo">089</span>         * @param str   the characters to append to the phonemes<a name="line.89"></a>
+<span class="sourceLineNo">090</span>         */<a name="line.90"></a>
+<span class="sourceLineNo">091</span>        public void append(final CharSequence str) {<a name="line.91"></a>
+<span class="sourceLineNo">092</span>            for (final Rule.Phoneme ph : this.phonemes) {<a name="line.92"></a>
+<span class="sourceLineNo">093</span>                ph.append(str);<a name="line.93"></a>
+<span class="sourceLineNo">094</span>            }<a name="line.94"></a>
+<span class="sourceLineNo">095</span>        }<a name="line.95"></a>
+<span class="sourceLineNo">096</span><a name="line.96"></a>
+<span class="sourceLineNo">097</span>        /**<a name="line.97"></a>
+<span class="sourceLineNo">098</span>         * Applies the given phoneme expression to all phonemes in this phoneme builder.<a name="line.98"></a>
+<span class="sourceLineNo">099</span>         * &lt;p&gt;<a name="line.99"></a>
+<span class="sourceLineNo">100</span>         * This will lengthen phonemes that have compatible language sets to the expression, and drop those that are<a name="line.100"></a>
+<span class="sourceLineNo">101</span>         * incompatible.<a name="line.101"></a>
+<span class="sourceLineNo">102</span>         *<a name="line.102"></a>
+<span class="sourceLineNo">103</span>         * @param phonemeExpr   the expression to apply<a name="line.103"></a>
+<span class="sourceLineNo">104</span>         * @param maxPhonemes   the maximum number of phonemes to build up<a name="line.104"></a>
+<span class="sourceLineNo">105</span>         */<a name="line.105"></a>
+<span class="sourceLineNo">106</span>        public void apply(final Rule.PhonemeExpr phonemeExpr, final int maxPhonemes) {<a name="line.106"></a>
+<span class="sourceLineNo">107</span>            final Set&lt;Rule.Phoneme&gt; newPhonemes = new LinkedHashSet&lt;&gt;(maxPhonemes);<a name="line.107"></a>
+<span class="sourceLineNo">108</span><a name="line.108"></a>
+<span class="sourceLineNo">109</span>            EXPR: for (final Rule.Phoneme left : this.phonemes) {<a name="line.109"></a>
+<span class="sourceLineNo">110</span>                for (final Rule.Phoneme right : phonemeExpr.getPhonemes()) {<a name="line.110"></a>
+<span class="sourceLineNo">111</span>                    final LanguageSet languages = left.getLanguages().restrictTo(right.getLanguages());<a name="line.111"></a>
+<span class="sourceLineNo">112</span>                    if (!languages.isEmpty()) {<a name="line.112"></a>
+<span class="sourceLineNo">113</span>                        final Rule.Phoneme join = new Phoneme(left, right, languages);<a name="line.113"></a>
+<span class="sourceLineNo">114</span>                        if (newPhonemes.size() &lt; maxPhonemes) {<a name="line.114"></a>
+<span class="sourceLineNo">115</span>                            newPhonemes.add(join);<a name="line.115"></a>
+<span class="sourceLineNo">116</span>                            if (newPhonemes.size() &gt;= maxPhonemes) {<a name="line.116"></a>
+<span class="sourceLineNo">117</span>                                break EXPR;<a name="line.117"></a>
+<span class="sourceLineNo">118</span>                            }<a name="line.118"></a>
+<span class="sourceLineNo">119</span>                        }<a name="line.119"></a>
+<span class="sourceLineNo">120</span>                    }<a name="line.120"></a>
+<span class="sourceLineNo">121</span>                }<a name="line.121"></a>
+<span class="sourceLineNo">122</span>            }<a name="line.122"></a>
+<span class="sourceLineNo">123</span><a name="line.123"></a>
+<span class="sourceLineNo">124</span>            this.phonemes.clear();<a name="line.124"></a>
+<span class="sourceLineNo">125</span>            this.phonemes.addAll(newPhonemes);<a name="line.125"></a>
+<span class="sourceLineNo">126</span>        }<a name="line.126"></a>
+<span class="sourceLineNo">127</span><a name="line.127"></a>
+<span class="sourceLineNo">128</span>        /**<a name="line.128"></a>
+<span class="sourceLineNo">129</span>         * Gets underlying phoneme set. Please don't mutate.<a name="line.129"></a>
+<span class="sourceLineNo">130</span>         *<a name="line.130"></a>
+<span class="sourceLineNo">131</span>         * @return  the phoneme set<a name="line.131"></a>
+<span class="sourceLineNo">132</span>         */<a name="line.132"></a>
+<span class="sourceLineNo">133</span>        public Set&lt;Rule.Phoneme&gt; getPhonemes() {<a name="line.133"></a>
+<span class="sourceLineNo">134</span>            return this.phonemes;<a name="line.134"></a>
+<span class="sourceLineNo">135</span>        }<a name="line.135"></a>
+<span class="sourceLineNo">136</span><a name="line.136"></a>
+<span class="sourceLineNo">137</span>        /**<a name="line.137"></a>
+<span class="sourceLineNo">138</span>         * Stringifies the phoneme set. This produces a single string of the strings of each phoneme,<a name="line.138"></a>
+<span class="sourceLineNo">139</span>         * joined with a pipe. This is explicitly provided in place of toString as it is a potentially<a name="line.139"></a>
+<span class="sourceLineNo">140</span>         * expensive operation, which should be avoided when debugging.<a name="line.140"></a>
+<span class="sourceLineNo">141</span>         *<a name="line.141"></a>
+<span class="sourceLineNo">142</span>         * @return  the stringified phoneme set<a name="line.142"></a>
+<span class="sourceLineNo">143</span>         */<a name="line.143"></a>
+<span class="sourceLineNo">144</span>        public String makeString() {<a name="line.144"></a>
+<span class="sourceLineNo">145</span>            final StringBuilder sb = new StringBuilder();<a name="line.145"></a>
+<span class="sourceLineNo">146</span><a name="line.146"></a>
+<span class="sourceLineNo">147</span>            for (final Rule.Phoneme ph : this.phonemes) {<a name="line.147"></a>
+<span class="sourceLineNo">148</span>                if (sb.length() &gt; 0) {<a name="line.148"></a>
+<span class="sourceLineNo">149</span>                    sb.append("|");<a name="line.149"></a>
+<span class="sourceLineNo">150</span>                }<a name="line.150"></a>
+<span class="sourceLineNo">151</span>                sb.append(ph.getPhonemeText());<a name="line.151"></a>
+<span class="sourceLineNo">152</span>            }<a name="line.152"></a>
+<span class="sourceLineNo">153</span><a name="line.153"></a>
+<span class="sourceLineNo">154</span>            return sb.toString();<a name="line.154"></a>
+<span class="sourceLineNo">155</span>        }<a name="line.155"></a>
+<span class="sourceLineNo">156</span>    }<a name="line.156"></a>
+<span class="sourceLineNo">157</span><a name="line.157"></a>
+<span class="sourceLineNo">158</span>    /**<a name="line.158"></a>
+<span class="sourceLineNo">159</span>     * A function closure capturing the application of a list of rules to an input sequence at a particular offset.<a name="line.159"></a>
+<span class="sourceLineNo">160</span>     * After invocation, the values &lt;code&gt;i&lt;/code&gt; and &lt;code&gt;found&lt;/code&gt; are updated. &lt;code&gt;i&lt;/code&gt; points to the<a name="line.160"></a>
+<span class="sourceLineNo">161</span>     * index of the next char in &lt;code&gt;input&lt;/code&gt; that must be processed next (the input up to that index having been<a name="line.161"></a>
+<span class="sourceLineNo">162</span>     * processed already), and &lt;code&gt;found&lt;/code&gt; indicates if a matching rule was found or not. In the case where a<a name="line.162"></a>
+<span class="sourceLineNo">163</span>     * matching rule was found, &lt;code&gt;phonemeBuilder&lt;/code&gt; is replaced with a new builder containing the phonemes<a name="line.163"></a>
+<span class="sourceLineNo">164</span>     * updated by the matching rule.<a name="line.164"></a>
+<span class="sourceLineNo">165</span>     *<a name="line.165"></a>
+<span class="sourceLineNo">166</span>     * Although this class is not thread-safe (it has mutable unprotected fields), it is not shared between threads<a name="line.166"></a>
+<span class="sourceLineNo">167</span>     * as it is constructed as needed by the calling methods.<a name="line.167"></a>
+<span class="sourceLineNo">168</span>     * @since 1.6<a name="line.168"></a>
+<span class="sourceLineNo">169</span>     */<a name="line.169"></a>
+<span class="sourceLineNo">170</span>    private static final class RulesApplication {<a name="line.170"></a>
+<span class="sourceLineNo">171</span>        private final Map&lt;String, List&lt;Rule&gt;&gt; finalRules;<a name="line.171"></a>
+<span class="sourceLineNo">172</span>        private final CharSequence input;<a name="line.172"></a>
+<span class="sourceLineNo">173</span><a name="line.173"></a>
+<span class="sourceLineNo">174</span>        private final PhonemeBuilder phonemeBuilder;<a name="line.174"></a>
+<span class="sourceLineNo">175</span>        private int i;<a name="line.175"></a>
+<span class="sourceLineNo">176</span>        private final int maxPhonemes;<a name="line.176"></a>
+<span class="sourceLineNo">177</span>        private boolean found;<a name="line.177"></a>
+<span class="sourceLineNo">178</span><a name="line.178"></a>
+<span class="sourceLineNo">179</span>        public RulesApplication(final Map&lt;String, List&lt;Rule&gt;&gt; finalRules, final CharSequence input,<a name="line.179"></a>
+<span class="sourceLineNo">180</span>                                final PhonemeBuilder phonemeBuilder, final int i, final int maxPhonemes) {<a name="line.180"></a>
+<span class="sourceLineNo">181</span>            if (finalRules == null) {<a name="line.181"></a>
+<span class="sourceLineNo">182</span>                throw new NullPointerException("The finalRules argument must not be null");<a name="line.182"></a>
+<span class="sourceLineNo">183</span>            }<a name="line.183"></a>
+<span class="sourceLineNo">184</span>            this.finalRules = finalRules;<a name="line.184"></a>
+<span class="sourceLineNo">185</span>            this.phonemeBuilder = phonemeBuilder;<a name="line.185"></a>
+<span class="sourceLineNo">186</span>            this.input = input;<a name="line.186"></a>
+<span class="sourceLineNo">187</span>            this.i = i;<a name="line.187"></a>
+<span class="sourceLineNo">188</span>            this.maxPhonemes = maxPhonemes;<a name="line.188"></a>
+<span class="sourceLineNo">189</span>        }<a name="line.189"></a>
+<span class="sourceLineNo">190</span><a name="line.190"></a>
+<span class="sourceLineNo">191</span>        public int getI() {<a name="line.191"></a>
+<span class="sourceLineNo">192</span>            return this.i;<a name="line.192"></a>
+<span class="sourceLineNo">193</span>        }<a name="line.193"></a>
+<span class="sourceLineNo">194</span><a name="line.194"></a>
+<span class="sourceLineNo">195</span>        public PhonemeBuilder getPhonemeBuilder() {<a name="line.195"></a>
+<span class="sourceLineNo">196</span>            return this.phonemeBuilder;<a name="line.196"></a>
+<span class="sourceLineNo">197</span>        }<a name="line.197"></a>
+<span class="sourceLineNo">198</span><a name="line.198"></a>
+<span class="sourceLineNo">199</span>        /**<a name="line.199"></a>
+<span class="sourceLineNo">200</span>         * Invokes the rules. Loops over the rules list, stopping at the first one that has a matching context<a name="line.200"></a>
+<span class="sourceLineNo">201</span>         * and pattern. Then applies this rule to the phoneme builder to produce updated phonemes. If there was no<a name="line.201"></a>
+<span class="sourceLineNo">202</span>         * match, &lt;code&gt;i&lt;/code&gt; is advanced one and the character is silently dropped from the phonetic spelling.<a name="line.202"></a>
+<span class="sourceLineNo">203</span>         *<a name="line.203"></a>
+<span class="sourceLineNo">204</span>         * @return &lt;code&gt;this&lt;/code&gt;<a name="line.204"></a>
+<span class="sourceLineNo">205</span>         */<a name="line.205"></a>
+<span class="sourceLineNo">206</span>        public RulesApplication invoke() {<a name="line.206"></a>
+<span class="sourceLineNo">207</span>            this.found = false;<a name="line.207"></a>
+<span class="sourceLineNo">208</span>            int patternLength = 1;<a name="line.208"></a>
+<span class="sourceLineNo">209</span>            final List&lt;Rule&gt; rules = this.finalRules.get(input.subSequence(i, i+patternLength));<a name="line.209"></a>
+<span class="sourceLineNo">210</span>            if (rules != null) {<a name="line.210"></a>
+<span class="sourceLineNo">211</span>                for (final Rule rule : rules) {<a name="line.211"></a>
+<span class="sourceLineNo">212</span>                    final String pattern = rule.getPattern();<a name="line.212"></a>
+<span class="sourceLineNo">213</span>                    patternLength = pattern.length();<a name="line.213"></a>
+<span class="sourceLineNo">214</span>                    if (rule.patternAndContextMatches(this.input, this.i)) {<a name="line.214"></a>
+<span class="sourceLineNo">215</span>                        this.phonemeBuilder.apply(rule.getPhoneme(), maxPhonemes);<a name="line.215"></a>
+<span class="sourceLineNo">216</span>                        this.found = true;<a name="line.216"></a>
+<span class="sourceLineNo">217</span>                        break;<a name="line.217"></a>
+<span class="sourceLineNo">218</span>                    }<a name="line.218"></a>
+<span class="sourceLineNo">219</span>                }<a name="line.219"></a>
+<span class="sourceLineNo">220</span>            }<a name="line.220"></a>
+<span class="sourceLineNo">221</span><a name="line.221"></a>
+<span class="sourceLineNo">222</span>            if (!this.found) {<a name="line.222"></a>
+<span class="sourceLineNo">223</span>                patternLength = 1;<a name="line.223"></a>
+<span class="sourceLineNo">224</span>            }<a name="line.224"></a>
+<span class="sourceLineNo">225</span><a name="line.225"></a>
+<span class="sourceLineNo">226</span>            this.i += patternLength;<a name="line.226"></a>
+<span class="sourceLineNo">227</span>            return this;<a name="line.227"></a>
+<span class="sourceLineNo">228</span>        }<a name="line.228"></a>
+<span class="sourceLineNo">229</span><a name="line.229"></a>
+<span class="sourceLineNo">230</span>        public boolean isFound() {<a name="line.230"></a>
+<span class="sourceLineNo">231</span>            return this.found;<a name="line.231"></a>
+<span class="sourceLineNo">232</span>        }<a name="line.232"></a>
+<span class="sourceLineNo">233</span>    }<a name="line.233"></a>
+<span class="sourceLineNo">234</span><a name="line.234"></a>
+<span class="sourceLineNo">235</span>    private static final Map&lt;NameType, Set&lt;String&gt;&gt; NAME_PREFIXES = new EnumMap&lt;&gt;(NameType.class);<a name="line.235"></a>
+<span class="sourceLineNo">236</span><a name="line.236"></a>
+<span class="sourceLineNo">237</span>    static {<a name="line.237"></a>
+<span class="sourceLineNo">238</span>        NAME_PREFIXES.put(NameType.ASHKENAZI,<a name="line.238"></a>
+<span class="sourceLineNo">239</span>                Collections.unmodifiableSet(<a name="line.239"></a>
+<span class="sourceLineNo">240</span>                        new HashSet&lt;&gt;(Arrays.asList("bar", "ben", "da", "de", "van", "von"))));<a name="line.240"></a>
+<span class="sourceLineNo">241</span>        NAME_PREFIXES.put(NameType.SEPHARDIC,<a name="line.241"></a>
+<span class="sourceLineNo">242</span>                Collections.unmodifiableSet(<a name="line.242"></a>
+<span class="sourceLineNo">243</span>                        new HashSet&lt;&gt;(Arrays.asList("al", "el", "da", "dal", "de", "del", "dela", "de la",<a name="line.243"></a>
+<span class="sourceLineNo">244</span>                                                          "della", "des", "di", "do", "dos", "du", "van", "von"))));<a name="line.244"></a>
+<span class="sourceLineNo">245</span>        NAME_PREFIXES.put(NameType.GENERIC,<a name="line.245"></a>
+<span class="sourceLineNo">246</span>                Collections.unmodifiableSet(<a name="line.246"></a>
+<span class="sourceLineNo">247</span>                        new HashSet&lt;&gt;(Arrays.asList("da", "dal", "de", "del", "dela", "de la", "della",<a name="line.247"></a>
+<span class="sourceLineNo">248</span>                                                          "des", "di", "do", "dos", "du", "van", "von"))));<a name="line.248"></a>
+<span class="sourceLineNo">249</span>    }<a name="line.249"></a>
+<span class="sourceLineNo">250</span><a name="line.250"></a>
+<span class="sourceLineNo">251</span>    /**<a name="line.251"></a>
+<span class="sourceLineNo">252</span>     * Joins some strings with an internal separator.<a name="line.252"></a>
+<span class="sourceLineNo">253</span>     * @param strings   Strings to join<a name="line.253"></a>
+<span class="sourceLineNo">254</span>     * @param sep       String to separate them with<a name="line.254"></a>
+<span class="sourceLineNo">255</span>     * @return a single String consisting of each element of &lt;code&gt;strings&lt;/code&gt; interleaved by &lt;code&gt;sep&lt;/code&gt;<a name="line.255"></a>
+<span class="sourceLineNo">256</span>     */<a name="line.256"></a>
+<span class="sourceLineNo">257</span>    private static String join(final Iterable&lt;String&gt; strings, final String sep) {<a name="line.257"></a>
+<span class="sourceLineNo">258</span>        final StringBuilder sb = new StringBuilder();<a name="line.258"></a>
+<span class="sourceLineNo">259</span>        final Iterator&lt;String&gt; si = strings.iterator();<a name="line.259"></a>
+<span class="sourceLineNo">260</span>        if (si.hasNext()) {<a name="line.260"></a>
+<span class="sourceLineNo">261</span>            sb.append(si.next());<a name="line.261"></a>
+<span class="sourceLineNo">262</span>        }<a name="line.262"></a>
+<span class="sourceLineNo">263</span>        while (si.hasNext()) {<a name="line.263"></a>
+<span class="sourceLineNo">264</span>            sb.append(sep).append(si.next());<a name="line.264"></a>
+<span class="sourceLineNo">265</span>        }<a name="line.265"></a>
+<span class="sourceLineNo">266</span><a name="line.266"></a>
+<span class="sourceLineNo">267</span>        return sb.toString();<a name="line.267"></a>
+<span class="sourceLineNo">268</span>    }<a name="line.268"></a>
+<span class="sourceLineNo">269</span><a name="line.269"></a>
+<span class="sourceLineNo">270</span>    private static final int DEFAULT_MAX_PHONEMES = 20;<a name="line.270"></a>
+<span class="sourceLineNo">271</span><a name="line.271"></a>
+<span class="sourceLineNo">272</span>    private final Lang lang;<a name="line.272"></a>
+<span class="sourceLineNo">273</span><a name="line.273"></a>
+<span class="sourceLineNo">274</span>    private final NameType nameType;<a name="line.274"></a>
+<span class="sourceLineNo">275</span><a name="line.275"></a>
+<span class="sourceLineNo">276</span>    private final RuleType ruleType;<a name="line.276"></a>
+<span class="sourceLineNo">277</span><a name="line.277"></a>
+<span class="sourceLineNo">278</span>    private final boolean concat;<a name="line.278"></a>
+<span class="sourceLineNo">279</span><a name="line.279"></a>
+<span class="sourceLineNo">280</span>    private final int maxPhonemes;<a name="line.280"></a>
+<span class="sourceLineNo">281</span><a name="line.281"></a>
+<span class="sourceLineNo">282</span>    /**<a name="line.282"></a>
+<span class="sourceLineNo">283</span>     * Generates a new, fully-configured phonetic engine.<a name="line.283"></a>
+<span class="sourceLineNo">284</span>     *<a name="line.284"></a>
+<span class="sourceLineNo">285</span>     * @param nameType<a name="line.285"></a>
+<span class="sourceLineNo">286</span>     *            the type of names it will use<a name="line.286"></a>
+<span class="sourceLineNo">287</span>     * @param ruleType<a name="line.287"></a>
+<span class="sourceLineNo">288</span>     *            the type of rules it will apply<a name="line.288"></a>
+<span class="sourceLineNo">289</span>     * @param concat<a name="line.289"></a>
+<span class="sourceLineNo">290</span>     *            if it will concatenate multiple encodings<a name="line.290"></a>
+<span class="sourceLineNo">291</span>     */<a name="line.291"></a>
+<span class="sourceLineNo">292</span>    public PhoneticEngine(final NameType nameType, final RuleType ruleType, final boolean concat) {<a name="line.292"></a>
+<span class="sourceLineNo">293</span>        this(nameType, ruleType, concat, DEFAULT_MAX_PHONEMES);<a name="line.293"></a>
+<span class="sourceLineNo">294</span>    }<a name="line.294"></a>
+<span class="sourceLineNo">295</span><a name="line.295"></a>
+<span class="sourceLineNo">296</span>    /**<a name="line.296"></a>
+<span class="sourceLineNo">297</span>     * Generates a new, fully-configured phonetic engine.<a name="line.297"></a>
+<span class="sourceLineNo">298</span>     *<a name="line.298"></a>
+<span class="sourceLineNo">299</span>     * @param nameType<a name="line.299"></a>
+<span class="sourceLineNo">300</span>     *            the type of names it will use<a name="line.300"></a>
+<span class="sourceLineNo">301</span>     * @param ruleType<a name="line.301"></a>
+<span class="sourceLineNo">302</span>     *            the type of rules it will apply<a name="line.302"></a>
+<span class="sourceLineNo">303</span>     * @param concat<a name="line.303"></a>
+<span class="sourceLineNo">304</span>     *            if it will concatenate multiple encodings<a name="line.304"></a>
+<span class="sourceLineNo">305</span>     * @param maxPhonemes<a name="line.305"></a>
+<span class="sourceLineNo">306</span>     *            the maximum number of phonemes that will be handled<a name="line.306"></a>
+<span class="sourceLineNo">307</span>     * @since 1.7<a name="line.307"></a>
+<span class="sourceLineNo">308</span>     */<a name="line.308"></a>
+<span class="sourceLineNo">309</span>    public PhoneticEngine(final NameType nameType, final RuleType ruleType, final boolean concat,<a name="line.309"></a>
+<span class="sourceLineNo">310</span>                          final int maxPhonemes) {<a name="line.310"></a>
+<span class="sourceLineNo">311</span>        if (ruleType == RuleType.RULES) {<a name="line.311"></a>
+<span class="sourceLineNo">312</span>            throw new IllegalArgumentException("ruleType must not be " + RuleType.RULES);<a name="line.312"></a>
+<span class="sourceLineNo">313</span>        }<a name="line.313"></a>
+<span class="sourceLineNo">314</span>        this.nameType = nameType;<a name="line.314"></a>
+<span class="sourceLineNo">315</span>        this.ruleType = ruleType;<a name="line.315"></a>
+<span class="sourceLineNo">316</span>        this.concat = concat;<a name="line.316"></a>
+<span class="sourceLineNo">317</span>        this.lang = Lang.instance(nameType);<a name="line.317"></a>
+<span class="sourceLineNo">318</span>        this.maxPhonemes = maxPhonemes;<a name="line.318"></a>
+<span class="sourceLineNo">319</span>    }<a name="line.319"></a>
+<span class="sourceLineNo">320</span><a name="line.320"></a>
+<span class="sourceLineNo">321</span>    /**<a name="line.321"></a>
+<span class="sourceLineNo">322</span>     * Applies the final rules to convert from a language-specific phonetic representation to a<a name="line.322"></a>
+<span class="sourceLineNo">323</span>     * language-independent representation.<a name="line.323"></a>
+<span class="sourceLineNo">324</span>     *<a name="line.324"></a>
+<span class="sourceLineNo">325</span>     * @param phonemeBuilder the current phonemes<a name="line.325"></a>
+<span class="sourceLineNo">326</span>     * @param finalRules the final rules to apply<a name="line.326"></a>
+<span class="sourceLineNo">327</span>     * @return the resulting phonemes<a name="line.327"></a>
+<span class="sourceLineNo">328</span>     */<a name="line.328"></a>
+<span class="sourceLineNo">329</span>    private PhonemeBuilder applyFinalRules(final PhonemeBuilder phonemeBuilder,<a name="line.329"></a>
+<span class="sourceLineNo">330</span>                                           final Map&lt;String, List&lt;Rule&gt;&gt; finalRules) {<a name="line.330"></a>
+<span class="sourceLineNo">331</span>        if (finalRules == null) {<a name="line.331"></a>
+<span class="sourceLineNo">332</span>            throw new NullPointerException("finalRules can not be null");<a name="line.332"></a>
+<span class="sourceLineNo">333</span>        }<a name="line.333"></a>
+<span class="sourceLineNo">334</span>        if (finalRules.isEmpty()) {<a name="line.334"></a>
+<span class="sourceLineNo">335</span>            return phonemeBuilder;<a name="line.335"></a>
+<span class="sourceLineNo">336</span>        }<a name="line.336"></a>
+<span class="sourceLineNo">337</span><a name="line.337"></a>
+<span class="sourceLineNo">338</span>        final Map&lt;Rule.Phoneme, Rule.Phoneme&gt; phonemes =<a name="line.338"></a>
+<span class="sourceLineNo">339</span>            new TreeMap&lt;&gt;(Rule.Phoneme.COMPARATOR);<a name="line.339"></a>
+<span class="sourceLineNo">340</span><a name="line.340"></a>
+<span class="sourceLineNo">341</span>        for (final Rule.Phoneme phoneme : phonemeBuilder.getPhonemes()) {<a name="line.341"></a>
+<span class="sourceLineNo">342</span>            PhonemeBuilder subBuilder = PhonemeBuilder.empty(phoneme.getLanguages());<a name="line.342"></a>
+<span class="sourceLineNo">343</span>            final String phonemeText = phoneme.getPhonemeText().toString();<a name="line.343"></a>
+<span class="sourceLineNo">344</span><a name="line.344"></a>
+<span class="sourceLineNo">345</span>            for (int i = 0; i &lt; phonemeText.length();) {<a name="line.345"></a>
+<span class="sourceLineNo">346</span>                final RulesApplication rulesApplication =<a name="line.346"></a>
+<span class="sourceLineNo">347</span>                        new RulesApplication(finalRules, phonemeText, subBuilder, i, maxPhonemes).invoke();<a name="line.347"></a>
+<span class="sourceLineNo">348</span>                final boolean found = rulesApplication.isFound();<a name="line.348"></a>
+<span class="sourceLineNo">349</span>                subBuilder = rulesApplication.getPhonemeBuilder();<a name="line.349"></a>
+<span class="sourceLineNo">350</span><a name="line.350"></a>
+<span class="sourceLineNo">351</span>                if (!found) {<a name="line.351"></a>
+<span class="sourceLineNo">352</span>                    // not found, appending as-is<a name="line.352"></a>
+<span class="sourceLineNo">353</span>                    subBuilder.append(phonemeText.subSequence(i, i + 1));<a name="line.353"></a>
+<span class="sourceLineNo">354</span>                }<a name="line.354"></a>
+<span class="sourceLineNo">355</span><a name="line.355"></a>
+<span class="sourceLineNo">356</span>                i = rulesApplication.getI();<a name="line.356"></a>
+<span class="sourceLineNo">357</span>            }<a name="line.357"></a>
+<span class="sourceLineNo">358</span><a name="line.358"></a>
+<span class="sourceLineNo">359</span>            // the phonemes map orders the phonemes only based on their text, but ignores the language set<a name="line.359"></a>
+<span class="sourceLineNo">360</span>            // when adding new phonemes, check for equal phonemes and merge their language set, otherwise<a name="line.360"></a>
+<span class="sourceLineNo">361</span>            // phonemes with the same text but different language set get lost<a name="line.361"></a>
+<span class="sourceLineNo">362</span>            for (final Rule.Phoneme newPhoneme : subBuilder.getPhonemes()) {<a name="line.362"></a>
+<span class="sourceLineNo">363</span>                if (phonemes.containsKey(newPhoneme)) {<a name="line.363"></a>
+<span class="sourceLineNo">364</span>                    final Rule.Phoneme oldPhoneme = phonemes.remove(newPhoneme);<a name="line.364"></a>
+<span class="sourceLineNo">365</span>                    final Rule.Phoneme mergedPhoneme = oldPhoneme.mergeWithLanguage(newPhoneme.getLanguages());<a name="line.365"></a>
+<span class="sourceLineNo">366</span>                    phonemes.put(mergedPhoneme, mergedPhoneme);<a name="line.366"></a>
+<span class="sourceLineNo">367</span>                } else {<a name="line.367"></a>
+<span class="sourceLineNo">368</span>                    phonemes.put(newPhoneme, newPhoneme);<a name="line.368"></a>
+<span class="sourceLineNo">369</span>                }<a name="line.369"></a>
+<span class="sourceLineNo">370</span>            }<a name="line.370"></a>
+<span class="sourceLineNo">371</span>        }<a name="line.371"></a>
+<span class="sourceLineNo">372</span><a name="line.372"></a>
+<span class="sourceLineNo">373</span>        return new PhonemeBuilder(phonemes.keySet());<a name="line.373"></a>
+<span class="sourceLineNo">374</span>    }<a name="line.374"></a>
+<span class="sourceLineNo">375</span><a name="line.375"></a>
+<span class="sourceLineNo">376</span>    /**<a name="line.376"></a>
+<span class="sourceLineNo">377</span>     * Encodes a string to its phonetic representation.<a name="line.377"></a>
+<span class="sourceLineNo">378</span>     *<a name="line.378"></a>
+<span class="sourceLineNo">379</span>     * @param input<a name="line.379"></a>
+<span class="sourceLineNo">380</span>     *            the String to encode<a name="line.380"></a>
+<span class="sourceLineNo">381</span>     * @return the encoding of the input<a name="line.381"></a>
+<span class="sourceLineNo">382</span>     */<a name="line.382"></a>
+<span class="sourceLineNo">383</span>    public String encode(final String input) {<a name="line.383"></a>
+<span class="sourceLineNo">384</span>        final Languages.LanguageSet languageSet = this.lang.guessLanguages(input);<a name="line.384"></a>
+<span class="sourceLineNo">385</span>        return encode(input, languageSet);<a name="line.385"></a>
+<span class="sourceLineNo">386</span>    }<a name="line.386"></a>
+<span class="sourceLineNo">387</span><a name="line.387"></a>
+<span class="sourceLineNo">388</span>    /**<a name="line.388"></a>
+<span class="sourceLineNo">389</span>     * Encodes an input string into an output phonetic representation, given a set of possible origin languages.<a name="line.389"></a>
+<span class="sourceLineNo">390</span>     *<a name="line.390"></a>
+<span class="sourceLineNo">391</span>     * @param input<a name="line.391"></a>
+<span class="sourceLineNo">392</span>     *            String to phoneticise; a String with dashes or spaces separating each word<a name="line.392"></a>
+<span class="sourceLineNo">393</span>     * @param languageSet<a name="line.393"></a>
+<span class="sourceLineNo">394</span>     *            set of possible origin languages<a name="line.394"></a>
+<span class="sourceLineNo">395</span>     * @return a phonetic representation of the input; a String containing '-'-separated phonetic representations of the<a name="line.395"></a>
+<span class="sourceLineNo">396</span>     *         input<a name="line.396"></a>
+<span class="sourceLineNo">397</span>     */<a name="line.397"></a>
+<span class="sourceLineNo">398</span>    public String encode(String input, final Languages.LanguageSet languageSet) {<a name="line.398"></a>
+<span class="sourceLineNo">399</span>        final Map&lt;String, List&lt;Rule&gt;&gt; rules = Rule.getInstanceMap(this.nameType, RuleType.RULES, languageSet);<a name="line.399"></a>
+<span class="sourceLineNo">400</span>        // rules common across many (all) languages<a name="line.400"></a>
+<span class="sourceLineNo">401</span>        final Map&lt;String, List&lt;Rule&gt;&gt; finalRules1 = Rule.getInstanceMap(this.nameType, this.ruleType, "common");<a name="line.401"></a>
+<span class="sourceLineNo">402</span>        // rules that apply to a specific language that may be ambiguous or wrong if applied to other languages<a name="line.402"></a>
+<span class="sourceLineNo">403</span>        final Map&lt;String, List&lt;Rule&gt;&gt; finalRules2 = Rule.getInstanceMap(this.nameType, this.ruleType, languageSet);<a name="line.403"></a>
+<span class="sourceLineNo">404</span><a name="line.404"></a>
+<span class="sourceLineNo">405</span>        // tidy the input<a name="line.405"></a>
+<span class="sourceLineNo">406</span>        // lower case is a locale-dependent operation<a name="line.406"></a>
+<span class="sourceLineNo">407</span>        input = input.toLowerCase(Locale.ENGLISH).replace('-', ' ').trim();<a name="line.407"></a>
+<span class="sourceLineNo">408</span><a name="line.408"></a>
+<span class="sourceLineNo">409</span>        if (this.nameType == NameType.GENERIC) {<a name="line.409"></a>
+<span class="sourceLineNo">410</span>            if (input.length() &gt;= 2 &amp;&amp; input.substring(0, 2).equals("d'")) { // check for d'<a name="line.410"></a>
+<span class="sourceLineNo">411</span>                final String remainder = input.substring(2);<a name="line.411"></a>
+<span class="sourceLineNo">412</span>                final String combined = "d" + remainder;<a name="line.412"></a>
+<span class="sourceLineNo">413</span>                return "(" + encode(remainder) + ")-(" + encode(combined) + ")";<a name="line.413"></a>
+<span class="sourceLineNo">414</span>            }<a name="line.414"></a>
+<span class="sourceLineNo">415</span>            for (final String l : NAME_PREFIXES.get(this.nameType)) {<a name="line.415"></a>
+<span class="sourceLineNo">416</span>                // handle generic prefixes<a name="line.416"></a>
+<span class="sourceLineNo">417</span>                if (input.startsWith(l + " ")) {<a name="line.417"></a>
+<span class="sourceLineNo">418</span>                    // check for any prefix in the words list<a name="line.418"></a>
+<span class="sourceLineNo">419</span>                    final String remainder = input.substring(l.length() + 1); // input without the prefix<a name="line.419"></a>
+<span class="sourceLineNo">420</span>                    final String combined = l + remainder; // input with prefix without space<a name="line.420"></a>
+<span class="sourceLineNo">421</span>                    return "(" + encode(remainder) + ")-(" + encode(combined) + ")";<a name="line.421"></a>
+<span class="sourceLineNo">422</span>                }<a name="line.422"></a>
+<span class="sourceLineNo">423</span>            }<a name="line.423"></a>
+<span class="sourceLineNo">424</span>        }<a name="line.424"></a>
+<span class="sourceLineNo">425</span><a name="line.425"></a>
+<span class="sourceLineNo">426</span>        final List&lt;String&gt; words = Arrays.asList(input.split("\\s+"));<a name="line.426"></a>
+<span class="sourceLineNo">427</span>        final List&lt;String&gt; words2 = new ArrayList&lt;&gt;();<a name="line.427"></a>
+<span class="sourceLineNo">428</span><a name="line.428"></a>
+<span class="sourceLineNo">429</span>        // special-case handling of word prefixes based upon the name type<a name="line.429"></a>
+<span class="sourceLineNo">430</span>        switch (this.nameType) {<a name="line.430"></a>
+<span class="sourceLineNo">431</span>        case SEPHARDIC:<a name="line.431"></a>
+<span class="sourceLineNo">432</span>            for (final String aWord : words) {<a name="line.432"></a>
+<span class="sourceLineNo">433</span>                final String[] parts = aWord.split("'");<a name="line.433"></a>
+<span class="sourceLineNo">434</span>                final String lastPart = parts[parts.length - 1];<a name="line.434"></a>
+<span class="sourceLineNo">435</span>                words2.add(lastPart);<a name="line.435"></a>
+<span class="sourceLineNo">436</span>            }<a name="line.436"></a>
+<span class="sourceLineNo">437</span>            words2.removeAll(NAME_PREFIXES.get(this.nameType));<a name="line.437"></a>
+<span class="sourceLineNo">438</span>            break;<a name="line.438"></a>
+<span class="sourceLineNo">439</span>        case ASHKENAZI:<a name="line.439"></a>
+<span class="sourceLineNo">440</span>            words2.addAll(words);<a name="line.440"></a>
+<span class="sourceLineNo">441</span>            words2.removeAll(NAME_PREFIXES.get(this.nameType));<a name="line.441"></a>
+<span class="sourceLineNo">442</span>            break;<a name="line.442"></a>
+<span class="sourceLineNo">443</span>        case GENERIC:<a name="line.443"></a>
+<span class="sourceLineNo">444</span>            words2.addAll(words);<a name="line.444"></a>
+<span class="sourceLineNo">445</span>            break;<a name="line.445"></a>
+<span class="sourceLineNo">446</span>        default:<a name="line.446"></a>
+<span class="sourceLineNo">447</span>            throw new IllegalStateException("Unreachable case: " + this.nameType);<a name="line.447"></a>
+<span class="sourceLineNo">448</span>        }<a name="line.448"></a>
+<span class="sourceLineNo">449</span><a name="line.449"></a>
+<span class="sourceLineNo">450</span>        if (this.concat) {<a name="line.450"></a>
+<span class="sourceLineNo">451</span>            // concat mode enabled<a name="line.451"></a>
+<span class="sourceLineNo">452</span>            input = join(words2, " ");<a name="line.452"></a>
+<span class="sourceLineNo">453</span>        } else if (words2.size() == 1) {<a name="line.453"></a>
+<span class="sourceLineNo">454</span>            // not a multi-word name<a name="line.454"></a>
+<span class="sourceLineNo">455</span>            input = words.iterator().next();<a name="line.455"></a>
+<span class="sourceLineNo">456</span>        } else {<a name="line.456"></a>
+<span class="sourceLineNo">457</span>            // encode each word in a multi-word name separately (normally used for approx matches)<a name="line.457"></a>
+<span class="sourceLineNo">458</span>            final StringBuilder result = new StringBuilder();<a name="line.458"></a>
+<span class="sourceLineNo">459</span>            for (final String word : words2) {<a name="line.459"></a>
+<span class="sourceLineNo">460</span>                result.append("-").append(encode(word));<a name="line.460"></a>
+<span class="sourceLineNo">461</span>            }<a name="line.461"></a>
+<span class="sourceLineNo">462</span>            // return the result without the leading "-"<a name="line.462"></a>
+<span class="sourceLineNo">463</span>            return result.substring(1);<a name="line.463"></a>
+<span class="sourceLineNo">464</span>        }<a name="line.464"></a>
+<span class="sourceLineNo">465</span><a name="line.465"></a>
+<span class="sourceLineNo">466</span>        PhonemeBuilder phonemeBuilder = PhonemeBuilder.empty(languageSet);<a name="line.466"></a>
+<span class="sourceLineNo">467</span><a name="line.467"></a>
+<span class="sourceLineNo">468</span>        // loop over each char in the input - we will handle the increment manually<a name="line.468"></a>
+<span class="sourceLineNo">469</span>        for (int i = 0; i &lt; input.length();) {<a name="line.469"></a>
+<span class="sourceLineNo">470</span>            final RulesApplication rulesApplication =<a name="line.470"></a>
+<span class="sourceLineNo">471</span>                    new RulesApplication(rules, input, phonemeBuilder, i, maxPhonemes).invoke();<a name="line.471"></a>
+<span class="sourceLineNo">472</span>            i = rulesApplication.getI();<a name="line.472"></a>
+<span class="sourceLineNo">473</span>            phonemeBuilder = rulesApplication.getPhonemeBuilder();<a name="line.473"></a>
+<span class="sourceLineNo">474</span>        }<a name="line.474"></a>
+<span class="sourceLineNo">475</span><a name="line.475"></a>
+<span class="sourceLineNo">476</span>        // Apply the general rules<a name="line.476"></a>
+<span class="sourceLineNo">477</span>        phonemeBuilder = applyFinalRules(phonemeBuilder, finalRules1);<a name="line.477"></a>
+<span class="sourceLineNo">478</span>        // Apply the language-specific rules<a name="line.478"></a>
+<span class="sourceLineNo">479</span>        phonemeBuilder = applyFinalRules(phonemeBuilder, finalRules2);<a name="line.479"></a>
+<span class="sourceLineNo">480</span><a name="line.480"></a>
+<span class="sourceLineNo">481</span>        return phonemeBuilder.makeString();<a name="line.481"></a>
+<span class="sourceLineNo">482</span>    }<a name="line.482"></a>
+<span class="sourceLineNo">483</span><a name="line.483"></a>
+<span class="sourceLineNo">484</span>    /**<a name="line.484"></a>
+<span class="sourceLineNo">485</span>     * Gets the Lang language guessing rules being used.<a name="line.485"></a>
+<span class="sourceLineNo">486</span>     *<a name="line.486"></a>
+<span class="sourceLineNo">487</span>     * @return the Lang in use<a name="line.487"></a>
+<span class="sourceLineNo">488</span>     */<a name="line.488"></a>
+<span class="sourceLineNo">489</span>    public Lang getLang() {<a name="line.489"></a>
+<span class="sourceLineNo">490</span>        return this.lang;<a name="line.490"></a>
+<span class="sourceLineNo">491</span>    }<a name="line.491"></a>
+<span class="sourceLineNo">492</span><a name="line.492"></a>
+<span class="sourceLineNo">493</span>    /**<a name="line.493"></a>
+<span class="sourceLineNo">494</span>     * Gets the NameType being used.<a name="line.494"></a>
+<span class="sourceLineNo">495</span>     *<a name="line.495"></a>
+<span class="sourceLineNo">496</span>     * @return the NameType in use<a name="line.496"></a>
+<span class="sourceLineNo">497</span>     */<a name="line.497"></a>
+<span class="sourceLineNo">498</span>    public NameType getNameType() {<a name="line.498"></a>
+<span class="sourceLineNo">499</span>        return this.nameType;<a name="line.499"></a>
+<span class="sourceLineNo">500</span>    }<a name="line.500"></a>
+<span class="sourceLineNo">501</span><a name="line.501"></a>
+<span class="sourceLineNo">502</span>    /**<a name="line.502"></a>
+<span class="sourceLineNo">503</span>     * Gets the RuleType being used.<a name="line.503"></a>
+<span class="sourceLineNo">504</span>     *<a name="line.504"></a>
+<span class="sourceLineNo">505</span>     * @return the RuleType in use<a name="line.505"></a>
+<span class="sourceLineNo">506</span>     */<a name="line.506"></a>
+<span class="sourceLineNo">507</span>    public RuleType getRuleType() {<a name="line.507"></a>
+<span class="sourceLineNo">508</span>        return this.ruleType;<a name="line.508"></a>
+<span class="sourceLineNo">509</span>    }<a name="line.509"></a>
+<span class="sourceLineNo">510</span><a name="line.510"></a>
+<span class="sourceLineNo">511</span>    /**<a name="line.511"></a>
+<span class="sourceLineNo">512</span>     * Gets if multiple phonetic encodings are concatenated or if just the first one is kept.<a name="line.512"></a>
+<span class="sourceLineNo">513</span>     *<a name="line.513"></a>
+<span class="sourceLineNo">514</span>     * @return true if multiple phonetic encodings are returned, false if just the first is<a name="line.514"></a>
+<span class="sourceLineNo">515</span>     */<a name="line.515"></a>
+<span class="sourceLineNo">516</span>    public boolean isConcat() {<a name="line.516"></a>
+<span class="sourceLineNo">517</span>        return this.concat;<a name="line.517"></a>
+<span class="sourceLineNo">518</span>    }<a name="line.518"></a>
+<span class="sourceLineNo">519</span><a name="line.519"></a>
+<span class="sourceLineNo">520</span>    /**<a name="line.520"></a>
+<span class="sourceLineNo">521</span>     * Gets the maximum number of phonemes the engine will calculate for a given input.<a name="line.521"></a>
+<span class="sourceLineNo">522</span>     *<a name="line.522"></a>
+<span class="sourceLineNo">523</span>     * @return the maximum number of phonemes<a name="line.523"></a>
+<span class="sourceLineNo">524</span>     * @since 1.7<a name="line.524"></a>
+<span class="sourceLineNo">525</span>     */<a name="line.525"></a>
+<span class="sourceLineNo">526</span>    public int getMaxPhonemes() {<a name="line.526"></a>
+<span class="sourceLineNo">527</span>        return this.maxPhonemes;<a name="line.527"></a>
+<span class="sourceLineNo">528</span>    }<a name="line.528"></a>
+<span class="sourceLineNo">529</span>}<a name="line.529"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

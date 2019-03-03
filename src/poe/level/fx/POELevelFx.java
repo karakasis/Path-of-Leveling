@@ -17,6 +17,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,6 +30,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -40,6 +42,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+//import java.util.Base64;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +51,8 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.DataFormatException;
+import java.util.zip.Inflater;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -61,11 +66,18 @@ import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import poe.level.data.Act;
 import poe.level.data.ActHandler;
 import poe.level.data.Build;
@@ -75,6 +87,7 @@ import poe.level.data.Gem.Info;
 import poe.level.data.GemHolder;
 import poe.level.data.SocketGroup;
 import poe.level.data.Zone;
+import poe.level.data.Zone.recipeInfo;
 import static poe.level.fx.Preferences_Controller.zones_images_toggle;
 import static poe.level.fx.Preferences_Controller.zones_passive_toggle;
 import static poe.level.fx.Preferences_Controller.zones_text_toggle;
@@ -102,8 +115,6 @@ public class POELevelFx extends Application {
     //v0.5-alpha <- between
     
     public void update() {
-
-
             URL url;
             
             try{
@@ -120,6 +131,18 @@ public class POELevelFx extends Application {
             long downloadedFileSize = 0;
             int x = 0;
             while ((x = in.read(data, 0, 1024)) >= 0) {
+                if(UpdaterController.cancelDownload){
+                    bout.close();
+                    in.close();
+                    File file = new File("PathOfLeveling-"+POELevelFx.version+".jar"); 
+                    file.delete() ;
+                    try {
+                        init();
+                    } catch (Exception ex) {
+                        Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                }
             downloadedFileSize += x;
             
             notifyPreloader(new UpdatePreloader.ProgressNotification(downloadedFileSize));
@@ -139,13 +162,41 @@ public class POELevelFx extends Application {
             
     }
     
+    public void declineUpdateFromPreload(){
+        is_new_version = false;
+        try {
+            init();
+        } catch (Exception ex) {
+            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("test");
+    }
+    
     @Override
     public void init() throws Exception {
        
-        
+        boolean restart = false;
         if(is_new_version){
-            update();
             
+            
+            while(true){
+                    System.err.println("");
+                if(UpdaterController.allowUpdate){
+                    System.out.println("allowed");
+                    UpdaterController.allowUpdate = false;
+                    update();
+                    break;
+                }
+                if(UpdaterController.declUpdate){
+                    is_new_version = false;
+                    restart = true;
+                    break;
+                }
+            }
+            if(restart) {
+                //LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, null);
+                init();
+            }
             //System.exit(-10);
         }else{
             Platform.setImplicitExit( false );
@@ -181,10 +232,12 @@ public class POELevelFx extends Application {
                     Preferences_Controller.zones_toggle = false;
                     prop.setProperty("zones-text-toggle", "true");
                     Preferences_Controller.zones_text_toggle = true;
-                    prop.setProperty("zones-trial-toggle", "false");
-                    Preferences_Controller.zones_trial_toggle = false;
+                    prop.setProperty("zones-trial-toggle", "true");
+                    Preferences_Controller.zones_trial_toggle = true;
                     prop.setProperty("zones-passive-toggle", "true");
                     Preferences_Controller.zones_passive_toggle = true;
+                    prop.setProperty("zones-recipe-toggle", "true");
+                    Preferences_Controller.zones_recipe_toggle = true;
                     prop.setProperty("zones-images-toggle", "true");
                     Preferences_Controller.zones_images_toggle = true;
                     double a = 10;
@@ -193,25 +246,34 @@ public class POELevelFx extends Application {
                     prop.setProperty("zones-hotkey-show_hide", "F5");
                     try{
                         KeyCombination keyCombination = KeyCombination.keyCombination("F5");
-                        System.out.println("key code : " + keyCombination.getName());
+                        System.out.println("key code zones: " + keyCombination.getName());
                         Preferences_Controller.zones_hotkey_show_hide_key = keyCombination;
-                    }catch(IllegalArgumentException e){
-                        System.out.println(":incorect:");
+                    }catch(Exception e){
+                        System.out.println(":key code zones not set:");
                         Preferences_Controller.zones_hotkey_show_hide_key = KeyCombination.NO_MATCH;
                     }
                     a = 15;
                     Preferences_Controller.level_slider = a;
                     prop.setProperty("level-slider", String.valueOf(a));
-                    prop.setProperty("level-hotkey-remind", "F4");
                     prop.setProperty("poe-dir","");
                     Preferences_Controller.poe_log_dir = "";
+                    prop.setProperty("level-hotkey-remind", "F4");
                     try{
                         KeyCombination keyCombination = KeyCombination.keyCombination("F4");
-                        System.out.println("key code : " + keyCombination.getName());
+                        System.out.println("key code gems: " + keyCombination.getName());
                         Preferences_Controller.level_hotkey_remind_key = keyCombination;
-                    }catch(IllegalArgumentException e){
-                        System.out.println(":incorect:");
+                    }catch(Exception e){
+                        System.out.println(":key code gems not set:");
                         Preferences_Controller.level_hotkey_remind_key = KeyCombination.NO_MATCH;
+                    }
+                    prop.setProperty("recipe-hotkey-mark", "F6");
+                    try{
+                        KeyCombination keyCombination = KeyCombination.keyCombination("F6");
+                        System.out.println("key code recipe: " + keyCombination.getName());
+                        Preferences_Controller.recipe_hotkey_mark_key = keyCombination;
+                    }catch(Exception e){
+                        System.out.println(":key code recipe not set:");
+                        Preferences_Controller.recipe_hotkey_mark_key = KeyCombination.NO_MATCH;
                     }
 
                     //new changes
@@ -244,6 +306,7 @@ public class POELevelFx extends Application {
                   InputStream input = null;
                   String zones_hotkey_show_hide = "";
                   String level_hotkey_remind = "";
+                  String recipe_hotkey_mark = "";
                   try {
 
                           input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
@@ -253,12 +316,28 @@ public class POELevelFx extends Application {
                           Preferences_Controller.zones_toggle = Boolean.parseBoolean(prop.getProperty("zones-toggle"));
                           Preferences_Controller.zones_text_toggle = Boolean.parseBoolean(prop.getProperty("zones-text-toggle"));
                           Preferences_Controller.zones_images_toggle = Boolean.parseBoolean(prop.getProperty("zones-images-toggle"));
-                          Preferences_Controller.zones_trial_toggle = Boolean.parseBoolean(prop.getProperty("zones-trial-toggle"));
+                          //this 2 settings were added in later versions so im trying to avoid errors.
+                          String parseRecipe = prop.getProperty("zones-recipe-toggle");
+                          if(parseRecipe == null){
+                              Preferences_Controller.zones_recipe_toggle = true; //default
+                          }else{
+                              Preferences_Controller.zones_recipe_toggle = Boolean.parseBoolean(prop.getProperty("zones-recipe-toggle"));
+                          }
+                          String parseTrial = prop.getProperty("zones-trial-toggle");
+                          if(parseTrial == null){
+                              Preferences_Controller.zones_trial_toggle = true; //default
+                          }else{
+                              Preferences_Controller.zones_trial_toggle = Boolean.parseBoolean(prop.getProperty("zones-trial-toggle"));
+                          }
                           Preferences_Controller.zones_passive_toggle = Boolean.parseBoolean(prop.getProperty("zones-passive-toggle"));
                           Preferences_Controller.zones_slider = Double.parseDouble(prop.getProperty("zones-slider"));
                           zones_hotkey_show_hide = prop.getProperty("zones-hotkey-show_hide");
                           Preferences_Controller.level_slider = Double.parseDouble(prop.getProperty("level-slider"));
                           level_hotkey_remind = prop.getProperty("level-hotkey-remind");
+                          recipe_hotkey_mark = prop.getProperty("recipe-hotkey-mark");
+                          //check if recipe hotkey is null, on older versions
+                          if(recipe_hotkey_mark == null) recipe_hotkey_mark = "F6";
+                          
                             if(!(prop.getProperty("poe-dir")==null || prop.getProperty("poe-dir").equals(""))){
                                 Preferences_Controller.poe_log_dir = prop.getProperty("poe-dir") + "\\logs\\Client.txt";
                             }
@@ -319,30 +398,87 @@ public class POELevelFx extends Application {
 
                   try{
                       KeyCombination keyCombination = KeyCombination.keyCombination(zones_hotkey_show_hide);
-                      System.out.println("key code : " + keyCombination.getName());
+                      System.out.println("key code zones: " + keyCombination.getName());
                       Preferences_Controller.zones_hotkey_show_hide_key = keyCombination;
-                  }catch(IllegalArgumentException e){
+                  }catch(Exception e){
                       System.out.println(":incorect:");
                       Preferences_Controller.zones_hotkey_show_hide_key = KeyCombination.NO_MATCH;
                   }
 
                   try{
                       KeyCombination keyCombination = KeyCombination.keyCombination(level_hotkey_remind);
-                      System.out.println("key code : " + keyCombination.getName());
+                      System.out.println("key code gems: " + keyCombination.getName());
                       Preferences_Controller.level_hotkey_remind_key = keyCombination;
-                  }catch(IllegalArgumentException e){
+                  }catch(Exception e){
                       System.out.println(":incorect:");
                       Preferences_Controller.level_hotkey_remind_key = KeyCombination.NO_MATCH;
                   }
                   
+                  try{
+                      KeyCombination keyCombination = KeyCombination.keyCombination(recipe_hotkey_mark);
+                      System.out.println("key code recipe: " + keyCombination.getName());
+                      Preferences_Controller.recipe_hotkey_mark_key = keyCombination;
+                  }catch(Exception e){
+                      System.out.println(":incorect:");
+                      Preferences_Controller.recipe_hotkey_mark_key = KeyCombination.NO_MATCH;
+                  }
+                  
             }
 
+            
+            
+            //StringBuilder raw = readRawToString();
+            
               loadActsFromMemory();
               loadGemsFromMemory();
               loadBuildsFromMemory();
-
+              
+              loadRecipesProperties();
+              
         }
         
+        
+        
+        /*
+              ArrayList<String[]> mergeTags = mergeTags();
+              ArrayList<Gem> gems = GemHolder.getInstance().gems;
+              boolean active = false;
+              for(int i=0; i<mergeTags.size(); i++){
+                  if(mergeTags.get(i)[0].equals("Abyssal Cry")){
+                      active = true;
+                  }
+                  boolean found = false;
+                  for(int j=0; j<gems.size(); j++){
+                      if(mergeTags.get(i)[0].equals(gems.get(j).name)){
+                          gems.get(j).isActive = active;
+                          gems.get(j).isSupport = !active;
+                          for(int k = 1 ; k< mergeTags.get(i).length; k++){
+                              gems.get(j).tags.add( mergeTags.get(i)[k]);
+                          }
+                          found = true;
+                          break;
+                      }
+                  }
+                  if(!found){
+                      System.out.println("not found : " + mergeTags.get(i)[0]);
+                  }
+                  found = false;
+              }
+              
+              ArrayList<Gem> gems2 = GemHolder.getInstance().gems;
+              for(Gem g : gems2){
+                  if(g.isActive == g.isSupport){
+                      System.out.println("same active : " + g.name);
+                      
+                  }
+                  if(g.tags == null || g.tags.size() == 0){
+                      System.out.println("no tag : " + g.name);
+                  }
+              }
+              System.out.println(gems2);
+              
+              GemHolder.getInstance().init_remaining_in_pool();
+              */
         
      /*   
         StringBuilder hack = hack();
@@ -369,11 +505,11 @@ public class POELevelFx extends Application {
         */
     }
     
-    private StringBuilder hack(){
+    private StringBuilder readRawToString(){
         BufferedReader br = null;
         StringBuilder sb = null;
         try {
-            br = new BufferedReader(new FileReader("gem.txt"));
+            br = new BufferedReader(new FileReader("raw.txt"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -407,10 +543,114 @@ public class POELevelFx extends Application {
         return sb;
     }
     
+    private ArrayList<String[]> mergeTags(){
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("tags.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ArrayList<String[]> list_tags = new ArrayList<>();
+        try {
+            String line = null;
+            try {
+                
+                line = br.readLine();
+                while(line != null){
+                    String[] tags = line.split(",");
+                    list_tags.add(tags);
+                    line = br.readLine();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } finally {
+            try {
+                br.close();
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return list_tags;
+    }
+    
     public void close(){
         //exp.close();
         main.close();
         //zone.close();
+    }
+    
+    private void loadRecipesProperties(){
+        if (!new File(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties").isFile()) {
+            try {
+                new File(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties").createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Properties prop = new Properties();
+            OutputStream output = null;
+            try{
+                output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            for(Zone z : ActHandler.getInstance().getZonesWithRecipes()){
+                String thanksGGG = z.name + " [L" + z.getZoneLevel() + "]";
+                System.out.println(thanksGGG);
+                prop.setProperty(thanksGGG, "false");
+                ActHandler.getInstance().recipeMap.put(z, false);
+            }
+            
+            try {
+                // save properties to project root folder
+                prop.store(output, null);
+                System.out.println("Recipe properties file created successfully in " + POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } finally {
+                    if (output != null) {
+                            try {
+                                    output.close();
+                            } catch (IOException e) {
+                                    e.printStackTrace();
+                            }
+                    }
+
+            }
+
+
+        }else{
+            Properties prop = new Properties();
+            InputStream input = null;
+            try {
+
+                    input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+
+                    // load a properties file
+                    prop.load(input);
+                    for(Zone z : ActHandler.getInstance().getZonesWithRecipes()){
+                        String thanksGGG = z.name + " [L" + z.getZoneLevel() + "]";
+                        boolean parseBoolean = Boolean.parseBoolean(prop.getProperty(thanksGGG));
+                        ActHandler.getInstance().recipeMap.put(z, parseBoolean);
+                    }
+
+            } catch (IOException ex) {
+                    ex.printStackTrace();
+            } finally {
+                if (input != null) {
+                        try {
+                                input.close();
+                                System.out.println("Recipe properties loaded successfully ");
+            
+                        } catch (IOException e) {
+                                e.printStackTrace();
+                        }
+                }
+            }
+        }
     }
     
     private void loadActsFromMemory(){
@@ -437,22 +677,41 @@ public class POELevelFx extends Application {
                 for(int k=0; k<zonesImagAr.length(); k++){
                     zoneImages.add(zonesImagAr.getString(k));
                 }
-                        Zone z = new Zone(
-                        zoneObj.getString("name"),
-                        zoneObj.getInt("level"),
-                        zoneImages,
-                        zoneObj.getString("altimage"),
-                        zoneObj.getString("note"),
-                        zoneObj.getBoolean("haspassive"),
-                        zoneObj.getBoolean("hastrial"),
-                        zoneObj.getString("quest"),   
-                        zoneObj.getBoolean("questRewardsSkills"),
-                        actname,actid
+                Zone z = new Zone(
+                    zoneObj.getString("name"),
+                    zoneObj.getInt("level"),
+                    zoneImages,
+                    zoneObj.getString("altimage"),
+                    zoneObj.getString("note"),
+                    zoneObj.getBoolean("haspassive"),
+                    zoneObj.getBoolean("hastrial"),
+                    zoneObj.getString("quest"),   
+                    zoneObj.getBoolean("questRewardsSkills"),
+                    actname,actid
                 );
+                //manual zone recipe load
+                z.hasRecipe = zoneObj.getBoolean("hasRecipe");
+                if(z.hasRecipe){
+                    recipeInfo rInfo = z.new recipeInfo();
+                    JSONObject recipeObj = zoneObj.getJSONObject("recipe");
+                    if(recipeObj != null){
+                        rInfo.tooltip = recipeObj.getString("tooltip");
+                        /* // we wont be using this information so we might as well
+                        //not use space for no reason.
+                        JSONArray recipeMods = recipeObj.getJSONArray("mods");
+                        rInfo.mods = new ArrayList<>();
+                        for(int k=0; k<recipeMods.length(); k++){
+                            rInfo.mods.add(recipeMods.getString(k));
+                        }*/
+                    } 
+                    ActHandler.getInstance().putZone(z);
+                }
                 a.putZone(z);
             }
             ActHandler.getInstance().putAct(a);
+            
         }
+        System.out.println("Zone data loaded.");
     }
     
     private void loadGemsFromMemory(){
@@ -495,27 +754,27 @@ public class POELevelFx extends Application {
                     }
                     gem.reward.available_to = chars_list;
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     gem.reward.quest_name= rewardObj.getString("quest_name");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     gem.reward.npc= rewardObj.getString("npc");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     gem.reward.act = rewardObj.getInt("act");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     gem.reward.town= rewardObj.getString("town");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
             }
             JSONArray buy_arrays = gemObj.getJSONArray("buy");
@@ -534,27 +793,27 @@ public class POELevelFx extends Application {
                     buy_info.available_to = chars_list;
                 }catch(JSONException e){
                     e.printStackTrace();
-                    System.out.println(gem.getGemName());
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     buy_info.quest_name= buyObj.getString("quest_name");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     buy_info.npc= buyObj.getString("npc");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     buy_info.act = buyObj.getInt("act");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 try{
                     buy_info.town= buyObj.getString("town");
                 }catch(JSONException e){
-
+                    logErrorGem(gem.getGemName());
                 }
                 gem.buy.add(buy_info);
             }
@@ -598,12 +857,27 @@ public class POELevelFx extends Application {
             
             gem.resizeImage();
             
+            //load tags - new feature
+            gem.isActive = gemObj.getBoolean("isActive");
+            gem.isSupport = gemObj.getBoolean("isSupport");
+            JSONArray tags = gemObj.getJSONArray("gemTags");
+            //new arraylist is in constructor
+            for(int j=0;j<tags.length();j++){
+                gem.tags.add(tags.getString(j));
+            }
+            
             GemHolder.getInstance().putGem(gem);
             double a = (double)i/arrG.length();
             a = a * 100.0 ;
             
             notifyPreloader(new NewFXPreloader.ProgressNotification(a));
         }
+        System.out.println("Gem data loaded");
+            
+    }
+    
+    private void logErrorGem(String gemName){
+        System.out.println("Gem : " +gemName+ " had errors in loading.");
     }
     
     public static void reloadBuilds(){
@@ -709,12 +983,13 @@ public class POELevelFx extends Application {
                     for(int k = 0 ; k<gems_array.length(); k++ ){
                         JSONObject gObj = gems_array.getJSONObject(k);
                         String gemName = gObj.getString("name");
+                        /*
                         if(gemName.equals("Detonate Mines")){
                             System.out.println();
-                        }
+                        }*/
                         Gem gem = GemHolder.getInstance().createGemFromCache(gemName,build.getClassName());
                         if(gem == null){
-                            System.out.println();
+                            System.out.println(gem.getGemName()+"was null.");
                         }
                         gem.id = gObj.getInt("id");
                         gem.level_added = gObj.getInt("level_added");
@@ -788,8 +1063,9 @@ public class POELevelFx extends Application {
                 buildsLoaded.add(build);
         }
         
-        System.out.println(stringValueBase64Encoded  + " when decoded is: " + stringValueBase64Decoded);
-            
+        //System.out.println(stringValueBase64Encoded  + " when decoded is: " + stringValueBase64Decoded);
+          System.out.println("Loaded builds successfully from " + POELevelFx.directory + "\\Path of Leveling\\Builds\\builds.txt");
+              
         }
     }
     
@@ -1019,6 +1295,7 @@ public class POELevelFx extends Application {
     });
 }
     
+    
     /**
      * @param args the command line arguments
      */
@@ -1026,6 +1303,7 @@ public class POELevelFx extends Application {
         setUpDirectories();
         //remove below for debuging.
         //setUpLog();
+        //checkForNewVersion()
         if(checkForNewVersion()){
             is_new_version = true;
             LauncherImpl.launchApplication(POELevelFx.class, UpdatePreloader.class, args);

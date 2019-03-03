@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Licensed to the Apache Software Foundation (ASF) under one or more<a name="line.2"></a>
+<span class="sourceLineNo">003</span> * contributor license agreements.  See the NOTICE file distributed with<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * this work for additional information regarding copyright ownership.<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * The ASF licenses this file to You under the Apache License, Version 2.0<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * (the "License"); you may not use this file except in compliance with<a name="line.6"></a>
+<span class="sourceLineNo">007</span> * the License.  You may obtain a copy of the License at<a name="line.7"></a>
+<span class="sourceLineNo">008</span> *<a name="line.8"></a>
+<span class="sourceLineNo">009</span> *      http://www.apache.org/licenses/LICENSE-2.0<a name="line.9"></a>
+<span class="sourceLineNo">010</span> *<a name="line.10"></a>
+<span class="sourceLineNo">011</span> * Unless required by applicable law or agreed to in writing, software<a name="line.11"></a>
+<span class="sourceLineNo">012</span> * distributed under the License is distributed on an "AS IS" BASIS,<a name="line.12"></a>
+<span class="sourceLineNo">013</span> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<a name="line.13"></a>
+<span class="sourceLineNo">014</span> * See the License for the specific language governing permissions and<a name="line.14"></a>
+<span class="sourceLineNo">015</span> * limitations under the License.<a name="line.15"></a>
+<span class="sourceLineNo">016</span> */<a name="line.16"></a>
+<span class="sourceLineNo">017</span><a name="line.17"></a>
+<span class="sourceLineNo">018</span>package org.apache.commons.codec.language;<a name="line.18"></a>
+<span class="sourceLineNo">019</span><a name="line.19"></a>
+<span class="sourceLineNo">020</span>import org.apache.commons.codec.EncoderException;<a name="line.20"></a>
+<span class="sourceLineNo">021</span>import org.apache.commons.codec.StringEncoder;<a name="line.21"></a>
+<span class="sourceLineNo">022</span><a name="line.22"></a>
+<span class="sourceLineNo">023</span>/**<a name="line.23"></a>
+<span class="sourceLineNo">024</span> * Encodes a string into a Caverphone 2.0 value. Delegate to a {@link Caverphone2} instance.<a name="line.24"></a>
+<span class="sourceLineNo">025</span> *<a name="line.25"></a>
+<span class="sourceLineNo">026</span> * This is an algorithm created by the Caversham Project at the University of Otago. It implements the Caverphone 2.0<a name="line.26"></a>
+<span class="sourceLineNo">027</span> * algorithm:<a name="line.27"></a>
+<span class="sourceLineNo">028</span> *<a name="line.28"></a>
+<span class="sourceLineNo">029</span> * @version $Id: Caverphone.java 1079535 2011-03-08 20:54:37Z ggregory $<a name="line.29"></a>
+<span class="sourceLineNo">030</span> * @see &lt;a href="http://en.wikipedia.org/wiki/Caverphone"&gt;Wikipedia - Caverphone&lt;/a&gt;<a name="line.30"></a>
+<span class="sourceLineNo">031</span> * @see &lt;a href="http://caversham.otago.ac.nz/files/working/ctp150804.pdf"&gt;Caverphone 2.0 specification&lt;/a&gt;<a name="line.31"></a>
+<span class="sourceLineNo">032</span> * @since 1.4<a name="line.32"></a>
+<span class="sourceLineNo">033</span> * @deprecated 1.5 Replaced by {@link Caverphone2}, will be removed in 2.0.<a name="line.33"></a>
+<span class="sourceLineNo">034</span> */<a name="line.34"></a>
+<span class="sourceLineNo">035</span>@Deprecated<a name="line.35"></a>
+<span class="sourceLineNo">036</span>public class Caverphone implements StringEncoder {<a name="line.36"></a>
+<span class="sourceLineNo">037</span><a name="line.37"></a>
+<span class="sourceLineNo">038</span>    /**<a name="line.38"></a>
+<span class="sourceLineNo">039</span>     * Delegate to a {@link Caverphone2} instance to avoid code duplication.<a name="line.39"></a>
+<span class="sourceLineNo">040</span>     */<a name="line.40"></a>
+<span class="sourceLineNo">041</span>    final private Caverphone2 encoder = new Caverphone2();<a name="line.41"></a>
+<span class="sourceLineNo">042</span><a name="line.42"></a>
+<span class="sourceLineNo">043</span>    /**<a name="line.43"></a>
+<span class="sourceLineNo">044</span>     * Creates an instance of the Caverphone encoder<a name="line.44"></a>
+<span class="sourceLineNo">045</span>     */<a name="line.45"></a>
+<span class="sourceLineNo">046</span>    public Caverphone() {<a name="line.46"></a>
+<span class="sourceLineNo">047</span>        super();<a name="line.47"></a>
+<span class="sourceLineNo">048</span>    }<a name="line.48"></a>
+<span class="sourceLineNo">049</span><a name="line.49"></a>
+<span class="sourceLineNo">050</span>    /**<a name="line.50"></a>
+<span class="sourceLineNo">051</span>     * Encodes the given String into a Caverphone value.<a name="line.51"></a>
+<span class="sourceLineNo">052</span>     *<a name="line.52"></a>
+<span class="sourceLineNo">053</span>     * @param source<a name="line.53"></a>
+<span class="sourceLineNo">054</span>     *            String the source string<a name="line.54"></a>
+<span class="sourceLineNo">055</span>     * @return A caverphone code for the given String<a name="line.55"></a>
+<span class="sourceLineNo">056</span>     */<a name="line.56"></a>
+<span class="sourceLineNo">057</span>    public String caverphone(final String source) {<a name="line.57"></a>
+<span class="sourceLineNo">058</span>        return this.encoder.encode(source);<a name="line.58"></a>
+<span class="sourceLineNo">059</span>    }<a name="line.59"></a>
+<span class="sourceLineNo">060</span><a name="line.60"></a>
+<span class="sourceLineNo">061</span>    /**<a name="line.61"></a>
+<span class="sourceLineNo">062</span>     * Encodes an Object using the caverphone algorithm. This method is provided in order to satisfy the requirements of<a name="line.62"></a>
+<span class="sourceLineNo">063</span>     * the Encoder interface, and will throw an EncoderException if the supplied object is not of type java.lang.String.<a name="line.63"></a>
+<span class="sourceLineNo">064</span>     *<a name="line.64"></a>
+<span class="sourceLineNo">065</span>     * @param obj<a name="line.65"></a>
+<span class="sourceLineNo">066</span>     *            Object to encode<a name="line.66"></a>
+<span class="sourceLineNo">067</span>     * @return An object (or type java.lang.String) containing the caverphone code which corresponds to the String<a name="line.67"></a>
+<span class="sourceLineNo">068</span>     *         supplied.<a name="line.68"></a>
+<span class="sourceLineNo">069</span>     * @throws EncoderException<a name="line.69"></a>
+<span class="sourceLineNo">070</span>     *             if the parameter supplied is not of type java.lang.String<a name="line.70"></a>
+<span class="sourceLineNo">071</span>     */<a name="line.71"></a>
+<span class="sourceLineNo">072</span>    @Override<a name="line.72"></a>
+<span class="sourceLineNo">073</span>    public Object encode(final Object obj) throws EncoderException {<a name="line.73"></a>
+<span class="sourceLineNo">074</span>        if (!(obj instanceof String)) {<a name="line.74"></a>
+<span class="sourceLineNo">075</span>            throw new EncoderException("Parameter supplied to Caverphone encode is not of type java.lang.String");<a name="line.75"></a>
+<span class="sourceLineNo">076</span>        }<a name="line.76"></a>
+<span class="sourceLineNo">077</span>        return this.caverphone((String) obj);<a name="line.77"></a>
+<span class="sourceLineNo">078</span>    }<a name="line.78"></a>
+<span class="sourceLineNo">079</span><a name="line.79"></a>
+<span class="sourceLineNo">080</span>    /**<a name="line.80"></a>
+<span class="sourceLineNo">081</span>     * Encodes a String using the Caverphone algorithm.<a name="line.81"></a>
+<span class="sourceLineNo">082</span>     *<a name="line.82"></a>
+<span class="sourceLineNo">083</span>     * @param str<a name="line.83"></a>
+<span class="sourceLineNo">084</span>     *            String object to encode<a name="line.84"></a>
+<span class="sourceLineNo">085</span>     * @return The caverphone code corresponding to the String supplied<a name="line.85"></a>
+<span class="sourceLineNo">086</span>     */<a name="line.86"></a>
+<span class="sourceLineNo">087</span>    @Override<a name="line.87"></a>
+<span class="sourceLineNo">088</span>    public String encode(final String str) {<a name="line.88"></a>
+<span class="sourceLineNo">089</span>        return this.caverphone(str);<a name="line.89"></a>
+<span class="sourceLineNo">090</span>    }<a name="line.90"></a>
+<span class="sourceLineNo">091</span><a name="line.91"></a>
+<span class="sourceLineNo">092</span>    /**<a name="line.92"></a>
+<span class="sourceLineNo">093</span>     * Tests if the caverphones of two strings are identical.<a name="line.93"></a>
+<span class="sourceLineNo">094</span>     *<a name="line.94"></a>
+<span class="sourceLineNo">095</span>     * @param str1<a name="line.95"></a>
+<span class="sourceLineNo">096</span>     *            First of two strings to compare<a name="line.96"></a>
+<span class="sourceLineNo">097</span>     * @param str2<a name="line.97"></a>
+<span class="sourceLineNo">098</span>     *            Second of two strings to compare<a name="line.98"></a>
+<span class="sourceLineNo">099</span>     * @return &lt;code&gt;true&lt;/code&gt; if the caverphones of these strings are identical, &lt;code&gt;false&lt;/code&gt; otherwise.<a name="line.99"></a>
+<span class="sourceLineNo">100</span>     */<a name="line.100"></a>
+<span class="sourceLineNo">101</span>    public boolean isCaverphoneEqual(final String str1, final String str2) {<a name="line.101"></a>
+<span class="sourceLineNo">102</span>        return this.caverphone(str1).equals(this.caverphone(str2));<a name="line.102"></a>
+<span class="sourceLineNo">103</span>    }<a name="line.103"></a>
+<span class="sourceLineNo">104</span><a name="line.104"></a>
+<span class="sourceLineNo">105</span>}<a name="line.105"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

@@ -5,8 +5,33 @@
  */
 package poe.level.fx;
 
+import com.besaba.revonline.pastebinapi.Pastebin;
+import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
+import com.besaba.revonline.pastebinapi.response.Response;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.events.JFXDialogEvent;
+import com.sun.deploy.net.HttpResponse;
+import com.sun.javafx.tk.Toolkit;
+import java.awt.Desktop;
+import java.awt.datatransfer.StringSelection;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.StringReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.zip.DataFormatException;
+import java.util.zip.Inflater;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,6 +47,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import poe.level.data.Build;
 
 import java.awt.*;
@@ -39,6 +72,8 @@ import java.util.logging.Logger;
  */
 public class MainApp_Controller implements Initializable {
 
+    @FXML
+    private AnchorPane container;
     @FXML
     private AnchorPane buildsAnchorPane;
     @FXML
@@ -99,6 +134,12 @@ public class MainApp_Controller implements Initializable {
         this.parent = parent;
     }
 
+    public void resize(double h, double w){
+        System.out.println(h + "" + w);
+        container.prefWidth(w);
+        container.prefHeight(h);
+    }
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -439,11 +480,137 @@ public class MainApp_Controller implements Initializable {
         }
     }
 
-    public void fetch_pob_paste(String pasteLink){
-        buildspanel_controller.getCurrentBuild().hasPob = true;
-        buildspanel_controller.getCurrentBuild().pobLink = pasteLink;
+    public void fetch_pob_paste(String pasteLink, int code){
+      // code : 0 is create , 1 is link pob
+      if(code == 0){
+          //and make a new build.
+          Build newBuild = extractBuildFromPOBPastebin(pastebin_import_pobController.getResponse());
+          if(newBuild != null){
+              newBuild.hasPob = true;
+              newBuild.pobLink = pasteLink;
+          }
+      }else if(code == 1){
+          buildspanel_controller.getCurrentBuild().hasPob = true;
+          buildspanel_controller.getCurrentBuild().pobLink = pasteLink;
+
+          togglePobMenus(true); //< requires active build selected.
+      }
+        
         buildPreviewPopup.close();
-        togglePobMenus(true);
+        
+    }
+    
+    private Build extractBuildFromPOBPastebin(String raw){
+        String replace = raw.replace('-','+').replace('_','/').trim();
+        /*
+        //save the replaced-values base64 string - optional
+        PrintWriter out = new PrintWriter("decoded.txt");
+        out.println(replace);
+        out.close();*/
+
+        //read into byte array using apache commons base64
+        byte[] byteValueBase64Decoded = null;
+        try{
+            byteValueBase64Decoded = org.apache.commons.codec.binary.Base64.decodeBase64(replace);
+        }catch(java.lang.IllegalArgumentException e){
+            e.printStackTrace();
+            return null;
+        }
+        String inflatedXML = "";
+        try{
+            //inflate 
+            inflatedXML = inflate(byteValueBase64Decoded);
+        }catch(IOException e){
+
+        }catch(DataFormatException e){
+
+        }
+        //System.out.println(inflatedXML);
+        /* //optional
+        out = new PrintWriter("pathofbuilding.txt");
+        out.println(inflatedXML);
+        out.close();*/
+            
+        //JSONArray obj = new JsonParser().parse(stringValueBase64Encoded).getAsJsonArray();
+        //JSONArray builds_array = new JSONArray(stringValueBase64Decoded);
+        
+        //parse XML
+        ArrayList<ArrayList<String>> skills = new ArrayList<>();
+        Document doc = convertStringToXMLDocument(inflatedXML);
+        NodeList nList = doc.getElementsByTagName("Skill");
+        NodeList buildInfo = doc.getElementsByTagName("Build");
+        String className = "";
+        String asc = "";
+        String bandit = "";
+        if(buildInfo.getLength() == 1){
+            //check for bandit here
+            Node info = buildInfo.item(0);
+            Element eElement = (Element) info;
+            className = eElement.getAttribute("className");
+            asc = eElement.getAttribute("ascendClassName");
+            bandit = eElement.getAttribute("bandit");
+        }else{
+            System.out.println("error");
+        }
+        for (int temp = 0; temp < nList.getLength(); temp++) {
+            Node nNode = nList.item(temp);
+            System.out.println("\nCurrent Element :" + nNode.getNodeName());
+            ArrayList<String> skillNames = new ArrayList<>();
+            for (int gemTemp = 0; gemTemp < nNode.getChildNodes().getLength(); gemTemp++) {
+                Node item = nNode.getChildNodes().item(gemTemp);
+                if (item.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) item;
+                    String attribute = eElement.getAttribute("nameSpec");
+                    System.out.println(attribute);
+                    skillNames.add(attribute);
+                }
+            }
+            if(!skillNames.isEmpty())
+                skills.add(skillNames);
+
+         }
+              
+        return buildspanel_controller.addNewBuildFromPOB("New build", className, asc,skills);
+        
+    }
+    
+    private String inflate(byte[] data) throws IOException, DataFormatException {  
+        Inflater inflater = new Inflater();   
+        inflater.setInput(data);  
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);  
+        byte[] buffer = new byte[1024];  
+        while (!inflater.finished()) {  
+         int count = inflater.inflate(buffer);  
+         outputStream.write(buffer, 0, count);  
+        }  
+        outputStream.close();  
+        byte[] output = outputStream.toByteArray();  
+        System.out.println("Original: " + data.length);  
+        System.out.println("Compressed: " + output.length);  
+        return new String(output);  
+    }
+    
+     private Document convertStringToXMLDocument(String xmlString)
+    {
+        //Parser that produces DOM object trees from XML content
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+         
+        //API to obtain DOM Document instance
+        DocumentBuilder builder = null;
+        try
+        {
+            //Create DocumentBuilder with default configuration
+            builder = factory.newDocumentBuilder();
+             
+            //Parse the content to Document object
+            Document doc = builder.parse(new InputSource(new StringReader(xmlString)));
+            return doc;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private void togglePobMenus(boolean toggle){
@@ -479,6 +646,26 @@ public class MainApp_Controller implements Initializable {
             clipboard.setContent(content);
     }
 
+    private Pastebin_import_pobController pastebin_import_pobController;
+    
+    @FXML
+    private void createFromPOB(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("pastebin_import_pob.fxml"));
+            AnchorPane con = null;
+            try {
+                con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            pastebin_import_pobController = loader.<Pastebin_import_pobController>getController();
+            pastebin_import_pobController.hook(this,0);
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            //controller.passDialog(mLoad);
+            //paste_pob_controller.hook(this);
+            buildPreviewPopup.show();
+    }
+    
     @FXML
     private void linkPOB(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("pastebin_import_pob.fxml"));
@@ -488,7 +675,7 @@ public class MainApp_Controller implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
-            loader.<Pastebin_import_pobController>getController().hook(this);
+            loader.<Pastebin_import_pobController>getController().hook(this,1);
 
             buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
             //controller.passDialog(mLoad);

@@ -24,8 +24,10 @@ public class GlobalKeyListener implements NativeKeyListener {
         static HashSet<Integer> mapper;
         static String[] level_hotkey_remind_key;
         static String[] zones_hotkey_show_hide_key;
+        static String[] recipes_hotkey_mark_key;
         static HashSet<String> level_hotkey_remind_set;
         static HashSet<String> zones_hotkey_show_hide_set;
+        static HashSet<String> recipes_hotkey_mark_set;
         
         @Override
 	public void nativeKeyPressed(NativeKeyEvent e) {
@@ -71,6 +73,16 @@ public class GlobalKeyListener implements NativeKeyListener {
                     Controller.instance.zones_hotkey_show_hide_key_event();
                 }
             }
+            if(mapper.size() == recipes_hotkey_mark_set.size()){
+                HashSet<String> temp = new HashSet<>();
+                for(Integer vk : mapper){
+                    temp.add(NativeKeyEvent.getKeyText(vk));
+                }
+                if(temp.equals(recipes_hotkey_mark_set)){
+                    System.out.println("recipes_hotkey_mark_set triggered");
+                    Controller.instance.recipe_hotkey_mark_key_event(); //<
+                }
+            }
         }
         
 	public static void run() {
@@ -96,13 +108,18 @@ public class GlobalKeyListener implements NativeKeyListener {
                 mapper = new HashSet<>();
                 level_hotkey_remind_key = Preferences_Controller.level_hotkey_remind_key.toString().split("\\+");
                 zones_hotkey_show_hide_key = Preferences_Controller.zones_hotkey_show_hide_key.toString().split("\\+");
+                recipes_hotkey_mark_key = Preferences_Controller.recipe_hotkey_mark_key.toString().split("\\+");
                 level_hotkey_remind_set = new HashSet<>();
                 zones_hotkey_show_hide_set = new HashSet<>();
+                recipes_hotkey_mark_set = new HashSet<>();
                 for(int i=0; i<level_hotkey_remind_key.length;i++){
                     level_hotkey_remind_set.add(level_hotkey_remind_key[i]);
                 }
                 for(int i=0; i<zones_hotkey_show_hide_key.length;i++){
                     zones_hotkey_show_hide_set.add(zones_hotkey_show_hide_key[i]);
+                }
+                for(int i=0; i<recipes_hotkey_mark_key.length;i++){
+                    recipes_hotkey_mark_set.add(recipes_hotkey_mark_key[i]);
                 }
 		GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
 	}

@@ -5,6 +5,7 @@
  */
 package poe.level.fx;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXProgressBar;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -21,12 +23,23 @@ import javafx.scene.control.Label;
  */
 public class UpdaterController implements Initializable {
 
-     @FXML
+    @FXML
     private JFXProgressBar progressbar;
     @FXML
     private Label label;
     @FXML
     private Label final_label;
+    @FXML
+    private AnchorPane updatePane;
+    @FXML
+    private AnchorPane askUpdatePane;
+    @FXML
+    private JFXButton acceptUpdate;
+    @FXML
+    private JFXButton declineUpdate;
+    @FXML
+    private JFXButton cancelUpdate;
+    
     
     public static long finalSize;
     
@@ -36,6 +49,12 @@ public class UpdaterController implements Initializable {
     private static double SPACE_TB = 1024 * SPACE_GB;
 
     private boolean initialized;
+    public static boolean cancelDownload;
+    public static boolean allowUpdate;
+    public static boolean declUpdate;
+    public static boolean waitForInput;
+    
+    private POELevelFx root;
     
     public static String bytes2String(long sizeInBytes) {
 
@@ -66,8 +85,38 @@ public class UpdaterController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         initialized = false;
+        cancelDownload = false;
+        allowUpdate = false;
+        declUpdate = false;
+        waitForInput= true;
     }    
     
+    public void hookMain(POELevelFx root){
+        this.root = root;
+    }
+    
+    @FXML
+    private void accept(){
+        cancelDownload = false;
+        askUpdatePane.setVisible(false);
+        updatePane.setVisible(true);
+        allowUpdate = true;
+    }
+    
+    @FXML
+    private void decline(){
+        allowUpdate = false;
+        declUpdate = true;
+    }
+    
+    @FXML
+    private void cancel(){
+        askUpdatePane.setVisible(true);
+        updatePane.setVisible(false);
+        //and reset maybe idk or stop updating somehow
+        cancelDownload = true;
+        
+    }
     
     public void notify(Double prog){
         if(!initialized){

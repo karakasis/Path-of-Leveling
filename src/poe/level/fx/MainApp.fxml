@@ -12,9 +12,9 @@
 
 <StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.MainApp_Controller">
    <children>
-      <AnchorPane>
+      <AnchorPane fx:id="container">
          <children>
-          <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <MenuBar layoutX="-14.0" layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
               <Menu mnemonicParsing="false" text="File">
                 <items>
@@ -43,7 +43,8 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <Menu mnemonicParsing="false" text="Path of Building">
                           <items>
-                            <MenuItem fx:id="get_pob_link" disable="true" mnemonicParsing="false" onAction="#getPOB" text="Get the pastebin" />
+                              <MenuItem mnemonicParsing="false" onAction="#createFromPOB" text="Create build from Pastebin" />
+                            <MenuItem fx:id="get_pob_link" disable="true" mnemonicParsing="false" onAction="#getPOB" text="Get the Pastebin" />
                               <MenuItem fx:id="open_pob_view" disable="true" mnemonicParsing="false" onAction="#openPOBwebview" text="Open the PoB build" />
                               <MenuItem fx:id="link_active_pob" disable="true" mnemonicParsing="false" onAction="#linkPOB" text="Link active build with PoB" />
                           </items>
@@ -76,14 +77,18 @@
               </Menu>
             </menus>
           </MenuBar>
-          <SplitPane dividerPositions="0.2, 0.8" focusTraversable="true" layoutY="25.0" prefHeight="-1.0" prefWidth="-1.0">
-            <items>
-              <AnchorPane fx:id="socketGroupsAnchorPane" minWidth="150.0" prefHeight="544.0" prefWidth="177.0" />
-                  <AnchorPane fx:id="gemsPanelAnchorPane" minWidth="500.0" />
-              <AnchorPane fx:id="buildsAnchorPane" minWidth="150.0" prefHeight="551.0" prefWidth="245.0" />
-            </items>
-          </SplitPane>
-            <AnchorPane layoutY="578.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="578.0">
+            <AnchorPane layoutY="25.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+               <children>
+                <SplitPane dividerPositions="0.2, 0.8" focusTraversable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <items>
+                    <AnchorPane fx:id="socketGroupsAnchorPane" minWidth="150.0" prefHeight="544.0" prefWidth="177.0" />
+                        <AnchorPane fx:id="gemsPanelAnchorPane" minWidth="500.0" />
+                    <AnchorPane fx:id="buildsAnchorPane" minWidth="150.0" prefHeight="551.0" prefWidth="245.0" />
+                  </items>
+                </SplitPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="578.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
               <Label fx:id="footerValid" layoutX="3.0" layoutY="3.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Build is not valid!" textFill="#bc2121" visible="false" AnchorPane.leftAnchor="3.0">
                 <font>

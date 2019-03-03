@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Licensed to the Apache Software Foundation (ASF) under one or more<a name="line.2"></a>
+<span class="sourceLineNo">003</span> * contributor license agreements.  See the NOTICE file distributed with<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * this work for additional information regarding copyright ownership.<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * The ASF licenses this file to You under the Apache License, Version 2.0<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * (the "License"); you may not use this file except in compliance with<a name="line.6"></a>
+<span class="sourceLineNo">007</span> * the License.  You may obtain a copy of the License at<a name="line.7"></a>
+<span class="sourceLineNo">008</span> *<a name="line.8"></a>
+<span class="sourceLineNo">009</span> *      http://www.apache.org/licenses/LICENSE-2.0<a name="line.9"></a>
+<span class="sourceLineNo">010</span> *<a name="line.10"></a>
+<span class="sourceLineNo">011</span> * Unless required by applicable law or agreed to in writing, software<a name="line.11"></a>
+<span class="sourceLineNo">012</span> * distributed under the License is distributed on an "AS IS" BASIS,<a name="line.12"></a>
+<span class="sourceLineNo">013</span> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<a name="line.13"></a>
+<span class="sourceLineNo">014</span> * See the License for the specific language governing permissions and<a name="line.14"></a>
+<span class="sourceLineNo">015</span> * limitations under the License.<a name="line.15"></a>
+<span class="sourceLineNo">016</span> */<a name="line.16"></a>
+<span class="sourceLineNo">017</span><a name="line.17"></a>
+<span class="sourceLineNo">018</span>package org.apache.commons.codec.language;<a name="line.18"></a>
+<span class="sourceLineNo">019</span><a name="line.19"></a>
+<span class="sourceLineNo">020</span>import org.apache.commons.codec.EncoderException;<a name="line.20"></a>
+<span class="sourceLineNo">021</span>import org.apache.commons.codec.StringEncoder;<a name="line.21"></a>
+<span class="sourceLineNo">022</span><a name="line.22"></a>
+<span class="sourceLineNo">023</span>/**<a name="line.23"></a>
+<span class="sourceLineNo">024</span> * Encodes a string into a Soundex value. Soundex is an encoding used to relate similar names, but can also be used as a<a name="line.24"></a>
+<span class="sourceLineNo">025</span> * general purpose scheme to find word with similar phonemes.<a name="line.25"></a>
+<span class="sourceLineNo">026</span> *<a name="line.26"></a>
+<span class="sourceLineNo">027</span> * This class is thread-safe.<a name="line.27"></a>
+<span class="sourceLineNo">028</span> * Although not strictly immutable, the {@link #maxLength} field is not actually used.<a name="line.28"></a>
+<span class="sourceLineNo">029</span> *<a name="line.29"></a>
+<span class="sourceLineNo">030</span> * @version $Id$<a name="line.30"></a>
+<span class="sourceLineNo">031</span> */<a name="line.31"></a>
+<span class="sourceLineNo">032</span>public class Soundex implements StringEncoder {<a name="line.32"></a>
+<span class="sourceLineNo">033</span><a name="line.33"></a>
+<span class="sourceLineNo">034</span>    /**<a name="line.34"></a>
+<span class="sourceLineNo">035</span>     * The marker character used to indicate a silent (ignored) character.<a name="line.35"></a>
+<span class="sourceLineNo">036</span>     * These are ignored except when they appear as the first character.<a name="line.36"></a>
+<span class="sourceLineNo">037</span>     * &lt;p&gt;<a name="line.37"></a>
+<span class="sourceLineNo">038</span>     * Note: the {@link #US_ENGLISH_MAPPING_STRING} does not use this mechanism<a name="line.38"></a>
+<span class="sourceLineNo">039</span>     * because changing it might break existing code. Mappings that don't contain<a name="line.39"></a>
+<span class="sourceLineNo">040</span>     * a silent marker code are treated as though H and W are silent.<a name="line.40"></a>
+<span class="sourceLineNo">041</span>     * &lt;p&gt;<a name="line.41"></a>
+<span class="sourceLineNo">042</span>     * To override this, use the {@link #Soundex(String, boolean)} constructor.<a name="line.42"></a>
+<span class="sourceLineNo">043</span>     * @since 1.11<a name="line.43"></a>
+<span class="sourceLineNo">044</span>     */<a name="line.44"></a>
+<span class="sourceLineNo">045</span>    public static final char SILENT_MARKER = '-';<a name="line.45"></a>
+<span class="sourceLineNo">046</span><a name="line.46"></a>
+<span class="sourceLineNo">047</span>    /**<a name="line.47"></a>
+<span class="sourceLineNo">048</span>     * This is a default mapping of the 26 letters used in US English. A value of &lt;code&gt;0&lt;/code&gt; for a letter position<a name="line.48"></a>
+<span class="sourceLineNo">049</span>     * means do not encode, but treat as a separator when it occurs between consonants with the same code.<a name="line.49"></a>
+<span class="sourceLineNo">050</span>     * &lt;p&gt;<a name="line.50"></a>
+<span class="sourceLineNo">051</span>     * (This constant is provided as both an implementation convenience and to allow Javadoc to pick<a name="line.51"></a>
+<span class="sourceLineNo">052</span>     * up the value for the constant values page.)<a name="line.52"></a>
+<span class="sourceLineNo">053</span>     * &lt;p&gt;<a name="line.53"></a>
+<span class="sourceLineNo">054</span>     * &lt;b&gt;Note that letters H and W are treated specially.&lt;/b&gt;<a name="line.54"></a>
+<span class="sourceLineNo">055</span>     * They are ignored (after the first letter) and don't act as separators<a name="line.55"></a>
+<span class="sourceLineNo">056</span>     * between consonants with the same code.<a name="line.56"></a>
+<span class="sourceLineNo">057</span>     * @see #US_ENGLISH_MAPPING<a name="line.57"></a>
+<span class="sourceLineNo">058</span>     */<a name="line.58"></a>
+<span class="sourceLineNo">059</span>    //                                                      ABCDEFGHIJKLMNOPQRSTUVWXYZ<a name="line.59"></a>
+<span class="sourceLineNo">060</span>    public static final String US_ENGLISH_MAPPING_STRING = "01230120022455012623010202";<a name="line.60"></a>
+<span class="sourceLineNo">061</span><a name="line.61"></a>
+<span class="sourceLineNo">062</span>    /**<a name="line.62"></a>
+<span class="sourceLineNo">063</span>     * This is a default mapping of the 26 letters used in US English. A value of &lt;code&gt;0&lt;/code&gt; for a letter position<a name="line.63"></a>
+<span class="sourceLineNo">064</span>     * means do not encode.<a name="line.64"></a>
+<span class="sourceLineNo">065</span>     *<a name="line.65"></a>
+<span class="sourceLineNo">066</span>     * @see Soundex#Soundex(char[])<a name="line.66"></a>
+<span class="sourceLineNo">067</span>     */<a name="line.67"></a>
+<span class="sourceLineNo">068</span>    private static final char[] US_ENGLISH_MAPPING = US_ENGLISH_MAPPING_STRING.toCharArray();<a name="line.68"></a>
+<span class="sourceLineNo">069</span><a name="line.69"></a>
+<span class="sourceLineNo">070</span>    /**<a name="line.70"></a>
+<span class="sourceLineNo">071</span>     * An instance of Soundex using the US_ENGLISH_MAPPING mapping.<a name="line.71"></a>
+<span class="sourceLineNo">072</span>     * This treats H and W as silent letters.<a name="line.72"></a>
+<span class="sourceLineNo">073</span>     * Apart from when they appear as the first letter, they are ignored.<a name="line.73"></a>
+<span class="sourceLineNo">074</span>     * They don't act as separators between duplicate codes.<a name="line.74"></a>
+<span class="sourceLineNo">075</span>     *<a name="line.75"></a>
+<span class="sourceLineNo">076</span>     * @see #US_ENGLISH_MAPPING<a name="line.76"></a>
+<span class="sourceLineNo">077</span>     * @see #US_ENGLISH_MAPPING_STRING<a name="line.77"></a>
+<span class="sourceLineNo">078</span>     */<a name="line.78"></a>
+<span class="sourceLineNo">079</span>    public static final Soundex US_ENGLISH = new Soundex();<a name="line.79"></a>
+<span class="sourceLineNo">080</span><a name="line.80"></a>
+<span class="sourceLineNo">081</span>    /**<a name="line.81"></a>
+<span class="sourceLineNo">082</span>     * An instance of Soundex using the Simplified Soundex mapping, as described here:<a name="line.82"></a>
+<span class="sourceLineNo">083</span>     * http://west-penwith.org.uk/misc/soundex.htm<a name="line.83"></a>
+<span class="sourceLineNo">084</span>     * &lt;p&gt;<a name="line.84"></a>
+<span class="sourceLineNo">085</span>     * This treats H and W the same as vowels (AEIOUY).<a name="line.85"></a>
+<span class="sourceLineNo">086</span>     * Such letters aren't encoded (after the first), but they do<a name="line.86"></a>
+<span class="sourceLineNo">087</span>     * act as separators when dropping duplicate codes.<a name="line.87"></a>
+<span class="sourceLineNo">088</span>     * The mapping is otherwise the same as for {@link #US_ENGLISH}<a name="line.88"></a>
+<span class="sourceLineNo">089</span>     * &lt;p&gt;<a name="line.89"></a>
+<span class="sourceLineNo">090</span>     * @since 1.11<a name="line.90"></a>
+<span class="sourceLineNo">091</span>     */<a name="line.91"></a>
+<span class="sourceLineNo">092</span>    public static final Soundex US_ENGLISH_SIMPLIFIED = new Soundex(US_ENGLISH_MAPPING_STRING, false);<a name="line.92"></a>
+<span class="sourceLineNo">093</span><a name="line.93"></a>
+<span class="sourceLineNo">094</span>    /**<a name="line.94"></a>
+<span class="sourceLineNo">095</span>     * An instance of Soundex using the mapping as per the Genealogy site:<a name="line.95"></a>
+<span class="sourceLineNo">096</span>     * http://www.genealogy.com/articles/research/00000060.html<a name="line.96"></a>
+<span class="sourceLineNo">097</span>     * &lt;p&gt;<a name="line.97"></a>
+<span class="sourceLineNo">098</span>     * This treats vowels (AEIOUY), H and W as silent letters.<a name="line.98"></a>
+<span class="sourceLineNo">099</span>     * Such letters are ignored (after the first) and do not<a name="line.99"></a>
+<span class="sourceLineNo">100</span>     * act as separators when dropping duplicate codes.<a name="line.100"></a>
+<span class="sourceLineNo">101</span>     * &lt;p&gt;<a name="line.101"></a>
+<span class="sourceLineNo">102</span>     * The codes for consonants are otherwise the same as for<a name="line.102"></a>
+<span class="sourceLineNo">103</span>     * {@link #US_ENGLISH_MAPPING_STRING} and {@link #US_ENGLISH_SIMPLIFIED}<a name="line.103"></a>
+<span class="sourceLineNo">104</span>     *<a name="line.104"></a>
+<span class="sourceLineNo">105</span>     * @since 1.11<a name="line.105"></a>
+<span class="sourceLineNo">106</span>     */<a name="line.106"></a>
+<span class="sourceLineNo">107</span>    public static final Soundex US_ENGLISH_GENEALOGY = new Soundex("-123-12--22455-12623-1-2-2");<a name="line.107"></a>
+<span class="sourceLineNo">108</span>    //                                                              ABCDEFGHIJKLMNOPQRSTUVWXYZ<a name="line.108"></a>
+<span class="sourceLineNo">109</span><a name="line.109"></a>
+<span class="sourceLineNo">110</span>    /**<a name="line.110"></a>
+<span class="sourceLineNo">111</span>     * The maximum length of a Soundex code - Soundex codes are only four characters by definition.<a name="line.111"></a>
+<span class="sourceLineNo">112</span>     *<a name="line.112"></a>
+<span class="sourceLineNo">113</span>     * @deprecated This feature is not needed since the encoding size must be constant. Will be removed in 2.0.<a name="line.113"></a>
+<span class="sourceLineNo">114</span>     */<a name="line.114"></a>
+<span class="sourceLineNo">115</span>    @Deprecated<a name="line.115"></a>
+<span class="sourceLineNo">116</span>    private int maxLength = 4;<a name="line.116"></a>
+<span class="sourceLineNo">117</span><a name="line.117"></a>
+<span class="sourceLineNo">118</span>    /**<a name="line.118"></a>
+<span class="sourceLineNo">119</span>     * Every letter of the alphabet is "mapped" to a numerical value. This char array holds the values to which each<a name="line.119"></a>
+<span class="sourceLineNo">120</span>     * letter is mapped. This implementation contains a default map for US_ENGLISH<a name="line.120"></a>
+<span class="sourceLineNo">121</span>     */<a name="line.121"></a>
+<span class="sourceLineNo">122</span>    private final char[] soundexMapping;<a name="line.122"></a>
+<span class="sourceLineNo">123</span><a name="line.123"></a>
+<span class="sourceLineNo">124</span>    /**<a name="line.124"></a>
+<span class="sourceLineNo">125</span>     * Should H and W be treated specially?<a name="line.125"></a>
+<span class="sourceLineNo">126</span>     * &lt;p&gt;<a name="line.126"></a>
+<span class="sourceLineNo">127</span>     * In versions of the code prior to 1.11,<a name="line.127"></a>
+<span class="sourceLineNo">128</span>     * the code always treated H and W as silent (ignored) letters.<a name="line.128"></a>
+<span class="sourceLineNo">129</span>     * If this field is false, H and W are no longer special-cased.<a name="line.129"></a>
+<span class="sourceLineNo">130</span>     */<a name="line.130"></a>
+<span class="sourceLineNo">131</span>    private final boolean specialCaseHW;<a name="line.131"></a>
+<span class="sourceLineNo">132</span><a name="line.132"></a>
+<span class="sourceLineNo">133</span>    /**<a name="line.133"></a>
+<span class="sourceLineNo">134</span>     * Creates an instance using US_ENGLISH_MAPPING<a name="line.134"></a>
+<span class="sourceLineNo">135</span>     *<a name="line.135"></a>
+<span class="sourceLineNo">136</span>     * @see Soundex#Soundex(char[])<a name="line.136"></a>
+<span class="sourceLineNo">137</span>     * @see Soundex#US_ENGLISH_MAPPING<a name="line.137"></a>
+<span class="sourceLineNo">138</span>     */<a name="line.138"></a>
+<span class="sourceLineNo">139</span>    public Soundex() {<a name="line.139"></a>
+<span class="sourceLineNo">140</span>        this.soundexMapping = US_ENGLISH_MAPPING;<a name="line.140"></a>
+<span class="sourceLineNo">141</span>        this.specialCaseHW = true;<a name="line.141"></a>
+<span class="sourceLineNo">142</span>    }<a name="line.142"></a>
+<span class="sourceLineNo">143</span><a name="line.143"></a>
+<span class="sourceLineNo">144</span>    /**<a name="line.144"></a>
+<span class="sourceLineNo">145</span>     * Creates a soundex instance using the given mapping. This constructor can be used to provide an internationalized<a name="line.145"></a>
+<span class="sourceLineNo">146</span>     * mapping for a non-Western character set.<a name="line.146"></a>
+<span class="sourceLineNo">147</span>     *<a name="line.147"></a>
+<span class="sourceLineNo">148</span>     * Every letter of the alphabet is "mapped" to a numerical value. This char array holds the values to which each<a name="line.148"></a>
+<span class="sourceLineNo">149</span>     * letter is mapped. This implementation contains a default map for US_ENGLISH<a name="line.149"></a>
+<span class="sourceLineNo">150</span>     * &lt;p&gt;<a name="line.150"></a>
+<span class="sourceLineNo">151</span>     * If the mapping contains an instance of {@link #SILENT_MARKER} then H and W are not given special treatment<a name="line.151"></a>
+<span class="sourceLineNo">152</span>     *<a name="line.152"></a>
+<span class="sourceLineNo">153</span>     * @param mapping<a name="line.153"></a>
+<span class="sourceLineNo">154</span>     *                  Mapping array to use when finding the corresponding code for a given character<a name="line.154"></a>
+<span class="sourceLineNo">155</span>     */<a name="line.155"></a>
+<span class="sourceLineNo">156</span>    public Soundex(final char[] mapping) {<a name="line.156"></a>
+<span class="sourceLineNo">157</span>        this.soundexMapping = new char[mapping.length];<a name="line.157"></a>
+<span class="sourceLineNo">158</span>        System.arraycopy(mapping, 0, this.soundexMapping, 0, mapping.length);<a name="line.158"></a>
+<span class="sourceLineNo">159</span>        this.specialCaseHW = !hasMarker(this.soundexMapping);<a name="line.159"></a>
+<span class="sourceLineNo">160</span>    }<a name="line.160"></a>
+<span class="sourceLineNo">161</span><a name="line.161"></a>
+<span class="sourceLineNo">162</span>    private boolean hasMarker(final char[] mapping) {<a name="line.162"></a>
+<span class="sourceLineNo">163</span>        for(final char ch : mapping) {<a name="line.163"></a>
+<span class="sourceLineNo">164</span>            if (ch == SILENT_MARKER) {<a name="line.164"></a>
+<span class="sourceLineNo">165</span>                return true;<a name="line.165"></a>
+<span class="sourceLineNo">166</span>            }<a name="line.166"></a>
+<span class="sourceLineNo">167</span>        }<a name="line.167"></a>
+<span class="sourceLineNo">168</span>        return false;<a name="line.168"></a>
+<span class="sourceLineNo">169</span>    }<a name="line.169"></a>
+<span class="sourceLineNo">170</span><a name="line.170"></a>
+<span class="sourceLineNo">171</span>    /**<a name="line.171"></a>
+<span class="sourceLineNo">172</span>     * Creates a refined soundex instance using a custom mapping. This constructor can be used to customize the mapping,<a name="line.172"></a>
+<span class="sourceLineNo">173</span>     * and/or possibly provide an internationalized mapping for a non-Western character set.<a name="line.173"></a>
+<span class="sourceLineNo">174</span>     * &lt;p&gt;<a name="line.174"></a>
+<span class="sourceLineNo">175</span>     * If the mapping contains an instance of {@link #SILENT_MARKER} then H and W are not given special treatment<a name="line.175"></a>
+<span class="sourceLineNo">176</span>     *<a name="line.176"></a>
+<span class="sourceLineNo">177</span>     * @param mapping<a name="line.177"></a>
+<span class="sourceLineNo">178</span>     *            Mapping string to use when finding the corresponding code for a given character<a name="line.178"></a>
+<span class="sourceLineNo">179</span>     * @since 1.4<a name="line.179"></a>
+<span class="sourceLineNo">180</span>     */<a name="line.180"></a>
+<span class="sourceLineNo">181</span>    public Soundex(final String mapping) {<a name="line.181"></a>
+<span class="sourceLineNo">182</span>        this.soundexMapping = mapping.toCharArray();<a name="line.182"></a>
+<span class="sourceLineNo">183</span>        this.specialCaseHW = !hasMarker(this.soundexMapping);<a name="line.183"></a>
+<span class="sourceLineNo">184</span>    }<a name="line.184"></a>
+<span class="sourceLineNo">185</span><a name="line.185"></a>
+<span class="sourceLineNo">186</span>    /**<a name="line.186"></a>
+<span class="sourceLineNo">187</span>     * Creates a refined soundex instance using a custom mapping. This constructor can be used to customize the mapping,<a name="line.187"></a>
+<span class="sourceLineNo">188</span>     * and/or possibly provide an internationalized mapping for a non-Western character set.<a name="line.188"></a>
+<span class="sourceLineNo">189</span>     *<a name="line.189"></a>
+<span class="sourceLineNo">190</span>     * @param mapping<a name="line.190"></a>
+<span class="sourceLineNo">191</span>     *            Mapping string to use when finding the corresponding code for a given character<a name="line.191"></a>
+<span class="sourceLineNo">192</span>     * @param specialCaseHW if true, then<a name="line.192"></a>
+<span class="sourceLineNo">193</span>     * @since 1.11<a name="line.193"></a>
+<span class="sourceLineNo">194</span>     */<a name="line.194"></a>
+<span class="sourceLineNo">195</span>    public Soundex(final String mapping, final boolean specialCaseHW) {<a name="line.195"></a>
+<span class="sourceLineNo">196</span>        this.soundexMapping = mapping.toCharArray();<a name="line.196"></a>
+<span class="sourceLineNo">197</span>        this.specialCaseHW = specialCaseHW;<a name="line.197"></a>
+<span class="sourceLineNo">198</span>    }<a name="line.198"></a>
+<span class="sourceLineNo">199</span><a name="line.199"></a>
+<span class="sourceLineNo">200</span>    /**<a name="line.200"></a>
+<span class="sourceLineNo">201</span>     * Encodes the Strings and returns the number of characters in the two encoded Strings that are the same. This<a name="line.201"></a>
+<span class="sourceLineNo">202</span>     * return value ranges from 0 through 4: 0 indicates little or no similarity, and 4 indicates strong similarity or<a name="line.202"></a>
+<span class="sourceLineNo">203</span>     * identical values.<a name="line.203"></a>
+<span class="sourceLineNo">204</span>     *<a name="line.204"></a>
+<span class="sourceLineNo">205</span>     * @param s1<a name="line.205"></a>
+<span class="sourceLineNo">206</span>     *                  A String that will be encoded and compared.<a name="line.206"></a>
+<span class="sourceLineNo">207</span>     * @param s2<a name="line.207"></a>
+<span class="sourceLineNo">208</span>     *                  A String that will be encoded and compared.<a name="line.208"></a>
+<span class="sourceLineNo">209</span>     * @return The number of characters in the two encoded Strings that are the same from 0 to 4.<a name="line.209"></a>
+<span class="sourceLineNo">210</span>     *<a name="line.210"></a>
+<span class="sourceLineNo">211</span>     * @see SoundexUtils#difference(StringEncoder,String,String)<a name="line.211"></a>
+<span class="sourceLineNo">212</span>     * @see &lt;a href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/tsqlref/ts_de-dz_8co5.asp"&gt; MS<a name="line.212"></a>
+<span class="sourceLineNo">213</span>     *          T-SQL DIFFERENCE &lt;/a&gt;<a name="line.213"></a>
+<span class="sourceLineNo">214</span>     *<a name="line.214"></a>
+<span class="sourceLineNo">215</span>     * @throws EncoderException<a name="line.215"></a>
+<span class="sourceLineNo">216</span>     *                  if an error occurs encoding one of the strings<a name="line.216"></a>
+<span class="sourceLineNo">217</span>     * @since 1.3<a name="line.217"></a>
+<span class="sourceLineNo">218</span>     */<a name="line.218"></a>
+<span class="sourceLineNo">219</span>    public int difference(final String s1, final String s2) throws EncoderException {<a name="line.219"></a>
+<span class="sourceLineNo">220</span>        return SoundexUtils.difference(this, s1, s2);<a name="line.220"></a>
+<span class="sourceLineNo">221</span>    }<a name="line.221"></a>
+<span class="sourceLineNo">222</span><a name="line.222"></a>
+<span class="sourceLineNo">223</span>    /**<a name="line.223"></a>
+<span class="sourceLineNo">224</span>     * Encodes an Object using the soundex algorithm. This method is provided in order to satisfy the requirements of<a name="line.224"></a>
+<span class="sourceLineNo">225</span>     * the Encoder interface, and will throw an EncoderException if the supplied object is not of type java.lang.String.<a name="line.225"></a>
+<span class="sourceLineNo">226</span>     *<a name="line.226"></a>
+<span class="sourceLineNo">227</span>     * @param obj<a name="line.227"></a>
+<span class="sourceLineNo">228</span>     *                  Object to encode<a name="line.228"></a>
+<span class="sourceLineNo">229</span>     * @return An object (or type java.lang.String) containing the soundex code which corresponds to the String<a name="line.229"></a>
+<span class="sourceLineNo">230</span>     *             supplied.<a name="line.230"></a>
+<span class="sourceLineNo">231</span>     * @throws EncoderException<a name="line.231"></a>
+<span class="sourceLineNo">232</span>     *                  if the parameter supplied is not of type java.lang.String<a name="line.232"></a>
+<span class="sourceLineNo">233</span>     * @throws IllegalArgumentException<a name="line.233"></a>
+<span class="sourceLineNo">234</span>     *                  if a character is not mapped<a name="line.234"></a>
+<span class="sourceLineNo">235</span>     */<a name="line.235"></a>
+<span class="sourceLineNo">236</span>    @Override<a name="line.236"></a>
+<span class="sourceLineNo">237</span>    public Object encode(final Object obj) throws EncoderException {<a name="line.237"></a>
+<span class="sourceLineNo">238</span>        if (!(obj instanceof String)) {<a name="line.238"></a>
+<span class="sourceLineNo">239</span>            throw new EncoderException("Parameter supplied to Soundex encode is not of type java.lang.String");<a name="line.239"></a>
+<span class="sourceLineNo">240</span>        }<a name="line.240"></a>
+<span class="sourceLineNo">241</span>        return soundex((String) obj);<a name="line.241"></a>
+<span class="sourceLineNo">242</span>    }<a name="line.242"></a>
+<span class="sourceLineNo">243</span><a name="line.243"></a>
+<span class="sourceLineNo">244</span>    /**<a name="line.244"></a>
+<span class="sourceLineNo">245</span>     * Encodes a String using the soundex algorithm.<a name="line.245"></a>
+<span class="sourceLineNo">246</span>     *<a name="line.246"></a>
+<span class="sourceLineNo">247</span>     * @param str<a name="line.247"></a>
+<span class="sourceLineNo">248</span>     *                  A String object to encode<a name="line.248"></a>
+<span class="sourceLineNo">249</span>     * @return A Soundex code corresponding to the String supplied<a name="line.249"></a>
+<span class="sourceLineNo">250</span>     * @throws IllegalArgumentException<a name="line.250"></a>
+<span class="sourceLineNo">251</span>     *                  if a character is not mapped<a name="line.251"></a>
+<span class="sourceLineNo">252</span>     */<a name="line.252"></a>
+<span class="sourceLineNo">253</span>    @Override<a name="line.253"></a>
+<span class="sourceLineNo">254</span>    public String encode(final String str) {<a name="line.254"></a>
+<span class="sourceLineNo">255</span>        return soundex(str);<a name="line.255"></a>
+<span class="sourceLineNo">256</span>    }<a name="line.256"></a>
+<span class="sourceLineNo">257</span><a name="line.257"></a>
+<span class="sourceLineNo">258</span>    /**<a name="line.258"></a>
+<span class="sourceLineNo">259</span>     * Returns the maxLength. Standard Soundex<a name="line.259"></a>
+<span class="sourceLineNo">260</span>     *<a name="line.260"></a>
+<span class="sourceLineNo">261</span>     * @deprecated This feature is not needed since the encoding size must be constant. Will be removed in 2.0.<a name="line.261"></a>
+<span class="sourceLineNo">262</span>     * @return int<a name="line.262"></a>
+<span class="sourceLineNo">263</span>     */<a name="line.263"></a>
+<span class="sourceLineNo">264</span>    @Deprecated<a name="line.264"></a>
+<span class="sourceLineNo">265</span>    public int getMaxLength() {<a name="line.265"></a>
+<span class="sourceLineNo">266</span>        return this.maxLength;<a name="line.266"></a>
+<span class="sourceLineNo">267</span>    }<a name="line.267"></a>
+<span class="sourceLineNo">268</span><a name="line.268"></a>
+<span class="sourceLineNo">269</span>    /**<a name="line.269"></a>
+<span class="sourceLineNo">270</span>     * Maps the given upper-case character to its Soundex code.<a name="line.270"></a>
+<span class="sourceLineNo">271</span>     *<a name="line.271"></a>
+<span class="sourceLineNo">272</span>     * @param ch<a name="line.272"></a>
+<span class="sourceLineNo">273</span>     *                  An upper-case character.<a name="line.273"></a>
+<span class="sourceLineNo">274</span>     * @return A Soundex code.<a name="line.274"></a>
+<span class="sourceLineNo">275</span>     * @throws IllegalArgumentException<a name="line.275"></a>
+<span class="sourceLineNo">276</span>     *                  Thrown if &lt;code&gt;ch&lt;/code&gt; is not mapped.<a name="line.276"></a>
+<span class="sourceLineNo">277</span>     */<a name="line.277"></a>
+<span class="sourceLineNo">278</span>    private char map(final char ch) {<a name="line.278"></a>
+<span class="sourceLineNo">279</span>        final int index = ch - 'A';<a name="line.279"></a>
+<span class="sourceLineNo">280</span>        if (index &lt; 0 || index &gt;= this.soundexMapping.length) {<a name="line.280"></a>
+<span class="sourceLineNo">281</span>            throw new IllegalArgumentException("The character is not mapped: " + ch + " (index=" + index + ")");<a name="line.281"></a>
+<span class="sourceLineNo">282</span>        }<a name="line.282"></a>
+<span class="sourceLineNo">283</span>        return this.soundexMapping[index];<a name="line.283"></a>
+<span class="sourceLineNo">284</span>    }<a name="line.284"></a>
+<span class="sourceLineNo">285</span><a name="line.285"></a>
+<span class="sourceLineNo">286</span>    /**<a name="line.286"></a>
+<span class="sourceLineNo">287</span>     * Sets the maxLength.<a name="line.287"></a>
+<span class="sourceLineNo">288</span>     *<a name="line.288"></a>
+<span class="sourceLineNo">289</span>     * @deprecated This feature is not needed since the encoding size must be constant. Will be removed in 2.0.<a name="line.289"></a>
+<span class="sourceLineNo">290</span>     * @param maxLength<a name="line.290"></a>
+<span class="sourceLineNo">291</span>     *                  The maxLength to set<a name="line.291"></a>
+<span class="sourceLineNo">292</span>     */<a name="line.292"></a>
+<span class="sourceLineNo">293</span>    @Deprecated<a name="line.293"></a>
+<span class="sourceLineNo">294</span>    public void setMaxLength(final int maxLength) {<a name="line.294"></a>
+<span class="sourceLineNo">295</span>        this.maxLength = maxLength;<a name="line.295"></a>
+<span class="sourceLineNo">296</span>    }<a name="line.296"></a>
+<span class="sourceLineNo">297</span><a name="line.297"></a>
+<span class="sourceLineNo">298</span>    /**<a name="line.298"></a>
+<span class="sourceLineNo">299</span>     * Retrieves the Soundex code for a given String object.<a name="line.299"></a>
+<span class="sourceLineNo">300</span>     *<a name="line.300"></a>
+<span class="sourceLineNo">301</span>     * @param str<a name="line.301"></a>
+<span class="sourceLineNo">302</span>     *                  String to encode using the Soundex algorithm<a name="line.302"></a>
+<span class="sourceLineNo">303</span>     * @return A soundex code for the String supplied<a name="line.303"></a>
+<span class="sourceLineNo">304</span>     * @throws IllegalArgumentException<a name="line.304"></a>
+<span class="sourceLineNo">305</span>     *                  if a character is not mapped<a name="line.305"></a>
+<span class="sourceLineNo">306</span>     */<a name="line.306"></a>
+<span class="sourceLineNo">307</span>    public String soundex(String str) {<a name="line.307"></a>
+<span class="sourceLineNo">308</span>        if (str == null) {<a name="line.308"></a>
+<span class="sourceLineNo">309</span>            return null;<a name="line.309"></a>
+<span class="sourceLineNo">310</span>        }<a name="line.310"></a>
+<span class="sourceLineNo">311</span>        str = SoundexUtils.clean(str);<a name="line.311"></a>
+<span class="sourceLineNo">312</span>        if (str.length() == 0) {<a name="line.312"></a>
+<span class="sourceLineNo">313</span>            return str;<a name="line.313"></a>
+<span class="sourceLineNo">314</span>        }<a name="line.314"></a>
+<span class="sourceLineNo">315</span>        final char out[] = {'0', '0', '0', '0'};<a name="line.315"></a>
+<span class="sourceLineNo">316</span>        int count = 0;<a name="line.316"></a>
+<span class="sourceLineNo">317</span>        final char first = str.charAt(0);<a name="line.317"></a>
+<span class="sourceLineNo">318</span>        out[count++] = first;<a name="line.318"></a>
+<span class="sourceLineNo">319</span>        char lastDigit = map(first); // previous digit<a name="line.319"></a>
+<span class="sourceLineNo">320</span>        for(int i = 1; i &lt; str.length() &amp;&amp; count &lt; out.length ; i++) {<a name="line.320"></a>
+<span class="sourceLineNo">321</span>            final char ch = str.charAt(i);<a name="line.321"></a>
+<span class="sourceLineNo">322</span>            if ((this.specialCaseHW) &amp;&amp; (ch == 'H' || ch == 'W')) { // these are ignored completely<a name="line.322"></a>
+<span class="sourceLineNo">323</span>                continue;<a name="line.323"></a>
+<span class="sourceLineNo">324</span>            }<a name="line.324"></a>
+<span class="sourceLineNo">325</span>            final char digit = map(ch);<a name="line.325"></a>
+<span class="sourceLineNo">326</span>            if (digit == SILENT_MARKER) {<a name="line.326"></a>
+<span class="sourceLineNo">327</span>                continue;<a name="line.327"></a>
+<span class="sourceLineNo">328</span>            }<a name="line.328"></a>
+<span class="sourceLineNo">329</span>            if (digit != '0' &amp;&amp; digit != lastDigit) { // don't store vowels or repeats<a name="line.329"></a>
+<span class="sourceLineNo">330</span>                out[count++] = digit;<a name="line.330"></a>
+<span class="sourceLineNo">331</span>            }<a name="line.331"></a>
+<span class="sourceLineNo">332</span>            lastDigit = digit;<a name="line.332"></a>
+<span class="sourceLineNo">333</span>        }<a name="line.333"></a>
+<span class="sourceLineNo">334</span>        return new String(out);<a name="line.334"></a>
+<span class="sourceLineNo">335</span>    }<a name="line.335"></a>
+<span class="sourceLineNo">336</span><a name="line.336"></a>
+<span class="sourceLineNo">337</span>}<a name="line.337"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>
