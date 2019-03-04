@@ -49,7 +49,7 @@ public class Pastebin_import_Controller implements Initializable {
         }
         paste_error.setVisible(false);
         //paste_error.setText("Valid");
-        System.out.println(pasteResponse.get());
+        //System.out.println(pasteResponse.get());
         root.fetchPaste(pasteResponse.get());
     }
     

@@ -27,7 +27,6 @@ import javax.imageio.ImageIO;
 import poe.level.data.Build;
 import poe.level.data.Gem;
 import poe.level.data.SocketGroup;
-import poe.level.data.Zone;
 
 /**
  * FXML Controller class

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,12 +21,12 @@
             <Font name="Alegreya Sans SC" size="17.0" />
          </font>
       </Label>
-      <Label fx:id="ascendAndLevel" layoutX="90.0" layoutY="33.0" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="Guardian - 97" textFill="#656565" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="33.0">
+      <Label fx:id="ascendAndLevel" layoutX="90.0" layoutY="33.0" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="Guardian - 97" textFill="#656565" AnchorPane.leftAnchor="87.0" AnchorPane.topAnchor="33.0">
          <font>
             <Font name="Alegreya Sans SC" size="14.0" />
          </font>
       </Label>
-      <JFXButton buttonType="RAISED" layoutX="21.0" layoutY="29.0" onAction="#onPress" ripplerFill="BLACK" text=" " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="0.0" />
+      <TextField fx:id="editBuildName" layoutX="86.0" layoutY="9.0" prefHeight="25.0" prefWidth="88.0" visible="false" />
    </children>
    <cursor>
       <Cursor fx:constant="OPEN_HAND" />

@@ -8,7 +8,7 @@ package poe.level.fx.overlay;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
+
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -20,8 +20,6 @@ import javafx.stage.StageStyle;
 import poe.level.fx.Main_Stage;
 import static poe.level.fx.POELevelFx.saveBuildsToMemory;
 import poe.level.fx.Preferences_Controller;
-import static poe.level.fx.overlay.ZoneOverlay_Stage.prefX;
-import static poe.level.fx.overlay.ZoneOverlay_Stage.prefY;
 
 /**
  *

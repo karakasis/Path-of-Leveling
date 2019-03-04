@@ -63,6 +63,10 @@ public class BuildsPanel_Controller implements Initializable {
         public void update(){
             root.update(id);
         }
+
+        public void requestNameChange(String newName){
+            build.buildName = newName;
+        }
     }
 
     private static HashSet<Integer> randomIDs;

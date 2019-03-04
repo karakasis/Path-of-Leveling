@@ -7,15 +7,20 @@ package poe.level.fx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import poe.level.fx.BuildsPanel_Controller.BuildLinker;
 
 /**
@@ -35,6 +40,8 @@ public class BuildEntry_Controller implements Initializable {
     Label ascendAndLevel;
     @FXML
     AnchorPane root;
+    @FXML
+    private TextField editBuildName;
     
     BuildLinker parent;
     SelectBuild_PopupController parent2;
@@ -46,6 +53,51 @@ public class BuildEntry_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        root.setOnMouseClicked(new EventHandler<MouseEvent>() {  
+            @Override  
+            public void handle(MouseEvent event) {  
+                System.err.println("Clicked root " + event.getClickCount() + " times");
+                onPress(); 
+            }  
+          });
+        
+        buildName.setOnMouseClicked(new EventHandler<MouseEvent>() {  
+            @Override  
+            public void handle(MouseEvent event) {  
+                System.err.println("Clicked label" + event.getClickCount() + " times");
+              if (event.getClickCount()==2) {  
+                editBuildName.setVisible(true);
+                editBuildName.setText(buildName.getText());  
+                //tab.setGraphic(textField);  
+                editBuildName.selectAll();  
+                editBuildName.requestFocus();  
+              }  
+            }  
+          });
+        
+        editBuildName.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (!editBuildName.isFocused())
+                {
+                    buildName.setText(editBuildName.getText());
+                    parent.requestNameChange(editBuildName.getText());
+                    editBuildName.setVisible(false);
+                }
+            }
+        });
+        
+        editBuildName.setOnAction(new EventHandler<ActionEvent>() {  
+            @Override  
+            public void handle(ActionEvent event) {  
+              buildName.setText(editBuildName.getText());
+              parent.requestNameChange(editBuildName.getText());
+              editBuildName.setVisible(false);
+            }  
+          });
+        
     }    
     
     public void init(Image iv, String buildName,String ascendAndLevel, BuildLinker parent){
@@ -74,8 +126,12 @@ public class BuildEntry_Controller implements Initializable {
     public void reset(boolean validationColor){
         //root.setStyle("-fx-background-color: transparent;"
                 //+"-fx-border-style: solid;");
-        if(validationColor)
+        if(validationColor){
             root.setStyle("color: transparent;");
+            
+            buildName.setTextFill(Color.BLACK);
+            ascendAndLevel.setTextFill(Color.web("#656565"));
+        }
         else
             root.setStyle("color: rgba(217, 215, 215, 0.8);");
     }
@@ -93,16 +149,22 @@ public class BuildEntry_Controller implements Initializable {
     }
     
     
-    @FXML
-    private void onPress(ActionEvent event) {
+    private void onPress() {
         //root.setStyle("-fx-background-color: PeachPuff;"
                 //+"-fx-border-style: solid;");
         if(parent!=null){
-            root.setStyle("color: rgba(58, 44, 189, 0.4);");
+            //root.setStyle("color: rgba(58, 44, 189, 0.4);"); old violet color
+            buildName.setTextFill(Color.WHITE);
+            ascendAndLevel.setTextFill(Color.web("#f6f6f6"));
+            //buildName.setTextFill(Color.web("#0076a3"));
+            root.setStyle("color: rgba(0, 150, 201, 1);"); //new blue for consistency
+            
             parent.update();
         }
         if(parent2!=null)   
             parent2.update(id_for_popup);
+        
+        
     }
     
 }

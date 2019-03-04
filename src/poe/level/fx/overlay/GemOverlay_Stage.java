@@ -18,7 +18,6 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.WritableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -27,15 +26,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import poe.level.data.Build;
 import poe.level.data.Gem;
 import poe.level.data.SocketGroup;
 import static poe.level.fx.POELevelFx.saveBuildsToMemory;
 import poe.level.fx.Preferences_Controller;
-import static poe.level.fx.overlay.ZoneOverlay_Stage.prefX;
-import static poe.level.fx.overlay.ZoneOverlay_Stage.prefY;
 
 /**
  *
