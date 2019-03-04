@@ -4,13 +4,14 @@
 <?import com.jfoenix.controls.JFXListView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="150.0" prefHeight="200.0" prefWidth="183.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.SocketGroupsPanel_Controller">
+<AnchorPane minWidth="150.0" prefHeight="200.0" prefWidth="183.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.SocketGroupsPanel_Controller">
    <children>
       <Label alignment="CENTER" layoutX="20.0" layoutY="7.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Socket Group :" textAlignment="CENTER" visible="false" wrapText="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
@@ -32,6 +33,9 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <tooltip>
+            <Tooltip text="Add new Socket-Group" />
+         </tooltip>
       </JFXButton>
       <JFXButton fx:id="removeSocketGroup_button" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" layoutX="111.0" layoutY="500.0" onAction="#removeSocketGroup" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0">
          <graphic>
@@ -41,6 +45,9 @@
                </image>
             </ImageView>
          </graphic>
+         <tooltip>
+            <Tooltip text="Remove selected Socket-Group" />
+         </tooltip>
       </JFXButton>
       <JFXButton fx:id="duplicate_button" alignment="CENTER" cache="true" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" layoutX="20.0" layoutY="7.0" onAction="#duplicate" text=" " AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
          <graphic>
@@ -53,6 +60,9 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <tooltip>
+            <Tooltip text="Clone selected Socket-Group" />
+         </tooltip>
       </JFXButton>
       <JFXButton fx:id="add_note_button" alignment="CENTER" cache="true" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" layoutX="14.0" layoutY="314.0" onAction="#requestNotePopup" text=" " AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
          <graphic>
@@ -65,6 +75,9 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <tooltip>
+            <Tooltip text="Add note to selected Group" />
+         </tooltip>
       </JFXButton>
    </children>
 </AnchorPane>
