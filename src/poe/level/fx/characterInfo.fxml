@@ -1,71 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="172.0" prefWidth="329.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.CharacterInfo_Controller">
+<AnchorPane id="AnchorPane" prefHeight="219.0" prefWidth="329.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.CharacterInfo_Controller">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-         <children>
-            <Label text="Character :">
-               <font>
-                  <Font name="Alegreya Sans SC" size="16.0" />
-               </font>
-            </Label>
-            <HBox prefHeight="25.0" prefWidth="279.0">
-               <children>
-                  <Label prefHeight="25.0" prefWidth="100.0" text="Character Name :" />
-                  <TextField fx:id="name" prefHeight="25.0" prefWidth="178.0" promptText="Your in-game character name.">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin></TextField>
-               </children>
-            </HBox>
-            <HBox prefHeight="28.0" prefWidth="279.0">
-               <children>
-                  <Label prefHeight="25.0" prefWidth="101.0" text="Character Level :" textAlignment="CENTER" wrapText="true" />
-                  <TextField fx:id="level" prefHeight="25.0" prefWidth="178.0" promptText="The level of your character.">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin></TextField>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox prefHeight="28.0" prefWidth="279.0">
-               <children>
-                  <Label prefHeight="25.0" prefWidth="105.0" text="Character League :" textAlignment="CENTER" wrapText="true" />
-                  <ComboBox fx:id="cmbLeague" prefHeight="25.0" prefWidth="200.0" promptText="League">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </ComboBox>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label fx:id="error" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="178.0" textAlignment="CENTER" textFill="#e82222" visible="false" wrapText="true" />
-                  <JFXButton buttonType="RAISED" onAction="#start" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Start" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin></JFXButton>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
-         </children>
-      </VBox>
+      <JFXTabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Manual">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                           <center>
+                              <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Character :">
+                                       <font>
+                                          <Font name="Alegreya Sans SC" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox prefHeight="25.0" prefWidth="279.0">
+                                       <children>
+                                          <Label prefHeight="25.0" prefWidth="100.0" text="Character Name :" />
+                                          <TextField fx:id="txtManualName" prefHeight="25.0" prefWidth="178.0" promptText="Your in-game character name.">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="28.0" prefWidth="279.0">
+                                       <children>
+                                          <Label prefHeight="25.0" prefWidth="101.0" text="Character Level :" textAlignment="CENTER" wrapText="true" />
+                                          <TextField fx:id="txtManualLevel" prefHeight="25.0" prefWidth="178.0" promptText="The level of your character.">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </center>
+                           <bottom>
+                              <HBox prefHeight="6.0" prefWidth="329.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="lblManualError" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="178.0" textAlignment="CENTER" textFill="#e82222" visible="false" wrapText="true" />
+                                    <JFXButton buttonType="RAISED" onAction="#startManual" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Start" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </bottom>
+                        </BorderPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Choose from Site">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                           <center>
+                              <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <HBox prefHeight="25.0" prefWidth="279.0">
+                                       <children>
+                                          <Label prefHeight="25.0" prefWidth="100.0" text="Account Name :" />
+                                          <TextField fx:id="txtAccountName" prefHeight="25.0" prefWidth="200.0" promptText="Your Path of Exile account name">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <Label prefHeight="25.0" prefWidth="64.0" text="Character:" textAlignment="CENTER" wrapText="true" />
+                                    <HBox prefHeight="52.0" prefWidth="309.0">
+                                       <children>
+                                          <ImageView fx:id="buildIcon" fitHeight="70.0" fitWidth="70.0" layoutX="346.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true" />
+                                          <JFXButton fx:id="btnSelectCharacter" graphicTextGap="1.0" layoutX="243.0" layoutY="493.0" onAction="#buildPopup" prefHeight="57.0" prefWidth="227.0" style="-fx-border-color: #c3bca0;" text="Select Character" textFill="#c3bca0">
+                                             <font>
+                                                <Font name="Fontin Regular" size="22.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets top="7.0" />
+                                             </HBox.margin>
+                                          </JFXButton>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </center>
+                           <bottom>
+                              <HBox prefHeight="7.0" prefWidth="329.0" BorderPane.alignment="BOTTOM_CENTER">
+                                 <children>
+                                    <Label fx:id="lblAutoError" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="178.0" textAlignment="CENTER" textFill="#e82222" visible="false" wrapText="true" />
+                                    <JFXButton buttonType="RAISED" onAction="#startAuto" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Start" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </bottom>
+                        </BorderPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </JFXTabPane>
    </children>
 </AnchorPane>

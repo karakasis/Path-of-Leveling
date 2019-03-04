@@ -8,14 +8,6 @@ package poe.level.fx;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXToggleButton;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,15 +15,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-
-import javax.imageio.ImageIO;
 import poe.level.data.Build;
+import poe.level.data.CharacterInfo;
+import poe.level.data.Util;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * FXML Controller class
@@ -39,6 +37,8 @@ import poe.level.data.Build;
  * @author Christos
  */
 public class Main_Controller implements Initializable {
+
+    private final Logger m_logger = Logger.getLogger(Main_Controller.class.getName());
 
     @FXML
     private JFXButton selectBuild;
@@ -54,20 +54,6 @@ public class Main_Controller implements Initializable {
     private ImageView buildIcon;
     @FXML
     private Pane dragPane;
-    /**
-     * Initializes the controller class.
-     */
-
-    private static Image charToImage(String className, String asc){
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(BuildsPanel_Controller.class.getResource("/classes/"+className+"/"+asc+".png"));
-        } catch (IOException ex) {
-            Logger.getLogger(BuildsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return SwingFXUtils.toFXImage(img, null);
-    }
 
     Main_Stage parent;
     private JFXDialog addBuildPopup;
@@ -175,7 +161,7 @@ public class Main_Controller implements Initializable {
         try {
             con = (AnchorPane) loader.load();
         } catch (IOException ex) {
-            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            m_logger.log(Level.SEVERE, null, ex);
         }
         loader.<Preferences_Controller>getController().hook(this);
 
@@ -190,11 +176,12 @@ public class Main_Controller implements Initializable {
         try {
             con = (AnchorPane) loader.load();
         } catch (IOException ex) {
-            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            m_logger.log(Level.SEVERE, null, ex);
         }
         loader.<CharacterInfo_Controller>getController().hook(this);
-        if(buildLoaded!=null)
+        if(buildLoaded!=null) {
             loader.<CharacterInfo_Controller>getController().init(buildLoaded);
+        }
 
         editCharacterPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
         //controller.passDialog(mLoad);
@@ -205,11 +192,11 @@ public class Main_Controller implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectBuild_Popup.fxml"));
         AnchorPane con = null;
         try {
-            con = (AnchorPane) loader.load();
+            loader.setController(new SelectBuild_PopupController(this::closePopup));
+            con = loader.load();
         } catch (IOException ex) {
-            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            m_logger.log(Level.SEVERE, null, ex);
         }
-        loader.<SelectBuild_PopupController>getController().hook(this);
         addBuildPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
         //controller.passDialog(mLoad);
         addBuildPopup.show();
@@ -225,20 +212,17 @@ public class Main_Controller implements Initializable {
         addBuildPopup.close();
     }
 
-    public void closeCharacterPopup(String characterName, int level, String leagueName){
+    public void closeCharacterPopup(CharacterInfo charInfo){
         if(xp.isSelected() || zones.isSelected()){
-            Main_Stage.playerLevel = level;
-            Main_Stage.characterName = characterName;
+            Main_Stage.playerLevel = charInfo.level;
+            Main_Stage.characterName = charInfo.characterName;
             //Main_Stage.playerLevel = temp_alert();
         }
         if(leveling.isSelected()){
             Main_Stage.buildLoaded = buildLoaded;
-            buildLoaded.characterName = characterName;
-            buildLoaded.level = level;
-            buildLoaded.leagueName = leagueName;
+            buildLoaded.setCharacterInfo(charInfo);
         }
-        System.out.println("Character : " + characterName);
-        System.out.println("Level : " + level);
+
         editCharacterPopup.close();
 
         parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());
@@ -247,9 +231,13 @@ public class Main_Controller implements Initializable {
     private void decorateSelectButton(){
         //selectBuild.setGraphic(new ImageView(charToImage(buildLoaded.getClassName(),buildLoaded.getAsc())));
         //ImageView graphic = (ImageView) selectBuild.getGraphic();
-        buildIcon.setImage(charToImage(buildLoaded.getClassName(),buildLoaded.getAsc()));
+        buildIcon.setImage(Util.charToImage(buildLoaded.getClassName(),buildLoaded.getAsc()));
         //graphic.setFitHeight(30);
         //graphic.setPreserveRatio(true);
         selectBuild.setText(buildLoaded.getName());
+    }
+
+    StackPane getRootPane() {
+        return rootPane;
     }
 }

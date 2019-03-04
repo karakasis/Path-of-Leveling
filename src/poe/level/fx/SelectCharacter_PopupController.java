@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package poe.level.fx;
 
 import javafx.fxml.FXML;
@@ -10,11 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import poe.level.data.Build;
+import poe.level.data.CharacterInfo;
 import poe.level.data.Util;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import java.util.logging.Level;
@@ -24,24 +20,30 @@ import java.util.logging.Logger;
 /**
  * FXML Controller class
  *
- * @author Christos
+ * @author Protuhj
  */
-public class SelectBuild_PopupController implements Initializable {
+public class SelectCharacter_PopupController implements Initializable {
 
-    @FXML
+    private final ArrayList<CharacterInfo> m_characterList;
+
+    public SelectCharacter_PopupController(ArrayList<CharacterInfo> characterList) {
+        this.m_characterList = characterList;
+    }
+
+        @FXML
     private Label lblDialogTitle;
     @FXML
     private VBox buildsBox;
 
-    private final Consumer<Build> closePopupFunction;
+    private Consumer<CharacterInfo> closePopupFunction;
 
-    public SelectBuild_PopupController(Consumer<Build> closePopupFunction) {
+    public void hook(Consumer<CharacterInfo> closePopupFunction) {
         this.closePopupFunction = closePopupFunction;
     }
 
     public void update(int id) {
-        Build selected = POELevelFx.buildsLoaded.get(id);
-        closePopupFunction.accept(selected);
+        assert (m_characterList != null);
+        closePopupFunction.accept(m_characterList.get(id));
     }
 
     /**
@@ -49,8 +51,10 @@ public class SelectBuild_PopupController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        for (int i = 0; i < POELevelFx.buildsLoaded.size(); i++) { //this might require to update the buildsLoaded on each new build added and removed
-            Build b = POELevelFx.buildsLoaded.get(i);
+        lblDialogTitle.setText("Characters :");
+        assert (m_characterList != null);
+        for (int i = 0; i < m_characterList.size(); i++) { //this might require to update the buildsLoaded on each new build added and removed
+            CharacterInfo ci = m_characterList.get(i);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("buildEntry.fxml"));
             try {
                 //this will add the AnchorPane to the VBox
@@ -59,7 +63,7 @@ public class SelectBuild_PopupController implements Initializable {
                 Logger.getLogger(SelectBuild_PopupController.class.getName()).log(Level.SEVERE, null, ex);
             }
             BuildEntry_Controller bec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
-            bec.init_for_popup(Util.charToImage(b.getClassName(), b.getAsc()), b.getName(), b.getAsc(), i, this::update);
+            bec.init_for_popup(Util.charToImage(ci.className, ci.ascendancyName), ci.characterName, ci.ascendancyName, i, this::update);
         }
     }
 

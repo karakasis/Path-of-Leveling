@@ -25,7 +25,7 @@ import poe.level.fx.Preferences_Controller;
 public class LevelOverlay_Controller implements Initializable {
 
     class Delta { double x, y; }
-    
+
     @FXML
     private AnchorPane root;
     @FXML
@@ -36,13 +36,13 @@ public class LevelOverlay_Controller implements Initializable {
     private Label safezone;
     @FXML
     private Label xpmulti;
-    
+
     /**
      * Initializes the controller class.
      */
-    
+
     public void hookStage(Stage stage){
-        
+
         final LevelOverlay_Controller.Delta dragDelta = new LevelOverlay_Controller.Delta();
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
@@ -57,11 +57,15 @@ public class LevelOverlay_Controller implements Initializable {
             stage.setY(mouseEvent.getScreenY() + dragDelta.y);
             LevelOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
             LevelOverlay_Stage.prefY = mouseEvent.getScreenY() + dragDelta.y;
-            Preferences_Controller.updateLevelPos(LevelOverlay_Stage.prefX, LevelOverlay_Stage.prefY);
           }
         });
+        root.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                Preferences_Controller.updateLevelPos(LevelOverlay_Stage.prefX, LevelOverlay_Stage.prefY);
+            }
+        });
     }
-    
+
     public void update(int playerLvl, int zoneLvl){
         int safe = Controller.findSafe(playerLvl)[2];
         if(playerLvl + safe < zoneLvl || playerLvl - safe > zoneLvl){
@@ -80,7 +84,7 @@ public class LevelOverlay_Controller implements Initializable {
         safezone.setText("Safezone: -+" + Controller.findSafe(playerLvl)[2]);
         xpmulti.setText("XP Multiplier: "+ (int)Controller.findxpmulti(playerLvl, zoneLvl)+"%");
     }
-    
+
     public void reset(int playerLvl){
         player.setStyle("-fx-border-color : white; -fx-text-fill: white;");
         zone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
@@ -91,16 +95,16 @@ public class LevelOverlay_Controller implements Initializable {
         safezone.setText("Safezone : -");
         xpmulti.setText("XP Multiplier : -");
     }
-    
+
     public void setPlayerLevel(int level){
         player.setText("Current Level: "+ level);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         root.setFocusTraversable(true);
-        
-    }    
-    
+
+    }
+
 }

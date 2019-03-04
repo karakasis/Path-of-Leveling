@@ -23,7 +23,7 @@ import poe.level.fx.overlay.ZoneOverlay_Stage;
 public class Controller {
 
     public static Controller instance;
-    
+
     public void zones_hotkey_show_hide_key_event(){
         if(!zone_stage_lock)
             Platform.runLater(new Runnable(){
@@ -33,7 +33,7 @@ public class Controller {
                     }
                 });
     }
-    
+
     public void level_hotkey_remind_key_event(){
         if(!level_stage_lock)
             Platform.runLater(new Runnable(){
@@ -43,13 +43,13 @@ public class Controller {
                     }
                 });
     }
-    
+
     public void recipe_hotkey_mark_key_event(){
         if(!zone_stage_lock){
             if(zone_checkpoint!=null){
                 ActHandler.getInstance().recipeMap.replace(zone_checkpoint, false, true);
                 //need to save to file.
-                Preferences_Controller.updateRecipeFile(zone_checkpoint.name + " [L" 
+                Preferences_Controller.updateRecipeFile(zone_checkpoint.name + " [L"
                         + zone_checkpoint.getZoneLevel() + "]");
             }
             Platform.runLater(new Runnable(){
@@ -60,24 +60,27 @@ public class Controller {
                 });
         }
     }
-    
+
     public void settings_event(){
-        if(settings_stage == null)
-        Platform.runLater(new Runnable(){
+        if(settings_stage == null) {
+            Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     settings_stage = new Settings_Stage();
+                    settings_stage.show();
                 }
             });
-         Platform.runLater(new Runnable(){
-                    @Override
-                    public void run() {
-                        settings_stage.show();
-                    }
-                });
-        
+        } else {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    settings_stage.show();
+                }
+            });
+        }
+
     }
-    
+
     public int playerLevel;
     public String playerName;
     public int monsterLevel;
@@ -93,13 +96,13 @@ public class Controller {
     private boolean xp_stage_lock;
     private boolean level_stage_lock;
     private Build build;
-    
+
     private Zone zone_checkpoint;
     private HashSet<String> duplicates;
     private boolean skipActs;
     private boolean act6detected;
     private boolean releaseLock;
-    
+
     public static int[] findSafe(int currentLevel){
         int[] safe = new int[3];
         if(currentLevel - 3 <= 0){
@@ -135,7 +138,7 @@ public class Controller {
         System.out.println("xp multi is "+(int)a+"%");
         return a;
     }
-    
+
 
     //public Controller(Stage zone, Stage xp, Stage level, Build build) {
     public Controller(boolean zone_b, boolean xp, boolean level, Build build) {
@@ -159,16 +162,16 @@ public class Controller {
         //xp_stage = (LevelOverlay_Stage) xp;
         //level_stage = (GemOverlay_Stage) level;
         this.build = build;
-        
+
         //zone_stage_lock = zone_stage == null;
         //xp_stage_lock = xp_stage == null;
         //level_stage_lock = level_stage == null;
         zone_stage_lock = !zone_b;
         xp_stage_lock= !xp;
         level_stage_lock= !level;
-        
+
         path = Preferences_Controller.poe_log_dir;
-        
+
         duplicates = new HashSet<>();
         duplicates.add("The Reliquary");
         duplicates.add("The Ossuary");
@@ -197,9 +200,9 @@ public class Controller {
         duplicates.add("The Coast");
         duplicates.add("The Chamber of Sins Level 1");
         duplicates.add("The Chamber of Sins Level 2");
-        
+
         start();
-        
+
     }
 
     public void start(){
@@ -207,14 +210,14 @@ public class Controller {
         //_tObj.setUpTailer(new File("C:\\Users\\Christos\\Documents\\NetBeansProjects\\POE-level-fx\\src\\a.txt"), this);
         _tObj.setUpTailer(new File("src/logs.txt"), this);
         //_tObj.setUpTailer(new File(path), this);
-        
+
         //manually input the level 1 gems
         if(playerLevel == 1 && !level_stage_lock){
             level_stage.update(playerLevel);
         }
     }
-    
-    
+
+
     public void lvlupdate(){
         if(!xp_stage_lock){
             System.out.println("New level is "+ playerLevel+".");
@@ -229,7 +232,7 @@ public class Controller {
             }
         }
         if(build!=null){
-            build.level = playerLevel;
+            build.setCharacterLevel(playerLevel);
         }
     }
 
@@ -248,7 +251,7 @@ public class Controller {
             skipActs = true;
             releaseLock = false;
         }
-        
+
         System.out.println("Trying to identify zone.");
         //add a reset thing for when zone in uknown
         //System.out.println("New zone is "+ currentZone+".");

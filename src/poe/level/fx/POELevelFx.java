@@ -75,7 +75,7 @@ import poe.level.keybinds.GlobalKeyListener;
  * @author Christos
  */
 public class POELevelFx extends Application {
-    
+
     public static String directory;
     public static String gemDir;
     public static ArrayList<Build> buildsLoaded;
@@ -89,10 +89,10 @@ public class POELevelFx extends Application {
     private static String version = "v0.65-alpha";
     private static boolean is_new_version;
     //v0.5-alpha <- between
-    
+
     public void update() {
             URL url;
-            
+
             try{
             url = new URL(update_path_prefix + "" + POELevelFx.version + "" + update_path_suffix);
             HttpURLConnection httpConnection = (HttpURLConnection) (url.openConnection());
@@ -110,7 +110,7 @@ public class POELevelFx extends Application {
                 if(UpdaterController.cancelDownload){
                     bout.close();
                     in.close();
-                    File file = new File("PathOfLeveling-"+POELevelFx.version+".jar"); 
+                    File file = new File("PathOfLeveling-"+POELevelFx.version+".jar");
                     file.delete() ;
                     try {
                         init();
@@ -120,10 +120,10 @@ public class POELevelFx extends Application {
                     break;
                 }
             downloadedFileSize += x;
-            
+
             notifyPreloader(new UpdatePreloader.ProgressNotification(downloadedFileSize));
-            
-            
+
+
             //System.out.println(downloadedFileSize);
             bout.write(data, 0, x);
             }
@@ -134,10 +134,10 @@ public class POELevelFx extends Application {
             } catch (IOException e) {
             e.printStackTrace();
             }
-        
-            
+
+
     }
-    
+
     public void declineUpdateFromPreload(){
         is_new_version = false;
         try {
@@ -147,14 +147,14 @@ public class POELevelFx extends Application {
         }
         System.out.println("test");
     }
-    
+
     @Override
     public void init() throws Exception {
-       
+
         boolean restart = false;
         if(is_new_version){
-            
-            
+
+
             while(true){
                     System.err.println("");
                 if(UpdaterController.allowUpdate){
@@ -181,7 +181,7 @@ public class POELevelFx extends Application {
             Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Italic.ttf").toExternalForm(), 10);
             Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Bold.ttf").toExternalForm(), 10);
             Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-SmallCaps.ttf").toExternalForm(), 10);
-            
+
             Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Thin.ttf").toExternalForm(), 10);
             Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-ThinItalic.ttf").toExternalForm(), 10);
             Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Regular.ttf").toExternalForm(), 10);
@@ -195,7 +195,7 @@ public class POELevelFx extends Application {
             Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-BoldItalic.ttf").toExternalForm(), 10);
             if (!new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").isFile()) {
             new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").createNewFile();
-            
+
             Properties prop = new Properties();
             OutputStream output = null;
 
@@ -253,14 +253,14 @@ public class POELevelFx extends Application {
                     }
 
                     //new changes
-                    
+
                     prop.setProperty("gems-overlay-pos", "-200.0,-200.0");
                     Preferences_Controller.updateGemsPos(-200.0, -200.0);
                     prop.setProperty("level-overlay-pos", "-200.0,-200.0");
                     Preferences_Controller.updateLevelPos(-200.0, -200.0);
                     prop.setProperty("zones-overlay-pos", "-200.0,-200.0");
                     Preferences_Controller.updateZonesPos(-200.0, -200.0);
-                    
+
                     // save properties to project root folder
                     prop.store(output, null);
 
@@ -313,7 +313,7 @@ public class POELevelFx extends Application {
                           recipe_hotkey_mark = prop.getProperty("recipe-hotkey-mark");
                           //check if recipe hotkey is null, on older versions
                           if(recipe_hotkey_mark == null) recipe_hotkey_mark = "F6";
-                          
+
                             if(!(prop.getProperty("poe-dir")==null || prop.getProperty("poe-dir").equals(""))){
                                 Preferences_Controller.poe_log_dir = prop.getProperty("poe-dir") + "\\logs\\Client.txt";
                             }
@@ -335,7 +335,7 @@ public class POELevelFx extends Application {
                             }
                             Preferences_Controller.updateZonesPos(Double.parseDouble(zones_pos[0])
                                     , Double.parseDouble(zones_pos[1]));
-                            
+
                             String[] level_pos = null;
                             try{
                                  level_pos = prop.getProperty("level-overlay-pos").toString().split(",");
@@ -344,10 +344,10 @@ public class POELevelFx extends Application {
                                 level_pos= new String[2];
                                 level_pos[0] = "-200.0";
                                 level_pos[1] = "-200.0";
-                            }   
+                            }
                             Preferences_Controller.updateLevelPos(Double.parseDouble(level_pos[0])
                                     , Double.parseDouble(level_pos[1]));
-                            
+
                             String[] gem_pos = null;
                             try{
                                 gem_pos = prop.getProperty("gems-overlay-pos").toString().split(",");
@@ -356,10 +356,12 @@ public class POELevelFx extends Application {
                                 gem_pos= new String[2];
                                 gem_pos[0] = "-200.0";
                                 gem_pos[1] = "-200.0";
-                            } 
+                            }
                             Preferences_Controller.updateGemsPos(Double.parseDouble(gem_pos[0])
                                     , Double.parseDouble(gem_pos[1]));
-                            
+
+                            Preferences_Controller.poe_account_name = prop.getProperty("poe-account-name", "");
+
                   } catch (IOException ex) {
                           ex.printStackTrace();
                   } finally {
@@ -389,7 +391,7 @@ public class POELevelFx extends Application {
                       System.out.println(":incorect:");
                       Preferences_Controller.level_hotkey_remind_key = KeyCombination.NO_MATCH;
                   }
-                  
+
                   try{
                       KeyCombination keyCombination = KeyCombination.keyCombination(recipe_hotkey_mark);
                       System.out.println("key code recipe: " + keyCombination.getName());
@@ -398,23 +400,23 @@ public class POELevelFx extends Application {
                       System.out.println(":incorect:");
                       Preferences_Controller.recipe_hotkey_mark_key = KeyCombination.NO_MATCH;
                   }
-                  
+
             }
 
-            
-            
+
+
             //StringBuilder raw = readRawToString();
-            
+
               loadActsFromMemory();
               loadGemsFromMemory();
               loadBuildsFromMemory();
-              
+
               loadRecipesProperties();
-              
+
         }
-        
-        
-        
+
+
+
         /*
               ArrayList<String[]> mergeTags = mergeTags();
               ArrayList<Gem> gems = GemHolder.getInstance().gems;
@@ -440,26 +442,26 @@ public class POELevelFx extends Application {
                   }
                   found = false;
               }
-              
+
               ArrayList<Gem> gems2 = GemHolder.getInstance().gems;
               for(Gem g : gems2){
                   if(g.isActive == g.isSupport){
                       System.out.println("same active : " + g.name);
-                      
+
                   }
                   if(g.tags == null || g.tags.size() == 0){
                       System.out.println("no tag : " + g.name);
                   }
               }
               System.out.println(gems2);
-              
+
               GemHolder.getInstance().init_remaining_in_pool();
               */
-        
-     /*   
+
+     /*
         StringBuilder hack = hack();
         String[] split = hack.toString().split("\r\n|\t");
-        
+
         ArrayList<String> s = new ArrayList<>();
         ArrayList<ArrayList<String>> s_col = new ArrayList<>();
         GemHolder.getInstance().pool();
@@ -471,16 +473,16 @@ public class POELevelFx extends Application {
                 GemHolder.getInstance().updateGemInfo(s);
                 s = new ArrayList<>();
             }
-            
+
         }
-        
+
         GemHolder.getInstance().init_remaining_in_pool();
-        
-        
+
+
         s_col.size();
         */
     }
-    
+
     private StringBuilder readRawToString(){
         BufferedReader br = null;
         StringBuilder sb = null;
@@ -515,10 +517,10 @@ public class POELevelFx extends Application {
                 Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         return sb;
     }
-    
+
     private ArrayList<String[]> mergeTags(){
         BufferedReader br = null;
         try {
@@ -530,7 +532,7 @@ public class POELevelFx extends Application {
         try {
             String line = null;
             try {
-                
+
                 line = br.readLine();
                 while(line != null){
                     String[] tags = line.split(",");
@@ -550,13 +552,13 @@ public class POELevelFx extends Application {
         }
         return list_tags;
     }
-    
+
     public void close(){
         //exp.close();
         main.close();
         //zone.close();
     }
-    
+
     private void loadRecipesProperties(){
         if (!new File(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties").isFile()) {
             try {
@@ -564,7 +566,7 @@ public class POELevelFx extends Application {
             } catch (IOException ex) {
                 Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             Properties prop = new Properties();
             OutputStream output = null;
             try{
@@ -572,14 +574,14 @@ public class POELevelFx extends Application {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             for(Zone z : ActHandler.getInstance().getZonesWithRecipes()){
                 String thanksGGG = z.name + " [L" + z.getZoneLevel() + "]";
                 System.out.println(thanksGGG);
                 prop.setProperty(thanksGGG, "false");
                 ActHandler.getInstance().recipeMap.put(z, false);
             }
-            
+
             try {
                 // save properties to project root folder
                 prop.store(output, null);
@@ -620,7 +622,7 @@ public class POELevelFx extends Application {
                         try {
                                 input.close();
                                 System.out.println("Recipe properties loaded successfully ");
-            
+
                         } catch (IOException e) {
                                 e.printStackTrace();
                         }
@@ -628,7 +630,7 @@ public class POELevelFx extends Application {
             }
         }
     }
-    
+
     private void loadActsFromMemory(){
         InputStream in = POELevelFx.class.getResourceAsStream("/json/data.json");
         Scanner s = new Scanner(in).useDelimiter("\\A");
@@ -661,7 +663,7 @@ public class POELevelFx extends Application {
                     zoneObj.getString("note"),
                     zoneObj.getBoolean("haspassive"),
                     zoneObj.getBoolean("hastrial"),
-                    zoneObj.getString("quest"),   
+                    zoneObj.getString("quest"),
                     zoneObj.getBoolean("questRewardsSkills"),
                     actname,actid
                 );
@@ -679,19 +681,19 @@ public class POELevelFx extends Application {
                         for(int k=0; k<recipeMods.length(); k++){
                             rInfo.mods.add(recipeMods.getString(k));
                         }*/
-                    } 
+                    }
                     ActHandler.getInstance().putZone(z);
                 }
                 a.putZone(z);
             }
             ActHandler.getInstance().putAct(a);
-            
+
         }
         System.out.println("Zone data loaded.");
     }
-    
+
     private void loadGemsFromMemory(){
-                
+
         InputStream inG = POELevelFx.class.getResourceAsStream("/json/gems.json");
         Scanner sG = new Scanner(inG).useDelimiter("\\A");
         String jsonstringG = sG.hasNext() ? sG.next() : "";
@@ -705,10 +707,10 @@ public class POELevelFx extends Application {
         {
             JSONObject gemObj  = arrG.getJSONObject(i);
             Gem gem = new Gem();
-            
+
             gem.name= gemObj.getString("name");
             //System.out.println(gem.name);
-            
+
             gem.required_lvl= gemObj.getInt("required_lvl");
             gem.isVaal=gemObj.getBoolean("isVaal");
             //gem.id = gemObj.getInt("id");
@@ -716,7 +718,7 @@ public class POELevelFx extends Application {
             gem.color= gemObj.getString("color");
             gem.iconPath= gemObj.getString("iconPath");
             gem.isRewarded = gemObj.getBoolean("isReward");
-            
+
             if(gem.isRewarded){
                 JSONObject rewardObj  = gemObj.getJSONObject("reward");
                 gem.reward = gem.new Info();
@@ -764,7 +766,7 @@ public class POELevelFx extends Application {
                     for(int k=0;k<chars.length();k++){
                         chars_list.add(chars.getString(k));
                         //gem.putChar(chars.getString(j));
-                        
+
                     }
                     buy_info.available_to = chars_list;
                 }catch(JSONException e){
@@ -809,14 +811,14 @@ public class POELevelFx extends Application {
                         e.printStackTrace();
                 }
                 System.err.println("Image not found and redownloaded: "+gemDir+""+gem.name+".png");
-                
+
             }else{
                 BufferedImage img = null;
                     try {
                         img = ImageIO.read(new File(gemDir+""+gem.name+".png"));
-                        
+
                         gem.gemIcon = SwingFXUtils.toFXImage(img, null);
-                    } 
+                    }
                     catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -829,9 +831,9 @@ public class POELevelFx extends Application {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            
+
             gem.resizeImage();
-            
+
             //load tags - new feature
             gem.isActive = gemObj.getBoolean("isActive");
             gem.isSupport = gemObj.getBoolean("isSupport");
@@ -840,25 +842,25 @@ public class POELevelFx extends Application {
             for(int j=0;j<tags.length();j++){
                 gem.tags.add(tags.getString(j));
             }
-            
+
             GemHolder.getInstance().putGem(gem);
             double a = (double)i/arrG.length();
             a = a * 100.0 ;
-            
+
             notifyPreloader(new NewFXPreloader.ProgressNotification(a));
         }
         System.out.println("Gem data loaded");
-            
+
     }
-    
+
     private void logErrorGem(String gemName){
         System.out.println("Gem : " +gemName+ " had errors in loading.");
     }
-    
+
     public static void reloadBuilds(){
         loadBuildsFromMemory();
     }
-    
+
     private static void loadBuildsFromMemory(){
         //pseudo for loop loads builds and panels put them
         //into buildlinker and add buildlinker to the list
@@ -873,10 +875,10 @@ public class POELevelFx extends Application {
                 br = new BufferedReader(fr);
                 stringValueBase64Encoded = br.readLine();
 
-                
+
             } catch (IOException e) {
                 e.printStackTrace();
-            } 
+            }
             try {
             if (br != null)
                     br.close();
@@ -898,7 +900,7 @@ public class POELevelFx extends Application {
         }
         //byte[] byteValueBase64Decoded = Base64.getDecoder().decode(stringValueBase64Encoded);
         String stringValueBase64Decoded = new String(byteValueBase64Decoded);
-        
+
         //JSONArray obj = new JsonParser().parse(stringValueBase64Encoded).getAsJsonArray();
         JSONArray builds_array = new JSONArray(stringValueBase64Decoded);
         for (int i = 0; i < builds_array.length(); i++) {
@@ -915,8 +917,8 @@ public class POELevelFx extends Application {
                     //if it doesnt exist prob its valid from earlier versions
                     build.isValid = true;
                 }
-                build.characterName = bObj.getString("characterName");
-                build.level = bObj.getInt("level");
+                build.setCharacterName(bObj.getString("characterName"));
+                build.setCharacterLevel(bObj.getInt("level"));
                 try{
                     //bObj.get("hasPob");
                     build.hasPob = bObj.getBoolean("hasPob");
@@ -963,28 +965,29 @@ public class POELevelFx extends Application {
                             System.out.println();
                         }*/
                         Gem gem = GemHolder.getInstance().createGemFromCache(gemName,build.getClassName());
-                        if(gem == null){
-                            System.out.println(gem.getGemName()+"was null.");
+                        if(gem != null) {
+                            gem.id = gObj.getInt("id");
+                            gem.level_added = gObj.getInt("level_added");
+                            gem.replaced = gObj.getBoolean("replaced");
+                            gem.replaces = gObj.getBoolean("replaces");
+                            if(gem.replaced){
+                                int id_replaced = gObj.getInt("replaceWith");
+                                gem.id_replaced = id_replaced;
+
+                            }
+                            if(gem.replaces){
+                                int id_replaces = gObj.getInt("replacesGem");
+                                gem.id_replaces = id_replaces;
+                            }
+                            sg.getGems().add(gem);//***check line 324 in GemsPanel_Controller;
+                        } else {
+                            System.out.println(gemName + " was null.");
                         }
-                        gem.id = gObj.getInt("id");
-                        gem.level_added = gObj.getInt("level_added");
-                        gem.replaced = gObj.getBoolean("replaced");
-                        gem.replaces = gObj.getBoolean("replaces");
-                        if(gem.replaced){
-                            int id_replaced = gObj.getInt("replaceWith");
-                            gem.id_replaced = id_replaced;
-                           
-                        }
-                        if(gem.replaces){
-                            int id_replaces = gObj.getInt("replacesGem");
-                            gem.id_replaces = id_replaces;
-                        }
-                        sg.getGems().add(gem);//***check line 324 in GemsPanel_Controller;
                     }
                     build.getSocketGroup().add(sg);
                 }
-                
-                
+
+
                 //update data links
                 for(SocketGroup sg : build.getSocketGroup()){
                     if(sg.active_id!=-1){
@@ -1013,14 +1016,14 @@ public class POELevelFx extends Application {
                             }
                         }
                     }
-                    
+
                     for(Gem g : sg.getGems()){
                         //if g active id != -1
                         if(g.replaces){
                             for(Gem g1 : sg.getGems()){
                                 if(g1.id == g.id_replaces){
                                     g.replacesGem = g1;
-                                    break;  
+                                    break;
                                 }
                             }
                         }
@@ -1032,18 +1035,18 @@ public class POELevelFx extends Application {
                                 }
                             }
                         }
-                        
+
                     }
                 }
                 buildsLoaded.add(build);
         }
-        
+
         //System.out.println(stringValueBase64Encoded  + " when decoded is: " + stringValueBase64Decoded);
           System.out.println("Loaded builds successfully from " + POELevelFx.directory + "\\Path of Leveling\\Builds\\builds.txt");
-              
+
         }
     }
-    
+
     private static int sign_jsons(HashSet<Integer> unique_ids){
         if(unique_ids == null) unique_ids = new HashSet<>();
         int ran;
@@ -1053,9 +1056,9 @@ public class POELevelFx extends Application {
         unique_ids.add(ran);
         return ran;
     }
-    
+
     public static boolean saveBuildsToMemory(){
-         
+
         JSONArray builds_array = new JSONArray();
         HashSet<Integer> unique_ids = new HashSet<>();
         for( Build build : buildsLoaded){
@@ -1063,12 +1066,12 @@ public class POELevelFx extends Application {
             bObj.put("buildName",build.getName());
             bObj.put("className",build.getClassName());
             bObj.put("ascendancyName",build.getAsc());
-            bObj.put("level", build.level); //<change
-            bObj.put("characterName",build.characterName);
+            bObj.put("level", build.getCharacterLevel()); //<change
+            bObj.put("characterName",build.getCharacterName());
             bObj.put("isValid", build.isValid);
             bObj.put("hasPob",build.hasPob);
             bObj.put("pobLink",build.pobLink);
-        
+
             JSONArray socket_group_array = new JSONArray();
             bObj.put("socketGroup", socket_group_array);
             for(SocketGroup sg : build.getSocketGroup()){
@@ -1124,21 +1127,21 @@ public class POELevelFx extends Application {
                 }
                 sObj.put("gem", gems_array);
                 socket_group_array.put(sObj);
-                
+
             }
-            //now we need to connect data 
-            
-            
+            //now we need to connect data
+
+
             builds_array.put(bObj);
         }
-        
+
         String build_to_json = builds_array.toString();
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         //Gson gson = new Gson();
         //String build_to_json = gson.toJson(linker.get(activeBuildID).build);
         System.out.println(build_to_json);
@@ -1166,10 +1169,10 @@ public class POELevelFx extends Application {
                 ex.printStackTrace();
             }
         }
-        
+
         return done;
     }
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         if(is_new_version){
@@ -1180,12 +1183,12 @@ public class POELevelFx extends Application {
         //zone = new ZoneOverlay_Stage();
         //exp = new LevelOverlay_Stage();
     }
-    
+
     public void editor(){
         main.close();
         editor = new Editor_Stage(this);
     }
-    
+
     public void launcher(){
         editor.close();
         main = new Main_Stage(this);
@@ -1203,18 +1206,18 @@ public class POELevelFx extends Application {
         if(level){
             this.leveling = new GemOverlay_Stage(Main_Stage.buildLoaded);
         }
-                
 
 
-        
+
+
         Platform.runLater(new Runnable(){
-            
+
 
             @Override
             public void run() {
                 Controller controller = new Controller(zone, exp, leveling, Main_Stage.buildLoaded);
             }
-         });   
+         });
         */
         main.close();
         Platform.runLater(new Runnable(){
@@ -1225,10 +1228,10 @@ public class POELevelFx extends Application {
                 }
         });
         controller = new Controller(zone_b, xp, level, Main_Stage.buildLoaded);
-        
+
     }
     Controller controller;
-    
+
     private void addTrayIcon() throws AWTException {
     final TrayIcon trayIcon = new TrayIcon(new ImageIcon(getClass().getResource("/icons/humility.png")).getImage(), "Path of Leveling");
 
@@ -1245,7 +1248,7 @@ public class POELevelFx extends Application {
     trayIcon.setImageAutoSize(true); //So the icon auto-sizes
 
     SystemTray.getSystemTray().add(trayIcon);
-    
+
     trayIcon.addMouseListener(new MouseAdapter() {
         @Override public void mouseClicked(java.awt.event.MouseEvent e) {
             if (e.getButton() == java.awt.event.MouseEvent.BUTTON1) { //Left click on tray icon (single click !)
@@ -1255,7 +1258,7 @@ public class POELevelFx extends Application {
             }
         }
     });
-    
+
     shutdownItem.addActionListener(evnt -> {
         //code to exit the program
         //save stuff
@@ -1271,7 +1274,7 @@ public class POELevelFx extends Application {
         }
         System.exit(20);
     });
-    
+
     settingsItem.addActionListener(evnt -> {
         //code to exit the program
         //save stuff
@@ -1280,8 +1283,8 @@ public class POELevelFx extends Application {
         }
     });
 }
-    
-    
+
+
     /**
      * @param args the command line arguments
      */
@@ -1297,9 +1300,9 @@ public class POELevelFx extends Application {
             is_new_version = false;
             LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, args);
         }
-       
+
     }
-    
+
     public static void setUpDirectories(){
         POELevelFx.directory = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
         System.out.println(POELevelFx.directory + "\\Path of Leveling");
@@ -1324,7 +1327,7 @@ public class POELevelFx extends Application {
             }
         }
     }
-    
+
     public static void setUpLog(){
         File f = new File(POELevelFx.directory + "\\Path of Leveling\\log.txt");
         System.out.println(f.length());
@@ -1359,7 +1362,7 @@ public class POELevelFx extends Application {
             } finally {
 
                 try {
-                    
+
                     if (br != null)
                         br.close();
 
@@ -1399,26 +1402,26 @@ public class POELevelFx extends Application {
         System.out.println();
         System.out.println();
     }
-    
+
     public static boolean checkForNewVersion(){
         URL url;
             String input = "";
             try {
                 // get URL content
-                
+
                 String a="https://raw.githubusercontent.com/karakasis/Path-of-Leveling/master/version.txt";
                 url = new URL(a);
                 URLConnection conn = url.openConnection();
-                
+
                 // open the stream and put it into BufferedReader
                 BufferedReader br = new BufferedReader(
                         new InputStreamReader(conn.getInputStream()));
-                
+
                 input = br.readLine();
                 br.close();
-                
+
                 System.out.println("Done");
-                
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
                 return false;
@@ -1426,7 +1429,7 @@ public class POELevelFx extends Application {
                 e.printStackTrace();
                 return false;
             }
-            
+
             String new_git_version = input;
             System.out.println("Current Version: "+POELevelFx.version);
             System.out.println("New Version: "+new_git_version);
@@ -1437,5 +1440,5 @@ public class POELevelFx extends Application {
                 return false;
             }
     }
-    
+
 }

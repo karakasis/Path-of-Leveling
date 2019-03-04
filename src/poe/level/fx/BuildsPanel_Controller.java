@@ -6,6 +6,7 @@
 package poe.level.fx;
 
 import com.jfoenix.controls.JFXButton;
+import com.sun.istack.internal.NotNull;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,10 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import poe.level.data.Build;
-import poe.level.data.Gem;
-import poe.level.data.GemHolder;
-import poe.level.data.SocketGroup;
+import poe.level.data.*;
 import poe.level.fx.SocketGroupsPanel_Controller.SocketGroupLinker;
 
 import javax.imageio.ImageIO;
@@ -78,17 +76,6 @@ public class BuildsPanel_Controller implements Initializable {
         }while(randomIDs.contains(ran));
         randomIDs.add(ran);
         return ran;
-    }
-
-    private static Image charToImage(String className, String asc){
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(BuildsPanel_Controller.class.getResource("/classes/"+className+"/"+asc+".png"));
-        } catch (IOException ex) {
-            Logger.getLogger(BuildsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return SwingFXUtils.toFXImage(img, null);
     }
 
     @FXML
@@ -217,95 +204,15 @@ public class BuildsPanel_Controller implements Initializable {
         return ran;
     }
 
-    public void saveBuild() throws IOException{
-
-
+    public void saveBuild() throws IOException {
 
         JSONArray builds_array = new JSONArray();
         HashSet<Integer> unique_ids = new HashSet<>();
         for( BuildLinker bl : linker.values()){
-            Build build = bl.build;
-            JSONObject bObj = new JSONObject();
-            bObj.put("isValid", build.isValid);
-            bObj.put("buildName",build.getName());
-            bObj.put("className",build.getClassName());
-            bObj.put("ascendancyName",build.getAsc());
-            bObj.put("level", build.level); //<change
-            bObj.put("characterName",build.characterName);
-
-            bObj.put("hasPob",build.hasPob);
-            bObj.put("pobLink",build.pobLink);
-
-            JSONArray socket_group_array = new JSONArray();
-            bObj.put("socketGroup", socket_group_array);
-            for(SocketGroup sg : build.getSocketGroup()){
-                JSONObject sObj = new JSONObject();
-                if(sg.id == -1)
-                    sg.id = sign_jsons(unique_ids);
-                sObj.put("id",sg.id);
-                if(sg.getActiveGem().id == -1){
-                    sg.getActiveGem().id = sign_jsons(unique_ids);
-                }
-                sObj.put("active", sg.getActiveGem().id);
-                sObj.put("fromGroupLevel", sg.getFromGroupLevel());
-                sObj.put("untilGroupLevel", sg.getUntilGroupLevel());
-                sObj.put("replaceGroup", sg.replaceGroup());
-                sObj.put("replacesGroup", sg.replacesGroup());
-                if(sg.replaceGroup()){
-                    if(sg.getGroupReplaced().id == -1){
-                        sg.getGroupReplaced().id = sign_jsons(unique_ids);
-                    }
-                    sObj.put("socketGroupReplace", sg.getGroupReplaced().id);
-                }
-                if(sg.replacesGroup()){
-                    if(sg.getGroupThatReplaces().id == -1){
-                        sg.getGroupThatReplaces().id = sign_jsons(unique_ids);
-                    }
-                    sObj.put("socketGroupThatReplaces", sg.getGroupThatReplaces().id);
-                }
-
-                sObj.put("note",sg.getNote());
-                JSONArray gems_array = new JSONArray();
-                for(Gem g : sg.getGems()){
-                    JSONObject gObj = new JSONObject();
-                    if(g.id == -1){
-                        g.id = sign_jsons(unique_ids);
-                    }
-                    gObj.put("id",g.id);
-                    gObj.put("name", g.getGemName());
-                    gObj.put("level_added", g.getLevelAdded());
-                    gObj.put("replaced", g.replaced);
-                    gObj.put("replaces", g.replaces);
-                    if(g.replaced){
-                        if(g.replacedWith.id == -1){
-                            g.replacedWith.id  = sign_jsons(unique_ids);
-                        }
-                        gObj.put("replaceWith", g.replacedWith.id);
-                    }
-                    if(g.replaces){
-                        if(g.replacesGem.id == -1){
-                            g.replacesGem.id = sign_jsons(unique_ids);
-                        }
-                        gObj.put("replacesGem", g.replacesGem.id);
-                    }
-                    gems_array.put(gObj);
-                }
-                sObj.put("gem", gems_array);
-                socket_group_array.put(sObj);
-
-            }
-            //now we need to connect data
-
-
-            builds_array.put(bObj);
+          buildTo64(bl.build, builds_array, unique_ids);
         }
 
         String build_to_json = builds_array.toString();
-
-
-
-
-
 
         //Gson gson = new Gson();
         //String build_to_json = gson.toJson(linker.get(activeBuildID).build);
@@ -332,11 +239,6 @@ public class BuildsPanel_Controller implements Initializable {
                 ex.printStackTrace();
             }
         }
-
-
-        //PrintWriter out = new PrintWriter(POELevelFx.directory+"\\Builds\\builds.txt");
-        //out.println(stringValueBase64Encoded);
-        //gson.toJson(linker.get(activeBuildID).build,new FileWriter(POELevelFx.directory+"\\Builds\\builds.txt"));
     }
 
     public String allTo64(){
@@ -344,79 +246,7 @@ public class BuildsPanel_Controller implements Initializable {
         JSONArray builds_array = new JSONArray();
         HashSet<Integer> unique_ids = new HashSet<>();
         for( BuildLinker bl : linker.values()){
-            Build build = bl.build;
-            JSONObject bObj = new JSONObject();
-            bObj.put("buildName",build.getName());
-            bObj.put("className",build.getClassName());
-            bObj.put("ascendancyName",build.getAsc());
-            bObj.put("isValid", build.isValid);
-            bObj.put("level", build.level); //<change
-            bObj.put("characterName",build.characterName);
-
-            bObj.put("hasPob",build.hasPob);
-            bObj.put("pobLink",build.pobLink);
-
-            JSONArray socket_group_array = new JSONArray();
-            bObj.put("socketGroup", socket_group_array);
-            for(SocketGroup sg : build.getSocketGroup()){
-                JSONObject sObj = new JSONObject();
-                if(sg.id == -1)
-                    sg.id = sign_jsons(unique_ids);
-                sObj.put("id",sg.id);
-                if(sg.getActiveGem().id == -1){
-                    sg.getActiveGem().id = sign_jsons(unique_ids);
-                }
-                sObj.put("active", sg.getActiveGem().id);
-                sObj.put("fromGroupLevel", sg.getFromGroupLevel());
-                sObj.put("untilGroupLevel", sg.getUntilGroupLevel());
-                sObj.put("replaceGroup", sg.replaceGroup());
-                sObj.put("replacesGroup", sg.replacesGroup());
-                sObj.put("note",sg.getNote());
-                if(sg.replaceGroup()){
-                    if(sg.getGroupReplaced().id == -1){
-                        sg.getGroupReplaced().id = sign_jsons(unique_ids);
-                    }
-                    sObj.put("socketGroupReplace", sg.getGroupReplaced().id);
-                }
-                if(sg.replacesGroup()){
-                    if(sg.getGroupThatReplaces().id == -1){
-                        sg.getGroupThatReplaces().id = sign_jsons(unique_ids);
-                    }
-                    sObj.put("socketGroupThatReplaces", sg.getGroupThatReplaces().id);
-                }
-                JSONArray gems_array = new JSONArray();
-                for(Gem g : sg.getGems()){
-                    JSONObject gObj = new JSONObject();
-                    if(g.id == -1){
-                        g.id = sign_jsons(unique_ids);
-                    }
-                    gObj.put("id",g.id);
-                    gObj.put("name", g.getGemName());
-                    gObj.put("level_added", g.getLevelAdded());
-                    gObj.put("replaced", g.replaced);
-                    gObj.put("replaces", g.replaces);
-                    if(g.replaced){
-                        if(g.replacedWith.id == -1){
-                            g.replacedWith.id  = sign_jsons(unique_ids);
-                        }
-                        gObj.put("replaceWith", g.replacedWith.id);
-                    }
-                    if(g.replaces){
-                        if(g.replacesGem.id == -1){
-                            g.replacesGem.id = sign_jsons(unique_ids);
-                        }
-                        gObj.put("replacesGem", g.replacesGem.id);
-                    }
-                    gems_array.put(gObj);
-                }
-                sObj.put("gem", gems_array);
-                socket_group_array.put(sObj);
-
-            }
-            //now we need to connect data
-
-
-            builds_array.put(bObj);
+            buildTo64(bl.build, builds_array, unique_ids);
         }
 
         String build_to_json = builds_array.toString();
@@ -433,79 +263,7 @@ public class BuildsPanel_Controller implements Initializable {
 
         HashSet<Integer> unique_ids = new HashSet<>();
 
-        JSONObject bObj = new JSONObject();
-        bObj.put("buildName",build.getName());
-        bObj.put("className",build.getClassName());
-        bObj.put("ascendancyName",build.getAsc());
-        bObj.put("isValid", build.isValid);
-        bObj.put("level", build.level); //<change
-        bObj.put("characterName",build.characterName);
-
-        bObj.put("hasPob",build.hasPob);
-        bObj.put("pobLink",build.pobLink);
-
-        JSONArray socket_group_array = new JSONArray();
-        bObj.put("socketGroup", socket_group_array);
-        for(SocketGroup sg : build.getSocketGroup()){
-            JSONObject sObj = new JSONObject();
-            if(sg.id == -1)
-                sg.id = sign_jsons(unique_ids);
-            sObj.put("id",sg.id);
-            if(sg.getActiveGem().id == -1){
-                sg.getActiveGem().id = sign_jsons(unique_ids);
-            }
-            sObj.put("active", sg.getActiveGem().id);
-            sObj.put("fromGroupLevel", sg.getFromGroupLevel());
-            sObj.put("untilGroupLevel", sg.getUntilGroupLevel());
-            sObj.put("replaceGroup", sg.replaceGroup());
-            sObj.put("replacesGroup", sg.replacesGroup());
-            if(sg.replaceGroup()){
-                if(sg.getGroupReplaced().id == -1){
-                    sg.getGroupReplaced().id = sign_jsons(unique_ids);
-                }
-                sObj.put("socketGroupReplace", sg.getGroupReplaced().id);
-            }
-            if(sg.replacesGroup()){
-                if(sg.getGroupThatReplaces().id == -1){
-                    sg.getGroupThatReplaces().id = sign_jsons(unique_ids);
-                }
-                sObj.put("socketGroupThatReplaces", sg.getGroupThatReplaces().id);
-            }
-            sObj.put("note",sg.getNote());
-            JSONArray gems_array = new JSONArray();
-            for(Gem g : sg.getGems()){
-                JSONObject gObj = new JSONObject();
-                if(g.id == -1){
-                    g.id = sign_jsons(unique_ids);
-                }
-                gObj.put("id",g.id);
-                gObj.put("name", g.getGemName());
-                gObj.put("level_added", g.getLevelAdded());
-                gObj.put("replaced", g.replaced);
-                gObj.put("replaces", g.replaces);
-                if(g.replaced){
-                    if(g.replacedWith.id == -1){
-                        g.replacedWith.id  = sign_jsons(unique_ids);
-                    }
-                    gObj.put("replaceWith", g.replacedWith.id);
-                }
-                if(g.replaces){
-                    if(g.replacesGem.id == -1){
-                        g.replacesGem.id = sign_jsons(unique_ids);
-                    }
-                    gObj.put("replacesGem", g.replacesGem.id);
-                }
-                gems_array.put(gObj);
-            }
-            sObj.put("gem", gems_array);
-            socket_group_array.put(sObj);
-
-        }
-        //now we need to connect data
-
-
-        builds_array.put(bObj);
-
+        buildTo64(build, builds_array, unique_ids);
 
         String build_to_json = builds_array.toString();
 
@@ -513,6 +271,81 @@ public class BuildsPanel_Controller implements Initializable {
         String stringValueBase64Encoded = Base64.getEncoder().encodeToString(build_to_json.getBytes());
         System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
         return stringValueBase64Encoded;
+    }
+
+    void buildTo64(Build build, JSONArray builds_array, HashSet<Integer> unique_ids) {
+      JSONObject bObj = new JSONObject();
+      bObj.put("buildName",build.getName());
+      bObj.put("className",build.getClassName());
+      bObj.put("ascendancyName",build.getAsc());
+      bObj.put("isValid", build.isValid);
+      bObj.put("level", build.getCharacterLevel()); //<change
+      bObj.put("characterName",build.getCharacterName());
+
+      bObj.put("hasPob",build.hasPob);
+      bObj.put("pobLink",build.pobLink);
+
+      JSONArray socket_group_array = new JSONArray();
+      bObj.put("socketGroup", socket_group_array);
+      for(SocketGroup sg : build.getSocketGroup()){
+        JSONObject sObj = new JSONObject();
+        if(sg.id == -1)
+          sg.id = sign_jsons(unique_ids);
+        sObj.put("id",sg.id);
+        if(sg.getActiveGem().id == -1){
+          sg.getActiveGem().id = sign_jsons(unique_ids);
+        }
+        sObj.put("active", sg.getActiveGem().id);
+        sObj.put("fromGroupLevel", sg.getFromGroupLevel());
+        sObj.put("untilGroupLevel", sg.getUntilGroupLevel());
+        sObj.put("replaceGroup", sg.replaceGroup());
+        sObj.put("replacesGroup", sg.replacesGroup());
+        if(sg.replaceGroup()){
+          if(sg.getGroupReplaced().id == -1){
+            sg.getGroupReplaced().id = sign_jsons(unique_ids);
+          }
+          sObj.put("socketGroupReplace", sg.getGroupReplaced().id);
+        }
+        if(sg.replacesGroup()){
+          if(sg.getGroupThatReplaces().id == -1){
+            sg.getGroupThatReplaces().id = sign_jsons(unique_ids);
+          }
+          sObj.put("socketGroupThatReplaces", sg.getGroupThatReplaces().id);
+        }
+        sObj.put("note",sg.getNote());
+        JSONArray gems_array = new JSONArray();
+        for(Gem g : sg.getGems()){
+          JSONObject gObj = new JSONObject();
+          if(g.id == -1){
+            g.id = sign_jsons(unique_ids);
+          }
+          gObj.put("id",g.id);
+          gObj.put("name", g.getGemName());
+          gObj.put("level_added", g.getLevelAdded());
+          gObj.put("replaced", g.replaced);
+          gObj.put("replaces", g.replaces);
+          if(g.replaced){
+            if(g.replacedWith.id == -1){
+              g.replacedWith.id  = sign_jsons(unique_ids);
+            }
+            gObj.put("replaceWith", g.replacedWith.id);
+          }
+          if(g.replaces){
+            if(g.replacesGem.id == -1){
+              g.replacesGem.id = sign_jsons(unique_ids);
+            }
+            gObj.put("replacesGem", g.replacesGem.id);
+          }
+          gems_array.put(gObj);
+        }
+        sObj.put("gem", gems_array);
+        socket_group_array.put(sObj);
+
+      }
+      //now we need to connect data
+
+
+      builds_array.put(bObj);
     }
 
     public boolean loadBuildsFromPastebin(String rawPaste){
@@ -547,8 +380,8 @@ public class BuildsPanel_Controller implements Initializable {
                             bObj.getString("ascendancyName")
                     );
                     //when importing character name will not be passed.
-                    build.characterName = "";
-                    build.level = 0;
+                    build.setCharacterName("");
+                    build.setCharacterLevel(0);
                     try{
                         //bObj.get("hasPob");
                         build.isValid = bObj.getBoolean("isValid");
@@ -694,8 +527,8 @@ public class BuildsPanel_Controller implements Initializable {
         //addNewBuild(buildName,className,ascendancyName);
         Build pobBuild = new Build(buildName,className,ascendancyName); //make empty build
 
-        pobBuild.characterName = "";
-        pobBuild.level = 0;
+        pobBuild.setCharacterName("");
+        pobBuild.setCharacterLevel(0);
         //main app controller will take care of pob link and hasPob tag
         pobBuild.isValid = false; //obv needs checking after import from pob.
 
@@ -734,7 +567,7 @@ public class BuildsPanel_Controller implements Initializable {
         }
 
         bl.pec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
-        bl.pec.init(charToImage(className,ascendancyName), buildName, ascendancyName, bl);
+        bl.pec.init(Util.charToImage(className,ascendancyName), buildName, ascendancyName, bl);
         bl.build = new Build(buildName,className,ascendancyName);
         //every new build should be considered non-valid?
         bl.build.isValid = false;
@@ -766,7 +599,7 @@ public class BuildsPanel_Controller implements Initializable {
         }
 
         bl.pec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
-        bl.pec.init(charToImage(build.getClassName(),build.getAsc())
+        bl.pec.init(Util.charToImage(build.getClassName(),build.getAsc())
                 , build.getName(), build.getAsc(), bl);
         bl.build = build;
         //bl.build.isValid = true;
