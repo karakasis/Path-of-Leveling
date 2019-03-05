@@ -24,7 +24,7 @@ import poe.level.fx.POELevelFx;
  */
 public class GemHolder {
     public ArrayList<Gem> gems;
-    
+
     private ArrayList<Gem> witch;
     private ArrayList<Gem> shadow;
     private ArrayList<Gem> templar;
@@ -32,7 +32,7 @@ public class GemHolder {
     private ArrayList<Gem> duelist;
     private ArrayList<Gem> marauder;
     private ArrayList<Gem> scion;
-    
+
     private ArrayList<Gem> witchO;
     private ArrayList<Gem> shadowO;
     private ArrayList<Gem> templarO;
@@ -40,26 +40,26 @@ public class GemHolder {
     private ArrayList<Gem> duelistO;
     private ArrayList<Gem> marauderO;
     private ArrayList<Gem> scionO;
-    
-    
+
+
     private ArrayList<Gem> dropOnly;
-    
-    
+
+
     private static GemHolder mInstance;
     private Gem dummie;
     public String className;
     private HashMap<String,ArrayList<HashMap<Zone,ArrayList<Gem>>>> the_ultimate_map;
     private ArrayList<HashMap<Zone,ArrayList<Gem>>> zone_gems;
-  
+
     private HashSet<Gem> gem_pool;
-    
+
     public static synchronized GemHolder getInstance() {
     if (mInstance == null ) {
       mInstance = new GemHolder();
     }
     return mInstance;
   }
-    
+
     public GemHolder(){
         gems = new ArrayList<>();
         witch = new ArrayList<>();
@@ -69,7 +69,7 @@ public class GemHolder {
         duelist = new ArrayList<>();
         marauder = new ArrayList<>();
         scion = new ArrayList<>();
-        
+
         witchO = new ArrayList<>();
         shadowO = new ArrayList<>();
         templarO = new ArrayList<>();
@@ -77,12 +77,12 @@ public class GemHolder {
         duelistO = new ArrayList<>();
         marauderO = new ArrayList<>();
         scionO = new ArrayList<>();
-        
+
         dropOnly = new ArrayList<>();
-                
+
         dummie = new Gem();
         dummie.name = "<empty group>";
-        
+
         the_ultimate_map = new HashMap<>();
         the_ultimate_map.put("witch", null);
         the_ultimate_map.put("shadow", null);
@@ -92,7 +92,7 @@ public class GemHolder {
         the_ultimate_map.put("marauder", null);
         the_ultimate_map.put("scion", null);
     }
-    
+
     private void placeGemInClass(Gem a, String ch){
         //ch = classname
         //a = gem object
@@ -113,7 +113,7 @@ public class GemHolder {
                 scion.add(a);
         }
     }
-    
+
     public void putGem(Gem a){
         gems.add(a);
         if(a.isRewarded){}//not configured this feature yet.
@@ -156,12 +156,12 @@ public class GemHolder {
                     //System.err.println("CLASS : "+class_+" GEM : "+a.getGemName());
                 }
             }
-            
+
         }else{
             //System.err.println(" GEM : "+a.getGemName() + " not asssigned to any class");
             dropOnly.add(a);
         }
-        
+
     }
 
     public void pool(){
@@ -170,8 +170,8 @@ public class GemHolder {
             gem_pool.add(g);
         }
     }
-    
-    
+
+
     public void init_remaining_in_pool(){
         /*
         for(Gem g : gem_pool){
@@ -180,7 +180,7 @@ public class GemHolder {
             g.buy = new ArrayList<>();
             System.out.println(g.getGemName());
         }*/
-        
+
         JSONArray gems = new JSONArray();
         Collections.sort(this.gems, new Comparator<Gem>() {
             @Override
@@ -236,14 +236,14 @@ public class GemHolder {
             gems.put(bObj);
             counter++;
         }
-        
+
         String gem_to_json = gems.toString();
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         //Gson gson = new Gson();
         //String build_to_json = gson.toJson(linker.get(activeBuildID).build);
         BufferedWriter bw = null;
@@ -267,7 +267,7 @@ public class GemHolder {
             }
         }
     }
-    
+
     public void updateGemInfo(ArrayList<String> gemlist){
         String gemname = gemlist.get(0);
         if(gemname.equals("Siphoning Trap")){
@@ -282,7 +282,7 @@ public class GemHolder {
             //if(gemname.contains(g.getGemName()) || g.getGemName().contains(gemname)){
             if(gemname.equals(g.getGemName())){
                 found = true;
-                
+
                 if(gemlist.get(1).equals("N/A")){
                     g.isRewarded = false;
                     g.reward = null;
@@ -298,7 +298,7 @@ public class GemHolder {
                     for(int i = 0; i<split.length;i++){
                         av_list.add(split[i].trim());
                     }
-                    
+
                     g.reward = g.new Info();
                     g.reward.act = rew_act;
                     g.reward.npc = "Unknown";
@@ -306,11 +306,11 @@ public class GemHolder {
                     g.reward.town = "Unknwon";
                     g.reward.available_to = new ArrayList<>(av_list);
                 }
-                
+
                 g.buy = new ArrayList<>();
-                
+
                 for(int k = 2; k< gemlist.size(); k++){
-                    
+
                     String rew_string = gemlist.get(k);
                     int rew_act = Integer.parseInt(rew_string.charAt(4)+"");
                     int indexOf = rew_string.indexOf("with");
@@ -329,7 +329,7 @@ public class GemHolder {
                     for(int i = 0; i<split.length;i++){
                         av_list.add(split[i].trim());
                     }
-                    
+
                     Info inf = g.new Info();
                     inf.act = rew_act;
                     inf.npc = npc_name;
@@ -337,10 +337,10 @@ public class GemHolder {
                     inf.town = "Unknwon";
                     inf.available_to = new ArrayList<>(av_list);
                     g.buy.add(inf);
-                    
+
                 }
-                
-                
+
+
                 gem_pool.remove(g);
                 break;
             }
@@ -349,13 +349,13 @@ public class GemHolder {
             System.out.println("gem : "+gemname+" not found.");
         }
     }
-    
+
     public ArrayList<Gem> getGems(){
         return gems;
     }
-    
+
     public ArrayList<Gem> getGemsClass(){
-        
+
         if(className.toUpperCase().equals("WITCH")){
             return witch;
         }else if(className.toUpperCase().equals("SHADOW")){
@@ -373,7 +373,7 @@ public class GemHolder {
         }
         return null;
     }
-    
+
     public ArrayList<Gem> getGemOther(){
         /*
         if(className.toUpperCase().equals("WITCH")){
@@ -383,7 +383,7 @@ public class GemHolder {
                         witchO.add(g);
                     }
                 }
-                
+
             }
             return witchO;
         }else if(className.toUpperCase().equals("SHADOW")){
@@ -393,7 +393,7 @@ public class GemHolder {
                         shadowO.add(g);
                     }
                 }
-                
+
             }
             return shadowO;
         }else if(className.toUpperCase().equals("TEMPLAR")){
@@ -403,7 +403,7 @@ public class GemHolder {
                         templarO.add(g);
                     }
                 }
-                
+
             }
             return templarO;
         }else if(className.toUpperCase().equals("RANGER")){
@@ -413,7 +413,7 @@ public class GemHolder {
                         rangerO.add(g);
                     }
                 }
-                
+
             }
             return rangerO;
         }else if(className.toUpperCase().equals("DUELIST")){
@@ -423,7 +423,7 @@ public class GemHolder {
                         duelistO.add(g);
                     }
                 }
-                
+
             }
             return duelistO;
         }else if(className.toUpperCase().equals("MARAUDER")){
@@ -433,7 +433,7 @@ public class GemHolder {
                         marauderO.add(g);
                     }
                 }
-                
+
             }
            return marauderO;
         }else if(className.toUpperCase().equals("SCION")){
@@ -443,7 +443,7 @@ public class GemHolder {
                         scionO.add(g);
                     }
                 }
-                
+
             }
             return scionO;
         }
@@ -458,7 +458,7 @@ public class GemHolder {
         }
         return the_ultimate_map.get(className.toLowerCase());
     }
-    
+
     public ArrayList<HashMap<Zone,ArrayList<Gem>>> getGemClassAndQuest(){
             HashSet<String> avoidDuplicate = new HashSet<>();
             zone_gems = new ArrayList<>();
@@ -485,16 +485,16 @@ public class GemHolder {
                 }
                 zone_gems.add(map);
             }
-        
+
         return zone_gems;
     }
-    
-    
+
+
     public Gem tossDummie(){
         return dummie;
     }
-    
-    public Gem createGemFromCache(String gemName,String className){
+
+    public Gem createGemFromCache(String gemName, String className){
         ArrayList<Gem> gems = null;
         if(className.toUpperCase().equals("WITCH")){
             gems = new ArrayList<>(witch);
@@ -511,22 +511,24 @@ public class GemHolder {
         }else if(className.toUpperCase().equals("SCION")){
             gems = new ArrayList<>(scion);
         }
-        if(gems!=null)
-            for(Gem g : gems){
-                if(g.getGemName().equals(gemName)){
+        if(gems!=null) {
+            for (Gem g : gems) {
+                if (g.getGemName().equals(gemName)) {
                     return g.dupeGem();
                 }
             }
+        }
         //if we reach here no gem was found so it is placed on the drop-only
         gems = new ArrayList<>(getGemOther());
-        for(Gem g : gems){
-                if(g.getGemName().equals(gemName)){
-                    return g.dupeGem();
-                }
+        for(Gem g : gems) {
+            if(g.getGemName().equals(gemName)){
+                return g.dupeGem();
             }
+        }
+        System.out.println("Failed to createGemFromCache with gemName: " + gemName + " and className: " + className);
         return null;
     }
-    
+
     public ArrayList<Gem> custom(String query){
         String query_lower = query.toLowerCase();
         ArrayList<Gem> list = new ArrayList<>();

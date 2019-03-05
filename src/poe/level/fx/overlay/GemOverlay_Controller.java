@@ -29,9 +29,9 @@ import poe.level.fx.Preferences_Controller;
 public class GemOverlay_Controller implements Initializable {
 
     class Delta { double x, y; }
-    
+
     public void hookStage(Stage stage){
-        
+
         final Delta dragDelta = new Delta();
         gem_overlay_container.setOnMousePressed(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
@@ -46,12 +46,16 @@ public class GemOverlay_Controller implements Initializable {
             stage.setY(mouseEvent.getScreenY() + dragDelta.y);
             GemOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
             GemOverlay_Stage.prefY = mouseEvent.getScreenY() + dragDelta.y;
-            //update the prop file
-            Preferences_Controller.updateGemsPos(GemOverlay_Stage.prefX, GemOverlay_Stage.prefY);
           }
         });
+        gem_overlay_container.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                //update the prop file
+                Preferences_Controller.updateGemsPos(GemOverlay_Stage.prefX, GemOverlay_Stage.prefY);
+            }
+        });
     }
-    
+
     @FXML
     private VBox gem_overlay_container;
     /**
@@ -60,8 +64,8 @@ public class GemOverlay_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }  
-    
+    }
+
     public void socketGroupReplace(Gem add, Gem remove){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/replace_socket_group_overlay.fxml"));
         AnchorPane ap = null;
@@ -72,9 +76,9 @@ public class GemOverlay_Controller implements Initializable {
         }
         loader.<Replace_socket_group_overlay_Controller>getController().load(add,remove);
         gem_overlay_container.getChildren().add(ap);
-        
+
     }
-    
+
     public void gemReplace(Gem add, Gem remove, Gem socketgroup){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/replace_gem_overlay.fxml"));
         AnchorPane ap = null;
@@ -86,7 +90,7 @@ public class GemOverlay_Controller implements Initializable {
         loader.<Replace_gem_overlay_Controller>getController().load(add,remove,socketgroup);
         gem_overlay_container.getChildren().add(ap);
     }
-    
+
     public void addGem(Gem add, Gem socketgroup){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/add_gem_overlay.fxml"));
         AnchorPane ap = null;
@@ -98,9 +102,9 @@ public class GemOverlay_Controller implements Initializable {
         loader.<Add_gem_overlay_Controller>getController().load(add,socketgroup);
         gem_overlay_container.getChildren().add(ap);
     }
-    
+
     public void reset(){
         gem_overlay_container.getChildren().clear();
     }
-    
+
 }

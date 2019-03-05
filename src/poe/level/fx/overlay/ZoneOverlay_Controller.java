@@ -39,7 +39,7 @@ import poe.level.fx.Preferences_Controller;
 public class ZoneOverlay_Controller implements Initializable {
 
     class Delta { double x, y; }
-    
+
     @FXML
     private AnchorPane root;
     @FXML
@@ -50,9 +50,9 @@ public class ZoneOverlay_Controller implements Initializable {
     private ImageView trial;
     @FXML
     private ImageView recipe;
-    @FXML
+
     private Label recipeMarkedLabel;
-    
+  
     private double initialX;
     private double initialY;
     private Label cacheLabel;
@@ -60,9 +60,9 @@ public class ZoneOverlay_Controller implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
+
     public void hookStage(Stage stage){
-        
+
         final Delta dragDelta = new Delta();
         container.setOnMousePressed(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
@@ -72,18 +72,23 @@ public class ZoneOverlay_Controller implements Initializable {
           }
         });
         container.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                stage.setX(mouseEvent.getScreenX() + dragDelta.x);
+                stage.setY(mouseEvent.getScreenY() + dragDelta.y);
+                ZoneOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
+                ZoneOverlay_Stage.prefY = mouseEvent.getScreenY() + dragDelta.y;
+            }
+        });
+        container.setOnMouseDragReleased(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
-            stage.setX(mouseEvent.getScreenX() + dragDelta.x);
-            stage.setY(mouseEvent.getScreenY() + dragDelta.y);
-            ZoneOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
-            ZoneOverlay_Stage.prefY = mouseEvent.getScreenY() + dragDelta.y;
             Preferences_Controller.updateZonesPos(ZoneOverlay_Stage.prefX, ZoneOverlay_Stage.prefY);
           }
         });
     }
-    
+
     public void init(Zone zone){
-        
+
         BufferedImage img = null;
         if(Preferences_Controller.zones_trial_toggle){
             if(zone.hasTrial){
@@ -138,21 +143,21 @@ public class ZoneOverlay_Controller implements Initializable {
             cacheLabel.setText(zone.getZoneNote());
             container.getChildren().add(cacheLabel);
         }
-        
+
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         cacheLabel = (Label) container.getChildren().get(1);
         cacheLabelAlt = (Label) container.getChildren().get(0);
         container.getChildren().clear();
+    }
+
     }    
 
     public void playRecipeAnimation(){
         recipeMarkedLabel.setVisible(true);
-
-
 
         Timeline slideIn = new Timeline();
 
@@ -161,4 +166,5 @@ public class ZoneOverlay_Controller implements Initializable {
         slideIn.setOnFinished(e -> Platform.runLater(() -> recipeMarkedLabel.setVisible(false)));
         slideIn.play();
     }
+
 }

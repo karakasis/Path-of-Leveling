@@ -86,7 +86,15 @@ public class Preferences_Controller implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
+
+    //API
+
+    @FXML
+    private JFXTextField txtAccountName;
+
+    public static String poe_account_name;
+    //
+
     private Main_Controller root;
     private String level_hotkey_remind;
     private String recipe_hotkey_mark;
@@ -403,6 +411,10 @@ public class Preferences_Controller implements Initializable {
             poe_installation.setText(directory);
         }
 
+        //API
+        poe_account_name = prop.getProperty("poe-account-name", "");
+        //API
+
         zones_hotkey_show_hide_key = loadKeybinds(
                 prop
                 ,"zones-hotkey-show_hide"
@@ -462,6 +474,10 @@ public class Preferences_Controller implements Initializable {
                             betaGemUItoggle.setSelected(gem_UI_toggle);
                             betaHotkey_pane.setVisible(gem_UI_toggle);
 
+                            //API
+                            txtAccountName.setText(poe_account_name);
+                            //API
+                        
                             if(zones_toggle){
                                 sliderZones.setVisible(true);
                                 hideText.setVisible(true);
@@ -926,6 +942,11 @@ public class Preferences_Controller implements Initializable {
 
                     poe_log_dir = directory + "\\logs\\Client.txt";
                     prop.setProperty("poe-dir",directory);
+
+                    //API
+                    poe_account_name = txtAccountName.getText();
+                    prop.setProperty("poe-account-name", poe_account_name);
+                    //API
 
                     zones_hotkey_show_hide_key = saveKeybinds(prop,"zones-hotkey-show_hide",show_hide_hotkey_zone.getText());
                     level_hotkey_remind_key = saveKeybinds(prop,"level-hotkey-remind",remind_gems.getText());

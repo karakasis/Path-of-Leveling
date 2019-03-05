@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="66.0" styleClass="buildPanel" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.BuildEntry_Controller">
+<AnchorPane fx:id="root" prefHeight="66.0" styleClass="buildPanel" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.BuildEntry_Controller">
    <children>
       <ImageView fx:id="banner" fitHeight="64.0" fitWidth="140.0" layoutX="14.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0">
          <image>
