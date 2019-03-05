@@ -82,11 +82,14 @@ public class Preferences_Controller implements Initializable {
 
     @FXML
     private AnchorPane betaHotkey_pane;
+
+    //API
+
     @FXML
     private JFXTextField txtAccountName;
-    /**
-     * Initializes the controller class.
-     */
+
+    public static String poe_account_name;
+    //
 
     private Main_Controller root;
     private String level_hotkey_remind;
@@ -124,8 +127,6 @@ public class Preferences_Controller implements Initializable {
 
 
     public static String poe_log_dir;
-
-    public static String poe_account_name;
 
     public static double[] zones_overlay_pos;
     public static double[] level_overlay_pos;
@@ -379,6 +380,7 @@ public class Preferences_Controller implements Initializable {
 
 		// load a properties file
 		prop.load(input);
+
         zones_toggle = Boolean.parseBoolean(prop.getProperty("zones-toggle"));
         zones_text_toggle = Boolean.parseBoolean(prop.getProperty("zones-text-toggle"));
         zones_images_toggle = Boolean.parseBoolean(prop.getProperty("zones-images-toggle"));
@@ -410,7 +412,10 @@ public class Preferences_Controller implements Initializable {
             poe_log_dir = directory + "\\logs\\Client.txt";
             poe_installation.setText(directory);
         }
+
+        //API
         poe_account_name = prop.getProperty("poe-account-name", "");
+        //API
 
         zones_hotkey_show_hide_key = loadKeybinds(
                 prop
@@ -473,6 +478,11 @@ public class Preferences_Controller implements Initializable {
             passive_toggle.setSelected(zones_passive_toggle);
             betaGemUItoggle.setSelected(gem_UI_toggle);
             betaHotkey_pane.setVisible(gem_UI_toggle);
+
+            //API
+            txtAccountName.setText(poe_account_name);
+            //API
+
             if(zones_toggle){
                 sliderZones.setVisible(true);
                 hideText.setVisible(true);
@@ -482,13 +492,7 @@ public class Preferences_Controller implements Initializable {
                 sliderZones.setVisible(false);
                 hideText.setVisible(false);
             }
-
-            show_hide_hotkey_zone.setText(zones_hotkey_show_hide);
-
             sliderLevel.setValue(level_slider);
-            remind_gems.setText(level_hotkey_remind);
-            mark_recipe_hotkey.setText(recipe_hotkey_mark);
-            txtAccountName.setText(poe_account_name);
 	}
 
         show_hide_hotkey_zone.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -937,8 +941,11 @@ public class Preferences_Controller implements Initializable {
 
                     poe_log_dir = directory + "\\logs\\Client.txt";
                     prop.setProperty("poe-dir",directory);
+
+                    //API
                     poe_account_name = txtAccountName.getText();
                     prop.setProperty("poe-account-name", poe_account_name);
+                    //API
 
                     zones_hotkey_show_hide_key = saveKeybinds(prop,"zones-hotkey-show_hide",show_hide_hotkey_zone.getText());
                     level_hotkey_remind_key = saveKeybinds(prop,"level-hotkey-remind",remind_gems.getText());

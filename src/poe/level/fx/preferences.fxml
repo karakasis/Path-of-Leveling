@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="646.0" prefWidth="499.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Preferences_Controller">
+<AnchorPane id="AnchorPane" prefHeight="677.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Preferences_Controller">
    <children>
       <Label layoutX="29.0" layoutY="17.0" text="Zones :">
          <font>
@@ -40,7 +40,7 @@
       <Label layoutX="330.0" layoutY="267.0" prefHeight="36.0" prefWidth="68.0" text="Show gems again" textAlignment="CENTER" wrapText="true" />
       <TextField fx:id="remind_gems" editable="false" layoutX="401.0" layoutY="272.0" prefHeight="25.0" prefWidth="79.0" />
       <Separator layoutX="310.0" layoutY="12.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="7.0" />
-      <JFXButton buttonType="RAISED" layoutX="381.0" layoutY="559.0" onAction="#save" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Save changes" textFill="WHITE" AnchorPane.rightAnchor="30.0" />
+      <JFXButton buttonType="RAISED" layoutX="384.0" layoutY="638.0" onAction="#save" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Save changes" textFill="WHITE" AnchorPane.rightAnchor="27.0" />
       <Separator layoutX="22.0" layoutY="435.0" prefHeight="8.0" prefWidth="285.0" />
       <Label layoutX="28.0" layoutY="452.0" text="Path of Exile Installation folder :">
          <font>
@@ -87,13 +87,13 @@
       <JFXToggleButton fx:id="recipe_toggle" layoutX="15.0" layoutY="198.0" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Alert when zone has a crafting recipe" />
       <Label layoutX="317.0" layoutY="175.0" prefHeight="47.0" prefWidth="64.0" text="Mark recipe as found" textAlignment="CENTER" wrapText="true" />
       <TextField fx:id="mark_recipe_hotkey" editable="false" layoutX="388.0" layoutY="186.0" prefHeight="25.0" prefWidth="79.0" />
-       <Separator layoutX="19.0" layoutY="588.0" prefHeight="8.0" prefWidth="462.0" />
-       <Label layoutX="28.0" layoutY="509.0" prefHeight="25.0" prefWidth="233.0" text="Path of Exile API Account Name :">
+       <Separator layoutX="19.0" layoutY="624.0" prefHeight="8.0" prefWidth="462.0" />
+       <Label layoutX="28.0" layoutY="552.0" prefHeight="25.0" prefWidth="233.0" text="Path of Exile API Account Name :">
            <font>
                <Font size="16.0" />
            </font>
        </Label>
-       <JFXTextField fx:id="txtAccountName" layoutX="28.0" layoutY="543.0" prefHeight="25.0" prefWidth="285.0" />
+       <JFXTextField fx:id="txtAccountName" layoutX="28.0" layoutY="586.0" prefHeight="25.0" prefWidth="248.0" />
        <Label layoutX="330.0" layoutY="220.0" prefHeight="47.0" prefWidth="68.0" text="Open recipe preview" textAlignment="CENTER" wrapText="true" />
        <TextField fx:id="recipe_preview_hotkey" editable="false" layoutX="401.0" layoutY="231.0" prefHeight="25.0" prefWidth="79.0" />
        <JFXToggleButton fx:id="betaGemUItoggle" layoutX="9.0" layoutY="385.0" onAction="#betaGemUItoggle_action" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" text="Beta Gem UI" />

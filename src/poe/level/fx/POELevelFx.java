@@ -367,6 +367,9 @@ public class POELevelFx extends Application {
                               Preferences_Controller.poe_log_dir = prop.getProperty("poe-dir") + "\\logs\\Client.txt";
                           }
 
+                          //API
+                          Preferences_Controller.poe_account_name = prop.getProperty("poe-account-name", "");
+
                             //new changes to overlay positions persist
                             //a bug is introduced at this point. users with older versions will not have
                             //those lines in their prop files and a null error will pop up
@@ -410,7 +413,6 @@ public class POELevelFx extends Application {
                             Preferences_Controller.updateGemsPos(Double.parseDouble(gem_pos[0])
                                     , Double.parseDouble(gem_pos[1]));
 
-
                       Preferences_Controller.zones_hotkey_show_hide_key = loadKeybinds(
                                 prop
                                 ,"zones-hotkey-show_hide"
@@ -453,7 +455,6 @@ public class POELevelFx extends Application {
                               }
                       }
                   }
-
             }
 
 
@@ -465,13 +466,6 @@ public class POELevelFx extends Application {
               loadBuildsFromMemory();
 
               loadRecipesProperties();
-/*
-            Platform.runLater(new Runnable(){
-                @Override
-                public void run() {
-                    new Test();
-                }
-            }); */
 
         }
 

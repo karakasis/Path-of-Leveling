@@ -50,7 +50,7 @@ public class ZoneOverlay_Controller implements Initializable {
     private ImageView trial;
     @FXML
     private ImageView recipe;
-    @FXML
+
     private Label recipeMarkedLabel;
 
     private double initialX;
@@ -157,8 +157,6 @@ public class ZoneOverlay_Controller implements Initializable {
     public void playRecipeAnimation(){
         recipeMarkedLabel.setVisible(true);
 
-
-
         Timeline slideIn = new Timeline();
 
         KeyFrame kf_slideIn = new KeyFrame(Duration.millis(5000));
@@ -166,4 +164,5 @@ public class ZoneOverlay_Controller implements Initializable {
         slideIn.setOnFinished(e -> Platform.runLater(() -> recipeMarkedLabel.setVisible(false)));
         slideIn.play();
     }
+
 }
