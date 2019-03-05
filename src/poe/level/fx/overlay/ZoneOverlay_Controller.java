@@ -154,8 +154,6 @@ public class ZoneOverlay_Controller implements Initializable {
         container.getChildren().clear();
     }
 
-    }    
-
     public void playRecipeAnimation(){
         recipeMarkedLabel.setVisible(true);
 
