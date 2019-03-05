@@ -8,12 +8,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.TilePane?>
 
-<AnchorPane fx:id="rootPane" minWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.GemsPanel_Controller">
+<AnchorPane fx:id="rootPane" minWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.GemsPanel_Controller">
    <children>
       <AnchorPane layoutX="14.0" layoutY="10.0" prefHeight="147.0" prefWidth="504.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -50,6 +51,9 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <tooltip>
+            <Tooltip text="Add Gem to Socket-Group" />
+         </tooltip>
       </JFXButton>
       <JFXButton fx:id="removeGemPanel_button" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" layoutX="9.0" layoutY="221.0" onAction="#removeGemPanel" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="220.0">
          <graphic>
@@ -59,6 +63,9 @@
                </image>
             </ImageView>
          </graphic>
+         <tooltip>
+            <Tooltip text="Remove Gem from Socket-Group" />
+         </tooltip>
       </JFXButton>
    </children>
 </AnchorPane>

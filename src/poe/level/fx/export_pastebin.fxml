@@ -3,12 +3,16 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="279.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Export_pastebin_Controller">
    <children>
-      <JFXButton buttonType="RAISED" layoutX="344.0" layoutY="14.0" onAction="#copyToClipboard" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Copy" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="344.0" layoutY="14.0" onAction="#copyToClipboard" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Copy" textFill="WHITE">
+         <tooltip>
+            <Tooltip text="If successful: copies PastebinURL to clipboard &#013;If not: copies Build-Data and opens pastebin" />
+         </tooltip></JFXButton>
       <Label layoutX="21.0" layoutY="16.0" text="Copy to clipboard">
          <font>
             <Font name="Alegreya Sans SC" size="15.0" />
