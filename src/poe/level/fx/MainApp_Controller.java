@@ -28,6 +28,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import poe.level.data.Build;
+import poe.level.fx.overlay.RecipeOverlay_Controller;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -711,6 +712,26 @@ public class MainApp_Controller implements Initializable {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER).show();
+    }
+    private JFXDialog jfxDialog;
+
+    @FXML
+    private void recipePopup(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("overlay/RecipeOverlay.fxml"));
+        AnchorPane con = null;
+        try {
+            con = (AnchorPane) loader.load();
+            loader.<RecipeOverlay_Controller>getController().hook(this);
+        } catch (IOException ex) {
+            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jfxDialog = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+        jfxDialog.show();
+    }
+
+    public void refreshRecipePopup(){
+        jfxDialog.close();
+        recipePopup();
     }
 }
               /*

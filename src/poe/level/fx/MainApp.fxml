@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.MainApp_Controller">
+<StackPane fx:id="rootPane" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.MainApp_Controller">
    <children>
       <AnchorPane fx:id="container">
          <children>
@@ -67,6 +67,7 @@
                             <MenuItem disable="true" mnemonicParsing="false" text="Night Mode - Soon" />
                           </items>
                         </Menu>
+                        <MenuItem mnemonicParsing="false" onAction="#recipePopup" text="Recipes/Passives" />
                 </items>
               </Menu>
               <Menu mnemonicParsing="false" text="About">

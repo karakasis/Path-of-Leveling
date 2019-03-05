@@ -189,12 +189,14 @@ public class GemOverlay_Stage extends Stage{
         WritableValue<Double> writableWidth = new WritableValue<Double>() {
             @Override
             public Double getValue() {
+
                 return getWidth();
+                //return getY();
             }
 
             @Override
             public void setValue(Double value) {
-                //setX(screenRightEdge + value);
+                 //setY(screenRightEdge + value);
                 setWidth(value);
             }
         };
@@ -212,10 +214,10 @@ public class GemOverlay_Stage extends Stage{
         
         slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending");isPlaying = false; this.hide();}));
         slideIn.setOnFinished(e -> Platform.runLater(() -> slideOut.play()));
-        
+
+        this.show();
         slideIn.play();
         isPlaying = true;
-        this.show();
     }
     
     public void update(int level){
