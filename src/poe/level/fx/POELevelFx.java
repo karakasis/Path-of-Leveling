@@ -1137,11 +1137,6 @@ public class POELevelFx extends Application {
 
         String build_to_json = builds_array.toString();
 
-
-
-
-
-
         //Gson gson = new Gson();
         //String build_to_json = gson.toJson(linker.get(activeBuildID).build);
         System.out.println(build_to_json);

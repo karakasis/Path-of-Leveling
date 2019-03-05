@@ -1,17 +1,16 @@
 package poe.level.fx;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import poe.level.data.CharacterInfo;
-import poe.level.data.Util;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,15 +25,16 @@ public class SelectCharacter_PopupController implements Initializable {
 
     private final ArrayList<CharacterInfo> m_characterList;
 
-    public SelectCharacter_PopupController(ArrayList<CharacterInfo> characterList) {
+    SelectCharacter_PopupController(ArrayList<CharacterInfo> characterList) {
         this.m_characterList = characterList;
     }
 
-        @FXML
-    private Label lblDialogTitle;
     @FXML
-    private VBox buildsBox;
+    private VBox charactersBox;
+    @FXML
+    private JFXComboBox<String> cmbLeagueFilter;
 
+    private final HashMap<Node, String> m_NodeToLeague = new HashMap<>();
     private Consumer<CharacterInfo> closePopupFunction;
 
     public void hook(Consumer<CharacterInfo> closePopupFunction) {
@@ -46,25 +46,43 @@ public class SelectCharacter_PopupController implements Initializable {
         closePopupFunction.accept(m_characterList.get(id));
     }
 
+    private void filterChanged() {
+        filterCharacters(cmbLeagueFilter.getValue());
+    }
+
+    private void filterCharacters(String league) {
+        for (Node node : charactersBox.getChildren()) {
+            node.setVisible(league.isEmpty() || "All".equalsIgnoreCase(league) || m_NodeToLeague.get(node).equalsIgnoreCase(league));
+        }
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lblDialogTitle.setText("Characters :");
         assert (m_characterList != null);
+        Set<String> leagueList = new LinkedHashSet<>();
+        leagueList.add("All");
         for (int i = 0; i < m_characterList.size(); i++) { //this might require to update the buildsLoaded on each new build added and removed
             CharacterInfo ci = m_characterList.get(i);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("buildEntry.fxml"));
+            leagueList.add(ci.league);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("characterEntry.fxml"));
             try {
+                Node n = loader.load();
+                n.managedProperty().bind(n.visibleProperty());
+                m_NodeToLeague.put(n, ci.league);
                 //this will add the AnchorPane to the VBox
-                buildsBox.getChildren().add(loader.load());
+                charactersBox.getChildren().add(n);
             } catch (IOException ex) {
                 Logger.getLogger(SelectBuild_PopupController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            BuildEntry_Controller bec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
-            bec.init_for_popup(Util.charToImage(ci.className, ci.ascendancyName), ci.characterName, ci.ascendancyName, i, this::update);
+            CharacterEntry_Controller cec = loader.getController(); //add controller to the linker class
+            cec.init_for_popup(ci, i, this::update);
         }
+        cmbLeagueFilter.getItems().addAll(leagueList);
+        cmbLeagueFilter.setOnAction(event -> filterChanged());
+
     }
 
 

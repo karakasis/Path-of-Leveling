@@ -32,7 +32,9 @@ public class Build {
     }
 
     public void setCharacterInfo(CharacterInfo charInfo) {
-        m_characterInfo.copyFrom(charInfo);
+        // TODO - don't overwrite ascendancy in the Build
+        m_characterInfo.characterName = charInfo.characterName;
+        m_characterInfo.level = charInfo.level;
     }
 
     public CharacterInfo getCharacterInfo() {

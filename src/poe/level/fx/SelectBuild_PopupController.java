@@ -8,7 +8,6 @@ package poe.level.fx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import poe.level.data.Build;
 import poe.level.data.Util;
@@ -16,7 +15,6 @@ import poe.level.data.Util;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,19 +27,17 @@ import java.util.logging.Logger;
 public class SelectBuild_PopupController implements Initializable {
 
     @FXML
-    private Label lblDialogTitle;
-    @FXML
     private VBox buildsBox;
 
-    private final Consumer<Build> closePopupFunction;
+    private Main_Controller root;
 
-    public SelectBuild_PopupController(Consumer<Build> closePopupFunction) {
-        this.closePopupFunction = closePopupFunction;
+    public void hook(Main_Controller root){
+        this.root = root;
     }
 
     public void update(int id) {
         Build selected = POELevelFx.buildsLoaded.get(id);
-        closePopupFunction.accept(selected);
+        root.closePopup(selected);
     }
 
     /**
@@ -58,7 +54,7 @@ public class SelectBuild_PopupController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(SelectBuild_PopupController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            BuildEntry_Controller bec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
+            BuildEntry_Controller bec = loader.getController(); //add controller to the linker class
             bec.init_for_popup(Util.charToImage(b.getClassName(), b.getAsc()), b.getName(), b.getAsc(), i, this::update);
         }
     }

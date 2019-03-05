@@ -121,7 +121,7 @@ public class CharacterInfo_Controller implements Initializable {
 
     @FXML
     public void buildPopup() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectBuild_Popup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectCharacter_Popup.fxml"));
         try {
             ArrayList<CharacterInfo> characters = POEAPIHelper.getCharacters(txtAccountName.getText());
             if (characters == null || characters.isEmpty()) {
@@ -135,7 +135,6 @@ public class CharacterInfo_Controller implements Initializable {
             AnchorPane con = loader.load();
             SelectCharacter_PopupController controller = loader.getController();
             controller.hook(this::closePopup);
-            con.setPrefWidth(400);
             addBuildPopup = new JFXDialog(root.getRootPane(), con, JFXDialog.DialogTransition.CENTER);
             //controller.passDialog(mLoad);
             addBuildPopup.show();
@@ -146,7 +145,7 @@ public class CharacterInfo_Controller implements Initializable {
 
     }
 
-    public void closePopup(CharacterInfo charInfo) {
+    private void closePopup(CharacterInfo charInfo) {
         if (addBuildPopup != null) {
             addBuildPopup.close();
         }
