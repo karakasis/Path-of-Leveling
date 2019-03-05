@@ -56,6 +56,9 @@ public class SelectBuild_PopupController implements Initializable {
             }
             BuildEntry_Controller bec = loader.getController(); //add controller to the linker class
             bec.init_for_popup(Util.charToImage(b.getClassName(), b.getAsc()), b.getName(), b.getAsc(), i, this::update);
+
+            if(!b.isValid) bec.initDisabledBuild();
+
         }
     }
 

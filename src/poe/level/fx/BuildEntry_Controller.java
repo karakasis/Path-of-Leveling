@@ -17,6 +17,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -42,17 +45,23 @@ public class BuildEntry_Controller implements Initializable {
     @FXML
     AnchorPane root;
     @FXML
+    AnchorPane disabledPanel;
+    @FXML
+    AnchorPane nonValidPanel;
+    @FXML
     private TextField editBuildName;
 
     BuildLinker parent;
     Consumer<Integer> buildSelectorCallback;
     int id_for_popup;
+    boolean isDisabledInLauncher;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        isDisabledInLauncher = false;
         // TODO
         root.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -149,6 +158,24 @@ public class BuildEntry_Controller implements Initializable {
 
     }
 
+    public void initInvalidBackgroundColor(){
+        root.setStyle("color: rgba(217, 215, 215, 0.8);");
+    }
+
+    public void initDisabledBuild(){
+        isDisabledInLauncher = true;
+        BoxBlur b = new BoxBlur();
+        b.setWidth(5.0);
+        b.setHeight(5.0);
+        b.setIterations(1);
+        Blend bl = new Blend();
+        bl.setMode(BlendMode.SRC_OVER);
+        bl.setOpacity(1.0);
+        bl.setTopInput(b);
+        disabledPanel.setEffect(b);
+        //disabledPanel.setVisible(true);
+        nonValidPanel.setVisible(true);
+    }
 
     private void onPress() {
         //root.setStyle("-fx-background-color: PeachPuff;"
@@ -162,7 +189,7 @@ public class BuildEntry_Controller implements Initializable {
 
             parent.update();
         }
-        if(buildSelectorCallback != null) {
+        if(buildSelectorCallback != null && !isDisabledInLauncher) {
             buildSelectorCallback.accept(id_for_popup);
         }
 

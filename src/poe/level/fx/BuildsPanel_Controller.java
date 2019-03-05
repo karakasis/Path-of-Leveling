@@ -601,6 +601,7 @@ public class BuildsPanel_Controller implements Initializable {
         bl.pec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
         bl.pec.init(Util.charToImage(build.getClassName(),build.getAsc())
                 , build.getName(), build.getAsc(), bl);
+        if(!build.isValid) bl.pec.initInvalidBackgroundColor();
         bl.build = build;
         //bl.build.isValid = true;
         for(SocketGroup sg : bl.build.getSocketGroup()){

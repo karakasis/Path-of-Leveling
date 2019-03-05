@@ -252,6 +252,7 @@ public class MainApp_Controller implements Initializable {
 
     private boolean revalidation_switch = false;
     private boolean launcher_switch = false;
+    private boolean export_switch = false;
 
     public void sayNoToValidation(){
         buildPreviewPopup.close();
@@ -261,14 +262,25 @@ public class MainApp_Controller implements Initializable {
         buildPreviewPopup.close();
         buildspanel_controller.setBuildToNonValid();
         if(revalidation_switch){
-            if(launcher_switch){
+            if(export_switch){
                 revalidation_switch = false;
-                launcher_switch = false;
-                validateToLauncher();
+                export_switch = false;
+                exportToPastebinAll();
             }else{
-                revalidation_switch = false;
-                launcher_switch = false;
-                saveAllBuilds();
+                if(launcher_switch){
+                    revalidation_switch = false;
+                    launcher_switch = false;
+                    validateToLauncher();
+                }else{
+                    revalidation_switch = false;
+                    launcher_switch = false;
+                    saveAllBuilds();
+                }
+            }
+        }else{
+            if(export_switch){
+                export_switch = false;
+                exportToPastebinActive();
             }
         }
     }
@@ -400,7 +412,8 @@ public class MainApp_Controller implements Initializable {
 
     @FXML
     private void exportToPastebinAll(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("export_pastebin.fxml"));
+        if(buildspanel_controller.validateAll()){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("export_pastebin.fxml"));
             AnchorPane con = null;
             try {
                 con = (AnchorPane) loader.load();
@@ -411,11 +424,30 @@ public class MainApp_Controller implements Initializable {
 
             buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
             buildPreviewPopup.show();
+        }else{
+            revalidation_switch = true;
+            export_switch=true;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ValidateErrorPopup.fxml"));
+            AnchorPane con = null;
+            try {
+                con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            //controller.passDialog(mLoad);
+            loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated,
+                    buildspanel_controller.validateAllError(),this);
+            buildPreviewPopup.show();
+        }
+
     }
 
     @FXML
     private void exportToPastebinActive(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("export_pastebin.fxml"));
+        if(buildspanel_controller.validate()){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("export_pastebin.fxml"));
             AnchorPane con = null;
             try {
                 con = (AnchorPane) loader.load();
@@ -426,6 +458,23 @@ public class MainApp_Controller implements Initializable {
 
             buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
             buildPreviewPopup.show();
+        }else{
+            export_switch = true;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ValidateErrorPopup.fxml"));
+            AnchorPane con = null;
+            try {
+                con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            //controller.passDialog(mLoad);
+            loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated
+                    , buildspanel_controller.validateError(),this);
+            buildPreviewPopup.show();
+        }
+
     }
 
     public void toggleActiveBuilds(boolean toggle){
