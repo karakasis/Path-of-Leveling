@@ -9,6 +9,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.beans.value.WritableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +26,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+
+import javafx.util.Duration;
 import poe.level.data.Zone;
 import poe.level.fx.Preferences_Controller;
 
@@ -43,6 +50,8 @@ public class ZoneOverlay_Controller implements Initializable {
     private ImageView trial;
     @FXML
     private ImageView recipe;
+    @FXML
+    private Label recipeMarkedLabel;
 
     private double initialX;
     private double initialY;
@@ -145,4 +154,16 @@ public class ZoneOverlay_Controller implements Initializable {
         container.getChildren().clear();
     }
 
+    public void playRecipeAnimation(){
+        recipeMarkedLabel.setVisible(true);
+
+
+
+        Timeline slideIn = new Timeline();
+
+        KeyFrame kf_slideIn = new KeyFrame(Duration.millis(5000));
+        slideIn.getKeyFrames().addAll(kf_slideIn);
+        slideIn.setOnFinished(e -> Platform.runLater(() -> recipeMarkedLabel.setVisible(false)));
+        slideIn.play();
+    }
 }
