@@ -48,6 +48,8 @@ public class CharacterInfo_Controller implements Initializable {
     private ImageView buildIcon;
     @FXML
     private JFXButton btnSelectCharacter;
+    @FXML
+    private JFXButton btnAutoStart;
 
     private JFXDialog addBuildPopup;
 
@@ -73,7 +75,6 @@ public class CharacterInfo_Controller implements Initializable {
             txtManualLevel.setText(Integer.toString(build.getCharacterLevel()));
         }
         m_selectedCharacterInfo.copyFrom(build.getCharacterInfo());
-        decorateSelectButton(m_selectedCharacterInfo);
     }
 
     @FXML
@@ -121,6 +122,7 @@ public class CharacterInfo_Controller implements Initializable {
 
     @FXML
     public void buildPopup() {
+        btnAutoStart.setDisable(true);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectCharacter_Popup.fxml"));
         try {
             ArrayList<CharacterInfo> characters = POEAPIHelper.getCharacters(txtAccountName.getText());
@@ -151,6 +153,8 @@ public class CharacterInfo_Controller implements Initializable {
         }
         decorateSelectButton(charInfo);
         m_selectedCharacterInfo.copyFrom(charInfo);
+        btnAutoStart.setDisable(false);
+
     }
 
     private void decorateSelectButton(CharacterInfo charInfo) {

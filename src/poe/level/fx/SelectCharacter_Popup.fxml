@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="150.0" prefHeight="551.0" prefWidth="313.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minWidth="150.0" prefHeight="551.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="38.0" prefWidth="335.0" AnchorPane.bottomAnchor="508.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -29,7 +29,7 @@
          <content>
             <VBox fx:id="charactersBox" spacing="7.0" style="-fx-background-color: white;">
                <padding>
-                  <Insets left="-2.0" right="-2.0" top="2.0" />
+                  <Insets left="2.0" right="2.0" top="2.0" />
                </padding>
             </VBox>
          </content>

@@ -40,6 +40,6 @@
       <Cursor fx:constant="OPEN_HAND" />
    </cursor>
    <padding>
-      <Insets right="10.0" />
+      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
    </padding>
 </AnchorPane>

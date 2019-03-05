@@ -369,7 +369,7 @@ public class POELevelFx extends Application {
 
                           //API
                           Preferences_Controller.poe_account_name = prop.getProperty("poe-account-name", "");
-                    
+
                             //new changes to overlay positions persist
                             //a bug is introduced at this point. users with older versions will not have
                             //those lines in their prop files and a null error will pop up

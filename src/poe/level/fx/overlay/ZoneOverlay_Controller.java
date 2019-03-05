@@ -52,7 +52,7 @@ public class ZoneOverlay_Controller implements Initializable {
     private ImageView recipe;
 
     private Label recipeMarkedLabel;
-  
+
     private double initialX;
     private double initialY;
     private Label cacheLabel;

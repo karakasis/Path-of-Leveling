@@ -125,7 +125,7 @@
                               <HBox prefHeight="7.0" prefWidth="329.0" BorderPane.alignment="BOTTOM_CENTER">
                                  <children>
                                     <Label fx:id="lblAutoError" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="197.0" textAlignment="CENTER" textFill="#e82222" visible="false" wrapText="true" />
-                                    <JFXButton buttonType="RAISED" onAction="#startAuto" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Start" textFill="WHITE">
+                                    <JFXButton fx:id="btnAutoStart" buttonType="RAISED" disable="true" onAction="#startAuto" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Start" textFill="WHITE">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>

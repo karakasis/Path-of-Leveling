@@ -48,7 +48,7 @@ public class Preferences_Controller implements Initializable {
     private JFXSlider sliderZones;
     @FXML
     private JFXSlider sliderLevel;
-    @FXML 
+    @FXML
     private Label hideText;
 
     @FXML
@@ -66,7 +66,7 @@ public class Preferences_Controller implements Initializable {
 
     @FXML
     private JFXTextField poe_installation;
-    
+
     @FXML
     private JFXToggleButton text_toggle;
     @FXML
@@ -83,10 +83,6 @@ public class Preferences_Controller implements Initializable {
     @FXML
     private AnchorPane betaHotkey_pane;
 
-    /**
-     * Initializes the controller class.
-     */
-
     //API
 
     @FXML
@@ -100,38 +96,38 @@ public class Preferences_Controller implements Initializable {
     private String recipe_hotkey_mark;
     private String key_bind = "";
     private String directory;
-    
+
     public static boolean zones_toggle;
-    
+
     public static boolean zones_text_toggle;
     public static boolean zones_images_toggle;
-    
+
     public static boolean zones_passive_toggle;
     public static boolean zones_trial_toggle;
     public static boolean zones_recipe_toggle;
 
     public static boolean gem_UI_toggle;
-    
+
     public static double zones_slider;
     public static double level_slider;
-    
+
     public static KeyCombination zones_hotkey_show_hide_key;
     public static KeyCombination level_hotkey_remind_key;
     public static KeyCombination recipe_hotkey_mark_key;
     public static KeyCombination recipe_hotkey_preview_key;
     public static KeyCombination level_hotkey_beta_next_key;
     public static KeyCombination level_hotkey_beta_previous_key;
-    
+
     private KeyCombination zones_hotkey_show_hide_key_tmp;
     private KeyCombination level_hotkey_remind_key_tmp;
     private KeyCombination recipe_hotkey_mark_key_tmp;
     public static KeyCombination recipe_hotkey_preview_key_tmp;
     public static KeyCombination level_hotkey_beta_next_key_tmp;
     public static KeyCombination level_hotkey_beta_previous_key_tmp;
-    
-    
+
+
     public static String poe_log_dir;
-    
+
     public static double[] zones_overlay_pos;
     public static double[] level_overlay_pos;
     public static double[] gem_overlay_pos;
@@ -148,143 +144,150 @@ public class Preferences_Controller implements Initializable {
         }
         zones_overlay_pos[0] = x;
         zones_overlay_pos[1] = y;
-        
+
         //replace the changes in prop file
         FileInputStream in = null;
-        try {
-            in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
         Properties props = new Properties();
         try {
+            in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
             props.load(in);
         } catch (IOException ex) {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            in.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        props.setProperty("zones-overlay-pos", zones_overlay_pos[0] + "," + zones_overlay_pos[1]);
-        try {
+            props.setProperty("zones-overlay-pos", zones_overlay_pos[0] + "," + zones_overlay_pos[1]);
             props.store(out, null);
         } catch (IOException ex) {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
-        try {
-            out.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
-    
+
     public static void updateLevelPos(double x, double y){
+        System.out.println("updateLevelPos x:" + x + " y: " + y);
         if(level_overlay_pos == null){
             level_overlay_pos = new double[2];
         }
         level_overlay_pos[0] = x;
         level_overlay_pos[1] = y;
-        
+
         //replace the changes in prop file
         FileInputStream in = null;
-        try {
-            in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
         Properties props = new Properties();
         try {
+            in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
             props.load(in);
         } catch (IOException ex) {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            in.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        props.setProperty("level-overlay-pos", level_overlay_pos[0] + "," + level_overlay_pos[1]);
-        try {
+            props.setProperty("level-overlay-pos", level_overlay_pos[0] + "," + level_overlay_pos[1]);
             props.store(out, null);
         } catch (IOException ex) {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
-        try {
-            out.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+
     }
-    
+
     public static void updateGemsPos(double x, double y){
         if(gem_overlay_pos == null){
             gem_overlay_pos = new double[2];
         }
         gem_overlay_pos[0] = x;
         gem_overlay_pos[1] = y;
-        
+
         //replace the changes in prop file
         FileInputStream in = null;
-        try {
-            in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
         Properties props = new Properties();
         try {
+            in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
             props.load(in);
         } catch (IOException ex) {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            in.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        props.setProperty("gems-overlay-pos", gem_overlay_pos[0] + "," + gem_overlay_pos[1]);
-        try {
+            props.setProperty("gems-overlay-pos", gem_overlay_pos[0] + "," + gem_overlay_pos[1]);
             props.store(out, null);
         } catch (IOException ex) {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
-        try {
-            out.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
-    
+
     public static void updateRecipeFile(String zoneName){ // default is replace with true the false value
-        
+
         //replace the changes in prop file
         FileInputStream in = null;
         try {
             in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
         Properties props = new Properties();
         try {
@@ -301,19 +304,18 @@ public class Preferences_Controller implements Initializable {
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        props.setProperty(zoneName, "true");
-        try {
+            props.setProperty(zoneName, "true");
             props.store(out, null);
         } catch (IOException ex) {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            out.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 
@@ -350,11 +352,11 @@ public class Preferences_Controller implements Initializable {
 
         }
     }
-    
+
     public void hook(Main_Controller root){
         this.root = root;
     }
-    
+
     //i think i dont need to load and save overlay positions here.
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -384,17 +386,17 @@ public class Preferences_Controller implements Initializable {
         zones_images_toggle = Boolean.parseBoolean(prop.getProperty("zones-images-toggle"));
         zones_passive_toggle = Boolean.parseBoolean(prop.getProperty("zones-passive-toggle"));
         String parseTrial = prop.getProperty("zones-trial-toggle");
-            if(parseTrial == null){
-                zones_trial_toggle = true; //default
-            }else{
-                zones_trial_toggle = Boolean.parseBoolean(prop.getProperty("zones-trial-toggle"));
-            }
+        if(parseTrial == null){
+            zones_trial_toggle = true; //default
+        }else{
+            zones_trial_toggle = Boolean.parseBoolean(prop.getProperty("zones-trial-toggle"));
+        }
         String parseRecipe = prop.getProperty("zones-recipe-toggle");
-            if(parseRecipe == null){
-                zones_recipe_toggle = true; //default
-            }else{
-                zones_recipe_toggle = Boolean.parseBoolean(prop.getProperty("zones-recipe-toggle"));
-            }
+        if(parseRecipe == null){
+            zones_recipe_toggle = true; //default
+        }else{
+            zones_recipe_toggle = Boolean.parseBoolean(prop.getProperty("zones-recipe-toggle"));
+        }
         String parseGemUI = prop.getProperty("gem-beta-UI-toggle");
         if(parseGemUI == null){
             gem_UI_toggle = true; //default
@@ -464,35 +466,33 @@ public class Preferences_Controller implements Initializable {
             if (input != null) {
                     try {
                             input.close();
-
-                            toggle.setSelected(zones_toggle);
-                            text_toggle.setSelected(zones_text_toggle);
-                            images_toggle.setSelected(zones_images_toggle);
-                            trial_toggle.setSelected(zones_trial_toggle);
-                            recipe_toggle.setSelected(zones_recipe_toggle);
-                            passive_toggle.setSelected(zones_passive_toggle);
-                            betaGemUItoggle.setSelected(gem_UI_toggle);
-                            betaHotkey_pane.setVisible(gem_UI_toggle);
-
-                            //API
-                            txtAccountName.setText(poe_account_name);
-                            //API
-                        
-                            if(zones_toggle){
-                                sliderZones.setVisible(true);
-                                hideText.setVisible(true);
-
-                                sliderZones.setValue(zones_slider);
-                            }else{
-                                sliderZones.setVisible(false);
-                                hideText.setVisible(false);
-                            }
-                            sliderLevel.setValue(level_slider);
-
                     } catch (IOException e) {
-                            e.printStackTrace();
+                        e.printStackTrace();
                     }
             }
+            toggle.setSelected(zones_toggle);
+            text_toggle.setSelected(zones_text_toggle);
+            images_toggle.setSelected(zones_images_toggle);
+            trial_toggle.setSelected(zones_trial_toggle);
+            recipe_toggle.setSelected(zones_recipe_toggle);
+            passive_toggle.setSelected(zones_passive_toggle);
+            betaGemUItoggle.setSelected(gem_UI_toggle);
+            betaHotkey_pane.setVisible(gem_UI_toggle);
+
+            //API
+            txtAccountName.setText(poe_account_name);
+            //API
+
+            if(zones_toggle){
+                sliderZones.setVisible(true);
+                hideText.setVisible(true);
+
+                sliderZones.setValue(zones_slider);
+            }else{
+                sliderZones.setVisible(false);
+                hideText.setVisible(false);
+            }
+            sliderLevel.setValue(level_slider);
 	}
 
         show_hide_hotkey_zone.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -635,7 +635,7 @@ public class Preferences_Controller implements Initializable {
         return kc_temp;
     }
 
-    private boolean checkEquality(String[] s1, String[] s2) {
+    private static boolean checkEquality(String[] s1, String[] s2) {
         if (s1 == s2)
                 return true;
 
@@ -653,7 +653,7 @@ public class Preferences_Controller implements Initializable {
 
         return true;
     }
-    
+
     private boolean isBeingUsed(KeyCombination key, int nodeID){
         //this will get messy fast if we add more keybinds but for now it works
         String[] input = key.toString().split("\\+");
@@ -843,31 +843,30 @@ public class Preferences_Controller implements Initializable {
         }
         return false;
     }
-    
+
     @FXML
     private void save(){
         //replace the changes in prop file this is to AVOID OVERWRITE, AND ONLY APPEND
-        Properties prop = null;
+        Properties prop = new Properties();
         FileInputStream in = null;
         try {
             in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        prop = new Properties();
-        try {
             prop.load(in);
         } catch (IOException ex) {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
-        try {
-            in.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            OutputStream output = null;
 
-            try {
+        OutputStream output = null;
+
+        try {
 
 
                     // set the properties value
@@ -955,7 +954,7 @@ public class Preferences_Controller implements Initializable {
                     level_hotkey_beta_next_key = saveKeybinds(prop,"level-hotkey-beta-next",next_gem_hotkey.getText());
                     level_hotkey_beta_previous_key = saveKeybinds(prop,"level-hotkey-beta-previous",previous_gem_hotkey.getText());
 
-                    
+
                     output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
                     // save properties to project root folder
                     prop.store(output, null);
@@ -975,9 +974,9 @@ public class Preferences_Controller implements Initializable {
                     else
                         GlobalKeyListener.setUpKeybinds();
 
-            }
+        }
     }
-    
+
     @FXML
     private void onToggle(){
         if(toggle.isSelected()){
@@ -989,18 +988,18 @@ public class Preferences_Controller implements Initializable {
             hideText.setVisible(false);
         }
     }
-    
+
     @FXML
     private void locateLog(){
-        
+
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Locate Path of Exile Installation Folder"); 
+        directoryChooser.setTitle("Locate Path of Exile Installation Folder");
         File selectedDirectory = directoryChooser.showDialog(root.parent.getScene().getWindow());
 
         if(selectedDirectory == null){
              //No Directory selected
              //do something ?
-             
+
         }else{
              directory = selectedDirectory.getAbsolutePath();
              System.out.println(selectedDirectory.getAbsolutePath());
@@ -1021,5 +1020,5 @@ public class Preferences_Controller implements Initializable {
             betaHotkey_pane.setVisible(false);
         }
     }
-    
+
 }
