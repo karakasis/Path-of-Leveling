@@ -48,6 +48,7 @@ public class Editor_Stage extends Stage{
         editor_controller.hook(this);
         Scene scene = new Scene(new Group(sp));
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+        //scene.getStylesheets().add(getClass().getResource("/styles/modena_dark.css").toExternalForm());
         this.setScene(scene);
         
         this.show();

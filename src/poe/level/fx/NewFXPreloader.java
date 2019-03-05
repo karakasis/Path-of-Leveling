@@ -40,11 +40,13 @@ public class NewFXPreloader extends Preloader {
         } catch (IOException ex) {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //at this point this class has done enough, and we need to contact with the 
         //appropriate controllers.
         controller = loader.<Loading_Controller>getController();
-        return new Scene(p);        
+        Scene pr = new Scene(p);
+        pr.getStylesheets().add(getClass().getResource("/styles/modena_dark.css").toExternalForm());
+        return pr;
     }
     
     @Override

@@ -295,6 +295,7 @@ public class MainApp_Controller implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
+
             BuildProgressPreview_Controller controller = loader.<BuildProgressPreview_Controller>getController();
 
             buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
