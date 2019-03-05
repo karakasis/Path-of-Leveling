@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -69,25 +70,17 @@
             </Label>
          </children>
       </FlowPane>
-      <ScrollPane hbarPolicy="ALWAYS" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+      <ScrollPane fx:id="outerScroll" hbarPolicy="ALWAYS" pannable="true" style="-fx-background-color: transparent;" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
          <content>
             <AnchorPane>
                <children>
-                  <ScrollPane hbarPolicy="NEVER" layoutY="59.0" maxHeight="350.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-                     <content>
-                        <AnchorPane fx:id="timeline_pane" />
-                     </content>
-                  </ScrollPane>
-                  <AnchorPane fx:id="level_axis_pane" layoutX="1.0" layoutY="30.0" prefHeight="32.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Line fx:id="baseline" endX="450.0" endY="30.0" layoutX="60.0" startY="30.0" />
-                        <Line endX="39.0" endY="30.0" layoutX="20.0" startY="30.0" />
-                        <Line fx:id="tail_line" endX="480.0" endY="30.0" layoutX="60.0" startX="451.0" startY="30.0" />
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane fx:id="timeline_pane" layoutY="30.0" />
                </children>
             </AnchorPane>
          </content>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ScrollPane>
       <FlowPane alignment="TOP_RIGHT" maxHeight="11.0" prefHeight="11.0" prefWidth="200.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="-5.0">
          <children>
@@ -116,6 +109,17 @@
             </Label>
          </children>
       </FlowPane>
+      <ScrollPane fx:id="levelScroll" hbarPolicy="NEVER" layoutY="30.0" maxWidth="800.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="30.0">
+         <content>
+            <AnchorPane fx:id="level_axis_pane" prefHeight="32.0">
+               <children>
+                  <Line fx:id="baseline" endX="450.0" endY="30.0" layoutX="60.0" startY="30.0" />
+                  <Line endX="39.0" endY="30.0" layoutX="20.0" startY="30.0" />
+                  <Line fx:id="tail_line" endX="480.0" endY="30.0" layoutX="60.0" startX="451.0" startY="30.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
       <Label text="Level: " AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0">
          <font>
             <Font name="Alegreya Sans SC Medium" size="13.0" />

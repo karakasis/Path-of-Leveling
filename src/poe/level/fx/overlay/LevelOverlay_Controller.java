@@ -65,31 +65,31 @@ public class LevelOverlay_Controller implements Initializable {
     public void update(int playerLvl, int zoneLvl){
         int safe = Controller.findSafe(playerLvl)[2];
         if(playerLvl + safe < zoneLvl || playerLvl - safe > zoneLvl){
-            player.setStyle("-fx-border-color : red; -fx-text-fill: red;");
-            zone.setStyle("-fx-border-color : red; -fx-text-fill: red;");
-            safezone.setStyle("-fx-border-color : red; -fx-text-fill: red;");
-            xpmulti.setStyle("-fx-border-color : red; -fx-text-fill: red;");
+            //player.setStyle("-fx-border-color : red; -fx-text-fill: red;");
+            //zone.setStyle("-fx-border-color : red; -fx-text-fill: red;");
+            //safezone.setStyle("-fx-border-color : red; -fx-text-fill: red;");
+            //xpmulti.setStyle("-fx-border-color : red; -fx-text-fill: red;");
         }else{
-            player.setStyle("-fx-border-color : white; -fx-text-fill: white;");
-            zone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
-            safezone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
-            xpmulti.setStyle("-fx-border-color : white; -fx-text-fill: white;");
+            //player.setStyle("-fx-border-color : white; -fx-text-fill: white;");
+            //zone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
+            //safezone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
+            //xpmulti.setStyle("-fx-border-color : white; -fx-text-fill: white;");
         }
-        player.setText("Current Level: "+ playerLvl);
-        zone.setText("Monster Level: "+ zoneLvl);
-        safezone.setText("Safezone: -+" + Controller.findSafe(playerLvl)[2]);
-        xpmulti.setText("XP Multiplier: "+ (int)Controller.findxpmulti(playerLvl, zoneLvl)+"%");
+        player.setText(playerLvl + "");
+        zone.setText(zoneLvl + "");
+        safezone.setText("-+" + Controller.findSafe(playerLvl)[2]) ;
+        xpmulti.setText((int)Controller.findxpmulti(playerLvl, zoneLvl)+"%");
     }
     
     public void reset(int playerLvl){
-        player.setStyle("-fx-border-color : white; -fx-text-fill: white;");
-        zone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
-        safezone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
-        xpmulti.setStyle("-fx-border-color : white; -fx-text-fill: white;");
-        player.setText("Current LVL : "+ playerLvl);
-        zone.setText("Monster LVL : - ");
-        safezone.setText("Safezone : -");
-        xpmulti.setText("XP Multiplier : -");
+        //player.setStyle("-fx-border-color : white; -fx-text-fill: white;");
+        //zone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
+        //safezone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
+        //xpmulti.setStyle("-fx-border-color : white; -fx-text-fill: white;");
+        player.setText(playerLvl + "");
+        zone.setText(" - ");
+        safezone.setText(" - ");
+        xpmulti.setText(" - ");
     }
     
     public void setPlayerLevel(int level){

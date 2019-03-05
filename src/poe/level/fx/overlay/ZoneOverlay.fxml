@@ -23,6 +23,7 @@
             </Label>
          </children>
       </HBox>
+      <Label fx:id="recipeMarkedLabel" prefHeight="25.0" prefWidth="256.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" text="Recipe found!" textFill="#8cf8ae" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <ImageView fx:id="passive_book" fitHeight="55.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="114.0">
          <image>
             <Image url="@../../../../icons/Book_of_Skill_inventory_icon.png" />

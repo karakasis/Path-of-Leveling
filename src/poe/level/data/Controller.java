@@ -10,10 +10,7 @@ import java.util.HashSet;
 import javafx.application.Platform;
 import poe.level.fx.Main_Stage;
 import poe.level.fx.Preferences_Controller;
-import poe.level.fx.overlay.GemOverlay_Stage;
-import poe.level.fx.overlay.LevelOverlay_Stage;
-import poe.level.fx.overlay.Settings_Stage;
-import poe.level.fx.overlay.ZoneOverlay_Stage;
+import poe.level.fx.overlay.*;
 
 
 /**
@@ -46,36 +43,69 @@ public class Controller {
     
     public void recipe_hotkey_mark_key_event(){
         if(!zone_stage_lock){
-            if(zone_checkpoint!=null){
+            if(zone_checkpoint!=null
+            && zone_checkpoint.hasRecipe
+            && ActHandler.getInstance().recipeMap.get(zone_checkpoint) == false){
                 ActHandler.getInstance().recipeMap.replace(zone_checkpoint, false, true);
                 //need to save to file.
                 Preferences_Controller.updateRecipeFile(zone_checkpoint.name + " [L" 
                         + zone_checkpoint.getZoneLevel() + "]");
-            }
-            Platform.runLater(new Runnable(){
+
+                Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
                         zone_stage.event_mark_recipe();
                     }
                 });
+            }
+
+        }
+    }
+
+    public void refreshRecipePopup(){
+        placeholder_stageGameMode.close();
+        placeholder_stageGameMode.loadRecipes();
+        RecipeOverlay_Controller.gameModeOn = true;
+    }
+
+    public void recipe_hotkey_preview_key_event(){
+        System.err.println("tirigger");
+        if(!zone_stage_lock){
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        placeholder_stageGameMode.loadRecipes();
+                        RecipeOverlay_Controller.gameModeOn = true;
+                        Preferences_Controller.gameModeOn = false;
+                        placeholder_stageGameMode.show();
+                    }
+                });
+
         }
     }
     
     public void settings_event(){
-        if(settings_stage == null)
         Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
-                    settings_stage = new Settings_Stage();
+                    placeholder_stageGameMode.loadSettings();
+                    Preferences_Controller.gameModeOn = true;
+                    RecipeOverlay_Controller.gameModeOn = false;
+                    placeholder_stageGameMode.show();
                 }
             });
-         Platform.runLater(new Runnable(){
-                    @Override
-                    public void run() {
-                        settings_stage.show();
-                    }
-                });
-        
+    }
+
+    public void gem_gui_next_event(){
+        if(Preferences_Controller.gem_UI_toggle){
+            System.out.println("consumed_next");
+        }
+    }
+
+    public void gem_gui_previous_event(){
+        if(Preferences_Controller.gem_UI_toggle){
+            System.out.println("consumed_previous");
+        }
     }
     
     public int playerLevel;
@@ -88,7 +118,7 @@ public class Controller {
     private ZoneOverlay_Stage zone_stage;
     private LevelOverlay_Stage xp_stage;
     private GemOverlay_Stage level_stage;
-    private Settings_Stage settings_stage;
+    private PlaceholderStageGameMode placeholder_stageGameMode;
     private boolean zone_stage_lock;
     private boolean xp_stage_lock;
     private boolean level_stage_lock;
@@ -149,6 +179,16 @@ public class Controller {
         if(level){
             level_stage = new GemOverlay_Stage(build);
         }
+
+        placeholder_stageGameMode = new PlaceholderStageGameMode(this);
+        /*
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                new Test();
+            }
+        });*/
+
         act6detected = false;
         skipActs = false;
         releaseLock = true;

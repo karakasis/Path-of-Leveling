@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.security.Key;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -27,7 +29,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
+import poe.level.data.ActHandler;
+import poe.level.data.Zone;
+import poe.level.keybinds.GlobalKeyListener;
 
 /**
  * FXML Controller class
@@ -44,12 +50,20 @@ public class Preferences_Controller implements Initializable {
     private JFXSlider sliderLevel;
     @FXML 
     private Label hideText;
+
     @FXML
     private TextField show_hide_hotkey_zone;
     @FXML
     private TextField mark_recipe_hotkey;
     @FXML
     private TextField remind_gems;
+    @FXML
+    private TextField recipe_preview_hotkey;
+    @FXML
+    private TextField next_gem_hotkey;
+    @FXML
+    private TextField previous_gem_hotkey;
+
     @FXML
     private JFXTextField poe_installation;
     
@@ -63,12 +77,17 @@ public class Preferences_Controller implements Initializable {
     private JFXToggleButton trial_toggle;
     @FXML
     private JFXToggleButton recipe_toggle;
+    @FXML
+    private JFXToggleButton betaGemUItoggle;
+
+    @FXML
+    private AnchorPane betaHotkey_pane;
+
     /**
      * Initializes the controller class.
      */
     
     private Main_Controller root;
-    private String zones_hotkey_show_hide;
     private String level_hotkey_remind;
     private String recipe_hotkey_mark;
     private String key_bind = "";
@@ -82,6 +101,8 @@ public class Preferences_Controller implements Initializable {
     public static boolean zones_passive_toggle;
     public static boolean zones_trial_toggle;
     public static boolean zones_recipe_toggle;
+
+    public static boolean gem_UI_toggle;
     
     public static double zones_slider;
     public static double level_slider;
@@ -89,10 +110,16 @@ public class Preferences_Controller implements Initializable {
     public static KeyCombination zones_hotkey_show_hide_key;
     public static KeyCombination level_hotkey_remind_key;
     public static KeyCombination recipe_hotkey_mark_key;
+    public static KeyCombination recipe_hotkey_preview_key;
+    public static KeyCombination level_hotkey_beta_next_key;
+    public static KeyCombination level_hotkey_beta_previous_key;
     
     private KeyCombination zones_hotkey_show_hide_key_tmp;
     private KeyCombination level_hotkey_remind_key_tmp;
     private KeyCombination recipe_hotkey_mark_key_tmp;
+    public static KeyCombination recipe_hotkey_preview_key_tmp;
+    public static KeyCombination level_hotkey_beta_next_key_tmp;
+    public static KeyCombination level_hotkey_beta_previous_key_tmp;
     
     
     public static String poe_log_dir;
@@ -100,7 +127,13 @@ public class Preferences_Controller implements Initializable {
     public static double[] zones_overlay_pos;
     public static double[] level_overlay_pos;
     public static double[] gem_overlay_pos;
-    
+
+    public static boolean gameModeOn;
+    private HashMap<String,String> hotkeyDefaults;
+
+    public Preferences_Controller() {
+    }
+
     public static void updateZonesPos(double x, double y){
         if(zones_overlay_pos == null){
             zones_overlay_pos = new double[2];
@@ -275,6 +308,40 @@ public class Preferences_Controller implements Initializable {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public static void resetRecipesFile(){
+        Properties prop = new Properties();
+        OutputStream output = null;
+        try{
+            output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for(Zone z : ActHandler.getInstance().getZonesWithRecipes()){
+            String thanksGGG = z.name + " [L" + z.getZoneLevel() + "]";
+            System.out.println(thanksGGG);
+            prop.setProperty(thanksGGG, "false");
+            ActHandler.getInstance().recipeMap.put(z, false);
+        }
+
+        try {
+            // save properties to project root folder
+            prop.store(output, null);
+            System.out.println("Recipe properties file created successfully in " + POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
     
     public void hook(Main_Controller root){
         this.root = root;
@@ -283,104 +350,129 @@ public class Preferences_Controller implements Initializable {
     //i think i dont need to load and save overlay positions here.
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    gameModeOn = false;
+
+    hotkeyDefaults = new HashMap<>();
+    hotkeyDefaults.put("zones-hotkey-show_hide","F4");
+    hotkeyDefaults.put("level-hotkey-remind","F5");
+    hotkeyDefaults.put("recipe-hotkey-mark","F6");
+    hotkeyDefaults.put("recipe-hotkey-preview","F7");
+    hotkeyDefaults.put("level-hotkey-beta-next","F8");
+    hotkeyDefaults.put("level-hotkey-beta-previous","F9");
+
         // TODO
-        Properties prop = new Properties();
+    Properties prop = new Properties();
 	InputStream input = null;
 
 	try {
-            
+
 		input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
 
 		// load a properties file
 		prop.load(input);
-                zones_toggle = Boolean.parseBoolean(prop.getProperty("zones-toggle"));
-                zones_text_toggle = Boolean.parseBoolean(prop.getProperty("zones-text-toggle"));
-                zones_images_toggle = Boolean.parseBoolean(prop.getProperty("zones-images-toggle"));
-                zones_passive_toggle = Boolean.parseBoolean(prop.getProperty("zones-passive-toggle"));
-                String parseTrial = prop.getProperty("zones-trial-toggle");
-                    if(parseTrial == null){
-                        zones_trial_toggle = true; //default
-                    }else{
-                        zones_trial_toggle = Boolean.parseBoolean(prop.getProperty("zones-trial-toggle"));
-                    }
-                String parseRecipe = prop.getProperty("zones-recipe-toggle");
-                    if(parseRecipe == null){
-                        zones_recipe_toggle = true; //default
-                    }else{
-                        zones_recipe_toggle = Boolean.parseBoolean(prop.getProperty("zones-recipe-toggle"));
-                    }
-                zones_slider = Double.parseDouble(prop.getProperty("zones-slider"));
-                zones_hotkey_show_hide = prop.getProperty("zones-hotkey-show_hide");
-                level_slider = Double.parseDouble(prop.getProperty("level-slider"));
-                level_hotkey_remind = prop.getProperty("level-hotkey-remind");
-                recipe_hotkey_mark = prop.getProperty("recipe-hotkey-mark");
-                if(recipe_hotkey_mark == null) recipe_hotkey_mark = "F6";
-                directory = prop.getProperty("poe-dir");
-                if(!(directory==null || directory.equals(""))){
-                    poe_log_dir = directory + "\\logs\\Client.txt";
-                    poe_installation.setText(directory);
-                }
-                
 
-                try{
-                    KeyCombination keyCombination = KeyCombination.keyCombination(zones_hotkey_show_hide);
-                    System.out.println("key code : " + keyCombination.getName());
-                    zones_hotkey_show_hide_key = keyCombination;
-                }catch(Exception e){
-                    System.out.println(":incorect:");
-                    zones_hotkey_show_hide_key = KeyCombination.NO_MATCH;
-                }
-                
-                try{
-                    KeyCombination keyCombination = KeyCombination.keyCombination(level_hotkey_remind);
-                    System.out.println("key code : " + keyCombination.getName());
-                    level_hotkey_remind_key = keyCombination;
-                }catch(Exception e){
-                    System.out.println(":incorect:");
-                    level_hotkey_remind_key = KeyCombination.NO_MATCH;
-                }
-                
-                try{
-                    KeyCombination keyCombination = KeyCombination.keyCombination(recipe_hotkey_mark);
-                    System.out.println("key code : " + keyCombination.getName());
-                    recipe_hotkey_mark_key = keyCombination;
-                }catch(Exception e){
-                    System.out.println(":incorect:");
-                    recipe_hotkey_mark_key = KeyCombination.NO_MATCH;
-                }
-                zones_hotkey_show_hide_key_tmp = zones_hotkey_show_hide_key;
-                level_hotkey_remind_key_tmp = level_hotkey_remind_key;
-                recipe_hotkey_mark_key_tmp = recipe_hotkey_mark_key;
-                
-                
+        zones_toggle = Boolean.parseBoolean(prop.getProperty("zones-toggle"));
+        zones_text_toggle = Boolean.parseBoolean(prop.getProperty("zones-text-toggle"));
+        zones_images_toggle = Boolean.parseBoolean(prop.getProperty("zones-images-toggle"));
+        zones_passive_toggle = Boolean.parseBoolean(prop.getProperty("zones-passive-toggle"));
+        String parseTrial = prop.getProperty("zones-trial-toggle");
+            if(parseTrial == null){
+                zones_trial_toggle = true; //default
+            }else{
+                zones_trial_toggle = Boolean.parseBoolean(prop.getProperty("zones-trial-toggle"));
+            }
+        String parseRecipe = prop.getProperty("zones-recipe-toggle");
+            if(parseRecipe == null){
+                zones_recipe_toggle = true; //default
+            }else{
+                zones_recipe_toggle = Boolean.parseBoolean(prop.getProperty("zones-recipe-toggle"));
+            }
+        String parseGemUI = prop.getProperty("gem-beta-UI-toggle");
+        if(parseGemUI == null){
+            gem_UI_toggle = true; //default
+        }else{
+            gem_UI_toggle = Boolean.parseBoolean(prop.getProperty("gem-beta-UI-toggle"));
+        }
+
+        zones_slider = Double.parseDouble(prop.getProperty("zones-slider"));
+        level_slider = Double.parseDouble(prop.getProperty("level-slider"));
+
+        directory = prop.getProperty("poe-dir");
+        if(!(directory==null || directory.equals(""))){
+            poe_log_dir = directory + "\\logs\\Client.txt";
+            poe_installation.setText(directory);
+        }
+
+        zones_hotkey_show_hide_key = loadKeybinds(
+                prop
+                ,"zones-hotkey-show_hide"
+                ,show_hide_hotkey_zone
+        );
+        zones_hotkey_show_hide_key_tmp = zones_hotkey_show_hide_key ;
+
+        level_hotkey_remind_key = loadKeybinds(
+                prop
+                ,"level-hotkey-remind"
+                ,remind_gems
+        );
+        level_hotkey_remind_key_tmp = level_hotkey_remind_key;
+
+        recipe_hotkey_mark_key = loadKeybinds(
+                prop
+                ,"recipe-hotkey-mark"
+                ,mark_recipe_hotkey
+        );
+        recipe_hotkey_mark_key_tmp = recipe_hotkey_mark_key;
+
+        recipe_hotkey_preview_key = loadKeybinds(
+                prop
+                ,"recipe-hotkey-preview"
+                ,recipe_preview_hotkey
+        );
+        recipe_hotkey_preview_key_tmp = recipe_hotkey_preview_key;
+
+        level_hotkey_beta_next_key = loadKeybinds(
+                prop
+                ,"level-hotkey-beta-next"
+
+                ,next_gem_hotkey
+        );
+        level_hotkey_beta_next_key_tmp = level_hotkey_beta_next_key;
+
+        level_hotkey_beta_previous_key = loadKeybinds(
+                prop
+                ,"level-hotkey-beta-previous"
+                ,previous_gem_hotkey
+        );
+        level_hotkey_beta_previous_key_tmp = level_hotkey_beta_previous_key;
+
 	} catch (IOException ex) {
 		ex.printStackTrace();
 	} finally {
             if (input != null) {
                     try {
                             input.close();
-                            
+
                             toggle.setSelected(zones_toggle);
                             text_toggle.setSelected(zones_text_toggle);
                             images_toggle.setSelected(zones_images_toggle);
                             trial_toggle.setSelected(zones_trial_toggle);
                             recipe_toggle.setSelected(zones_recipe_toggle);
                             passive_toggle.setSelected(zones_passive_toggle);
+                            betaGemUItoggle.setSelected(gem_UI_toggle);
+                            betaHotkey_pane.setVisible(gem_UI_toggle);
+
                             if(zones_toggle){
                                 sliderZones.setVisible(true);
                                 hideText.setVisible(true);
-                                
+
                                 sliderZones.setValue(zones_slider);
                             }else{
                                 sliderZones.setVisible(false);
                                 hideText.setVisible(false);
                             }
-                            
-                            show_hide_hotkey_zone.setText(zones_hotkey_show_hide);
-                            
                             sliderLevel.setValue(level_slider);
-                            remind_gems.setText(level_hotkey_remind);
-                            mark_recipe_hotkey.setText(recipe_hotkey_mark);
+
                     } catch (IOException e) {
                             e.printStackTrace();
                     }
@@ -390,154 +482,142 @@ public class Preferences_Controller implements Initializable {
         show_hide_hotkey_zone.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if(event.isAltDown()){
-                    key_bind = "Alt+";
-                    if(event.getCode().getName().equals("Alt")){
-                        key_bind = "Alt";
-                    }else{
-                        key_bind += event.getCode().getName();
-                    }
-                }else if(event.isControlDown()){
-                    key_bind = "Ctrl+";
-                    if(event.getCode().getName().equals("Ctrl")){
-                        key_bind = "Ctrl";
-                    }else{
-                        key_bind += event.getCode().getName();
-                    }
-                    
-                }else if(event.isShiftDown()){
-                    key_bind = "Shift+";
-                    if(event.getCode().getName().equals("Shift")){
-                        key_bind = "Shift";
-                    }else{
-                        key_bind += event.getCode().getName();
-                    }
-                    
-                }else{
-                    key_bind += event.getCode().getName();
-                }
-                try{
-                    zones_hotkey_show_hide_key_tmp = KeyCombination.keyCombination(key_bind);
-                    isBeingUsed(zones_hotkey_show_hide_key_tmp,0);
-                    show_hide_hotkey_zone.setText(key_bind);
-                    System.out.println("key code : " + zones_hotkey_show_hide_key_tmp.getName());
-                    //zones_hotkey_show_hide_key = keyCombination;
-                }catch(IllegalArgumentException e){
-                    show_hide_hotkey_zone.setText("");
-                    System.out.println(":incorect:");
-                    //zones_hotkey_show_hide_key = KeyCombination.NO_MATCH;
-                }finally{
-                    key_bind = "";
-                }
-
-
+                zones_hotkey_show_hide_key_tmp = handleKeybindEdit(
+                        event
+                        ,show_hide_hotkey_zone
+                        ,0
+                );
             }
         });
-        /*
-        show_hide_hotkey_zone.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                //show_hide_hotkey_zone.clear();
-                if(!(event.isAltDown() || event.isControlDown() || event.isShiftDown())){
-                    System.out.println("key_bind on release : " + key_bind);
-                    show_hide_hotkey_zone.setText(key_bind);
-                    key_bind = "";
-                }
-            }
-        });*/
-        
+
         remind_gems.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if(event.isAltDown()){
-                    key_bind = "Alt+";
-                    if(event.getCode().getName().equals("Alt")){
-                        key_bind = "Alt";
-                    }else{
-                        key_bind += event.getCode().getName();
-                    }
-                }else if(event.isControlDown()){
-                    key_bind = "Ctrl+";
-                    if(event.getCode().getName().equals("Ctrl")){
-                        key_bind = "Ctrl";
-                    }else{
-                        key_bind += event.getCode().getName();
-                    }
-                    
-                }else if(event.isShiftDown()){
-                    key_bind = "Shift+";
-                    if(event.getCode().getName().equals("Shift")){
-                        key_bind = "Shift";
-                    }else{
-                        key_bind += event.getCode().getName();
-                    }
-                    
-                }else{
-                    key_bind += event.getCode().getName();
-                }
-                try{
-                    level_hotkey_remind_key_tmp = KeyCombination.keyCombination(key_bind);
-                    isBeingUsed(level_hotkey_remind_key_tmp,1);
-                    remind_gems.setText(key_bind);
-                    System.out.println("key code : " + level_hotkey_remind_key_tmp.getName());
-                    //level_hotkey_remind_key = keyCombination;
-                }catch(IllegalArgumentException e){
-                    remind_gems.setText("");
-                    System.out.println(":incorect:");
-                    //level_hotkey_remind_key = KeyCombination.NO_MATCH;
-                }finally{
-                    key_bind = "";
-                }
+                level_hotkey_remind_key_tmp = handleKeybindEdit(
+                        event
+                        ,remind_gems
+                        ,1
+                );
             }
         });
-        
+
         mark_recipe_hotkey.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if(event.isAltDown()){
-                    key_bind = "Alt+";
-                    if(event.getCode().getName().equals("Alt")){
-                        key_bind = "Alt";
-                    }else{
-                        key_bind += event.getCode().getName();
-                    }
-                }else if(event.isControlDown()){
-                    key_bind = "Ctrl+";
-                    if(event.getCode().getName().equals("Ctrl")){
-                        key_bind = "Ctrl";
-                    }else{
-                        key_bind += event.getCode().getName();
-                    }
-                    
-                }else if(event.isShiftDown()){
-                    key_bind = "Shift+";
-                    if(event.getCode().getName().equals("Shift")){
-                        key_bind = "Shift";
-                    }else{
-                        key_bind += event.getCode().getName();
-                    }
-                    
-                }else{
-                    key_bind += event.getCode().getName();
-                }
-                try{
-                    recipe_hotkey_mark_key_tmp = KeyCombination.keyCombination(key_bind);
-                    isBeingUsed(recipe_hotkey_mark_key_tmp,2);
-                    mark_recipe_hotkey.setText(key_bind);
-                    
-                    System.out.println("key code : " + recipe_hotkey_mark_key_tmp.getName());
-                    //level_hotkey_remind_key = keyCombination;
-                }catch(IllegalArgumentException e){
-                    mark_recipe_hotkey.setText("");
-                    System.out.println(":incorect:");
-                    //level_hotkey_remind_key = KeyCombination.NO_MATCH;
-                }finally{
-                    key_bind = "";
-                }
+                recipe_hotkey_mark_key_tmp = handleKeybindEdit(
+                         event
+                        ,mark_recipe_hotkey
+                        ,2
+                );
             }
         });
-                
-    }    
+
+        recipe_preview_hotkey.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                recipe_hotkey_preview_key_tmp = handleKeybindEdit(
+                        event
+                        ,recipe_preview_hotkey
+                        ,3
+                );
+            }
+        });
+
+        next_gem_hotkey.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                level_hotkey_beta_next_key_tmp = handleKeybindEdit(
+                        event
+                        ,next_gem_hotkey
+                        ,4
+                );
+            }
+        });
+
+        previous_gem_hotkey.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                level_hotkey_beta_previous_key_tmp = handleKeybindEdit(
+                        event
+                        ,previous_gem_hotkey
+                        ,5
+                );
+            }
+        });
+
+    }
+
+    private KeyCombination loadKeybinds(Properties prop, String propertyName, TextField kc_field){
+        String loadProp = prop.getProperty(propertyName);
+        if(loadProp == null) loadProp = hotkeyDefaults.get(propertyName);
+        KeyCombination keyCombination;
+        try{
+            keyCombination = KeyCombination.keyCombination(loadProp);
+            System.out.println("key code : " + keyCombination.getName());
+        }catch(Exception e){
+            System.out.println(":incorect:");
+            keyCombination = KeyCombination.NO_MATCH;
+        }
+        kc_field.setText(loadProp);
+        return keyCombination;
+    }
+
+    private KeyCombination saveKeybinds(Properties prop, String propertyName, String kc_field_text){
+        prop.setProperty(propertyName, kc_field_text);
+        KeyCombination keyCombination;
+        try{
+            keyCombination = KeyCombination.keyCombination(kc_field_text);
+            System.out.println(" Saved key code zones: " + keyCombination.getName());
+        }catch(Exception e){
+            System.out.println(":incorect:");
+            keyCombination = KeyCombination.NO_MATCH;
+        }
+        return keyCombination;
+    }
+
+    private KeyCombination handleKeybindEdit(KeyEvent event, TextField kc_field, int nodeID){
+        if(event.isAltDown()){
+            key_bind = "Alt+";
+            if(event.getCode().getName().equals("Alt")){
+                key_bind = "Alt";
+            }else{
+                key_bind += event.getCode().getName();
+            }
+        }else if(event.isControlDown()){
+            key_bind = "Ctrl+";
+            if(event.getCode().getName().equals("Ctrl")){
+                key_bind = "Ctrl";
+            }else{
+                key_bind += event.getCode().getName();
+            }
+
+        }else if(event.isShiftDown()){
+            key_bind = "Shift+";
+            if(event.getCode().getName().equals("Shift")){
+                key_bind = "Shift";
+            }else{
+                key_bind += event.getCode().getName();
+            }
+
+        }else{
+            key_bind += event.getCode().getName();
+        }
+        KeyCombination kc_temp;
+        try{
+            kc_temp = KeyCombination.keyCombination(key_bind);
+            isBeingUsed(kc_temp,nodeID);
+            kc_field.setText(key_bind);
+            System.out.println("key code : " + kc_temp.getName());
+            //zones_hotkey_show_hide_key = keyCombination;
+        }catch(IllegalArgumentException e){
+            kc_field.setText("");
+            System.out.println(":incorect:");
+            kc_temp = KeyCombination.NO_MATCH;
+        }finally{
+            key_bind = "";
+        }
+        return kc_temp;
+    }
 
     private boolean checkEquality(String[] s1, String[] s2) {
         if (s1 == s2)
@@ -564,12 +644,21 @@ public class Preferences_Controller implements Initializable {
         String[] zone = null;
         String[] level = null;
         String[] recipe = null;
+        String[] preview = null;
+        String[] next = null;
+        String[] previous = null;
         if(zones_hotkey_show_hide_key_tmp!=null)
-        zone = zones_hotkey_show_hide_key_tmp.toString().split("\\+");
+            zone = zones_hotkey_show_hide_key_tmp.toString().split("\\+");
         if(level_hotkey_remind_key_tmp!=null)
-        level = level_hotkey_remind_key_tmp.toString().split("\\+");
+            level = level_hotkey_remind_key_tmp.toString().split("\\+");
         if(recipe_hotkey_mark_key_tmp!=null)
-        recipe = recipe_hotkey_mark_key_tmp.toString().split("\\+");
+            recipe = recipe_hotkey_mark_key_tmp.toString().split("\\+");
+        if(recipe_hotkey_preview_key_tmp!=null)
+            preview = recipe_hotkey_preview_key_tmp.toString().split("\\+");
+        if(level_hotkey_beta_next_key_tmp!=null)
+            next = level_hotkey_beta_next_key_tmp.toString().split("\\+");
+        if(level_hotkey_beta_previous_key_tmp!=null)
+            previous = level_hotkey_beta_previous_key_tmp.toString().split("\\+");
         switch (nodeID) {
             case 0:
                 if(checkEquality(input,level)){
@@ -580,6 +669,21 @@ public class Preferences_Controller implements Initializable {
                 if(checkEquality(input,recipe)){
                     mark_recipe_hotkey.clear();
                     recipe_hotkey_mark_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,preview)){
+                    recipe_preview_hotkey.clear();
+                    recipe_hotkey_preview_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,next)){
+                    next_gem_hotkey.clear();
+                    level_hotkey_beta_next_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,previous)){
+                    previous_gem_hotkey.clear();
+                    level_hotkey_beta_previous_key_tmp = null;
                     return true;
                 }
                 return false;
@@ -594,6 +698,21 @@ public class Preferences_Controller implements Initializable {
                     recipe_hotkey_mark_key_tmp = null;
                     return true;
                 }
+                if(checkEquality(input,preview)){
+                    recipe_preview_hotkey.clear();
+                    recipe_hotkey_preview_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,next)){
+                    next_gem_hotkey.clear();
+                    level_hotkey_beta_next_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,previous)){
+                    previous_gem_hotkey.clear();
+                    level_hotkey_beta_previous_key_tmp = null;
+                    return true;
+                }
                 return false;
             case 2:
                 if(checkEquality(input,zone)){
@@ -604,6 +723,102 @@ public class Preferences_Controller implements Initializable {
                 if(checkEquality(input,level)){
                     remind_gems.clear();
                     level_hotkey_remind_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,preview)){
+                    recipe_preview_hotkey.clear();
+                    recipe_hotkey_preview_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,next)){
+                    next_gem_hotkey.clear();
+                    level_hotkey_beta_next_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,previous)){
+                    previous_gem_hotkey.clear();
+                    level_hotkey_beta_previous_key_tmp = null;
+                    return true;
+                }
+                return false;
+            case 3:
+                if(checkEquality(input,zone)){
+                    show_hide_hotkey_zone.clear();
+                    zones_hotkey_show_hide_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,level)){
+                    remind_gems.clear();
+                    level_hotkey_remind_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,recipe)){
+                    mark_recipe_hotkey.clear();
+                    recipe_hotkey_mark_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,next)){
+                    next_gem_hotkey.clear();
+                    level_hotkey_beta_next_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,previous)){
+                    previous_gem_hotkey.clear();
+                    level_hotkey_beta_previous_key_tmp = null;
+                    return true;
+                }
+                return false;
+            case 4:
+                if(checkEquality(input,zone)){
+                    show_hide_hotkey_zone.clear();
+                    zones_hotkey_show_hide_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,level)){
+                    remind_gems.clear();
+                    level_hotkey_remind_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,previous)){
+                    previous_gem_hotkey.clear();
+                    level_hotkey_beta_previous_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,preview)){
+                    recipe_preview_hotkey.clear();
+                    recipe_hotkey_preview_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,recipe)){
+                    mark_recipe_hotkey.clear();
+                    recipe_hotkey_mark_key_tmp = null;
+                    return true;
+                }
+                return false;
+            case 5:
+                if(checkEquality(input,zone)){
+                    show_hide_hotkey_zone.clear();
+                    zones_hotkey_show_hide_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,level)){
+                    remind_gems.clear();
+                    level_hotkey_remind_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,recipe)){
+                    mark_recipe_hotkey.clear();
+                    recipe_hotkey_mark_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,preview)){
+                    recipe_preview_hotkey.clear();
+                    recipe_hotkey_preview_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,next)){
+                    next_gem_hotkey.clear();
+                    level_hotkey_beta_next_key_tmp = null;
                     return true;
                 }
                 return false;
@@ -688,6 +903,14 @@ public class Preferences_Controller implements Initializable {
                         toggleS_passive = "false";
                         zones_passive_toggle = false;
                     }
+                    String toggleS_gemUI;
+                    if(betaGemUItoggle.isSelected()){
+                        toggleS_gemUI = "true";
+                        gem_UI_toggle = true;
+                    }else{
+                        toggleS_gemUI = "false";
+                        gem_UI_toggle = false;
+                    }
                     zones_slider = sliderZones.getValue();
                     level_slider = sliderLevel.getValue();
                     prop.setProperty("zones-toggle", toggleS);
@@ -696,39 +919,21 @@ public class Preferences_Controller implements Initializable {
                     prop.setProperty("zones-trial-toggle", toggleS_trial);
                     prop.setProperty("zones-recipe-toggle", toggleS_recipe);
                     prop.setProperty("zones-passive-toggle", toggleS_passive);
+                    prop.setProperty("gem-beta-UI-toggle", toggleS_gemUI);
+
                     prop.setProperty("zones-slider", String.valueOf(zones_slider));
-                    prop.setProperty("zones-hotkey-show_hide", show_hide_hotkey_zone.getText());
                     prop.setProperty("level-slider", String.valueOf(level_slider));
-                    prop.setProperty("level-hotkey-remind", remind_gems.getText());
-                    prop.setProperty("recipe-hotkey-mark", mark_recipe_hotkey.getText());
+
                     poe_log_dir = directory + "\\logs\\Client.txt";
                     prop.setProperty("poe-dir",directory);
-                    try{
-                        KeyCombination keyCombination = KeyCombination.keyCombination(show_hide_hotkey_zone.getText());
-                        System.out.println(" Saved key code zones: " + keyCombination.getName());
-                        zones_hotkey_show_hide_key = keyCombination;
-                    }catch(Exception e){
-                        System.out.println(":incorect:");
-                        zones_hotkey_show_hide_key = KeyCombination.NO_MATCH;
-                    }
 
-                    try{
-                        KeyCombination keyCombination = KeyCombination.keyCombination(remind_gems.getText());
-                        System.out.println(" Saved key code gems: " + keyCombination.getName());
-                        level_hotkey_remind_key = keyCombination;
-                    }catch(Exception e){
-                        System.out.println(":incorect:");
-                        level_hotkey_remind_key = KeyCombination.NO_MATCH;
-                    }
-                    
-                    try{
-                        KeyCombination keyCombination = KeyCombination.keyCombination(mark_recipe_hotkey.getText());
-                        System.out.println(" Saved key code recipes: " + keyCombination.getName());
-                        recipe_hotkey_mark_key = keyCombination;
-                    }catch(Exception e){
-                        System.out.println(":incorect:");
-                        recipe_hotkey_mark_key = KeyCombination.NO_MATCH;
-                    }
+                    zones_hotkey_show_hide_key = saveKeybinds(prop,"zones-hotkey-show_hide",show_hide_hotkey_zone.getText());
+                    level_hotkey_remind_key = saveKeybinds(prop,"level-hotkey-remind",remind_gems.getText());
+                    recipe_hotkey_mark_key = saveKeybinds(prop,"recipe-hotkey-mark",mark_recipe_hotkey.getText());
+                    recipe_hotkey_preview_key = saveKeybinds(prop,"recipe-hotkey-preview",recipe_preview_hotkey.getText());
+                    level_hotkey_beta_next_key = saveKeybinds(prop,"level-hotkey-beta-next",next_gem_hotkey.getText());
+                    level_hotkey_beta_previous_key = saveKeybinds(prop,"level-hotkey-beta-previous",previous_gem_hotkey.getText());
+
                     
                     output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
                     // save properties to project root folder
@@ -744,7 +949,10 @@ public class Preferences_Controller implements Initializable {
                                     e.printStackTrace();
                             }
                     }
-                    root.closePrefPopup();
+                    if(!gameModeOn)
+                        root.closePrefPopup();
+                    else
+                        GlobalKeyListener.setUpKeybinds();
 
             }
     }
@@ -779,6 +987,17 @@ public class Preferences_Controller implements Initializable {
              System.out.println(directory + "\\logs\\Client.txt");
              //System.out.println(directoryA);
              poe_installation.setText(directory);
+        }
+    }
+
+    @FXML
+    private void betaGemUItoggle_action(){
+        if(betaGemUItoggle.isSelected()){
+            gem_UI_toggle = true;
+            betaHotkey_pane.setVisible(true);
+        }else{
+            gem_UI_toggle = false;
+            betaHotkey_pane.setVisible(false);
         }
     }
     

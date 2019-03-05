@@ -9,6 +9,7 @@ package poe.level.keybinds;
  *
  * @author Christos
  */
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -25,9 +26,15 @@ public class GlobalKeyListener implements NativeKeyListener {
         static String[] level_hotkey_remind_key;
         static String[] zones_hotkey_show_hide_key;
         static String[] recipes_hotkey_mark_key;
+        static String[] recipe_hotkey_preview_key;
+        static String[] level_hotkey_beta_next_key;
+        static String[] level_hotkey_beta_previous_key;
         static HashSet<String> level_hotkey_remind_set;
         static HashSet<String> zones_hotkey_show_hide_set;
         static HashSet<String> recipes_hotkey_mark_set;
+        static HashSet<String> recipe_hotkey_preview_key_set;
+        static HashSet<String> level_hotkey_beta_next_key_set;
+        static HashSet<String> level_hotkey_beta_previous_key_set;
         
         @Override
 	public void nativeKeyPressed(NativeKeyEvent e) {
@@ -83,6 +90,36 @@ public class GlobalKeyListener implements NativeKeyListener {
                     Controller.instance.recipe_hotkey_mark_key_event(); //<
                 }
             }
+            if(mapper.size() == recipe_hotkey_preview_key_set.size()){
+                HashSet<String> temp = new HashSet<>();
+                for(Integer vk : mapper){
+                    temp.add(NativeKeyEvent.getKeyText(vk));
+                }
+                if(temp.equals(recipe_hotkey_preview_key_set)){
+                    System.out.println("recipe_hotkey_preview_key_set triggered");
+                    Controller.instance.recipe_hotkey_preview_key_event(); //<
+                }
+            }
+            if(mapper.size() == level_hotkey_beta_next_key_set.size()){
+                HashSet<String> temp = new HashSet<>();
+                for(Integer vk : mapper){
+                    temp.add(NativeKeyEvent.getKeyText(vk));
+                }
+                if(temp.equals(level_hotkey_beta_next_key_set)){
+                    System.out.println("level_hotkey_beta_next_key_set triggered");
+                    Controller.instance.gem_gui_next_event(); //<
+                }
+            }
+            if(mapper.size() == level_hotkey_beta_previous_key_set.size()){
+                HashSet<String> temp = new HashSet<>();
+                for(Integer vk : mapper){
+                    temp.add(NativeKeyEvent.getKeyText(vk));
+                }
+                if(temp.equals(level_hotkey_beta_previous_key_set)){
+                    System.out.println("level_hotkey_beta_previous_key_set triggered");
+                    Controller.instance.gem_gui_previous_event(); //<
+                }
+            }
         }
         
 	public static void run() {
@@ -105,22 +142,32 @@ public class GlobalKeyListener implements NativeKeyListener {
                 for (int i = 0; i < handlers.length; i++) {
                         handlers[i].setLevel(Level.OFF);
                 }
-                mapper = new HashSet<>();
-                level_hotkey_remind_key = Preferences_Controller.level_hotkey_remind_key.toString().split("\\+");
-                zones_hotkey_show_hide_key = Preferences_Controller.zones_hotkey_show_hide_key.toString().split("\\+");
-                recipes_hotkey_mark_key = Preferences_Controller.recipe_hotkey_mark_key.toString().split("\\+");
-                level_hotkey_remind_set = new HashSet<>();
-                zones_hotkey_show_hide_set = new HashSet<>();
-                recipes_hotkey_mark_set = new HashSet<>();
-                for(int i=0; i<level_hotkey_remind_key.length;i++){
-                    level_hotkey_remind_set.add(level_hotkey_remind_key[i]);
-                }
-                for(int i=0; i<zones_hotkey_show_hide_key.length;i++){
-                    zones_hotkey_show_hide_set.add(zones_hotkey_show_hide_key[i]);
-                }
-                for(int i=0; i<recipes_hotkey_mark_key.length;i++){
-                    recipes_hotkey_mark_set.add(recipes_hotkey_mark_key[i]);
-                }
+
+                setUpKeybinds();
 		GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
 	}
+
+	public static void setUpKeybinds(){
+        mapper = new HashSet<>();
+        level_hotkey_remind_key = Preferences_Controller.level_hotkey_remind_key.toString().split("\\+");
+        zones_hotkey_show_hide_key = Preferences_Controller.zones_hotkey_show_hide_key.toString().split("\\+");
+        recipes_hotkey_mark_key = Preferences_Controller.recipe_hotkey_mark_key.toString().split("\\+");
+        recipe_hotkey_preview_key = Preferences_Controller.recipe_hotkey_preview_key.toString().split("\\+");
+        level_hotkey_beta_next_key = Preferences_Controller.level_hotkey_beta_next_key.toString().split("\\+");
+        level_hotkey_beta_previous_key = Preferences_Controller.level_hotkey_beta_previous_key.toString().split("\\+");
+
+        level_hotkey_remind_set = new HashSet<>();
+        zones_hotkey_show_hide_set = new HashSet<>();
+        recipes_hotkey_mark_set = new HashSet<>();
+        recipe_hotkey_preview_key_set = new HashSet<>();
+        level_hotkey_beta_next_key_set = new HashSet<>();
+        level_hotkey_beta_previous_key_set = new HashSet<>();
+
+        level_hotkey_remind_set.addAll(Arrays.asList(level_hotkey_remind_key));
+        zones_hotkey_show_hide_set.addAll(Arrays.asList(zones_hotkey_show_hide_key));
+        recipes_hotkey_mark_set.addAll(Arrays.asList(recipes_hotkey_mark_key));
+        recipe_hotkey_preview_key_set.addAll(Arrays.asList(recipe_hotkey_preview_key));
+        level_hotkey_beta_next_key_set.addAll(Arrays.asList(level_hotkey_beta_next_key));
+        level_hotkey_beta_previous_key_set.addAll(Arrays.asList(level_hotkey_beta_previous_key));
+    }
 }

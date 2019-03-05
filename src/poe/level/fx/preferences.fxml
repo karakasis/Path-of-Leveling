@@ -7,10 +7,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="554.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Preferences_Controller">
+<AnchorPane id="AnchorPane" prefHeight="602.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Preferences_Controller">
    <children>
       <Label layoutX="29.0" layoutY="17.0" text="Zones :">
          <font>
@@ -18,7 +20,7 @@
          </font>
       </Label>
       <JFXToggleButton fx:id="toggle" layoutX="14.0" layoutY="38.0" onAction="#onToggle" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Make the panel slide out automatically" />
-      <Separator layoutX="19.0" layoutY="277.0" prefHeight="8.0" prefWidth="462.0" />
+      <Separator layoutX="19.0" layoutY="277.0" prefHeight="8.0" prefWidth="285.0" />
       <Label fx:id="hideText" layoutX="50.0" layoutY="78.0" text="Set zone panel slide out timer in seconds :" />
       <JFXSlider fx:id="sliderZones" blockIncrement="1.0" layoutX="29.0" layoutY="112.0" max="30.0" min="4.0" minorTickCount="10" prefHeight="14.0" prefWidth="272.0" value="6.0" />
       <Label layoutX="406.0" layoutY="19.0" text="Hotkeys :">
@@ -26,8 +28,8 @@
             <Font name="Alegreya Sans SC" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="show_hide_hotkey_zone" editable="false" layoutX="388.0" layoutY="137.0" prefHeight="25.0" prefWidth="79.0" />
-      <Label layoutX="317.0" layoutY="126.0" prefHeight="47.0" prefWidth="64.0" text="Show/Hide Zone" textAlignment="CENTER" wrapText="true" />
+      <TextField fx:id="show_hide_hotkey_zone" editable="false" layoutX="401.0" layoutY="135.0" prefHeight="25.0" prefWidth="79.0" />
+      <Label layoutX="330.0" layoutY="124.0" prefHeight="47.0" prefWidth="64.0" text="Show/Hide Zone" textAlignment="CENTER" wrapText="true" />
       <Label layoutX="28.0" layoutY="298.0" text="Leveling :">
          <font>
             <Font name="Alegreya Sans SC" size="16.0" />
@@ -35,20 +37,26 @@
       </Label>
       <Label layoutX="50.0" layoutY="331.0" text="Set gem panel slide out timer in seconds :" />
       <JFXSlider fx:id="sliderLevel" blockIncrement="1.0" layoutX="28.0" layoutY="365.0" max="30.0" min="4.0" minorTickCount="10" prefHeight="14.0" prefWidth="272.0" value="6.0" />
-      <Label layoutX="315.0" layoutY="298.0" prefHeight="36.0" prefWidth="68.0" text="Show gems again" textAlignment="CENTER" wrapText="true" />
-      <TextField fx:id="remind_gems" editable="false" layoutX="392.0" layoutY="303.0" prefHeight="25.0" prefWidth="79.0" />
-      <Separator layoutX="310.0" layoutY="12.0" orientation="VERTICAL" prefHeight="263.0" prefWidth="6.0" />
-      <Separator layoutX="310.0" layoutY="297.0" orientation="VERTICAL" prefHeight="102.0" prefWidth="6.0" />
-      <JFXButton buttonType="RAISED" layoutX="383.0" layoutY="510.0" onAction="#save" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Save changes" textFill="WHITE" AnchorPane.rightAnchor="28.0" />
-      <Separator layoutX="19.0" layoutY="402.0" prefHeight="8.0" prefWidth="462.0" />
-      <Label layoutX="28.0" layoutY="420.0" text="Path of Exile Installation folder :">
+      <Label layoutX="330.0" layoutY="267.0" prefHeight="36.0" prefWidth="68.0" text="Show gems again" textAlignment="CENTER" wrapText="true" />
+      <TextField fx:id="remind_gems" editable="false" layoutX="401.0" layoutY="272.0" prefHeight="25.0" prefWidth="79.0" />
+      <Separator layoutX="310.0" layoutY="12.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="7.0" />
+      <JFXButton buttonType="RAISED" layoutX="381.0" layoutY="559.0" onAction="#save" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Save changes" textFill="WHITE" AnchorPane.rightAnchor="30.0" />
+      <Separator layoutX="22.0" layoutY="435.0" prefHeight="8.0" prefWidth="285.0" />
+      <Label layoutX="28.0" layoutY="452.0" text="Path of Exile Installation folder :">
          <font>
             <Font name="Alegreya Sans SC" size="16.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="poe_installation" layoutX="28.0" layoutY="454.0" prefHeight="25.0" prefWidth="285.0" />
-      <JFXButton buttonType="RAISED" layoutX="383.0" layoutY="441.0" onAction="#locateLog" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Locate" textFill="WHITE" AnchorPane.rightAnchor="28.0" />
-      <Separator layoutX="19.0" layoutY="494.0" prefHeight="8.0" prefWidth="462.0" />
+      <JFXTextField fx:id="poe_installation" layoutX="28.0" layoutY="486.0" prefHeight="25.0" prefWidth="248.0" />
+      <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="273.0" layoutY="473.0" onAction="#locateLog" text="Locate" textFill="WHITE" AnchorPane.rightAnchor="185.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../icons/icons8-opened-folder-48.png" />
+               </image>
+            </ImageView>
+         </graphic></JFXButton>
+      <Separator layoutX="19.0" layoutY="537.0" prefHeight="8.0" prefWidth="462.0" />
       <JFXToggleButton fx:id="passive_toggle" layoutX="7.0" layoutY="126.0" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Alert when zone has passive point" />
       <JFXToggleButton fx:id="trial_toggle" layoutX="7.0" layoutY="162.0" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Alert when zone has labyrinth trial" />
       <Label layoutX="335.0" layoutY="40.0" prefHeight="36.0" prefWidth="150.0" text="You can use any combination with Shift or Control" textAlignment="CENTER" wrapText="true">
@@ -58,18 +66,29 @@
       </Label>
       <JFXToggleButton fx:id="images_toggle" layoutX="7.0" layoutY="228.0" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" text="Show images " />
       <JFXToggleButton fx:id="text_toggle" layoutX="143.0" layoutY="228.0" prefHeight="47.0" prefWidth="150.0" selected="true" size="6.0" text="Show text" />
-      <Label layoutX="321.0" layoutY="340.0" prefHeight="36.0" prefWidth="150.0" text="Pressing this hotkey will show the last gems that showed up" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font name="System Italic" size="9.0" />
-         </font>
-      </Label>
+      <AnchorPane fx:id="betaHotkey_pane" layoutX="321.0" layoutY="309.0">
+         <children>
+            <Label layoutX="54.0" prefHeight="36.0" prefWidth="106.0" text="Beta Gem UI Hotkeys only" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Italic" size="9.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="27.0" prefHeight="36.0" prefWidth="68.0" text="Show next gem" textAlignment="CENTER" wrapText="true" />
+            <TextField fx:id="next_gem_hotkey" editable="false" layoutX="81.0" layoutY="32.0" prefHeight="25.0" prefWidth="79.0" />
+            <Label layoutY="57.0" prefHeight="56.0" prefWidth="79.0" text="Show previous gem" textAlignment="CENTER" wrapText="true" />
+            <TextField fx:id="previous_gem_hotkey" editable="false" layoutX="81.0" layoutY="76.0" prefHeight="25.0" prefWidth="79.0" />
+         </children>
+      </AnchorPane>
       <Label layoutX="331.0" layoutY="78.0" prefHeight="47.0" prefWidth="150.0" text="You can set custom hotkeys by clicking on this box and typing the Keys" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Italic" size="9.0" />
          </font>
       </Label>
       <JFXToggleButton fx:id="recipe_toggle" layoutX="15.0" layoutY="198.0" prefHeight="47.0" prefWidth="272.0" size="6.0" text="Alert when zone has a crafting recipe" />
-      <Label layoutX="317.0" layoutY="175.0" prefHeight="47.0" prefWidth="64.0" text="Mark recipe as found" textAlignment="CENTER" wrapText="true" />
-      <TextField fx:id="mark_recipe_hotkey" editable="false" layoutX="388.0" layoutY="186.0" prefHeight="25.0" prefWidth="79.0" />
+      <Label layoutX="330.0" layoutY="173.0" prefHeight="47.0" prefWidth="64.0" text="Mark recipe as found" textAlignment="CENTER" wrapText="true" />
+      <TextField fx:id="mark_recipe_hotkey" editable="false" layoutX="401.0" layoutY="184.0" prefHeight="25.0" prefWidth="79.0" />
+      <Label layoutX="330.0" layoutY="220.0" prefHeight="47.0" prefWidth="68.0" text="Open recipe preview" textAlignment="CENTER" wrapText="true" />
+      <TextField fx:id="recipe_preview_hotkey" editable="false" layoutX="401.0" layoutY="231.0" prefHeight="25.0" prefWidth="79.0" />
+      <JFXToggleButton fx:id="betaGemUItoggle" layoutX="9.0" layoutY="385.0" onAction="#betaGemUItoggle_action" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" text="Beta Gem UI" />
    </children>
 </AnchorPane>

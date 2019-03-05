@@ -76,6 +76,7 @@ public class LevelOverlay_Stage extends Stage{
         
         controller.hookStage(this);
         controller.setPlayerLevel(Main_Stage.playerLevel);
+        controller.reset(Main_Stage.playerLevel);
         this.show();
     }
     
