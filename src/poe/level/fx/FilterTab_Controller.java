@@ -20,22 +20,20 @@ public class FilterTab_Controller implements Initializable {
 
     private String tabName;
     private AddGem_Controller parent;
-    private int code;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void load(String tagName, AddGem_Controller root, int code){
+    public void load(String tagName, AddGem_Controller root){
         this.parent = root;
         tabName = tagName;
-        this.code = code;
 
         tab.setText(tagName);
     }
 
     @FXML
     private void triggerClose(){
-        parent.filterTabClosed(tabName,code);
+        parent.filterTabClosed(tabName,root);
     }
 }

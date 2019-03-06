@@ -610,12 +610,12 @@ public class GemsPanel_Controller implements Initializable {
     public void gemUpdate(Gem gem, int id){
         
         Gem old = current_sgl.sg.putGem(gem,id);
+        //if it was an active gem.
         if(old!=null){
-            
+            lockClear = true;
             activeSkillGroup.getItems().clear();
+            lockClear = false;
             activeSkillGroup.getItems().addAll(current_sgl.sg.getGems());
-            
-            //if it was an active gem.
             current_sgl.sg.setActiveGem(gem);
             activeSkillGroup.setValue(gem);
             current_sgl.changeLabel();

@@ -205,7 +205,7 @@ public class MainApp_Controller implements Initializable {
         con.setPrefWidth((int) lastWidth*0.66);
         con.setPrefHeight((int) lastHeight*0.69);
         addGemPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
-        addGemPopup.setCacheContainer(true);
+        //addGemPopup.setCacheContainer(true);
         addGemPopup.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -231,8 +231,7 @@ public class MainApp_Controller implements Initializable {
         } else {
             if(rootPane.getWidth() != lastWidth || rootPane.getHeight() != lastHeight){
                 gemPanelCreation();
-            }
-            addGemPopup.show();
+            }else addGemPopup.show();
         }
         return m_addGemPopupController;
     }

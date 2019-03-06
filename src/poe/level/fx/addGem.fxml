@@ -74,7 +74,7 @@
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </padding>
             </FlowPane>
-            <TextField fx:id="searchArea" onAction="#onEnter" promptText="Search gem" styleClass="searchField" stylesheets="@../../../../resources/styles/style.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
+            <TextField fx:id="searchArea" promptText="Search gem" styleClass="searchField" stylesheets="@../../../../resources/styles/style.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
                <font>
                   <Font size="13.0" />
                </font>
@@ -126,7 +126,7 @@
                            <children>
                               <ScrollPane fx:id="scroll3" prefHeight="340.0" prefWidth="573.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <content>
-                                    <VBox fx:id="actIIIbox" prefWidth="666.0" />
+                                    <VBox fx:id="actIIIbox" />
                                  </content>
                               </ScrollPane>
                            </children>
@@ -210,7 +210,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <TextField fx:id="searchArea1" onAction="#onEnter" promptText="Search gem" styleClass="searchField" stylesheets="@../../../../resources/styles/style.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
+            <TextField fx:id="searchArea1" promptText="Search gem" styleClass="searchField" stylesheets="@../../../../resources/styles/style.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
                <font>
                   <Font size="13.0" />
                </font>

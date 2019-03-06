@@ -8,15 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="root" prefHeight="43.0" prefWidth="84.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.FilterTab_Controller">
+<AnchorPane fx:id="root" maxWidth="111.0" minWidth="111.0" prefHeight="47.0" prefWidth="111.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.FilterTab_Controller">
    <children>
-      <Button fx:id="tab" layoutY="15.0" mnemonicParsing="false" text="Support">
+      <Button fx:id="tab" layoutY="15.0" maxWidth="102.0" minWidth="102.0" mnemonicParsing="false" prefWidth="102.0" text="Minion">
          <font>
             <Font name="Alegreya Sans SC Light" size="16.0" />
          </font>
       </Button>
-      <JFXButton fx:id="tabClose" contentDisplay="GRAPHIC_ONLY" layoutX="62.0" layoutY="9.0" onAction="#triggerClose">
+      <JFXButton fx:id="tabClose" contentDisplay="GRAPHIC_ONLY" layoutX="90.0" layoutY="9.0" onAction="#triggerClose">
          <graphic>
             <ImageView fx:id="tabImage" fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                <image>

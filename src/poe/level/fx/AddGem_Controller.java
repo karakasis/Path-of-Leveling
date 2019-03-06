@@ -84,6 +84,8 @@ public class AddGem_Controller implements Initializable {
     @FXML
     private TextField searchArea;
     @FXML
+    private TextField searchArea1;
+    @FXML
     private ScrollPane scroll1;
     @FXML
     private ScrollPane scroll2;
@@ -128,8 +130,8 @@ public class AddGem_Controller implements Initializable {
 
     }
 
-    public void onEnter(){
-        String searchText = searchArea.getText().trim().toLowerCase();
+    public void onEnter(TextField whichField){
+        String searchText = whichField.getText().trim().toLowerCase();
 
         if (searchText.isEmpty()) {
           return;
@@ -232,6 +234,33 @@ public class AddGem_Controller implements Initializable {
             for(TabLinker tl : tablinkersOther){
                 tl.controller.scrollListener(h);
             }
+    }
+
+    private boolean bTransferringText;
+    private void addAutoCompleteListenerToTextField(TextField whichField, ArrayList<String> autoCompleteContents) {
+        whichField.setOnAction(event -> onEnter(whichField));
+        JFXAutoCompletePopup<String> autoCompletePopup = new JFXAutoCompletePopup<>();
+        autoCompletePopup.getSuggestions().addAll(autoCompleteContents);
+        //SelectionHandler sets the value of the comboBox
+        autoCompletePopup.setSelectionHandler(event -> {
+            whichField.setText(event.getObject());
+            onEnter(whichField);
+        });
+        whichField.textProperty().addListener((observable, oldVal, newVal) -> {
+            String searchVal = newVal;
+            if (searchVal == null  || bTransferringText ) {
+                return;
+            }
+            searchVal = searchVal.trim().toLowerCase();
+            String finalSearchVal = searchVal;
+            autoCompletePopup.filter(item -> item.toLowerCase().contains(finalSearchVal));
+            //Hide the autocomplete popup if the filtered suggestions is empty or when the box's original popup is open
+            if (searchVal.isEmpty() || autoCompletePopup.getFilteredSuggestions().isEmpty()) {
+                autoCompletePopup.hide();
+            } else {
+                autoCompletePopup.show(whichField);
+            }
+        });
     }
 
     void callback(Gem g){
@@ -504,25 +533,9 @@ public class AddGem_Controller implements Initializable {
             }
         }
         m_gemNames.sort(Comparator.naturalOrder());
-        JFXAutoCompletePopup<String> autoCompletePopup = new JFXAutoCompletePopup<>();
-        autoCompletePopup.getSuggestions().addAll(m_gemNames);
-        //SelectionHandler sets the value of the comboBox
-        autoCompletePopup.setSelectionHandler(event -> searchArea.setText(event.getObject()));
-        searchArea.textProperty().addListener(observable -> {
-            String searchVal = searchArea.getText();
-            if (searchVal == null) {
-                return;
-            }
-            searchVal = searchVal.trim().toLowerCase();
-            String finalSearchVal = searchVal;
-            autoCompletePopup.filter(item -> item.toLowerCase().contains(finalSearchVal));
-            //Hide the autocomplete popup if the filtered suggestions is empty or when the box's original popup is open
-            if (searchVal.isEmpty() || autoCompletePopup.getFilteredSuggestions().isEmpty()) {
-                autoCompletePopup.hide();
-            } else {
-                autoCompletePopup.show(searchArea);
-            }
-        });
+        addAutoCompleteListenerToTextField(searchArea, m_gemNames);
+        addAutoCompleteListenerToTextField(searchArea1, m_gemNames);
+
     }
 
     private void fillBox(int whichAct, VBox whichActBox, HashMap<Zone, ArrayList<Gem>> gemHash, ArrayList<Zone> zoneList) {
@@ -574,12 +587,13 @@ public class AddGem_Controller implements Initializable {
 
         slideIn.play();
 
-
+        bTransferringText = true;
+        searchArea1.setText(searchArea.getText());
+        bTransferringText = false;
     }
 
     private void setUpTabs(){
         filtersLayoutSmall.getChildren().clear();
-        int code = 0;
         for(String s : tagsActive){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("filterTab.fxml"));
             //gemButton con = null;
@@ -590,12 +604,12 @@ public class AddGem_Controller implements Initializable {
                 Logger.getLogger(QuestSplitPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
             FilterTab_Controller controller = loader.<FilterTab_Controller>getController();
-            controller.load(s,this,code++);
+            controller.load(s,this);
             filtersLayoutSmall.getChildren().add(filterTab);
         }
     }
 
-    public void filterTabClosed(String s, int code){
+    public void filterTabClosed(String s, AnchorPane root){
         customCheckboxClicker(s,false);
         Integer integer = checkboxToCode.get(s);
         JFXCheckBox node = null;
@@ -611,7 +625,7 @@ public class AddGem_Controller implements Initializable {
              node.setSelected(false);
         }
 
-        filtersLayoutSmall.getChildren().remove(code);
+        filtersLayoutSmall.getChildren().remove(root);
     }
 
     @FXML
@@ -644,6 +658,9 @@ public class AddGem_Controller implements Initializable {
 
         slideIn.play();
 
+        bTransferringText = true;
+        searchArea.setText(searchArea1.getText());
+        bTransferringText = false;
     }
 
     @FXML
