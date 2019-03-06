@@ -2,50 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5df49a55-3d54-4b9c-bc7b-0e6ec592fdb5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecipeMerge/data.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecipeMerge/newData.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecipeMerge/recipe.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecipeMerge/src/merge/Recipe.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecipeMerge/src/merge/RecipeMerger.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/getdown-launcher-1.8.2-javadoc.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/getdown-launcher-1.8.2-sources.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/getdown-launcher-1.8.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/gson-2.8.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jna-4.5.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jna-platform-4.1.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lwjgl-glfw-natives-windows.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lwjgl-glfw-sources.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lwjgl-glfw.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lwjgl-javadoc.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lwjgl-natives-windows.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lwjgl-opengl-natives-windows.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lwjgl-opengl-sources.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lwjgl-opengl.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lwjgl-sources.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lwjgl.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-1.7.25.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/system-hook-3.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manifest.mf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/configs/Run_as_WebStart.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/configs/Run_in_Browser.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/genfiles.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/jfx-impl.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/configs/Run_as_WebStart.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/configs/Run_in_Browser.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/retriever/catalog.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/poe/level/data/Build.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/poe/level/data/Build.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/poe/level/fx/BuildsPanel_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/poe/level/fx/BuildsPanel_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/poe/level/fx/GemsPanel_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/poe/level/fx/GemsPanel_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/poe/level/fx/NewFXPreloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/poe/level/fx/NewFXPreloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/poe/level/fx/POELevelFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/poe/level/fx/POELevelFx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/poeapi/POEAPIHelper.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,8 +17,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/poe/level/fx/POELevelFx.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="1361" column="31" selection-start-line="1361" selection-start-column="31" selection-end-line="1361" selection-end-column="31" />
+            <state relative-caret-position="3732">
+              <caret line="1356" column="43" selection-start-line="1356" selection-start-column="43" selection-end-line="1356" selection-end-column="43" />
               <folding>
                 <element signature="method#init#0;class#POELevelFx#0" expanded="true" />
                 <element signature="e#6257#6956#1" />
@@ -69,11 +27,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/poe/level/fx/GemsPanel_Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="462" column="50" selection-start-line="462" selection-start-column="50" selection-end-line="462" selection-end-column="50" />
+            <state relative-caret-position="29">
+              <caret line="590" column="14" lean-forward="true" selection-start-line="590" selection-start-column="14" selection-end-line="590" selection-end-column="14" />
+              <folding>
+                <element signature="e#1846#2249#0" expanded="true" />
+                <element signature="e#2276#2390#0" expanded="true" />
+                <element signature="e#12157#12178#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -92,6 +55,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/poe/level/fx/GemEntry_Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-796">
+              <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/poe/level/fx/NewFXPreloader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
@@ -100,7 +72,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/poe/level/fx/BuildsPanel_Controller.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="103">
@@ -120,10 +92,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/poe/level/data/Build.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="137" column="70" selection-start-line="137" selection-start-column="70" selection-end-line="137" selection-end-column="70" />
+            <state relative-caret-position="-2156">
+              <caret line="76" selection-start-line="76" selection-end-line="76" />
               <folding>
-                <element signature="method#validate#0;class#Build#0" expanded="true" />
+                <element signature="method#validate_failed_string#0;class#Build#0" expanded="true" />
                 <element signature="method#patch_missing_sgroups#0;class#Build#0" expanded="true" />
               </folding>
             </state>
@@ -164,9 +136,9 @@
         <option value="$PROJECT_DIR$/src/dev/src/RecipeMerge/src/merge/RecipeMerger.java" />
         <option value="$PROJECT_DIR$/src/poe/level/fx/NewFXPreloader.java" />
         <option value="$PROJECT_DIR$/src/poe/level/fx/POELevelFx.java" />
-        <option value="$PROJECT_DIR$/src/poe/level/fx/GemsPanel_Controller.java" />
         <option value="$PROJECT_DIR$/src/poe/level/fx/BuildsPanel_Controller.java" />
         <option value="$PROJECT_DIR$/src/poe/level/data/Build.java" />
+        <option value="$PROJECT_DIR$/src/poe/level/fx/GemsPanel_Controller.java" />
       </list>
     </option>
   </component>
@@ -232,7 +204,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551896912569" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551905028272" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -282,12 +254,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1551893375870</updated>
-      <workItem from="1551893376990" duration="4012000" />
+      <workItem from="1551893376990" duration="8951000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4012000" />
+    <option name="totallyTimeSpent" value="8951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1864" height="1096" extended-state="6" />
@@ -307,9 +279,9 @@
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32917964" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32917964" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997923" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -342,6 +314,24 @@
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/poe/level/fx/GemsPanel_Controller.java</url>
+          <line>459</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/poe/level/fx/GemsPanel_Controller.java</url>
+          <line>296</line>
+          <properties />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/poe/level/fx/GemsPanel_Controller.java</url>
+          <line>590</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -367,24 +357,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/poe/level/fx/POELevelFx.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="1361" column="31" selection-start-line="1361" selection-start-column="31" selection-end-line="1361" selection-end-column="31" />
-          <folding>
-            <element signature="method#init#0;class#POELevelFx#0" expanded="true" />
-            <element signature="e#6257#6956#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/poe/level/fx/GemsPanel_Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="462" column="50" selection-start-line="462" selection-start-column="50" selection-end-line="462" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/poe/level/data/SocketGroup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-407">
@@ -392,17 +364,6 @@
           <folding>
             <element signature="e#3556#3557#0" expanded="true" />
             <element signature="e#3583#3584#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/poe/level/data/Build.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="137" column="70" selection-start-line="137" selection-start-column="70" selection-end-line="137" selection-end-column="70" />
-          <folding>
-            <element signature="method#validate#0;class#Build#0" expanded="true" />
-            <element signature="method#patch_missing_sgroups#0;class#Build#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -437,6 +398,47 @@
             <element signature="e#5682#5683#0" expanded="true" />
             <element signature="e#5736#5737#0" expanded="true" />
             <element signature="method#addNewBuild#1;class#BuildsPanel_Controller#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/poe/level/fx/POELevelFx.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3732">
+          <caret line="1356" column="43" selection-start-line="1356" selection-start-column="43" selection-end-line="1356" selection-end-column="43" />
+          <folding>
+            <element signature="method#init#0;class#POELevelFx#0" expanded="true" />
+            <element signature="e#6257#6956#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/poe/level/data/Build.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2156">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+          <folding>
+            <element signature="method#validate_failed_string#0;class#Build#0" expanded="true" />
+            <element signature="method#patch_missing_sgroups#0;class#Build#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/poe/level/fx/GemEntry_Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-796">
+          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/poe/level/fx/GemsPanel_Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="590" column="14" lean-forward="true" selection-start-line="590" selection-start-column="14" selection-end-line="590" selection-end-column="14" />
+          <folding>
+            <element signature="e#1846#2249#0" expanded="true" />
+            <element signature="e#2276#2390#0" expanded="true" />
+            <element signature="e#12157#12178#0" expanded="true" />
           </folding>
         </state>
       </provider>

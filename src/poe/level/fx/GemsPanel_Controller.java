@@ -50,8 +50,7 @@ public class GemsPanel_Controller implements Initializable {
         HashMap<Integer,GemLinker> gl_map;
         GemsPanel_Controller root;
         int id;
-        ArrayList<Integer> leftid;
-        ArrayList<Integer> rightid;
+        ArrayList<Integer> ids;
         int active_gemLinker;
         int popup_id;
         SocketGroup sg;
@@ -62,22 +61,26 @@ public class GemsPanel_Controller implements Initializable {
             this.sg = sg;
             id = GemsPanel_Controller.sign();
             //acts as constructor
-            leftid = new ArrayList<>();
-            rightid = new ArrayList<>();
+            ids = new ArrayList<>();
             active_gemLinker = -1;
             popup_id = -1;
             currentMain = null;
             return id;
         }
         
-        public void loadGemPanel(int rootId, int gemId){
-            if(rootId == 0){
-                leftid.add(gemId);
-            }else if(rootId == 1){
-                rightid.add(gemId);
+        public void loadGemPanel(int gemId){
+            ids.add(gemId);
+        }
+
+        public void removeGemPanel(int gemId){
+            for(int i = 0; i< ids.size() ; i++) {
+                if(ids.get(i) == gemId){
+                    ids.remove(i);
+                    break;
+                }
             }
         }
-        
+
         public void setActiveLinker(GemLinker gl){
             currentMain = gl;
         }
@@ -343,7 +346,7 @@ public class GemsPanel_Controller implements Initializable {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("gemEntry.fxml"));
                         
                         gemContainer.getChildren().add(loader.load());
-                        sgl.gpl.loadGemPanel(1,gl.id);
+                        sgl.gpl.loadGemPanel(gl.id);
                         
                         gl.hookController(loader.<GemEntry_Controller>getController());
                         if(gl.gem.getGemName().equals("<empty group>")){
@@ -362,7 +365,7 @@ public class GemsPanel_Controller implements Initializable {
         }else{
             
             
-            for(int gem_id : sgl.gpl.rightid){
+            for(int gem_id : sgl.gpl.ids){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("gemEntry.fxml"));
                 try {
                     gemContainer.getChildren().add(loader.load());
@@ -442,25 +445,9 @@ public class GemsPanel_Controller implements Initializable {
         GemLinker gl = new GemLinker();
         current_sgl.gpl.gl_map.put(gl.hook(current_sgl.gpl), gl);
         gl.gem = GemHolder.getInstance().tossDummie();
-        /*
-        if(findNextVBox() == 0){
-            try { 
-                leftGemBox.getChildren().add(loader.load());
-                current_sgl.gpl.loadGemPanel(0,gl.id);
-                } catch (IOException ex) {
-                    Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }else {
-            try {
-                rightGemBox.getChildren().add(loader.load());
-                current_sgl.gpl.loadGemPanel(1,gl.id);
-                } catch (IOException ex) {
-                    Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }*/
         try {
             gemContainer.getChildren().add(loader.load());
-            current_sgl.gpl.loadGemPanel(1,gl.id);
+            current_sgl.gpl.loadGemPanel(gl.id);
         } catch (IOException ex) {
             Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -470,26 +457,17 @@ public class GemsPanel_Controller implements Initializable {
     
     @FXML 
     private void removeGemPanel(){
-        int vbox = -1;
-        if(current_sgl.gpl.leftid.contains(current_sgl.gpl.active_gemLinker)){
-            vbox = 0;
-        }else if (current_sgl.gpl.rightid.contains(current_sgl.gpl.active_gemLinker)){
-            vbox = 1;
-        }
-        
-        if(vbox != -1){
-            GemLinker get = current_sgl.gpl.gl_map.get(current_sgl.gpl.active_gemLinker);
-            GemEntry_Controller thisiswrong = get.controller;
-            removeGem(get.gem); //remove gem from socketGroup class
-            current_sgl.gpl.gl_map.remove(current_sgl.gpl.active_gemLinker);//let go of the GemLinker reference
-            
-            //current.sgl//remove from the vbox lists
-            if(thisiswrong!=null){
-                gemContainer.getChildren().remove(thisiswrong.getRoot());
-            }
-            removeGemPanel_button.setDisable(true);
+        GemLinker get = current_sgl.gpl.gl_map.get(current_sgl.gpl.active_gemLinker);
+        current_sgl.gpl.removeGemPanel(current_sgl.gpl.active_gemLinker);
+        GemEntry_Controller thisiswrong = get.controller;
+        removeGem(get.gem); //remove gem from socketGroup class
+        current_sgl.gpl.gl_map.remove(current_sgl.gpl.active_gemLinker);//let go of the GemLinker reference
 
+        //current.sgl//remove from the vbox lists
+        if(thisiswrong!=null){
+            gemContainer.getChildren().remove(thisiswrong.getRoot());
         }
+        removeGemPanel_button.setDisable(true);
     }
     
     @FXML 
