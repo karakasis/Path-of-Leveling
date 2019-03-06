@@ -9,16 +9,16 @@
 
 <AnchorPane id="AnchorPane" prefHeight="279.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Export_pastebin_Controller">
    <children>
-      <JFXButton buttonType="RAISED" layoutX="344.0" layoutY="14.0" onAction="#copyToClipboard" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Copy" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="344.0" layoutY="14.0" onAction="#copy" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Copy" textFill="WHITE">
          <tooltip>
-            <Tooltip text="If successful: copies PastebinURL to clipboard &#013;If not: copies Build-Data and opens pastebin" />
+            <Tooltip text="If successful: copies PastebinURL to clipboard &#13;If not: copies Raw Build-Data" />
          </tooltip></JFXButton>
       <Label layoutX="21.0" layoutY="16.0" text="Copy to clipboard">
          <font>
             <Font name="Alegreya Sans SC" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="21.0" layoutY="70.0" text="Share the Pastebin url with others">
+      <Label layoutX="21.0" layoutY="70.0" text="Open Pastebin">
          <font>
             <Font name="Alegreya Sans SC" size="15.0" />
          </font>
@@ -26,5 +26,10 @@
       <Separator layoutX="12.0" layoutY="100.0" prefHeight="6.0" prefWidth="438.0" />
       <Separator layoutX="12.0" layoutY="54.0" prefHeight="6.0" prefWidth="438.0" />
       <AnchorPane id="AnchorPane" fx:id="verify_clipboard" layoutX="75.0" layoutY="122.0" prefHeight="133.0" prefWidth="313.0" />
+      <JFXButton buttonType="RAISED" layoutX="344.0" layoutY="68.0" onAction="#openPastebin" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Open" textFill="WHITE">
+         <tooltip>
+            <Tooltip text="Opens pastebin.com" />
+         </tooltip>
+      </JFXButton>
    </children>
 </AnchorPane>
