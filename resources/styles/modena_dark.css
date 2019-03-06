@@ -39,7 +39,12 @@
 .text-input:focused {
     -fx-prompt-text-fill: transparent;
 }
-
+.jfx-dialog-overlay-pane {
+    -fx-background-color: TRANSPARENT;
+}
+.jfx-dialog-overlay-pane > StackPane {
+    -fx-background-color: rgba(60, 63, 65, 255);
+}
 
 /****************************************************************
  
