@@ -61,6 +61,10 @@ public class POELevelFx extends Application {
     private static String BRANCH_NAME = RELEASE_BRANCH_NAME;
     private static final String REPO_OWNER = "karakasis";
     public static String directory;
+    public static String gemsJSONFileName;
+    public static String gemsHashFileName;
+    public static String dataJSONFileName;
+    public static String dataHashFileName;
     public static String gemDir;
     public static ArrayList<Build> buildsLoaded;
     private Stage zone;
@@ -1361,6 +1365,7 @@ public class POELevelFx extends Application {
 
     public static void setUpDirectories(){
         POELevelFx.directory = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
+
         System.out.println(POELevelFx.directory + "\\Path of Leveling");
         if (!new File(POELevelFx.directory + "\\Path of Leveling").exists()) {
             new File(POELevelFx.directory + "\\Path of Leveling").mkdirs();
@@ -1519,6 +1524,17 @@ public class POELevelFx extends Application {
             }else{
                 return false;
             }
+    }
+
+    public static boolean checkForNewJSON() {
+        GithubHelper gh = new GithubHelper(REPO_OWNER, BRANCH_NAME);
+        gh.init();
+        File gemsJSONFile = new File(gemsJSONFileName);
+        File dataJSONFile = new File(dataJSONFileName);
+        if (!gemsJSONFile.exists()) {
+
+        }
+        return false;
     }
 
 
