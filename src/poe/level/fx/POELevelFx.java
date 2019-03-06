@@ -13,21 +13,7 @@ import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -56,16 +42,8 @@ import org.jnativehook.NativeHookException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import poe.level.data.Act;
-import poe.level.data.ActHandler;
-import poe.level.data.Build;
-import poe.level.data.Controller;
-import poe.level.data.Gem;
+import poe.level.data.*;
 import poe.level.data.Gem.Info;
-import poe.level.data.GemHolder;
-import poe.level.data.SocketGroup;
-import poe.level.data.Zone;
-import poe.level.data.Zone.recipeInfo;
 import poe.level.keybinds.GlobalKeyListener;
 
 /**
@@ -74,6 +52,14 @@ import poe.level.keybinds.GlobalKeyListener;
  */
 public class POELevelFx extends Application {
 
+
+
+    public static boolean DEBUG = false;
+
+    private static final String DEBUG_BRANCH_NAME = "development";
+    private static final String RELEASE_BRANCH_NAME = "master";
+    private static String BRANCH_NAME = RELEASE_BRANCH_NAME;
+    private static final String REPO_OWNER = "karakasis";
     public static String directory;
     public static String gemDir;
     public static ArrayList<Build> buildsLoaded;
@@ -181,8 +167,7 @@ public class POELevelFx extends Application {
         if(is_new_version){
 
 
-            while(true){
-                    System.err.println("");
+            while(true) {
                 if(UpdaterController.allowUpdate){
                     System.out.println("allowed");
                     UpdaterController.allowUpdate = false;
@@ -194,13 +179,18 @@ public class POELevelFx extends Application {
                     restart = true;
                     break;
                 }
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException ie) {
+                    // ignore
+                }
             }
             if(restart) {
                 //LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, null);
                 init();
             }
             //System.exit(-10);
-        }else{
+        } else {
             Platform.setImplicitExit( false );
             addTrayIcon();
             Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Regular.ttf").toExternalForm(), 10);
@@ -459,7 +449,10 @@ public class POELevelFx extends Application {
                   }
             }
 
-
+            // TODO
+            if (DEBUG) {
+                checkForNewJSON();
+            }
 
             //StringBuilder raw = readRawToString();
 
@@ -687,8 +680,8 @@ public class POELevelFx extends Application {
         }
     }
 
-    private void loadActsFromMemory(){
-        InputStream in = POELevelFx.class.getResourceAsStream("/json/data.json");
+    private void loadActsFromMemory() throws IOException {
+        InputStream in = new FileInputStream(dataJSONFileName);
         Scanner s = new Scanner(in).useDelimiter("\\A");
         String jsonstring = s.hasNext() ? s.next() : "";
 
@@ -748,9 +741,9 @@ public class POELevelFx extends Application {
         System.out.println("Zone data loaded.");
     }
 
-    private void loadGemsFromMemory(){
+    private void loadGemsFromMemory() throws FileNotFoundException {
 
-        InputStream inG = POELevelFx.class.getResourceAsStream("/json/gems.json");
+        InputStream inG = new FileInputStream(gemsJSONFileName);
         Scanner sG = new Scanner(inG).useDelimiter("\\A");
         String jsonstringG = sG.hasNext() ? sG.next() : "";
 
@@ -1340,14 +1333,27 @@ public class POELevelFx extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // Negate the following if you want to test release mode
+        if (Files.exists(Paths.get("./debug.donotdelete"))) {
+            System.out.println("Detected that we're running in a development environment");
+            DEBUG = true;
+            BRANCH_NAME = DEBUG_BRANCH_NAME;
+        } else {
+            System.out.println("Running in release mode");
+        }
         //remove below for debuging.
         //setUpLog();
         setUpDirectories();
-        //checkForNewVersion()
-        if(checkForNewVersion()){
-            is_new_version = true;
-            LauncherImpl.launchApplication(POELevelFx.class, UpdatePreloader.class, args);
-        }else{
+
+        if (!DEBUG) {
+            if (checkForNewVersion()) {
+                is_new_version = true;
+                LauncherImpl.launchApplication(POELevelFx.class, UpdatePreloader.class, args);
+            } else {
+                is_new_version = false;
+                LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, args);
+            }
+        } else {
             is_new_version = false;
             LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, args);
         }
@@ -1365,17 +1371,29 @@ public class POELevelFx extends Application {
         createFileIfNotExists(POELevelFx.directory + "\\Path of Leveling\\settings.txt");
         createFileIfNotExists(POELevelFx.directory + "\\Path of Leveling\\log.txt");
 
-        if (!new File(POELevelFx.directory + "\\Path of Leveling\\json").exists()) {
-            if (new File(POELevelFx.directory + "\\Path of Leveling\\json").mkdirs()) {
-                try {
-                    Files.setAttribute(Paths.get(POELevelFx.directory + "\\Path of Leveling\\json"), "dos:hidden", true);
-                } catch (IOException ex) {
-                    Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "Exception while attempting to set json directory as hidden", ex);
+        if (!DEBUG) {
+            gemsJSONFileName = POELevelFx.directory + "\\Path of Leveling\\json\\gems.json";
+            gemsHashFileName = POELevelFx.directory + "\\Path of Leveling\\json\\gemsjson.sha";
+            dataJSONFileName = POELevelFx.directory + "\\Path of Leveling\\json\\data.json";
+            dataHashFileName = POELevelFx.directory + "\\Path of Leveling\\json\\datajson.sha";
+            if (!new File(POELevelFx.directory + "\\Path of Leveling\\json").exists()) {
+                if (new File(POELevelFx.directory + "\\Path of Leveling\\json").mkdirs()) {
+                    try {
+                        Files.setAttribute(Paths.get(POELevelFx.directory + "\\Path of Leveling\\json"), "dos:hidden", true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "Exception while attempting to set json directory as hidden", ex);
+                    }
+                } else {
+                    System.err.println("Failed to create JSON directory!");
                 }
-            } else {
-                System.err.println("Failed to create JSON directory!");
             }
+        } else {
+            gemsJSONFileName = "json\\gems.json";
+            gemsHashFileName = "json\\gemsjson.sha";
+            dataJSONFileName = "json\\data.json";
+            dataHashFileName = "json\\datajson.sha";
         }
+
     }
 
     private static boolean createFileIfNotExists(String path) {
@@ -1502,5 +1520,8 @@ public class POELevelFx extends Application {
                 return false;
             }
     }
+
+
+
 
 }

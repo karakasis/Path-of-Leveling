@@ -3,6 +3,7 @@ package poeapi;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import poe.level.data.CharacterInfo;
+import poe.level.data.Util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,49 +13,12 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class POEAPIHelper {
-    private static String http(String url) {
-
-        HttpURLConnection connection = null;
-        try {
-            URL urlObj = new URL(url);
-            connection = (HttpURLConnection) urlObj.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("User-Agent", "Path-Of-Leveling");
-            connection.connect();
-            int responseCode = connection.getResponseCode();
-            System.out.println("Response code: " + responseCode);
-            if (responseCode == 200) {
-                BufferedReader in = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                connection.disconnect();
-                in.close();
-//        System.out.println(response);
-                return response.toString();
-            } else {
-                connection.disconnect();
-            }
-
-        } catch (IOException ex) {
-            System.err.println(ex.getMessage());
-            ex.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
-        return null;
-    }
 
     public static ArrayList<String> getPOEActiveLeagues() {
-        String response = http("http://api.pathofexile.com/leagues?compact=1");
+        Util.HttpResponse response = Util.httpToString("http://api.pathofexile.com/leagues?compact=1");
         ArrayList<String> result = new ArrayList<>();
-        if (response != null) {
-            JSONArray arr = new JSONArray(response);
+        if (response.responseCode == 200) {
+            JSONArray arr = new JSONArray(response.responseString);
             for (int i = 0; i < arr.length(); i++) {
                 result.add(arr.getJSONObject(i).getString("id"));
             }
@@ -63,10 +27,10 @@ public class POEAPIHelper {
     }
 
     public static long getCharacterExperience(String account, String character, String league) {
-        String response = http("https://www.pathofexile.com/character-window/get-characters?accountName=" + account);
+        Util.HttpResponse response = Util.httpToString("https://www.pathofexile.com/character-window/get-characters?accountName=" + account);
         long result = -1;
-        if (response != null) {
-            JSONArray arr = new JSONArray(response);
+        if (response.responseCode == 200) {
+            JSONArray arr = new JSONArray(response.responseString);
             for (int i = 0; i < arr.length(); i++) {
                 if (arr.getJSONObject(i).getString("league").equalsIgnoreCase(league) &&
                     arr.getJSONObject(i).getString("name").equalsIgnoreCase(character)) {
@@ -79,11 +43,11 @@ public class POEAPIHelper {
     }
 
     public static ArrayList<CharacterInfo> getCharacters(String account) {
-        String response = http("https://www.pathofexile.com/character-window/get-characters?accountName=" + account);
+        Util.HttpResponse response = Util.httpToString("https://www.pathofexile.com/character-window/get-characters?accountName=" + account);
         ArrayList<CharacterInfo> result = new ArrayList<>();
 
-        if (response != null) {
-            JSONArray arr = new JSONArray(response);
+        if (response.responseCode == 200) {
+            JSONArray arr = new JSONArray(response.responseString);
             for (int i = 0; i < arr.length(); i++) {
                 CharacterInfo ci = new CharacterInfo();
                 ci.loadedFromPOEAPI = true;
