@@ -72,7 +72,7 @@ import poe.level.keybinds.GlobalKeyListener;
  * @author Christos
  */
 public class POELevelFx extends Application {
-
+    //search for public void start(Stage stage) throws Exception for css
     public static String directory;
     public static String gemDir;
     public static ArrayList<Build> buildsLoaded;
@@ -752,7 +752,9 @@ public class POELevelFx extends Application {
         InputStream inG = POELevelFx.class.getResourceAsStream("/json/gems.json");
         Scanner sG = new Scanner(inG).useDelimiter("\\A");
         String jsonstringG = sG.hasNext() ? sG.next() : "";
-
+        HashSet<String> gemTags = new HashSet<>();
+        HashSet<String> activeTags = new HashSet<>();
+        HashSet<String> supportTags = new HashSet<>();
 
         //JSONObject objG = new JSONObject(jsonstringG);
         JSONArray arrG = new JSONArray(jsonstringG);
@@ -896,6 +898,9 @@ public class POELevelFx extends Application {
             //new arraylist is in constructor
             for(int j=0;j<tags.length();j++){
                 gem.tags.add(tags.getString(j));
+                gemTags.add(tags.getString(j));
+                if(gem.isActive) activeTags.add(tags.getString(j));
+                else supportTags.add(tags.getString(j));
             }
 
             GemHolder.getInstance().putGem(gem);
@@ -905,6 +910,30 @@ public class POELevelFx extends Application {
             notifyPreloader(new NewFXPreloader.ProgressNotification(a));
         }
         System.out.println("Gem data loaded");
+        activeTags.remove("Active");
+        supportTags.remove("Support");
+        HashSet<String> active_excl = new HashSet<>();
+        HashSet<String> support_excl = new HashSet<>();
+        HashSet<String> mutual = new HashSet<>();
+
+        System.out.println("Active tags exclusive. ");
+        for(String s : activeTags){
+            if(!supportTags.contains(s)){
+                active_excl.add(s); System.out.println(s);
+            }
+        }
+        System.out.println("Support tags exclusive. ");
+        for(String s : supportTags){
+            if(!activeTags.contains(s)){
+                support_excl.add(s); System.out.println(s);
+            }
+        }
+        System.out.println("Mutual tags. ");
+        for(String s : gemTags){
+            if(!active_excl.contains(s) && !support_excl.contains(s)){
+                mutual.add(s);System.out.println(s);
+            }
+        }
 
     }
 
@@ -1226,9 +1255,11 @@ public class POELevelFx extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
-        StyleManager.getInstance().addUserAgentStylesheet(getClass().getResource("/styles/modena_dark.css").toExternalForm());
+        //StyleManager.getInstance().addUserAgentStylesheet(getClass().getResource("/styles/modena_dark.css").toExternalForm());
+        StyleManager.getInstance().addUserAgentStylesheet(getClass().getResource("/styles/style.css").toExternalForm());
+
         if(is_new_version){
-            UpdaterStage updaterStage = new UpdaterStage();
+            new UpdaterStage();
         }else{
             main = new Main_Stage(this);
         }
@@ -1239,6 +1270,7 @@ public class POELevelFx extends Application {
     public void editor(){
         main.close();
         editor = new Editor_Stage(this);
+        editor.setMaximized(true);
     }
 
     public void launcher(){

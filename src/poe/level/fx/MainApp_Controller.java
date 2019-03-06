@@ -106,6 +106,8 @@ public class MainApp_Controller implements Initializable {
     SocketGroupsPanel_Controller socketgroups_controller;
     GemsPanel_Controller gemspanel_controller;
     Editor_Stage parent;
+    private double lastWidth;
+    private double lastHeight;
 
     public void hook(Editor_Stage parent){
         this.parent = parent;
@@ -189,34 +191,47 @@ public class MainApp_Controller implements Initializable {
         addBuildPopup.close();
     }
 
+    private void gemPanelCreation(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("addGem.fxml"));
+        AnchorPane con = null;
+        try {
+            con = (AnchorPane) loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        m_addGemPopupController = loader.getController();
+        lastWidth = rootPane.getWidth();
+        lastHeight = rootPane.getHeight();
+        con.setPrefWidth((int) lastWidth*0.66);
+        con.setPrefHeight((int) lastHeight*0.69);
+        addGemPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+        addGemPopup.setCacheContainer(true);
+        addGemPopup.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ESCAPE) {
+                    gemClosePopup();
+                }
+            }
+        });
+        m_addGemPopupController.load(lastWidth);
+        addGemPopup.show();
+        addGemPopup.setOnDialogOpened(new EventHandler<JFXDialogEvent>() {
+            @Override
+            public void handle(JFXDialogEvent event) {
+                addGemPopup.requestFocus();
+            }
+        });
+    }
+
     public AddGem_Controller gemPopup() {
         System.out.println("gemPopup");
         if (addGemPopup == null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("addGem.fxml"));
-            AnchorPane con = null;
-            try {
-                con = (AnchorPane) loader.load();
-            } catch (IOException ex) {
-                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            m_addGemPopupController = loader.getController();
-            addGemPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
-            addGemPopup.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent event) {
-                    if (event.getCode() == KeyCode.ESCAPE) {
-                        gemClosePopup();
-                    }
-                }
-            });
-            addGemPopup.show();
-            addGemPopup.setOnDialogOpened(new EventHandler<JFXDialogEvent>() {
-                @Override
-                public void handle(JFXDialogEvent event) {
-                    addGemPopup.requestFocus();
-                }
-            });
+            gemPanelCreation();
         } else {
+            if(rootPane.getWidth() != lastWidth || rootPane.getHeight() != lastHeight){
+                gemPanelCreation();
+            }
             addGemPopup.show();
         }
         return m_addGemPopupController;

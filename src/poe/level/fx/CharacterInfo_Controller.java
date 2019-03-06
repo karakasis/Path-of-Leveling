@@ -138,6 +138,7 @@ public class CharacterInfo_Controller implements Initializable {
             SelectCharacter_PopupController controller = loader.getController();
             controller.hook(this::closePopup);
             addBuildPopup = new JFXDialog(root.getRootPane(), con, JFXDialog.DialogTransition.CENTER);
+            addBuildPopup.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
             //controller.passDialog(mLoad);
             addBuildPopup.show();
         } catch (IOException ex) {

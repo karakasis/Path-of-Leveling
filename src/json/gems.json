@@ -1581,7 +1581,8 @@
       "name":"Blasphemy",
       "isVaal":false,
       "gemTags":[  
-         "Aura Curse",
+         "Aura",
+		 "Curse",
          "Support"
       ],
       "id":25,
@@ -2596,7 +2597,8 @@
       "name":"Cast on Melee Kill",
       "isVaal":false,
       "gemTags":[  
-         "Attack Spell",
+         "Attack",
+		 "Spell",
          "Melee",
          "Trigger",
          "Support"
@@ -15868,7 +15870,8 @@
       "isVaal":false,
       "gemTags":[  
          "Spell",
-         "Minion/Golem",
+         "Minion",
+		 "Golem",
          "Chaos",
          "Active"
       ],
@@ -15920,7 +15923,8 @@
       "isVaal":false,
       "gemTags":[  
          "Spell",
-         "Minion/Golem",
+         "Minion",
+		 "Golem",
          "Fire",
          "Active"
       ],
@@ -16033,7 +16037,8 @@
       "isVaal":false,
       "gemTags":[  
          "Spell",
-         "Minion/Golem",
+         "Minion",
+		 "Golem",
          "Cold",
          "Active"
       ],
@@ -16085,7 +16090,8 @@
       "isVaal":false,
       "gemTags":[  
          "Spell",
-         "Minion/Golem",
+         "Minion",
+		 "Golem",
          "Lightning",
          "Active"
       ],
@@ -16326,7 +16332,8 @@
       "isVaal":false,
       "gemTags":[  
          "Spell",
-         "Minion/Golem",
+         "Minion",
+		 "Golem",
          "Active"
       ],
       "id":266,
@@ -16968,7 +16975,8 @@
       "name":"Trap and Mine Damage",
       "isVaal":false,
       "gemTags":[  
-         "Mine Trap",
+         "Mine",
+		 "Trap",
          "Support"
       ],
       "id":276,

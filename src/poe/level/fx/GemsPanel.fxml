@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.TilePane?>
 
-<AnchorPane fx:id="rootPane" minWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.GemsPanel_Controller">
+<AnchorPane fx:id="rootPane" minWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.GemsPanel_Controller">
    <children>
       <AnchorPane layoutX="14.0" layoutY="10.0" prefHeight="147.0" prefWidth="504.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -31,9 +31,9 @@
          </children>
       </AnchorPane>
       <Separator layoutX="14.0" layoutY="156.0" prefHeight="2.0" prefWidth="504.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="51.0" layoutY="169.0" prefHeight="376.0" prefWidth="510.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="169.0">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="51.0" layoutY="169.0" prefHeight="376.0" prefWidth="510.0" style="-fx-background-color: #2B2B2B;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="169.0">
          <content>
-            <TilePane fx:id="gemContainer" hgap="10.0" prefColumns="1" prefRows="1" vgap="10.0">
+            <TilePane fx:id="gemContainer" hgap="10.0" prefColumns="1" prefRows="1" style="-fx-background-color: transparent;" vgap="10.0">
                <padding>
                   <Insets left="10.0" top="10.0" />
                </padding>

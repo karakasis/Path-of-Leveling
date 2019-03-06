@@ -9,6 +9,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashSet;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -62,7 +64,7 @@ public class Gem {
     
     public boolean isActive;
     public boolean isSupport;
-    public ArrayList<String> tags;
+    public HashSet<String> tags;
     
     public boolean isBought(){
         if(buy.size()>0){
@@ -82,7 +84,7 @@ public class Gem {
         id = -1;
         id_replaced = -1;
         id_replaces = -1;
-        tags = new ArrayList<>();
+        tags = new HashSet<>();
     }
     
     public Gem(Gem dupe){
@@ -112,7 +114,7 @@ public class Gem {
         this.cachedLabel= dupe.cachedLabel;
         this.iconDirPath = dupe.iconDirPath;
         this.isRewarded = dupe.isRewarded;
-        this.tags = new ArrayList<>(dupe.tags);
+        this.tags = new HashSet<>(dupe.tags);
         this.isActive = dupe.isActive;
         this.isSupport = dupe.isSupport;
     }

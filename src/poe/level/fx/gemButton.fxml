@@ -4,9 +4,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<JFXButton fx:id="gemButton" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="0.0" minWidth="97.0" onAction="#gemClick" prefHeight="95.0" prefWidth="97.0" text="Cast On critcial strike" textAlignment="CENTER" wrapText="true" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.GemButton_Controller">
+<JFXButton fx:id="gemButton" alignment="TOP_CENTER" buttonType="RAISED" contentDisplay="TOP" minWidth="97.0" onAction="#gemClick" prefHeight="95.0" prefWidth="97.0" text="Cast On critcial strike" textAlignment="CENTER" wrapText="true" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.GemButton_Controller">
    <graphic>
-      <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" cache="true">
+      <ImageView cache="true" fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../AppData/Local/rainy/POE-Level-FX/0.1/GemIcons/Bodyswap.png" />
          </image>

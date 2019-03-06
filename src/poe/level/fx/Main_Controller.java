@@ -23,6 +23,8 @@ import javafx.scene.layout.StackPane;
 import poe.level.data.Build;
 import poe.level.data.CharacterInfo;
 import poe.level.data.Util;
+import poe.level.fx.overlay.PlaceholderStageGameMode;
+import poe.level.fx.overlay.RecipeOverlay_Controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -156,6 +158,13 @@ public class Main_Controller implements Initializable {
     }
 
     private void preferencesPopup() {
+        /*
+        PlaceholderStageGameMode placeholder_stageGameMode = new PlaceholderStageGameMode(null);
+        placeholder_stageGameMode.loadSettings();
+        Preferences_Controller.gameModeOn = true;
+        //RecipeOverlay_Controller.gameModeOn = false;
+        placeholder_stageGameMode.show();*/
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("preferences.fxml"));
         AnchorPane con = null;
         try {
@@ -164,8 +173,8 @@ public class Main_Controller implements Initializable {
             m_logger.log(Level.SEVERE, null, ex);
         }
         loader.<Preferences_Controller>getController().hook(this);
-
         addBuildPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+        //addBuildPopup.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         //controller.passDialog(mLoad);
         addBuildPopup.show();
     }
@@ -184,6 +193,7 @@ public class Main_Controller implements Initializable {
         }
 
         editCharacterPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+        //editCharacterPopup.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         //controller.passDialog(mLoad);
         editCharacterPopup.show();
     }
@@ -194,6 +204,7 @@ public class Main_Controller implements Initializable {
             AnchorPane con = loader.load();
             loader.<SelectBuild_PopupController>getController().hook(this);
             addBuildPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            addBuildPopup.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
             //controller.passDialog(mLoad);
             addBuildPopup.show();
         } catch (IOException ex) {

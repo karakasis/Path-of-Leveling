@@ -18,9 +18,9 @@
             <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
          </textFill>
       </Label>
-      <ScrollPane fitToWidth="true" layoutY="41.0" prefHeight="499.0" prefWidth="225.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+      <ScrollPane fitToWidth="true" layoutY="41.0" prefHeight="499.0" prefWidth="245.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <content>
-            <VBox fx:id="buildsBox" spacing="7.0" style="-fx-background-color: white;">
+            <VBox fx:id="buildsBox" spacing="7.0">
                <padding>
                   <Insets left="-2.0" right="-2.0" top="2.0" />
                </padding>

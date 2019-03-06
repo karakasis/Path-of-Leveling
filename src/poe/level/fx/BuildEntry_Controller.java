@@ -139,8 +139,8 @@ public class BuildEntry_Controller implements Initializable {
         if(validationColor){
             root.setStyle("color: transparent;");
 
-            buildName.setTextFill(Color.BLACK);
-            ascendAndLevel.setTextFill(Color.web("#656565"));
+            //buildName.setTextFill(Color.BLACK);
+            //ascendAndLevel.setTextFill(Color.web("#656565"));
         }
         else
             root.setStyle("color: rgba(217, 215, 215, 0.8);");
@@ -182,8 +182,8 @@ public class BuildEntry_Controller implements Initializable {
                 //+"-fx-border-style: solid;");
         if(parent!=null){
             //root.setStyle("color: rgba(58, 44, 189, 0.4);"); old violet color
-            buildName.setTextFill(Color.WHITE);
-            ascendAndLevel.setTextFill(Color.web("#f6f6f6"));
+            //buildName.setTextFill(Color.WHITE);
+            //ascendAndLevel.setTextFill(Color.web("#f6f6f6"));
             //buildName.setTextFill(Color.web("#0076a3"));
             root.setStyle("color: rgba(0, 150, 201, 1);"); //new blue for consistency
 
