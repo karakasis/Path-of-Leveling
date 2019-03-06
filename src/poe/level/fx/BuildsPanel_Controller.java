@@ -178,14 +178,10 @@ public class BuildsPanel_Controller implements Initializable {
         return null;
     }
 
-    //for better update-ability i need to make this client sided and not attached to json.
-    //some thoughts: if you try to open the app and not visit editor, a non-valid build will not show up as non valid.
-    //so basically since it will not be saved the app will not know that its not valid.
-    //if i save the non valid tag to builds, all users will have valid builds b4 the update, so it wont mess up anything.
-    //i just need to check again with null exceptions
     public void setBuildToNonValid(){
         Build active_build = linker.get(lastbuild_invalidatedID).build;
         active_build.isValid = false;
+        active_build.patch_missing_sgroups();
         updateBuildValidationBanner(lastbuild_invalidatedID);
     }
 
@@ -530,7 +526,12 @@ public class BuildsPanel_Controller implements Initializable {
         pobBuild.setCharacterName("");
         pobBuild.setCharacterLevel(0);
         //main app controller will take care of pob link and hasPob tag
-        pobBuild.isValid = false; //obv needs checking after import from pob.
+        //actually later i discovered that this brings a new bug
+        //if u set it no non valid that means that during validation this build will be "accepted"
+        //and be passed to write to memory, but then since it didnt passed the validation in the first place
+        //it may have null values, most likely in sg.getactivegem. until then set it to true.
+        //pobBuild.isValid = false; //obv needs checking after import from pob.
+        pobBuild.isValid = true; //obv needs checking after import from pob.
 
         GemHolder.getInstance().className = pobBuild.getClassName();
         for(ArrayList<String> sgList : info){
@@ -569,8 +570,16 @@ public class BuildsPanel_Controller implements Initializable {
         bl.pec = loader.<BuildEntry_Controller>getController(); //add controller to the linker class
         bl.pec.init(Util.charToImage(className,ascendancyName), buildName, ascendancyName, bl);
         bl.build = new Build(buildName,className,ascendancyName);
+
         //every new build should be considered non-valid?
-        bl.build.isValid = false;
+        //bl.build.isValid = false;
+        bl.build.isValid = true;
+        //actually later i discovered that this brings a new bug
+        //if u set it no non valid that means that during validation this build will be "accepted"
+        //and be passed to write to memory, but then since it didnt passed the validation in the first place
+        //it may have null values, most likely in sg.getactivegem. until then set it to true.
+        //also setting it to valid will cause it to be put through the validation process.
+
         bl.build.hasPob = false;
         bl.build.pobLink = "";
         for(SocketGroup sg : bl.build.getSocketGroup()){

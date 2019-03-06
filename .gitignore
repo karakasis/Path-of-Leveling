@@ -2,9 +2,6 @@ build/
 dist/
 .DS_Store
 
-.idea/*
-out/*
-nbproject/
+out/
+.gitgnore
 Path-of-Leveling.iml
-
-

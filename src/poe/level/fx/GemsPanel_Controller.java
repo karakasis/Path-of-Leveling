@@ -460,6 +460,7 @@ public class GemsPanel_Controller implements Initializable {
         }*/
         try {
             gemContainer.getChildren().add(loader.load());
+            current_sgl.gpl.loadGemPanel(1,gl.id);
         } catch (IOException ex) {
             Logger.getLogger(GemsPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

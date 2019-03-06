@@ -45,7 +45,7 @@ public class NewFXPreloader extends Preloader {
         //appropriate controllers.
         controller = loader.<Loading_Controller>getController();
         Scene pr = new Scene(p);
-        pr.getStylesheets().add(getClass().getResource("/styles/modena_dark.css").toExternalForm());
+        pr.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         return pr;
     }
     

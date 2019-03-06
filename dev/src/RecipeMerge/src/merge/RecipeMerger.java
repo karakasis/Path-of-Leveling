@@ -1,6 +1,7 @@
 package merge;
 
 
+import org.json.JSONArray;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,7 +16,7 @@ public class RecipeMerger {
     private static final String dataFilepath = "RecipeMerge\\data.json";
     private static final String recipeFilepath = "RecipeMerge\\recipe.json";
     private static final String outputFilepath = "RecipeMerge\\newData.json";
-    private Map<String, Recipe> recipes;
+    private Map<String, merge.Recipe> recipes;
     private JSONArray zones;
     private JSONArray acts;
 

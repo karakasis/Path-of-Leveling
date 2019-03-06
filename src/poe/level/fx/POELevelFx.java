@@ -177,6 +177,7 @@ public class POELevelFx extends Application {
     public void init() throws Exception {
 
         boolean restart = false;
+        setUpFonts();
         if(is_new_version){
 
 
@@ -200,25 +201,6 @@ public class POELevelFx extends Application {
             }
             //System.exit(-10);
         }else{
-            Platform.setImplicitExit( false );
-            addTrayIcon();
-            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Regular.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Italic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Bold.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-SmallCaps.ttf").toExternalForm(), 10);
-
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Thin.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-ThinItalic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Regular.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-ThinItalic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-MediumItalic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Medium.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Light.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-LightItalic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Italic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Bold.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-BoldItalic.ttf").toExternalForm(), 10);
-
 
             HashMap<String,String> hotkeyDefaults;
             hotkeyDefaults = new HashMap<>();
@@ -1409,6 +1391,27 @@ public class POELevelFx extends Application {
                 Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public void setUpFonts() throws Exception{
+        Platform.setImplicitExit( false );
+        addTrayIcon();
+        Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Regular.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Italic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Bold.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-SmallCaps.ttf").toExternalForm(), 10);
+
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Thin.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-ThinItalic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Regular.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-ThinItalic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-MediumItalic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Medium.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Light.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-LightItalic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Italic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Bold.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-BoldItalic.ttf").toExternalForm(), 10);
     }
 
     public static void setUpLog(){
