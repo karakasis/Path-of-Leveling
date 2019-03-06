@@ -34,30 +34,37 @@ public class Export_pastebin_Controller implements Initializable {
 
     private String pastebinURL;
     private String export_data;
+    private boolean successful = false;
 
     @FXML
     private AnchorPane verify_clipboard;
 
     @FXML
-    private void copyToClipboard() {
+    private void copy() {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         StringSelection selection;
 
         if (this.export_data == null) {
             return;
         } else if (this.pastebinURL == null) {
-            // Copies Export-Data and opens pastebin.com
+            // Copies Raw Export-Data
             selection = new StringSelection(this.export_data);
             clipboard.setContents(selection, selection);
-
-            inflatePastebinLimit();
-
-            openWebpage("https://www.pastebin.com/");
+            inflateSuccessMessage();
         } else {
             // Copies pastebin-URL
             selection = new StringSelection(this.pastebinURL);
             clipboard.setContents(selection, selection);
             inflateSuccessMessage();
+        }
+    }
+
+    @FXML
+    private void openPastebin() {
+        if(successful) {
+            openWebpage(pastebinURL);
+        }else {
+            openWebpage("https://www.pastebin.com/");
         }
     }
 
@@ -97,6 +104,7 @@ public class Export_pastebin_Controller implements Initializable {
                 inflatePastebinLimit();
                 return;
             }
+            this.successful = true;
             this.pastebinURL = response;
         }
     }
@@ -140,9 +148,14 @@ public class Export_pastebin_Controller implements Initializable {
     }
 
     private void inflateSuccessMessage() {
+
         Pane newLoadedPane = null;
         try {
-            newLoadedPane = FXMLLoader.load(getClass().getResource("clipboard_verify.fxml"));
+            if(successful) {
+                newLoadedPane = FXMLLoader.load(getClass().getResource("clipboard_verify_link.fxml"));
+            }else{
+                newLoadedPane = FXMLLoader.load(getClass().getResource("clipboard_verify_data.fxml"));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
