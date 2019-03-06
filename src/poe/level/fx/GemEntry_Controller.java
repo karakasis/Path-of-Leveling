@@ -14,14 +14,22 @@ import com.jfoenix.controls.JFXToggleButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.sun.javafx.geom.BaseBounds;
+import com.sun.javafx.geom.transform.BaseTransform;
+import com.sun.javafx.scene.BoundsAccessor;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import poe.level.data.Gem;
@@ -247,6 +255,7 @@ public class GemEntry_Controller implements Initializable {
         //also a way to remove effects from the disablePanel
         disablePanel.setDisable(false);
         disablePanel.setEffect(null);
+
         //change button
         selectGemButton.setGraphic(new ImageView(g.getSmallIcon()));
         selectGemButton.setText(g.getGemName());

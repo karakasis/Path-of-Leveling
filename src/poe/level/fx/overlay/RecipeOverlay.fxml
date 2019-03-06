@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="538.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.overlay.RecipeOverlay_Controller">
+   <children>
+      <JFXTabPane stylesheets="@../../../../../resources/styles/style.css">
+         <tabs>
+            <Tab text="Recipes">
+               <content>
+                  <AnchorPane prefHeight="500.0" prefWidth="370.0">
+                     <children>
+                        <Accordion fx:id="accordion" prefHeight="502.0" prefWidth="370.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <JFXButton buttonType="RAISED" layoutX="269.0" layoutY="461.0" onAction="#reset" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: IndianRed;" text="Reset" textFill="WHITE" AnchorPane.bottomAnchor="7.0" />
+                        <Label layoutX="14.0" layoutY="471.0" text="It is advised to reset on a new League">
+                           <font>
+                              <Font name="Alegreya Sans SC" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab disable="true" text="Passives" />
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

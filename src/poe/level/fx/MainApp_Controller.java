@@ -7,12 +7,6 @@ package poe.level.fx;
 
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.events.JFXDialogEvent;
-
-import java.io.ByteArrayOutputStream;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.zip.DataFormatException;
-import java.util.zip.Inflater;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -28,25 +22,26 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import poe.level.data.Build;
+import poe.level.fx.overlay.RecipeOverlay_Controller;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.URL;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.DataFormatException;
+import java.util.zip.Inflater;
 
 /**
  *
@@ -121,7 +116,7 @@ public class MainApp_Controller implements Initializable {
         container.prefWidth(w);
         container.prefHeight(h);
     }
-  
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -257,6 +252,7 @@ public class MainApp_Controller implements Initializable {
 
     private boolean revalidation_switch = false;
     private boolean launcher_switch = false;
+    private boolean export_switch = false;
 
     public void sayNoToValidation(){
         buildPreviewPopup.close();
@@ -266,14 +262,25 @@ public class MainApp_Controller implements Initializable {
         buildPreviewPopup.close();
         buildspanel_controller.setBuildToNonValid();
         if(revalidation_switch){
-            if(launcher_switch){
+            if(export_switch){
                 revalidation_switch = false;
-                launcher_switch = false;
-                validateToLauncher();
+                export_switch = false;
+                exportToPastebinAll();
             }else{
-                revalidation_switch = false;
-                launcher_switch = false;
-                saveAllBuilds();
+                if(launcher_switch){
+                    revalidation_switch = false;
+                    launcher_switch = false;
+                    validateToLauncher();
+                }else{
+                    revalidation_switch = false;
+                    launcher_switch = false;
+                    saveAllBuilds();
+                }
+            }
+        }else{
+            if(export_switch){
+                export_switch = false;
+                exportToPastebinActive();
             }
         }
     }
@@ -405,7 +412,8 @@ public class MainApp_Controller implements Initializable {
 
     @FXML
     private void exportToPastebinAll(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("export_pastebin.fxml"));
+        if(buildspanel_controller.validateAll()){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("export_pastebin.fxml"));
             AnchorPane con = null;
             try {
                 con = (AnchorPane) loader.load();
@@ -416,11 +424,30 @@ public class MainApp_Controller implements Initializable {
 
             buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
             buildPreviewPopup.show();
+        }else{
+            revalidation_switch = true;
+            export_switch=true;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ValidateErrorPopup.fxml"));
+            AnchorPane con = null;
+            try {
+                con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            //controller.passDialog(mLoad);
+            loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated,
+                    buildspanel_controller.validateAllError(),this);
+            buildPreviewPopup.show();
+        }
+
     }
 
     @FXML
     private void exportToPastebinActive(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("export_pastebin.fxml"));
+        if(buildspanel_controller.validate()){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("export_pastebin.fxml"));
             AnchorPane con = null;
             try {
                 con = (AnchorPane) loader.load();
@@ -431,6 +458,23 @@ public class MainApp_Controller implements Initializable {
 
             buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
             buildPreviewPopup.show();
+        }else{
+            export_switch = true;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ValidateErrorPopup.fxml"));
+            AnchorPane con = null;
+            try {
+                con = (AnchorPane) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+            //controller.passDialog(mLoad);
+            loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated
+                    , buildspanel_controller.validateError(),this);
+            buildPreviewPopup.show();
+        }
+
     }
 
     public void toggleActiveBuilds(boolean toggle){
@@ -477,11 +521,11 @@ public class MainApp_Controller implements Initializable {
 
           togglePobMenus(true); //< requires active build selected.
       }
-        
+
         buildPreviewPopup.close();
-        
+
     }
-    
+
     private Build extractBuildFromPOBPastebin(String raw){
         String replace = raw.replace('-','+').replace('_','/').trim();
         /*
@@ -490,7 +534,6 @@ public class MainApp_Controller implements Initializable {
         out.println(replace);
         out.close();*/
 
-        //read into byte array using apache commons base64
         byte[] byteValueBase64Decoded = null;
         try{
             byteValueBase64Decoded = Base64.getDecoder().decode(replace);
@@ -500,7 +543,7 @@ public class MainApp_Controller implements Initializable {
         }
         String inflatedXML = "";
         try{
-            //inflate 
+            //inflate
             inflatedXML = inflate(byteValueBase64Decoded);
         }catch(IOException e){
 
@@ -512,10 +555,10 @@ public class MainApp_Controller implements Initializable {
         out = new PrintWriter("pathofbuilding.txt");
         out.println(inflatedXML);
         out.close();*/
-            
+
         //JSONArray obj = new JsonParser().parse(stringValueBase64Encoded).getAsJsonArray();
         //JSONArray builds_array = new JSONArray(stringValueBase64Decoded);
-        
+
         //parse XML
         ArrayList<ArrayList<String>> skills = new ArrayList<>();
         Document doc = convertStringToXMLDocument(inflatedXML);
@@ -551,39 +594,39 @@ public class MainApp_Controller implements Initializable {
                 skills.add(skillNames);
 
          }
-              
+
         return buildspanel_controller.addNewBuildFromPOB("New build", className, asc,skills);
-        
+
     }
-    
-    private String inflate(byte[] data) throws IOException, DataFormatException {  
-        Inflater inflater = new Inflater();   
-        inflater.setInput(data);  
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);  
-        byte[] buffer = new byte[1024];  
-        while (!inflater.finished()) {  
-         int count = inflater.inflate(buffer);  
-         outputStream.write(buffer, 0, count);  
-        }  
-        outputStream.close();  
-        byte[] output = outputStream.toByteArray();  
-        System.out.println("Original: " + data.length);  
-        System.out.println("Compressed: " + output.length);  
-        return new String(output);  
+
+    private String inflate(byte[] data) throws IOException, DataFormatException {
+        Inflater inflater = new Inflater();
+        inflater.setInput(data);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] buffer = new byte[1024];
+        while (!inflater.finished()) {
+         int count = inflater.inflate(buffer);
+         outputStream.write(buffer, 0, count);
+        }
+        outputStream.close();
+        byte[] output = outputStream.toByteArray();
+        System.out.println("Original: " + data.length);
+        System.out.println("Compressed: " + output.length);
+        return new String(output);
     }
-    
+
      private Document convertStringToXMLDocument(String xmlString)
     {
         //Parser that produces DOM object trees from XML content
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-         
+
         //API to obtain DOM Document instance
         DocumentBuilder builder = null;
         try
         {
             //Create DocumentBuilder with default configuration
             builder = factory.newDocumentBuilder();
-             
+
             //Parse the content to Document object
             Document doc = builder.parse(new InputSource(new StringReader(xmlString)));
             return doc;
@@ -629,7 +672,7 @@ public class MainApp_Controller implements Initializable {
     }
 
     private Pastebin_import_pobController pastebin_import_pobController;
-    
+
     @FXML
     private void createFromPOB(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("pastebin_import_pob.fxml"));
@@ -647,7 +690,7 @@ public class MainApp_Controller implements Initializable {
             //paste_pob_controller.hook(this);
             buildPreviewPopup.show();
     }
-    
+
     @FXML
     private void linkPOB(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("pastebin_import_pob.fxml"));
@@ -718,6 +761,26 @@ public class MainApp_Controller implements Initializable {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER).show();
+    }
+    private JFXDialog jfxDialog;
+
+    @FXML
+    private void recipePopup(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("overlay/RecipeOverlay.fxml"));
+        AnchorPane con = null;
+        try {
+            con = (AnchorPane) loader.load();
+            loader.<RecipeOverlay_Controller>getController().hook(this);
+        } catch (IOException ex) {
+            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jfxDialog = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+        jfxDialog.show();
+    }
+
+    public void refreshRecipePopup(){
+        jfxDialog.close();
+        recipePopup();
     }
 }
               /*

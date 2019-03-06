@@ -5,6 +5,8 @@
  */
 package poe.level.data;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -14,43 +16,65 @@ import java.util.Comparator;
  */
 public class Build {
     public String buildName;
-    String className;
-    String ascendancyName;
-    public String characterName;
-    public int level;
     ArrayList<SocketGroup> gems;
     public boolean hasPob;
     public String pobLink;
     public boolean isValid;
-    
-    public Build(String buildName,String className
-            , String ascendancyName){
+    private final CharacterInfo m_characterInfo = new CharacterInfo();
+
+    public Build(String buildName, String className, String ascendancyName){
         this.buildName = buildName;
-        this.className = className;
-        this.ascendancyName = ascendancyName;
+        m_characterInfo.className = className;
+        m_characterInfo.ascendancyName = ascendancyName;
         gems = new ArrayList<>();
-        level = -1;
-        characterName = "";
+        m_characterInfo.level = -1;
+        m_characterInfo.characterName = "";
     }
-    
+
+    public void setCharacterInfo(CharacterInfo charInfo) {
+        // TODO - don't overwrite ascendancy in the Build
+        m_characterInfo.characterName = charInfo.characterName;
+        m_characterInfo.level = charInfo.level;
+    }
+
+    public CharacterInfo getCharacterInfo() {
+        return m_characterInfo;
+    }
+
     public String getName(){
         return buildName;
     }
-    
+
+    public String getCharacterName() {
+        return m_characterInfo.characterName;
+    }
+
+    public void setCharacterName(String newCharacterName) {
+        m_characterInfo.characterName = newCharacterName;
+    }
+
+    public int getCharacterLevel() {
+        return m_characterInfo.level;
+    }
+
+    public void setCharacterLevel(int newLevel) {
+        m_characterInfo.level = newLevel;
+    }
+
     public String getClassName(){
-        return className;
+        return m_characterInfo.className;
     }
 
     public String getAsc(){
-        return ascendancyName;
+        return m_characterInfo.ascendancyName;
     }
 
     public ArrayList<SocketGroup> getSocketGroup(){
         return gems;
     }
-    
+
     public boolean validate(){
-        System.out.println(">>>>Validating build :"+this.buildName+"... <<<<");
+        System.out.println(">>>>Validating build :" + this.buildName + "... <<<<");
         for(SocketGroup sg : getSocketGroup()){
             if(sg.getActiveGem()==null){
                 System.out.println(">>>>A socket group doesn't have a valid main gem.<<<<");
@@ -71,7 +95,7 @@ public class Build {
                     System.out.println("- Replace at level: "+sg.untilGroupLevel);
                     System.out.println("- Replace with : -"+sg.getGroupReplaced().getActiveGem().getGemName()+"- .");
                 }
-                
+
                 //inner loop
                 ArrayList<Gem> sorted = new ArrayList<>(sg.getGems());
                 sorted.sort(Comparator.comparing(Gem::getLevelAdded));
@@ -101,11 +125,10 @@ public class Build {
         //isValid = true;
         return true;
     }
-    
+
     public String validate_failed_string(){
-        String error = "";
-        System.out.println(">>>>Validating build :"+this.buildName+"... <<<<");
-        error += ">>>>Validating build :"+this.buildName+"... <<<<\n";
+        String error = ">>>>Validating build :" + this.buildName + "... <<<<\n";
+        System.out.println(error);
         for(SocketGroup sg : getSocketGroup()){
             if(sg.getActiveGem()==null){
                 System.out.println(">>>>A socket group doesn't have a valid main gem.<<<<");
@@ -134,7 +157,7 @@ public class Build {
                     System.out.println("- Replace with : -"+sg.getGroupReplaced().getActiveGem().getGemName()+"- .");
                     error+="- Replace with : -"+sg.getGroupReplaced().getActiveGem().getGemName()+"- .\n";
                 }
-                
+
                 //inner loop
                 ArrayList<Gem> sorted = new ArrayList<>(sg.getGems());
                 sorted.sort(Comparator.comparing(Gem::getLevelAdded));

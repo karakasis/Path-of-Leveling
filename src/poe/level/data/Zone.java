@@ -34,6 +34,7 @@ public class Zone {
         public String tooltip;
         public ArrayList<String> mods;
     }
+    public recipeInfo rInfo;
 
     public Zone(String zoneName, int zoneLevel, ArrayList<String> images, String altimage
             , String note, boolean hasPassive, boolean hasTrial , String quest ,boolean questRewardsSkills
@@ -49,6 +50,7 @@ public class Zone {
         this.questRewardsSkills = questRewardsSkills;
         this.actName = actName;
         this.actID = actID;
+        rInfo = new recipeInfo();
     }
     
     public int getZoneLevel(){

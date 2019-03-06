@@ -32,7 +32,7 @@ public class Tail implements LoggerListener {
         tailer = new Logger(this.file, 1000, false);
         tailer.addLogFileTailerListener(this);
         tailer.start();
-        
+
         log = new ArrayList<String>();
     }
 
@@ -44,7 +44,7 @@ public class Tail implements LoggerListener {
     public void newLogFileLine(String line) {
         log.add(line);
         if (line.contains("You have entered ")) {
-            
+
             System.out.println(line);
             int padding = line.indexOf("You have entered");
             String zone = "";
@@ -53,7 +53,7 @@ public class Tail implements LoggerListener {
                 zone += line.charAt(i);
             }
             parent.currentZone = zone;
-            
+
             System.out.println(zone);
             Platform.runLater(new Runnable(){
                 @Override
@@ -63,7 +63,7 @@ public class Tail implements LoggerListener {
             });
         }
         if (line.contains("is now level ")) {
-            
+
             System.out.println(line);
             int sufPad = line.lastIndexOf(':');
             String charname = "";
@@ -80,7 +80,7 @@ public class Tail implements LoggerListener {
                 for(int i=padding + 13; i<line.length(); i++){
                     plvl += line.charAt(i);
                 }
-                int plvlint = Integer.parseInt(plvl);
+                int plvlint = Integer.parseInt(plvl.trim());
                 parent.playerLevel = plvlint;
                 System.out.println(charname + " is now level "+ plvlint+ ".");
                 Platform.runLater(new Runnable(){
@@ -89,11 +89,11 @@ public class Tail implements LoggerListener {
                         parent.lvlupdate();
                     }
                 });
-                
+
             }
-            
-            
-            
+
+
+
         }
 
     }
@@ -105,7 +105,7 @@ public class Tail implements LoggerListener {
 
         tailer.start();
 
-        
+
     }
 
     public void _stopTailing() {

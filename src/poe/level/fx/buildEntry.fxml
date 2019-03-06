@@ -9,27 +9,40 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="66.0" styleClass="buildPanel" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.BuildEntry_Controller">
+<AnchorPane fx:id="root" prefHeight="66.0" styleClass="buildPanel" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.BuildEntry_Controller">
    <children>
-      <ImageView fx:id="banner" fitHeight="64.0" fitWidth="140.0" layoutX="14.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0">
-         <image>
-            <Image url="@../../../classes/Templar/Inquisitor.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="buildName" layoutX="85.0" layoutY="2.0" maxHeight="42.0" maxWidth="-Infinity" minHeight="42.0" prefHeight="42.0" text="rf totems" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="0.0">
-         <font>
-            <Font name="Alegreya Sans SC" size="17.0" />
-         </font>
-      </Label>
-      <Label fx:id="ascendAndLevel" layoutX="90.0" layoutY="33.0" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="Guardian - 97" textFill="#656565" AnchorPane.leftAnchor="87.0" AnchorPane.topAnchor="33.0">
-         <font>
-            <Font name="Alegreya Sans SC" size="14.0" />
-         </font>
-      </Label>
-      <TextField fx:id="editBuildName" layoutX="86.0" layoutY="9.0" prefHeight="25.0" prefWidth="88.0" visible="false" />
+      <AnchorPane fx:id="disabledPanel" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="banner" fitHeight="64.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0">
+               <image>
+                  <Image url="@../../../classes/Templar/Inquisitor.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="buildName" maxHeight="42.0" maxWidth="-Infinity" minHeight="42.0" prefHeight="42.0" text="rf totems" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="Alegreya Sans SC" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="ascendAndLevel" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="Guardian - 97" textFill="#656565" AnchorPane.leftAnchor="87.0" AnchorPane.topAnchor="33.0">
+               <font>
+                  <Font name="Alegreya Sans SC" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editBuildName" prefHeight="25.0" prefWidth="88.0" visible="false" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="nonValidPanel" layoutX="-8.0" layoutY="-65.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Non-valid" textFill="#c60808" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="-2.0">
+               <font>
+                  <Font name="Alegreya Sans SC" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
    <cursor>
-      <Cursor fx:constant="OPEN_HAND" />
+      <Cursor fx:constant="DEFAULT" />
    </cursor>
    <padding>
       <Insets right="10.0" />

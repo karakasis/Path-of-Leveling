@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="503.0" prefWidth="721.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.AddGem_Controller">
    <children>
-      <JFXTabPane fx:id="tabpane" prefHeight="401.0" prefWidth="601.0" stylesheets="@../../../../resources/styles/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <JFXTabPane fx:id="tabpane" prefHeight="401.0" prefWidth="601.0" stylesheets="@../../../styles/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
             <Tab text="Act I">
               <content>
@@ -49,7 +49,7 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab style="-fx-background-color: C0321;" text="Act IV">
+            <Tab text="Act IV">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -61,7 +61,7 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab style="-fx-background-color: C0321;" text="Act VI">
+            <Tab text="Act VI">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

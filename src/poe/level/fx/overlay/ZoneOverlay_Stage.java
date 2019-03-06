@@ -39,6 +39,7 @@ public class ZoneOverlay_Stage  extends Stage{
     private boolean isVisible;
     public static double prefX;
     public static double prefY;
+    private ZoneOverlay_Controller controller;
     
     public ZoneOverlay_Stage(){
         
@@ -74,7 +75,9 @@ public class ZoneOverlay_Stage  extends Stage{
         parent = c;
         
     }
-    
+
+
+
     public void queue(Zone currentZone){
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/ZoneOverlay.fxml"));
@@ -84,7 +87,7 @@ public class ZoneOverlay_Stage  extends Stage{
         } catch (IOException ex) {
             Logger.getLogger(ZoneOverlay_Stage.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ZoneOverlay_Controller controller = loader.<ZoneOverlay_Controller>getController();
+        controller = loader.<ZoneOverlay_Controller>getController();
         controller.init(currentZone);
         Scene scene = new Scene(ap);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
@@ -97,95 +100,113 @@ public class ZoneOverlay_Stage  extends Stage{
 
         
         this.setX(prefX);
-        this.setY(prefY);
-        this.setHeight(0);
+        //this.setY(prefY);
+        this.setY(prefY-256.0);
+        //this.setHeight(0);
 
 
 
         WritableValue<Double> writableWidth = new WritableValue<Double>() {
             @Override
             public Double getValue() {
-                return getHeight();
+
+                //return getHeight();
+                return getY();
             }
 
             @Override
-            public void setValue(Double value) {
-                setHeight(value);
+            public void setValue(Double value)
+            {
+                //setHeight(value);
+                setY(value);
             }
         };
 
 
         Timeline slideIn = new Timeline();
        
-        KeyValue kv = new KeyValue(writableWidth, 256d);
+        KeyValue kv = new KeyValue(writableWidth, 0d);
         KeyFrame kf_slideIn = new KeyFrame(Duration.millis(500), kv);
         
         if(Preferences_Controller.zones_toggle){
             KeyFrame kf_delay = new KeyFrame(Duration.millis(Preferences_Controller.zones_slider * 1000)); 
             slideIn.getKeyFrames().addAll(kf_slideIn,kf_delay);
             Timeline slideOut = new Timeline();
-            KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 0.0));
+            KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, -256d));
             slideOut.getKeyFrames().add(kf_slideOut);
-            slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending"); this.hide();}));
+            slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending"); isVisible = false; this.hide();}));
             slideIn.setOnFinished(e -> Platform.runLater(() -> slideOut.play()));
         }else{
             slideIn.getKeyFrames().addAll(kf_slideIn);
         }
-        
-        slideIn.play();
+
+        //if(isVisible) hidePanel();
         this.show();
+        slideIn.play();
+        isVisible = true;
          
     }
     
     public void showPanel(){
         isVisible = true;
+        this.show();
         this.setX(prefX);
-        this.setY(prefY);
-        this.setHeight(0);
+        //this.setY(prefY);
+        //this.setHeight(0);
+
+        this.setY(prefY-256.0);
 
 
 
         WritableValue<Double> writableWidth = new WritableValue<Double>() {
             @Override
             public Double getValue() {
-                return getHeight();
+
+                //return getHeight();
+                return getY();
             }
 
             @Override
-            public void setValue(Double value) {
-                setHeight(value);
+            public void setValue(Double value)
+            {
+                //setHeight(value);
+                setY(value);
             }
         };
 
 
         Timeline slideIn = new Timeline();
        
-        KeyValue kv = new KeyValue(writableWidth, 169d);
+        KeyValue kv = new KeyValue(writableWidth, 0d);
         KeyFrame kf_slideIn = new KeyFrame(Duration.millis(500), kv);
         slideIn.getKeyFrames().addAll(kf_slideIn);
         slideIn.play();
     }
     
     public void hidePanel(){
-        
-        isVisible = false;
-        
-         WritableValue<Double> writableWidth = new WritableValue<Double>() {
+
+
+
+        WritableValue<Double> writableWidth = new WritableValue<Double>() {
             @Override
             public Double getValue() {
-                return getHeight();
+
+                //return getHeight();
+                return getY();
             }
 
             @Override
-            public void setValue(Double value) {
-                setHeight(value);
+            public void setValue(Double value)
+            {
+                //setHeight(value);
+                setY(value);
             }
         };
          
         Timeline timeline = new Timeline();
-        KeyFrame endFrame = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 0.0));
+        KeyFrame endFrame = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, -256d));
         timeline.getKeyFrames().add(endFrame);
-        timeline.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending"); this.hide();}));
+        timeline.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending"); isVisible = false; this.hide();}));
         timeline.play();
     }
     
@@ -204,11 +225,15 @@ public class ZoneOverlay_Stage  extends Stage{
     }
     
     public void event_mark_recipe(){
+
         if(isVisible){
-            hidePanel();
+
         }else{
             showPanel();
+
         }
+
+        controller.playRecipeAnimation();
     }
     
     public void bindKeyEvent(Scene scene){

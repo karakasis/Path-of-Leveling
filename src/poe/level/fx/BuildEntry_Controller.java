@@ -7,6 +7,7 @@ package poe.level.fx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,6 +17,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -32,49 +36,55 @@ import poe.level.fx.BuildsPanel_Controller.BuildLinker;
 
 public class BuildEntry_Controller implements Initializable {
 
-    @FXML 
+    @FXML
     ImageView banner;
-    @FXML 
+    @FXML
     Label buildName;
-    @FXML 
+    @FXML
     Label ascendAndLevel;
     @FXML
     AnchorPane root;
     @FXML
+    AnchorPane disabledPanel;
+    @FXML
+    AnchorPane nonValidPanel;
+    @FXML
     private TextField editBuildName;
-    
+
     BuildLinker parent;
-    SelectBuild_PopupController parent2;
+    Consumer<Integer> buildSelectorCallback;
     int id_for_popup;
-    
+    boolean isDisabledInLauncher;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        isDisabledInLauncher = false;
         // TODO
-        root.setOnMouseClicked(new EventHandler<MouseEvent>() {  
-            @Override  
-            public void handle(MouseEvent event) {  
+        root.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
                 System.err.println("Clicked root " + event.getClickCount() + " times");
-                onPress(); 
-            }  
+                onPress();
+            }
           });
-        
-        buildName.setOnMouseClicked(new EventHandler<MouseEvent>() {  
-            @Override  
-            public void handle(MouseEvent event) {  
+
+        buildName.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
                 System.err.println("Clicked label" + event.getClickCount() + " times");
-              if (event.getClickCount()==2) {  
+              if (event.getClickCount()==2) {
                 editBuildName.setVisible(true);
-                editBuildName.setText(buildName.getText());  
-                //tab.setGraphic(textField);  
-                editBuildName.selectAll();  
-                editBuildName.requestFocus();  
-              }  
-            }  
+                editBuildName.setText(buildName.getText());
+                //tab.setGraphic(textField);
+                editBuildName.selectAll();
+                editBuildName.requestFocus();
+              }
+            }
           });
-        
+
         editBuildName.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
             @Override
@@ -88,54 +98,54 @@ public class BuildEntry_Controller implements Initializable {
                 }
             }
         });
-        
-        editBuildName.setOnAction(new EventHandler<ActionEvent>() {  
-            @Override  
-            public void handle(ActionEvent event) {  
+
+        editBuildName.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
               buildName.setText(editBuildName.getText());
               parent.requestNameChange(editBuildName.getText());
               editBuildName.setVisible(false);
-            }  
+            }
           });
-        
-    }    
-    
+
+    }
+
     public void init(Image iv, String buildName,String ascendAndLevel, BuildLinker parent){
         banner.setImage(iv);
-        
+
         this.buildName.setText(buildName);
         //this.ascendAndLevel.setText(ascendAndLevel+" lvl.95");
         this.ascendAndLevel.setText(ascendAndLevel);
         this.parent = parent;
     }
-    
-    public void init_for_popup(Image iv, String buildName,String ascendAndLevel,int id, SelectBuild_PopupController parent){
+
+    public void init_for_popup(Image iv, String buildName,String ascendAndLevel,int id, Consumer<Integer> callback){
         banner.setImage(iv);
-        
+
         this.buildName.setText(buildName);
         //this.ascendAndLevel.setText(ascendAndLevel+" lvl.95");
         this.ascendAndLevel.setText(ascendAndLevel);
-        this.parent2 = parent;
+        this.buildSelectorCallback = callback;
         this.id_for_popup = id;
     }
-    
+
     public AnchorPane getRoot(){
         return root;
     }
-    
+
     public void reset(boolean validationColor){
         //root.setStyle("-fx-background-color: transparent;"
                 //+"-fx-border-style: solid;");
         if(validationColor){
             root.setStyle("color: transparent;");
-            
+
             buildName.setTextFill(Color.BLACK);
             ascendAndLevel.setTextFill(Color.web("#656565"));
         }
         else
             root.setStyle("color: rgba(217, 215, 215, 0.8);");
     }
-    
+
     public void setValidBackgroundColor(boolean validationColor,boolean isBuildActive){
         //root.setStyle("-fx-background-color: transparent;"
                 //+"-fx-border-style: solid;");
@@ -145,10 +155,28 @@ public class BuildEntry_Controller implements Initializable {
             else
                 root.setStyle("color: rgba(217, 215, 215, 0.8);");
         }
-        
+
     }
-    
-    
+
+    public void initInvalidBackgroundColor(){
+        root.setStyle("color: rgba(217, 215, 215, 0.8);");
+    }
+
+    public void initDisabledBuild(){
+        isDisabledInLauncher = true;
+        BoxBlur b = new BoxBlur();
+        b.setWidth(5.0);
+        b.setHeight(5.0);
+        b.setIterations(1);
+        Blend bl = new Blend();
+        bl.setMode(BlendMode.SRC_OVER);
+        bl.setOpacity(1.0);
+        bl.setTopInput(b);
+        disabledPanel.setEffect(b);
+        //disabledPanel.setVisible(true);
+        nonValidPanel.setVisible(true);
+    }
+
     private void onPress() {
         //root.setStyle("-fx-background-color: PeachPuff;"
                 //+"-fx-border-style: solid;");
@@ -158,13 +186,14 @@ public class BuildEntry_Controller implements Initializable {
             ascendAndLevel.setTextFill(Color.web("#f6f6f6"));
             //buildName.setTextFill(Color.web("#0076a3"));
             root.setStyle("color: rgba(0, 150, 201, 1);"); //new blue for consistency
-            
+
             parent.update();
         }
-        if(parent2!=null)   
-            parent2.update(id_for_popup);
-        
-        
+        if(buildSelectorCallback != null && !isDisabledInLauncher) {
+            buildSelectorCallback.accept(id_for_popup);
+        }
+
+
     }
-    
+
 }

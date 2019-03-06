@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="61.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.overlay.RecipeArea_Controller">
+   <children>
+      <JFXCheckBox fx:id="checkBox" contentDisplay="RIGHT" ellipsisString="" layoutX="311.0" layoutY="22.0" prefHeight="18.0" prefWidth="20.0" text=" " />
+      <Label fx:id="zoneName" layoutX="14.0" layoutY="6.0" prefHeight="33.0" prefWidth="269.0" text="The Chamber of Sins Level 2">
+         <font>
+            <Font name="Alegreya Sans SC" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="recipeTooltip" layoutX="29.0" layoutY="31.0" prefHeight="24.0" prefWidth="256.0" text="Movement Speed - Rank 2" textFill="#6f6f6f">
+         <font>
+            <Font name="Alegreya Sans SC Light" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

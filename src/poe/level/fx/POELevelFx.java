@@ -35,12 +35,8 @@ import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Base64;
+import java.util.*;
 //import java.util.Base64;
-import java.util.HashSet;
-import java.util.Properties;
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -150,6 +146,34 @@ public class POELevelFx extends Application {
         System.out.println("test");
     }
 
+    private KeyCombination setKeybinds(Properties prop, String propertyName, String defaultValue){
+        prop.setProperty(propertyName, defaultValue);
+        KeyCombination keyCombination;
+        try{
+            keyCombination = KeyCombination.keyCombination(defaultValue);
+            System.out.println("key code zones: " + keyCombination.getName());
+        }catch(Exception e){
+            System.out.println(":key code zones not set:");
+            keyCombination = KeyCombination.NO_MATCH;
+        }
+        return keyCombination;
+    }
+
+    private KeyCombination loadKeybinds(Properties prop, String propertyName, String defaultValue){
+        //check if hotkey is null, on older versions
+        String loadProp = prop.getProperty(propertyName);
+        if(loadProp == null) loadProp = defaultValue;
+        KeyCombination keyCombination;
+        try{
+            keyCombination = KeyCombination.keyCombination(loadProp);
+            System.out.println("key code : " + keyCombination.getName());
+        }catch(Exception e){
+            System.out.println(":incorect:");
+            keyCombination = KeyCombination.NO_MATCH;
+        }
+        return keyCombination;
+    }
+
     @Override
     public void init() throws Exception {
 
@@ -195,14 +219,25 @@ public class POELevelFx extends Application {
             Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Italic.ttf").toExternalForm(), 10);
             Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Bold.ttf").toExternalForm(), 10);
             Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-BoldItalic.ttf").toExternalForm(), 10);
+
+
+            HashMap<String,String> hotkeyDefaults;
+            hotkeyDefaults = new HashMap<>();
+            hotkeyDefaults.put("zones-hotkey-show_hide","F4");
+            hotkeyDefaults.put("level-hotkey-remind","F5");
+            hotkeyDefaults.put("recipe-hotkey-mark","F6");
+            hotkeyDefaults.put("recipe-hotkey-preview","F7");
+            hotkeyDefaults.put("level-hotkey-beta-next","F8");
+            hotkeyDefaults.put("level-hotkey-beta-previous","F9");
+
             if (!new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").isFile()) {
             new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").createNewFile();
 
             Properties prop = new Properties();
             OutputStream output = null;
 
-            try {
 
+            try {
                     output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
 
                     // set the properties value
@@ -218,41 +253,51 @@ public class POELevelFx extends Application {
                     Preferences_Controller.zones_recipe_toggle = true;
                     prop.setProperty("zones-images-toggle", "true");
                     Preferences_Controller.zones_images_toggle = true;
+                    prop.setProperty("gem-beta-UI-toggle", "true");
+                    Preferences_Controller.gem_UI_toggle = true;
+
                     double a = 10;
                     prop.setProperty("zones-slider", String.valueOf(a));
                     Preferences_Controller.zones_slider = a;
-                    prop.setProperty("zones-hotkey-show_hide", "F5");
-                    try{
-                        KeyCombination keyCombination = KeyCombination.keyCombination("F5");
-                        System.out.println("key code zones: " + keyCombination.getName());
-                        Preferences_Controller.zones_hotkey_show_hide_key = keyCombination;
-                    }catch(Exception e){
-                        System.out.println(":key code zones not set:");
-                        Preferences_Controller.zones_hotkey_show_hide_key = KeyCombination.NO_MATCH;
-                    }
+
                     a = 15;
                     Preferences_Controller.level_slider = a;
                     prop.setProperty("level-slider", String.valueOf(a));
+
                     prop.setProperty("poe-dir","");
                     Preferences_Controller.poe_log_dir = "";
-                    prop.setProperty("level-hotkey-remind", "F4");
-                    try{
-                        KeyCombination keyCombination = KeyCombination.keyCombination("F4");
-                        System.out.println("key code gems: " + keyCombination.getName());
-                        Preferences_Controller.level_hotkey_remind_key = keyCombination;
-                    }catch(Exception e){
-                        System.out.println(":key code gems not set:");
-                        Preferences_Controller.level_hotkey_remind_key = KeyCombination.NO_MATCH;
-                    }
-                    prop.setProperty("recipe-hotkey-mark", "F6");
-                    try{
-                        KeyCombination keyCombination = KeyCombination.keyCombination("F6");
-                        System.out.println("key code recipe: " + keyCombination.getName());
-                        Preferences_Controller.recipe_hotkey_mark_key = keyCombination;
-                    }catch(Exception e){
-                        System.out.println(":key code recipe not set:");
-                        Preferences_Controller.recipe_hotkey_mark_key = KeyCombination.NO_MATCH;
-                    }
+
+                Preferences_Controller.zones_hotkey_show_hide_key = setKeybinds(
+                            prop
+                            ,"zones-hotkey-show_hide"
+                            ,hotkeyDefaults.get("zones-hotkey-show_hide")
+                    );
+                Preferences_Controller.level_hotkey_remind_key = setKeybinds(
+                            prop
+                            ,"level-hotkey-remind"
+                            ,hotkeyDefaults.get("level-hotkey-remind")
+                    );
+                Preferences_Controller.recipe_hotkey_mark_key = setKeybinds(
+                            prop
+                            ,"recipe-hotkey-mark"
+                            ,hotkeyDefaults.get("recipe-hotkey-mark")
+                    );
+                Preferences_Controller.recipe_hotkey_preview_key = setKeybinds(
+                            prop
+                            ,"recipe-hotkey-preview"
+                            ,hotkeyDefaults.get("recipe-hotkey-preview")
+                    );
+                Preferences_Controller.level_hotkey_beta_next_key = setKeybinds(
+                            prop
+                            ,"level-hotkey-beta-next"
+                            ,hotkeyDefaults.get("level-hotkey-beta-next")
+                    );
+                Preferences_Controller.level_hotkey_beta_previous_key = setKeybinds(
+                            prop
+                            ,"level-hotkey-beta-previous"
+                            ,hotkeyDefaults.get("level-hotkey-beta-previous")
+                    );
+
 
                     //new changes
 
@@ -294,7 +339,8 @@ public class POELevelFx extends Application {
                           Preferences_Controller.zones_toggle = Boolean.parseBoolean(prop.getProperty("zones-toggle"));
                           Preferences_Controller.zones_text_toggle = Boolean.parseBoolean(prop.getProperty("zones-text-toggle"));
                           Preferences_Controller.zones_images_toggle = Boolean.parseBoolean(prop.getProperty("zones-images-toggle"));
-                          //this 2 settings were added in later versions so im trying to avoid errors.
+
+                          //this 3 settings were added in later versions so im trying to avoid errors.
                           String parseRecipe = prop.getProperty("zones-recipe-toggle");
                           if(parseRecipe == null){
                               Preferences_Controller.zones_recipe_toggle = true; //default
@@ -307,19 +353,26 @@ public class POELevelFx extends Application {
                           }else{
                               Preferences_Controller.zones_trial_toggle = Boolean.parseBoolean(prop.getProperty("zones-trial-toggle"));
                           }
-                          Preferences_Controller.zones_passive_toggle = Boolean.parseBoolean(prop.getProperty("zones-passive-toggle"));
-                          Preferences_Controller.zones_slider = Double.parseDouble(prop.getProperty("zones-slider"));
-                          zones_hotkey_show_hide = prop.getProperty("zones-hotkey-show_hide");
-                          Preferences_Controller.level_slider = Double.parseDouble(prop.getProperty("level-slider"));
-                          level_hotkey_remind = prop.getProperty("level-hotkey-remind");
-                          recipe_hotkey_mark = prop.getProperty("recipe-hotkey-mark");
-                          //check if recipe hotkey is null, on older versions
-                          if(recipe_hotkey_mark == null) recipe_hotkey_mark = "F6";
+                          String parseGemUI = prop.getProperty("gem-beta-UI-toggle");
+                          if(parseTrial == null){
+                              Preferences_Controller.gem_UI_toggle = true; //default
+                          }else{
+                              Preferences_Controller.gem_UI_toggle = Boolean.parseBoolean(prop.getProperty("gem-beta-UI-toggle"));
+                          }
 
-                            if(!(prop.getProperty("poe-dir")==null || prop.getProperty("poe-dir").equals(""))){
-                                Preferences_Controller.poe_log_dir = prop.getProperty("poe-dir") + "\\logs\\Client.txt";
-                            }
-                            //new changes
+                          Preferences_Controller.zones_passive_toggle = Boolean.parseBoolean(prop.getProperty("zones-passive-toggle"));
+
+                          Preferences_Controller.zones_slider = Double.parseDouble(prop.getProperty("zones-slider"));
+                          Preferences_Controller.level_slider = Double.parseDouble(prop.getProperty("level-slider"));
+
+                          if(!(prop.getProperty("poe-dir")==null || prop.getProperty("poe-dir").equals(""))){
+                              Preferences_Controller.poe_log_dir = prop.getProperty("poe-dir") + "\\logs\\Client.txt";
+                          }
+
+                          //API
+                          Preferences_Controller.poe_account_name = prop.getProperty("poe-account-name", "");
+
+                            //new changes to overlay positions persist
                             //a bug is introduced at this point. users with older versions will not have
                             //those lines in their prop files and a null error will pop up
                             //quick fix if null add the line manually from code.
@@ -362,6 +415,37 @@ public class POELevelFx extends Application {
                             Preferences_Controller.updateGemsPos(Double.parseDouble(gem_pos[0])
                                     , Double.parseDouble(gem_pos[1]));
 
+                      Preferences_Controller.zones_hotkey_show_hide_key = loadKeybinds(
+                                prop
+                                ,"zones-hotkey-show_hide"
+                                ,hotkeyDefaults.get("zones-hotkey-show_hide")
+                        );
+                      Preferences_Controller.level_hotkey_remind_key = loadKeybinds(
+                              prop
+                              ,"level-hotkey-remind"
+                              ,hotkeyDefaults.get("level-hotkey-remind")
+                      );
+                      Preferences_Controller.recipe_hotkey_mark_key = loadKeybinds(
+                              prop
+                              ,"recipe-hotkey-mark"
+                              ,hotkeyDefaults.get("recipe-hotkey-mark")
+                      );
+                      Preferences_Controller.recipe_hotkey_preview_key = loadKeybinds(
+                              prop
+                              ,"recipe-hotkey-preview"
+                              ,hotkeyDefaults.get("recipe-hotkey-preview")
+                      );
+                      Preferences_Controller.level_hotkey_beta_next_key = loadKeybinds(
+                              prop
+                              ,"level-hotkey-beta-next"
+                              ,hotkeyDefaults.get("level-hotkey-beta-next")
+                      );
+                      Preferences_Controller.level_hotkey_beta_previous_key = loadKeybinds(
+                              prop
+                              ,"level-hotkey-beta-previous"
+                              ,hotkeyDefaults.get("level-hotkey-beta-previous")
+                      );
+
                   } catch (IOException ex) {
                           ex.printStackTrace();
                   } finally {
@@ -373,34 +457,6 @@ public class POELevelFx extends Application {
                               }
                       }
                   }
-
-                  try{
-                      KeyCombination keyCombination = KeyCombination.keyCombination(zones_hotkey_show_hide);
-                      System.out.println("key code zones: " + keyCombination.getName());
-                      Preferences_Controller.zones_hotkey_show_hide_key = keyCombination;
-                  }catch(Exception e){
-                      System.out.println(":incorect:");
-                      Preferences_Controller.zones_hotkey_show_hide_key = KeyCombination.NO_MATCH;
-                  }
-
-                  try{
-                      KeyCombination keyCombination = KeyCombination.keyCombination(level_hotkey_remind);
-                      System.out.println("key code gems: " + keyCombination.getName());
-                      Preferences_Controller.level_hotkey_remind_key = keyCombination;
-                  }catch(Exception e){
-                      System.out.println(":incorect:");
-                      Preferences_Controller.level_hotkey_remind_key = KeyCombination.NO_MATCH;
-                  }
-
-                  try{
-                      KeyCombination keyCombination = KeyCombination.keyCombination(recipe_hotkey_mark);
-                      System.out.println("key code recipe: " + keyCombination.getName());
-                      Preferences_Controller.recipe_hotkey_mark_key = keyCombination;
-                  }catch(Exception e){
-                      System.out.println(":incorect:");
-                      Preferences_Controller.recipe_hotkey_mark_key = KeyCombination.NO_MATCH;
-                  }
-
             }
 
 
@@ -670,10 +726,10 @@ public class POELevelFx extends Application {
                 //manual zone recipe load
                 z.hasRecipe = zoneObj.getBoolean("hasRecipe");
                 if(z.hasRecipe){
-                    recipeInfo rInfo = z.new recipeInfo();
+                    //recipeInfo rInfo = z.new recipeInfo();
                     JSONObject recipeObj = zoneObj.getJSONObject("recipe");
                     if(recipeObj != null){
-                        rInfo.tooltip = recipeObj.getString("tooltip");
+                        z.rInfo.tooltip = recipeObj.getString("tooltip");
                         /* // we wont be using this information so we might as well
                         //not use space for no reason.
                         JSONArray recipeMods = recipeObj.getJSONArray("mods");
@@ -917,8 +973,8 @@ public class POELevelFx extends Application {
                     //if it doesnt exist prob its valid from earlier versions
                     build.isValid = true;
                 }
-                build.characterName = bObj.getString("characterName");
-                build.level = bObj.getInt("level");
+                build.setCharacterName(bObj.getString("characterName"));
+                build.setCharacterLevel(bObj.getInt("level"));
                 try{
                     //bObj.get("hasPob");
                     build.hasPob = bObj.getBoolean("hasPob");
@@ -965,23 +1021,24 @@ public class POELevelFx extends Application {
                             System.out.println();
                         }*/
                         Gem gem = GemHolder.getInstance().createGemFromCache(gemName,build.getClassName());
-                        if(gem == null){
-                            System.out.println(gem.getGemName()+"was null.");
-                        }
-                        gem.id = gObj.getInt("id");
-                        gem.level_added = gObj.getInt("level_added");
-                        gem.replaced = gObj.getBoolean("replaced");
-                        gem.replaces = gObj.getBoolean("replaces");
-                        if(gem.replaced){
-                            int id_replaced = gObj.getInt("replaceWith");
-                            gem.id_replaced = id_replaced;
+                        if(gem != null) {
+                            gem.id = gObj.getInt("id");
+                            gem.level_added = gObj.getInt("level_added");
+                            gem.replaced = gObj.getBoolean("replaced");
+                            gem.replaces = gObj.getBoolean("replaces");
+                            if(gem.replaced){
+                                int id_replaced = gObj.getInt("replaceWith");
+                                gem.id_replaced = id_replaced;
 
+                            }
+                            if(gem.replaces){
+                                int id_replaces = gObj.getInt("replacesGem");
+                                gem.id_replaces = id_replaces;
+                            }
+                            sg.getGems().add(gem);//***check line 324 in GemsPanel_Controller;
+                        } else {
+                            System.out.println(gemName + " was null.");
                         }
-                        if(gem.replaces){
-                            int id_replaces = gObj.getInt("replacesGem");
-                            gem.id_replaces = id_replaces;
-                        }
-                        sg.getGems().add(gem);//***check line 324 in GemsPanel_Controller;
                     }
                     build.getSocketGroup().add(sg);
                 }
@@ -1065,8 +1122,8 @@ public class POELevelFx extends Application {
             bObj.put("buildName",build.getName());
             bObj.put("className",build.getClassName());
             bObj.put("ascendancyName",build.getAsc());
-            bObj.put("level", build.level); //<change
-            bObj.put("characterName",build.characterName);
+            bObj.put("level", build.getCharacterLevel()); //<change
+            bObj.put("characterName",build.getCharacterName());
             bObj.put("isValid", build.isValid);
             bObj.put("hasPob",build.hasPob);
             bObj.put("pobLink",build.pobLink);
@@ -1135,11 +1192,6 @@ public class POELevelFx extends Application {
         }
 
         String build_to_json = builds_array.toString();
-
-
-
-
-
 
         //Gson gson = new Gson();
         //String build_to_json = gson.toJson(linker.get(activeBuildID).build);
@@ -1240,8 +1292,8 @@ public class POELevelFx extends Application {
     final MenuItem settingsItem = new MenuItem("Settings");
 
     //Add components to pop-up menu
-    popup.add(shutdownItem);
     popup.add(settingsItem);
+    popup.add(shutdownItem);
 
     trayIcon.setPopupMenu(popup);
     trayIcon.setImageAutoSize(true); //So the icon auto-sizes
@@ -1288,9 +1340,9 @@ public class POELevelFx extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        setUpDirectories();
         //remove below for debuging.
         //setUpLog();
+        setUpDirectories();
         //checkForNewVersion()
         if(checkForNewVersion()){
             is_new_version = true;
@@ -1299,7 +1351,6 @@ public class POELevelFx extends Application {
             is_new_version = false;
             LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, args);
         }
-
     }
 
     public static void setUpDirectories(){

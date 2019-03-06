@@ -14,12 +14,17 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ResourceBundle;
+
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -50,6 +55,11 @@ public class BuildProgressPreview_Controller implements Initializable {
     private Label class_label;
     @FXML
     private Label ascend_label;
+
+    @FXML
+    private ScrollPane outerScroll;
+    @FXML
+    private ScrollPane levelScroll;
     
     public void start(Build build){
         
@@ -401,7 +411,32 @@ public class BuildProgressPreview_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
+
+
+        outerScroll.vvalueProperty().addListener(
+                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+
+                    System.out.println("Scroll v outer:" + outerScroll.getVvalue());
+                });
+        outerScroll.hvalueProperty().addListener(
+                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+
+                    System.out.println("Scroll h outer:" + outerScroll.getHvalue());
+                    levelScroll.setHvalue(outerScroll.getHvalue());
+
+                });
+/*
+        innerScroll.vvalueProperty().addListener(
+                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+
+                    System.out.println("Scroll v inner:" + innerScroll.getVvalue());
+                });
+        innerScroll.hvalueProperty().addListener(
+                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+
+                    System.out.println("Scroll h inner:" + innerScroll.getHvalue());
+                });*/
         
     }    
     
