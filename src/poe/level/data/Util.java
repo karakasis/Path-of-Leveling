@@ -10,12 +10,12 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.channels.Channels;
-import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Util {
+
+    private static final Logger m_logger = Logger.getLogger(Util.class.getName());
 
     public static class HttpResponse {
         public int responseCode = -1;
@@ -28,7 +28,7 @@ public class Util {
             BufferedImage img = ImageIO.read(Util.class.getResource("/classes/" + className + "/" + asc + ".png"));
             result = SwingFXUtils.toFXImage(img, null);
         } catch (Exception ex) {
-            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, "Failed to load ascendancy image for class: " + className + " asc: " + asc);
+            m_logger.severe("Failed to load ascendancy image for class: " + className + " asc: " + asc);
         }
 
         return result;
@@ -36,7 +36,7 @@ public class Util {
 
     @NotNull
     public static HttpResponse httpToString(String url) {
-
+        m_logger.info("Retrieving URL: " + url);
         HttpURLConnection connection = null;
         HttpResponse httpResponse = new HttpResponse();
         try {
@@ -46,7 +46,6 @@ public class Util {
             connection.setRequestProperty("User-Agent", "Path-Of-Leveling");
             connection.connect();
             httpResponse.responseCode = connection.getResponseCode();
-            System.out.println("Response code: " + httpResponse.responseCode);
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
             StringBuilder response = new StringBuilder();
@@ -59,7 +58,7 @@ public class Util {
             connection.disconnect();
 
         } catch (IOException ex) {
-            System.err.println(ex.getMessage());
+            m_logger.severe(ex.getMessage());
             ex.printStackTrace();
         } finally {
             if (connection != null) {

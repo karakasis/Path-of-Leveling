@@ -59,12 +59,14 @@ public class POELevelFx extends Application {
     private static final String DEBUG_BRANCH_NAME = "development";
     private static final String RELEASE_BRANCH_NAME = "master";
     private static String BRANCH_NAME = RELEASE_BRANCH_NAME;
-    private static final String REPO_OWNER = "karakasis";
+    // TODO - Protuhj
+//    private static final String REPO_OWNER = "karakasis";
+    private static final String REPO_OWNER = "protuhj";
     public static String directory;
     public static String gemsJSONFileName;
-    public static String gemsHashFileName;
+    public static String gemsTimeFileName;
     public static String dataJSONFileName;
-    public static String dataHashFileName;
+    public static String dataTimeFileName;
     public static String gemDir;
     public static ArrayList<Build> buildsLoaded;
     private Stage zone;
@@ -453,8 +455,8 @@ public class POELevelFx extends Application {
                   }
             }
 
-            // TODO
-            if (DEBUG) {
+            // Only check for new JSON files when running in release mode
+            if (!DEBUG) {
                 checkForNewJSON();
             }
 
@@ -1338,7 +1340,7 @@ public class POELevelFx extends Application {
      */
     public static void main(String[] args) {
         // Negate the following if you want to test release mode
-        if (Files.exists(Paths.get("./debug.donotdelete"))) {
+        if (!Files.exists(Paths.get("./debug.donotdelete"))) {
             System.out.println("Detected that we're running in a development environment");
             DEBUG = true;
             BRANCH_NAME = DEBUG_BRANCH_NAME;
@@ -1361,6 +1363,7 @@ public class POELevelFx extends Application {
             is_new_version = false;
             LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, args);
         }
+        System.err.println("Exiting");
     }
 
     public static void setUpDirectories(){
@@ -1378,9 +1381,9 @@ public class POELevelFx extends Application {
 
         if (!DEBUG) {
             gemsJSONFileName = POELevelFx.directory + "\\Path of Leveling\\json\\gems.json";
-            gemsHashFileName = POELevelFx.directory + "\\Path of Leveling\\json\\gemsjson.sha";
+            gemsTimeFileName = POELevelFx.directory + "\\Path of Leveling\\json\\gemsjson.time";
             dataJSONFileName = POELevelFx.directory + "\\Path of Leveling\\json\\data.json";
-            dataHashFileName = POELevelFx.directory + "\\Path of Leveling\\json\\datajson.sha";
+            dataTimeFileName = POELevelFx.directory + "\\Path of Leveling\\json\\datajson.time";
             if (!new File(POELevelFx.directory + "\\Path of Leveling\\json").exists()) {
                 if (new File(POELevelFx.directory + "\\Path of Leveling\\json").mkdirs()) {
                     try {
@@ -1394,9 +1397,9 @@ public class POELevelFx extends Application {
             }
         } else {
             gemsJSONFileName = "json\\gems.json";
-            gemsHashFileName = "json\\gemsjson.sha";
+            gemsTimeFileName = "json\\gemsjson.time";
             dataJSONFileName = "json\\data.json";
-            dataHashFileName = "json\\datajson.sha";
+            dataTimeFileName = "json\\datajson.time";
         }
 
     }
@@ -1526,15 +1529,25 @@ public class POELevelFx extends Application {
             }
     }
 
-    public static boolean checkForNewJSON() {
-        GithubHelper gh = new GithubHelper(REPO_OWNER, BRANCH_NAME);
+    public static void checkForNewJSON() {
+        // TODO - Protuhj
+//        GithubHelper gh = new GithubHelper(REPO_OWNER, BRANCH_NAME);
+        GithubHelper gh = new GithubHelper(REPO_OWNER, DEBUG_BRANCH_NAME);
         gh.init();
         File gemsJSONFile = new File(gemsJSONFileName);
-        File dataJSONFile = new File(dataJSONFileName);
-        if (!gemsJSONFile.exists()) {
-
+        File gemsTimeFile = new File(gemsTimeFileName);
+        try {
+            gh.downloadGemsJsonFileIfNeeded(gemsJSONFile, gemsTimeFile);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return false;
+        File dataJSONFile = new File(dataJSONFileName);
+        File dataTimeFile = new File(dataTimeFileName);
+        try {
+            gh.downloadDataJsonFileIfNeeded(dataJSONFile, dataTimeFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
