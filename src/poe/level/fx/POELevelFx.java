@@ -757,10 +757,7 @@ public class POELevelFx extends Application {
         for (int i = 0; i < arrG.length(); i++)
         {
             JSONObject gemObj  = arrG.getJSONObject(i);
-            Gem gem = new Gem();
-
-            gem.name= gemObj.getString("name");
-            //System.out.println(gem.name);
+            Gem gem = new Gem(gemObj.getString("name"));
 
             gem.required_lvl= gemObj.getInt("required_lvl");
             gem.isVaal=gemObj.getBoolean("isVaal");
@@ -769,6 +766,10 @@ public class POELevelFx extends Application {
             gem.color= gemObj.getString("color");
             gem.iconPath= gemObj.getString("iconPath");
             gem.isRewarded = gemObj.getBoolean("isReward");
+            JSONArray alt_name = gemObj.optJSONArray("alt_name");
+            if (alt_name != null) {
+                gem.addAltNamesFromJSON(alt_name.iterator());
+            }
 
             if(gem.isRewarded){
                 JSONObject rewardObj  = gemObj.getJSONObject("reward");
@@ -849,10 +850,16 @@ public class POELevelFx extends Application {
 
             BufferedImage img;
             try {
-                File gemFile = new File(gemsIconsLocation + gem.name + ".png");
+                File gemFile = new File(gemsIconsLocation + gem.getGemName() + ".png");
                 if (gemFile.exists()) {
                     img = ImageIO.read(gemFile);
                 } else {
+                    if (DEBUG) {
+                        // If we're debugging, all icons should exist, since we're pointing at the local directory
+                        notifyPreloader(new Preloader.ErrorNotification("loadGemsFromMemory", "Missing gem icon for: " + gem.getGemName() + "! Is your repo up to date?", null));
+                    }
+                    //TODO
+                    //notifyPreloader(new GemDownloadNotification(gem.getGemName()));
                     m_logger.info("Gem " + gemFile.getName() + " doesn't exist in " + gemsIconsLocation + " downloading");
                     img = downloadGemIcon(gem, true);
                     if (img == null) {
@@ -864,7 +871,7 @@ public class POELevelFx extends Application {
                     gem.gemIcon = SwingFXUtils.toFXImage(img, null);
                     gem.resizeImage();
                 } else {
-                    m_logger.warning("Failed to get the gem icon for: " + gem.name);
+                    m_logger.warning("Failed to get the gem icon for: " + gem.getGemName());
                     gem.gemIcon = null;
                 }
 
@@ -924,13 +931,13 @@ public class POELevelFx extends Application {
         try {
             URL url;
             if (fromGithub) {
-                url = new URL("https://raw.githubusercontent.com/" + REPO_OWNER + "/Path-of-Leveling/" + BRANCH_NAME + "/gems/" + gem.name.replaceAll(" ", "%20") + ".png");
+                url = new URL("https://raw.githubusercontent.com/" + REPO_OWNER + "/Path-of-Leveling/" + BRANCH_NAME + "/gems/" + gem.getGemName().replaceAll(" ", "%20") + ".png");
             } else {
                 url = new URL(gem.iconPath);
             }
             image = ImageIO.read(url);
 
-            ImageIO.write(image, "png", new File(gemsIconsLocation + gem.name + ".png"));
+            ImageIO.write(image, "png", new File(gemsIconsLocation + gem.getGemName() + ".png"));
         } catch (IOException e) {
             m_logger.log(Level.SEVERE, "IOException while read/writing the new gem icon", e);
         }
