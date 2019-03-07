@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -82,7 +83,7 @@ public class LevelOverlay_Controller implements Initializable {
         player.setText(playerLvl + "");
         zone.setText(zoneLvl + "");
         safezone.setText("-+" + Controller.findSafe(playerLvl)[2]) ;
-        xpmulti.setText((int)Controller.findxpmulti(playerLvl, zoneLvl)+"%");
+        xpmulti.setText((int)Controller.findxpmulti(playerLvl, zoneLvl)+"");
     }
 
     public void reset(int playerLvl){
@@ -97,14 +98,26 @@ public class LevelOverlay_Controller implements Initializable {
     }
 
     public void setPlayerLevel(int level){
-        player.setText("Current Level: "+ level);
+        player.setText(level+"");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         root.setFocusTraversable(true);
+        Tooltip level_t = new Tooltip("Indicates your current level");
+        level_t.setStyle("-fx-font-size: 16");
+        player.setTooltip(level_t);
+        Tooltip zone_t = new Tooltip("Indicates the area monster level");
+        zone_t.setStyle("-fx-font-size: 16");
+        zone.setTooltip(zone_t);
 
+        Tooltip safe_t = new Tooltip("Your character level must be within these range to get maximum experience");
+        safe_t.setStyle("-fx-font-size: 16");
+        safezone.setTooltip(safe_t);
+        Tooltip xp_t = new Tooltip("The percentage of experience your character is gaining in this area");
+        xp_t.setStyle("-fx-font-size: 16");
+        xpmulti.setTooltip(xp_t);
     }
 
 }

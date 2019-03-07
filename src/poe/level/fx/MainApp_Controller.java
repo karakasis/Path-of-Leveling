@@ -5,9 +5,11 @@
  */
 package poe.level.fx;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.events.JFXDialogEvent;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import org.w3c.dom.Document;
@@ -50,6 +49,8 @@ import java.util.zip.Inflater;
 public class MainApp_Controller implements Initializable {
 
     @FXML
+    private AnchorPane title;
+    @FXML
     private AnchorPane container;
     @FXML
     private AnchorPane buildsAnchorPane;
@@ -79,6 +80,13 @@ public class MainApp_Controller implements Initializable {
     private MenuItem link_active_pob;
     @FXML
     private Label footerValid;
+    @FXML
+    private JFXButton closeWindow;
+    @FXML
+    private JFXButton maximizeWindow;
+    @FXML
+    private JFXButton minimizeWindow;
+
 
 
     JFXDialog addBuildPopup;
@@ -119,8 +127,96 @@ public class MainApp_Controller implements Initializable {
         container.prefHeight(h);
     }
 
+    class Delta { double x, y; }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        final Delta dragDelta = new Delta();
+        /*
+        title.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                // record a delta distance for the drag and drop operation.
+                dragDelta.x = parent.getX() - mouseEvent.getScreenX();
+                dragDelta.y = parent.getY() - mouseEvent.getScreenY();
+            }
+        });
+        title.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                parent.setX(mouseEvent.getScreenX() + dragDelta.x);
+                parent.setY(mouseEvent.getScreenY() + dragDelta.y);
+            }
+        });*/
+        title.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.err.println("Clicked label" + event.getClickCount() + " times");
+                if (event.getClickCount()==2) {
+                    if(parent.isMaximized())
+                        parent.setMaximized(false);
+                    else
+                        parent.setMaximized(true);
+                }
+            }
+        });
+        closeWindow.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                custom_editor_exit_with_validate();
+            }
+        });
+        maximizeWindow.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(parent.isMaximized()){
+                    parent.setMaximized(false);
+                }else{
+                    parent.setMaximized(true);
+                }
+            }
+        });
+        minimizeWindow.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                parent.setIconified(true);
+            }
+        });
+        closeWindow.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                closeWindow.setStyle("-fx-background-color: rgba(244, 66, 110, 140)");
+            }
+        });
+        closeWindow.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                closeWindow.setStyle("-fx-background-color: transparent;");
+            }
+        });
+        maximizeWindow.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                maximizeWindow.setStyle("-fx-background-color:rgba(232, 232, 232, 40)");
+            }
+        });
+        maximizeWindow.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                maximizeWindow.setStyle("-fx-background-color: transparent;");
+            }
+        });
+        minimizeWindow.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                minimizeWindow.setStyle("-fx-background-color:rgba(232, 232, 232, 40)");
+            }
+        });
+        minimizeWindow.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                minimizeWindow.setStyle("-fx-background-color: transparent;");
+            }
+        });
+
         // TODO
         buildToSocketGroupMap = new HashMap<>();
         //option to reload builds from memory on start

@@ -6,6 +6,7 @@
 package poe.level.fx;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import com.sun.istack.internal.NotNull;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
@@ -83,7 +84,7 @@ public class BuildsPanel_Controller implements Initializable {
     @FXML
     private JFXButton removeBuild_button;
     @FXML
-    private VBox buildsBox;
+    private JFXListView buildsBox;
 
     private MainApp_Controller root;
     private SocketGroupsPanel_Controller sgc;
@@ -562,7 +563,8 @@ public class BuildsPanel_Controller implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("buildEntry.fxml"));
         try {
             //this will add the AnchorPane to the VBox
-            buildsBox.getChildren().add(loader.load());
+            //buildsBox.getChildren().add(loader.load());
+            buildsBox.getItems().add(loader.load());
         } catch (IOException ex) {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -602,7 +604,8 @@ public class BuildsPanel_Controller implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("buildEntry.fxml"));
         try {
             //this will add the AnchorPane to the VBox
-            buildsBox.getChildren().add(loader.load());
+            //buildsBox.getChildren().add(loader.load());
+            buildsBox.getItems().add(loader.load());
         } catch (IOException ex) {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -638,7 +641,8 @@ public class BuildsPanel_Controller implements Initializable {
             }
             POELevelFx.buildsLoaded.remove(bl.build);
             sgc.reset();
-            buildsBox.getChildren().remove(bl.pec.getRoot()); // remove from the UI
+            //buildsBox.getChildren().remove(bl.pec.getRoot()); // remove from the UI
+            buildsBox.getItems().remove(bl.pec.getRoot()); // remove from the UI
             linker.remove(bl.id); //remove from data
             root.toggleActiveBuilds(false);
             if(POELevelFx.buildsLoaded.isEmpty()){

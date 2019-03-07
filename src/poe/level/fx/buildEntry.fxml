@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="66.0" styleClass="buildPanel" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.BuildEntry_Controller">
+<AnchorPane fx:id="root" prefHeight="66.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.BuildEntry_Controller">
    <children>
       <AnchorPane fx:id="disabledPanel" prefHeight="200.0" prefWidth="210.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -28,7 +28,7 @@
                   <Font name="Alegreya Sans SC" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="editBuildName" prefHeight="25.0" prefWidth="88.0" visible="false" />
+            <TextField fx:id="editBuildName" prefHeight="25.0" prefWidth="88.0" visible="false" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="14.0" />
          </children>
          <padding>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
@@ -36,7 +36,7 @@
       </AnchorPane>
       <AnchorPane fx:id="nonValidPanel" layoutX="-8.0" layoutY="-65.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Non-valid" textFill="#c60808" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="-2.0">
+            <Label text="Non-valid" textFill="#c60808" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="Alegreya Sans SC" size="16.0" />
                </font>

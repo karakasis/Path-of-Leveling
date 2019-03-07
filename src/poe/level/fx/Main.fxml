@@ -40,7 +40,7 @@
                   </Lighting>
                </effect>
             </Label>
-            <JFXToggleButton fx:id="zones" layoutX="44.0" layoutY="462.0" selected="true" text="Zones" textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0">
+            <JFXToggleButton fx:id="zones" layoutX="44.0" layoutY="462.0" selected="true" styleClass="jfx-toggle-buttonCustom" text="Zones" textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0">
                <font>
                   <Font name="Fontin Regular" size="18.0" />
                </font>
@@ -48,7 +48,7 @@
                   <Tooltip text="Shows Zone-Layouts, Recipes, Passive Points and Trials" />
                </tooltip>
             </JFXToggleButton>
-            <JFXToggleButton layoutX="44.0" layoutY="525.0" selected="true" text="XP Indicator" textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0" fx:id="xp">
+            <JFXToggleButton layoutX="44.0" layoutY="525.0" selected="true" styleClass="jfx-toggle-buttonCustom" text="XP Indicator" textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0" fx:id="xp">
                <font>
                   <Font name="Fontin Regular" size="18.0" />
                </font>
@@ -56,7 +56,7 @@
                   <Tooltip text="Shows your current level, the average level of monsters in the zone and how much XP you are receiving" />
                </tooltip>
             </JFXToggleButton>
-            <JFXToggleButton fx:id="leveling" graphicTextGap="5.0" layoutX="44.0" layoutY="587.0" selected="true" text="Leveling " textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0">
+            <JFXToggleButton fx:id="leveling" graphicTextGap="5.0" layoutX="44.0" layoutY="587.0" selected="true" styleClass="jfx-toggle-buttonCustom" text="Leveling " textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0">
                <font>
                   <Font name="Fontin Regular" size="18.0" />
                </font>

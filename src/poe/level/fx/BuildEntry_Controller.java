@@ -137,13 +137,15 @@ public class BuildEntry_Controller implements Initializable {
         //root.setStyle("-fx-background-color: transparent;"
                 //+"-fx-border-style: solid;");
         if(validationColor){
-            root.setStyle("color: transparent;");
+            nonValidPanel.setVisible(false);
+            //root.setStyle("color: transparent;");
 
             //buildName.setTextFill(Color.BLACK);
             //ascendAndLevel.setTextFill(Color.web("#656565"));
         }
         else
-            root.setStyle("color: rgba(217, 215, 215, 0.8);");
+            nonValidPanel.setVisible(true);
+            //root.setStyle("color: rgba(217, 215, 215, 0.8);");
     }
 
     public void setValidBackgroundColor(boolean validationColor,boolean isBuildActive){
@@ -151,15 +153,20 @@ public class BuildEntry_Controller implements Initializable {
                 //+"-fx-border-style: solid;");
         if(!isBuildActive){//so if build is not active set to transparent or gray.
             if(validationColor)
-                root.setStyle("color: transparent;");
+                nonValidPanel.setVisible(false);
+                //root.setStyle("color: transparent;");
             else
-                root.setStyle("color: rgba(217, 215, 215, 0.8);");
+                nonValidPanel.setVisible(true);
+                //root.setStyle("-fx-border-style: solid; -fx-border-style-color: border-color-red;");
+                //root.setStyle("color: rgba(217, 215, 215, 0.8);");
         }
 
     }
 
     public void initInvalidBackgroundColor(){
-        root.setStyle("color: rgba(217, 215, 215, 0.8);");
+        nonValidPanel.setVisible(true);
+        //root.setStyle("-fx-border-style: solid; -fx-border-style-color: border-color-red;");
+       // root.setStyle("color: rgba(217, 215, 215, 0.8);");
     }
 
     public void initDisabledBuild(){
@@ -185,8 +192,8 @@ public class BuildEntry_Controller implements Initializable {
             //buildName.setTextFill(Color.WHITE);
             //ascendAndLevel.setTextFill(Color.web("#f6f6f6"));
             //buildName.setTextFill(Color.web("#0076a3"));
-            root.setStyle("color: rgba(0, 150, 201, 1);"); //new blue for consistency
-
+            //root.setStyle("color: rgba(0, 150, 201, 1);"); //new blue for consistency
+           // root.setStyle("-fx-border-style: solid; -fx-border-style-color: border-color-red;");
             parent.update();
         }
         if(buildSelectorCallback != null && !isDisabledInLauncher) {

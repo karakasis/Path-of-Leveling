@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minWidth="150.0" prefHeight="551.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
@@ -21,14 +19,6 @@
             <JFXComboBox fx:id="cmbLeagueFilter" prefHeight="35.0" prefWidth="185.0" promptText="Filter by League" />
          </children>
       </HBox>
-      <ScrollPane fitToWidth="true" layoutX="-1.0" layoutY="41.0" prefHeight="489.0" prefWidth="304.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
-         <content>
-            <VBox fx:id="charactersBox" spacing="7.0">
-               <padding>
-                  <Insets left="-2.0" right="-2.0" top="2.0" />
-               </padding>
-            </VBox>
-         </content>
-      </ScrollPane>
+      <JFXListView fx:id="charactersBox" layoutX="33.0" layoutY="69.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
    </children>
 </AnchorPane>

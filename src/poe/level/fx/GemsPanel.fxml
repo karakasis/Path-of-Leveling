@@ -2,36 +2,47 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" minWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.GemsPanel_Controller">
+<AnchorPane fx:id="rootPane" minWidth="500.0" prefHeight="594.0" prefWidth="575.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.GemsPanel_Controller">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="10.0" prefHeight="147.0" prefWidth="504.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0">
+      <AnchorPane layoutX="7.0" prefHeight="168.0" prefWidth="560.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXToggleButton fx:id="replaceGroup" layoutX="8.0" layoutY="48.0" onAction="#toggleReplaceGroup" prefHeight="34.0" prefWidth="185.0" size="8.0" text="Replace group later" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-10.0" />
-            <Label layoutX="14.0" layoutY="46.0" prefHeight="17.0" prefWidth="147.0" text="Use this Group from level" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="47.0" />
-            <Label fx:id="untilLevelLabel" layoutX="14.0" layoutY="82.0" prefHeight="17.0" prefWidth="147.0" text="Use this Group until level" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="14.0" />
-            <JFXComboBox fx:id="replaceGroupBox" editable="true" layoutX="227.0" layoutY="59.0" onAction="#groupReplaceValueChanged" prefHeight="25.0" prefWidth="226.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="47.0" />
-            <Label layoutX="14.0" layoutY="14.0" text="Select main Gem" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
-            <JFXComboBox fx:id="activeSkillGroup" editable="true" layoutX="224.0" layoutY="10.0" onAction="#mainGemValueChanged" prefHeight="25.0" prefWidth="226.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="2.0" />
-            <JFXSlider fx:id="untilLevelSlider" blockIncrement="1.0" indicatorPosition="RIGHT" layoutX="231.0" layoutY="76.0" majorTickUnit="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="226.0" snapToTicks="true" value="1.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="47.0" />
-            <JFXSlider fx:id="fromLevelSlider" blockIncrement="1.0" layoutX="231.0" layoutY="51.0" majorTickUnit="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="226.0" snapToTicks="true" value="1.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="48.0" />
-            <Label fx:id="fromLevelLabel" layoutX="212.0" layoutY="47.0" text="1" />
-            <Label fx:id="untilLevelLabel2" layoutX="212.0" layoutY="82.0" text="1" />
+            <JFXToggleButton fx:id="replaceGroup" contentDisplay="RIGHT" graphicTextGap="5.0" layoutX="27.0" layoutY="80.0" onAction="#toggleReplaceGroup" prefHeight="52.0" prefWidth="233.0" size="8.0" text="Replace group later" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="27.0">
+               <font>
+                  <Font name="Alegreya Sans SC" size="18.0" />
+               </font></JFXToggleButton>
+            <Label layoutX="327.0" layoutY="15.0" prefHeight="24.0" prefWidth="162.0" text="Choose level added" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Alegreya Sans SC" size="18.0" />
+               </font></Label>
+            <Label fx:id="untilLevelLabel" layoutX="303.0" layoutY="94.0" prefHeight="24.0" prefWidth="172.0" text="Choose level removed" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="66.0">
+               <font>
+                  <Font name="Alegreya Sans SC" size="18.0" />
+               </font></Label>
+            <JFXComboBox fx:id="replaceGroupBox" editable="true" layoutX="51.0" layoutY="130.0" maxWidth="280.0" onAction="#groupReplaceValueChanged" prefHeight="25.0" prefWidth="185.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="51.0" />
+            <Label layoutX="44.0" layoutY="14.0" text="Select main Gem" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Alegreya Sans SC" size="18.0" />
+               </font></Label>
+            <JFXComboBox fx:id="activeSkillGroup" editable="true" layoutX="51.0" layoutY="43.0" maxWidth="280.0" onAction="#mainGemValueChanged" prefHeight="25.0" prefWidth="185.0" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="43.0" />
+            <Spinner fx:id="fromLevel" layoutX="337.0" layoutY="46.0" maxWidth="280.0" prefHeight="25.0" prefWidth="185.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="46.0" />
+            <Spinner fx:id="untilLevel" layoutX="323.0" layoutY="55.0" maxWidth="280.0" prefHeight="25.0" prefWidth="185.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="128.0" />
          </children>
       </AnchorPane>
-      <Separator layoutX="14.0" layoutY="156.0" prefHeight="2.0" prefWidth="504.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="51.0" layoutY="169.0" prefHeight="376.0" prefWidth="510.0" style="-fx-background-color: #2B2B2B;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="169.0">
+      <Separator layoutX="14.0" layoutY="175.0" prefHeight="2.0" prefWidth="504.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="51.0" layoutY="192.0" prefHeight="388.0" prefWidth="510.0" style="-fx-background-color: #2B2B2B;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="192.0">
          <content>
             <TilePane fx:id="gemContainer" hgap="10.0" prefColumns="1" prefRows="1" style="-fx-background-color: transparent;" vgap="10.0">
                <padding>
@@ -40,7 +51,7 @@
             </TilePane>
          </content>
       </ScrollPane>
-      <JFXButton fx:id="addGemPanel_button" alignment="CENTER" cache="true" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" layoutX="9.0" layoutY="176.0" onAction="#addGemPanel" text=" " AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="176.0">
+      <JFXButton fx:id="addGemPanel_button" alignment="CENTER" cache="true" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" layoutX="4.0" layoutY="192.0" onAction="#addGemPanel" text=" " AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="192.0">
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
@@ -55,7 +66,7 @@
             <Tooltip text="Add Gem to Socket-Group" />
          </tooltip>
       </JFXButton>
-      <JFXButton fx:id="removeGemPanel_button" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" layoutX="9.0" layoutY="221.0" onAction="#removeGemPanel" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="220.0">
+      <JFXButton fx:id="removeGemPanel_button" contentDisplay="GRAPHIC_ONLY" disable="true" graphicTextGap="0.0" layoutX="4.0" layoutY="237.0" onAction="#removeGemPanel" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="237.0">
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>

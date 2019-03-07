@@ -5,6 +5,7 @@
  */
 package poe.level.fx;
 
+import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +28,7 @@ import java.util.logging.Logger;
 public class SelectBuild_PopupController implements Initializable {
 
     @FXML
-    private VBox buildsBox;
+    private JFXListView buildsBox;
 
     private Main_Controller root;
 
@@ -50,7 +51,7 @@ public class SelectBuild_PopupController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("buildEntry.fxml"));
             try {
                 //this will add the AnchorPane to the VBox
-                buildsBox.getChildren().add(loader.load());
+                buildsBox.getItems().add(loader.load());
             } catch (IOException ex) {
                 Logger.getLogger(SelectBuild_PopupController.class.getName()).log(Level.SEVERE, null, ex);
             }

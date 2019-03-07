@@ -26,6 +26,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -233,11 +235,7 @@ public class GemsPanel_Controller implements Initializable {
     @FXML
     private JFXComboBox<SocketGroup> replaceGroupBox;
     @FXML
-    private JFXSlider fromLevelSlider;
-    @FXML
     private Label untilLevelLabel;
-    @FXML
-    private JFXSlider untilLevelSlider;
     @FXML
     private JFXComboBox<Gem> activeSkillGroup;
     @FXML
@@ -245,9 +243,9 @@ public class GemsPanel_Controller implements Initializable {
     @FXML
     private JFXButton removeGemPanel_button;
     @FXML
-    private Label fromLevelLabel;
+    private Spinner fromLevel;
     @FXML
-    private Label untilLevelLabel2;
+    private Spinner untilLevel;
     
     
     private MainApp_Controller root;
@@ -386,23 +384,21 @@ public class GemsPanel_Controller implements Initializable {
         if(sg.replaceGroup()){
 
             untilLevelLabel.setVisible(true);
-            untilLevelLabel2.setVisible(true);
-            untilLevelSlider.setVisible(true);
+            untilLevel.setVisible(true);
             replaceGroup.setSelected(true);
             replaceGroupBox.setVisible(true);
             //replaceGroupBox.getItems().addAll(GemsPanel_Controller.getReplaceableGroups(linker));
             
             if(sg.getGroupReplaced()!=null){
                 replaceGroupBox.setValue(sg.getGroupReplaced());
-                untilLevelLabel2.setText(sg.getGroupReplaced().getFromGroupLevel()+"");
+                untilLevel.getValueFactory().setValue(sg.getGroupReplaced().getFromGroupLevel());
                 //replaceGroupBox.getEditor().setText(sg.getGroupReplaced().getActiveGem().getGemName());
             }
         }else{
                 replaceGroup.setSelected(false);
                 replaceGroupBox.setVisible(false);
                 untilLevelLabel.setVisible(false);
-                untilLevelLabel2.setVisible(false);
-                untilLevelSlider.setVisible(false);
+                untilLevel.setVisible(false);
         }
         //activeSkillGroup.getItems().addAll(current_sgl.sg.getGems());
         
@@ -420,10 +416,9 @@ public class GemsPanel_Controller implements Initializable {
             }
             //activeSkillGroup.getEditor().setText(sg.getActiveGem().getGemName());
         }
-        fromLevelSlider.setValue( sg.getFromGroupLevel());
-        fromLevelLabel.setText(sg.getFromGroupLevel()+"");
+        fromLevel.getValueFactory().setValue( sg.getFromGroupLevel());
         //lockClear = true;
-        untilLevelSlider.setValue( sg.getUntilGroupLevel());
+        untilLevel.getValueFactory().setValue( sg.getUntilGroupLevel());
         lockClear = false;
 
     }
@@ -475,13 +470,11 @@ public class GemsPanel_Controller implements Initializable {
         if(replaceGroup.isSelected()){
             replaceGroupBox.setVisible(true);
             untilLevelLabel.setVisible(true);
-            untilLevelLabel2.setVisible(true);
-            untilLevelSlider.setVisible(true);
+            untilLevel.setVisible(true);
         }else{
             replaceGroupBox.setVisible(false);
             untilLevelLabel.setVisible(false);
-            untilLevelLabel2.setVisible(false);
-            untilLevelSlider.setVisible(false);
+            untilLevel.setVisible(false);
             current_sgl.sg.setReplaceGroup(false);
         }
     }
@@ -502,7 +495,7 @@ public class GemsPanel_Controller implements Initializable {
                 }
             }*/
             groupSliderChange(current_sgl.sg.getGroupReplaced().getFromGroupLevel(),1);
-            untilLevelSlider.setValue(current_sgl.sg.getGroupReplaced().getFromGroupLevel());
+            untilLevel.getValueFactory().setValue(current_sgl.sg.getGroupReplaced().getFromGroupLevel());
             
         }
         
@@ -545,10 +538,10 @@ public class GemsPanel_Controller implements Initializable {
             }
             current_sgl.changeLabel();
             groupSliderChange(current_sgl.sg.getActiveGem().getLevelAdded(),0);
-            fromLevelSlider.setValue(current_sgl.sg.getActiveGem().getLevelAdded());
+            fromLevel.getValueFactory().setValue(current_sgl.sg.getActiveGem().getLevelAdded());
             if(current_sgl.sg.replaceGroup()){
                 groupSliderChange(current_sgl.sg.getGroupReplaced().getFromGroupLevel(),1);
-                untilLevelSlider.setValue(current_sgl.sg.getGroupReplaced().getFromGroupLevel());
+                untilLevel.getValueFactory().setValue(current_sgl.sg.getGroupReplaced().getFromGroupLevel());
             }
         }
         /*
@@ -565,7 +558,7 @@ public class GemsPanel_Controller implements Initializable {
     private void groupSliderChange(int newValue, int code){
         if(code == 0){
             current_sgl.sg.setFromGroupLevel(newValue);
-            fromLevelLabel.setText(current_sgl.sg.getFromGroupLevel()+"");
+           // fromLevel.setText(current_sgl.sg.getFromGroupLevel()+"");
             if(current_sgl.sg.getActiveGem()!=null){
                 current_sgl.sg.getActiveGem().level_added = newValue;
                 System.out.println("current Main testing :");
@@ -574,14 +567,12 @@ public class GemsPanel_Controller implements Initializable {
                     current_sgl.gpl.currentMain.controller.groupLevelChanged(newValue);
                 }
             }
-            untilLevelSlider.setMin(newValue);
-            if(untilLevelSlider.getValue()<=newValue){
-                untilLevelSlider.setValue(newValue+1);
+            //untilLevel.getValueFactory().setMin(newValue);
+            if((Integer)untilLevel.getValueFactory().getValue()<=newValue){
+                untilLevel.getValueFactory().setValue(newValue+1);
             }
-            untilLevelLabel2.setText((newValue+1)+"");
         }else if(code == 1){
             current_sgl.sg.setUntilGroupLevel(newValue);
-            untilLevelLabel2.setText(newValue+"");
         }
     }
     
@@ -683,31 +674,43 @@ public class GemsPanel_Controller implements Initializable {
     
     public void levelChanged(int level){
         groupSliderChange(level,0);
-        fromLevelSlider.setValue(level);
+        fromLevel.getValueFactory().setValue(level);
     }
     
     /**
      * Initializes the controller class.
      */
+    private SpinnerValueFactory<Integer> valueFactoryFrom;
+    private SpinnerValueFactory<Integer> valueFactoryUntil;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         rootPane.setVisible(false);
-        
-        fromLevelSlider.valueProperty().addListener(new ChangeListener() {
+        valueFactoryFrom = //
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
+        valueFactoryUntil = //
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
+        fromLevel.setValueFactory(valueFactoryFrom);
+        fromLevel.setStyle(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
+        untilLevel.setValueFactory(valueFactoryUntil);
+        untilLevel.setStyle(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
+        fromLevel.setEditable(true);
+        untilLevel.setEditable(true);
+
+        valueFactoryFrom.valueProperty().addListener(new ChangeListener() {
 
             @Override
             public void changed(ObservableValue arg0, Object arg1, Object arg2) {
-               groupSliderChange((int)fromLevelSlider.getValue(),0);
+               groupSliderChange((int)fromLevel.getValue(),0);
 
             }
         });
-        
-        untilLevelSlider.valueProperty().addListener(new ChangeListener() {
+
+        valueFactoryUntil.valueProperty().addListener(new ChangeListener() {
 
             @Override
             public void changed(ObservableValue arg0, Object arg1, Object arg2) {
-               groupSliderChange((int)untilLevelSlider.getValue(),1);
+               groupSliderChange((int)untilLevel.getValue(),1);
 
             }
         });

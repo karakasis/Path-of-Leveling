@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="rootPane" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.MainApp_Controller">
+<StackPane fx:id="rootPane" prefHeight="742.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.MainApp_Controller">
    <children>
-      <AnchorPane fx:id="container">
+      <AnchorPane fx:id="container" prefHeight="721.0" prefWidth="1080.0">
          <children>
-          <MenuBar layoutX="-14.0" layoutY="2.0" prefHeight="26.0" prefWidth="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <MenuBar layoutX="-14.0" layoutY="2.0" prefHeight="26.0" prefWidth="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
             <menus>
               <Menu mnemonicParsing="false" text="File">
                 <items>
@@ -78,12 +82,12 @@
               </Menu>
             </menus>
           </MenuBar>
-            <AnchorPane layoutY="25.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+            <AnchorPane layoutY="25.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
                <children>
                 <SplitPane dividerPositions="0.1, 0.85" focusTraversable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <items>
                     <AnchorPane fx:id="socketGroupsAnchorPane" minWidth="150.0" prefHeight="544.0" prefWidth="177.0" />
-                        <AnchorPane fx:id="gemsPanelAnchorPane" minWidth="500.0" />
+                        <AnchorPane fx:id="gemsPanelAnchorPane" minWidth="500.0" style="-fx-background-color: light-dark-color;" />
                     <AnchorPane fx:id="buildsAnchorPane" minWidth="150.0" prefHeight="551.0" prefWidth="245.0" />
                   </items>
                 </SplitPane>
@@ -96,7 +100,49 @@
                   <Font size="11.0" fx:id="x3" />
                 </font>
               </Label>
-              <Label font="$x3" layoutX="63.0" layoutY="3.0" maxWidth="-1.0" text="Path-of-Leveling_v0.65-alpha" AnchorPane.rightAnchor="3.0" />
+              <Label layoutX="63.0" layoutY="3.0" maxWidth="-1.0" text="Path-of-Leveling_v0.65-alpha" AnchorPane.rightAnchor="3.0">
+                     <font>
+                        <Font name="Trebuchet MS" size="11.0" />
+                     </font></Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="title" prefHeight="30.0" prefWidth="1080.0" style="-fx-background-color: #282B30;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <JFXButton fx:id="closeWindow" contentDisplay="GRAPHIC_ONLY" layoutY="6.0" maxHeight="30.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/icons8-multiply-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="maximizeWindow" contentDisplay="GRAPHIC_ONLY" layoutX="1044.0" layoutY="10.0" maxHeight="30.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/icons8-rectangular-30.png" />
+                           </image>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="minimizeWindow" contentDisplay="GRAPHIC_ONLY" layoutX="1022.0" layoutY="10.0" maxHeight="30.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/icons8-horizontal-line-50%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Label layoutX="14.0" layoutY="8.0" text="Path of Leveling" textFill="#d7d7d7">
+                     <font>
+                        <Font name="Alegreya Sans SC" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children>

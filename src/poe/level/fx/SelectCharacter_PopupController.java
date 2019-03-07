@@ -1,6 +1,7 @@
 package poe.level.fx;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,7 +31,7 @@ public class SelectCharacter_PopupController implements Initializable {
     }
 
     @FXML
-    private VBox charactersBox;
+    private JFXListView charactersBox;
     @FXML
     private JFXComboBox<String> cmbLeagueFilter;
 
@@ -51,9 +52,10 @@ public class SelectCharacter_PopupController implements Initializable {
     }
 
     private void filterCharacters(String league) {
-        for (Node node : charactersBox.getChildren()) {
+        /*
+        for (Node node : charactersBox.getItems()) {
             node.setVisible(league.isEmpty() || "All".equalsIgnoreCase(league) || m_NodeToLeague.get(node).equalsIgnoreCase(league));
-        }
+        }*/
     }
 
     /**
@@ -73,7 +75,7 @@ public class SelectCharacter_PopupController implements Initializable {
                 n.managedProperty().bind(n.visibleProperty());
                 m_NodeToLeague.put(n, ci.league);
                 //this will add the AnchorPane to the VBox
-                charactersBox.getChildren().add(n);
+                charactersBox.getItems().add(n);
             } catch (IOException ex) {
                 Logger.getLogger(SelectBuild_PopupController.class.getName()).log(Level.SEVERE, null, ex);
             }

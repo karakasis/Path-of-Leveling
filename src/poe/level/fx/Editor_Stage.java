@@ -14,6 +14,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import poe.resizer.ResizeHelper;
+import poe.resizer.ResizeListener;
 
 /**
  *
@@ -50,7 +53,9 @@ public class Editor_Stage extends Stage{
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         //scene.getStylesheets().add(getClass().getResource("/styles/modena_dark.css").toExternalForm());
         this.setScene(scene);
-        
+        this.initStyle(StageStyle.UNDECORATED);
+        //new ResizeListener(this);
+        ResizeHelper.addResizeListener(this);
         this.show();
         sp.prefWidthProperty().bind(scene.widthProperty());
         sp.prefHeightProperty().bind(scene.heightProperty());
