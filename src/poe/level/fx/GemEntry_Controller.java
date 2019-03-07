@@ -21,22 +21,23 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.effect.Blend;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.StringConverter;
 import poe.level.data.Gem;
 import poe.level.data.GemListCell;
 import poe.level.data.GemToString;
+import poe.level.data.Util;
 import poe.level.fx.GemsPanel_Controller.GemLinker;
 
 /**
@@ -69,18 +70,18 @@ public class GemEntry_Controller implements Initializable {
     @FXML
     private JFXButton backButton;
     @FXML
-    private Spinner levelSlider;
+    private Spinner<Integer> levelSlider;
 
-    
+
     public static boolean skip = false;
     int id;
-    
+
     GemLinker parent;
     Gem selectedGem;
     int selected;
     private boolean lockClear = false;
 
-    private void handleSpin(ObservableValue<?> observableValue, Object oldValue, Object newValue) {
+    private void handleSpin(ObservableValue<? extends Integer> observableValue, Integer oldValue, Integer newValue) {
         try {
             if (newValue == null) {
                 levelSlider.getValueFactory().setValue(selectedGem.level_added);
@@ -100,11 +101,13 @@ public class GemEntry_Controller implements Initializable {
         // TODO
         replaceGem.setVisible(false);
         ObservableList<Label> list = FXCollections.observableArrayList();
-        SpinnerValueFactory valueFactoryFrom =
+        SpinnerValueFactory<Integer> valueFactoryFrom =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
+
         levelSlider.setValueFactory(valueFactoryFrom);
         levelSlider.setEditable(true);
-        levelSlider.valueProperty().addListener((observableValue, oldValue, newValue) -> handleSpin(observableValue, oldValue, newValue));
+        levelSlider.valueProperty().addListener(this::handleSpin);
+        Util.addIntegerLimiterToIntegerSpinner(levelSlider, valueFactoryFrom);
 
         //ArrayList<Gem> gems = GemHolder.getInstance().getGemsClass();
         /*
@@ -128,7 +131,7 @@ public class GemEntry_Controller implements Initializable {
         gemSelected.getEditor().textProperty().addListener(new ChangeListener<String>() {
 
             @Override
-            public void changed(ObservableValue<? extends String> observable, 
+            public void changed(ObservableValue<? extends String> observable,
                                             String oldValue, String newValue) {
                 if(!GemEntry_Controller.skip){
                     GemEntry_Controller.skip = true;
@@ -141,13 +144,13 @@ public class GemEntry_Controller implements Initializable {
                         ArrayList<Gem> gemsQuery = GemHolder.getInstance().custom(newValue);
                         gemSelected.getItems().clear();
                         gemSelected.getItems().addAll(gemsQuery);
-                    } 
+                    }
                     GemEntry_Controller.skip = false;
                 }
-            
-                
-                
-                
+
+
+
+
             }
         });
         */
@@ -163,16 +166,16 @@ public class GemEntry_Controller implements Initializable {
         //TextFields.bindAutoCompletion(gemSelected.getEditor(), gemSelected.getItems(),new GemToString());
         /*new AutoCompleteComboBoxListener(gemSelected);*/
         selected = -1;
-    }    
-    
+    }
+
     public void input(GemLinker parent,int id){
         this.parent = parent;
         this.id = id;
-        
+
 
                replaceGem.setVisible(false);
                replaceToggle.setSelected(false);
-               
+
         for(Gem g_sib : parent.getSiblings().getGems()){
             if(!g_sib.equals(selectedGem)){
                 replaceGem.getItems().add(g_sib);
@@ -181,17 +184,17 @@ public class GemEntry_Controller implements Initializable {
         replaceGem.setCellFactory(lv -> new GemListCell());
         replaceGem.setButtonCell(new GemListCell());
         replaceGem.setConverter(new GemToString());
-        
+
         //add open window gem selection pop up functionallity
         parent.requestPopup();
-        
+
     }
-    
+
     public void load(GemLinker parent,int id, Gem g){
         this.parent = parent;
-        
+
         this.id = id;
-        
+
         for(Gem g_sib : parent.getSiblings().getGems()){
             if(!g_sib.equals(g)){
                 replaceGem.getItems().add(g_sib);
@@ -200,7 +203,7 @@ public class GemEntry_Controller implements Initializable {
         replaceGem.setCellFactory(lv -> new GemListCell());
         replaceGem.setButtonCell(new GemListCell());
         replaceGem.setConverter(new GemToString());
-        
+
         selectedGem = g;
         replaceGem.setVisible(false);
         replaceToggle.setSelected(false);
@@ -235,11 +238,11 @@ public class GemEntry_Controller implements Initializable {
             }else{
                replaceGem.setVisible(false);
                replaceToggle.setSelected(false);
-            }  
+            }
         }
-        
+
     }
-    
+
     public void toggleReplace(){
         if(replaceToggle.isSelected()){
             replaceGem.setVisible(true);
@@ -250,12 +253,12 @@ public class GemEntry_Controller implements Initializable {
             selectedGem.replacedWith = null;
         }
     }
-    
+
     @FXML
     private void gemPress(){
         parent.requestPopup();
     }
-    
+
     public void callback(Gem g){
         //also a way to remove effects from the disablePanel
         disablePanel.setDisable(false);
@@ -264,7 +267,7 @@ public class GemEntry_Controller implements Initializable {
         //change button
         selectGemButton.setGraphic(new ImageView(g.getSmallIcon()));
         selectGemButton.setText(g.getGemName());
-        
+
         selectedGem = g.dupeGem();
         levelSlider.getValueFactory().setValue(selectedGem.getLevelAdded());
         if(selectedGem.act == 0){
@@ -281,17 +284,17 @@ public class GemEntry_Controller implements Initializable {
            replaceGem.setVisible(false);
            replaceToggle.setSelected(false);
         }
-        
-        
+
+
         parent.updateGemData(selectedGem);
     }
-    
+
     public void onGemSelect(){
             gemSelected.hide();
             //selected = gemSelected.getSelectionModel().getSelectedIndex();
             Gem g = (Gem) gemSelected.getValue();
             //gemSelected.getEditor().setText(g.getGemName());
-            
+
             selectedGem = g.dupeGem();
             levelSlider.getValueFactory().setValue(selectedGem.getLevelAdded());
             act.setText("Act " + selectedGem.act);
@@ -305,9 +308,9 @@ public class GemEntry_Controller implements Initializable {
                replaceToggle.setSelected(false);
             }
             parent.updateGemData(selectedGem);
-              
+
     }
-    
+
     public void updateComboBox(){
         lockClear = true;
         replaceGem.getItems().clear();
@@ -316,32 +319,32 @@ public class GemEntry_Controller implements Initializable {
                 replaceGem.getItems().add(g_sib);
             }
         }
-        
+
         if(selectedGem!= null && selectedGem.replaced){
             if(selectedGem.replacedWith != null){
                 System.out.println(selectedGem.getGemName()+" replaces with : "+ selectedGem.replacedWith.getGemName());
             }else{
                 System.out.println(selectedGem.getGemName()+" has null replacement ");
             }
-            
+
             replaceGem.setValue(selectedGem.replacedWith);
         }else{
             replaceGem.getSelectionModel().clearSelection();
             replaceToggle.setSelected(false);
         }
-        
+
         lockClear = false;
     }
-    
+
     public void levelChanged(){
         selectedGem.level_added = (int) levelSlider.getValue();
         parent.levelChanged();
     }
-    
+
     public void groupLevelChanged(int value){
         levelSlider.getValueFactory().setValue(value);
     }
-    
+
     public void replaceChanged(){
         if(!lockClear){
             System.out.println(">>Called in the middle<<");
@@ -355,39 +358,39 @@ public class GemEntry_Controller implements Initializable {
                 replaceToggle.setSelected(false);
              }
         }
-        
+
     }
-    
+
     public void onClick(){
         root.setStyle("color2: onclick-color-inner;");
         outerRoot.setStyle("color4: onclick-color-outer;");
-        
+
         parent.clicked();
     }
-    
+
     public void reset(){
         //root.setStyle("-fx-background-color: transparent;"
                 //+"-fx-border-style: solid;");
-        
+
         root.setStyle("color2: transparent;");
         outerRoot.setStyle("color4: transparent;");
     }
-    
+
     public int getId(){
         return id;
     }
-    
+
     public void setId(int id){
         this.id = id;
     }
-    
+
     public AnchorPane getRoot(){
         return root;
     }
-    
+
     public Gem getGem(){
         return selectedGem;
     }
-    
-    
+
+
 }

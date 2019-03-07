@@ -1,7 +1,10 @@
 package poe.level.data;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
+import javafx.util.StringConverter;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -71,5 +74,33 @@ public class Util {
              ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream())) {
             fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
         }
+    }
+
+    public static void addIntegerLimiterToIntegerSpinner(Spinner<Integer> theSpinner, SpinnerValueFactory<Integer> valueFactory) {
+        theSpinner.setValueFactory(valueFactory);
+        StringConverter<Integer> sci = valueFactory.getConverter();
+        StringConverter<Integer> sci2 = new StringConverter<Integer>() {
+            @Override
+            public Integer fromString(String value) {
+                // Don't try to get fromString if the value is null or an empty String, just reset the field.
+                if (value != null && !value.trim().isEmpty()) {
+                    try {
+                        return sci.fromString(value);
+                    } catch (NumberFormatException nfe) {
+                        // Ignore
+                    }
+                }
+                // if we get here, the input was invalid, reset it.
+                theSpinner.getEditor().setText(toString(theSpinner.getValue()));
+                return theSpinner.getValue();
+            }
+
+            @Override
+            public String toString(Integer value) {
+                return sci.toString(value);
+            }
+        };
+        valueFactory.setConverter(sci2);
+
     }
 }
