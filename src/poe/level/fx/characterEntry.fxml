@@ -6,36 +6,27 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="67.0" prefWidth="285.0" styleClass="buildPanel" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.CharacterEntry_Controller">
-      <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <ImageView fx:id="banner" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true">
-                  <Image url="@../../../classes/Templar/Inquisitor.png" />
-            </ImageView>
-            <VBox prefHeight="75.0" prefWidth="245.0">
-                  <Label fx:id="characterName" maxHeight="42.0" maxWidth="-Infinity" minHeight="27.0" prefHeight="27.0" prefWidth="175.0" text="rf totems" VBox.vgrow="NEVER">
-                     <font>
-                        <Font name="Alegreya Sans SC" size="17.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblAscendancy" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="Guardian" textFill="#656565" VBox.vgrow="NEVER">
-                     <font>
-                        <Font name="Alegreya Sans SC" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblLeague" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="Standard" textFill="#656565">
-                     <font>
-                        <Font name="System Italic" size="14.0" />
-                     </font>
-                  </Label>
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin>
-            </VBox>
-      </HBox>
+<AnchorPane fx:id="root" prefWidth="210.0" styleClass="buildPanel" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.CharacterEntry_Controller">
+         <ImageView fx:id="banner" fitHeight="75.0" fitWidth="75.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="5.0">
+               <Image url="@../../../classes/Templar/Inquisitor.png" />
+         </ImageView>
+            <Label fx:id="characterName" layoutX="92.0" layoutY="5.0" maxHeight="42.0" maxWidth="-Infinity" minHeight="27.0" prefHeight="27.0" text="rf totems" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="4.0">
+               <font>
+                  <Font name="Alegreya Sans SC" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblAscendancy" layoutX="95.0" layoutY="31.0" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="Guardian" textFill="#9f9f9f" AnchorPane.leftAnchor="92.0" AnchorPane.topAnchor="28.0">
+               <font>
+                  <Font name="Alegreya Sans SC" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblLeague" layoutX="97.0" layoutY="55.0" maxHeight="24.0" minHeight="24.0" prefHeight="24.0" text="Standard" textFill="#9f9f9f" AnchorPane.leftAnchor="92.0" AnchorPane.topAnchor="52.0">
+               <font>
+                  <Font name="Alegreya Sans SC Italic" size="14.0" />
+               </font>
+            </Label>
    <cursor>
       <Cursor fx:constant="OPEN_HAND" />
    </cursor>

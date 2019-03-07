@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="219.0" prefWidth="329.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.CharacterInfo_Controller">
+<AnchorPane id="AnchorPane" prefHeight="219.0" prefWidth="329.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.CharacterInfo_Controller">
    <children>
       <JFXTabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -24,14 +24,14 @@
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                            <center>
-                              <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label text="Character :">
                                        <font>
                                           <Font name="Alegreya Sans SC" size="16.0" />
                                        </font>
                                     </Label>
-                                    <HBox prefHeight="25.0" prefWidth="279.0">
+                                    <HBox prefHeight="25.0" prefWidth="279.0" style="-fx-background-color: transparent;">
                                        <children>
                                           <Label prefHeight="25.0" prefWidth="100.0" text="Character Name :" />
                                           <TextField fx:id="txtManualName" prefHeight="25.0" prefWidth="178.0" promptText="Your in-game character name.">
@@ -41,7 +41,7 @@
                                           </TextField>
                                        </children>
                                     </HBox>
-                                    <HBox prefHeight="28.0" prefWidth="279.0">
+                                    <HBox prefHeight="28.0" prefWidth="279.0" style="-fx-background-color: transparent;">
                                        <children>
                                           <Label prefHeight="25.0" prefWidth="101.0" text="Character Level :" textAlignment="CENTER" wrapText="true" />
                                           <TextField fx:id="txtManualLevel" prefHeight="25.0" prefWidth="178.0" promptText="The level of your character.">
@@ -58,7 +58,7 @@
                               </VBox>
                            </center>
                            <bottom>
-                              <HBox prefHeight="6.0" prefWidth="329.0" BorderPane.alignment="CENTER">
+                              <HBox prefHeight="6.0" prefWidth="329.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="lblManualError" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="189.0" textAlignment="CENTER" textFill="#e82222" visible="false" wrapText="true" />
                                     <JFXButton buttonType="RAISED" onAction="#startManual" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Start" textFill="WHITE">
@@ -79,9 +79,9 @@
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                            <center>
-                              <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                                  <children>
-                                    <HBox prefHeight="25.0" prefWidth="279.0">
+                                    <HBox prefHeight="25.0" prefWidth="279.0" style="-fx-background-color: transparent;">
                                        <children>
                                           <Label prefHeight="25.0" prefWidth="100.0" text="Account Name :" />
                                           <TextField fx:id="txtAccountName" prefHeight="25.0" prefWidth="200.0" promptText="Your Path of Exile account name">
@@ -96,7 +96,7 @@
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </Separator>
-                                    <HBox prefHeight="52.0" prefWidth="309.0">
+                                    <HBox prefHeight="52.0" prefWidth="309.0" style="-fx-background-color: transparent;">
                                        <children>
                                           <ImageView fx:id="buildIcon" fitHeight="70.0" fitWidth="70.0" layoutX="346.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true" />
                                           <JFXButton fx:id="btnSelectCharacter" graphicTextGap="1.0" layoutX="243.0" layoutY="493.0" onAction="#buildPopup" prefHeight="77.0" prefWidth="227.0" style="-fx-border-color: #c3bca0;" text="Select Character" textFill="#c3bca0">
@@ -122,7 +122,7 @@
                               </VBox>
                            </center>
                            <bottom>
-                              <HBox prefHeight="7.0" prefWidth="329.0" BorderPane.alignment="BOTTOM_CENTER">
+                              <HBox prefHeight="7.0" prefWidth="329.0" style="-fx-background-color: transparent;" BorderPane.alignment="BOTTOM_CENTER">
                                  <children>
                                     <Label fx:id="lblAutoError" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="197.0" textAlignment="CENTER" textFill="#e82222" visible="false" wrapText="true" />
                                     <JFXButton fx:id="btnAutoStart" buttonType="RAISED" disable="true" onAction="#startAuto" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Start" textFill="WHITE">

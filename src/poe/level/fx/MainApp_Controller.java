@@ -5,9 +5,11 @@
  */
 package poe.level.fx;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.events.JFXDialogEvent;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import org.w3c.dom.Document;
@@ -28,6 +27,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import poe.level.data.Build;
+import poe.level.data.GemHolder;
 import poe.level.fx.overlay.RecipeOverlay_Controller;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -49,6 +49,8 @@ import java.util.zip.Inflater;
  */
 public class MainApp_Controller implements Initializable {
 
+    @FXML
+    private AnchorPane title;
     @FXML
     private AnchorPane container;
     @FXML
@@ -79,6 +81,13 @@ public class MainApp_Controller implements Initializable {
     private MenuItem link_active_pob;
     @FXML
     private Label footerValid;
+    @FXML
+    private JFXButton closeWindow;
+    @FXML
+    private JFXButton maximizeWindow;
+    @FXML
+    private JFXButton minimizeWindow;
+
 
 
     JFXDialog addBuildPopup;
@@ -106,6 +115,8 @@ public class MainApp_Controller implements Initializable {
     SocketGroupsPanel_Controller socketgroups_controller;
     GemsPanel_Controller gemspanel_controller;
     Editor_Stage parent;
+    private double lastWidth;
+    private double lastHeight;
 
     public void hook(Editor_Stage parent){
         this.parent = parent;
@@ -117,8 +128,96 @@ public class MainApp_Controller implements Initializable {
         container.prefHeight(h);
     }
 
+    class Delta { double x, y; }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        final Delta dragDelta = new Delta();
+        /*
+        title.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                // record a delta distance for the drag and drop operation.
+                dragDelta.x = parent.getX() - mouseEvent.getScreenX();
+                dragDelta.y = parent.getY() - mouseEvent.getScreenY();
+            }
+        });
+        title.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                parent.setX(mouseEvent.getScreenX() + dragDelta.x);
+                parent.setY(mouseEvent.getScreenY() + dragDelta.y);
+            }
+        });*/
+        title.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.err.println("Clicked label" + event.getClickCount() + " times");
+                if (event.getClickCount()==2) {
+                    if(parent.isMaximized())
+                        parent.setMaximized(false);
+                    else
+                        parent.setMaximized(true);
+                }
+            }
+        });
+        closeWindow.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                custom_editor_exit_with_validate();
+            }
+        });
+        maximizeWindow.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(parent.isMaximized()){
+                    parent.setMaximized(false);
+                }else{
+                    parent.setMaximized(true);
+                }
+            }
+        });
+        minimizeWindow.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                parent.setIconified(true);
+            }
+        });
+        closeWindow.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                closeWindow.setStyle("-fx-background-color: rgba(244, 66, 110, 140)");
+            }
+        });
+        closeWindow.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                closeWindow.setStyle("-fx-background-color: transparent;");
+            }
+        });
+        maximizeWindow.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                maximizeWindow.setStyle("-fx-background-color:rgba(232, 232, 232, 40)");
+            }
+        });
+        maximizeWindow.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                maximizeWindow.setStyle("-fx-background-color: transparent;");
+            }
+        });
+        minimizeWindow.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                minimizeWindow.setStyle("-fx-background-color:rgba(232, 232, 232, 40)");
+            }
+        });
+        minimizeWindow.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                minimizeWindow.setStyle("-fx-background-color: transparent;");
+            }
+        });
+
         // TODO
         buildToSocketGroupMap = new HashMap<>();
         //option to reload builds from memory on start
@@ -189,35 +288,49 @@ public class MainApp_Controller implements Initializable {
         addBuildPopup.close();
     }
 
+    private void gemPanelCreation(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("addGem.fxml"));
+        AnchorPane con = null;
+        try {
+            con = (AnchorPane) loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        m_addGemPopupController = loader.getController();
+        lastWidth = rootPane.getWidth();
+        lastHeight = rootPane.getHeight();
+        con.setPrefWidth((int) lastWidth*0.66);
+        con.setPrefHeight((int) lastHeight*0.69);
+        addGemPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+        //addGemPopup.setCacheContainer(true);
+        addGemPopup.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ESCAPE) {
+                    gemClosePopup();
+                }
+            }
+        });
+        m_addGemPopupController.load(lastWidth);
+        addGemPopup.show();
+        addGemPopup.setOnDialogOpened(new EventHandler<JFXDialogEvent>() {
+            @Override
+            public void handle(JFXDialogEvent event) {
+                addGemPopup.requestFocus();
+            }
+        });
+    }
+
+    private String cachedForClass = "";
     public AddGem_Controller gemPopup() {
         System.out.println("gemPopup");
-        if (addGemPopup == null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("addGem.fxml"));
-            AnchorPane con = null;
-            try {
-                con = (AnchorPane) loader.load();
-            } catch (IOException ex) {
-                Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            m_addGemPopupController = loader.getController();
-            addGemPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
-            addGemPopup.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent event) {
-                    if (event.getCode() == KeyCode.ESCAPE) {
-                        gemClosePopup();
-                    }
-                }
-            });
-            addGemPopup.show();
-            addGemPopup.setOnDialogOpened(new EventHandler<JFXDialogEvent>() {
-                @Override
-                public void handle(JFXDialogEvent event) {
-                    addGemPopup.requestFocus();
-                }
-            });
+        if (addGemPopup == null || !cachedForClass.equals(GemHolder.getInstance().className)) {
+            cachedForClass = GemHolder.getInstance().className;
+            gemPanelCreation();
         } else {
-            addGemPopup.show();
+            if(rootPane.getWidth() != lastWidth || rootPane.getHeight() != lastHeight){
+                gemPanelCreation();
+            }else addGemPopup.show();
         }
         return m_addGemPopupController;
     }
@@ -295,6 +408,7 @@ public class MainApp_Controller implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
+
             BuildProgressPreview_Controller controller = loader.<BuildProgressPreview_Controller>getController();
 
             buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);

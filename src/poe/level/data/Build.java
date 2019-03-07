@@ -120,6 +120,10 @@ public class Build {
                 }
             }
         }
+        if(getSocketGroup().isEmpty()) {
+            System.out.println(">>>>This build has no socket groups created.<<<<");
+            return false;
+        }
         //isValid = true;
         return true;
     }
@@ -127,6 +131,11 @@ public class Build {
     public String validate_failed_string(){
         String error = ">>>>Validating build :" + this.buildName + "... <<<<\n";
         System.out.println(error);
+        if(getSocketGroup().isEmpty()) {
+            System.out.println(">>>>This build has no socket groups created.<<<<");
+            error+=">>>>This build has no socket groups created.<<<<";
+            return error;
+        }
         for(SocketGroup sg : getSocketGroup()){
             if(sg.getActiveGem()==null){
                 System.out.println(">>>>A socket group doesn't have a valid main gem.<<<<");
@@ -191,5 +200,31 @@ public class Build {
             }
         }
         return error;
+    }
+
+    public void patch_missing_sgroups() {
+        ArrayList<SocketGroup> deleted = new ArrayList<>();
+        for (SocketGroup sg : getSocketGroup()) {
+            if (sg.getActiveGem() == null) {
+                System.out.println("patching>>>>A socket group doesn't have a valid main gem.<<<<");
+                if (sg.getGems() == null || sg.getGems().isEmpty()) {
+                    System.out.println("patching>>>>Deleting empty socket group<<<<");
+                    deleted.add(sg);
+                }else{
+                    System.out.println("patching>>>>Trying to set an active gem for the group<<<<");
+                    for(Gem g : sg.getGems()){
+                        if(g.isActive) {
+                            sg.setActiveGem(g);
+                            System.out.println("patching>>>>Managed to set an active gem for the group<<<<");
+                        }
+                    }
+                    if(sg.getActiveGem() == null){
+                        System.out.println("patching>>>>No actives gems were available.<<<<");
+                        sg.setActiveGem(sg.getGems().get(0));
+                        System.out.println("patching>>>>Set the first gem in the socket group as main gem.<<<<");
+                    }
+                }
+            }
+        }
     }
 }

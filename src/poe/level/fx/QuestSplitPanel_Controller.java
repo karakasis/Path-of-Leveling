@@ -40,6 +40,7 @@ public class QuestSplitPanel_Controller implements Initializable {
     private Label quest_label;
     @FXML
     private SplitPane container;
+
     //private JFXButton gemButton;
     /**
      * Initializes the controller class.
@@ -121,8 +122,12 @@ public class QuestSplitPanel_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         // TODO
+    }
+
+    //not used for now.
+    public void scrollListener(double h){
+        //innerScroll.setHvalue(h);
     }
 
 }
