@@ -59,9 +59,7 @@ public class POELevelFx extends Application {
     private static final String DEBUG_BRANCH_NAME = "development";
     private static final String RELEASE_BRANCH_NAME = "master";
     private static String BRANCH_NAME = RELEASE_BRANCH_NAME;
-    // TODO - Protuhj
-//    private static final String REPO_OWNER = "karakasis";
-    private static final String REPO_OWNER = "protuhj";
+    private static final String REPO_OWNER = "karakasis";
     public static String directory;
     public static String gemsJSONFileName;
     public static String gemsTimeFileName;
@@ -1340,7 +1338,7 @@ public class POELevelFx extends Application {
      */
     public static void main(String[] args) {
         // Negate the following if you want to test release mode
-        if (!Files.exists(Paths.get("./debug.donotdelete"))) {
+        if (Files.exists(Paths.get("./debug.donotdelete"))) {
             System.out.println("Detected that we're running in a development environment");
             DEBUG = true;
             BRANCH_NAME = DEBUG_BRANCH_NAME;
@@ -1530,9 +1528,7 @@ public class POELevelFx extends Application {
     }
 
     public static void checkForNewJSON() {
-        // TODO - Protuhj
-//        GithubHelper gh = new GithubHelper(REPO_OWNER, BRANCH_NAME);
-        GithubHelper gh = new GithubHelper(REPO_OWNER, DEBUG_BRANCH_NAME);
+        GithubHelper gh = new GithubHelper(REPO_OWNER, BRANCH_NAME);
         gh.init();
         File gemsJSONFile = new File(gemsJSONFileName);
         File gemsTimeFile = new File(gemsTimeFileName);

@@ -1,6 +1,5 @@
 package poe.level.data;
 
-import com.sun.istack.internal.NotNull;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -34,7 +33,6 @@ public class Util {
         return result;
     }
 
-    @NotNull
     public static HttpResponse httpToString(String url) {
         m_logger.info("Retrieving URL: " + url);
         HttpURLConnection connection = null;

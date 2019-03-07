@@ -12,11 +12,10 @@ import java.util.logging.Logger;
 public class GithubHelper {
     private static final Logger m_logger = Logger.getLogger(GithubHelper.class.getName());
 
-    // TODO - Protuhj - Need to match the file system prior to commit
-    /*private static final String GEMS_JSON_REMOTE_PATH = "/json/gems.json";
-    private static final String DATA_JSON_REMOTE_PATH = "/json/data.json";*/
-    private static final String GEMS_JSON_REMOTE_PATH = "/src/json/gems.json";
-    private static final String DATA_JSON_REMOTE_PATH = "/src/json/data.json";
+    private static final String GEMS_JSON_REMOTE_PATH = "/json/gems.json";
+    private static final String DATA_JSON_REMOTE_PATH = "/json/data.json";
+//    private static final String GEMS_JSON_REMOTE_PATH = "/src/json/gems.json";
+//    private static final String DATA_JSON_REMOTE_PATH = "/src/json/data.json";
     private final String m_repoOwner;
     private final String m_branch;
     private String m_branchSHA;

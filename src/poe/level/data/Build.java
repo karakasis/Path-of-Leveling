@@ -5,8 +5,6 @@
  */
 package poe.level.data;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 

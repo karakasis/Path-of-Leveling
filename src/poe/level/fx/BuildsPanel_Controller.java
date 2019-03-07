@@ -6,23 +6,18 @@
 package poe.level.fx;
 
 import com.jfoenix.controls.JFXButton;
-import com.sun.istack.internal.NotNull;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import poe.level.data.*;
 import poe.level.fx.SocketGroupsPanel_Controller.SocketGroupLinker;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
