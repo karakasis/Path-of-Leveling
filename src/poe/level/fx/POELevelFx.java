@@ -71,8 +71,9 @@ public class POELevelFx extends Application {
     public static String gemsTimeFileName;
     public static String dataJSONFileName;
     public static String dataTimeFileName;
-    public static String gemDir;
+    public static String gemsIconsLocation;
     public static ArrayList<Build> buildsLoaded;
+    private static final Logger m_logger = Logger.getLogger(POELevelFx.class.getName());
     private Stage zone;
     private Stage exp;
     private Stage main;
@@ -859,44 +860,32 @@ public class POELevelFx extends Application {
                 }
                 gem.buy.add(buy_info);
             }
-            /* uncomment to download images. also uncomment gemdir on top of class
-            //CHECK cached images
-            if (!new File(gemDir+""+gem.name+".png").exists()) {
-                BufferedImage image = null;
-                try {
 
-                    URL url = new URL(gem.iconPath);
-                    image = ImageIO.read(url);
-
-                    ImageIO.write(image, "png",new File(gemDir+""+gem.name+".png"));
-
-                    gem.gemIcon = SwingFXUtils.toFXImage(image, null);
-                } catch (IOException e) {
-                        e.printStackTrace();
+            BufferedImage img;
+            try {
+                File gemFile = new File(gemsIconsLocation + gem.name + ".png");
+                if (gemFile.exists()) {
+                    img = ImageIO.read(gemFile);
+                } else {
+                    m_logger.info("Gem " + gemFile.getName() + " doesn't exist in " + gemsIconsLocation + " downloading");
+                    img = downloadGemIcon(gem, true);
+                    if (img == null) {
+                        m_logger.info("Gem " + gemFile.getName() + " Failed to download from Github, trying " + gem.iconPath);
+                        img = downloadGemIcon(gem, false);
+                    }
                 }
-                System.err.println("Image not found and redownloaded: "+gemDir+""+gem.name+".png");
-
-            }else{
-                BufferedImage img = null;
-                    try {
-                        img = ImageIO.read(new File(gemDir+""+gem.name+".png"));
-
-                        gem.gemIcon = SwingFXUtils.toFXImage(img, null);
-                    }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                    }
-            }
-            */
-            BufferedImage img = null;
-                try {
-                    img = ImageIO.read(getClass().getResource("/gems/"+gem.name+".png"));
+                if (img != null) {
                     gem.gemIcon = SwingFXUtils.toFXImage(img, null);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    gem.resizeImage();
+                } else {
+                    m_logger.warning("Failed to get the gem icon for: " + gem.name);
+                    gem.gemIcon = null;
                 }
 
-            gem.resizeImage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
             //load tags - new feature
             gem.isActive = gemObj.getBoolean("isActive");
@@ -916,6 +905,25 @@ public class POELevelFx extends Application {
         System.out.println("Gem data loaded");
 
     }
+
+    private BufferedImage downloadGemIcon(Gem gem, boolean fromGithub) {
+        BufferedImage image = null;
+        try {
+            URL url;
+            if (fromGithub) {
+                url = new URL("https://raw.githubusercontent.com/" + REPO_OWNER + "/Path-of-Leveling/" + BRANCH_NAME + "/gems/" + gem.name.replaceAll(" ", "%20") + ".png");
+            } else {
+                url = new URL(gem.iconPath);
+            }
+            image = ImageIO.read(url);
+
+            ImageIO.write(image, "png", new File(gemsIconsLocation + gem.name + ".png"));
+        } catch (IOException e) {
+            m_logger.log(Level.SEVERE, "IOException while read/writing the new gem icon", e);
+        }
+        return image;
+    }
+
 
     private void logErrorGem(String gemName){
         System.out.println("Gem : " +gemName+ " had errors in loading.");
@@ -1401,7 +1409,19 @@ public class POELevelFx extends Application {
                         Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "Exception while attempting to set json directory as hidden", ex);
                     }
                 } else {
-                    System.err.println("Failed to create JSON directory!");
+                    m_logger.severe("Failed to create JSON directory!");
+                }
+            }
+            gemsIconsLocation = POELevelFx.directory + "\\Path of Leveling\\gems\\icons\\";
+            if (!new File(gemsIconsLocation).exists()) {
+                if (new File(gemsIconsLocation).mkdirs()) {
+                    try {
+                        Files.setAttribute(Paths.get(POELevelFx.directory + "\\Path of Leveling\\gems\\"), "dos:hidden", true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "Exception while attempting to set gems directory as hidden", ex);
+                    }
+                } else {
+                    m_logger.severe("Failed to create gems directory!");
                 }
             }
         } else {
@@ -1409,6 +1429,7 @@ public class POELevelFx extends Application {
             gemsTimeFileName = "json\\gemsjson.time";
             dataJSONFileName = "json\\data.json";
             dataTimeFileName = "json\\datajson.time";
+            gemsIconsLocation = "gems\\";
         }
 
     }
