@@ -142,6 +142,7 @@ public class AddGem_Controller implements Initializable {
         Zone zoneFound = null;
 
         boolean exactMatch = false;
+        // Loop over the list because case doesn't matter, and contains() will be false if the case doesn't match
         for (String str : m_gemNames) {
           if (str.equalsIgnoreCase(searchText)) {
             exactMatch = true;
@@ -552,7 +553,7 @@ public class AddGem_Controller implements Initializable {
                 otherVBox.getChildren().add(con);
                 controller.loadOther(map.get(a), a , this);
                 tablinkersOther.add(new TabLinker(controller,5, map.get(a)));
-                map.get(a).forEach(gem -> m_gemNames.add(gem.name));
+                map.get(a).forEach(gem -> m_gemNames.add(gem.getGemName()));
             } catch (IOException ex) {
                 Logger.getLogger(QuestSplitPanel_Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -574,7 +575,7 @@ public class AddGem_Controller implements Initializable {
                 whichActBox.getChildren().add(con);
                 controller.load(z, gemHash.get(z), this);
                 tablinkers.add(new TabLinker(controller,z, whichAct - 1));
-                gemHash.get(z).forEach(gem -> m_gemNames.add(gem.name));
+                gemHash.get(z).forEach(gem -> m_gemNames.add(gem.getGemName()));
             } catch (IOException ex) {
                 Logger.getLogger(QuestSplitPanel_Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
