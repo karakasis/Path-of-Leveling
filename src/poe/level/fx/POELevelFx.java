@@ -453,8 +453,8 @@ public class POELevelFx extends Application {
             try {
                 loadActsFromMemory();
                 loadGemsFromMemory();
+                //GemHolder.getInstance().init_remaining_in_pool();
                 loadBuildsFromMemory();
-
                 loadRecipesProperties();
             } catch (Exception e) {
                 Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "Error during Path of Leveling start up: " + e.getMessage(), e);

@@ -172,6 +172,24 @@ public class GemHolder {
         }
     }
 
+    public String linkNpcToTown(String npc){
+        switch (npc) {
+            case "Lilly Roth":
+                return "Lioneye's Watch";
+            case "Nessa":
+                return "Lioneye's Watch";
+            case "Yeena":
+                return "The Forest Encampment";
+            case "Clarissa":
+                return "The Sarn Encampment";
+            case "Petarus and Vanja":
+                return "Highgate";
+            case "Siosa":
+                return "The Library";
+        }
+        return "Unknown";
+    }
+
 
     public void init_remaining_in_pool(){
         /*
@@ -204,7 +222,7 @@ public class GemHolder {
                 rewardObj.put("quest_name", g.reward.quest_name);
                 rewardObj.put("npc",g.reward.npc);
                 rewardObj.put("act",g.reward.act);
-                rewardObj.put("town",g.reward.town);
+                rewardObj.put("town",linkNpcToTown(g.reward.npc));
                 JSONArray av_array = new JSONArray();
                 for(String s : g.reward.available_to){
                     av_array.put(s);
@@ -218,7 +236,7 @@ public class GemHolder {
                 bInfObj.put("quest_name", gInf.quest_name);
                 bInfObj.put("npc",gInf.npc);
                 bInfObj.put("act",gInf.act);
-                bInfObj.put("town",gInf.town);
+                bInfObj.put("town",linkNpcToTown(gInf.npc));
                 JSONArray av_array = new JSONArray();
                 for(String s : gInf.available_to){
                     av_array.put(s);
@@ -251,7 +269,7 @@ public class GemHolder {
         FileWriter fw = null;
 
         try {
-            fw = new FileWriter(POELevelFx.directory+"\\Path of Leveling\\Gems\\gems_new.json");
+            fw = new FileWriter(POELevelFx.directory+"\\Path of Leveling\\gems_new.json");
             bw = new BufferedWriter(fw);
             bw.write(gem_to_json);
             System.out.println("Done");
