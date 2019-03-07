@@ -39,10 +39,12 @@ public class UpdaterController implements Initializable {
     private JFXButton declineUpdate;
     @FXML
     private JFXButton cancelUpdate;
-    
-    
+    @FXML
+    private Label lblUpdate;
+
+
     public static long finalSize;
-    
+
     private static double SPACE_KB = 1024;
     private static double SPACE_MB = 1024 * SPACE_KB;
     private static double SPACE_GB = 1024 * SPACE_MB;
@@ -53,9 +55,9 @@ public class UpdaterController implements Initializable {
     public static boolean allowUpdate;
     public static boolean declUpdate;
     public static boolean waitForInput;
-    
+
     private POELevelFx root;
-    
+
     public static String bytes2String(long sizeInBytes) {
 
         NumberFormat nf = new DecimalFormat();
@@ -89,12 +91,12 @@ public class UpdaterController implements Initializable {
         allowUpdate = false;
         declUpdate = false;
         waitForInput= true;
-    }    
-    
+    }
+
     public void hookMain(POELevelFx root){
         this.root = root;
     }
-    
+
     @FXML
     private void accept(){
         cancelDownload = false;
@@ -102,22 +104,22 @@ public class UpdaterController implements Initializable {
         updatePane.setVisible(true);
         allowUpdate = true;
     }
-    
+
     @FXML
     private void decline(){
         allowUpdate = false;
         declUpdate = true;
     }
-    
+
     @FXML
     private void cancel(){
         askUpdatePane.setVisible(true);
         updatePane.setVisible(false);
         //and reset maybe idk or stop updating somehow
         cancelDownload = true;
-        
+
     }
-    
+
     public void notify(Double prog){
         if(!initialized){
             final_label.setText("/" + (bytes2String(finalSize)));
@@ -128,6 +130,6 @@ public class UpdaterController implements Initializable {
         Double progress_made = prog/finalSize;
         progressbar.setProgress(progress_made);
         //label.setText(prog.intValue() + " %");
-    }   
-    
+    }
+
 }

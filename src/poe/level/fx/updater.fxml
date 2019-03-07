@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="367.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.UpdaterController">
+<AnchorPane id="AnchorPane" prefHeight="367.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.UpdaterController">
    <children>
       <AnchorPane fx:id="askUpdatePane" layoutX="20.0" layoutY="21.0" prefHeight="80.0" prefWidth="540.0">
          <children>
-            <Label layoutX="167.0" layoutY="3.0" prefHeight="67.0" prefWidth="207.0" text="Version 0.7-Alpha is available. Do you wish to update? (27MB)" textAlignment="CENTER" textFill="#432da1" wrapText="true">
+            <Label fx:id="lblUpdate" layoutX="167.0" layoutY="3.0" prefHeight="67.0" prefWidth="207.0" text="Version 0.7-Alpha is available. Do you wish to update? (27MB)" textAlignment="CENTER" textFill="#432da1" wrapText="true">
                <font>
                   <Font name="Alegreya Sans SC" size="15.0" />
                </font>
