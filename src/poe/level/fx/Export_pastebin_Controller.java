@@ -8,7 +8,6 @@ package poe.level.fx;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,10 +19,9 @@ import com.besaba.revonline.pastebinapi.paste.PasteExpire;
 import com.besaba.revonline.pastebinapi.paste.PasteVisiblity;
 import com.besaba.revonline.pastebinapi.response.Response;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Paint;
 
 /**
  * FXML Controller class
@@ -32,12 +30,20 @@ import javafx.scene.layout.Pane;
  */
 public class Export_pastebin_Controller implements Initializable {
 
-    private String pastebinURL;
+    private String pastebinURL = "https://www.pastebin.com/";
     private String export_data;
-    private boolean successful = false;
+
+    private final String EXPORT_DATA_CLIPBOARD = "Export-Data has successfully been copied to your Clipboard. You can now open pastebin and paste it manually!";
+    private final String LINK_CLIPBOARD = "Pastebin link has successfully been copied to your Clipboard";
+    private final String LINK_CREATED = "Your Pastebin Link has successfully been created! You can now copy it to your clipboard or open it directly!";
+    private final String PASTEBIN_LIMIT = "Unfortunately the limit of pastebins in 24h has been reached. You can still copy the raw export data and paste it manually to pastebin!";
+    private final String GENERAL_ERROR = "Something went wrong!";
+
+    private final javafx.scene.paint.Paint COLOR_SUCCESS = javafx.scene.paint.Paint.valueOf("#45a12c");
+    private final javafx.scene.paint.Paint COLOR_ERROR = Paint.valueOf("#ff3300");
 
     @FXML
-    private AnchorPane verify_clipboard;
+    private Label message_label;
 
     @FXML
     private void copy() {
@@ -46,31 +52,27 @@ public class Export_pastebin_Controller implements Initializable {
 
         if (this.export_data == null) {
             return;
-        } else if (this.pastebinURL == null) {
+        } else if (this.pastebinURL.equals("https://www.pastebin.com/")) {
             // Copies Raw Export-Data
             selection = new StringSelection(this.export_data);
             clipboard.setContents(selection, selection);
-            inflateSuccessMessage();
+            showMessage(EXPORT_DATA_CLIPBOARD, true);
         } else {
             // Copies pastebin-URL
             selection = new StringSelection(this.pastebinURL);
             clipboard.setContents(selection, selection);
-            inflateSuccessMessage();
+            showMessage(LINK_CLIPBOARD, true);
         }
     }
 
     @FXML
     private void openPastebin() {
-        if(successful) {
-            openWebpage(pastebinURL);
-        }else {
-            openWebpage("https://www.pastebin.com/");
-        }
+        openWebpage(pastebinURL);
     }
 
-    public void initPasteText(String export_data){
-        if(export_data == null || export_data.isEmpty()) {
-            inflateErrorMessage();
+    public void initPasteText(String export_data) {
+        if (export_data == null || export_data.isEmpty()) {
+            showMessage(GENERAL_ERROR, false);
             return;
         } else {
             this.export_data = export_data;
@@ -100,11 +102,11 @@ public class Export_pastebin_Controller implements Initializable {
             System.out.println(response);
 
             // "Post limit, maximum pastes per 24h reached"
-            if(response.startsWith("Post")) {
-                inflatePastebinLimit();
+            if (response.startsWith("Post")) {
+                showMessage(PASTEBIN_LIMIT, false);
                 return;
             }
-            this.successful = true;
+            showMessage(LINK_CREATED, true);
             this.pastebinURL = response;
         }
     }
@@ -117,7 +119,7 @@ public class Export_pastebin_Controller implements Initializable {
         // TODO
     }
 
-    public void openWebpage(String urlString) {
+    private void openWebpage(String urlString) {
         try {
             Desktop.getDesktop().browse(new URL(urlString).toURI());
         } catch (Exception e) {
@@ -125,41 +127,13 @@ public class Export_pastebin_Controller implements Initializable {
         }
     }
 
-    private void inflatePastebinLimit() {
-        Pane newLoadedPane = null;
-        try {
-            newLoadedPane = FXMLLoader.load(getClass().getResource("pastebin_limit.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void showMessage(String message, boolean successful) {
+        if (successful) {
+            message_label.setTextFill(COLOR_SUCCESS);
+        } else {
+            message_label.setTextFill(COLOR_ERROR);
         }
-        verify_clipboard.getChildren().clear();
-        verify_clipboard.getChildren().add(newLoadedPane);
-    }
 
-    public void inflateErrorMessage() {
-        Pane newLoadedPane = null;
-        try {
-            newLoadedPane = FXMLLoader.load(getClass().getResource("generatePastebinError.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        verify_clipboard.getChildren().clear();
-        verify_clipboard.getChildren().add(newLoadedPane);
-    }
-
-    private void inflateSuccessMessage() {
-
-        Pane newLoadedPane = null;
-        try {
-            if(successful) {
-                newLoadedPane = FXMLLoader.load(getClass().getResource("clipboard_verify_link.fxml"));
-            }else{
-                newLoadedPane = FXMLLoader.load(getClass().getResource("clipboard_verify_data.fxml"));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        verify_clipboard.getChildren().clear();
-        verify_clipboard.getChildren().add(newLoadedPane);
+        message_label.setText(message);
     }
 }

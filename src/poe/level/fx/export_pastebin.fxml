@@ -25,7 +25,14 @@
       </Label>
       <Separator layoutX="12.0" layoutY="100.0" prefHeight="6.0" prefWidth="438.0" />
       <Separator layoutX="12.0" layoutY="54.0" prefHeight="6.0" prefWidth="438.0" />
-      <AnchorPane id="AnchorPane" fx:id="verify_clipboard" layoutX="75.0" layoutY="122.0" prefHeight="133.0" prefWidth="313.0" />
+      <AnchorPane id="AnchorPane" fx:id="verify_clipboard" layoutX="75.0" layoutY="122.0" prefHeight="133.0" prefWidth="313.0">
+         <children>
+            <Label fx:id="message_label" prefHeight="142.0" prefWidth="313.0" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Alegreya Sans SC" size="15.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
       <JFXButton buttonType="RAISED" layoutX="344.0" layoutY="68.0" onAction="#openPastebin" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Open" textFill="WHITE">
          <tooltip>
             <Tooltip text="Opens pastebin.com" />
