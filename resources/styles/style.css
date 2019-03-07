@@ -1,23 +1,28 @@
 {
+	/* color ascendancy banner for white skin #656565 */
+	/* color ascendancy banner for dark skin #9f9f9f */
     color: transparent;
-    //background-color:  rgba(58, 44, 189, 0.4); // violet
-    background-color:  rgba(0, 150, 201, 0.4); // blue
+	border-banners-color: rgba(101,101,101, 1); /* gray*/
+    /*background-color:  rgba(58, 44, 189, 0.4);  /* violet */
+    background-color:  rgba(0, 150, 201, 0.4); /* blue*/
     color2: transparent;
     background-color2:  rgba(215, 44, 44, 0.4);
     
     background-pane-color-1: black;
     background-pane-color-2: yellow;
     color3: transparent;
+	main-dark-color: rgba(47,49,54,255);
+	second-dark-color: rgba(54,57,63,255);
+	/*#484C52*/
+	light-dark-color: rgba(72,76,82,255);
+	border-color-red: #c13a5e;
 }
-
+/*
 .buildPanel{
-    -fx-border-style: solid;
+    /*-fx-border-style: solid;
+	/*-fx-border-style-color: border-banners-color;
     -fx-background-color: color;
-}
-
-.buildPanel:hover{
-    -fx-background-color: background-color;
-}
+}*/
 
 .gemPanel{
     -fx-background-color: color2;
@@ -34,12 +39,12 @@
 
 .jfx-tab-pane .headers-region
 {
-  -fx-background-color: #3F826D;
+  -fx-background-color: second-dark-color;
 }
 
 .jfx-tab-pane .tab-header-background
 {
-  -fx-background-color: #3F826D;
+  -fx-background-color: second-dark-color;
 }
 
 .jfx-tab-pane .tab-header-area .jfx-rippler
@@ -58,4 +63,298 @@
 
 .backgroundPane{
     -fx-background-color: color3;
+}
+
+/* File style.css */
+
+.searchField {
+	-fx-background-color: transparent;
+	-fx-border-style: solid;
+	-fx-border-width: 0 0 1 0;
+	-fx-border-color: second-dark-color;
+}
+.searchField:focused {
+    -fx-border-color: orange;
+}
+
+/*
+ * This is an adjustment of the original modena.css for a consistent dark theme.
+ * Original modena.css here: https://gist.github.com/maxd/63691840fc372f22f470.
+ */
+
+/* Redefine base colors */
+.root {
+	-fx-font-size: 14px;
+	-fx-font-family: "Trebuchet MS";
+	/* #2F3136 outer
+		#36393F inner
+    -fx-background: rgba(60, 63, 65, 255);
+	*/ 
+    -fx-base: main-dark-color;
+    -fx-background: main-dark-color;
+    -fx-background-color: main-dark-color;
+
+    /* make controls (buttons, thumb, etc.) slightly lighter */
+    -fx-color: second-dark-color;
+
+    /* text fields and table rows background */
+    -fx-control-inner-background: second-dark-color;
+    /* version of -fx-control-inner-background for alternative rows */
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 2.5%);
+
+    /* text colors depending on background's brightness */
+    -fx-light-text-color: rgb(220, 220, 220);
+    -fx-mid-text-color: rgb(100, 100, 100);
+    -fx-dark-text-color: rgb(20, 20, 20);
+
+    /* A bright blue for highlighting/accenting objects.  For example: selected
+     * text; selected items in menus, lists, trees, and tables; progress bars */
+    -fx-accent: rgb(0, 80, 100);
+
+    /* color of non-focused yet selected elements */
+    -fx-selection-bar-non-focused: rgb(50, 50, 50);
+}
+
+/* Fix derived prompt color for text fields */
+.text-input {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background, +50%);
+}
+
+/* Keep prompt invisible when focused (above color fix overrides it) */
+.text-input:focused {
+    -fx-prompt-text-fill: transparent;
+}
+.jfx-dialog-overlay-pane {
+    -fx-background-color: TRANSPARENT;
+}
+.jfx-dialog-overlay-pane > StackPane {
+    -fx-background-color: main-dark-color;
+}
+
+.jfx-combo-box {
+    -jfx-focus-color: #4059A9;
+    -jfx-unfocus-color: #4d4d4d;
+    -fx-prompt-text-fill: #4d4d4d;
+}
+
+.jfx-combo-box > .input-line {
+    -fx-background-color: white;
+    -fx-pref-height: 1px;
+    -fx-translate-y: 1px;
+}
+
+.jfx-combo-box > .input-focused-line {
+    -fx-background-color: -jfx-focus-color;
+    -fx-pref-height: 2px;
+}
+
+.jfx-combo-box,
+.jfx-combo-box:focused,
+.jfx-combo-box:editable,
+.jfx-combo-box:editable:focused {
+    -fx-background-color: TRANSPARENT, TRANSPARENT, TRANSPARENT, TRANSPARENT;
+    -fx-background-radius: 3px;
+    -fx-background-insets: 0px;
+}
+
+.jfx-combo-box .combo-box-button-container {
+    -fx-background-color: TRANSPARENT;
+}
+
+.jfx-combo-box > .arrow-button,
+.jfx-combo-box:editable > .arrow-button,
+.jfx-combo-box:editable:focused > .arrow-button {
+    -fx-background-color: TRANSPARENT;
+}
+
+.jfx-combo-box:error {
+    -jfx-focus-color: #D34336;
+    -jfx-unfocus-color: #D34336;
+}
+
+.jfx-combo-box .error-label {
+    -fx-text-fill: #D34336;
+}
+
+.jfx-combo-box .error-icon {
+    -fx-fill: #D34336;
+}
+
+HBox, VBox {
+    -fx-background-color: second-dark-color;
+}
+
+ScrollPane {
+	-fx-background-color: transparent;
+}
+/****************************************************************
+ 
+  Spinner Skin  
+ 
+****************************************************************/
+.spinner {
+    -fx-prompt-text-fill: black;
+    -fx-text-fill: black;
+    -fx-background-color: none;
+
+    -fx-padding: 0 0 3 0;   
+}
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: transparent;
+}
+
+.spinner .increment-arrow-button .increment-arrow,
+.spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: main-dark-color;
+    -fx-font-size: 30px;
+}
+
+.spinner .text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #bdbdbd;
+}
+/****************************************************************
+ 
+  List view Skin 
+ 
+****************************************************************/
+.list-view {
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: background-color;
+}
+
+
+/****************************************************************
+ 
+  Toggle button Skin 
+ 
+****************************************************************/
+/* custom launcher toggle */
+.jfx-toggle-buttonCustom,
+.jfx-toggle-buttonCustom:armed,
+.jfx-toggle-buttonCustom:hover,
+.jfx-toggle-buttonCustom:focused,
+.jfx-toggle-buttonCustom:selected,
+.jfx-toggle-buttonCustom:focused:selected {
+    -fx-background-color: TRANSPARENT, TRANSPARENT, TRANSPARENT, TRANSPARENT;
+    -fx-background-radius: 3px;
+    -fx-background-insets: 0px;
+
+    -jfx-toggle-color: #ba6d51;
+    -jfx-untoggle-color: #fafafa;
+    -jfx-toggle-line-color: #c3bca0;
+    -jfx-untoggle-line-color: #999999;
+    -jfx-size: 10;
+}
+
+.jfx-toggle-button,
+.jfx-toggle-button:armed,
+.jfx-toggle-button:hover,
+.jfx-toggle-button:focused,
+.jfx-toggle-button:selected,
+.jfx-toggle-button:focused:selected {
+    -fx-background-color: TRANSPARENT, TRANSPARENT, TRANSPARENT, TRANSPARENT;
+    -fx-background-radius: 3px;
+    -fx-background-insets: 0px;
+
+    -jfx-toggle-color: #645d4b;
+    -jfx-untoggle-color: #FAFAFA;
+    -jfx-toggle-line-color: derive(-jfx-toggle-color, 65%);
+    -jfx-untoggle-line-color: #999999;
+    -jfx-size: 10;
+}
+
+
+.jfx-toggle-button Line {
+    -fx-stroke: -jfx-untoggle-line-color;
+}
+.jfx-toggle-button:selected Line{
+    -fx-stroke: -jfx-toggle-line-color;
+}
+
+.jfx-toggle-button Circle{
+    -fx-fill: -jfx-untoggle-color;
+}
+
+.jfx-toggle-button:selected Circle{
+    -fx-fill: -jfx-toggle-color;
+}
+
+.jfx-toggle-button .jfx-rippler {
+    -jfx-rippler-fill: -jfx-untoggle-line-color;
+}
+
+.jfx-toggle-button:selected .jfx-rippler {
+    -jfx-rippler-fill: -jfx-toggle-line-color;
+}
+
+/****************************************************************
+ 
+  ScrollBar Skin  
+ 
+****************************************************************/
+.scroll-bar{
+ -fx-background-color: transparent;
+ /*-fx-background-radius: 2em;*/
+}
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+ -fx-background-color: transparent;
+ -fx-border-color:transparent;
+ -fx-background-radius: 2em;
+}
+.scroll-bar:vertical .track-background,
+.scroll-bar:horizontal .track-background {
+ -fx-background-color: transparent;
+ -fx-background-insets: 0;
+ -fx-background-radius: 2em;
+}
+.scroll-bar:horizontal .thumb {
+ -fx-background-color: rgb(211,211,211);
+ -fx-background-insets: 4 0 4 0;
+ -fx-background-radius: 2em;
+}
+.scroll-bar:vertical .thumb {
+ -fx-background-color: rgb(211,211,211);
+ -fx-background-insets: 0 4 0 4;
+ -fx-background-radius: 2em;
+}
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+ -fx-background-color: rgb(231,231,231);
+}
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed {
+ -fx-background-color: rgb(255,255,255);
+}
+.scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+ -fx-background-color:transparent;
+ -fx-background-radius: 2em;
+ -fx-padding: 5;
+}
+.scroll-bar:horizontal .increment-button, .scroll-bar:horizontal .decrement-button {
+ -fx-background-color:transparent;
+ -fx-background-radius: 2em;
+ -fx-padding: 5;
+}
+.scroll-bar:horizontal .increment-arrow {
+ -fx-background-color: rgb(96,96,96);
+}
+.scroll-bar:vertical .increment-arrow {
+ -fx-background-color: rgb(96,96,96);
+}
+.scroll-bar:horizontal .decrement-arrow {
+ -fx-background-color: rgb(96,96,96);
+}
+.scroll-bar:vertical .decrement-arrow {
+ -fx-background-color: rgb(96,96,96);
+}
+.scroll-bar:vertical:focused,
+.scroll-bar:horizontal:focused {
+ -fx-background-color: transparent,rgb(96,96,96),rgb(96,96,96);
 }

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="rootPane" prefHeight="675.0" prefWidth="580.0" style="-fx-background-color: rgba(0, 0, 0, 0);" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Main_Controller">
+<StackPane fx:id="rootPane" prefHeight="675.0" prefWidth="580.0" style="-fx-background-color: rgba(0, 0, 0, 0);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Main_Controller">
    <children>
       <AnchorPane id="AnchorPane" layoutX="30.0" prefHeight="675.0" prefWidth="299.0" style="-fx-background-color: rgba(0, 0, 0, 0);">
          <children>
@@ -40,7 +40,7 @@
                   </Lighting>
                </effect>
             </Label>
-            <JFXToggleButton fx:id="zones" layoutX="44.0" layoutY="462.0" selected="true" text="Zones" textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0">
+            <JFXToggleButton fx:id="zones" layoutX="44.0" layoutY="462.0" selected="true" styleClass="jfx-toggle-buttonCustom" text="Zones" textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0">
                <font>
                   <Font name="Fontin Regular" size="18.0" />
                </font>
@@ -48,7 +48,7 @@
                   <Tooltip text="Shows Zone-Layouts, Recipes, Passive Points and Trials" />
                </tooltip>
             </JFXToggleButton>
-            <JFXToggleButton layoutX="44.0" layoutY="525.0" selected="true" text="XP Indicator" textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0" fx:id="xp">
+            <JFXToggleButton layoutX="44.0" layoutY="525.0" selected="true" styleClass="jfx-toggle-buttonCustom" text="XP Indicator" textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0" fx:id="xp">
                <font>
                   <Font name="Fontin Regular" size="18.0" />
                </font>
@@ -56,7 +56,7 @@
                   <Tooltip text="Shows your current level, the average level of monsters in the zone and how much XP you are receiving" />
                </tooltip>
             </JFXToggleButton>
-            <JFXToggleButton fx:id="leveling" graphicTextGap="5.0" layoutX="44.0" layoutY="587.0" selected="true" text="Leveling " textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0">
+            <JFXToggleButton fx:id="leveling" graphicTextGap="5.0" layoutX="44.0" layoutY="587.0" selected="true" styleClass="jfx-toggle-buttonCustom" text="Leveling " textFill="#c3bca0" toggleColor="#645d4b" toggleLineColor="#c3bca0">
                <font>
                   <Font name="Fontin Regular" size="18.0" />
                </font>

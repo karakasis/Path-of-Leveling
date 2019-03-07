@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" maxWidth="111.0" minWidth="111.0" prefHeight="47.0" prefWidth="111.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.FilterTab_Controller">
+   <children>
+      <Button fx:id="tab" layoutY="15.0" maxWidth="102.0" minWidth="102.0" mnemonicParsing="false" prefWidth="102.0" text="Minion">
+         <font>
+            <Font name="Alegreya Sans SC Light" size="16.0" />
+         </font>
+      </Button>
+      <JFXButton fx:id="tabClose" contentDisplay="GRAPHIC_ONLY" layoutX="90.0" layoutY="9.0" onAction="#triggerClose">
+         <graphic>
+            <ImageView fx:id="tabImage" fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../icons/icons8-delete-64%20(1).png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets top="-3.0" />
+         </padding>
+      </JFXButton>
+   </children>
+</AnchorPane>
