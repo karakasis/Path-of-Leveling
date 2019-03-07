@@ -769,7 +769,7 @@ public class MainApp_Controller implements Initializable {
 
     @FXML
     private void getPOB(){
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("clipboard_verify.fxml"));
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("clipboard_verify_link.fxml"));
             AnchorPane con = null;
             try {
                 con = (AnchorPane) loader.load();
