@@ -3,8 +3,7 @@ dist/
 .DS_Store
 
 out/
-.gitgnore
 Path-of-Leveling.iml
 
-.idea/
+.idea/*
 .idea/workspace.xml
