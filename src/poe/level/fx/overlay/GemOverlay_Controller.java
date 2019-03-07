@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import poe.level.data.Controller;
 import poe.level.data.Gem;
 import poe.level.fx.Preferences_Controller;
 
@@ -35,23 +36,29 @@ public class GemOverlay_Controller implements Initializable {
         final Delta dragDelta = new Delta();
         gem_overlay_container.setOnMousePressed(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
-            // record a delta distance for the drag and drop operation.
-            dragDelta.x = stage.getX() - mouseEvent.getScreenX();
-            dragDelta.y = stage.getY() - mouseEvent.getScreenY();
+              if(!Controller.LOCK) {
+                  // record a delta distance for the drag and drop operation.
+                  dragDelta.x = stage.getX() - mouseEvent.getScreenX();
+                  dragDelta.y = stage.getY() - mouseEvent.getScreenY();
+              }
           }
         });
         gem_overlay_container.setOnMouseDragged(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
-            stage.setX(mouseEvent.getScreenX() + dragDelta.x);
-            stage.setY(mouseEvent.getScreenY() + dragDelta.y);
-            GemOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
-            GemOverlay_Stage.prefY = mouseEvent.getScreenY() + dragDelta.y;
+              if(!Controller.LOCK) {
+                  stage.setX(mouseEvent.getScreenX() + dragDelta.x);
+                  stage.setY(mouseEvent.getScreenY() + dragDelta.y);
+                  GemOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
+                  GemOverlay_Stage.prefY = mouseEvent.getScreenY() + dragDelta.y;
+              }
           }
         });
         gem_overlay_container.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
-                //update the prop file
-                Preferences_Controller.updateGemsPos(GemOverlay_Stage.prefX, GemOverlay_Stage.prefY);
+                if(!Controller.LOCK) {
+                    //update the prop file
+                    Preferences_Controller.updateGemsPos(GemOverlay_Stage.prefX, GemOverlay_Stage.prefY);
+                }
             }
         });
     }

@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -45,17 +46,19 @@ public class GemOverlay_Stage extends Stage{
     HashMap<Integer,ArrayList<Gem>> gemsOnLevelsMap;
     HashMap<Gem,SocketGroup> gemToSocket_map;
     GemOverlay_Controller controller;
+    GemOverlayBeta_Controller controller_beta;
     
     
     public static double prefX;
     public static double prefY;
     
     private boolean isPlaying;
-    
-    public GemOverlay_Stage(Build build){
+    private boolean betaUI;
+
+    public GemOverlay_Stage(Build build,boolean betaUi){
         
         generateLevels(build);
-        
+        betaUI = betaUi;
         this.setAlwaysOnTop(true);
         this.initStyle(StageStyle.TRANSPARENT);
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -74,7 +77,11 @@ public class GemOverlay_Stage extends Stage{
             prefY = Preferences_Controller.gem_overlay_pos[1];
         }
         gemsOnThisLevel_local = new ArrayList<>();
-        loadFXML();
+        if(!betaUi)
+            loadFXML();
+        else
+            loadFXMLBeta();
+
         this.setOnCloseRequest(event -> {
             System.out.println("Closing gem:: ");
             if(saveBuildsToMemory()){
@@ -173,6 +180,27 @@ public class GemOverlay_Stage extends Stage{
         
         this.show();
     }
+
+    public void loadFXMLBeta(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/GemOverlayBeta.fxml"));
+        StackPane ap = null;
+        try {
+            ap = loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(GemOverlay_Stage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        controller_beta = loader.<GemOverlayBeta_Controller>getController();
+
+        Scene scene = new Scene(ap);
+        scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+        scene.setFill(Color.TRANSPARENT);
+
+
+        this.setScene(scene);
+        controller_beta.hookStage(this);
+
+        this.show();
+    }
     
     public void animate(){
         
@@ -222,7 +250,7 @@ public class GemOverlay_Stage extends Stage{
     
     public void update(int level){
         if(level_list.contains(level) && !isPlaying){
-            controller.reset();
+            reset();
             gemsOnThisLevel_local.clear();
             gemsOnThisLevel_local = new ArrayList<>(gemsOnLevelsMap.get(level)); //very important or it will get deleted in the map
             for(Gem g : gemsOnThisLevel_local){
@@ -231,19 +259,19 @@ public class GemOverlay_Stage extends Stage{
                     //IF THIS GEM IS AN ACTIVE GEM AND ITS SOCKET GROUP REPLACES ANOTHER ONE
                     Gem add_this = g;
                     Gem remove_this = gemToSocket_map.get(g).getGroupThatReplaces().getActiveGem();
-                    controller.socketGroupReplace(add_this,remove_this);
+                    sg_replace(add_this,remove_this);
                     
                 }
                 if(g.replaces){
                     Gem add_this = g;
                     Gem remove_this = g.replacesGem;
-                    controller.gemReplace(add_this,remove_this,gemToSocket_map.get(g).getActiveGem());
+                    g_replace(add_this,remove_this,gemToSocket_map.get(g).getActiveGem());
                     //IF THIS GEM replaces another gem
                 }else{
-                    controller.addGem(g,gemToSocket_map.get(g).getActiveGem());
+                    g_add(g,gemToSocket_map.get(g).getActiveGem());
                 }
             }
-            
+            init_beta_ui_first_panel();
             animate();
         }else if(!level_list.contains(level)){
             System.err.println("No gems available in this level : "+ level);
@@ -255,30 +283,67 @@ public class GemOverlay_Stage extends Stage{
     public void event_remind(){
         if(!isPlaying){
             System.err.println("Reminding gems.");
-            controller.reset();
+            reset();
             for(Gem g : gemsOnThisLevel_local){
                 //THE REPLACE IS HERE for socket group
                 if(gemToSocket_map.get(g).getActiveGem().equals(g) && gemToSocket_map.get(g).replacesGroup()){
                     //IF THIS GEM IS AN ACTIVE GEM AND ITS SOCKET GROUP REPLACES ANOTHER ONE
                     Gem add_this = g;
                     Gem remove_this = gemToSocket_map.get(g).getGroupThatReplaces().getActiveGem();
-                    controller.socketGroupReplace(add_this,remove_this);
+                    sg_replace(add_this,remove_this);
                     
                 }
                 if(g.replaces){
                     Gem add_this = g;
                     Gem remove_this = g.replacesGem;
-                    controller.gemReplace(add_this,remove_this,gemToSocket_map.get(g).getActiveGem());
+                    g_replace(add_this,remove_this,gemToSocket_map.get(g).getActiveGem());
                     //IF THIS GEM replaces another gem
                 }else{
-                    controller.addGem(g,gemToSocket_map.get(g).getActiveGem());
+                    g_add(g,gemToSocket_map.get(g).getActiveGem());
                 }
             }
-            
+
+            init_beta_ui_first_panel();
             animate();
         }else{
             System.err.println("Cant remind animation is still playing.");
         }
     }
-    
+
+    public void init_beta_ui_first_panel(){
+        if(betaUI) controller_beta.initPanel();
+    }
+
+    public void slideBeta(int slideDirection){
+        //0 is left 1 is right
+        controller_beta.slide(slideDirection);
+    }
+
+    private void reset(){
+        if(betaUI)
+        controller_beta.reset();
+        else
+        controller.reset();
+    }
+
+    private void sg_replace(Gem add, Gem remove){
+        if(betaUI)
+            controller_beta.socketGroupReplace(add,remove);
+        else
+            controller.socketGroupReplace(add,remove);
+    }
+
+    private void g_replace(Gem add, Gem remove, Gem socketgroup){
+        if(betaUI)
+            controller_beta.gemReplace(add,remove,socketgroup);
+        else
+            controller.gemReplace(add,remove,socketgroup);
+    }
+
+    private void g_add(Gem add, Gem socketgroup){
+        if(betaUI)
+            controller_beta.addGem(add,socketgroup);
+        else
+            controller.addGem(add,socketgroup);
+    }
 }

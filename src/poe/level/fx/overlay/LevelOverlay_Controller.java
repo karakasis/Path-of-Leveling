@@ -48,21 +48,27 @@ public class LevelOverlay_Controller implements Initializable {
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
             // record a delta distance for the drag and drop operation.
-            dragDelta.x = stage.getX() - mouseEvent.getScreenX();
-            dragDelta.y = stage.getY() - mouseEvent.getScreenY();
+              if(!Controller.LOCK) {
+                  dragDelta.x = stage.getX() - mouseEvent.getScreenX();
+                  dragDelta.y = stage.getY() - mouseEvent.getScreenY();
+              }
           }
         });
         root.setOnMouseDragged(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
-            stage.setX(mouseEvent.getScreenX() + dragDelta.x);
-            stage.setY(mouseEvent.getScreenY() + dragDelta.y);
-            LevelOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
-            LevelOverlay_Stage.prefY = mouseEvent.getScreenY() + dragDelta.y;
+              if(!Controller.LOCK) {
+                  stage.setX(mouseEvent.getScreenX() + dragDelta.x);
+                  stage.setY(mouseEvent.getScreenY() + dragDelta.y);
+                  LevelOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
+                  LevelOverlay_Stage.prefY = mouseEvent.getScreenY() + dragDelta.y;
+              }
           }
         });
         root.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
-                Preferences_Controller.updateLevelPos(LevelOverlay_Stage.prefX, LevelOverlay_Stage.prefY);
+                if(!Controller.LOCK) {
+                    Preferences_Controller.updateLevelPos(LevelOverlay_Stage.prefX, LevelOverlay_Stage.prefY);
+                }
             }
         });
     }

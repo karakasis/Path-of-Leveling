@@ -269,7 +269,6 @@ public class GemEntry_Controller implements Initializable {
         selectGemButton.setText(g.getGemName());
 
         selectedGem = g.dupeGem();
-        levelSlider.getValueFactory().setValue(selectedGem.getLevelAdded());
         if(selectedGem.act == 0){
             act.setText("Drop only");
         }else{
@@ -287,6 +286,7 @@ public class GemEntry_Controller implements Initializable {
 
 
         parent.updateGemData(selectedGem);
+        levelSlider.getValueFactory().setValue(selectedGem.getLevelAdded());
     }
 
     public void onGemSelect(){

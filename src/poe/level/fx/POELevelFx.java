@@ -214,6 +214,7 @@ public class POELevelFx extends Application {
             hotkeyDefaults.put("recipe-hotkey-preview","F7");
             hotkeyDefaults.put("level-hotkey-beta-next","F8");
             hotkeyDefaults.put("level-hotkey-beta-previous","F9");
+            hotkeyDefaults.put("lock-keybinds","F12");
 
             if (!new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").isFile()) {
             new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").createNewFile();
@@ -282,6 +283,11 @@ public class POELevelFx extends Application {
                             ,"level-hotkey-beta-previous"
                             ,hotkeyDefaults.get("level-hotkey-beta-previous")
                     );
+                Preferences_Controller.lock_keybinds_hotkey_key = setKeybinds(
+                        prop
+                        ,"lock-keybinds"
+                        ,hotkeyDefaults.get("lock-keybinds")
+                );
 
 
                     //new changes
@@ -312,9 +318,6 @@ public class POELevelFx extends Application {
 
                   Properties prop = new Properties();
                   InputStream input = null;
-                  String zones_hotkey_show_hide = "";
-                  String level_hotkey_remind = "";
-                  String recipe_hotkey_mark = "";
                   try {
 
                           input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
@@ -429,6 +432,11 @@ public class POELevelFx extends Application {
                               prop
                               ,"level-hotkey-beta-previous"
                               ,hotkeyDefaults.get("level-hotkey-beta-previous")
+                      );
+                      Preferences_Controller.lock_keybinds_hotkey_key = loadKeybinds(
+                              prop
+                              ,"lock-keybinds"
+                              ,hotkeyDefaults.get("lock-keybinds")
                       );
 
                   } catch (IOException ex) {

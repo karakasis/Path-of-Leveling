@@ -98,16 +98,19 @@ public class Controller {
 
     public void gem_gui_next_event(){
         if(Preferences_Controller.gem_UI_toggle){
-            System.out.println("consumed_next");
+            level_stage.slideBeta(1); //next goes to right
+            //System.out.println("consumed_next");
         }
     }
 
     public void gem_gui_previous_event(){
         if(Preferences_Controller.gem_UI_toggle){
-            System.out.println("consumed_previous");
+            level_stage.slideBeta(0); //previous goes to left
+            //System.out.println("consumed_previous");
         }
     }
 
+    public static boolean LOCK; //locs all overlays and keybinds
     public int playerLevel;
     public String playerName;
     public int monsterLevel;
@@ -169,6 +172,7 @@ public class Controller {
 
     //public Controller(Stage zone, Stage xp, Stage level, Build build) {
     public Controller(boolean zone_b, boolean xp, boolean level, Build build) {
+        LOCK = false;
         instance = this;
         if(zone_b){
             zone_stage = new ZoneOverlay_Stage();
@@ -177,7 +181,7 @@ public class Controller {
             xp_stage = new LevelOverlay_Stage();
         }
         if(level){
-            level_stage = new GemOverlay_Stage(build);
+            level_stage = new GemOverlay_Stage(build,Preferences_Controller.gem_UI_toggle);
         }
 
         placeholder_stageGameMode = new PlaceholderStageGameMode(this);
