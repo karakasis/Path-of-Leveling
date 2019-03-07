@@ -1,6 +1,7 @@
 {
 	/* color ascendancy banner for white skin #656565 */
 	/* color ascendancy banner for dark skin #9f9f9f */
+	/* dark tab color  #282B30 */
     color: transparent;
 	border-banners-color: rgba(101,101,101, 1); /* gray*/
     /*background-color:  rgba(58, 44, 189, 0.4);  /* violet */
@@ -84,7 +85,7 @@
 
 /* Redefine base colors */
 .root {
-	-fx-font-size: 14px;
+	-fx-font-size: 13px;
 	-fx-font-family: "Trebuchet MS";
 	/* #2F3136 outer
 		#36393F inner

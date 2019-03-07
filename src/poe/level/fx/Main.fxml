@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.image.Image?>
@@ -20,7 +21,7 @@
          <children>
             <ImageView fitHeight="280.0" fitWidth="390.0" layoutX="25.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../icons/humility.png" />
+                  <Image url="@../../../icons/The_Explorer_card_art.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="668.0" fitWidth="440.0" layoutX="74.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -30,13 +31,16 @@
             </ImageView>
             <Label alignment="CENTER" layoutX="70.0" layoutY="27.0" prefHeight="32.0" prefWidth="299.0" text="Path of Leveling" textAlignment="CENTER">
                <font>
-                  <Font name="Fontin Regular" size="26.0" />
+                  <Font name="Fontin SmallCaps" size="26.0" />
                </font>
                <effect>
-                  <Lighting bumpInput="$null">
+                  <Lighting>
                      <light>
-                        <Light.Distant />
+                        <Light.Distant color="#5e5a5a" />
                      </light>
+                     <bumpInput>
+                        <Bloom />
+                     </bumpInput>
                   </Lighting>
                </effect>
             </Label>
