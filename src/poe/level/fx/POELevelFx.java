@@ -29,6 +29,7 @@ import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.application.Preloader;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.text.Font;
@@ -52,13 +53,18 @@ import poe.level.keybinds.GlobalKeyListener;
  */
 public class POELevelFx extends Application {
 
+    /***************************************************************************
+     * Change to true if a build is being pushed to the master branch for public release.
+     ***************************************************************************/
+    public static final boolean MASTER_RELEASE = false;
+    /******************************************************/
 
 
     public static boolean DEBUG = false;
 
     private static final String DEBUG_BRANCH_NAME = "development";
     private static final String RELEASE_BRANCH_NAME = "master";
-    private static String BRANCH_NAME = RELEASE_BRANCH_NAME;
+    private static String BRANCH_NAME = MASTER_RELEASE ? RELEASE_BRANCH_NAME : DEBUG_BRANCH_NAME;
     private static final String REPO_OWNER = "karakasis";
     public static String directory;
     public static String gemsJSONFileName;
@@ -459,12 +465,17 @@ public class POELevelFx extends Application {
             }
 
             //StringBuilder raw = readRawToString();
+            try {
+                loadActsFromMemory();
+                loadGemsFromMemory();
+                loadBuildsFromMemory();
 
-              loadActsFromMemory();
-              loadGemsFromMemory();
-              loadBuildsFromMemory();
+                loadRecipesProperties();
+            } catch (Exception e) {
+                Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "Error during Path of Leveling start up: " + e.getMessage(), e);
+                notifyPreloader(new Preloader.ErrorNotification("init", "Error during Path of Leveling start up: " + e.getMessage(), e));
 
-              loadRecipesProperties();
+            }
 
         }
 
@@ -1338,7 +1349,7 @@ public class POELevelFx extends Application {
      */
     public static void main(String[] args) {
         // Negate the following if you want to test release mode
-        if (Files.exists(Paths.get("./debug.donotdelete"))) {
+        if (Files.exists(Paths.get("./.gitignore"))) {
             System.out.println("Detected that we're running in a development environment");
             DEBUG = true;
             BRANCH_NAME = DEBUG_BRANCH_NAME;
@@ -1527,7 +1538,7 @@ public class POELevelFx extends Application {
             }
     }
 
-    public static void checkForNewJSON() {
+    public void checkForNewJSON() {
         GithubHelper gh = new GithubHelper(REPO_OWNER, BRANCH_NAME);
         gh.init();
         File gemsJSONFile = new File(gemsJSONFileName);
@@ -1535,14 +1546,14 @@ public class POELevelFx extends Application {
         try {
             gh.downloadGemsJsonFileIfNeeded(gemsJSONFile, gemsTimeFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "IOException trying to update gems.json", e);
         }
         File dataJSONFile = new File(dataJSONFileName);
         File dataTimeFile = new File(dataTimeFileName);
         try {
             gh.downloadDataJsonFileIfNeeded(dataJSONFile, dataTimeFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "IOException trying to update data.json", e);
         }
     }
 
