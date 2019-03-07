@@ -347,8 +347,10 @@ public class AddGem_Controller implements Initializable {
         for(Gem gem : GemHolder.getInstance().getGemsClass()){
             for(String s : gem.tags){
                 gemTags.add(s);
+                /* union code
                 if(gem.isActive) {activeTags.add(s); activeGems.add(gem);}
                 else {supportTags.add(s); supportGems.add(gem);}
+                */
             }
             //create the cached versions
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gemButton.fxml"));
@@ -363,7 +365,7 @@ public class AddGem_Controller implements Initializable {
             controller.loadFiltering(gem,this);
             cachedFXMLSmap.put(gem,gemButton);
         }
-
+/* since im not using this code for now (Union filtering) ill comment
         //once everything is loaded
         activeTags.remove("Active");
         supportTags.remove("Support");
@@ -393,7 +395,7 @@ public class AddGem_Controller implements Initializable {
                 mutual.add(s); //System.out.println(s);
             }
         }
-
+*/
         //NOTE FOR NOW I WILL NOT USE THE MUTUALLY EXCLUDED GROUPS.
 
         //at first load everything into the big panel
@@ -414,7 +416,7 @@ public class AddGem_Controller implements Initializable {
         // set listener for premade buttons
         activeCbox.setOnAction(eh);
         supportCbox.setOnAction(eh);
-        int counter = 2;
+        /* union code
         for(String s : mutual){
             HashSet<Gem> dummy = new HashSet<>();
             for(Gem g : GemHolder.getInstance().getGemsClass()){
@@ -464,7 +466,30 @@ public class AddGem_Controller implements Initializable {
             //link the id
             checkboxToCode.put(s, counter++);
         }
-
+*/
+        int counter = 2;
+        gemTags.remove("Active");
+        gemTags.remove("Support");
+        ArrayList<String> gemTagsSort = new ArrayList<>(gemTags);
+        Collections.sort(gemTagsSort);
+        for(String s : gemTagsSort){
+            /* union code
+            HashSet<Gem> dummy = new HashSet<>();
+            for(Gem g : GemHolder.getInstance().getGemsClass()){
+                if(g.tags.contains(s)){ //arraylist contains is a thing?
+                    dummy.add(g);// this set will contain all gems that have tag X.
+                }
+            }
+            //add the set
+            gemSetUnionHolder.add(dummy);
+            */
+            //display the checkbox and set listener
+            JFXCheckBox jfxCheckBox = new JFXCheckBox(s);
+            jfxCheckBox.setOnAction(eh); //eh is set up above.
+            filtersLayoutBig.getChildren().add(jfxCheckBox);
+            //link the id
+            checkboxToCode.put(s, counter++);
+        }
         //lastly we need a set of strings-tags to represent the selected filters. more code in the customCheckboxClicker below.
 
 
@@ -521,7 +546,7 @@ public class AddGem_Controller implements Initializable {
         for(Integer a : distinctLevels_order){
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("questSplitPanel.fxml"));
-                SplitPane con = fxmlLoader.load();
+                AnchorPane con = fxmlLoader.load();
                 con.setPrefWidth(rootW); //< here setting stretch
                 QuestSplitPanel_Controller controller = fxmlLoader.getController();
                 otherVBox.getChildren().add(con);
@@ -543,7 +568,7 @@ public class AddGem_Controller implements Initializable {
         for(Zone z : zoneList){
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("questSplitPanel.fxml"));
-                SplitPane con = fxmlLoader.load();
+                AnchorPane con = fxmlLoader.load();
 
                 QuestSplitPanel_Controller controller = fxmlLoader.getController();
                 whichActBox.getChildren().add(con);

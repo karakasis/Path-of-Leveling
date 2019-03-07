@@ -5,3 +5,5 @@ dist/
 out/
 .gitgnore
 Path-of-Leveling.iml
+
+.idea/

@@ -262,7 +262,7 @@ ScrollPane {
     -fx-background-radius: 3px;
     -fx-background-insets: 0px;
 
-    -jfx-toggle-color: #645d4b
+    -jfx-toggle-color: #645d4b;
     -jfx-untoggle-color: #FAFAFA;
     -jfx-toggle-line-color: derive(-jfx-toggle-color, 65%);
     -jfx-untoggle-line-color: #999999;

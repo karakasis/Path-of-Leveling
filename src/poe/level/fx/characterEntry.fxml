@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="67.0" prefWidth="210.0" styleClass="buildPanel" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.CharacterEntry_Controller">
+<AnchorPane fx:id="root" prefWidth="210.0" styleClass="buildPanel" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.CharacterEntry_Controller">
          <ImageView fx:id="banner" fitHeight="75.0" fitWidth="75.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="5.0">
                <Image url="@../../../classes/Templar/Inquisitor.png" />
          </ImageView>

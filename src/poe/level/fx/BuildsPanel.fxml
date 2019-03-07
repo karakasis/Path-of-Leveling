@@ -61,6 +61,6 @@
             <Tooltip text="Remove selected Build" />
          </tooltip>
       </JFXButton>
-      <JFXListView fx:id="buildsBox" layoutX="14.0" layoutY="51.0" style="-fx-background-color: trransparent;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+      <JFXListView fx:id="buildsBox" layoutX="14.0" layoutY="51.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
    </children>
 </AnchorPane>

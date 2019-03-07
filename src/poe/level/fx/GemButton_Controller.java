@@ -48,8 +48,7 @@ public class GemButton_Controller implements Initializable {
         gemButton.setText(g.getGemName());
         String toolt = "";
         for(String s : gem.tags) toolt+=s + " /";
-        toolt.substring(0,toolt.length()-2);
-        gemButton.setTooltip(new Tooltip(toolt));
+        gemButton.setTooltip(new Tooltip(toolt.substring(0,toolt.length()-2)));
     }
     
     @FXML

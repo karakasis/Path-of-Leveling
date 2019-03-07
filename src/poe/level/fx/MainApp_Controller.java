@@ -27,6 +27,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import poe.level.data.Build;
+import poe.level.data.GemHolder;
 import poe.level.fx.overlay.RecipeOverlay_Controller;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -320,9 +321,11 @@ public class MainApp_Controller implements Initializable {
         });
     }
 
+    private String cachedForClass = "";
     public AddGem_Controller gemPopup() {
         System.out.println("gemPopup");
-        if (addGemPopup == null) {
+        if (addGemPopup == null || !cachedForClass.equals(GemHolder.getInstance().className)) {
+            cachedForClass = GemHolder.getInstance().className;
             gemPanelCreation();
         } else {
             if(rootPane.getWidth() != lastWidth || rootPane.getHeight() != lastHeight){

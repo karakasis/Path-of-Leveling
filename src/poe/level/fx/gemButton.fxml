@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
 
 <JFXButton fx:id="gemButton" alignment="TOP_CENTER" buttonType="RAISED" contentDisplay="TOP" minWidth="97.0" onAction="#gemClick" prefHeight="95.0" prefWidth="97.0" text="Cast On critcial strike" textAlignment="CENTER" wrapText="true" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.GemButton_Controller">
    <graphic>
@@ -12,4 +14,10 @@
          </image>
       </ImageView>
    </graphic>
+   <font>
+      <Font name="Trebuchet MS" size="12.0" />
+   </font>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </JFXButton>
