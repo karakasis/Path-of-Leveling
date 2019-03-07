@@ -45,10 +45,12 @@ public class NewFXPreloader extends Preloader {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //at this point this class has done enough, and we need to contact with the
+        //at this point this class has done enough, and we need to contact with the 
         //appropriate controllers.
         controller = loader.<Loading_Controller>getController();
-        return new Scene(p);
+        Scene pr = new Scene(p);
+        pr.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+        return pr;
     }
 
     @Override

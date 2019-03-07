@@ -1,11 +1,15 @@
 package poe.level.fx;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXListView;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.layout.VBox;
 import poe.level.data.CharacterInfo;
 
 import java.io.IOException;
@@ -24,13 +28,14 @@ import java.util.logging.Logger;
 public class SelectCharacter_PopupController implements Initializable {
 
     private final ArrayList<CharacterInfo> m_characterList;
+    private final ObservableList<Node> allNodes = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 
     SelectCharacter_PopupController(ArrayList<CharacterInfo> characterList) {
         this.m_characterList = characterList;
     }
 
     @FXML
-    private VBox charactersBox;
+    private JFXListView<Node> charactersBox;
     @FXML
     private JFXComboBox<String> cmbLeagueFilter;
 
@@ -51,7 +56,7 @@ public class SelectCharacter_PopupController implements Initializable {
     }
 
     private void filterCharacters(String league) {
-        for (Node node : charactersBox.getChildren()) {
+        for (Node node : allNodes) {
             node.setVisible(league.isEmpty() || "All".equalsIgnoreCase(league) || m_NodeToLeague.get(node).equalsIgnoreCase(league));
         }
     }
@@ -70,10 +75,11 @@ public class SelectCharacter_PopupController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("characterEntry.fxml"));
             try {
                 Node n = loader.load();
-                n.managedProperty().bind(n.visibleProperty());
+//                n.managedProperty().bind(n.visibleProperty());
                 m_NodeToLeague.put(n, ci.league);
                 //this will add the AnchorPane to the VBox
-                charactersBox.getChildren().add(n);
+//                charactersBox.getItems().add(n);
+                allNodes.add(n);
             } catch (IOException ex) {
                 Logger.getLogger(SelectBuild_PopupController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -82,6 +88,9 @@ public class SelectCharacter_PopupController implements Initializable {
         }
         cmbLeagueFilter.getItems().addAll(leagueList);
         cmbLeagueFilter.setOnAction(event -> filterChanged());
+        FilteredList<Node> filtered = new FilteredList<>(allNodes, node -> node.visibleProperty().get());
+        charactersBox.setItems(filtered);
+
 
     }
 

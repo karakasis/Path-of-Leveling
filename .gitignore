@@ -2,9 +2,8 @@ build/
 dist/
 .DS_Store
 
-.idea/*
-out/*
-nbproject/
+out/
 Path-of-Leveling.iml
 
-
+.idea/*
+.idea/workspace.xml

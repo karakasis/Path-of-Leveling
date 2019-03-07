@@ -27,6 +27,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.sun.javafx.css.StyleManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;
@@ -52,6 +53,7 @@ import poe.level.keybinds.GlobalKeyListener;
  * @author Christos
  */
 public class POELevelFx extends Application {
+    //search for public void start(Stage stage) throws Exception for css
 
     /***************************************************************************
      * Change to true if a build is being pushed to the master branch for public release.
@@ -71,8 +73,9 @@ public class POELevelFx extends Application {
     public static String gemsTimeFileName;
     public static String dataJSONFileName;
     public static String dataTimeFileName;
-    public static String gemDir;
+    public static String gemsIconsLocation;
     public static ArrayList<Build> buildsLoaded;
+    private static final Logger m_logger = Logger.getLogger(POELevelFx.class.getName());
     private Stage zone;
     private Stage exp;
     private Stage main;
@@ -174,6 +177,7 @@ public class POELevelFx extends Application {
     public void init() throws Exception {
 
         boolean restart = false;
+        setUpFonts();
         if(is_new_version){
 
 
@@ -200,26 +204,7 @@ public class POELevelFx extends Application {
                 init();
             }
             //System.exit(-10);
-        } else {
-            Platform.setImplicitExit( false );
-            addTrayIcon();
-            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Regular.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Italic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Bold.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-SmallCaps.ttf").toExternalForm(), 10);
-
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Thin.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-ThinItalic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Regular.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-ThinItalic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-MediumItalic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Medium.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Light.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-LightItalic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Italic.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Bold.ttf").toExternalForm(), 10);
-            Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-BoldItalic.ttf").toExternalForm(), 10);
-
+        }else{
 
             HashMap<String,String> hotkeyDefaults;
             hotkeyDefaults = new HashMap<>();
@@ -761,7 +746,9 @@ public class POELevelFx extends Application {
         InputStream inG = new FileInputStream(gemsJSONFileName);
         Scanner sG = new Scanner(inG).useDelimiter("\\A");
         String jsonstringG = sG.hasNext() ? sG.next() : "";
-
+        HashSet<String> gemTags = new HashSet<>();
+        HashSet<String> activeTags = new HashSet<>();
+        HashSet<String> supportTags = new HashSet<>();
 
         //JSONObject objG = new JSONObject(jsonstringG);
         JSONArray arrG = new JSONArray(jsonstringG);
@@ -770,10 +757,7 @@ public class POELevelFx extends Application {
         for (int i = 0; i < arrG.length(); i++)
         {
             JSONObject gemObj  = arrG.getJSONObject(i);
-            Gem gem = new Gem();
-
-            gem.name= gemObj.getString("name");
-            //System.out.println(gem.name);
+            Gem gem = new Gem(gemObj.getString("name"));
 
             gem.required_lvl= gemObj.getInt("required_lvl");
             gem.isVaal=gemObj.getBoolean("isVaal");
@@ -782,6 +766,10 @@ public class POELevelFx extends Application {
             gem.color= gemObj.getString("color");
             gem.iconPath= gemObj.getString("iconPath");
             gem.isRewarded = gemObj.getBoolean("isReward");
+            JSONArray alt_name = gemObj.optJSONArray("alt_name");
+            if (alt_name != null) {
+                gem.addAltNamesFromJSON(alt_name.iterator());
+            }
 
             if(gem.isRewarded){
                 JSONObject rewardObj  = gemObj.getJSONObject("reward");
@@ -859,44 +847,38 @@ public class POELevelFx extends Application {
                 }
                 gem.buy.add(buy_info);
             }
-            /* uncomment to download images. also uncomment gemdir on top of class
-            //CHECK cached images
-            if (!new File(gemDir+""+gem.name+".png").exists()) {
-                BufferedImage image = null;
-                try {
 
-                    URL url = new URL(gem.iconPath);
-                    image = ImageIO.read(url);
-
-                    ImageIO.write(image, "png",new File(gemDir+""+gem.name+".png"));
-
-                    gem.gemIcon = SwingFXUtils.toFXImage(image, null);
-                } catch (IOException e) {
-                        e.printStackTrace();
+            BufferedImage img;
+            try {
+                File gemFile = new File(gemsIconsLocation + gem.getGemName() + ".png");
+                if (gemFile.exists()) {
+                    img = ImageIO.read(gemFile);
+                } else {
+                    if (DEBUG) {
+                        // If we're debugging, all icons should exist, since we're pointing at the local directory
+                        notifyPreloader(new Preloader.ErrorNotification("loadGemsFromMemory", "Missing gem icon for: " + gem.getGemName() + "! Is your repo up to date?", null));
+                    }
+                    //TODO
+                    //notifyPreloader(new GemDownloadNotification(gem.getGemName()));
+                    m_logger.info("Gem " + gemFile.getName() + " doesn't exist in " + gemsIconsLocation + " downloading");
+                    img = downloadGemIcon(gem, true);
+                    if (img == null) {
+                        m_logger.info("Gem " + gemFile.getName() + " Failed to download from Github, trying " + gem.iconPath);
+                        img = downloadGemIcon(gem, false);
+                    }
                 }
-                System.err.println("Image not found and redownloaded: "+gemDir+""+gem.name+".png");
-
-            }else{
-                BufferedImage img = null;
-                    try {
-                        img = ImageIO.read(new File(gemDir+""+gem.name+".png"));
-
-                        gem.gemIcon = SwingFXUtils.toFXImage(img, null);
-                    }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                    }
-            }
-            */
-            BufferedImage img = null;
-                try {
-                    img = ImageIO.read(getClass().getResource("/gems/"+gem.name+".png"));
+                if (img != null) {
                     gem.gemIcon = SwingFXUtils.toFXImage(img, null);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    gem.resizeImage();
+                } else {
+                    m_logger.warning("Failed to get the gem icon for: " + gem.getGemName());
+                    gem.gemIcon = null;
                 }
 
-            gem.resizeImage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
             //load tags - new feature
             gem.isActive = gemObj.getBoolean("isActive");
@@ -905,6 +887,9 @@ public class POELevelFx extends Application {
             //new arraylist is in constructor
             for(int j=0;j<tags.length();j++){
                 gem.tags.add(tags.getString(j));
+                gemTags.add(tags.getString(j));
+                if(gem.isActive) activeTags.add(tags.getString(j));
+                else supportTags.add(tags.getString(j));
             }
 
             GemHolder.getInstance().putGem(gem);
@@ -914,8 +899,51 @@ public class POELevelFx extends Application {
             notifyPreloader(new NewFXPreloader.ProgressNotification(a));
         }
         System.out.println("Gem data loaded");
+        activeTags.remove("Active");
+        supportTags.remove("Support");
+        HashSet<String> active_excl = new HashSet<>();
+        HashSet<String> support_excl = new HashSet<>();
+        HashSet<String> mutual = new HashSet<>();
+
+        System.out.println("Active tags exclusive. ");
+        for(String s : activeTags){
+            if(!supportTags.contains(s)){
+                active_excl.add(s); System.out.println(s);
+            }
+        }
+        System.out.println("Support tags exclusive. ");
+        for(String s : supportTags){
+            if(!activeTags.contains(s)){
+                support_excl.add(s); System.out.println(s);
+            }
+        }
+        System.out.println("Mutual tags. ");
+        for(String s : gemTags){
+            if(!active_excl.contains(s) && !support_excl.contains(s)){
+                mutual.add(s);System.out.println(s);
+            }
+        }
 
     }
+
+    private BufferedImage downloadGemIcon(Gem gem, boolean fromGithub) {
+        BufferedImage image = null;
+        try {
+            URL url;
+            if (fromGithub) {
+                url = new URL("https://raw.githubusercontent.com/" + REPO_OWNER + "/Path-of-Leveling/" + BRANCH_NAME + "/gems/" + gem.getGemName().replaceAll(" ", "%20") + ".png");
+            } else {
+                url = new URL(gem.iconPath);
+            }
+            image = ImageIO.read(url);
+
+            ImageIO.write(image, "png", new File(gemsIconsLocation + gem.getGemName() + ".png"));
+        } catch (IOException e) {
+            m_logger.log(Level.SEVERE, "IOException while read/writing the new gem icon", e);
+        }
+        return image;
+    }
+
 
     private void logErrorGem(String gemName){
         System.out.println("Gem : " +gemName+ " had errors in loading.");
@@ -1234,8 +1262,12 @@ public class POELevelFx extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
+        //StyleManager.getInstance().addUserAgentStylesheet(getClass().getResource("/styles/modena_dark.css").toExternalForm());
+        StyleManager.getInstance().addUserAgentStylesheet(getClass().getResource("/styles/style.css").toExternalForm());
+
         if(is_new_version){
-            UpdaterStage updaterStage = new UpdaterStage();
+            new UpdaterStage();
         }else{
             main = new Main_Stage(this);
         }
@@ -1246,6 +1278,7 @@ public class POELevelFx extends Application {
     public void editor(){
         main.close();
         editor = new Editor_Stage(this);
+        editor.setMaximized(true);
     }
 
     public void launcher(){
@@ -1401,7 +1434,19 @@ public class POELevelFx extends Application {
                         Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "Exception while attempting to set json directory as hidden", ex);
                     }
                 } else {
-                    System.err.println("Failed to create JSON directory!");
+                    m_logger.severe("Failed to create JSON directory!");
+                }
+            }
+            gemsIconsLocation = POELevelFx.directory + "\\Path of Leveling\\gems\\icons\\";
+            if (!new File(gemsIconsLocation).exists()) {
+                if (new File(gemsIconsLocation).mkdirs()) {
+                    try {
+                        Files.setAttribute(Paths.get(POELevelFx.directory + "\\Path of Leveling\\gems\\"), "dos:hidden", true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "Exception while attempting to set gems directory as hidden", ex);
+                    }
+                } else {
+                    m_logger.severe("Failed to create gems directory!");
                 }
             }
         } else {
@@ -1409,6 +1454,7 @@ public class POELevelFx extends Application {
             gemsTimeFileName = "json\\gemsjson.time";
             dataJSONFileName = "json\\data.json";
             dataTimeFileName = "json\\datajson.time";
+            gemsIconsLocation = "gems\\";
         }
 
     }
@@ -1423,6 +1469,27 @@ public class POELevelFx extends Application {
             }
         }
         return false;
+    }
+
+    public void setUpFonts() throws Exception{
+        Platform.setImplicitExit( false );
+        addTrayIcon();
+        Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Regular.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Italic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-Bold.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/Fontin-SmallCaps.ttf").toExternalForm(), 10);
+
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Thin.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-ThinItalic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Regular.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-ThinItalic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-MediumItalic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Medium.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Light.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-LightItalic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Italic.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-Bold.ttf").toExternalForm(), 10);
+        Font.loadFont(POELevelFx.class.getResource("/fonts/AlegreyaSansSC-BoldItalic.ttf").toExternalForm(), 10);
     }
 
     public static void setUpLog(){

@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import poe.level.data.Gem;
 
@@ -25,6 +26,7 @@ public class GemButton_Controller implements Initializable {
     
     private Gem gem;
     private QuestSplitPanel_Controller parent;
+    private AddGem_Controller parentFiltering;
     /**
      * Initializes the controller class.
      */
@@ -33,16 +35,34 @@ public class GemButton_Controller implements Initializable {
         gem = g;
         gemButton.setGraphic(new ImageView(g.gemIcon));
         gemButton.setText(g.getGemName());
+        String toolt = "";
+        for(String s : gem.tags) toolt+=s + " /";
+        toolt.substring(0,toolt.length()-2);
+        gemButton.setTooltip(new Tooltip(toolt));
+    }
+
+    public void loadFiltering(Gem g,AddGem_Controller parent){
+        this.parentFiltering = parent;
+        gem = g;
+        gemButton.setGraphic(new ImageView(g.gemIcon));
+        gemButton.setText(g.getGemName());
+        String toolt = "";
+        for(String s : gem.tags) toolt+=s + " /";
+        gemButton.setTooltip(new Tooltip(toolt.substring(0,toolt.length()-2)));
     }
     
     @FXML
     private void gemClick(){
+        if(parent!=null)
         parent.callback(gem);
+        else
+        parentFiltering.callback(gem);
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+
     }    
     
 }
