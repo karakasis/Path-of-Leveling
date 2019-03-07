@@ -926,8 +926,9 @@ public class Preferences_Controller implements Initializable {
                         toggleS_gemUI = "false";
                         gem_UI_toggle = false;
                     }
-                    zones_slider = sliderZones.getValue();
-                    level_slider = sliderLevel.getValue();
+                    //changing the big decimal number to 1 decimal apparently
+                    zones_slider = (int)sliderZones.getValue();
+                    level_slider = (int)sliderLevel.getValue();
                     prop.setProperty("zones-toggle", toggleS);
                     prop.setProperty("zones-text-toggle", toggleS_text);
                     prop.setProperty("zones-images-toggle", toggleS_images);

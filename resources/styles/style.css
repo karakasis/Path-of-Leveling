@@ -12,11 +12,16 @@
     background-pane-color-1: black;
     background-pane-color-2: yellow;
     color3: transparent;
+	color4: transparent;
 	main-dark-color: rgba(47,49,54,255);
 	second-dark-color: rgba(54,57,63,255);
 	/*#484C52*/
 	light-dark-color: rgba(72,76,82,255);
 	border-color-red: #c13a5e;
+	hover-color-red-alpha: rgba(193, 58, 94, 0.4);
+	onclick-color-red-alpha: rgba(193, 58, 94, 0.8);
+	onclick-color-inner: #005064;
+	onclick-color-outer: #176C7F;
 }
 /*
 .buildPanel{
@@ -25,12 +30,16 @@
     -fx-background-color: color;
 }*/
 
+.gemPanelOuter{
+    -fx-background-color: color4;
+}
+
 .gemPanel{
     -fx-background-color: color2;
 }
 
 .gemPanel:hover{
-    -fx-border-style: solid;
+	-fx-background-color: background-color;
 }
 
 .jfx-tab-pane

@@ -142,6 +142,7 @@ public class GemHolder {
                                 Gem duped = a.dupeGem();
                                 duped.act = inf.act;
                                 duped.npc = inf.npc;
+                                duped.town = inf.town;
                                 duped.quest_name = inf.quest_name;
                                 duped.available_to = inf.available_to;
                                 placeGemInClass(duped,class_);

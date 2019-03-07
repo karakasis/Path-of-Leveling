@@ -44,6 +44,7 @@ import org.jnativehook.NativeHookException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import poe.level.PreloadNotification.GemDownloadNotification;
 import poe.level.data.*;
 import poe.level.data.Gem.Info;
 import poe.level.keybinds.GlobalKeyListener;
@@ -845,9 +846,11 @@ public class POELevelFx extends Application {
                 }
                 gem.buy.add(buy_info);
             }
+
             /* uncomment to download images. also uncomment gemdir on top of class
             //CHECK cached images
             if (!new File(gemDir+""+gem.name+".png").exists()) {
+
                 BufferedImage image = null;
                 try {
 
@@ -883,6 +886,11 @@ public class POELevelFx extends Application {
                 }
 
             gem.resizeImage();
+
+                if(i> 40 && i < 80)
+                    notifyPreloader(new GemDownloadNotification(gem.getGemName()));
+                if(i> 230 && i < 240)
+                    notifyPreloader(new GemDownloadNotification(gem.getGemName()));
 
             //load tags - new feature
             gem.isActive = gemObj.getBoolean("isActive");

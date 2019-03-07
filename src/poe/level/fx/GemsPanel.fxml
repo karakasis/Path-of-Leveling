@@ -42,7 +42,7 @@
          </children>
       </AnchorPane>
       <Separator layoutX="14.0" layoutY="175.0" prefHeight="2.0" prefWidth="504.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="51.0" layoutY="192.0" prefHeight="388.0" prefWidth="510.0" style="-fx-background-color: #2B2B2B;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="192.0">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="51.0" layoutY="192.0" prefHeight="388.0" prefWidth="510.0" style="-fx-background-color: light-dark-color;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="192.0">
          <content>
             <TilePane fx:id="gemContainer" hgap="10.0" prefColumns="1" prefRows="1" style="-fx-background-color: transparent;" vgap="10.0">
                <padding>

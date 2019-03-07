@@ -13,7 +13,7 @@
    <children>
       <AnchorPane fx:id="askUpdatePane" layoutX="20.0" layoutY="21.0" prefHeight="80.0" prefWidth="540.0">
          <children>
-            <Label layoutX="167.0" layoutY="3.0" prefHeight="67.0" prefWidth="207.0" text="Version 0.7-Alpha is available. Do you wish to update? (27MB)" textAlignment="CENTER" textFill="#432da1" wrapText="true">
+            <Label layoutX="167.0" layoutY="3.0" prefHeight="67.0" prefWidth="207.0" text="Version 0.7-Alpha is available. Do you wish to update? (27MB)" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Alegreya Sans SC" size="15.0" />
                </font>
@@ -38,7 +38,7 @@
             <JFXButton fx:id="cancelUpdate" buttonType="RAISED" layoutX="140.0" layoutY="80.0" onAction="#cancel" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: IndianRed;" text="Cancel" textFill="WHITE" />
          </children>
       </AnchorPane>
-      <Label layoutX="24.0" layoutY="94.0" prefHeight="35.0" prefWidth="215.0" text="Whats new?" textAlignment="CENTER" textFill="#432da1" wrapText="true">
+      <Label layoutX="24.0" layoutY="94.0" prefHeight="35.0" prefWidth="215.0" text="Whats new?" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Alegreya Sans SC" size="15.0" />
          </font>

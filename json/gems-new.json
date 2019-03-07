@@ -7116,6 +7116,9 @@
          }
       ],
       "name":"Holy Flame Totem",
+	  "alt_name":[
+		"Flame Totem"
+	  ]
       "isVaal":false,
       "gemTags":[  
          "Spell",
@@ -15729,7 +15732,10 @@
             "quest_name":"Fallen from Grace"
          }
       ],
-      "name":"Storm Barrier",
+      "name":"Infused Channelling",
+	  "alt_name":[
+		"Storm Barrier"
+	  ]
       "isVaal":false,
       "gemTags":[  
          "Lightning",
@@ -15806,7 +15812,6 @@
    },
    {  
       "reward":{  
-
       },
       "required_lvl":12,
       "color":"blue",
