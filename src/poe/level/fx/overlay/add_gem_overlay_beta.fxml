@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" prefHeight="183.0" prefWidth="420.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.overlay.Add_gem_overlay_Controller">
+   <children>
+      <ImageView fx:id="sgImage" fitHeight="47.0" fitWidth="200.0" layoutX="200.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../../GemIcons/Additional%20Accuracy.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="socketGroupImage" fitHeight="47.0" fitWidth="200.0" layoutX="241.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="225.0">
+         <image>
+            <Image url="@../../../../GemIcons/Arctic%20Armour.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="gemAddedImage" fitHeight="47.0" fitWidth="200.0" layoutX="241.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@../../../../GemIcons/Damage%20on%20Full%20Life%20Support.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="gemAddedName" alignment="CENTER" layoutX="67.0" layoutY="34.0" prefHeight="57.0" prefWidth="147.0" text="Damage on Full LifeDamage on Full Life" textAlignment="CENTER" textFill="#ebebeb" wrapText="true" AnchorPane.leftAnchor="67.0" AnchorPane.topAnchor="22.0">
+         <font>
+            <Font name="Fontin SmallCaps" size="16.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="270.0" layoutY="5.0" prefHeight="183.0" prefWidth="135.0" style="-fx-background-color: rgba(0, 0, 0, 0.2);" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="act" alignment="CENTER" layoutX="6.0" layoutY="105.0" prefHeight="25.0" prefWidth="138.0" text="Act II" textFill="#ebebeb">
+               <font>
+                  <Font name="Fontin Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="quest" alignment="CENTER" layoutX="9.0" layoutY="50.0" prefHeight="57.0" prefWidth="138.0" text="Root of the Problem" textAlignment="CENTER" textFill="#ebebeb" wrapText="true">
+               <font>
+                  <Font name="Fontin Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="npc" alignment="CENTER" layoutX="9.0" prefHeight="57.0" prefWidth="138.0" text="Pernadus and Yenjja" textAlignment="CENTER" textFill="#ebebeb" wrapText="true">
+               <font>
+                  <Font name="Fontin Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="town" alignment="CENTER" layoutY="136.0" prefHeight="41.0" prefWidth="147.0" text="Sarn EncampentSarn Encampent" textAlignment="CENTER" textFill="#ebebeb" wrapText="true">
+               <font>
+                  <Font name="Fontin Regular" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="53.0" layoutY="47.0" prefHeight="34.0" prefWidth="185.0" text="In your socket group" textFill="#ebebeb" visible="false" AnchorPane.leftAnchor="40.0">
+         <font>
+            <Font name="Fontin SmallCaps" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="44.0" prefHeight="34.0" text="Place" textFill="#ebebeb" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font name="Fontin SmallCaps" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="92.0" prefHeight="34.0" prefWidth="125.0" text="in socket group" textAlignment="CENTER" textFill="#ebebeb" wrapText="true" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="14.0">
+         <font>
+            <Font name="Fontin SmallCaps" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="socketGroupName" alignment="CENTER" layoutX="33.0" layoutY="116.0" prefHeight="57.0" prefWidth="162.0" text="Damage on Full LifeDamage on Full Life" textAlignment="CENTER" textFill="#ebebeb" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="33.0">
+         <font>
+            <Font name="Fontin SmallCaps" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -8,6 +8,8 @@ package poe.level.data;
 import java.io.File;
 import java.util.HashSet;
 import javafx.application.Platform;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import poe.level.fx.Main_Stage;
 import poe.level.fx.POELevelFx;
 import poe.level.fx.Preferences_Controller;
@@ -64,9 +66,16 @@ public class Controller {
     }
 
     public void refreshRecipePopup(){
-        placeholder_stageGameMode.close();
-        placeholder_stageGameMode.loadRecipes();
-        RecipeOverlay_Controller.gameModeOn = true;
+        if(!zone_stage_lock){
+            Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    placeholder_stageGameMode.close();
+                    placeholder_stageGameMode.loadRecipes();
+                    RecipeOverlay_Controller.gameModeOn = true;
+                }
+            });
+        }
     }
 
     public void recipe_hotkey_preview_key_event(){
@@ -99,16 +108,39 @@ public class Controller {
 
     public void gem_gui_next_event(){
         if(Preferences_Controller.gem_UI_toggle){
-            System.out.println("consumed_next");
+            Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    level_stage.slideBeta(1); //next goes to right
+                    //System.out.println("consumed_next");
+                }
+            });
         }
     }
 
     public void gem_gui_previous_event(){
         if(Preferences_Controller.gem_UI_toggle){
-            System.out.println("consumed_previous");
+            Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    level_stage.slideBeta(0); //previous goes to left
+                    //System.out.println("consumed_previous");
+                }
+            });
         }
     }
 
+    public void gemUItoggled(boolean beta){
+        if(!level_stage_lock)
+            Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    level_stage.resetFXMLS(beta);
+                }
+            });
+    }
+
+    public static boolean LOCK; //locs all overlays and keybinds
     public int playerLevel;
     public String playerName;
     public int monsterLevel;
@@ -167,10 +199,15 @@ public class Controller {
         return a;
     }
 
-
+    public static double height;
+    public static double width;
     //public Controller(Stage zone, Stage xp, Stage level, Build build) {
     public Controller(boolean zone_b, boolean xp, boolean level, Build build) {
+        LOCK = false;
         instance = this;
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        height = primScreenBounds.getHeight();
+        width = primScreenBounds.getWidth();
         if(zone_b){
             zone_stage = new ZoneOverlay_Stage();
         }
@@ -178,7 +215,7 @@ public class Controller {
             xp_stage = new LevelOverlay_Stage();
         }
         if(level){
-            level_stage = new GemOverlay_Stage(build);
+            level_stage = new GemOverlay_Stage(build,Preferences_Controller.gem_UI_toggle);
         }
 
         placeholder_stageGameMode = new PlaceholderStageGameMode(this);

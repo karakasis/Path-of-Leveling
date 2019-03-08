@@ -21,6 +21,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import poe.level.PreloadNotification.GemDownloadNotification;
 
 /**
  * Simple Preloader Using the ProgressBar Control
@@ -84,6 +85,9 @@ public class NewFXPreloader extends Preloader {
               new Alert(Alert.AlertType.ERROR, ((ErrorNotification) arg0).getDetails(), ButtonType.OK).showAndWait();
               Platform.exit();
               System.exit(1);
+          } else if (arg0 instanceof GemDownloadNotification){
+              GemDownloadNotification err = (GemDownloadNotification) arg0;
+              controller.gemDownload(err.getGemName());
           }
     }
 

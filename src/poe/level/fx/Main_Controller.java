@@ -8,6 +8,7 @@ package poe.level.fx;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXToggleButton;
+import com.jfoenix.controls.events.JFXDialogEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -174,9 +177,23 @@ public class Main_Controller implements Initializable {
         }
         loader.<Preferences_Controller>getController().hook(this);
         addBuildPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
+        addBuildPopup.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ESCAPE) {
+                    closePrefPopup();
+                }
+            }
+        });
         //addBuildPopup.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         //controller.passDialog(mLoad);
         addBuildPopup.show();
+        addBuildPopup.setOnDialogOpened(new EventHandler<JFXDialogEvent>() {
+            @Override
+            public void handle(JFXDialogEvent event) {
+                addBuildPopup.requestFocus();
+            }
+        });
     }
 
     private void characterInfoPopup() {

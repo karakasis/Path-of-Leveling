@@ -1,6 +1,7 @@
 {
 	/* color ascendancy banner for white skin #656565 */
 	/* color ascendancy banner for dark skin #9f9f9f */
+	/* dark tab color  #282B30 */
     color: transparent;
 	border-banners-color: rgba(101,101,101, 1); /* gray*/
     /*background-color:  rgba(58, 44, 189, 0.4);  /* violet */
@@ -11,11 +12,16 @@
     background-pane-color-1: black;
     background-pane-color-2: yellow;
     color3: transparent;
+	color4: transparent;
 	main-dark-color: rgba(47,49,54,255);
 	second-dark-color: rgba(54,57,63,255);
 	/*#484C52*/
 	light-dark-color: rgba(72,76,82,255);
 	border-color-red: #c13a5e;
+	hover-color-red-alpha: rgba(193, 58, 94, 0.4);
+	onclick-color-red-alpha: rgba(193, 58, 94, 0.8);
+	onclick-color-inner: #005064;
+	onclick-color-outer: #176C7F;
 }
 /*
 .buildPanel{
@@ -24,12 +30,16 @@
     -fx-background-color: color;
 }*/
 
+.gemPanelOuter{
+    -fx-background-color: color4;
+}
+
 .gemPanel{
     -fx-background-color: color2;
 }
 
 .gemPanel:hover{
-    -fx-border-style: solid;
+	-fx-background-color: background-color;
 }
 
 .jfx-tab-pane
@@ -84,7 +94,7 @@
 
 /* Redefine base colors */
 .root {
-	-fx-font-size: 14px;
+	-fx-font-size: 13px;
 	-fx-font-family: "Trebuchet MS";
 	/* #2F3136 outer
 		#36393F inner

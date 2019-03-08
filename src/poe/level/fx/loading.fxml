@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXProgressBar?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="100.0" prefWidth="261.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Loading_Controller">
+<AnchorPane id="AnchorPane" prefHeight="118.0" prefWidth="261.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.Loading_Controller">
    <children>
-      <JFXProgressBar fx:id="progressbar" layoutX="31.0" layoutY="52.0" progress="0.0" />
-      <Label layoutX="71.0" layoutY="14.0" prefHeight="39.0" prefWidth="120.0" text="Running to Hillock ..." textAlignment="CENTER" wrapText="true" />
-      <Label fx:id="label" layoutX="111.0" layoutY="63.0" text="0 %" />
+      <JFXProgressBar fx:id="progressbar" layoutX="31.0" layoutY="52.0" progress="0.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="30.0" />
+      <Label alignment="CENTER" layoutX="71.0" layoutY="14.0" prefHeight="39.0" text="Running to Hillock ..." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="Alegreya Sans SC" size="15.0" />
+         </font></Label>
+      <Label fx:id="label" alignment="CENTER" layoutX="111.0" layoutY="63.0" text="0 %" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <AnchorPane fx:id="downloadPanel" layoutX="26.0" layoutY="86.0" prefHeight="46.0" prefWidth="234.0" style="-fx-background-color: second-dark-color;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label fx:id="downloadGemText" alignment="CENTER_RIGHT" text="Cast on Critical Strike" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="Alegreya Sans SC Thin" size="15.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" text="Downloading gem" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="Alegreya Sans SC Thin" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

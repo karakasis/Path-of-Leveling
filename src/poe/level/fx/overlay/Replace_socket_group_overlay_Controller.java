@@ -34,6 +34,8 @@ public class Replace_socket_group_overlay_Controller implements Initializable {
     private Label npc;
     @FXML
     private Label act;
+    @FXML
+    private Label town;
     
     /**
      * Initializes the controller class.
@@ -55,6 +57,8 @@ public class Replace_socket_group_overlay_Controller implements Initializable {
         }else{
             act.setText("Act " + add.act);
         }
+
+        if(town != null)town.setText(add.town);
     }
     
 }

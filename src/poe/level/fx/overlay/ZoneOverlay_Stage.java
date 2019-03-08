@@ -226,11 +226,8 @@ public class ZoneOverlay_Stage  extends Stage{
     
     public void event_mark_recipe(){
 
-        if(isVisible){
-
-        }else{
+        if (!isVisible) {
             showPanel();
-
         }
 
         controller.playRecipeAnimation();

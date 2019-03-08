@@ -36,7 +36,7 @@ public class PlaceholderStageGameMode extends Stage{
         } catch (IOException ex) {
             Logger.getLogger(ZoneOverlay_Stage.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        loader.<Preferences_Controller>getController().hookGameModeOn(parent_gameModeOn);
         Scene scene = new Scene(ap);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
 

@@ -42,6 +42,7 @@ import org.jnativehook.NativeHookException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import poe.level.PreloadNotification.GemDownloadNotification;
 import poe.level.data.*;
 import poe.level.data.Gem.Info;
 import poe.level.keybinds.GlobalKeyListener;
@@ -210,6 +211,7 @@ public class POELevelFx extends Application {
             hotkeyDefaults.put("recipe-hotkey-preview","F7");
             hotkeyDefaults.put("level-hotkey-beta-next","F8");
             hotkeyDefaults.put("level-hotkey-beta-previous","F9");
+            hotkeyDefaults.put("lock-keybinds","F12");
 
             if (!new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").isFile()) {
             new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").createNewFile();
@@ -278,6 +280,11 @@ public class POELevelFx extends Application {
                             ,"level-hotkey-beta-previous"
                             ,hotkeyDefaults.get("level-hotkey-beta-previous")
                     );
+                Preferences_Controller.lock_keybinds_hotkey_key = setKeybinds(
+                        prop
+                        ,"lock-keybinds"
+                        ,hotkeyDefaults.get("lock-keybinds")
+                );
 
 
                     //new changes
@@ -308,9 +315,6 @@ public class POELevelFx extends Application {
 
                   Properties prop = new Properties();
                   InputStream input = null;
-                  String zones_hotkey_show_hide = "";
-                  String level_hotkey_remind = "";
-                  String recipe_hotkey_mark = "";
                   try {
 
                           input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
@@ -426,6 +430,11 @@ public class POELevelFx extends Application {
                               ,"level-hotkey-beta-previous"
                               ,hotkeyDefaults.get("level-hotkey-beta-previous")
                       );
+                      Preferences_Controller.lock_keybinds_hotkey_key = loadKeybinds(
+                              prop
+                              ,"lock-keybinds"
+                              ,hotkeyDefaults.get("lock-keybinds")
+                      );
 
                   } catch (IOException ex) {
                           ex.printStackTrace();
@@ -449,8 +458,8 @@ public class POELevelFx extends Application {
             try {
                 loadActsFromMemory();
                 loadGemsFromMemory();
+                //GemHolder.getInstance().init_remaining_in_pool();
                 loadBuildsFromMemory();
-
                 loadRecipesProperties();
             } catch (Exception e) {
                 Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "Error during Path of Leveling start up: " + e.getMessage(), e);
@@ -855,7 +864,7 @@ public class POELevelFx extends Application {
                         notifyPreloader(new Preloader.ErrorNotification("loadGemsFromMemory", "Missing gem icon for: " + gem.getGemName() + "! Is your repo up to date?", null));
                     }
                     //TODO
-                    //notifyPreloader(new GemDownloadNotification(gem.getGemName()));
+                    notifyPreloader(new GemDownloadNotification(gem.getGemName()));
                     m_logger.info("Gem " + gemFile.getName() + " doesn't exist in " + gemsIconsLocation + " downloading");
                     img = downloadGemIcon(gem, true);
                     if (img == null) {
@@ -874,7 +883,6 @@ public class POELevelFx extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
             //load tags - new feature
             gem.isActive = gemObj.getBoolean("isActive");

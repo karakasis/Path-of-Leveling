@@ -25,6 +25,8 @@ public class Add_gem_overlay_Controller implements Initializable {
     @FXML
     private ImageView socketGroupImage;
     @FXML
+    private Label socketGroupName;
+    @FXML
     private Label gemAddedName;
     @FXML
     private Label quest;
@@ -32,6 +34,8 @@ public class Add_gem_overlay_Controller implements Initializable {
     private Label npc;
     @FXML
     private Label act;
+    @FXML
+    private Label town;
     
     /**
      * Initializes the controller class.
@@ -42,6 +46,7 @@ public class Add_gem_overlay_Controller implements Initializable {
     }    
     
     public void load(Gem add, Gem sg){
+        if(socketGroupName != null) socketGroupName.setText(sg.getGemName());
         gemAddedImage.setImage(add.getIcon());
         socketGroupImage.setImage(sg.getIcon());
         gemAddedName.setText(add.getGemName());
@@ -52,5 +57,6 @@ public class Add_gem_overlay_Controller implements Initializable {
         }else{
             act.setText("Act " + add.act);
         }
+        if(town != null)town.setText(add.town);
     }
 }

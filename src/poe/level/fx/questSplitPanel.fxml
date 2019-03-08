@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="160.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.QuestSplitPanel_Controller">
+<AnchorPane fx:id="container" prefHeight="160.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.QuestSplitPanel_Controller">
    <children>
       <AnchorPane maxWidth="120.0" minHeight="0.0" minWidth="85.0" prefHeight="160.0" prefWidth="120.0" style="-fx-background-color: #282B30;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>

@@ -32,6 +32,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import poe.level.data.ActHandler;
+import poe.level.data.Controller;
 import poe.level.data.Zone;
 import poe.level.keybinds.GlobalKeyListener;
 
@@ -63,6 +64,8 @@ public class Preferences_Controller implements Initializable {
     private TextField next_gem_hotkey;
     @FXML
     private TextField previous_gem_hotkey;
+    @FXML
+    private TextField lock_keybinds_hotkey;
 
     @FXML
     private JFXTextField poe_installation;
@@ -92,8 +95,6 @@ public class Preferences_Controller implements Initializable {
     //
 
     private Main_Controller root;
-    private String level_hotkey_remind;
-    private String recipe_hotkey_mark;
     private String key_bind = "";
     private String directory;
 
@@ -117,6 +118,7 @@ public class Preferences_Controller implements Initializable {
     public static KeyCombination recipe_hotkey_preview_key;
     public static KeyCombination level_hotkey_beta_next_key;
     public static KeyCombination level_hotkey_beta_previous_key;
+    public static KeyCombination lock_keybinds_hotkey_key;
 
     private KeyCombination zones_hotkey_show_hide_key_tmp;
     private KeyCombination level_hotkey_remind_key_tmp;
@@ -124,6 +126,7 @@ public class Preferences_Controller implements Initializable {
     public static KeyCombination recipe_hotkey_preview_key_tmp;
     public static KeyCombination level_hotkey_beta_next_key_tmp;
     public static KeyCombination level_hotkey_beta_previous_key_tmp;
+    public static KeyCombination lock_keybinds_hotkey_key_tmp;
 
 
     public static String poe_log_dir;
@@ -134,11 +137,17 @@ public class Preferences_Controller implements Initializable {
 
     public static boolean gameModeOn;
     private HashMap<String,String> hotkeyDefaults;
+    private Controller parent_gameModeOn;
+
+    public void hookGameModeOn(Controller parent_gameModeOn){
+        this.parent_gameModeOn = parent_gameModeOn;
+    }
 
     public Preferences_Controller() {
     }
 
     public static void updateZonesPos(double x, double y){
+        System.out.println("updateZonesPos x:" + x + " y: " + y);
         if(zones_overlay_pos == null){
             zones_overlay_pos = new double[2];
         }
@@ -229,6 +238,7 @@ public class Preferences_Controller implements Initializable {
     }
 
     public static void updateGemsPos(double x, double y){
+        System.out.println("updateGemsPos x:" + x + " y: " + y);
         if(gem_overlay_pos == null){
             gem_overlay_pos = new double[2];
         }
@@ -360,6 +370,7 @@ public class Preferences_Controller implements Initializable {
     //i think i dont need to load and save overlay positions here.
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.err.println("controller init called");
     gameModeOn = false;
 
     hotkeyDefaults = new HashMap<>();
@@ -369,6 +380,7 @@ public class Preferences_Controller implements Initializable {
     hotkeyDefaults.put("recipe-hotkey-preview","F7");
     hotkeyDefaults.put("level-hotkey-beta-next","F8");
     hotkeyDefaults.put("level-hotkey-beta-previous","F9");
+    hotkeyDefaults.put("lock-keybinds","F12");
 
         // TODO
     Properties prop = new Properties();
@@ -459,6 +471,13 @@ public class Preferences_Controller implements Initializable {
                 ,previous_gem_hotkey
         );
         level_hotkey_beta_previous_key_tmp = level_hotkey_beta_previous_key;
+
+        lock_keybinds_hotkey_key = loadKeybinds(
+                prop
+                ,"lock-keybinds"
+                ,lock_keybinds_hotkey
+        );
+        lock_keybinds_hotkey_key_tmp = lock_keybinds_hotkey_key;
 
 	} catch (IOException ex) {
 		ex.printStackTrace();
@@ -557,6 +576,17 @@ public class Preferences_Controller implements Initializable {
                         event
                         ,previous_gem_hotkey
                         ,5
+                );
+            }
+        });
+
+        lock_keybinds_hotkey.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                lock_keybinds_hotkey_key_tmp = handleKeybindEdit(
+                        event
+                        ,lock_keybinds_hotkey
+                        ,6
                 );
             }
         });
@@ -663,6 +693,7 @@ public class Preferences_Controller implements Initializable {
         String[] preview = null;
         String[] next = null;
         String[] previous = null;
+        String[] lock = null;
         if(zones_hotkey_show_hide_key_tmp!=null)
             zone = zones_hotkey_show_hide_key_tmp.toString().split("\\+");
         if(level_hotkey_remind_key_tmp!=null)
@@ -675,6 +706,8 @@ public class Preferences_Controller implements Initializable {
             next = level_hotkey_beta_next_key_tmp.toString().split("\\+");
         if(level_hotkey_beta_previous_key_tmp!=null)
             previous = level_hotkey_beta_previous_key_tmp.toString().split("\\+");
+        if(lock_keybinds_hotkey_key_tmp!=null)
+            lock = lock_keybinds_hotkey_key_tmp.toString().split("\\+");
         switch (nodeID) {
             case 0:
                 if(checkEquality(input,level)){
@@ -700,6 +733,11 @@ public class Preferences_Controller implements Initializable {
                 if(checkEquality(input,previous)){
                     previous_gem_hotkey.clear();
                     level_hotkey_beta_previous_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,lock)){
+                    lock_keybinds_hotkey.clear();
+                    lock_keybinds_hotkey_key_tmp = null;
                     return true;
                 }
                 return false;
@@ -729,6 +767,11 @@ public class Preferences_Controller implements Initializable {
                     level_hotkey_beta_previous_key_tmp = null;
                     return true;
                 }
+                if(checkEquality(input,lock)){
+                    lock_keybinds_hotkey.clear();
+                    lock_keybinds_hotkey_key_tmp = null;
+                    return true;
+                }
                 return false;
             case 2:
                 if(checkEquality(input,zone)){
@@ -754,6 +797,11 @@ public class Preferences_Controller implements Initializable {
                 if(checkEquality(input,previous)){
                     previous_gem_hotkey.clear();
                     level_hotkey_beta_previous_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,lock)){
+                    lock_keybinds_hotkey.clear();
+                    lock_keybinds_hotkey_key_tmp = null;
                     return true;
                 }
                 return false;
@@ -783,6 +831,11 @@ public class Preferences_Controller implements Initializable {
                     level_hotkey_beta_previous_key_tmp = null;
                     return true;
                 }
+                if(checkEquality(input,lock)){
+                    lock_keybinds_hotkey.clear();
+                    lock_keybinds_hotkey_key_tmp = null;
+                    return true;
+                }
                 return false;
             case 4:
                 if(checkEquality(input,zone)){
@@ -810,6 +863,11 @@ public class Preferences_Controller implements Initializable {
                     recipe_hotkey_mark_key_tmp = null;
                     return true;
                 }
+                if(checkEquality(input,lock)){
+                    lock_keybinds_hotkey.clear();
+                    lock_keybinds_hotkey_key_tmp = null;
+                    return true;
+                }
                 return false;
             case 5:
                 if(checkEquality(input,zone)){
@@ -835,6 +893,43 @@ public class Preferences_Controller implements Initializable {
                 if(checkEquality(input,next)){
                     next_gem_hotkey.clear();
                     level_hotkey_beta_next_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,lock)){
+                    lock_keybinds_hotkey.clear();
+                    lock_keybinds_hotkey_key_tmp = null;
+                    return true;
+                }
+                return false;
+            case 6:
+                if(checkEquality(input,zone)){
+                    show_hide_hotkey_zone.clear();
+                    zones_hotkey_show_hide_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,level)){
+                    remind_gems.clear();
+                    level_hotkey_remind_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,recipe)){
+                    mark_recipe_hotkey.clear();
+                    recipe_hotkey_mark_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,preview)){
+                    recipe_preview_hotkey.clear();
+                    recipe_hotkey_preview_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,next)){
+                    next_gem_hotkey.clear();
+                    level_hotkey_beta_next_key_tmp = null;
+                    return true;
+                }
+                if(checkEquality(input,previous)){
+                    previous_gem_hotkey.clear();
+                    level_hotkey_beta_previous_key_tmp = null;
                     return true;
                 }
                 return false;
@@ -919,15 +1014,24 @@ public class Preferences_Controller implements Initializable {
                         zones_passive_toggle = false;
                     }
                     String toggleS_gemUI;
+                    boolean toggled_reset = false;
                     if(betaGemUItoggle.isSelected()){
+                        if(!gem_UI_toggle){
+                            toggled_reset = true;
+                        }
                         toggleS_gemUI = "true";
                         gem_UI_toggle = true;
                     }else{
+                        if(gem_UI_toggle){
+                            toggled_reset = true;
+                        }
                         toggleS_gemUI = "false";
                         gem_UI_toggle = false;
                     }
-                    zones_slider = sliderZones.getValue();
-                    level_slider = sliderLevel.getValue();
+                    if(toggled_reset) parent_gameModeOn.gemUItoggled(gem_UI_toggle);
+                    //changing the big decimal number to 1 decimal apparently
+                    zones_slider = (int)sliderZones.getValue();
+                    level_slider = (int)sliderLevel.getValue();
                     prop.setProperty("zones-toggle", toggleS);
                     prop.setProperty("zones-text-toggle", toggleS_text);
                     prop.setProperty("zones-images-toggle", toggleS_images);
@@ -953,6 +1057,7 @@ public class Preferences_Controller implements Initializable {
                     recipe_hotkey_preview_key = saveKeybinds(prop,"recipe-hotkey-preview",recipe_preview_hotkey.getText());
                     level_hotkey_beta_next_key = saveKeybinds(prop,"level-hotkey-beta-next",next_gem_hotkey.getText());
                     level_hotkey_beta_previous_key = saveKeybinds(prop,"level-hotkey-beta-previous",previous_gem_hotkey.getText());
+                    lock_keybinds_hotkey_key = saveKeybinds(prop,"lock-keybinds",lock_keybinds_hotkey.getText());
 
 
                     output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
@@ -975,6 +1080,12 @@ public class Preferences_Controller implements Initializable {
                         GlobalKeyListener.setUpKeybinds();
 
         }
+    }
+
+    @FXML
+    private void cancel(){
+        if(!gameModeOn)
+            root.closePrefPopup();
     }
 
     @FXML

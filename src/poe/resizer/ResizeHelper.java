@@ -137,7 +137,7 @@ public class ResizeHelper {
                 startScreenX = mouseEvent.getScreenX();
                 startScreenY = mouseEvent.getScreenY();
             } else if (MouseEvent.MOUSE_DRAGGED.equals(mouseEventType)) {
-                if (Cursor.DEFAULT.equals(cursorEvent)) {
+                if (Cursor.DEFAULT.equals(cursorEvent) && !stage.isMaximized()) {
                     stage.setX(stage.getX() + mouseEvent.getScreenX() - startScreenX);
                     startScreenX = mouseEvent.getScreenX();
                     stage.setY(stage.getY() + mouseEvent.getScreenY() - startScreenY);

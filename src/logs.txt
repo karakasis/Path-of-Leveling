@@ -41,3 +41,39 @@ You have entered The Sewers.
 You have entered The Sewers.
 You have entered The Caverns.a
 You have entered The Sewers.
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 1
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 1
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 1
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 1
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 1
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+c
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : test (Ranger) is now level 2
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18rr
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18rrr
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18
+2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18

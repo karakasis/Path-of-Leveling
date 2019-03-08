@@ -13,10 +13,12 @@ import javafx.geometry.Bounds;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import poe.level.data.Gem;
 import poe.level.data.Zone;
+import sun.plugin.javascript.navig.Anchor;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,7 +41,7 @@ public class QuestSplitPanel_Controller implements Initializable {
     @FXML
     private Label quest_label;
     @FXML
-    private SplitPane container;
+    private AnchorPane container;
 
     //private JFXButton gemButton;
     /**
