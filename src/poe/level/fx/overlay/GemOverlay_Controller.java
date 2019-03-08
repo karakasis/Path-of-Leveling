@@ -87,7 +87,7 @@ public class GemOverlay_Controller implements Initializable {
     }
 
     public void gemReplace(Gem add, Gem remove, Gem socketgroup){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/replace_gem_overlay.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/replace_gem_overlay_beta.fxml"));
         AnchorPane ap = null;
         try {
             ap = loader.load();

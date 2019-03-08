@@ -6,10 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import poe.level.data.Controller;
 import poe.level.data.Gem;
@@ -17,6 +17,7 @@ import poe.level.fx.Preferences_Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,7 @@ public class GemOverlayBeta_Controller implements Initializable {
     public void hookStage(Stage stage){
 
         final Delta dragDelta = new Delta();
-        rootSwapPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+        rootDrag.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
                 if(!Controller.LOCK) {
                     // record a delta distance for the drag and drop operation.
@@ -37,7 +38,7 @@ public class GemOverlayBeta_Controller implements Initializable {
                 }
             }
         });
-        rootSwapPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+        rootDrag.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
                 if(!Controller.LOCK) {
                     stage.setX(mouseEvent.getScreenX() + dragDelta.x);
@@ -47,7 +48,7 @@ public class GemOverlayBeta_Controller implements Initializable {
                 }
             }
         });
-        rootSwapPane.setOnMouseReleased(new EventHandler<MouseEvent>() {
+        rootDrag.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
                 if(!Controller.LOCK) {
                     //update the prop file
@@ -58,45 +59,70 @@ public class GemOverlayBeta_Controller implements Initializable {
     }
 
     @FXML
+    private AnchorPane rootDrag;
+    @FXML
     private StackPane rootSwapPane;
     private int activePanel;
+    private int maxPages;
+    @FXML
+    private Label mainGem;
+    @FXML
+    private Label pagination;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        titles = new ArrayList<>();
+    }
+
+    public void hide(){
+        rootSwapPane.setVisible(false);
+    }
+
+    public void show(){
+        rootSwapPane.setVisible(true);
     }
 
     public void initPanel(){
         for(Node n : rootSwapPane.getChildren()) n.setVisible(false);
         rootSwapPane.getChildren().get(0).setVisible(true);
         activePanel = 0;
+        maxPages = rootSwapPane.getChildren().size();
+        pagination.setText(activePanel+1 + "/" + maxPages);
+        mainGem.setText(titles.get(activePanel));
     }
 
     public void slide(int slideDirection){
         //0 is left 1 is right
-        System.err.println("Before : "+(activePanel+1)+"/"+rootSwapPane.getChildren().size());
-        if(slideDirection == 0){
-            System.err.println("Sliding to left..");
-            if(activePanel - 1 >= 0){
-                rootSwapPane.getChildren().get(activePanel).setVisible(false);
-                rootSwapPane.getChildren().get(--activePanel).setVisible(true);
-                System.err.println("Displaying : "+(activePanel+1)+"/"+rootSwapPane.getChildren().size());
+        if(rootSwapPane.isVisible()){
+            System.err.println("Before : "+(activePanel+1)+"/"+maxPages);
+            if(slideDirection == 0){
+                System.err.println("Sliding to left..");
+                if(activePanel - 1 >= 0){
+                    rootSwapPane.getChildren().get(activePanel).setVisible(false);
+                    rootSwapPane.getChildren().get(--activePanel).setVisible(true);
+                    System.err.println("Displaying : "+(activePanel+1)+"/"+maxPages);
+                }
+            }else if(slideDirection == 1){
+                System.err.println("Sliding to right..");
+                if(activePanel + 1 < maxPages){
+                    rootSwapPane.getChildren().get(activePanel).setVisible(false);
+                    activePanel++;
+                    rootSwapPane.getChildren().get(activePanel).setVisible(true);
+                    System.err.println("Displaying : "+(activePanel+1)+"/"+maxPages);
+                }
             }
-        }else if(slideDirection == 1){
-            System.err.println("Sliding to right..");
-            if(activePanel + 1 < rootSwapPane.getChildren().size()){
-                rootSwapPane.getChildren().get(activePanel).setVisible(false);
-                activePanel++;
-                rootSwapPane.getChildren().get(activePanel).setVisible(true);
-                System.err.println("Displaying : "+(activePanel+1)+"/"+rootSwapPane.getChildren().size());
-            }
+            pagination.setText(activePanel+1 + "/" + maxPages);
+            mainGem.setText(titles.get(activePanel));
         }
+
     }
 
     public void socketGroupReplace(Gem add, Gem remove){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/replace_socket_group_overlay.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/replace_socket_group_overlay_beta.fxml"));
         AnchorPane ap = null;
         try {
             ap = loader.load();
@@ -107,11 +133,12 @@ public class GemOverlayBeta_Controller implements Initializable {
         Group group = new Group();
         group.getChildren().add(ap);
         rootSwapPane.getChildren().add(group);
+        titles.add("Replace Socket Groups");
 
     }
 
     public void gemReplace(Gem add, Gem remove, Gem socketgroup){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/replace_gem_overlay.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/replace_gem_overlay_beta.fxml"));
         AnchorPane ap = null;
         try {
             ap = loader.load();
@@ -122,10 +149,11 @@ public class GemOverlayBeta_Controller implements Initializable {
         Group group = new Group();
         group.getChildren().add(ap);
         rootSwapPane.getChildren().add(group);
+        titles.add(socketgroup.name);
     }
 
     public void addGem(Gem add, Gem socketgroup){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/add_gem_overlay.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/add_gem_overlay_beta.fxml"));
         AnchorPane ap = null;
         try {
             ap = loader.load();
@@ -136,10 +164,25 @@ public class GemOverlayBeta_Controller implements Initializable {
         Group group = new Group();
         group.getChildren().add(ap);
         rootSwapPane.getChildren().add(group);
+        titles.add(socketgroup.name);
     }
 
+    private ArrayList<String> titles;
     public void reset(){
         rootSwapPane.getChildren().clear();
+        titles.clear();
     }
 
+    public void defaultTitle(){
+        mainGem.setText("Path of Leveling");
+        pagination.setText("");
+    }
+
+    public void fade(double opacity){
+        rootSwapPane.setOpacity(opacity);
+    }
+
+    public double getOpacity(){
+        return rootSwapPane.getOpacity();
+    }
 }

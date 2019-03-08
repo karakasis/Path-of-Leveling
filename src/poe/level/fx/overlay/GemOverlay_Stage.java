@@ -76,6 +76,8 @@ public class GemOverlay_Stage extends Stage{
             prefX = Preferences_Controller.gem_overlay_pos[0];
             prefY = Preferences_Controller.gem_overlay_pos[1];
         }
+        this.setX(prefX);
+        this.setY(prefY);
         gemsOnThisLevel_local = new ArrayList<>();
         if(!betaUi)
             loadFXML();
@@ -183,7 +185,7 @@ public class GemOverlay_Stage extends Stage{
 
     public void loadFXMLBeta(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/GemOverlayBeta.fxml"));
-        StackPane ap = null;
+        AnchorPane ap = null;
         try {
             ap = loader.load();
         } catch (IOException ex) {
@@ -197,11 +199,56 @@ public class GemOverlay_Stage extends Stage{
 
 
         this.setScene(scene);
-        controller_beta.hookStage(this);
 
+        controller_beta.hookStage(this);
+        controller_beta.defaultTitle();
         this.show();
+
     }
-    
+
+    public void fade(){
+        controller_beta.show();
+        //apply fade
+
+        WritableValue<Double> opacity = new WritableValue<Double>() {
+            @Override
+            public Double getValue() {
+
+                return controller_beta.getOpacity();
+            }
+
+            @Override
+            public void setValue(Double value) {
+                controller_beta.fade(value);
+            }
+        };
+
+        Timeline fadeIn = new Timeline();
+        Timeline delay = new Timeline();
+        Timeline fadeOut = new Timeline();
+
+        KeyValue kv = new KeyValue(opacity, 1d);
+        KeyFrame kf_slideIn = new KeyFrame(Duration.millis(1000), kv);
+
+        fadeIn.getKeyFrames().add(kf_slideIn);
+        fadeIn.setOnFinished(e -> Platform.runLater(() -> delay.play()));
+
+        KeyFrame kf_delay = new KeyFrame(Duration.millis(Preferences_Controller.level_slider * 1000));
+        delay.getKeyFrames().addAll(kf_delay);
+
+
+        delay.setOnFinished(e -> Platform.runLater(() -> fadeOut.play()));
+
+        KeyValue kv2 = new KeyValue(opacity, 0d);
+        KeyFrame kf_slideIn2 = new KeyFrame(Duration.millis(1000), kv2);
+
+        fadeOut.getKeyFrames().add(kf_slideIn2);
+        fadeOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending");isPlaying = false; controller_beta.hide(); controller_beta.defaultTitle();}));
+
+        fadeIn.play();
+        isPlaying = true;
+    }
+
     public void animate(){
         
         
@@ -210,6 +257,7 @@ public class GemOverlay_Stage extends Stage{
         double screenRightEdge = primScreenBounds.getMinX();
         this.setX(prefX);
         this.setY(prefY);
+        double cur_width = this.getWidth();
         this.setWidth(0);
         this.setHeight(primScreenBounds.getHeight());
 
@@ -231,13 +279,13 @@ public class GemOverlay_Stage extends Stage{
 
         Timeline slideIn = new Timeline();
        
-        KeyValue kv = new KeyValue(writableWidth, 322d);
+        KeyValue kv = new KeyValue(writableWidth, cur_width);
         KeyFrame kf_slideIn = new KeyFrame(Duration.millis(500), kv);
-        KeyFrame kf_delay = new KeyFrame(Duration.millis(Preferences_Controller.level_slider * 1000)); 
+        KeyFrame kf_delay = new KeyFrame(Duration.millis(Preferences_Controller.level_slider * 1000));
         slideIn.getKeyFrames().addAll(kf_slideIn,kf_delay);
 
         Timeline slideOut = new Timeline();
-        KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 20.0));
+        KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 0d));
         slideOut.getKeyFrames().add(kf_slideOut);
         
         slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending");isPlaying = false; this.hide();}));
@@ -271,8 +319,10 @@ public class GemOverlay_Stage extends Stage{
                     g_add(g,gemToSocket_map.get(g).getActiveGem());
                 }
             }
-            init_beta_ui_first_panel();
-            animate();
+            if(!gemsOnThisLevel_local.isEmpty()){
+                init_beta_ui_first_panel();
+                startAnimation();
+            }
         }else if(!level_list.contains(level)){
             System.err.println("No gems available in this level : "+ level);
         }else if(isPlaying){
@@ -302,9 +352,10 @@ public class GemOverlay_Stage extends Stage{
                     g_add(g,gemToSocket_map.get(g).getActiveGem());
                 }
             }
-
-            init_beta_ui_first_panel();
-            animate();
+            if(!gemsOnThisLevel_local.isEmpty()){
+                init_beta_ui_first_panel();
+                startAnimation();
+            }
         }else{
             System.err.println("Cant remind animation is still playing.");
         }
@@ -317,6 +368,13 @@ public class GemOverlay_Stage extends Stage{
     public void slideBeta(int slideDirection){
         //0 is left 1 is right
         controller_beta.slide(slideDirection);
+    }
+
+    public void startAnimation(){
+        if(betaUI)
+            fade();
+        else
+            animate();
     }
 
     private void reset(){

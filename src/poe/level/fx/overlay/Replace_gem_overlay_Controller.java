@@ -36,6 +36,8 @@ public class Replace_gem_overlay_Controller implements Initializable {
     private Label npc;
     @FXML
     private Label act;
+    @FXML
+    private Label town;
     /**
      * Initializes the controller class.
      */
@@ -50,13 +52,14 @@ public class Replace_gem_overlay_Controller implements Initializable {
         gemRemovedImage.setImage(remove.getIcon());
         gemAddedName.setText(add.getGemName());
         gemRemovedName.setText(remove.getGemName());
-        quest.setText("Quest: " + add.quest_name);
-        npc.setText("NPC: "+add.npc);
+        quest.setText(add.quest_name);
+        npc.setText(add.npc);
         if(add.act == 0){
             act.setText("Drop only");
         }else{
             act.setText("Act " + add.act);
         }
+        town.setText(add.town);
     }
     
 }

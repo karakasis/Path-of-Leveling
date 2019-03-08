@@ -141,6 +141,7 @@ public class Preferences_Controller implements Initializable {
     }
 
     public static void updateZonesPos(double x, double y){
+        System.out.println("updateZonesPos x:" + x + " y: " + y);
         if(zones_overlay_pos == null){
             zones_overlay_pos = new double[2];
         }
@@ -231,6 +232,7 @@ public class Preferences_Controller implements Initializable {
     }
 
     public static void updateGemsPos(double x, double y){
+        System.out.println("updateGemsPos x:" + x + " y: " + y);
         if(gem_overlay_pos == null){
             gem_overlay_pos = new double[2];
         }
