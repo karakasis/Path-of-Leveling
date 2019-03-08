@@ -543,6 +543,10 @@ public class BuildsPanel_Controller implements Initializable {
             SocketGroup sg = new SocketGroup();
             for( String gemString : sgList){
                 Gem gem = GemHolder.getInstance().createGemFromCache(gemString,pobBuild.getClassName());
+                if(gem == null) {
+                    System.err.println(gemString);
+                    continue;
+                }
                 if(gem.isActive && sg.getActiveGem() == null){
                     sg.setActiveGem(gem);
                 }
