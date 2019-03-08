@@ -69,7 +69,7 @@ public class GlobalKeyListener implements NativeKeyListener {
                         temp.add(NativeKeyEvent.getKeyText(vk));
                     }
                     if (temp.equals(level_hotkey_remind_set)) {
-                        System.out.println("level_hotkey_remind_set triggered");
+                        //System.out.println("level_hotkey_remind_set triggered");
                         Controller.instance.level_hotkey_remind_key_event();
                     }
                 }
@@ -79,7 +79,7 @@ public class GlobalKeyListener implements NativeKeyListener {
                         temp.add(NativeKeyEvent.getKeyText(vk));
                     }
                     if (temp.equals(zones_hotkey_show_hide_set)) {
-                        System.out.println("zones_hotkey_show_hide_set triggered");
+                        //System.out.println("zones_hotkey_show_hide_set triggered");
                         Controller.instance.zones_hotkey_show_hide_key_event();
                     }
                 }
@@ -89,7 +89,7 @@ public class GlobalKeyListener implements NativeKeyListener {
                         temp.add(NativeKeyEvent.getKeyText(vk));
                     }
                     if (temp.equals(recipes_hotkey_mark_set)) {
-                        System.out.println("recipes_hotkey_mark_set triggered");
+                       // System.out.println("recipes_hotkey_mark_set triggered");
                         Controller.instance.recipe_hotkey_mark_key_event(); //<
                     }
                 }
@@ -99,7 +99,7 @@ public class GlobalKeyListener implements NativeKeyListener {
                         temp.add(NativeKeyEvent.getKeyText(vk));
                     }
                     if (temp.equals(recipe_hotkey_preview_key_set)) {
-                        System.out.println("recipe_hotkey_preview_key_set triggered");
+                        //System.out.println("recipe_hotkey_preview_key_set triggered");
                         Controller.instance.recipe_hotkey_preview_key_event(); //<
                     }
                 }
@@ -109,7 +109,7 @@ public class GlobalKeyListener implements NativeKeyListener {
                         temp.add(NativeKeyEvent.getKeyText(vk));
                     }
                     if (temp.equals(level_hotkey_beta_next_key_set)) {
-                        System.out.println("level_hotkey_beta_next_key_set triggered");
+                        //System.out.println("level_hotkey_beta_next_key_set triggered");
                         Controller.instance.gem_gui_next_event(); //<
                     }
                 }
@@ -119,7 +119,7 @@ public class GlobalKeyListener implements NativeKeyListener {
                         temp.add(NativeKeyEvent.getKeyText(vk));
                     }
                     if (temp.equals(level_hotkey_beta_previous_key_set)) {
-                        System.out.println("level_hotkey_beta_previous_key_set triggered");
+                        //System.out.println("level_hotkey_beta_previous_key_set triggered");
                         Controller.instance.gem_gui_previous_event(); //<
                     }
                 }

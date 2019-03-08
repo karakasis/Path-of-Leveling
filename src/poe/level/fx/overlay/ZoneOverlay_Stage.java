@@ -61,7 +61,7 @@ public class ZoneOverlay_Stage  extends Stage{
         }
         
         this.setOnCloseRequest(event -> {
-            System.out.println("Closing level:: ");
+            System.out.println("Closing application from stage -> level:: ");
             if(saveBuildsToMemory()){
                 System.out.println("Successfully saved checkpoint");
             }else{
@@ -134,7 +134,9 @@ public class ZoneOverlay_Stage  extends Stage{
             Timeline slideOut = new Timeline();
             KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, -256d));
             slideOut.getKeyFrames().add(kf_slideOut);
-            slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending"); isVisible = false; this.hide();}));
+            slideOut.setOnFinished(e -> Platform.runLater(() -> {
+               // System.out.println("Ending");
+                isVisible = false; this.hide();}));
             slideIn.setOnFinished(e -> Platform.runLater(() -> slideOut.play()));
         }else{
             slideIn.getKeyFrames().addAll(kf_slideIn);
@@ -206,7 +208,9 @@ public class ZoneOverlay_Stage  extends Stage{
         Timeline timeline = new Timeline();
         KeyFrame endFrame = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, -256d));
         timeline.getKeyFrames().add(endFrame);
-        timeline.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending"); isVisible = false; this.hide();}));
+        timeline.setOnFinished(e -> Platform.runLater(() -> {
+            //System.out.println("Ending");
+            isVisible = false; this.hide();}));
         timeline.play();
     }
     

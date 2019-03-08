@@ -45,7 +45,7 @@ public class LevelOverlay_Stage extends Stage{
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         scene.setFill(Color.TRANSPARENT);
         this.setOnCloseRequest(event -> {
-            System.out.println("Closing level:: ");
+            System.out.println("Closing application from stage -> level:: ");
             if(saveBuildsToMemory()){
                 System.out.println("Successfully saved checkpoint");
             }else{

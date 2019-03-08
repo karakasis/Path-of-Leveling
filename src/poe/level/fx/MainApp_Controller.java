@@ -123,7 +123,7 @@ public class MainApp_Controller implements Initializable {
     }
 
     public void resize(double h, double w){
-        System.out.println(h + "" + w);
+        //System.out.println(h + "" + w);
         container.prefWidth(w);
         container.prefHeight(h);
     }
@@ -150,7 +150,6 @@ public class MainApp_Controller implements Initializable {
         title.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.err.println("Clicked label" + event.getClickCount() + " times");
                 if (event.getClickCount()==2) {
                     if(parent.isMaximized())
                         parent.setMaximized(false);
@@ -323,7 +322,6 @@ public class MainApp_Controller implements Initializable {
 
     private String cachedForClass = "";
     public AddGem_Controller gemPopup() {
-        System.out.println("gemPopup");
         if (addGemPopup == null || !cachedForClass.equals(GemHolder.getInstance().className)) {
             cachedForClass = GemHolder.getInstance().className;
             gemPanelCreation();
@@ -340,7 +338,6 @@ public class MainApp_Controller implements Initializable {
     }
 
     public Socket_group_noteController notePopup() {
-        System.out.println("Note popup");
         if (socketGroupGemPopup == null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("socket_group_note.fxml"));
             AnchorPane con = null;
@@ -622,6 +619,7 @@ public class MainApp_Controller implements Initializable {
 
     public void fetch_pob_paste(String pasteLink, int code){
       // code : 0 is create , 1 is link pob
+        System.out.println("Fetching POB link : " + pasteLink);
       if(code == 0){
           //and make a new build.
           Build newBuild = extractBuildFromPOBPastebin(pastebin_import_pobController.getResponse());
@@ -659,10 +657,8 @@ public class MainApp_Controller implements Initializable {
         try{
             //inflate
             inflatedXML = inflate(byteValueBase64Decoded);
-        }catch(IOException e){
-
-        }catch(DataFormatException e){
-
+        }catch(IOException | DataFormatException e){
+            System.out.println("Couldn't inflate POB XML. raw: " + raw);
         }
         //System.out.println(inflatedXML);
         /* //optional
@@ -689,11 +685,11 @@ public class MainApp_Controller implements Initializable {
             asc = eElement.getAttribute("ascendClassName");
             bandit = eElement.getAttribute("bandit");
         }else{
-            System.out.println("error");
+            System.out.println("Trying to read POB link resulted in error buildInfo.getLength()!= 1");
         }
         for (int temp = 0; temp < nList.getLength(); temp++) {
             Node nNode = nList.item(temp);
-            System.out.println("\nCurrent Element :" + nNode.getNodeName());
+            //System.out.println("\nCurrent Element :" + nNode.getNodeName());
             ArrayList<String> skillNames = new ArrayList<>();
             for (int gemTemp = 0; gemTemp < nNode.getChildNodes().getLength(); gemTemp++) {
                 Node item = nNode.getChildNodes().item(gemTemp);
@@ -724,8 +720,8 @@ public class MainApp_Controller implements Initializable {
         }
         outputStream.close();
         byte[] output = outputStream.toByteArray();
-        System.out.println("Original: " + data.length);
-        System.out.println("Compressed: " + output.length);
+        //System.out.println("Original: " + data.length);
+        //System.out.println("Compressed: " + output.length);
         return new String(output);
     }
 

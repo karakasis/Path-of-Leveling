@@ -297,12 +297,12 @@ public class GemsPanel_Controller implements Initializable {
         rootPane.setVisible(true);
         linker = sgc.getLinker(); //<<< fix
 
-        System.out.println("Clearing... start");
+        //System.out.println("Clearing... start");
         lockClear = true;
         activeSkillGroup.getItems().clear();
         replaceGroupBox.getItems().clear();
         //lockClear = false;
-        System.out.println("Clearing... end");
+        //System.out.println("Clearing... end");
 
         ArrayList<Gem> gems = current_sgl.sg.getGems();
         activeSkillGroup.getItems().addAll(gems);
@@ -397,9 +397,9 @@ public class GemsPanel_Controller implements Initializable {
         }
         //activeSkillGroup.getItems().addAll(current_sgl.sg.getGems());
 
-        System.out.println("Im out");
+        //System.out.println("Im out");
         if(sg.getActiveGem()!=null){
-        System.out.println("Now im in..");
+        //System.out.println("Now im in..");
             activeSkillGroup.setValue(sg.getActiveGem());
 
             current_sgl.changeLabel();
@@ -507,21 +507,21 @@ public class GemsPanel_Controller implements Initializable {
 
     @FXML
     private void mainGemValueChanged(){
-            System.out.println("Triggered ! ");
+            //System.out.println("Triggered ! ");
         //this will prob change cuase of new combo box ><<<<<><><>
         //Label selection = (Label)activeSkillGroup.getSelectionModel().getSelectedItem();
         //String text = selection.getText();
         if(current_sgl.sg.getActiveGem() == null){
-            System.out.println("Active1: null");
+            //System.out.println("Active1: null");
         }else{
-            System.out.println("Active1: "+current_sgl.sg.getActiveGem().toString());
+            //System.out.println("Active1: "+current_sgl.sg.getActiveGem().toString());
         }
         if(!lockClear)
             current_sgl.sg.setActiveGem(activeSkillGroup.getValue());
         if(current_sgl.sg.getActiveGem() == null){
-            System.out.println("Active2: null");
+            //System.out.println("Active2: null");
         }else{
-            System.out.println("Active2: "+current_sgl.sg.getActiveGem().toString());
+            //System.out.println("Active2: "+current_sgl.sg.getActiveGem().toString());
         }
         //activeSkillGroup.
         if(!lockClear){
@@ -556,9 +556,9 @@ public class GemsPanel_Controller implements Initializable {
            // fromLevel.setText(current_sgl.sg.getFromGroupLevel()+"");
             if(current_sgl.sg.getActiveGem()!=null){
                 current_sgl.sg.getActiveGem().level_added = newValue;
-                System.out.println("current Main testing :");
+                //System.out.println("current Main testing :");
                 if(current_sgl.gpl.currentMain!=null){
-                    System.out.println("entered this time :");
+                    //System.out.println("entered this time :");
                     current_sgl.gpl.currentMain.controller.groupLevelChanged(newValue);
                 }
             }

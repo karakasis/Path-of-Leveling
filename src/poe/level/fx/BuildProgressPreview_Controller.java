@@ -417,12 +417,12 @@ public class BuildProgressPreview_Controller implements Initializable {
         outerScroll.vvalueProperty().addListener(
                 (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
 
-                    System.out.println("Scroll v outer:" + outerScroll.getVvalue());
+                    //System.out.println("Scroll v outer:" + outerScroll.getVvalue());
                 });
         outerScroll.hvalueProperty().addListener(
                 (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
 
-                    System.out.println("Scroll h outer:" + outerScroll.getHvalue());
+                    //System.out.println("Scroll h outer:" + outerScroll.getHvalue());
                     levelScroll.setHvalue(outerScroll.getHvalue());
 
                 });

@@ -66,7 +66,6 @@ public class BuildEntry_Controller implements Initializable {
         root.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.err.println("Clicked root " + event.getClickCount() + " times");
                 onPress();
             }
           });
@@ -74,7 +73,6 @@ public class BuildEntry_Controller implements Initializable {
         buildName.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.err.println("Clicked label" + event.getClickCount() + " times");
               if (event.getClickCount()==2) {
                 editBuildName.setVisible(true);
                 editBuildName.setText(buildName.getText());

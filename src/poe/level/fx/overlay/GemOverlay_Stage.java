@@ -85,7 +85,7 @@ public class GemOverlay_Stage extends Stage{
             loadFXMLBeta();
 
         this.setOnCloseRequest(event -> {
-            System.out.println("Closing gem:: ");
+            System.out.println("Closing application from stage -> gem:: ");
             if(saveBuildsToMemory()){
                 System.out.println("Successfully saved checkpoint");
             }else{
@@ -262,7 +262,7 @@ public class GemOverlay_Stage extends Stage{
 
         fadeOut.getKeyFrames().add(kf_slideIn2);
         fadeOut.setOnFinished(e -> Platform.runLater(() -> {
-            System.out.println("Ending");
+            //System.out.println("Ending");
             isPlaying = false;
             if (betaUI) {
                 controller_beta.hide();
@@ -356,15 +356,15 @@ public class GemOverlay_Stage extends Stage{
                 startAnimation();
             }
         }else if(!level_list.contains(level)){
-            System.err.println("No gems available in this level : "+ level);
+            //System.err.println("This error could be a bug >>No gems available in this level : "+ level);
         }else if(isPlaying){
-            System.err.println("A level animation is currently playing");
+            //System.err.println("A level animation is currently playing");
         }
     }
 
     public void event_remind(){
         if(!isPlaying){
-            System.err.println("Reminding gems.");
+            //System.err.println("Reminding gems.");
             reset();
             for(Gem g : gemsOnThisLevel_local){
                 //THE REPLACE IS HERE for socket group
@@ -389,7 +389,7 @@ public class GemOverlay_Stage extends Stage{
                 startAnimation();
             }
         }else{
-            System.err.println("Cant remind animation is still playing.");
+            //System.err.println("Cant remind animation is still playing.");
         }
     }
 

@@ -98,21 +98,21 @@ public class GemOverlayBeta_Controller implements Initializable {
     public void slide(int slideDirection){
         //0 is left 1 is right
         if(rootSwapPane.isVisible()){
-            System.err.println("Before : "+(activePanel+1)+"/"+maxPages);
+            //System.err.println("Before : "+(activePanel+1)+"/"+maxPages);
             if(slideDirection == 0){
-                System.err.println("Sliding to left..");
+                //System.err.println("Sliding to left..");
                 if(activePanel - 1 >= 0){
                     rootSwapPane.getChildren().get(activePanel).setVisible(false);
                     rootSwapPane.getChildren().get(--activePanel).setVisible(true);
-                    System.err.println("Displaying : "+(activePanel+1)+"/"+maxPages);
+                    //System.err.println("Displaying : "+(activePanel+1)+"/"+maxPages);
                 }
             }else if(slideDirection == 1){
-                System.err.println("Sliding to right..");
+                //System.err.println("Sliding to right..");
                 if(activePanel + 1 < maxPages){
                     rootSwapPane.getChildren().get(activePanel).setVisible(false);
                     activePanel++;
                     rootSwapPane.getChildren().get(activePanel).setVisible(true);
-                    System.err.println("Displaying : "+(activePanel+1)+"/"+maxPages);
+                    //System.err.println("Displaying : "+(activePanel+1)+"/"+maxPages);
                 }
             }
             pagination.setText(activePanel+1 + "/" + maxPages);

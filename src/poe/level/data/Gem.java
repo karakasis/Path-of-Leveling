@@ -97,7 +97,7 @@ public class Gem {
         while (jsonArrayIterator.hasNext()) {
             String altName = (String) jsonArrayIterator.next();
             alt_name.add(altName);
-            System.out.println("Adding alt name for " + name + ": " + altName);
+            //System.out.println("Adding alt name for " + name + ": " + altName);
         }
     }
 

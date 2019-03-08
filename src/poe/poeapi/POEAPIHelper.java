@@ -1,4 +1,4 @@
-package poeapi;
+package poe.poeapi;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -70,6 +70,6 @@ public class POEAPIHelper {
     /*ArrayList<String> result = getPOEActiveLeagues();
     System.out.println(result);*/
         long experience = getCharacterExperience("protuhj", "FlashBadmanners", "SSF Standard");
-        System.out.println("Experience: " + experience);
+        //System.out.println("Experience: " + experience);
     }
 }

@@ -126,7 +126,7 @@ public class Logger extends Thread
 
           if( fileLength > filePointer ) 
           {
-              System.out.println("New data");
+              //System.out.println("New data");
             // There is data to read
             file.seek( filePointer );
             String line = file.readLine();

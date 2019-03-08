@@ -79,7 +79,6 @@ public class Controller {
     }
 
     public void recipe_hotkey_preview_key_event(){
-        System.err.println("tirigger");
         if(!zone_stage_lock){
                 Platform.runLater(new Runnable(){
                     @Override
@@ -203,8 +202,8 @@ public class Controller {
         int safe = findSafe(playerlvl)[2];
         int effDif = effectiveDifference(playerlvl,arealvl,safe);
         double a = xpmultiplier(effDif,playerlvl);
-        System.out.println(" for level "+playerlvl+" safe zone is " + safe + " and eff dif is "+ effDif);
-        System.out.println("xp multi is "+(int)a+"%");
+        //System.out.println(" for level "+playerlvl+" safe zone is " + safe + " and eff dif is "+ effDif);
+        //System.out.println("xp multi is "+(int)a+"%");
         return a;
     }
 
@@ -226,7 +225,10 @@ public class Controller {
         if(level){
             level_stage = new GemOverlay_Stage(build,Preferences_Controller.gem_UI_toggle);
         }
-
+        System.out.println("Starting a new leveling enviroment. ");
+        System.out.println("Zones: " + zone_b);
+        System.out.println("XP: " + xp);
+        System.out.println("Leveling: " +level);
         placeholder_stageGameMode = new PlaceholderStageGameMode(this);
         /*
         Platform.runLater(new Runnable(){
@@ -356,7 +358,7 @@ public class Controller {
                     zone_checkpoint = zone;
                     monsterLevel = zone.level;
                     zoneDetect = true;
-                    System.out.println("Zone identified.");
+                    System.out.println("Zone identified. " + zone.name);
                     if(zone.hasPassive){
                         System.out.println("This zone contains a passive skill quest.");
                     }

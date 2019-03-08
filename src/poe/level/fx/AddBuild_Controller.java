@@ -147,7 +147,6 @@ public class AddBuild_Controller implements Initializable {
     @FXML
     private void ascChanged(ActionEvent event) {
         ascendancy = (String) selectAsc.getSelectionModel().getSelectedItem();
-        System.out.println(ascendancy);
         if(!buildName.getText().equals("")){
             addButton.setDisable(false);
         }else{

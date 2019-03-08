@@ -119,22 +119,6 @@ public class Main_Controller implements Initializable {
         }
     }
 
-    public int temp_alert(){
-        TextInputDialog dialog = new TextInputDialog("walter");
-        dialog.setTitle("Temporary level check");
-        dialog.setContentText("Enter the level of this character:");
-
-        dialog.initOwner(parent);
-        // Traditional way to get the response value.
-        Optional<String> result = dialog.showAndWait();
-        if (result.isPresent()){
-            System.out.println("Your name: " + result.get());
-        }
-        return Integer.parseInt(result.get());
-        // The Java 8 way to get the response value (with lambda expression).
-        //result.ifPresent(name -> System.out.println("Your name: " + name));
-    }
-
     @FXML
     private void launchEditor(){
         parent.editor();

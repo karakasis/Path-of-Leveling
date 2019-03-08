@@ -234,7 +234,7 @@ public class SocketGroupsPanel_Controller implements Initializable {
                         duplicate_button.setDisable(false);
                         add_note_button.setDisable(false);
                         gpc.hookSG_Controller(self);
-                        System.out.println("+_+++++++++++++++++++");
+                        //System.out.println("+_+++++++++++++++++++");
                         gpc.update(linker.get(activeSocketGroupID));
                         //gemVisiblePane.setVisible(true);
                     }else{

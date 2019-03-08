@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import poe.level.data.Controller;
 import poe.level.fx.Preferences_Controller;
@@ -25,6 +26,8 @@ import poe.level.fx.Preferences_Controller;
  */
 public class LevelOverlay_Controller implements Initializable {
 
+    private final javafx.scene.paint.Paint COLOR_ERROR = Paint.valueOf("#CD5C5C");
+    private final javafx.scene.paint.Paint COLOR_OK = Paint.valueOf("#FFFFFF");
     class Delta { double x, y; }
 
     @FXML
@@ -80,7 +83,15 @@ public class LevelOverlay_Controller implements Initializable {
             //zone.setStyle("-fx-border-color : red; -fx-text-fill: red;");
             //safezone.setStyle("-fx-border-color : red; -fx-text-fill: red;");
             //xpmulti.setStyle("-fx-border-color : red; -fx-text-fill: red;");
+            player.setTextFill(COLOR_ERROR);
+            zone.setTextFill(COLOR_ERROR);
+            safezone.setTextFill(COLOR_ERROR);
+            xpmulti.setTextFill(COLOR_ERROR);
         }else{
+            player.setTextFill(COLOR_OK);
+            zone.setTextFill(COLOR_OK);
+            safezone.setTextFill(COLOR_OK);
+            xpmulti.setTextFill(COLOR_OK);
             //player.setStyle("-fx-border-color : white; -fx-text-fill: white;");
             //zone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
             //safezone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
@@ -93,6 +104,10 @@ public class LevelOverlay_Controller implements Initializable {
     }
 
     public void reset(int playerLvl){
+        player.setTextFill(COLOR_OK);
+        zone.setTextFill(COLOR_OK);
+        safezone.setTextFill(COLOR_OK);
+        xpmulti.setTextFill(COLOR_OK);
         //player.setStyle("-fx-border-color : white; -fx-text-fill: white;");
         //zone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
         //safezone.setStyle("-fx-border-color : white; -fx-text-fill: white;");
@@ -118,7 +133,7 @@ public class LevelOverlay_Controller implements Initializable {
         zone_t.setStyle("-fx-font-size: 16");
         zone.setTooltip(zone_t);
 
-        Tooltip safe_t = new Tooltip("Your character level must be within these range to get maximum experience");
+        Tooltip safe_t = new Tooltip("Your character level must be within this range to get maximum experience");
         safe_t.setStyle("-fx-font-size: 16");
         safezone.setTooltip(safe_t);
         Tooltip xp_t = new Tooltip("The percentage of experience your character is gaining in this area");

@@ -24,7 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import poe.level.data.Build;
 import poe.level.data.CharacterInfo;
 import poe.level.data.Util;
-import poeapi.POEAPIHelper;
+import poe.poeapi.POEAPIHelper;
 
 /**
  * FXML Controller class

@@ -118,7 +118,7 @@ public class BuildsPanel_Controller implements Initializable {
     public boolean validate(){
         Build active_build = linker.get(activeBuildID).build;
         if(active_build.validate()){
-            System.out.println("Success.");
+            System.out.println("Validating build " + linker.get(activeBuildID).build.getName() + " .. success");
             if(!active_build.isValid){
                 //signal a graphic change
                 active_build.isValid = true;
@@ -126,7 +126,7 @@ public class BuildsPanel_Controller implements Initializable {
             }
             return true;
         }else{
-            System.out.println("Build invalidate.");
+            System.out.println("Validating build " + linker.get(activeBuildID).build.getName() + " .. failed");
             lastbuild_invalidatedID = activeBuildID;
             return false;
         }
@@ -138,7 +138,7 @@ public class BuildsPanel_Controller implements Initializable {
             if(!active_build.validate()){
                 if(active_build.isValid){
                     //active_build.isValid = false;
-                    System.out.println("Build invalidate.");
+                    System.out.println("Validating build "+ active_build.getName() + " via validate all option ... failed -> setting Build to non-valid.");
                     lastbuild_invalidatedID = bl.id;
                     //updateBuildValidationBanner(bl.id);
                     return false;
@@ -208,9 +208,9 @@ public class BuildsPanel_Controller implements Initializable {
 
         //Gson gson = new Gson();
         //String build_to_json = gson.toJson(linker.get(activeBuildID).build);
-        System.out.println(build_to_json);
+        //System.out.println(build_to_json);
         String stringValueBase64Encoded = Base64.getEncoder().encodeToString(build_to_json.getBytes());
-        System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
+        //System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
         BufferedWriter bw = null;
         FileWriter fw = null;
 
@@ -218,7 +218,7 @@ public class BuildsPanel_Controller implements Initializable {
             fw = new FileWriter(POELevelFx.directory+"\\Path of Leveling\\Builds\\builds.txt");
             bw = new BufferedWriter(fw);
             bw.write(stringValueBase64Encoded);
-            System.out.println("Done");
+            System.out.println("Saving build " + linker.get(activeBuildID).build.getName() + " .. failed");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -242,9 +242,9 @@ public class BuildsPanel_Controller implements Initializable {
         }
 
         String build_to_json = builds_array.toString();
-        System.out.println(build_to_json);
+        //System.out.println(build_to_json);
         String stringValueBase64Encoded = Base64.getEncoder().encodeToString(build_to_json.getBytes());
-        System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
+        //System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
         return stringValueBase64Encoded;
     }
 
@@ -259,9 +259,9 @@ public class BuildsPanel_Controller implements Initializable {
 
         String build_to_json = builds_array.toString();
 
-        System.out.println(build_to_json);
+        //System.out.println(build_to_json);
         String stringValueBase64Encoded = Base64.getEncoder().encodeToString(build_to_json.getBytes());
-        System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
+        //System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
         return stringValueBase64Encoded;
     }
 
@@ -269,7 +269,7 @@ public class BuildsPanel_Controller implements Initializable {
       JSONObject bObj = new JSONObject();
       bObj.put("buildName",build.getName());
       bObj.put("className",build.getClassName());
-      if(build.getAsc().equals("Assasin")) System.err.println("not fixed typo");
+      if(build.getAsc().equals("Assasin")) System.err.println("not fixed typo when loading build from external source");
       bObj.put("ascendancyName",build.getAsc());
       bObj.put("isValid", build.isValid);
       bObj.put("level", build.getCharacterLevel()); //<change
@@ -369,7 +369,7 @@ public class BuildsPanel_Controller implements Initializable {
                     JSONObject bObj = builds_array.getJSONObject(i);
                     String ascName = "";
                     if(bObj.getString("ascendancyName").equals("Assasin")){
-                        System.err.println("Replaced assassin typo.");
+                        System.err.println("Replaced assassin typo when loading build from external source.");
                         ascName = "Assassin";
                     }else{
                         ascName = bObj.getString("ascendancyName");

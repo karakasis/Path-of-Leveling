@@ -133,20 +133,20 @@ public class ZoneOverlay_Controller implements Initializable {
                         try {
                             //img = ImageIO.read(getClass().getResource("/zones/"+zone.getActName()+" - Overlay/"+s+".png"));
                             img = ImageIO.read(getClass().getResource("/zones/"+zone.getActName()+"/"+s+".png"));
-                            System.out.println("Loaded image.");
+                            //System.out.println("Loaded image.");
                             Image iv = SwingFXUtils.toFXImage(img, null);
                             ImageView iv_res = new ImageView(iv);
                             iv_res.setFitWidth(256);
                             iv_res.setFitHeight(144);
                             container.getChildren().add(iv_res);
                         } catch (IOException e) {
+                            System.err.println("IOException when reading zone : " +zone.name);
                             e.printStackTrace();
                         }
                 }
             }
         }
         if(Preferences_Controller.zones_text_toggle){
-                            System.out.println("Loaded text.");
             cacheLabel.setText(zone.getZoneNote());
             container.getChildren().add(cacheLabel);
         }

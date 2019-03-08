@@ -132,24 +132,14 @@ public class POELevelFx extends Application {
 
     }
 
-    public void declineUpdateFromPreload(){
-        is_new_version = false;
-        try {
-            init();
-        } catch (Exception ex) {
-            Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("test");
-    }
-
     private KeyCombination setKeybinds(Properties prop, String propertyName, String defaultValue){
         prop.setProperty(propertyName, defaultValue);
-        KeyCombination keyCombination;
+        KeyCombination keyCombination = null;
         try{
             keyCombination = KeyCombination.keyCombination(defaultValue);
-            System.out.println("key code zones: " + keyCombination.getName());
+            System.out.println("-POELevelFx- Setting keybind for : " + keyCombination.getName());
         }catch(Exception e){
-            System.out.println(":key code zones not set:");
+            System.out.println("-POELevelFx- Setting keybind for :" + keyCombination.getName() + " failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         return keyCombination;
@@ -159,12 +149,12 @@ public class POELevelFx extends Application {
         //check if hotkey is null, on older versions
         String loadProp = prop.getProperty(propertyName);
         if(loadProp == null) loadProp = defaultValue;
-        KeyCombination keyCombination;
+        KeyCombination keyCombination = null;
         try{
             keyCombination = KeyCombination.keyCombination(loadProp);
-            System.out.println("key code : " + keyCombination.getName());
+            System.out.println("-POELevelFx- Loading keybind for : " + keyCombination.getName());
         }catch(Exception e){
-            System.out.println(":incorect:");
+            System.out.println("-POELevelFx- Loading keybind for : " + keyCombination.getName() + " failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         return keyCombination;
@@ -180,7 +170,6 @@ public class POELevelFx extends Application {
 
             while(true) {
                 if(UpdaterController.allowUpdate){
-                    System.out.println("allowed");
                     UpdaterController.allowUpdate = false;
                     update();
                     break;
@@ -352,6 +341,11 @@ public class POELevelFx extends Application {
 
                           if(!(prop.getProperty("poe-dir")==null || prop.getProperty("poe-dir").equals(""))){
                               Preferences_Controller.poe_log_dir = prop.getProperty("poe-dir") + "\\logs\\Client.txt";
+
+                              System.out.println("Selected Path of exile log location : " + Preferences_Controller.poe_log_dir);
+                              System.out.println(Preferences_Controller.poe_log_dir + "\\logs\\Client.txt");
+                          }else{
+                              System.out.println("Path of exile log location is not set.");
                           }
 
                           //API
@@ -631,7 +625,7 @@ public class POELevelFx extends Application {
 
             for(Zone z : ActHandler.getInstance().getZonesWithRecipes()){
                 String thanksGGG = z.name + " [L" + z.getZoneLevel() + "]";
-                System.out.println(thanksGGG);
+                //System.out.println(thanksGGG);
                 prop.setProperty(thanksGGG, "false");
                 ActHandler.getInstance().recipeMap.put(z, false);
             }
@@ -751,9 +745,6 @@ public class POELevelFx extends Application {
         InputStream inG = new FileInputStream(gemsJSONFileName);
         Scanner sG = new Scanner(inG).useDelimiter("\\A");
         String jsonstringG = sG.hasNext() ? sG.next() : "";
-        HashSet<String> gemTags = new HashSet<>();
-        HashSet<String> activeTags = new HashSet<>();
-        HashSet<String> supportTags = new HashSet<>();
 
         //JSONObject objG = new JSONObject(jsonstringG);
         JSONArray arrG = new JSONArray(jsonstringG);
@@ -887,14 +878,7 @@ public class POELevelFx extends Application {
             //load tags - new feature
             gem.isActive = gemObj.getBoolean("isActive");
             gem.isSupport = gemObj.getBoolean("isSupport");
-            JSONArray tags = gemObj.getJSONArray("gemTags");
-            //new arraylist is in constructor
-            for(int j=0;j<tags.length();j++){
-                gem.tags.add(tags.getString(j));
-                gemTags.add(tags.getString(j));
-                if(gem.isActive) activeTags.add(tags.getString(j));
-                else supportTags.add(tags.getString(j));
-            }
+
 
             GemHolder.getInstance().putGem(gem);
             double a = (double)i/arrG.length();
@@ -903,30 +887,7 @@ public class POELevelFx extends Application {
             notifyPreloader(new NewFXPreloader.ProgressNotification(a));
         }
         System.out.println("Gem data loaded");
-        activeTags.remove("Active");
-        supportTags.remove("Support");
-        HashSet<String> active_excl = new HashSet<>();
-        HashSet<String> support_excl = new HashSet<>();
-        HashSet<String> mutual = new HashSet<>();
 
-        System.out.println("Active tags exclusive. ");
-        for(String s : activeTags){
-            if(!supportTags.contains(s)){
-                active_excl.add(s); System.out.println(s);
-            }
-        }
-        System.out.println("Support tags exclusive. ");
-        for(String s : supportTags){
-            if(!activeTags.contains(s)){
-                support_excl.add(s); System.out.println(s);
-            }
-        }
-        System.out.println("Mutual tags. ");
-        for(String s : gemTags){
-            if(!active_excl.contains(s) && !support_excl.contains(s)){
-                mutual.add(s);System.out.println(s);
-            }
-        }
 
     }
 
@@ -1084,7 +1045,7 @@ public class POELevelFx extends Application {
                             }
                             sg.getGems().add(gem);//***check line 324 in GemsPanel_Controller;
                         } else {
-                            System.out.println(gemName + " was null.");
+                            System.out.println("-POELevelFX- Trying to read"+gemName + " from GemHolder was a name mismatch for class "+build.getClassName());
                         }
                     }
                     build.getSocketGroup().add(sg);
@@ -1243,9 +1204,9 @@ public class POELevelFx extends Application {
 
         //Gson gson = new Gson();
         //String build_to_json = gson.toJson(linker.get(activeBuildID).build);
-        System.out.println(build_to_json);
+        //System.out.println(build_to_json);
         String stringValueBase64Encoded = Base64.getEncoder().encodeToString(build_to_json.getBytes());
-        System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
+        //System.out.println(build_to_json  + " when Base64 encoded is: " + stringValueBase64Encoded);
         BufferedWriter bw = null;
         FileWriter fw = null;
         boolean done = false;
@@ -1253,7 +1214,7 @@ public class POELevelFx extends Application {
             fw = new FileWriter(POELevelFx.directory+"\\Path of Leveling\\Builds\\builds.txt");
             bw = new BufferedWriter(fw);
             bw.write(stringValueBase64Encoded);
-            System.out.println("Done");
+            System.out.println("Svaed builds to "+ POELevelFx.directory+"\\Path of Leveling\\Builds\\builds.txt");
             done = true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -1422,7 +1383,6 @@ public class POELevelFx extends Application {
             is_new_version = false;
             LauncherImpl.launchApplication(POELevelFx.class, NewFXPreloader.class, args);
         }
-        System.err.println("Exiting");
     }
 
     public static void setUpDirectories(){
@@ -1511,7 +1471,6 @@ public class POELevelFx extends Application {
 
     public static void setUpLog(){
         File f = new File(POELevelFx.directory + "\\Path of Leveling\\log.txt");
-        System.out.println(f.length());
         if(f.length()>= 53287796 ){//that would be about 50mbs
             /* implement a good delete top N lines to empty some space.
             BufferedReader br = null;

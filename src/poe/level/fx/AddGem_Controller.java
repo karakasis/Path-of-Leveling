@@ -339,7 +339,7 @@ public class AddGem_Controller implements Initializable {
             public void handle(ActionEvent event) {
                 if (event.getSource() instanceof JFXCheckBox) {
                     JFXCheckBox chk = (JFXCheckBox) event.getSource();
-                    System.out.println("Action performed on checkbox " + chk.getText());
+                    //System.out.println("Action performed on checkbox " + chk.getText());
                     customCheckboxClicker(chk.getText(), chk.isSelected());
                 }
             }

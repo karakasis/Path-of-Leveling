@@ -89,7 +89,7 @@ public class GemEntry_Controller implements Initializable {
                 levelChanged();
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("GemEntry Controller spinner error : "+e.getMessage());
         }
     }
 
@@ -321,11 +321,12 @@ public class GemEntry_Controller implements Initializable {
         }
 
         if(selectedGem!= null && selectedGem.replaced){
+            /*
             if(selectedGem.replacedWith != null){
                 System.out.println(selectedGem.getGemName()+" replaces with : "+ selectedGem.replacedWith.getGemName());
             }else{
                 System.out.println(selectedGem.getGemName()+" has null replacement ");
-            }
+            }*/
 
             replaceGem.setValue(selectedGem.replacedWith);
         }else{
@@ -347,7 +348,6 @@ public class GemEntry_Controller implements Initializable {
 
     public void replaceChanged(){
         if(!lockClear){
-            System.out.println(">>Called in the middle<<");
             selectedGem.replaced = replaceToggle.isSelected();
             selectedGem.replacedWith = replaceGem.getValue();
             if(selectedGem.replaced){

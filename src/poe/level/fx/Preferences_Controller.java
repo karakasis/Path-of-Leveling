@@ -375,7 +375,6 @@ public class Preferences_Controller implements Initializable {
     //i think i dont need to load and save overlay positions here.
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.err.println("controller init called");
     gameModeOn = false;
 
     hotkeyDefaults = new HashMap<>();
@@ -601,12 +600,12 @@ public class Preferences_Controller implements Initializable {
     private KeyCombination loadKeybinds(Properties prop, String propertyName, TextField kc_field){
         String loadProp = prop.getProperty(propertyName);
         if(loadProp == null) loadProp = hotkeyDefaults.get(propertyName);
-        KeyCombination keyCombination;
+        KeyCombination keyCombination = null;
         try{
             keyCombination = KeyCombination.keyCombination(loadProp);
-            System.out.println("key code : " + keyCombination.getName());
+            System.out.println("-Preferences- Loaded key code : " + keyCombination.getName() + " for "+ propertyName);
         }catch(Exception e){
-            System.out.println(":incorect:");
+            System.out.println("-Preferences- Loading key code : " + keyCombination.getName() + " for "+ propertyName+" failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         kc_field.setText(loadProp);
@@ -615,12 +614,12 @@ public class Preferences_Controller implements Initializable {
 
     private KeyCombination saveKeybinds(Properties prop, String propertyName, String kc_field_text){
         prop.setProperty(propertyName, kc_field_text);
-        KeyCombination keyCombination;
+        KeyCombination keyCombination = null;
         try{
             keyCombination = KeyCombination.keyCombination(kc_field_text);
-            System.out.println(" Saved key code zones: " + keyCombination.getName());
+            System.out.println("-Preferences- Saved key code : " + keyCombination.getName()+ " for "+propertyName);
         }catch(Exception e){
-            System.out.println(":incorect:");
+            System.out.println("-Preferences- Saving key code : " + keyCombination.getName()+ " for "+propertyName + " failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         return keyCombination;
@@ -658,11 +657,11 @@ public class Preferences_Controller implements Initializable {
             kc_temp = KeyCombination.keyCombination(key_bind);
             isBeingUsed(kc_temp,nodeID);
             kc_field.setText(key_bind);
-            System.out.println("key code : " + kc_temp.getName());
+            //System.out.println("key code : " + kc_temp.getName());
             //zones_hotkey_show_hide_key = keyCombination;
         }catch(IllegalArgumentException e){
             kc_field.setText("");
-            System.out.println(":incorect:");
+            //System.out.println(":incorect:");
             kc_temp = KeyCombination.NO_MATCH;
         }finally{
             key_bind = "";
@@ -1121,14 +1120,9 @@ public class Preferences_Controller implements Initializable {
         directoryChooser.setTitle("Locate Path of Exile Installation Folder");
         File selectedDirectory = directoryChooser.showDialog(root.parent.getScene().getWindow());
 
-        if(selectedDirectory == null){
-             //No Directory selected
-             //do something ?
-
-        }else{
+        if (selectedDirectory != null) {
              directory = selectedDirectory.getAbsolutePath();
-             System.out.println(selectedDirectory.getAbsolutePath());
-             //String directoryA = directory + "\\logs\\Client.txt";
+             System.out.println("Selected new log location : " + selectedDirectory.getAbsolutePath());
              System.out.println(directory + "\\logs\\Client.txt");
              //System.out.println(directoryA);
              poe_installation.setText(directory);
