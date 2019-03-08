@@ -1,14 +1,14 @@
 # Path of Leveling
 
 **read this**
->Since a lot of people seem to have the misconception that this is a Path of Building reader.  
->  
->Don't try to import a Pastebin that contains a Path of Building file via Import ..  
->  
->**it will not work**.  
->  
->This application **loads its own files**. You can import pastebin's that contain **ONLY** a Path of Leveling file, either  **created by you within the editor, or distributed by someone else in the community** .  
->  
+>Since a lot of people seem to have the misconception that this is a Path of Building reader.
+>
+>Don't try to import a Pastebin that contains a Path of Building file via Import ..
+>
+>**it will not work**.
+>
+>This application **loads its own files**. You can import pastebin's that contain **ONLY** a Path of Leveling file, either  **created by you within the editor, or distributed by someone else in the community** .
+>
 >If you wish to simply **link** your Path of Building file with a certain build, please **use option Path of Building> Link active build with POB**. Once you have done this you can share your **Path of Leveling** build buy exporting it to Pastebin. The new Pastebin link will contain both of the "files" and it can only be opened with Path of Leveling. Thank you.
 
 **This is an alpha version, bugs included**
@@ -26,7 +26,7 @@
 This program currently does three things!
 - **Plan your leveling by selecting gems and links.** You can create complicated transitions between your gem setup, swap a gem for another one, or completely remove a Skill group for a different one. Get a popup on your in-game overlay when you reach certain levels.
 - **Navigate through the game's acts, with graphic representations from [Engineering Eternity](https://www.youtube.com/channel/UCaFHfrY-6uGSAvmczp_7a6Q/featured)** You can move the overlay around to suit your own needs. *Supporting only 1080p at this moment*
-- **Track your XP and find out when you are under/overleveled**. You can move the overlay around to suit your own needs. 
+- **Track your XP and find out when you are under/overleveled**. You can move the overlay around to suit your own needs.
 
 ## How does it work
 
@@ -38,7 +38,7 @@ Basically the images displayed, are pre-generated and are not in any way depende
 
 This can be done by using pen and paper.
 
-The Tailer is reading the log, and triggers on "entered zone .. " and " is now level .." . 
+The Tailer is reading the log, and triggers on "entered zone .. " and " is now level .." .
 
 That's all. Everything else is code.
 
@@ -46,7 +46,7 @@ That's all. Everything else is code.
 
 - Run PathOfLeveling.jar (Java 8 required) - *[download java](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) jre-8u191-windows-x64.exe at the time of writting this*
 - Click the preferences gear button.
-- Select your Path of Exile folder located in Steam or Grinding Gear Games folder. 
+- Select your Path of Exile folder located in Steam or Grinding Gear Games folder.
 
 **C:\Program Files (x86)\Grinding Gear Games\Path of Exile**
 - Save changes.
@@ -57,7 +57,7 @@ That's all. Everything else is code.
 *Will be updating this with a better write-down*
 
 - Make sure to click Run > Validate and view leveling progress, to get a visual representation of your gem setup.
-- Make sure to click Run > Validate and return to Launcher, to return to Launcher (Humility panel) and select your build to continue.
+- Make sure to click Run > Validate All and return to Launcher, to return to Launcher (Humility panel) and select your build to continue.
 
 ## Known bugs
 *Will be updating this*
@@ -71,18 +71,18 @@ That's all. Everything else is code.
 
 Mentioned in the reddit comments :
 
->~~Is it possible to add notes to the socket groups (e.g. off hand corruption purposes, writing down how much dps increase a 3-4 link is in comparison~~ done  
->  
->~~A confirmation button if you accidentally press the minus for build creation~~ done  
->  
->~~Do something so we can see the rewards of quest so we can skip the quest that don’t give passive points / respect points~~  done  
->  
->~~Add the ability to "clone" a socket group~~ done  
->  
->The "socket group" name should include the levels for which it is active  
->  
->~~I recommend putting a box around "Start". Similar to how there is one around "Build" and "Editor"~~. done  
->  
+>~~Is it possible to add notes to the socket groups (e.g. off hand corruption purposes, writing down how much dps increase a 3-4 link is in comparison~~ done
+>
+>~~A confirmation button if you accidentally press the minus for build creation~~ done
+>
+>~~Do something so we can see the rewards of quest so we can skip the quest that don’t give passive points / respect points~~  done
+>
+>~~Add the ability to "clone" a socket group~~ done
+>
+>The "socket group" name should include the levels for which it is active
+>
+>~~I recommend putting a box around "Start". Similar to how there is one around "Build" and "Editor"~~. done
+>
 >There is no way to get back to the options menu once the start button has been pushed
 
 If you have a suggestion I encourage you to start an issue.
@@ -99,9 +99,9 @@ I have no affiliation whatsoever with the developers.
 - Now if you export your build, and it is linked to Path of Building, the pastebin IS INCLUDED.
 That means that you only need 1 pastebin link that will contain both a PoL build and a PoB build.
 
- 
+
  __Reddit requests__
-- It is now possible to add notes to the socket groups. You can find the new icon on 
+- It is now possible to add notes to the socket groups. You can find the new icon on
 the top of the left panel in the editor.
 - It is now possible to duplicate socket groups. You can find the new icon on the top
 of the left panel in the editor.
@@ -109,13 +109,13 @@ of the left panel in the editor.
 - You now get prompts when deleting a build, and when you close the editor from the X icon.
    Also the application no longers terminates, instead it returns to the Launcher screen.
  - Slightly moved the Poets pen that was blocking the Editor button, and placed it below the button.
-   
+
  __Bug fixes__
 - Fixed a bug, where you had to select XP option, no matter what, or you would get no overlays.
  - - Now every option is independent, but running only the Zones options, now requests for
  character name and player level.
  - Fixed major bug, that forced application to update to itself, falling into a loop.  Hopefully, it is solved now.
- 
+
  __Changes__
 - Adjusted logs to provide less and more useful information
 
@@ -138,7 +138,7 @@ New in this release:
 - Pastebin support
 - Exporting and importing one or all builds
 - Keybindings with JNA Hooks
-- Now gems are properly distributed in each class. 
+- Now gems are properly distributed in each class.
 - - You can now find some of the gems in Act 6 tab, and the drop-only gems on Drop only tab.
 - Added a pop-up before starting a session that holds your character name and current level.
 - - This is a fix to an issue, where when leveling in a party your level would get updated when other people leveled up.
@@ -152,8 +152,8 @@ New in this release:
 [![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XKQ7R4AWWVFR4)
 
 *Some final words,*
-  
+
     I am a pre graduate Student of Computer Science and this project is far from being professional or completed.
-    As far as future update of this,I am planning to update the programm to keep up with the newest expansions. 
+    As far as future update of this,I am planning to update the programm to keep up with the newest expansions.
     Im hoping to fix some major issues at February of 2019, when I will have some spare time.
     If anyone is interested in helping, improving or anything on this project let me know!
