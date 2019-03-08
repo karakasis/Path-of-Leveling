@@ -85,11 +85,11 @@
             <Font name="System Italic" size="9.0" />
          </font>
       </Label>
-      <JFXToggleButton fx:id="images_toggle" alignment="CENTER_LEFT" layoutX="7.0" layoutY="228.0" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" text="Show images " AnchorPane.leftAnchor="20.0">
+      <JFXToggleButton fx:id="images_toggle" alignment="CENTER_LEFT" layoutX="7.0" layoutY="228.0" onAction="#toggleZonesImages" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" text="Show images " AnchorPane.leftAnchor="20.0">
          <font>
             <Font name="Trebuchet MS" size="13.0" />
          </font></JFXToggleButton>
-      <JFXToggleButton fx:id="text_toggle" alignment="CENTER_LEFT" layoutX="143.0" layoutY="228.0" prefHeight="47.0" prefWidth="150.0" selected="true" size="6.0" text="Show text" AnchorPane.leftAnchor="163.0">
+      <JFXToggleButton fx:id="text_toggle" alignment="CENTER_LEFT" layoutX="143.0" layoutY="228.0" onAction="#toggleZonesText" prefHeight="47.0" prefWidth="150.0" selected="true" size="6.0" text="Show text" AnchorPane.leftAnchor="163.0">
          <font>
             <Font name="Trebuchet MS" size="13.0" />
          </font></JFXToggleButton>

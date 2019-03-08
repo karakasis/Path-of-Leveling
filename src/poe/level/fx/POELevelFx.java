@@ -57,11 +57,11 @@ public class POELevelFx extends Application {
     /***************************************************************************
      * Change to true if a build is being pushed to the master branch for public release.
      ***************************************************************************/
-    public static final boolean MASTER_RELEASE = false;
+    public static final boolean MASTER_RELEASE = true;
     /*************************************************************************************/
     /* Update this when you are pushing a new release version, must match the GitHub release name!
     **************************************************************************************/
-    public static final String version = "v0.7-alpha";
+    public static final String version = "v0.7-beta";
 
 
     public static boolean DEBUG = false;
@@ -198,8 +198,8 @@ public class POELevelFx extends Application {
             hotkeyDefaults.put("level-hotkey-remind","F5");
             hotkeyDefaults.put("recipe-hotkey-mark","F6");
             hotkeyDefaults.put("recipe-hotkey-preview","F7");
-            hotkeyDefaults.put("level-hotkey-beta-next","F8");
-            hotkeyDefaults.put("level-hotkey-beta-previous","F9");
+            hotkeyDefaults.put("level-hotkey-beta-next","Left");
+            hotkeyDefaults.put("level-hotkey-beta-previous","Right");
             hotkeyDefaults.put("lock-keybinds","F12");
 
             if (!new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").isFile()) {

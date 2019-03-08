@@ -382,8 +382,8 @@ public class Preferences_Controller implements Initializable {
     hotkeyDefaults.put("level-hotkey-remind","F5");
     hotkeyDefaults.put("recipe-hotkey-mark","F6");
     hotkeyDefaults.put("recipe-hotkey-preview","F7");
-    hotkeyDefaults.put("level-hotkey-beta-next","F8");
-    hotkeyDefaults.put("level-hotkey-beta-previous","F9");
+    hotkeyDefaults.put("level-hotkey-beta-next","Right");
+    hotkeyDefaults.put("level-hotkey-beta-previous","Left");
     hotkeyDefaults.put("lock-keybinds","F12");
 
         // TODO
@@ -1047,8 +1047,11 @@ public class Preferences_Controller implements Initializable {
                     prop.setProperty("zones-slider", String.valueOf(zones_slider));
                     prop.setProperty("level-slider", String.valueOf(level_slider));
 
-                    poe_log_dir = directory + "\\logs\\Client.txt";
-                    prop.setProperty("poe-dir",directory);
+                    if(!(directory == null || directory.isEmpty())){
+                        poe_log_dir = directory + "\\logs\\Client.txt";
+                        prop.setProperty("poe-dir",directory);
+                    }
+
 
                     //API
                     poe_account_name = txtAccountName.getText();
@@ -1098,6 +1101,20 @@ public class Preferences_Controller implements Initializable {
             parent_gameModeOn.closePlaceholderStage();
         } else {
             Logger.getLogger(Preferences_Controller.class.getName()).info("No way to close this controller in cancel()");
+        }
+    }
+
+    @FXML
+    private void toggleZonesImages(){
+        if(!images_toggle.isSelected() && !text_toggle.isSelected()){
+            text_toggle.setSelected(true);
+        }
+    }
+
+    @FXML
+    private void toggleZonesText(){
+        if(!images_toggle.isSelected() && !text_toggle.isSelected()){
+            images_toggle.setSelected(true);
         }
     }
 
