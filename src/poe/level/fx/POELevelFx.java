@@ -15,9 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
@@ -59,7 +57,10 @@ public class POELevelFx extends Application {
      * Change to true if a build is being pushed to the master branch for public release.
      ***************************************************************************/
     public static final boolean MASTER_RELEASE = false;
-    /******************************************************/
+    /*************************************************************************************/
+    /* Update this when you are pushing a new release version, must match the GitHub release name!
+    **************************************************************************************/
+    public static final String version = "v0.65-alpha";
 
 
     public static boolean DEBUG = false;
@@ -81,34 +82,31 @@ public class POELevelFx extends Application {
     private Stage main;
     private Stage editor;
     private Stage leveling;
-    private static String update_path_prefix = "https://github.com/karakasis/Path-of-Leveling/releases/download/";
-    private static String update_path_suffix = "/PathOfLeveling.jar";
-    private static String version = "v0.65-alpha";
+    private static GithubHelper.ReleaseInfo newReleaseInfo = null;
     private static boolean is_new_version;
     //v0.5-alpha <- between
 
     public void update() {
-            URL url;
+        assert (newReleaseInfo != null);
+        URL url;
 
-            try{
-            url = new URL(update_path_prefix + "" + POELevelFx.version + "" + update_path_suffix);
+        String outFileName = "PathOfLeveling-" + newReleaseInfo.version + ".jar";
+        try {
+            url = new URL(newReleaseInfo.downloadURL);
             HttpURLConnection httpConnection = (HttpURLConnection) (url.openConnection());
-            long completeFileSize = httpConnection.getContentLength();
-            UpdaterController.finalSize = completeFileSize;
-            java.io.BufferedInputStream in = new java.io.BufferedInputStream(httpConnection.getInputStream());
-            java.io.FileOutputStream fos = new java.io.FileOutputStream(
-            "PathOfLeveling-"+POELevelFx.version+".jar");
-            java.io.BufferedOutputStream bout = new BufferedOutputStream(
-            fos, 1024);
-            byte[] data = new byte[1024];
+            BufferedInputStream in = new java.io.BufferedInputStream(httpConnection.getInputStream());
+            FileOutputStream fos = new java.io.FileOutputStream(outFileName);
+            int bufferSize = 8192;
+            BufferedOutputStream bout = new BufferedOutputStream(fos, bufferSize);
+            byte[] data = new byte[bufferSize];
             long downloadedFileSize = 0;
-            int x = 0;
-            while ((x = in.read(data, 0, 1024)) >= 0) {
-                if(UpdaterController.cancelDownload){
+            int x;
+            while ((x = in.read(data, 0, bufferSize)) >= 0) {
+                if (UpdaterController.cancelDownload) {
                     bout.close();
                     in.close();
-                    File file = new File("PathOfLeveling-"+POELevelFx.version+".jar");
-                    file.delete() ;
+                    File file = new File(outFileName);
+                    file.delete();
                     try {
                         init();
                     } catch (Exception ex) {
@@ -116,21 +114,19 @@ public class POELevelFx extends Application {
                     }
                     break;
                 }
-            downloadedFileSize += x;
+                downloadedFileSize += x;
 
-            notifyPreloader(new UpdatePreloader.ProgressNotification(downloadedFileSize));
+                notifyPreloader(new UpdatePreloader.ProgressNotification(downloadedFileSize));
 
 
-            //System.out.println(downloadedFileSize);
-            bout.write(data, 0, x);
+                //System.out.println(downloadedFileSize);
+                bout.write(data, 0, x);
             }
             bout.close();
             in.close();
-            } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            } catch (IOException e) {
-            e.printStackTrace();
-            }
+        }
 
 
     }
@@ -1382,6 +1378,7 @@ public class POELevelFx extends Application {
      */
     public static void main(String[] args) {
         // Negate the following if you want to test release mode
+        // .gitignore shouldn't exist in the release environment, if it doesn't exist, then play nice, no debuggery.
         if (Files.exists(Paths.get("./.gitignore"))) {
             System.out.println("Detected that we're running in a development environment");
             DEBUG = true;
@@ -1396,6 +1393,9 @@ public class POELevelFx extends Application {
         if (!DEBUG) {
             if (checkForNewVersion()) {
                 is_new_version = true;
+                // New release info should NEVER be null here!
+                assert (newReleaseInfo != null);
+                UpdaterController.newReleaseInfo = newReleaseInfo;
                 LauncherImpl.launchApplication(POELevelFx.class, UpdatePreloader.class, args);
             } else {
                 is_new_version = false;
@@ -1568,41 +1568,19 @@ public class POELevelFx extends Application {
     }
 
     public static boolean checkForNewVersion(){
-        URL url;
-            String input = "";
-            try {
-                // get URL content
+        GithubHelper.ReleaseInfo releaseInfo = GithubHelper.getLatestReleaseInfo();
+        if (releaseInfo == null) {
+            return false;
+        }
 
-                String a="https://raw.githubusercontent.com/karakasis/Path-of-Leveling/master/version.txt";
-                url = new URL(a);
-                URLConnection conn = url.openConnection();
-
-                // open the stream and put it into BufferedReader
-                BufferedReader br = new BufferedReader(
-                        new InputStreamReader(conn.getInputStream()));
-
-                input = br.readLine();
-                br.close();
-
-                System.out.println("Done");
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return false;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-
-            String new_git_version = input;
-            System.out.println("Current Version: "+POELevelFx.version);
-            System.out.println("New Version: "+new_git_version);
-            if(!POELevelFx.version.equals(new_git_version)){
-                POELevelFx.version = new_git_version;
-                return true;
-            }else{
-                return false;
-            }
+        System.out.println("Current Version: " + POELevelFx.version);
+        System.out.println("New Version: " + releaseInfo.version);
+        if(!POELevelFx.version.equalsIgnoreCase(releaseInfo.version)){
+            POELevelFx.newReleaseInfo = releaseInfo;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void checkForNewJSON() {

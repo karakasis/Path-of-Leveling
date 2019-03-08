@@ -8,13 +8,17 @@ package poe.level.fx;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXProgressBar;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import poe.level.data.GithubHelper;
 
 /**
  * FXML Controller class
@@ -41,9 +45,13 @@ public class UpdaterController implements Initializable {
     private JFXButton cancelUpdate;
     @FXML
     private Label lblUpdate;
+    @FXML
+    private TextArea txtReleaseNotes;
+    @FXML
+    private Label lblWarningText;
 
 
-    public static long finalSize;
+    public static GithubHelper.ReleaseInfo newReleaseInfo;
 
     private static double SPACE_KB = 1024;
     private static double SPACE_MB = 1024 * SPACE_KB;
@@ -56,9 +64,7 @@ public class UpdaterController implements Initializable {
     public static boolean declUpdate;
     public static boolean waitForInput;
 
-    private POELevelFx root;
-
-    public static String bytes2String(long sizeInBytes) {
+    private static String bytes2String(long sizeInBytes) {
 
         NumberFormat nf = new DecimalFormat();
         nf.setMaximumFractionDigits(2);
@@ -80,21 +86,26 @@ public class UpdaterController implements Initializable {
         }
 
     }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         initialized = false;
         cancelDownload = false;
         allowUpdate = false;
         declUpdate = false;
         waitForInput= true;
-    }
-
-    public void hookMain(POELevelFx root){
-        this.root = root;
+        lblUpdate.setText("Version " + newReleaseInfo.version + " is available. Do you wish to update? (" + bytes2String(newReleaseInfo.byteSize) + ")");
+        txtReleaseNotes.setText(newReleaseInfo.releaseNotes);
+        String updatedJarName = "PathOfLeveling-" + newReleaseInfo.version + ".jar";;
+        if (Files.exists(Paths.get(updatedJarName))) {
+            lblWarningText.setText("Notice: it appears that you have already downloaded this file. Make sure you ran " + updatedJarName);
+            lblWarningText.setVisible(true);
+        } else {
+            lblWarningText.setVisible(false);
+        }
     }
 
     @FXML
@@ -122,12 +133,12 @@ public class UpdaterController implements Initializable {
 
     public void notify(Double prog){
         if(!initialized){
-            final_label.setText("/" + (bytes2String(finalSize)));
+            final_label.setText("/" + (bytes2String(newReleaseInfo.byteSize)));
             initialized = true;
         }
         String done = (bytes2String((long)(double)prog));
         label.setText(done);
-        Double progress_made = prog/finalSize;
+        Double progress_made = prog/newReleaseInfo.byteSize;
         progressbar.setProgress(progress_made);
         //label.setText(prog.intValue() + " %");
     }
