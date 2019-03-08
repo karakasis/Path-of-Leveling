@@ -39,7 +39,7 @@ import poe.level.fx.Preferences_Controller;
  * @author Christos
  */
 public class GemOverlay_Stage extends Stage{
-    
+
     ArrayList<Integer> level_list;
     ArrayList<Gem> gemsOnThisLevel_local;
     HashSet<Integer> totalLevels;
@@ -47,16 +47,16 @@ public class GemOverlay_Stage extends Stage{
     HashMap<Gem,SocketGroup> gemToSocket_map;
     GemOverlay_Controller controller;
     GemOverlayBeta_Controller controller_beta;
-    
-    
+
+
     public static double prefX;
     public static double prefY;
-    
+
     private boolean isPlaying;
     private boolean betaUI;
 
     public GemOverlay_Stage(Build build,boolean betaUi){
-        
+
         generateLevels(build);
         betaUI = betaUi;
         this.setAlwaysOnTop(true);
@@ -64,13 +64,13 @@ public class GemOverlay_Stage extends Stage{
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         //double screenRightEdge = primScreenBounds.getMaxX() ;
         //if the settings are on default load the optimized settings based on screen measurements
-        if(Preferences_Controller.gem_overlay_pos[0] == -200 
+        if(Preferences_Controller.gem_overlay_pos[0] == -200
                 && Preferences_Controller.gem_overlay_pos[1] == -200){
-            
+
             double screenRightEdge = primScreenBounds.getMinX();
             prefX = screenRightEdge;
             prefY = primScreenBounds.getMinY();
-            
+
             Preferences_Controller.updateGemsPos(prefX, prefY);
         }else{
             prefX = Preferences_Controller.gem_overlay_pos[0];
@@ -125,7 +125,7 @@ public class GemOverlay_Stage extends Stage{
                 }
             }
         }
-        
+
         totalLevels = new HashSet<>();
         gemsOnLevelsMap = new HashMap<>();
         gemToSocket_map = new HashMap<>();
@@ -141,7 +141,7 @@ public class GemOverlay_Stage extends Stage{
 		}
 
 	});
-        
+
         //here we add each gem to according level it gets added.
         for(SocketGroup sg : sorted_sg){
             for(Gem g : sg.getGems()){
@@ -157,18 +157,18 @@ public class GemOverlay_Stage extends Stage{
             }
         }
 
-        
+
         //int totalLevelPoints = totalLevels.size();
         //int baselineSize = totalLevelPoints*100;
-        
+
         //now we need to implement the visual offset for each level.
         level_list = new ArrayList<>();
         level_list.addAll(totalLevels);
         Collections.sort(level_list);
-        
-        
+
+
     }
-    
+
     public void loadFXML(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/GemOverlay.fxml"));
         AnchorPane ap = null;
@@ -178,7 +178,7 @@ public class GemOverlay_Stage extends Stage{
             Logger.getLogger(GemOverlay_Stage.class.getName()).log(Level.SEVERE, null, ex);
         }
         controller = loader.<GemOverlay_Controller>getController();
-        
+
         Scene scene = new Scene(ap);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         scene.setFill(Color.TRANSPARENT);
@@ -186,7 +186,7 @@ public class GemOverlay_Stage extends Stage{
 
         this.setScene(scene);
         controller.hookStage(this);
-        
+
         this.show();
     }
 
@@ -214,19 +214,30 @@ public class GemOverlay_Stage extends Stage{
     }
 
     public void fade(){
-        controller_beta.show();
+        if (betaUI) {
+            controller_beta.show();
+        } else {
+            show();
+        }
         //apply fade
 
         WritableValue<Double> opacity = new WritableValue<Double>() {
             @Override
             public Double getValue() {
-
-                return controller_beta.getOpacity();
+                if (betaUI) {
+                    return controller_beta.getOpacity();
+                } else {
+                    return getOpacity();
+                }
             }
 
             @Override
             public void setValue(Double value) {
-                controller_beta.fade(value);
+                if (betaUI) {
+                    controller_beta.fade(value);
+                } else {
+                    setOpacity(value);
+                }
             }
         };
 
@@ -250,59 +261,73 @@ public class GemOverlay_Stage extends Stage{
         KeyFrame kf_slideIn2 = new KeyFrame(Duration.millis(1000), kv2);
 
         fadeOut.getKeyFrames().add(kf_slideIn2);
-        fadeOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending");isPlaying = false; controller_beta.hide(); controller_beta.defaultTitle();}));
+        fadeOut.setOnFinished(e -> Platform.runLater(() -> {
+            System.out.println("Ending");
+            isPlaying = false;
+            if (betaUI) {
+                controller_beta.hide();
+                controller_beta.defaultTitle();
+            } else {
+                this.hide();
+            }
+        }));
 
         fadeIn.play();
         isPlaying = true;
     }
 
-    public void animate(){
-        
-        
+    // If you want to slide something in from the left edge.
+    /*public void animate(){
+
+
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         //double screenRightEdge = primScreenBounds.getMaxX() ;
         double screenRightEdge = primScreenBounds.getMinX();
-        this.setX(prefX);
-        this.setY(prefY);
         double cur_width = this.getWidth();
-        this.setWidth(0);
-        this.setHeight(primScreenBounds.getHeight());
+        this.setX(prefX - cur_width );
+        this.setY(prefY);
+//        this.setWidth(0);
+//        this.setHeight(primScreenBounds.getHeight());
 
 
         WritableValue<Double> writableWidth = new WritableValue<Double>() {
+            double lastVal = 0.0;
             @Override
             public Double getValue() {
-
-                return getWidth();
-                //return getY();
+                return getX();
             }
 
             @Override
             public void setValue(Double value) {
-                 //setY(screenRightEdge + value);
-                setWidth(value);
+                if (value != lastVal) {
+                    setX(value);
+                }
+                lastVal = value;
             }
         };
 
         Timeline slideIn = new Timeline();
-       
-        KeyValue kv = new KeyValue(writableWidth, cur_width);
+
+        KeyValue kv = new KeyValue(writableWidth, 0d);
         KeyFrame kf_slideIn = new KeyFrame(Duration.millis(500), kv);
         KeyFrame kf_delay = new KeyFrame(Duration.millis(Preferences_Controller.level_slider * 1000));
         slideIn.getKeyFrames().addAll(kf_slideIn,kf_delay);
 
         Timeline slideOut = new Timeline();
-        KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 0d));
+        KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, -cur_width));
         slideOut.getKeyFrames().add(kf_slideOut);
-        
+
         slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending");isPlaying = false; this.hide();}));
-        slideIn.setOnFinished(e -> Platform.runLater(() -> slideOut.play()));
+        slideIn.setOnFinished(e -> Platform.runLater(() -> {
+            System.out.println("slide in Ending");
+            slideOut.play();
+            }));
 
         this.show();
         slideIn.play();
         isPlaying = true;
-    }
-    
+    }*/
+
     public void update(int level){
         if(level_list.contains(level) && !isPlaying){
             reset();
@@ -315,7 +340,7 @@ public class GemOverlay_Stage extends Stage{
                     Gem add_this = g;
                     Gem remove_this = gemToSocket_map.get(g).getGroupThatReplaces().getActiveGem();
                     sg_replace(add_this,remove_this);
-                    
+
                 }
                 if(g.replaces){
                     Gem add_this = g;
@@ -336,7 +361,7 @@ public class GemOverlay_Stage extends Stage{
             System.err.println("A level animation is currently playing");
         }
     }
-    
+
     public void event_remind(){
         if(!isPlaying){
             System.err.println("Reminding gems.");
@@ -348,7 +373,7 @@ public class GemOverlay_Stage extends Stage{
                     Gem add_this = g;
                     Gem remove_this = gemToSocket_map.get(g).getGroupThatReplaces().getActiveGem();
                     sg_replace(add_this,remove_this);
-                    
+
                 }
                 if(g.replaces){
                     Gem add_this = g;
@@ -378,10 +403,7 @@ public class GemOverlay_Stage extends Stage{
     }
 
     public void startAnimation(){
-        if(betaUI)
-            fade();
-        else
-            animate();
+       fade();
     }
 
     private void reset(){
