@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.URL;
 import java.util.Calendar;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GithubHelper {
@@ -17,6 +18,7 @@ public class GithubHelper {
     private final String m_repoOwner;
     private final String m_branch;
     private String m_branchSHA;
+    private static boolean m_rateLimited = false;
 
     public GithubHelper(String repoOwner, String branch) {
         m_logger.info("Initializing new GithubHelper for " + repoOwner + " on the " + branch + " branch.");
@@ -25,10 +27,17 @@ public class GithubHelper {
     }
 
     public boolean init() {
-        return getBranchSha();
+        if (!m_rateLimited) {
+            return getBranchSha();
+        }
+        return false;
     }
 
     public void downloadGemsJsonFileIfNeeded(File outputFile, File outputTimeFile) throws IOException {
+        if (m_rateLimited) {
+            m_logger.warning("Not checking for " + outputFile.getName() + " update due to rate limiting. Try back in a little bit.");
+            return;
+        }
         if (m_branchSHA == null) {
             // If we don't know what the default branch is on a repository, we need the SHA to be able to query on other branches.
             throw new IllegalStateException("Can't query Github for commit information without the branch SHA.");
@@ -45,6 +54,10 @@ public class GithubHelper {
     }
 
     public void downloadDataJsonFileIfNeeded(File outputFile, File outputTimeFile) throws IOException {
+        if (m_rateLimited) {
+            m_logger.warning("Not checking for " + outputFile.getName() + " update due to rate limiting. Try back in a little bit.");
+            return;
+        }
         if (m_branchSHA == null) {
             // If we don't know what the default branch is on a repository, we need the SHA to be able to query on other branches.
             throw new IllegalStateException("Can't query Github for commit information without the branch SHA.");
@@ -58,6 +71,48 @@ public class GithubHelper {
         } else {
             m_logger.info("Detected that the " + outputFile.getPath() + " is up to date.");
         }
+    }
+
+    public static ReleaseInfo getLatestReleaseInfo() {
+        if (m_rateLimited) {
+            m_logger.warning("Not checking for a new release due to rate limiting. Try back in a little bit.");
+            return null;
+        }
+        Util.HttpResponse response = Util.httpToString("https://api.github.com/repos/karakasis/Path-of-Leveling/releases");
+        if (response.responseCode == 200) {
+            try {
+                JSONArray releaseArray = new JSONArray(response.responseString);
+                ReleaseInfo info = new ReleaseInfo();
+                for (int releaseIdx = 0; releaseIdx < releaseArray.length(); releaseIdx++) {
+                    JSONObject releaseObj = releaseArray.getJSONObject(releaseIdx);
+                    if ("master".equalsIgnoreCase(releaseObj.getString("target_commitish")) ) {
+                        info.version = releaseObj.getString("name").trim();
+                        JSONArray assetsArr = releaseObj.getJSONArray("assets");
+                        boolean found = false;
+                        for (int i = 0; i < assetsArr.length(); i++) {
+                            JSONObject assetObj = assetsArr.getJSONObject(i);
+                            if ("PathOfLeveling.jar".equalsIgnoreCase(assetObj.getString("name").trim())) {
+                                found = true;
+                                info.byteSize = assetObj.getLong("size");
+                                info.downloadURL = assetObj.getString("browser_download_url");
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            m_logger.warning("Failed to find the PathOfLeveling.jar asset!");
+                            return null;
+                        }
+                        info.releaseNotes = releaseObj.getString("body");
+                        m_logger.info("Latest release is: " + info);
+                        return info;
+                    }
+                }
+                m_logger.warning("Failed to find a master release somehow");
+            } catch (Exception ex) {
+                m_logger.log(Level.SEVERE, "Exception while parsing release information: " + ex.getMessage(), ex);
+            }
+        }
+        return null;
     }
 
     private String isJsonDownloadNeeded(String metadataURL, File outputFile, File outputTimeFile) throws IOException {
@@ -159,6 +214,43 @@ public class GithubHelper {
         Util.downloadFile(remoteURL, outputFile);
         try (FileWriter writer = new FileWriter(outputTimeFile, false)) {
             writer.write(commitTime);
+        }
+    }
+
+    /**
+     * Check that we aren't rate limited, since future queries will fail with 403 if we are.
+     * We leave a buffer of 4 just for giggles.
+     */
+    public static void checkRateLimited() {
+        Util.HttpResponse response = Util.httpToString("https://api.github.com/rate_limit");
+        if (response.responseCode == 200) {
+
+            try {
+                int remainingUnits = new JSONObject(response.responseString).getJSONObject("resources").getJSONObject("core").getInt("remaining");
+                if (remainingUnits < 5) {
+                    m_logger.severe("******************* We are GitHub rate limited, update checking disabled!");
+                    m_rateLimited = true;
+                }
+            } catch (JSONException je) {
+                m_logger.log(Level.WARNING, "Caught JSONException checking for GitHub rate limit: " + je.getMessage(), je);
+            }
+        }
+    }
+
+    public static class ReleaseInfo {
+        public String version;
+        public long byteSize;
+        public String releaseNotes;
+        public String downloadURL;
+
+        @Override
+        public String toString() {
+            return "ReleaseInfo{" +
+                "version='" + version + '\'' +
+                ", byteSize=" + byteSize +
+                ", releaseNotes='" + releaseNotes + '\'' +
+                ", downloadURL='" + downloadURL + '\'' +
+                '}';
         }
     }
 }

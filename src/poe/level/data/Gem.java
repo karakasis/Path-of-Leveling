@@ -10,6 +10,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Label;
@@ -21,7 +22,7 @@ import javafx.scene.image.ImageView;
  * @author Christos
  */
 public class Gem {
-    
+
     public class Info{
         public String quest_name;
         public String npc;
@@ -29,12 +30,12 @@ public class Gem {
         public String town;
         public ArrayList<String> available_to;
     }
-    
+
     public transient Image gemIcon;
     public transient Image smallGemIcon;
     public int id;
-    
-    public String name;
+
+    private String name;
     public String quest_name;
     public String npc;
     public int act;
@@ -46,26 +47,27 @@ public class Gem {
     public String color;
     public String iconPath;
     public transient Label cachedLabel;
-    
+
     public String iconDirPath;
-    
+
     public boolean replaced;
     public Gem replacedWith;
     public boolean replaces;
     public Gem replacesGem;
-    
+
     //IDS FOR JSON CONVERTION
     public int id_replaced;
     public int id_replaces;
-    
+
     public boolean isRewarded;
     public Info reward;
     public ArrayList<Info> buy;
-    
+
     public boolean isActive;
     public boolean isSupport;
     public HashSet<String> tags;
-    
+    public HashSet<String> alt_name = null;
+
     public boolean isBought(){
         if(buy.size()>0){
             return true;
@@ -73,8 +75,9 @@ public class Gem {
             return false;
         }
     }
-    
-     public Gem(){
+
+     public Gem(String gemName) {
+        name = gemName;
         available_to = new ArrayList<>();
         level_added = -1;
         replaced = false;
@@ -86,7 +89,18 @@ public class Gem {
         id_replaces = -1;
         tags = new HashSet<>();
     }
-    
+
+    public void addAltNamesFromJSON(Iterator<Object> jsonArrayIterator) {
+        if (jsonArrayIterator.hasNext()) {
+            alt_name = new HashSet<>();
+        }
+        while (jsonArrayIterator.hasNext()) {
+            String altName = (String) jsonArrayIterator.next();
+            alt_name.add(altName);
+            System.out.println("Adding alt name for " + name + ": " + altName);
+        }
+    }
+
     public Gem(Gem dupe){
         available_to = new ArrayList<>();
         level_added = -1;
@@ -117,33 +131,48 @@ public class Gem {
         this.tags = new HashSet<>(dupe.tags);
         this.isActive = dupe.isActive;
         this.isSupport = dupe.isSupport;
+        if (dupe.alt_name != null) {
+            this.alt_name = new HashSet<>(dupe.alt_name);
+        }
     }
-    
+
     public int getLevelAdded(){
         if(level_added!=-1){
             return level_added;
         }else
             return required_lvl;
     }
-    
+
     public Image getIcon(){
         //hopefully resized
         return gemIcon;
     }
-    
+
     public Image getSmallIcon(){
         //hopefully resized
         return smallGemIcon;
     }
-    
+
     public String getGemName(){
         return name;
     }
-    
+
+    public boolean isSameGemNameOrOlder(String gemNameFromImport) {
+        if (name.equalsIgnoreCase(gemNameFromImport)) {
+            return true;
+        } else {
+            if (alt_name != null && alt_name.contains(gemNameFromImport)) {
+                System.out.println("**** Found old gem name: " + gemNameFromImport + " should be " + name + " now.");
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Gem dupeGem(){
         return new Gem(this);
     }
-    
+
     public ArrayList<String> getChar(){
         return available_to;
     }
@@ -151,7 +180,7 @@ public class Gem {
     public void putChar(String z){
         available_to.add(z);
     }
-    
+
     public String getGemColor(){
         return color;
     }
@@ -162,7 +191,7 @@ public class Gem {
         cachedLabel.setGraphic(new ImageView(gemIcon));
         return cachedLabel;
     }
-    
+
     public void resizeImage(){
         BufferedImage before = SwingFXUtils.fromFXImage(gemIcon, null);
         int w = before.getWidth();
@@ -172,12 +201,12 @@ public class Gem {
         int h2 = (int) (h * 0.7);
         BufferedImage after = new BufferedImage(w2, h2, BufferedImage.TYPE_INT_ARGB);
         AffineTransform scaleInstance = AffineTransform.getScaleInstance(0.7, 0.7);
-        AffineTransformOp scaleOp 
+        AffineTransformOp scaleOp
             = new AffineTransformOp(scaleInstance, AffineTransformOp.TYPE_BILINEAR);
 
         after = scaleOp.filter(before, after);
         smallGemIcon = SwingFXUtils.toFXImage(after, null);
         //ImageIcon imageIcon = new ImageIcon(dimg);
     }
-    
+
 }

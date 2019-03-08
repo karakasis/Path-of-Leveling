@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import poe.level.fx.Main_Stage;
+import poe.level.fx.POELevelFx;
 import poe.level.fx.Preferences_Controller;
 import poe.level.fx.overlay.*;
 
@@ -281,12 +282,17 @@ public class Controller {
 
     public void start(){
         _tObj = new Tail();
-        //_tObj.setUpTailer(new File("C:\\Users\\Christos\\Documents\\NetBeansProjects\\POE-level-fx\\src\\a.txt"), this);
-        _tObj.setUpTailer(new File("src/logs.txt"), this);
-        //_tObj.setUpTailer(new File(path), this);
+        if (!POELevelFx.DEBUG) {
+            _tObj.setUpTailer(new File(path), this);
+        } else {
+            // Choose your poison (default to the game's log)
+            //_tObj.setUpTailer(new File("C:\\Users\\Christos\\Documents\\NetBeansProjects\\POE-level-fx\\src\\a.txt"), this);
+            //_tObj.setUpTailer(new File("src/logs.txt"), this);
+            _tObj.setUpTailer(new File(path), this);
+        }
 
         //manually input the level 1 gems
-        if(playerLevel == 1 && !level_stage_lock){
+        if(!level_stage_lock){
             level_stage.update(playerLevel);
         }
     }

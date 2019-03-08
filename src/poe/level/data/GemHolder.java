@@ -80,8 +80,7 @@ public class GemHolder {
 
         dropOnly = new ArrayList<>();
 
-        dummie = new Gem();
-        dummie.name = "<empty group>";
+        dummie = new Gem("<empty group>");
 
         the_ultimate_map = new HashMap<>();
         the_ultimate_map.put("witch", null);
@@ -212,6 +211,7 @@ public class GemHolder {
             JSONObject bObj = new JSONObject();
             bObj.put("id", counter);
             bObj.put("name", g.getGemName());
+            bObj.putOpt("alt_name", g.alt_name);
             bObj.put("required_lvl",g.required_lvl);
             bObj.put("color", g.getGemColor());
             bObj.put("iconPath", g.iconPath);
@@ -532,7 +532,7 @@ public class GemHolder {
         }
         if(gems!=null) {
             for (Gem g : gems) {
-                if (g.getGemName().equals(gemName)) {
+                if (g.isSameGemNameOrOlder(gemName)) {
                     return g.dupeGem();
                 }
             }
@@ -540,7 +540,7 @@ public class GemHolder {
         //if we reach here no gem was found so it is placed on the drop-only
         gems = new ArrayList<>(getGemOther());
         for(Gem g : gems) {
-            if(g.getGemName().equals(gemName)){
+            if (g.isSameGemNameOrOlder(gemName)) {
                 return g.dupeGem();
             }
         }

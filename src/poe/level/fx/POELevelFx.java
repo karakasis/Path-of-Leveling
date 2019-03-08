@@ -15,9 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
@@ -60,7 +58,10 @@ public class POELevelFx extends Application {
      * Change to true if a build is being pushed to the master branch for public release.
      ***************************************************************************/
     public static final boolean MASTER_RELEASE = false;
-    /******************************************************/
+    /*************************************************************************************/
+    /* Update this when you are pushing a new release version, must match the GitHub release name!
+    **************************************************************************************/
+    public static final String version = "v0.65-alpha";
 
 
     public static boolean DEBUG = false;
@@ -74,41 +75,39 @@ public class POELevelFx extends Application {
     public static String gemsTimeFileName;
     public static String dataJSONFileName;
     public static String dataTimeFileName;
-    public static String gemDir;
+    public static String gemsIconsLocation;
     public static ArrayList<Build> buildsLoaded;
+    private static final Logger m_logger = Logger.getLogger(POELevelFx.class.getName());
     private Stage zone;
     private Stage exp;
     private Stage main;
     private Stage editor;
     private Stage leveling;
-    private static String update_path_prefix = "https://github.com/karakasis/Path-of-Leveling/releases/download/";
-    private static String update_path_suffix = "/PathOfLeveling.jar";
-    private static String version = "v0.65-alpha";
+    private static GithubHelper.ReleaseInfo newReleaseInfo = null;
     private static boolean is_new_version;
     //v0.5-alpha <- between
 
     public void update() {
-            URL url;
+        assert (newReleaseInfo != null);
+        URL url;
 
-            try{
-            url = new URL(update_path_prefix + "" + POELevelFx.version + "" + update_path_suffix);
+        String outFileName = "PathOfLeveling-" + newReleaseInfo.version + ".jar";
+        try {
+            url = new URL(newReleaseInfo.downloadURL);
             HttpURLConnection httpConnection = (HttpURLConnection) (url.openConnection());
-            long completeFileSize = httpConnection.getContentLength();
-            UpdaterController.finalSize = completeFileSize;
-            java.io.BufferedInputStream in = new java.io.BufferedInputStream(httpConnection.getInputStream());
-            java.io.FileOutputStream fos = new java.io.FileOutputStream(
-            "PathOfLeveling-"+POELevelFx.version+".jar");
-            java.io.BufferedOutputStream bout = new BufferedOutputStream(
-            fos, 1024);
-            byte[] data = new byte[1024];
+            BufferedInputStream in = new java.io.BufferedInputStream(httpConnection.getInputStream());
+            FileOutputStream fos = new java.io.FileOutputStream(outFileName);
+            int bufferSize = 8192;
+            BufferedOutputStream bout = new BufferedOutputStream(fos, bufferSize);
+            byte[] data = new byte[bufferSize];
             long downloadedFileSize = 0;
-            int x = 0;
-            while ((x = in.read(data, 0, 1024)) >= 0) {
-                if(UpdaterController.cancelDownload){
+            int x;
+            while ((x = in.read(data, 0, bufferSize)) >= 0) {
+                if (UpdaterController.cancelDownload) {
                     bout.close();
                     in.close();
-                    File file = new File("PathOfLeveling-"+POELevelFx.version+".jar");
-                    file.delete() ;
+                    File file = new File(outFileName);
+                    file.delete();
                     try {
                         init();
                     } catch (Exception ex) {
@@ -116,21 +115,19 @@ public class POELevelFx extends Application {
                     }
                     break;
                 }
-            downloadedFileSize += x;
+                downloadedFileSize += x;
 
-            notifyPreloader(new UpdatePreloader.ProgressNotification(downloadedFileSize));
+                notifyPreloader(new UpdatePreloader.ProgressNotification(downloadedFileSize));
 
 
-            //System.out.println(downloadedFileSize);
-            bout.write(data, 0, x);
+                //System.out.println(downloadedFileSize);
+                bout.write(data, 0, x);
             }
             bout.close();
             in.close();
-            } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            } catch (IOException e) {
-            e.printStackTrace();
-            }
+        }
 
 
     }
@@ -765,10 +762,7 @@ public class POELevelFx extends Application {
         for (int i = 0; i < arrG.length(); i++)
         {
             JSONObject gemObj  = arrG.getJSONObject(i);
-            Gem gem = new Gem();
-
-            gem.name= gemObj.getString("name");
-            //System.out.println(gem.name);
+            Gem gem = new Gem(gemObj.getString("name"));
 
             gem.required_lvl= gemObj.getInt("required_lvl");
             gem.isVaal=gemObj.getBoolean("isVaal");
@@ -777,6 +771,10 @@ public class POELevelFx extends Application {
             gem.color= gemObj.getString("color");
             gem.iconPath= gemObj.getString("iconPath");
             gem.isRewarded = gemObj.getBoolean("isReward");
+            JSONArray alt_name = gemObj.optJSONArray("alt_name");
+            if (alt_name != null) {
+                gem.addAltNamesFromJSON(alt_name.iterator());
+            }
 
             if(gem.isRewarded){
                 JSONObject rewardObj  = gemObj.getJSONObject("reward");
@@ -855,45 +853,37 @@ public class POELevelFx extends Application {
                 gem.buy.add(buy_info);
             }
 
-            /* uncomment to download images. also uncomment gemdir on top of class
-            //CHECK cached images
-            if (!new File(gemDir+""+gem.name+".png").exists()) {
-
-                BufferedImage image = null;
-                try {
-
-                    URL url = new URL(gem.iconPath);
-                    image = ImageIO.read(url);
-
-                    ImageIO.write(image, "png",new File(gemDir+""+gem.name+".png"));
-
-                    gem.gemIcon = SwingFXUtils.toFXImage(image, null);
-                } catch (IOException e) {
-                        e.printStackTrace();
+            BufferedImage img;
+            try {
+                File gemFile = new File(gemsIconsLocation + gem.getGemName() + ".png");
+                if (gemFile.exists()) {
+                    img = ImageIO.read(gemFile);
+                } else {
+                    if (DEBUG) {
+                        // If we're debugging, all icons should exist, since we're pointing at the local directory
+                        notifyPreloader(new Preloader.ErrorNotification("loadGemsFromMemory", "Missing gem icon for: " + gem.getGemName() + "! Is your repo up to date?", null));
+                    }
+                    //TODO
+                    //notifyPreloader(new GemDownloadNotification(gem.getGemName()));
+                    m_logger.info("Gem " + gemFile.getName() + " doesn't exist in " + gemsIconsLocation + " downloading");
+                    img = downloadGemIcon(gem, true);
+                    if (img == null) {
+                        m_logger.info("Gem " + gemFile.getName() + " Failed to download from Github, trying " + gem.iconPath);
+                        img = downloadGemIcon(gem, false);
+                    }
                 }
-                System.err.println("Image not found and redownloaded: "+gemDir+""+gem.name+".png");
-
-            }else{
-                BufferedImage img = null;
-                    try {
-                        img = ImageIO.read(new File(gemDir+""+gem.name+".png"));
-
-                        gem.gemIcon = SwingFXUtils.toFXImage(img, null);
-                    }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                    }
-            }
-            */
-            BufferedImage img = null;
-                try {
-                    img = ImageIO.read(getClass().getResource("/gems/"+gem.name+".png"));
+                if (img != null) {
                     gem.gemIcon = SwingFXUtils.toFXImage(img, null);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    gem.resizeImage();
+                } else {
+                    m_logger.warning("Failed to get the gem icon for: " + gem.getGemName());
+                    gem.gemIcon = null;
                 }
 
-            gem.resizeImage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
                 if(i> 40 && i < 80)
                     notifyPreloader(new GemDownloadNotification(gem.getGemName()));
@@ -945,6 +935,25 @@ public class POELevelFx extends Application {
         }
 
     }
+
+    private BufferedImage downloadGemIcon(Gem gem, boolean fromGithub) {
+        BufferedImage image = null;
+        try {
+            URL url;
+            if (fromGithub) {
+                url = new URL("https://raw.githubusercontent.com/" + REPO_OWNER + "/Path-of-Leveling/" + BRANCH_NAME + "/gems/" + gem.getGemName().replaceAll(" ", "%20") + ".png");
+            } else {
+                url = new URL(gem.iconPath);
+            }
+            image = ImageIO.read(url);
+
+            ImageIO.write(image, "png", new File(gemsIconsLocation + gem.getGemName() + ".png"));
+        } catch (IOException e) {
+            m_logger.log(Level.SEVERE, "IOException while read/writing the new gem icon", e);
+        }
+        return image;
+    }
+
 
     private void logErrorGem(String gemName){
         System.out.println("Gem : " +gemName+ " had errors in loading.");
@@ -1383,6 +1392,7 @@ public class POELevelFx extends Application {
      */
     public static void main(String[] args) {
         // Negate the following if you want to test release mode
+        // .gitignore shouldn't exist in the release environment, if it doesn't exist, then play nice, no debuggery.
         if (Files.exists(Paths.get("./.gitignore"))) {
             System.out.println("Detected that we're running in a development environment");
             DEBUG = true;
@@ -1395,8 +1405,12 @@ public class POELevelFx extends Application {
         setUpDirectories();
 
         if (!DEBUG) {
+            GithubHelper.checkRateLimited();
             if (checkForNewVersion()) {
                 is_new_version = true;
+                // New release info should NEVER be null here!
+                assert (newReleaseInfo != null);
+                UpdaterController.newReleaseInfo = newReleaseInfo;
                 LauncherImpl.launchApplication(POELevelFx.class, UpdatePreloader.class, args);
             } else {
                 is_new_version = false;
@@ -1435,7 +1449,19 @@ public class POELevelFx extends Application {
                         Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "Exception while attempting to set json directory as hidden", ex);
                     }
                 } else {
-                    System.err.println("Failed to create JSON directory!");
+                    m_logger.severe("Failed to create JSON directory!");
+                }
+            }
+            gemsIconsLocation = POELevelFx.directory + "\\Path of Leveling\\gems\\icons\\";
+            if (!new File(gemsIconsLocation).exists()) {
+                if (new File(gemsIconsLocation).mkdirs()) {
+                    try {
+                        Files.setAttribute(Paths.get(POELevelFx.directory + "\\Path of Leveling\\gems\\"), "dos:hidden", true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, "Exception while attempting to set gems directory as hidden", ex);
+                    }
+                } else {
+                    m_logger.severe("Failed to create gems directory!");
                 }
             }
         } else {
@@ -1443,6 +1469,7 @@ public class POELevelFx extends Application {
             gemsTimeFileName = "json\\gemsjson.time";
             dataJSONFileName = "json\\data.json";
             dataTimeFileName = "json\\datajson.time";
+            gemsIconsLocation = "gems\\";
         }
 
     }
@@ -1556,41 +1583,19 @@ public class POELevelFx extends Application {
     }
 
     public static boolean checkForNewVersion(){
-        URL url;
-            String input = "";
-            try {
-                // get URL content
+        GithubHelper.ReleaseInfo releaseInfo = GithubHelper.getLatestReleaseInfo();
+        if (releaseInfo == null) {
+            return false;
+        }
 
-                String a="https://raw.githubusercontent.com/karakasis/Path-of-Leveling/master/version.txt";
-                url = new URL(a);
-                URLConnection conn = url.openConnection();
-
-                // open the stream and put it into BufferedReader
-                BufferedReader br = new BufferedReader(
-                        new InputStreamReader(conn.getInputStream()));
-
-                input = br.readLine();
-                br.close();
-
-                System.out.println("Done");
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return false;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-
-            String new_git_version = input;
-            System.out.println("Current Version: "+POELevelFx.version);
-            System.out.println("New Version: "+new_git_version);
-            if(!POELevelFx.version.equals(new_git_version)){
-                POELevelFx.version = new_git_version;
-                return true;
-            }else{
-                return false;
-            }
+        System.out.println("Current Version: " + POELevelFx.version);
+        System.out.println("New Version: " + releaseInfo.version);
+        if(!POELevelFx.version.equalsIgnoreCase(releaseInfo.version)){
+            POELevelFx.newReleaseInfo = releaseInfo;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void checkForNewJSON() {
