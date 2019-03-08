@@ -1366,11 +1366,11 @@ public class POELevelFx extends Application {
         } else {
             System.out.println("Running in release mode");
         }
-        //remove below for debuging.
-        //setUpLog();
+
         setUpDirectories();
 
         if (!DEBUG) {
+            setUpLog();
             GithubHelper.checkRateLimited();
             if (checkForNewVersion()) {
                 is_new_version = true;
