@@ -693,6 +693,7 @@ public class AddGem_Controller implements Initializable {
     private void clearFilters(){
         gemsDisplayed.clear();
         filteredGemsPane.getChildren().clear();
+        filtersLayoutSmall.getChildren().clear();
         for(Node e : filtersLayoutBig.getChildren()){
              JFXCheckBox a =  (JFXCheckBox) e;
              a.setSelected(false);

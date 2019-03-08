@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="503.0" minWidth="721.0" prefHeight="614.0" prefWidth="1213.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.AddGem_Controller">
+<AnchorPane id="AnchorPane" minHeight="503.0" minWidth="820.0" prefHeight="614.0" prefWidth="1213.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.AddGem_Controller">
    <children>
       <AnchorPane fx:id="filtersPaneBig" prefHeight="153.0" prefWidth="1213.0" style="-fx-background-color: #282B30;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -44,7 +44,7 @@
                   <Font name="Alegreya Sans SC" size="21.0" />
                </font>
             </Label>
-            <FlowPane fx:id="filtersLayoutBig" hgap="20.0" layoutX="170.0" layoutY="1.0" prefHeight="88.0" prefWidth="1003.0" vgap="20.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="1.0">
+            <FlowPane fx:id="filtersLayoutBig" alignment="CENTER" hgap="20.0" layoutX="170.0" layoutY="1.0" prefHeight="118.0" prefWidth="1003.0" vgap="20.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="1.0">
                <children>
                   <JFXCheckBox text="Tag #1" />
                   <JFXCheckBox text="Tag #1" />

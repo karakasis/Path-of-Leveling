@@ -878,7 +878,10 @@ public class POELevelFx extends Application {
             //load tags - new feature
             gem.isActive = gemObj.getBoolean("isActive");
             gem.isSupport = gemObj.getBoolean("isSupport");
-
+            JSONArray tags = gemObj.getJSONArray("gemTags");
+            for(int j=0;j<tags.length();j++){
+                gem.tags.add(tags.getString(j));
+            }
 
             GemHolder.getInstance().putGem(gem);
             double a = (double)i/arrG.length();
@@ -1298,7 +1301,7 @@ public class POELevelFx extends Application {
     Controller controller;
 
     private void addTrayIcon() throws AWTException {
-    final TrayIcon trayIcon = new TrayIcon(new ImageIcon(getClass().getResource("/icons/humility.png")).getImage(), "Path of Leveling");
+    final TrayIcon trayIcon = new TrayIcon(new ImageIcon(getClass().getResource("/icons/The_Explorer_card_art.png")).getImage(), "Path of Leveling");
 
     // Create a pop-up menu components
     final PopupMenu popup = new PopupMenu();
