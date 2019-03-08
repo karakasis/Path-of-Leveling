@@ -149,7 +149,7 @@ public class GemOverlayBeta_Controller implements Initializable {
         Group group = new Group();
         group.getChildren().add(ap);
         rootSwapPane.getChildren().add(group);
-        titles.add(socketgroup.name);
+        titles.add(socketgroup.getGemName());
     }
 
     public void addGem(Gem add, Gem socketgroup){
@@ -164,7 +164,7 @@ public class GemOverlayBeta_Controller implements Initializable {
         Group group = new Group();
         group.getChildren().add(ap);
         rootSwapPane.getChildren().add(group);
-        titles.add(socketgroup.name);
+        titles.add(socketgroup.getGemName());
     }
 
     private ArrayList<String> titles;

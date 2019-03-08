@@ -273,7 +273,7 @@ public class AddGem_Controller implements Initializable {
         scroll1.hvalueProperty().addListener(
         (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
 
-            System.out.println("Scroll 1 horizontal value:" + scroll1.getHvalue());
+            //System.out.println("Scroll 1 horizontal value:" + scroll1.getHvalue());
             //levelScroll.setHvalue(outerScroll.getHvalue());
             superScroll(1, scroll1.getHvalue());
 

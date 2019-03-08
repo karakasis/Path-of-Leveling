@@ -864,7 +864,7 @@ public class POELevelFx extends Application {
                         notifyPreloader(new Preloader.ErrorNotification("loadGemsFromMemory", "Missing gem icon for: " + gem.getGemName() + "! Is your repo up to date?", null));
                     }
                     //TODO
-                    //notifyPreloader(new GemDownloadNotification(gem.getGemName()));
+                    notifyPreloader(new GemDownloadNotification(gem.getGemName()));
                     m_logger.info("Gem " + gemFile.getName() + " doesn't exist in " + gemsIconsLocation + " downloading");
                     img = downloadGemIcon(gem, true);
                     if (img == null) {
@@ -883,12 +883,6 @@ public class POELevelFx extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-                if(i> 40 && i < 80)
-                    notifyPreloader(new GemDownloadNotification(gem.getGemName()));
-                if(i> 230 && i < 240)
-                    notifyPreloader(new GemDownloadNotification(gem.getGemName()));
 
             //load tags - new feature
             gem.isActive = gemObj.getBoolean("isActive");
