@@ -58,7 +58,7 @@ public class Replace_socket_group_overlay_Controller implements Initializable {
             act.setText("Act " + add.act);
         }
 
-        town.setText(add.town);
+        if(town != null)town.setText(add.town);
     }
     
 }

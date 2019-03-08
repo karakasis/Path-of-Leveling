@@ -59,7 +59,7 @@ public class Replace_gem_overlay_Controller implements Initializable {
         }else{
             act.setText("Act " + add.act);
         }
-        town.setText(add.town);
+        if(town != null)town.setText(add.town);
     }
     
 }
