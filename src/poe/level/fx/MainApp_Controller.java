@@ -876,7 +876,7 @@ public class MainApp_Controller implements Initializable {
         }
         if (con != null) {
             try {
-                Label versionNumLbl = (Label) con.lookup("#lblVersionNumbe2r");
+                Label versionNumLbl = (Label) con.lookup("#lblVersionNumber");
                 versionNumLbl.setText(POELevelFx.version);
             } catch (Exception e) {
                 Logger.getLogger(MainApp_Controller.class.getName()).warning("Failed to find the lblVersionNumber component in version.fxml!");
