@@ -59,7 +59,7 @@ public class POELevelFx extends Application {
      ***************************************************************************/
     public static final boolean MASTER_RELEASE = false;
     /*************************************************************************************/
-    /* Update this when you are pushing a new release version, must match the GitHub release name!
+    /* Update this when you are pushing a new release version, must match the GitHub release tag name!!
     **************************************************************************************/
     public static final String version = "v0.7-alpha";
 
