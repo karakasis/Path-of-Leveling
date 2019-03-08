@@ -68,7 +68,7 @@ public class POELevelFx extends Application {
 
     private static final String DEBUG_BRANCH_NAME = "development";
     private static final String RELEASE_BRANCH_NAME = "master";
-    private static String BRANCH_NAME = MASTER_RELEASE ? RELEASE_BRANCH_NAME : DEBUG_BRANCH_NAME;
+    public static String BRANCH_NAME = MASTER_RELEASE ? RELEASE_BRANCH_NAME : DEBUG_BRANCH_NAME;
     private static final String REPO_OWNER = "karakasis";
     public static String directory;
     public static String gemsJSONFileName;
