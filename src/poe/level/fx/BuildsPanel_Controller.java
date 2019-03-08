@@ -219,7 +219,6 @@ public class BuildsPanel_Controller implements Initializable {
             fw = new FileWriter(POELevelFx.directory+"\\Path of Leveling\\Builds\\builds.txt");
             bw = new BufferedWriter(fw);
             bw.write(stringValueBase64Encoded);
-            System.out.println("Saving build " + linker.get(activeBuildID).build.getName() + " .. failed");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -339,6 +338,7 @@ public class BuildsPanel_Controller implements Initializable {
       //now we need to connect data
 
 
+      System.out.println("Saving build " + build.getName() + " .. success");
       builds_array.put(bObj);
     }
 
