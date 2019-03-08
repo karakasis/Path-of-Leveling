@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.URL;
 import java.util.Calendar;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GithubHelper {
@@ -58,6 +59,42 @@ public class GithubHelper {
         } else {
             m_logger.info("Detected that the " + outputFile.getPath() + " is up to date.");
         }
+    }
+
+    public static ReleaseInfo getLatestReleaseInfo() {
+        Util.HttpResponse response = Util.httpToString("https://api.github.com/repos/karakasis/Path-of-Leveling/releases");
+        if (response.responseCode == 200) {
+            try {
+                JSONArray releaseArray = new JSONArray(response.responseString);
+                if (releaseArray.length() > 0) {
+                    ReleaseInfo info = new ReleaseInfo();
+                    JSONObject releaseObj = releaseArray.getJSONObject(0);
+                    info.version = releaseObj.getString("name").trim();
+                    JSONArray assetsArr = releaseObj.getJSONArray("assets");
+                    boolean found = false;
+                    for (int i = 0; i < assetsArr.length(); i++) {
+                        JSONObject assetObj = assetsArr.getJSONObject(i);
+                        if ("PathOfLeveling.jar".equalsIgnoreCase(assetObj.getString("name").trim())) {
+                            found = true;
+                            info.byteSize = assetObj.getLong("size");
+                            info.downloadURL = assetObj.getString("browser_download_url");
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        m_logger.warning("Failed to find the PathOfLeveling.jar asset!");
+                        return null;
+                    }
+                    info.releaseNotes = releaseObj.getString("body");
+                    m_logger.info("Latest release is: " + info);
+                    return info;
+
+                }
+            } catch (Exception ex) {
+                m_logger.log(Level.SEVERE, "Exception while parsing release information: " + ex.getMessage(), ex);
+            }
+        }
+        return null;
     }
 
     private String isJsonDownloadNeeded(String metadataURL, File outputFile, File outputTimeFile) throws IOException {
@@ -159,6 +196,23 @@ public class GithubHelper {
         Util.downloadFile(remoteURL, outputFile);
         try (FileWriter writer = new FileWriter(outputTimeFile, false)) {
             writer.write(commitTime);
+        }
+    }
+
+    public static class ReleaseInfo {
+        public String version;
+        public long byteSize;
+        public String releaseNotes;
+        public String downloadURL;
+
+        @Override
+        public String toString() {
+            return "ReleaseInfo{" +
+                "version='" + version + '\'' +
+                ", byteSize=" + byteSize +
+                ", releaseNotes='" + releaseNotes + '\'' +
+                ", downloadURL='" + downloadURL + '\'' +
+                '}';
         }
     }
 }
