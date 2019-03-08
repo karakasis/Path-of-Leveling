@@ -8,8 +8,12 @@ package poe.level.fx.overlay;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import poe.level.data.Controller;
@@ -38,6 +42,14 @@ public class PlaceholderStageGameMode extends Stage{
         }
         loader.<Preferences_Controller>getController().hookGameModeOn(parent_gameModeOn);
         Scene scene = new Scene(ap);
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ESCAPE) {
+                    close();
+                }
+            }
+        });
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
 
         this.setScene(scene);
@@ -71,5 +83,5 @@ public class PlaceholderStageGameMode extends Stage{
 
         this.show();
     }
-    
+
 }
