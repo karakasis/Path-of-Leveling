@@ -87,20 +87,20 @@
                 <SplitPane dividerPositions="0.1, 0.85" focusTraversable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <items>
                     <AnchorPane fx:id="socketGroupsAnchorPane" minWidth="150.0" prefHeight="544.0" prefWidth="177.0" />
-                        <AnchorPane fx:id="gemsPanelAnchorPane" minWidth="500.0" style="-fx-background-color: light-dark-color;" />
+                        <AnchorPane fx:id="gemsPanelAnchorPane" minWidth="500.0" style="-fx-background-color: second-dark-color;" />
                     <AnchorPane fx:id="buildsAnchorPane" minWidth="150.0" prefHeight="551.0" prefWidth="245.0" />
                   </items>
                 </SplitPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="578.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <AnchorPane layoutY="578.0" style="-fx-background-color: #282B30;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
               <Label fx:id="footerValid" layoutX="3.0" layoutY="3.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Build is not valid!" textFill="#bc2121" visible="false" AnchorPane.leftAnchor="3.0">
                 <font>
                   <Font size="11.0" fx:id="x3" />
                 </font>
               </Label>
-              <Label layoutX="63.0" layoutY="3.0" maxWidth="-1.0" text="Path-of-Leveling_v0.65-alpha" AnchorPane.rightAnchor="3.0">
+              <Label layoutX="63.0" layoutY="3.0" maxWidth="-1.0" text="Path-of-Leveling_v0.7-alpha" textFill="#ebebeb" AnchorPane.rightAnchor="3.0">
                      <font>
                         <Font name="Trebuchet MS" size="11.0" />
                      </font></Label>

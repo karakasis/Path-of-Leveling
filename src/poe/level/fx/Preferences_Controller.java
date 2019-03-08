@@ -367,6 +367,11 @@ public class Preferences_Controller implements Initializable {
         this.root = root;
     }
 
+    public void manualDisableUIToggle(){
+        betaGemUItoggle.setDisable(true);
+
+    }
+
     //i think i dont need to load and save overlay positions here.
     @Override
     public void initialize(URL url, ResourceBundle rb) {

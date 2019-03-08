@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.paint.Paint;
 
 /**
  * FXML Controller class
@@ -22,6 +23,7 @@ import javafx.scene.control.Hyperlink;
  */
 public class AboutPageController implements Initializable {
 
+    private final javafx.scene.paint.Paint COLOR_SUCCESS = javafx.scene.paint.Paint.valueOf("#FFA500");
     @FXML
     JFXButton paypal;
     @FXML
@@ -62,6 +64,11 @@ public class AboutPageController implements Initializable {
                 openWebpage("https://github.com/karakasis");
             }
         });
+
+        ee.setTextFill(COLOR_SUCCESS);
+        arias.setTextFill(COLOR_SUCCESS);
+        poewiki.setTextFill(COLOR_SUCCESS);
+        rainy.setTextFill(COLOR_SUCCESS);
         
     }    
     
@@ -76,6 +83,11 @@ public class AboutPageController implements Initializable {
     @FXML
     private void paypal(){
         openWebpage("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XKQ7R4AWWVFR4");
+    }
+
+    @FXML
+    private void discord(){
+        openWebpage("https://discord.gg/GdTCeMU");
     }
     
 }

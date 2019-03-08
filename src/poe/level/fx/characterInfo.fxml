@@ -33,7 +33,7 @@
                                     </Label>
                                     <HBox prefHeight="25.0" prefWidth="279.0" style="-fx-background-color: transparent;">
                                        <children>
-                                          <Label prefHeight="25.0" prefWidth="100.0" text="Character Name :" />
+                                          <Label prefHeight="25.0" text="Character Name :" />
                                           <TextField fx:id="txtManualName" prefHeight="25.0" prefWidth="178.0" promptText="Your in-game character name.">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
@@ -43,7 +43,7 @@
                                     </HBox>
                                     <HBox prefHeight="28.0" prefWidth="279.0" style="-fx-background-color: transparent;">
                                        <children>
-                                          <Label prefHeight="25.0" prefWidth="101.0" text="Character Level :" textAlignment="CENTER" wrapText="true" />
+                                          <Label prefHeight="25.0" text="Character Level :" textAlignment="CENTER" wrapText="true" />
                                           <TextField fx:id="txtManualLevel" prefHeight="25.0" prefWidth="178.0" promptText="The level of your character.">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
@@ -83,7 +83,7 @@
                                  <children>
                                     <HBox prefHeight="25.0" prefWidth="279.0" style="-fx-background-color: transparent;">
                                        <children>
-                                          <Label prefHeight="25.0" prefWidth="100.0" text="Account Name :" />
+                                          <Label prefHeight="25.0" text="Account Name :" />
                                           <TextField fx:id="txtAccountName" prefHeight="25.0" prefWidth="200.0" promptText="Your Path of Exile account name">
                                              <HBox.margin>
                                                 <Insets left="10.0" />

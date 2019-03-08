@@ -39,8 +39,8 @@ public class Export_pastebin_Controller implements Initializable {
     private final String PASTEBIN_LIMIT = "Unfortunately the limit of pastebins in 24h has been reached. You can still copy the raw export data and paste it manually to pastebin!";
     private final String GENERAL_ERROR = "Something went wrong!";
 
-    private final javafx.scene.paint.Paint COLOR_SUCCESS = javafx.scene.paint.Paint.valueOf("#45a12c");
-    private final javafx.scene.paint.Paint COLOR_ERROR = Paint.valueOf("#ff3300");
+    private final javafx.scene.paint.Paint COLOR_SUCCESS = javafx.scene.paint.Paint.valueOf("#8ecc5f");
+    private final javafx.scene.paint.Paint COLOR_ERROR = Paint.valueOf("#CD5C5C");
 
     @FXML
     private Label message_label;

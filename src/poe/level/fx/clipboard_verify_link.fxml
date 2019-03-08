@@ -6,12 +6,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="133.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="12.0" layoutY="24.0" prefHeight="56.0" prefWidth="294.0" text="Pastebin link has successfully been copied to your Clipboard" textAlignment="CENTER" textFill="#45a12c" wrapText="true">
+      <Label layoutX="12.0" layoutY="24.0" prefHeight="56.0" prefWidth="294.0" text="Pastebin link has successfully been copied to your Clipboard" textAlignment="CENTER" textFill="#8ecc5f" wrapText="true">
          <font>
             <Font name="Alegreya Sans SC" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="77.0" layoutY="80.0" prefHeight="35.0" prefWidth="178.0" text="Use Ctrl + V to paste it." textAlignment="CENTER" textFill="#432da1" wrapText="true">
+      <Label layoutX="77.0" layoutY="80.0" prefHeight="35.0" prefWidth="178.0" text="Use Ctrl + V to paste it." textAlignment="CENTER" textFill="#6bafee" wrapText="true">
          <font>
             <Font name="Alegreya Sans SC" size="17.0" />
          </font>

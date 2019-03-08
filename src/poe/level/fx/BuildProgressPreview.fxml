@@ -96,7 +96,7 @@
             </Label>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" smooth="false">
                <image>
-                  <Image url="@../../../icons/replace_normal.png" />
+                  <Image url="@../../../icons/icons8-replace-100.png" />
                </image>
             </ImageView>
             <Label text=": Replace Gem">

@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="150.0" prefHeight="200.0" prefWidth="183.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.SocketGroupsPanel_Controller">
+<AnchorPane minWidth="150.0" prefHeight="200.0" prefWidth="183.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.SocketGroupsPanel_Controller">
    <children>
       <Label alignment="CENTER" layoutX="20.0" layoutY="7.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Socket Group :" textAlignment="CENTER" visible="false" wrapText="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
@@ -26,7 +26,7 @@
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
-                  <Image url="@../../../icons/icons8-plus-math-50.png" />
+                  <Image url="@../../../icons/icons8-plus-math-50%20(3).png" />
                </image>
             </ImageView>
          </graphic>
@@ -41,7 +41,7 @@
          <graphic>
             <ImageView disable="true" fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
-                  <Image url="@../../../icons/icons8-subtract-50.png" />
+                  <Image url="@../../../icons/icons8-subtract-50%20(1).png" />
                </image>
             </ImageView>
          </graphic>
@@ -53,7 +53,7 @@
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
-                  <Image url="@../../../icons/icons8-clone-100.png" />
+                  <Image url="@../../../icons/icons8-clone-52.png" />
                </image>
             </ImageView>
          </graphic>
@@ -68,7 +68,7 @@
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
-                  <Image url="@../../../icons/icons8-reserve-100.png" />
+                  <Image url="@../../../icons/icons8-note-50.png" />
                </image>
             </ImageView>
          </graphic>

@@ -101,6 +101,7 @@ public class Controller {
                     placeholder_stageGameMode.loadSettings();
                     Preferences_Controller.gameModeOn = true;
                     RecipeOverlay_Controller.gameModeOn = false;
+                    placeholder_stageGameMode.manualDisableUIToggle();
                     placeholder_stageGameMode.show();
                 }
             });
@@ -287,8 +288,8 @@ public class Controller {
         } else {
             // Choose your poison (default to the game's log)
             //_tObj.setUpTailer(new File("C:\\Users\\Christos\\Documents\\NetBeansProjects\\POE-level-fx\\src\\a.txt"), this);
-            //_tObj.setUpTailer(new File("src/logs.txt"), this);
-            _tObj.setUpTailer(new File(path), this);
+            _tObj.setUpTailer(new File("src/logs.txt"), this);
+            //_tObj.setUpTailer(new File(path), this);
         }
 
         //manually input the level 1 gems

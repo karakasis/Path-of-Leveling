@@ -140,6 +140,19 @@
 .jfx-dialog-overlay-pane > StackPane {
     -fx-background-color: main-dark-color;
 }
+/****************************************************************
+ 
+  Combo box Skin 
+ 
+****************************************************************/
+/* unfortunatelly this adds a list scrollbar
+.jfx-combo-box .list-cell:hover
+{
+    -fx-background-color: onclick-color-inner;
+	-fx-border-style: solid;
+	-fx-border-color: onclick-color-outer;
+}
+*/
 
 .jfx-combo-box {
     -jfx-focus-color: #4059A9;
@@ -216,8 +229,8 @@ ScrollPane {
 
 .spinner .increment-arrow-button .increment-arrow,
 .spinner .decrement-arrow-button .decrement-arrow {
-    -fx-background-color: main-dark-color;
-    -fx-font-size: 30px;
+    -fx-background-color: #cccccc;
+    -fx-font-size: 20px;
 }
 
 .spinner .text-field {
@@ -236,6 +249,12 @@ ScrollPane {
 
 .list-view .list-cell:hover {
     -fx-background-color: background-color;
+}
+
+.list-view .list-cell:selected{
+	-fx-background-color: onclick-color-inner;
+	-fx-border-style: solid;
+	-fx-border-color: onclick-color-outer;
 }
 
 

@@ -1001,10 +1001,17 @@ public class POELevelFx extends Application {
         JSONArray builds_array = new JSONArray(stringValueBase64Decoded);
         for (int i = 0; i < builds_array.length(); i++) {
                 JSONObject bObj = builds_array.getJSONObject(i);
+                String ascName = "";
+                if(bObj.getString("ascendancyName").equals("Assasin")){
+                    System.err.println("Replaced assassin typo. poelevelfx load");
+                    ascName = "Assassin";
+                }else{
+                    ascName = bObj.getString("ascendancyName");
+                }
                 Build build = new Build(
                         bObj.getString("buildName"),
                         bObj.getString("className"),
-                        bObj.getString("ascendancyName")
+                        ascName
                 );
                 try{
                     //bObj.get("hasPob");
@@ -1161,6 +1168,7 @@ public class POELevelFx extends Application {
             JSONObject bObj = new JSONObject();
             bObj.put("buildName",build.getName());
             bObj.put("className",build.getClassName());
+            if(build.getAsc().equals("Assasin")) System.err.println("not fixed typo. poelevelfx issue");
             bObj.put("ascendancyName",build.getAsc());
             bObj.put("level", build.getCharacterLevel()); //<change
             bObj.put("characterName",build.getCharacterName());

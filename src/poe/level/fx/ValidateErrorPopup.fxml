@@ -36,7 +36,7 @@
             <Font name="Alegreya Sans SC" size="16.0" />
          </font>
       </Label>
-      <JFXButton buttonType="RAISED" layoutX="365.0" layoutY="381.0" onAction="#sayYesToValidation" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Yes" textFill="WHITE" />
-      <JFXButton buttonType="RAISED" layoutX="469.0" layoutY="381.0" onAction="#sayNoToValidation" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="No" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="365.0" layoutY="381.0" onAction="#sayYesToValidation" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Yes" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="469.0" layoutY="381.0" onAction="#sayNoToValidation" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: IndianRed;" text="No" textFill="WHITE" />
    </children>
 </AnchorPane>

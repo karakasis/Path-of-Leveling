@@ -262,37 +262,37 @@ public class GemOverlay_Stage extends Stage{
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         //double screenRightEdge = primScreenBounds.getMaxX() ;
         double screenRightEdge = primScreenBounds.getMinX();
-        this.setX(prefX);
+        this.setX(prefX - 322.0);
         this.setY(prefY);
-        double cur_width = this.getWidth();
-        this.setWidth(0);
-        this.setHeight(primScreenBounds.getHeight());
+        double cur_width = 322.0;
+        //this.setWidth(0);
+        //this.setHeight(primScreenBounds.getHeight());
 
 
         WritableValue<Double> writableWidth = new WritableValue<Double>() {
             @Override
             public Double getValue() {
 
-                return getWidth();
+                return getX();
                 //return getY();
             }
 
             @Override
             public void setValue(Double value) {
                  //setY(screenRightEdge + value);
-                setWidth(value);
+                setX(value);
             }
         };
 
         Timeline slideIn = new Timeline();
        
-        KeyValue kv = new KeyValue(writableWidth, cur_width);
+        KeyValue kv = new KeyValue(writableWidth, 0d);
         KeyFrame kf_slideIn = new KeyFrame(Duration.millis(500), kv);
         KeyFrame kf_delay = new KeyFrame(Duration.millis(Preferences_Controller.level_slider * 1000));
         slideIn.getKeyFrames().addAll(kf_slideIn,kf_delay);
 
         Timeline slideOut = new Timeline();
-        KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, 0d));
+        KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, -322d));
         slideOut.getKeyFrames().add(kf_slideOut);
         
         slideOut.setOnFinished(e -> Platform.runLater(() -> {System.out.println("Ending");isPlaying = false; this.hide();}));

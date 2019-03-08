@@ -15,6 +15,6 @@
          </font>
       </Label>
       <JFXButton buttonType="RAISED" layoutX="140.0" layoutY="82.0" onAction="#paste_fetch" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: RoyalBlue;" text="Fetch" textFill="WHITE" />
-      <Label fx:id="paste_error" layoutX="29.0" layoutY="86.0" prefHeight="17.0" prefWidth="88.0" text="Invalid pastebin" textFill="#d72929" visible="false" />
+      <Label fx:id="paste_error" layoutX="29.0" layoutY="86.0" prefHeight="17.0" text="Invalid pastebin" textFill="#d72929" visible="false" />
    </children>
 </AnchorPane>

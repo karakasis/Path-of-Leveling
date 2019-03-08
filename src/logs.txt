@@ -77,3 +77,6 @@ c
 2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18rrr
 2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18
 2018/12/23 17:16:04 95562234 a24 [INFO Client 14520] : ele (Ranger) is now level 18
+You have entered The Sewers.
+You have entered The Sewers.
+You have entered The Sewers.

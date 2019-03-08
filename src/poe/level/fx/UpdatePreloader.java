@@ -43,7 +43,9 @@ public class UpdatePreloader extends Preloader {
         //at this point this class has done enough, and we need to contact with the
         //appropriate controllers.
         controller = loader.<UpdaterController>getController();
-        return new Scene(p);
+        Scene pr = new Scene(p);
+        pr.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+        return pr;
     }
 
     @Override

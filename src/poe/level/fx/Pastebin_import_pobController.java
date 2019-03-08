@@ -39,6 +39,12 @@ public class Pastebin_import_pobController implements Initializable {
         if(text.startsWith("https://pastebin.com/")){
             valid = true;
             pasteKey = text.substring(21, text.length());
+        }else{
+            System.out.println("Link is not a pastebin!");
+            paste_error.setVisible(true);
+            paste_error.setText("Link is not pastebin");
+            paste_area.clear();
+            return;
         }
         
         final PastebinFactory factory = new PastebinFactory();
@@ -47,9 +53,7 @@ public class Pastebin_import_pobController implements Initializable {
         final Response<String> pasteResponse = pastebin.getRawPaste(pasteKey);
         if (pasteResponse.hasError()) {
           System.out.println("Unable to read paste content!");
-          paste_error.setVisible(true);
-          paste_error.setText("Invalid pastebin");
-          paste_area.clear();
+          failed();
           return;
         }
         paste_error.setVisible(false);

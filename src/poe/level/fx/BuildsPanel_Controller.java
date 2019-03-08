@@ -265,10 +265,11 @@ public class BuildsPanel_Controller implements Initializable {
         return stringValueBase64Encoded;
     }
 
-    void buildTo64(Build build, JSONArray builds_array, HashSet<Integer> unique_ids) {
+    private void buildTo64(Build build, JSONArray builds_array, HashSet<Integer> unique_ids) {
       JSONObject bObj = new JSONObject();
       bObj.put("buildName",build.getName());
       bObj.put("className",build.getClassName());
+      if(build.getAsc().equals("Assasin")) System.err.println("not fixed typo");
       bObj.put("ascendancyName",build.getAsc());
       bObj.put("isValid", build.isValid);
       bObj.put("level", build.getCharacterLevel()); //<change
@@ -366,10 +367,17 @@ public class BuildsPanel_Controller implements Initializable {
             JSONArray builds_array = new JSONArray(stringValueBase64Decoded);
             for (int i = 0; i < builds_array.length(); i++) {
                     JSONObject bObj = builds_array.getJSONObject(i);
+                    String ascName = "";
+                    if(bObj.getString("ascendancyName").equals("Assasin")){
+                        System.err.println("Replaced assassin typo.");
+                        ascName = "Assassin";
+                    }else{
+                        ascName = bObj.getString("ascendancyName");
+                    }
                     Build build = new Build(
                             bObj.getString("buildName"),
                             bObj.getString("className"),
-                            bObj.getString("ascendancyName")
+                            ascName
                     );
                     //when importing character name will not be passed.
                     build.setCharacterName("");

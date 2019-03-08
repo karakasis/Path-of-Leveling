@@ -125,7 +125,7 @@ public class AddBuild_Controller implements Initializable {
         }else if(selectedClassIndex == 5){
             className = "Shadow";
             selectAsc.getItems().clear();
-            selectAsc.getItems().add("Assasin");
+            selectAsc.getItems().add("Assassin");
             selectAsc.getItems().add("Saboteur");
             selectAsc.getItems().add("Trickster");
         }else if(selectedClassIndex == 6){

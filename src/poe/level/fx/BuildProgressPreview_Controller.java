@@ -291,7 +291,7 @@ public class BuildProgressPreview_Controller implements Initializable {
                     iv_replace.setPreserveRatio(false);
                     BufferedImage img = null;
                         try {
-                            img = ImageIO.read(getClass().getResource("/icons/replace_normal.png"));
+                            img = ImageIO.read(getClass().getResource("/icons/icons8-replace-100.png"));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

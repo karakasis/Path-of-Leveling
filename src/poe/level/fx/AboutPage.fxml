@@ -23,15 +23,15 @@
       </Label>
       <Hyperlink fx:id="ee" layoutX="65.0" layoutY="38.0" text="Engineering Eternity" />
       <Hyperlink fx:id="arias" layoutX="65.0" layoutY="89.0" text="max-arias" />
-      <Label layoutX="81.0" layoutY="61.0" text="for his Act &amp; Leveling Guides videos" />
-      <Label layoutX="81.0" layoutY="112.0" text="for his JSON gem file that I worked on" />
-      <Label layoutX="14.0" layoutY="237.0" text="GitHub ">
+      <Label layoutX="81.0" layoutY="61.0" text="for his Act &amp; Leveling Guides videos" AnchorPane.leftAnchor="84.0" />
+      <Label layoutX="81.0" layoutY="112.0" text="for his JSON gem file that I worked on" AnchorPane.leftAnchor="84.0" />
+      <Label layoutX="14.0" layoutY="237.0" text="GitHub " AnchorPane.topAnchor="237.0">
          <font>
             <Font name="Alegreya Sans SC" size="13.0" />
          </font>
       </Label>
       <Hyperlink fx:id="rainy" layoutX="66.0" layoutY="254.0" text="rainy" />
-      <Label layoutX="14.0" layoutY="290.0" text="Support">
+      <Label layoutX="14.0" layoutY="290.0" text="Support me">
          <font>
             <Font name="Alegreya Sans SC" size="13.0" />
          </font>
@@ -50,6 +50,24 @@
          </padding>
       </JFXButton>
       <Hyperlink fx:id="poewiki" layoutX="68.0" layoutY="145.0" text="Path of Exile Wiki" />
-      <Label layoutX="84.0" layoutY="168.0" text="for the useful data" />
+      <Label layoutX="84.0" layoutY="168.0" text="for the useful data" AnchorPane.leftAnchor="84.0" />
+      <Label layoutX="74.0" layoutY="187.0" prefHeight="49.0" prefWidth="227.0" text="everyone that contributed in the project" textAlignment="CENTER" wrapText="true" />
+      <Label layoutX="159.0" layoutY="237.0" text="Discord" AnchorPane.topAnchor="237.0">
+         <font>
+            <Font name="Alegreya Sans SC" size="13.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="discord" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" layoutX="190.0" layoutY="253.0" onAction="#discord" prefHeight="49.0" prefWidth="80.0" ripplerFill="BLACK">
+         <graphic>
+            <ImageView fitHeight="75.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../icons/discord-512.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets bottom="-10.0" top="-10.0" />
+         </padding>
+      </JFXButton>
    </children>
 </AnchorPane>

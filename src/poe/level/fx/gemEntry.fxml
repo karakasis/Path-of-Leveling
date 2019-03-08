@@ -8,6 +8,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.BoxBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -29,7 +31,7 @@
                   <Font name="Alegreya Sans SC" size="16.0" />
                </font>
             </Button>
-            <AnchorPane fx:id="disablePanel" layoutX="15.0" layoutY="37.0" prefHeight="211.0" prefWidth="214.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+            <AnchorPane fx:id="disablePanel" disable="true" layoutX="15.0" layoutY="37.0" prefHeight="211.0" prefWidth="214.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
                <children>
                   <Label layoutX="28.0" layoutY="22.0" text="Level :" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="22.0">
                      <font>
@@ -51,7 +53,7 @@
                         <Font name="Alegreya Sans SC" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXToggleButton fx:id="replaceToggle" contentDisplay="RIGHT" layoutX="14.0" layoutY="189.0" onAction="#toggleReplace" prefHeight="42.0" size="6.0" text="Replace with" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="194.0">
+                  <JFXToggleButton fx:id="replaceToggle" contentDisplay="RIGHT" layoutX="14.0" layoutY="189.0" onAction="#toggleReplace" prefHeight="42.0" size="8.0" style="-jfx-size: 6;" stylesheets="@../../../../resources/styles/style.css" text="Replace with" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="194.0">
                      <font>
                         <Font name="Alegreya Sans SC" size="16.0" />
                      </font>
@@ -80,6 +82,13 @@
                   </JFXTextField>
                   <Separator layoutX="11.0" layoutY="184.0" prefHeight="2.0" prefWidth="242.0" AnchorPane.topAnchor="190.0" />
                </children>
+               <effect>
+                  <BoxBlur>
+                     <input>
+                        <Blend />
+                     </input>
+                  </BoxBlur>
+               </effect>
             </AnchorPane>
          </children>
       </AnchorPane>
