@@ -87,7 +87,7 @@ public class GithubHelper {
                 for (int releaseIdx = 0; releaseIdx < releaseArray.length(); releaseIdx++) {
                     JSONObject releaseObj = releaseArray.getJSONObject(releaseIdx);
                     if (POELevelFx.BRANCH_NAME.equalsIgnoreCase(releaseObj.getString("target_commitish")) ) {
-                        info.version = releaseObj.getString("name").trim();
+                        info.version = releaseObj.getString("tag_name").trim();
                         JSONArray assetsArr = releaseObj.getJSONArray("assets");
                         boolean found = false;
                         for (int i = 0; i < assetsArr.length(); i++) {
