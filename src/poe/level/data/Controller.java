@@ -94,6 +94,14 @@ public class Controller {
         }
     }
 
+    public void closePlaceholderStage() {
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                placeholder_stageGameMode.close();
+            }
+        });
+    }
     public void settings_event(){
         Platform.runLater(new Runnable(){
                 @Override

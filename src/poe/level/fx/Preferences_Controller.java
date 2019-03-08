@@ -1079,18 +1079,27 @@ public class Preferences_Controller implements Initializable {
                                     e.printStackTrace();
                             }
                     }
-                    if(!gameModeOn)
+                    if(!gameModeOn) {
                         root.closePrefPopup();
-                    else
+                    } else {
                         GlobalKeyListener.setUpKeybinds();
+                        if (parent_gameModeOn != null) {
+                            parent_gameModeOn.closePlaceholderStage();
+                        }
+                    }
 
         }
     }
 
     @FXML
     private void cancel(){
-        if(!gameModeOn)
+        if(!gameModeOn) {
             root.closePrefPopup();
+        } else if (parent_gameModeOn != null) {
+            parent_gameModeOn.closePlaceholderStage();
+        } else {
+            Logger.getLogger(Preferences_Controller.class.getName()).info("No way to close this controller in cancel()");
+        }
     }
 
     @FXML
