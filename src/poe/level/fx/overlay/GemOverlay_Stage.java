@@ -94,7 +94,14 @@ public class GemOverlay_Stage extends Stage{
             System.exit(11);
         });
     }
-    
+
+    public void resetFXMLS(boolean betaUi){
+        if(!betaUi)
+            loadFXML();
+        else
+            loadFXMLBeta();
+    }
+
     public void generateLevels(Build build){
         for(SocketGroup sg : build.getSocketGroup()){
             if(sg.replaceGroup()){

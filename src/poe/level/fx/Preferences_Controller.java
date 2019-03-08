@@ -32,6 +32,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import poe.level.data.ActHandler;
+import poe.level.data.Controller;
 import poe.level.data.Zone;
 import poe.level.keybinds.GlobalKeyListener;
 
@@ -136,6 +137,11 @@ public class Preferences_Controller implements Initializable {
 
     public static boolean gameModeOn;
     private HashMap<String,String> hotkeyDefaults;
+    private Controller parent_gameModeOn;
+
+    public void hookGameModeOn(Controller parent_gameModeOn){
+        this.parent_gameModeOn = parent_gameModeOn;
+    }
 
     public Preferences_Controller() {
     }
@@ -1008,13 +1014,21 @@ public class Preferences_Controller implements Initializable {
                         zones_passive_toggle = false;
                     }
                     String toggleS_gemUI;
+                    boolean toggled_reset = false;
                     if(betaGemUItoggle.isSelected()){
+                        if(!gem_UI_toggle){
+                            toggled_reset = true;
+                        }
                         toggleS_gemUI = "true";
                         gem_UI_toggle = true;
                     }else{
+                        if(gem_UI_toggle){
+                            toggled_reset = true;
+                        }
                         toggleS_gemUI = "false";
                         gem_UI_toggle = false;
                     }
+                    if(toggled_reset) parent_gameModeOn.gemUItoggled(gem_UI_toggle);
                     //changing the big decimal number to 1 decimal apparently
                     zones_slider = (int)sliderZones.getValue();
                     level_slider = (int)sliderLevel.getValue();

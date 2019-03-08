@@ -129,6 +129,16 @@ public class Controller {
         }
     }
 
+    public void gemUItoggled(boolean beta){
+        if(!level_stage_lock)
+            Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    level_stage.resetFXMLS(beta);
+                }
+            });
+    }
+
     public static boolean LOCK; //locs all overlays and keybinds
     public int playerLevel;
     public String playerName;
