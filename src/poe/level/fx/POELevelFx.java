@@ -1391,6 +1391,7 @@ public class POELevelFx extends Application {
         setUpDirectories();
 
         if (!DEBUG) {
+            GithubHelper.checkRateLimited();
             if (checkForNewVersion()) {
                 is_new_version = true;
                 // New release info should NEVER be null here!
