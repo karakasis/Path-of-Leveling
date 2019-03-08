@@ -3,6 +3,7 @@ package poe.level.data;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import poe.level.fx.POELevelFx;
 
 import java.io.*;
 import java.net.URL;
@@ -85,7 +86,7 @@ public class GithubHelper {
                 ReleaseInfo info = new ReleaseInfo();
                 for (int releaseIdx = 0; releaseIdx < releaseArray.length(); releaseIdx++) {
                     JSONObject releaseObj = releaseArray.getJSONObject(releaseIdx);
-                    if ("master".equalsIgnoreCase(releaseObj.getString("target_commitish")) ) {
+                    if (POELevelFx.BRANCH_NAME.equalsIgnoreCase(releaseObj.getString("target_commitish")) ) {
                         info.version = releaseObj.getString("name").trim();
                         JSONArray assetsArr = releaseObj.getJSONArray("assets");
                         boolean found = false;
@@ -107,7 +108,7 @@ public class GithubHelper {
                         return info;
                     }
                 }
-                m_logger.warning("Failed to find a master release somehow");
+                m_logger.warning("Failed to find a " + POELevelFx.BRANCH_NAME+ " release somehow");
             } catch (Exception ex) {
                 m_logger.log(Level.SEVERE, "Exception while parsing release information: " + ex.getMessage(), ex);
             }
