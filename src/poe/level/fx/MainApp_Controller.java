@@ -87,6 +87,8 @@ public class MainApp_Controller implements Initializable {
     private JFXButton maximizeWindow;
     @FXML
     private JFXButton minimizeWindow;
+    @FXML
+    private Label lblVersion;
 
 
 
@@ -132,6 +134,7 @@ public class MainApp_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        lblVersion.setText("Path of Leveling - " + POELevelFx.version);
         final Delta dragDelta = new Delta();
         /*
         title.setOnMousePressed(new EventHandler<MouseEvent>() {

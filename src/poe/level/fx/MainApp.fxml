@@ -100,7 +100,7 @@
                   <Font size="11.0" fx:id="x3" />
                 </font>
               </Label>
-              <Label layoutX="63.0" layoutY="3.0" maxWidth="-1.0" text="Path-of-Leveling_v0.7-alpha" textFill="#ebebeb" AnchorPane.rightAnchor="3.0">
+              <Label fx:id="lblVersion" layoutX="63.0" layoutY="3.0" text="Path-of-Leveling_vX.X-placeholder" textFill="#ebebeb" AnchorPane.rightAnchor="3.0">
                      <font>
                         <Font name="Trebuchet MS" size="11.0" />
                      </font></Label>
