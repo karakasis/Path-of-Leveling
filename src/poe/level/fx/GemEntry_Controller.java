@@ -385,7 +385,7 @@ public class GemEntry_Controller implements Initializable {
     }
 
     public AnchorPane getRoot(){
-        return root;
+        return outerRoot;
     }
 
     public Gem getGem(){
