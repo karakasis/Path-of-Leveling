@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="219.0" prefWidth="329.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.CharacterInfo_Controller">
+<AnchorPane id="AnchorPane" prefHeight="240.0" prefWidth="329.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.CharacterInfo_Controller">
    <children>
       <JFXTabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -46,7 +46,7 @@
                                           <Label prefHeight="25.0" text="Character Level :" textAlignment="CENTER" wrapText="true" />
                                           <TextField fx:id="txtManualLevel" prefHeight="25.0" prefWidth="178.0" promptText="The level of your character.">
                                              <HBox.margin>
-                                                <Insets left="10.0" />
+                                                <Insets left="13.0" />
                                              </HBox.margin>
                                           </TextField>
                                        </children>
@@ -112,6 +112,21 @@
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </HBox>
+                                    <HBox prefHeight="32.0" prefWidth="309.0" style="-fx-background-color: transparent;">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="25.0" text="Note: Your PoE account info must be public to do this." textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Italic" size="12.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
                                  </children>
                                  <BorderPane.margin>
                                     <Insets />
@@ -122,7 +137,7 @@
                               </VBox>
                            </center>
                            <bottom>
-                              <HBox prefHeight="7.0" prefWidth="329.0" style="-fx-background-color: transparent;" BorderPane.alignment="BOTTOM_CENTER">
+                              <HBox prefHeight="30.0" prefWidth="223.0" style="-fx-background-color: transparent;" BorderPane.alignment="BOTTOM_CENTER">
                                  <children>
                                     <Label fx:id="lblAutoError" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="197.0" textAlignment="CENTER" textFill="#e82222" visible="false" wrapText="true" />
                                     <JFXButton fx:id="btnAutoStart" buttonType="RAISED" disable="true" onAction="#startAuto" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Start" textFill="WHITE">

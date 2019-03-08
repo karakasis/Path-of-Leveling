@@ -61,7 +61,7 @@
                   <Menu mnemonicParsing="false" text="Run">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#validateBuild" text="Validate and view leveling progress" />
-                        <MenuItem mnemonicParsing="false" onAction="#validateToLauncher" text="Validate and return to Launcher" />
+                        <MenuItem mnemonicParsing="false" onAction="#validateToLauncher" text="Validate All and return to Launcher" />
                     </items>
                   </Menu>
               <Menu mnemonicParsing="false" text="View">

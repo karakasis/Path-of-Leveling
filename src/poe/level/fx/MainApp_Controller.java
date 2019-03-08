@@ -429,8 +429,9 @@ public class MainApp_Controller implements Initializable {
 
             buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
             //controller.passDialog(mLoad);
+            String errorText = buildspanel_controller.validateError();
             loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated
-                    , buildspanel_controller.validateError(),this);
+                    , errorText,this);
             buildPreviewPopup.show();
         }
     }
