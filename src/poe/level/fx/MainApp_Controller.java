@@ -80,6 +80,8 @@ public class MainApp_Controller implements Initializable {
     @FXML
     private MenuItem link_active_pob;
     @FXML
+    private MenuItem validateBuildMenuItem;
+    @FXML
     private Label footerValid;
     @FXML
     private JFXButton closeWindow;
@@ -87,6 +89,8 @@ public class MainApp_Controller implements Initializable {
     private JFXButton maximizeWindow;
     @FXML
     private JFXButton minimizeWindow;
+    @FXML
+    private Label lblVersion;
 
 
 
@@ -132,6 +136,7 @@ public class MainApp_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        lblVersion.setText("Path of Leveling - " + POELevelFx.version);
         final Delta dragDelta = new Delta();
         /*
         title.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -423,8 +428,9 @@ public class MainApp_Controller implements Initializable {
 
             buildPreviewPopup = new JFXDialog(rootPane, con, JFXDialog.DialogTransition.CENTER);
             //controller.passDialog(mLoad);
+            String errorText = buildspanel_controller.validateError();
             loader.<ValidateErrorPopupController>getController().setUp(buildspanel_controller.lastbuild_invalidated
-                    , buildspanel_controller.validateError(),this);
+                    , errorText,this);
             buildPreviewPopup.show();
         }
     }
@@ -761,6 +767,10 @@ public class MainApp_Controller implements Initializable {
             get_pob_link.setDisable(true);
             open_pob_view.setDisable(true);
         }
+    }
+
+    void setValidateBuildDisabled(boolean disabled) {
+        validateBuildMenuItem.setDisable(disabled);
     }
 
     @FXML

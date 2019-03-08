@@ -7,6 +7,7 @@ package poe.level.fx;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -646,6 +647,7 @@ public class BuildsPanel_Controller implements Initializable {
             sgc.reset();
             //buildsBox.getChildren().remove(bl.pec.getRoot()); // remove from the UI
             buildsBox.getItems().remove(bl.pec.getRoot()); // remove from the UI
+            buildsBox.getSelectionModel().clearSelection();
             linker.remove(bl.id); //remove from data
             root.toggleActiveBuilds(false);
             if(POELevelFx.buildsLoaded.isEmpty()){
@@ -701,6 +703,22 @@ public class BuildsPanel_Controller implements Initializable {
 
         linker = new HashMap<>();
         //loadBuildsFromMemory();
+        buildsBox.getSelectionModel().getSelectedItems().addListener(new ListChangeListener() {
+            @Override
+            public void onChanged(Change change) {
+                boolean added = false;
+                boolean removed = false;
+                while (change.next()) {
+                    if (change.wasAdded()) {
+                        added = true;
+                    } else if (change.wasRemoved()) {
+                        removed = true;
+                    }
+                }
+                removeBuild_button.setDisable(removed && !added);
+                root.setValidateBuildDisabled(removed && !added);
+            }
+        });
     }
 
 

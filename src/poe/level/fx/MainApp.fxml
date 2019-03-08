@@ -60,8 +60,8 @@
               </Menu>
                   <Menu mnemonicParsing="false" text="Run">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#validateBuild" text="Validate and view leveling progress" />
-                        <MenuItem mnemonicParsing="false" onAction="#validateToLauncher" text="Validate and return to Launcher" />
+                      <MenuItem fx:id="validateBuildMenuItem" mnemonicParsing="false" onAction="#validateBuild" text="Validate and view leveling progress" disable="true"/>
+                        <MenuItem mnemonicParsing="false" onAction="#validateToLauncher" text="Validate All and return to Launcher" />
                     </items>
                   </Menu>
               <Menu mnemonicParsing="false" text="View">
@@ -100,7 +100,7 @@
                   <Font size="11.0" fx:id="x3" />
                 </font>
               </Label>
-              <Label layoutX="63.0" layoutY="3.0" maxWidth="-1.0" text="Path-of-Leveling_v0.7-alpha" textFill="#ebebeb" AnchorPane.rightAnchor="3.0">
+              <Label fx:id="lblVersion" layoutX="63.0" layoutY="3.0" text="Path-of-Leveling_vX.X-placeholder" textFill="#ebebeb" AnchorPane.rightAnchor="3.0">
                      <font>
                         <Font name="Trebuchet MS" size="11.0" />
                      </font></Label>
