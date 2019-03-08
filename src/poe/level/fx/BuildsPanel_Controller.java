@@ -552,7 +552,13 @@ public class BuildsPanel_Controller implements Initializable {
                 }
                 sg.getGems().add(gem);//***check line 324 in GemsPanel_Controller;
             }
-            pobBuild.getSocketGroup().add(sg);
+            if(!sg.getGems().isEmpty()){
+                pobBuild.getSocketGroup().add(sg);
+                if(sg.getActiveGem() == null){
+                    sg.setActiveGem(sg.getGems().get(0));
+                }
+            }
+
         }
         //but we also need to link the build to the build panel
         //we do this by load method
