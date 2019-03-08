@@ -80,6 +80,8 @@ public class MainApp_Controller implements Initializable {
     @FXML
     private MenuItem link_active_pob;
     @FXML
+    private MenuItem validateBuildMenuItem;
+    @FXML
     private Label footerValid;
     @FXML
     private JFXButton closeWindow;
@@ -769,6 +771,10 @@ public class MainApp_Controller implements Initializable {
             get_pob_link.setDisable(true);
             open_pob_view.setDisable(true);
         }
+    }
+
+    void setValidateBuildDisabled(boolean disabled) {
+        validateBuildMenuItem.setDisable(disabled);
     }
 
     @FXML

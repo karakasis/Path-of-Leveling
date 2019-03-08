@@ -716,6 +716,7 @@ public class BuildsPanel_Controller implements Initializable {
                     }
                 }
                 removeBuild_button.setDisable(removed && !added);
+                root.setValidateBuildDisabled(removed && !added);
             }
         });
     }
