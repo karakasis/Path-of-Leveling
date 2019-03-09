@@ -99,23 +99,30 @@ public class Main_Controller implements Initializable {
             alert.initOwner(parent);
             alert.showAndWait();
         }else{
-            if(leveling.isSelected() && buildLoaded!=null){
-                characterInfoPopup();
-                //buildLoaded.level = temp_alert();
-            }else if(leveling.isSelected() && buildLoaded == null){
+            if(!leveling.isSelected() && !xp.isSelected() && !zones.isSelected()){
                 Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Build not set");
-                alert.setContentText("Select a build or create a new one in the Editor panel.");
+                alert.setTitle("Select at least one of the 3 main options.");
+                alert.setContentText("Select at least one of the 3 main options.");
                 alert.initOwner(parent);
                 alert.showAndWait();
             }else{
-                if(xp.isSelected() || zones.isSelected()){
+                if(leveling.isSelected() && buildLoaded!=null){
                     characterInfoPopup();
+                    //buildLoaded.level = temp_alert();
+                }else if(leveling.isSelected() && buildLoaded == null){
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Build not set");
+                    alert.setContentText("Select a build or create a new one in the Editor panel.");
+                    alert.initOwner(parent);
+                    alert.showAndWait();
                 }else{
-                    parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());
+                    if(xp.isSelected() || zones.isSelected()){
+                        characterInfoPopup();
+                    }else{
+                        parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());
+                    }
                 }
             }
-
         }
     }
 

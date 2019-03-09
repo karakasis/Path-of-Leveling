@@ -79,7 +79,7 @@ public class GlobalKeyListener implements NativeKeyListener {
                         temp.add(NativeKeyEvent.getKeyText(vk));
                     }
                     if (temp.equals(zones_hotkey_show_hide_set)) {
-                        //System.out.println("zones_hotkey_show_hide_set triggered");
+                        System.out.println("zones_hotkey_show_hide_set triggered");
                         Controller.instance.zones_hotkey_show_hide_key_event();
                     }
                 }

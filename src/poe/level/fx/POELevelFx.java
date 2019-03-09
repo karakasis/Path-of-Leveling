@@ -61,7 +61,7 @@ public class POELevelFx extends Application {
     /*************************************************************************************/
     /* Update this when you are pushing a new release version, must match the GitHub release name!
     **************************************************************************************/
-    public static final String version = "v0.73-beta";
+    public static final String version = "v0.74-beta";
 
 
     public static boolean DEBUG = false;
@@ -199,8 +199,8 @@ public class POELevelFx extends Application {
             HashMap<String,String> hotkeyDefaults;
             //changed the default keys
             hotkeyDefaults = new HashMap<>();
-            hotkeyDefaults.put("zones-hotkey-show_hide","Numpad 7");
-            hotkeyDefaults.put("level-hotkey-remind","Numpad 8");
+            hotkeyDefaults.put("zones-hotkey-show_hide","F4");
+            hotkeyDefaults.put("level-hotkey-remind","F5");
             hotkeyDefaults.put("recipe-hotkey-mark","Page Down");
             hotkeyDefaults.put("recipe-hotkey-preview","Page Up");
             hotkeyDefaults.put("level-hotkey-beta-next","Right");
