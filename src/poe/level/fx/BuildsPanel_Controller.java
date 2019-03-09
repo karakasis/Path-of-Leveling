@@ -352,10 +352,12 @@ public class BuildsPanel_Controller implements Initializable {
         try{
             byteValueBase64Decoded = Base64.getDecoder().decode(rawPaste.trim());
         }catch(java.lang.IllegalArgumentException e){
+            System.out.println("Seems you try to load a POB pastebin.");
             e.printStackTrace();
             return false;
         }
         catch(Exception e){
+            System.out.println("Seems you try to load a POB pastebin.");
             e.printStackTrace();
             return false;
         }

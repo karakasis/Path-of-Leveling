@@ -42,7 +42,7 @@ public class ZoneOverlay_Stage  extends Stage{
     private ZoneOverlay_Controller controller;
     
     public ZoneOverlay_Stage(){
-        
+        isVisible = false;
         this.setAlwaysOnTop(true);
         this.initStyle(StageStyle.TRANSPARENT);
         
@@ -69,6 +69,24 @@ public class ZoneOverlay_Stage  extends Stage{
             }
             System.exit(10);
         });
+        if(!Preferences_Controller.zones_toggle){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/ZoneOverlay.fxml"));
+            AnchorPane ap = null;
+            try {
+                ap = loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(ZoneOverlay_Stage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            controller = loader.<ZoneOverlay_Controller>getController();
+            controller.playTown();
+            Scene scene = new Scene(ap);
+            scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+            scene.setFill(Color.TRANSPARENT);
+            bindKeyEvent(scene);
+            this.setScene(scene);
+            controller.hookStage(this);
+            fadeIn();
+        }
     }
     
     public void hookController(Controller c){
@@ -98,57 +116,76 @@ public class ZoneOverlay_Stage  extends Stage{
         
         controller.hookStage(this);
 
-        
-        this.setX(prefX);
-        //this.setY(prefY);
-        this.setY(prefY-256.0);
-        //this.setHeight(0);
+        if(Preferences_Controller.zones_toggle)
+        showPanel();
+        else{
+            fadeOut();
+        }
+         
+    }
 
-
-
-        WritableValue<Double> writableWidth = new WritableValue<Double>() {
+    public void fadeIn(){
+        if(!isVisible){
+            this.show();
+            isVisible = true;
+        }
+        controller.setOpacity(0);
+        WritableValue<Double> opacity = new WritableValue<Double>() {
             @Override
             public Double getValue() {
-
-                //return getHeight();
-                return getY();
+               return controller.getOpacity();
             }
 
             @Override
-            public void setValue(Double value)
-            {
-                //setHeight(value);
-                setY(value);
+            public void setValue(Double value) {
+                controller.setOpacity(value);
+            }
+        };
+
+        Timeline fadeIn = new Timeline();
+
+
+        KeyValue kv = new KeyValue(opacity, 1d);
+        KeyFrame kf_slideIn = new KeyFrame(Duration.millis(1000), kv);
+
+        fadeIn.getKeyFrames().add(kf_slideIn);
+
+        fadeIn.play();
+    }
+
+    public void fadeOut(){
+        if(!isVisible){
+            this.show();
+            isVisible = true;
+        }
+        controller.setOpacity(1);
+        WritableValue<Double> opacity = new WritableValue<Double>() {
+            @Override
+            public Double getValue() {
+                return controller.getOpacity();
+            }
+
+            @Override
+            public void setValue(Double value) {
+                controller.setOpacity(value);
             }
         };
 
 
-        Timeline slideIn = new Timeline();
-       
-        KeyValue kv = new KeyValue(writableWidth, 0d);
-        KeyFrame kf_slideIn = new KeyFrame(Duration.millis(500), kv);
-        
-        if(Preferences_Controller.zones_toggle){
-            KeyFrame kf_delay = new KeyFrame(Duration.millis(Preferences_Controller.zones_slider * 1000)); 
-            slideIn.getKeyFrames().addAll(kf_slideIn,kf_delay);
-            Timeline slideOut = new Timeline();
-            KeyFrame kf_slideOut = new KeyFrame(Duration.millis(500), new KeyValue(writableWidth, -256d));
-            slideOut.getKeyFrames().add(kf_slideOut);
-            slideOut.setOnFinished(e -> Platform.runLater(() -> {
-               // System.out.println("Ending");
-                isVisible = false; this.hide();}));
-            slideIn.setOnFinished(e -> Platform.runLater(() -> slideOut.play()));
-        }else{
-            slideIn.getKeyFrames().addAll(kf_slideIn);
-        }
+        Timeline fadeOut = new Timeline();
 
-        //if(isVisible) hidePanel();
-        this.show();
-        slideIn.play();
-        isVisible = true;
-         
+        KeyValue kv2 = new KeyValue(opacity, 0d);
+        KeyFrame kf_slideIn2 = new KeyFrame(Duration.millis(1000), kv2);
+
+        fadeOut.getKeyFrames().add(kf_slideIn2);
+        fadeOut.setOnFinished(e -> Platform.runLater(() -> {
+            //System.out.println("Ending");
+           fadeIn();
+        }));
+        fadeOut.play();
+
     }
-    
+
     public void showPanel(){
         isVisible = true;
         this.show();
@@ -182,6 +219,14 @@ public class ZoneOverlay_Stage  extends Stage{
         KeyValue kv = new KeyValue(writableWidth, 0d);
         KeyFrame kf_slideIn = new KeyFrame(Duration.millis(500), kv);
         slideIn.getKeyFrames().addAll(kf_slideIn);
+        if(Preferences_Controller.zones_slider>=1){
+            KeyFrame kf_delay = new KeyFrame(Duration.millis(Preferences_Controller.zones_slider * 1000));
+            slideIn.getKeyFrames().addAll(kf_slideIn,kf_delay);
+
+            slideIn.setOnFinished(e -> Platform.runLater(() -> hidePanel()));
+        }else{
+            slideIn.getKeyFrames().addAll(kf_slideIn);
+        }
         slideIn.play();
     }
     
@@ -215,26 +260,33 @@ public class ZoneOverlay_Stage  extends Stage{
     }
     
     public void reset(){
-        if(!Preferences_Controller.zones_toggle || isVisible){
+        if(Preferences_Controller.zones_toggle && isVisible){
             hidePanel();
+        }else if(!Preferences_Controller.zones_toggle){
+            fadeOut();
+            controller.playTown();
+            fadeIn();
         }
     }
     
     public void event_show_hide(){
-        if(isVisible){
-            hidePanel();
-        }else{
-            showPanel();
+        if(Preferences_Controller.zones_toggle) {
+            if (isVisible) {
+                hidePanel();
+            } else {
+                showPanel();
+            }
         }
     }
     
     public void event_mark_recipe(){
-
+    if(Preferences_Controller.zones_toggle){
         if (!isVisible) {
             showPanel();
         }
+    }
 
-        controller.playRecipeAnimation();
+    controller.playRecipeAnimation();
     }
     
     public void bindKeyEvent(Scene scene){

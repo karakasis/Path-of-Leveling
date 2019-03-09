@@ -282,15 +282,20 @@ public class Preferences_Controller implements Initializable {
 
     }
 
-    public static void updateRecipeFile(String zoneName){ // default is replace with true the false value
-
+    public static void updateRecipeFile(Zone zone_checkpoint){ // default is replace with true the false value
+        ActHandler.getInstance().recipeMap.replace(zone_checkpoint, false, true);
+        String zoneName = zone_checkpoint.name + " [L"
+                + zone_checkpoint.getZoneLevel() + "]";
         //replace the changes in prop file
         FileInputStream in = null;
+        Properties props = new Properties();
         try {
             in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
-        } catch (FileNotFoundException ex) {
+            props.load(in);
+        } catch (IOException ex) {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        }
+        finally {
             if (in != null) {
                 try {
                     in.close();
@@ -298,17 +303,6 @@ public class Preferences_Controller implements Initializable {
                     Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }
-        Properties props = new Properties();
-        try {
-            props.load(in);
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            in.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         FileOutputStream out = null;
@@ -378,10 +372,12 @@ public class Preferences_Controller implements Initializable {
     gameModeOn = false;
 
     hotkeyDefaults = new HashMap<>();
-    hotkeyDefaults.put("zones-hotkey-show_hide","F4");
-    hotkeyDefaults.put("level-hotkey-remind","F5");
-    hotkeyDefaults.put("recipe-hotkey-mark","F6");
-    hotkeyDefaults.put("recipe-hotkey-preview","F7");
+    //changed the default keys
+    hotkeyDefaults = new HashMap<>();
+    hotkeyDefaults.put("zones-hotkey-show_hide","Numpad 7");
+    hotkeyDefaults.put("level-hotkey-remind","Numpad 8");
+    hotkeyDefaults.put("recipe-hotkey-mark","Page Down");
+    hotkeyDefaults.put("recipe-hotkey-preview","Page Up");
     hotkeyDefaults.put("level-hotkey-beta-next","Right");
     hotkeyDefaults.put("level-hotkey-beta-previous","Left");
     hotkeyDefaults.put("lock-keybinds","F12");

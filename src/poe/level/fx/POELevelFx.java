@@ -193,13 +193,14 @@ public class POELevelFx extends Application {
         }else{
 
             HashMap<String,String> hotkeyDefaults;
+            //changed the default keys
             hotkeyDefaults = new HashMap<>();
-            hotkeyDefaults.put("zones-hotkey-show_hide","F4");
-            hotkeyDefaults.put("level-hotkey-remind","F5");
-            hotkeyDefaults.put("recipe-hotkey-mark","F6");
-            hotkeyDefaults.put("recipe-hotkey-preview","F7");
-            hotkeyDefaults.put("level-hotkey-beta-next","Left");
-            hotkeyDefaults.put("level-hotkey-beta-previous","Right");
+            hotkeyDefaults.put("zones-hotkey-show_hide","Numpad 7");
+            hotkeyDefaults.put("level-hotkey-remind","Numpad 8");
+            hotkeyDefaults.put("recipe-hotkey-mark","Page Down");
+            hotkeyDefaults.put("recipe-hotkey-preview","Page Up");
+            hotkeyDefaults.put("level-hotkey-beta-next","Right");
+            hotkeyDefaults.put("level-hotkey-beta-previous","Left");
             hotkeyDefaults.put("lock-keybinds","F12");
 
             if (!new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").isFile()) {
@@ -213,8 +214,8 @@ public class POELevelFx extends Application {
                     output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
 
                     // set the properties value
-                    prop.setProperty("zones-toggle", "false");
-                    Preferences_Controller.zones_toggle = false;
+                    prop.setProperty("zones-toggle", "true");
+                    Preferences_Controller.zones_toggle = true;
                     prop.setProperty("zones-text-toggle", "true");
                     Preferences_Controller.zones_text_toggle = true;
                     prop.setProperty("zones-trial-toggle", "true");
@@ -651,31 +652,55 @@ public class POELevelFx extends Application {
         }else{
             Properties prop = new Properties();
             InputStream input = null;
+            boolean writeStream = false;
             try {
 
-                    input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+                input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
 
-                    // load a properties file
-                    prop.load(input);
-                    for(Zone z : ActHandler.getInstance().getZonesWithRecipes()){
-                        String thanksGGG = z.name + " [L" + z.getZoneLevel() + "]";
-                        boolean parseBoolean = Boolean.parseBoolean(prop.getProperty(thanksGGG));
-                        ActHandler.getInstance().recipeMap.put(z, parseBoolean);
-                    }
+                // load a properties file
+                prop.load(input);
+                for(Zone z : ActHandler.getInstance().getZonesWithRecipes()){
+                    String thanksGGG = z.name + " [L" + z.getZoneLevel() + "]";
+                    writeStream = writeStream || !prop.containsKey(thanksGGG);
+                    String propVal = prop.getProperty(thanksGGG, "false");
+                    prop.put(thanksGGG, propVal);
+                    ActHandler.getInstance().recipeMap.put(z, Boolean.parseBoolean(propVal));
+                }
 
             } catch (IOException ex) {
-                    ex.printStackTrace();
+                ex.printStackTrace();
             } finally {
                 if (input != null) {
-                        try {
-                                input.close();
-                                System.out.println("Recipe properties loaded successfully ");
+                    try {
+                        input.close();
+                        System.out.println("Recipe properties loaded successfully ");
 
-                        } catch (IOException e) {
-                                e.printStackTrace();
-                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+            if(writeStream){
+                System.out.println("Need to update recipes");
+                OutputStream output = null;
+                try{
+                    output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+                    prop.store(output, null);
+                    System.out.println("Recipe properties file PATCHED successfully in " + POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+                } catch (IOException ex) {
+                    Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                    if (output != null) {
+                        try {
+                            output.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
+            }
+
         }
     }
 

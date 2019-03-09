@@ -76,6 +76,7 @@ public class GemOverlayBeta_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         titles = new ArrayList<>();
+        rootDrag.setFocusTraversable(true);
     }
 
     public void hide(){

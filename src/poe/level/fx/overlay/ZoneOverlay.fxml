@@ -11,12 +11,12 @@
    <children>
       <HBox fx:id="container" layoutY="2.0" maxHeight="144.0" minHeight="144.0" prefHeight="144.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label maxHeight="144.0" maxWidth="256.0" minHeight="144.0" minWidth="-Infinity" prefHeight="144.0" prefWidth="256.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" text="Look for waypoint first, then find Fairgraves, and move away from the plateau, generally up or down. Find the Cave entrance, leave a portal for later and find the next wack to the Cavern of Wrath." textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Label alignment="CENTER" maxHeight="144.0" maxWidth="256.0" minHeight="144.0" minWidth="-Infinity" prefHeight="144.0" prefWidth="256.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" text="Zone Unidentified" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Alegreya Sans SC" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="10.0" maxHeight="144.0" maxWidth="256.0" minHeight="144.0" minWidth="-Infinity" prefHeight="144.0" prefWidth="256.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" text="Look for waypoint first, then find Fairgraves, and move away from the plateau, generally up or down. Find the Cave entrance, leave a portal for later and find the next wack to the Cavern of Wrath." textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="144.0" maxWidth="256.0" minHeight="144.0" minWidth="-Infinity" prefHeight="144.0" prefWidth="256.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" text="Zone Unidentified" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Alegreya Sans SC" size="14.0" />
                </font>
@@ -24,17 +24,17 @@
          </children>
       </HBox>
       <Label fx:id="recipeMarkedLabel" prefHeight="25.0" prefWidth="256.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" text="Recipe found!" textFill="#8cf8ae" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <ImageView fx:id="passive_book" fitHeight="55.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="114.0">
+      <ImageView fx:id="passive_book" fitHeight="55.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="114.0">
          <image>
             <Image url="@../../../../icons/Book_of_Skill_inventory_icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="trial" fitHeight="55.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="114.0">
+      <ImageView fx:id="trial" fitHeight="55.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="114.0">
          <image>
             <Image url="@../../../../icons/50px-AspirantTrialBefore.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="recipe" fitHeight="55.0" fitWidth="56.0" layoutX="322.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="114.0">
+      <ImageView fx:id="recipe" fitHeight="55.0" fitWidth="56.0" layoutX="322.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="114.0">
          <image>
             <Image url="@../../../../icons/5a1d1fda14de03.2056359715118581380855.png" />
          </image>
