@@ -137,9 +137,9 @@ public class POELevelFx extends Application {
         KeyCombination keyCombination = null;
         try{
             keyCombination = KeyCombination.keyCombination(defaultValue);
-            System.out.println("-POELevelFx- Setting keybind for : " + keyCombination.getName());
+            System.out.println("-POELevelFx- Setting keybind for : " + keyCombination.getName() +" for " + propertyName);
         }catch(Exception e){
-            System.out.println("-POELevelFx- Setting keybind for :" + keyCombination.getName() + " failed.");
+            System.out.println("-POELevelFx- Setting keybind for :" + propertyName + " failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         return keyCombination;
@@ -148,13 +148,17 @@ public class POELevelFx extends Application {
     private KeyCombination loadKeybinds(Properties prop, String propertyName, String defaultValue){
         //check if hotkey is null, on older versions
         String loadProp = prop.getProperty(propertyName);
-        if(loadProp == null) loadProp = defaultValue;
         KeyCombination keyCombination = null;
+        //this should load the keybind on the controller but not overwrite
+        if(loadProp == null){
+            //loadProp = defaultValue; <- load default or
+            return KeyCombination.NO_MATCH;
+        }
         try{
             keyCombination = KeyCombination.keyCombination(loadProp);
-            System.out.println("-POELevelFx- Loading keybind for : " + keyCombination.getName());
+            System.out.println("-POELevelFx- Loading keybind " + keyCombination.getName() +" for " + propertyName);
         }catch(Exception e){
-            System.out.println("-POELevelFx- Loading keybind for : " + keyCombination.getName() + " failed.");
+            System.out.println("-POELevelFx- Loading keybind for " + propertyName+ " failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         return keyCombination;
@@ -302,7 +306,7 @@ public class POELevelFx extends Application {
 
                 }
             }else{
-
+                    boolean patchKeybind = false;
                   Properties prop = new Properties();
                   InputStream input = null;
                   try {
@@ -431,6 +435,11 @@ public class POELevelFx extends Application {
                               ,hotkeyDefaults.get("lock-keybinds")
                       );
 
+                      if(prop.getProperty("level-hotkey-beta-next").equals("Left")
+                       && prop.getProperty("level-hotkey-beta-previous").equals("Right")) {
+                          patchKeybind = true;
+                      }
+
                   } catch (IOException ex) {
                           ex.printStackTrace();
                   } finally {
@@ -442,7 +451,31 @@ public class POELevelFx extends Application {
                               }
                       }
                   }
-            }
+                  if(patchKeybind) {
+                      OutputStream output = null;
+
+
+                      try {
+                          output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
+                          prop.setProperty("level-hotkey-beta-next","Right");
+                          prop.setProperty("level-hotkey-beta-previous","Left");
+                          prop.store(output, null);
+                      }    // save properties to project root folder
+                      catch (IOException io) {
+                          io.printStackTrace();
+                      } finally {
+                          if (output != null) {
+                              try {
+                                  output.close();
+                              } catch (IOException e) {
+                                  e.printStackTrace();
+                              }
+                          }
+                      }
+                  }
+
+                }
+
 
             // Only check for new JSON files when running in release mode
             if (!DEBUG) {

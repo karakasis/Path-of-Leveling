@@ -595,13 +595,17 @@ public class Preferences_Controller implements Initializable {
 
     private KeyCombination loadKeybinds(Properties prop, String propertyName, TextField kc_field){
         String loadProp = prop.getProperty(propertyName);
-        if(loadProp == null) loadProp = hotkeyDefaults.get(propertyName);
         KeyCombination keyCombination = null;
+        //this should load the keybind on the controller but not overwrite
+        if(loadProp == null){
+            //loadProp = hotkeyDefaults.get(propertyName); <- load default or
+            return KeyCombination.NO_MATCH;
+        }
         try{
             keyCombination = KeyCombination.keyCombination(loadProp);
-            System.out.println("-Preferences- Loaded key code : " + keyCombination.getName() + " for "+ propertyName);
+            System.out.println("-Preferences- Loaded keybind : " + keyCombination.getName() + " for "+ propertyName);
         }catch(Exception e){
-            System.out.println("-Preferences- Loading key code : " + keyCombination.getName() + " for "+ propertyName+" failed.");
+            System.out.println("-Preferences- Loading keybind for "+ propertyName+" failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         kc_field.setText(loadProp);
@@ -613,9 +617,9 @@ public class Preferences_Controller implements Initializable {
         KeyCombination keyCombination = null;
         try{
             keyCombination = KeyCombination.keyCombination(kc_field_text);
-            System.out.println("-Preferences- Saved key code : " + keyCombination.getName()+ " for "+propertyName);
+            System.out.println("-Preferences- Saved keybind : " + keyCombination.getName()+ " for "+propertyName);
         }catch(Exception e){
-            System.out.println("-Preferences- Saving key code : " + keyCombination.getName()+ " for "+propertyName + " failed.");
+            System.out.println("-Preferences- Saving keybind : for "+propertyName + " failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         return keyCombination;

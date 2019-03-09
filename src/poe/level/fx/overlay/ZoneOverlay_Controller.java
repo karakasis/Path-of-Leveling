@@ -105,7 +105,6 @@ public class ZoneOverlay_Controller implements Initializable {
 
     public void setOpacity(double value){
         root.setOpacity(value);
-        System.out.println("opactiy set to "+ value);
     }
 
     public double getOpacity(){

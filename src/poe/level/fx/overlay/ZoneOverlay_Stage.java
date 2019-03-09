@@ -96,32 +96,40 @@ public class ZoneOverlay_Stage  extends Stage{
 
 
 
-    public void queue(Zone currentZone){
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/ZoneOverlay.fxml"));
-        AnchorPane ap = null;
-        try {
-            ap = loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(ZoneOverlay_Stage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        controller = loader.<ZoneOverlay_Controller>getController();
-        controller.init(currentZone);
-        Scene scene = new Scene(ap);
-        scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
-        scene.setFill(Color.TRANSPARENT);
-        bindKeyEvent(scene);
-        this.setScene(scene);
-        
-        
-        controller.hookStage(this);
+    public void queue(Zone currentZone) {
 
-        if(Preferences_Controller.zones_toggle)
-        showPanel();
-        else{
-            fadeOut();
+        if (Preferences_Controller.zones_toggle){
+            forward_queue(currentZone);
+            showPanel();
         }
-         
+        else{
+            fadeOut(currentZone);
+        }
+    }
+
+    public void forward_queue(Zone currentZone){
+        if(currentZone == null){
+            controller.playTown();
+        }else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/poe/level/fx/overlay/ZoneOverlay.fxml"));
+            AnchorPane ap = null;
+            try {
+                ap = loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(ZoneOverlay_Stage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            controller = loader.<ZoneOverlay_Controller>getController();
+            controller.init(currentZone);
+            Scene scene = new Scene(ap);
+            scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+            scene.setFill(Color.TRANSPARENT);
+            bindKeyEvent(scene);
+            this.setScene(scene);
+
+
+            controller.hookStage(this);
+        }
+
     }
 
     public void fadeIn(){
@@ -153,7 +161,7 @@ public class ZoneOverlay_Stage  extends Stage{
         fadeIn.play();
     }
 
-    public void fadeOut(){
+    public void fadeOut(Zone zone){
         if(!isVisible){
             this.show();
             isVisible = true;
@@ -180,6 +188,7 @@ public class ZoneOverlay_Stage  extends Stage{
         fadeOut.getKeyFrames().add(kf_slideIn2);
         fadeOut.setOnFinished(e -> Platform.runLater(() -> {
             //System.out.println("Ending");
+            forward_queue(zone);
            fadeIn();
         }));
         fadeOut.play();
@@ -263,9 +272,9 @@ public class ZoneOverlay_Stage  extends Stage{
         if(Preferences_Controller.zones_toggle && isVisible){
             hidePanel();
         }else if(!Preferences_Controller.zones_toggle){
-            fadeOut();
-            controller.playTown();
-            fadeIn();
+            fadeOut(null);
+            //controller.playTown();
+            //fadeIn();
         }
     }
     
