@@ -147,6 +147,7 @@ public class Controller {
     }
 
     public static boolean LOCK; //locs all overlays and keybinds
+    public static boolean PRESS; //locs all overlays and keybinds
     public int playerLevel;
     public String playerName;
     public int monsterLevel;
@@ -210,6 +211,7 @@ public class Controller {
     //public Controller(Stage zone, Stage xp, Stage level, Build build) {
     public Controller(boolean zone_b, boolean xp, boolean level, Build build) {
         LOCK = false;
+        PRESS = false;
         instance = this;
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         height = primScreenBounds.getHeight();

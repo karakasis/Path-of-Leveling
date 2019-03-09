@@ -31,7 +31,8 @@ public class GemOverlayBeta_Controller implements Initializable {
         final Delta dragDelta = new Delta();
         rootDrag.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
-                if(!Controller.LOCK) {
+                if(!Controller.LOCK && mouseEvent.isPrimaryButtonDown()) {
+                    Controller.PRESS = true;
                     // record a delta distance for the drag and drop operation.
                     dragDelta.x = stage.getX() - mouseEvent.getScreenX();
                     dragDelta.y = stage.getY() - mouseEvent.getScreenY();
@@ -40,7 +41,7 @@ public class GemOverlayBeta_Controller implements Initializable {
         });
         rootDrag.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
-                if(!Controller.LOCK) {
+                if(!Controller.LOCK && mouseEvent.isPrimaryButtonDown()) {
                     stage.setX(mouseEvent.getScreenX() + dragDelta.x);
                     stage.setY(mouseEvent.getScreenY() + dragDelta.y);
                     GemOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
@@ -50,8 +51,9 @@ public class GemOverlayBeta_Controller implements Initializable {
         });
         rootDrag.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
-                if(!Controller.LOCK) {
+                if(!Controller.LOCK &&  Controller.PRESS) {
                     //update the prop file
+                    Controller.PRESS = false;
                     Preferences_Controller.updateGemsPos(GemOverlay_Stage.prefX, GemOverlay_Stage.prefY);
                 }
             }

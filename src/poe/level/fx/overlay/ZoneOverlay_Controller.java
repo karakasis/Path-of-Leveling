@@ -68,7 +68,8 @@ public class ZoneOverlay_Controller implements Initializable {
         container.setOnMousePressed(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
             // record a delta distance for the drag and drop operation.
-              if(!Controller.LOCK){
+              if(!Controller.LOCK && mouseEvent.isPrimaryButtonDown()){
+                  Controller.PRESS = true;
                   dragDelta.x = stage.getX() - mouseEvent.getScreenX();
                   dragDelta.y = stage.getY() - mouseEvent.getScreenY();
               }
@@ -77,7 +78,7 @@ public class ZoneOverlay_Controller implements Initializable {
         container.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(!Controller.LOCK) {
+                if(!Controller.LOCK && mouseEvent.isPrimaryButtonDown()) {
                     stage.setX(mouseEvent.getScreenX() + dragDelta.x);
                     stage.setY(mouseEvent.getScreenY() + dragDelta.y);
                     ZoneOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
@@ -87,7 +88,8 @@ public class ZoneOverlay_Controller implements Initializable {
         });
         container.setOnMouseReleased(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
-                if(!Controller.LOCK) {
+                if(!Controller.LOCK && Controller.PRESS) {
+                    Controller.PRESS = false;
                     Preferences_Controller.updateZonesPos(ZoneOverlay_Stage.prefX, ZoneOverlay_Stage.prefY);
                 }
           }
