@@ -49,10 +49,8 @@ public class Controller {
             if(zone_checkpoint!=null
             && zone_checkpoint.hasRecipe
             && ActHandler.getInstance().recipeMap.get(zone_checkpoint) == false){
-                ActHandler.getInstance().recipeMap.replace(zone_checkpoint, false, true);
-                //need to save to file.
-                Preferences_Controller.updateRecipeFile(zone_checkpoint.name + " [L"
-                        + zone_checkpoint.getZoneLevel() + "]");
+                //need to save to file and change the map in the method below
+                Preferences_Controller.updateRecipeFile(zone_checkpoint);
 
                 Platform.runLater(new Runnable(){
                     @Override
@@ -293,7 +291,8 @@ public class Controller {
 
     public void start(){
         _tObj = new Tail();
-        if (!POELevelFx.DEBUG) {
+        //!POELevelFx.DEBUG
+        if (true) {
             _tObj.setUpTailer(new File(path), this);
         } else {
             // Choose your poison (default to the game's log)

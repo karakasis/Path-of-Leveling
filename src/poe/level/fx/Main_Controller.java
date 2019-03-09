@@ -236,7 +236,7 @@ public class Main_Controller implements Initializable {
         }
 
         editCharacterPopup.close();
-        m_logger.info("Starting with character info: " + buildLoaded.getCharacterInfo());
+        m_logger.info("Starting with character info: " + charInfo);
         parent.start(zones.isSelected(), xp.isSelected(), leveling.isSelected());
     }
 

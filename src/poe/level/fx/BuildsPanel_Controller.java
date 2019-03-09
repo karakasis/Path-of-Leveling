@@ -352,10 +352,12 @@ public class BuildsPanel_Controller implements Initializable {
         try{
             byteValueBase64Decoded = Base64.getDecoder().decode(rawPaste.trim());
         }catch(java.lang.IllegalArgumentException e){
+            System.out.println("Seems you try to load a POB pastebin.");
             e.printStackTrace();
             return false;
         }
         catch(Exception e){
+            System.out.println("Seems you try to load a POB pastebin.");
             e.printStackTrace();
             return false;
         }
@@ -543,12 +545,22 @@ public class BuildsPanel_Controller implements Initializable {
             SocketGroup sg = new SocketGroup();
             for( String gemString : sgList){
                 Gem gem = GemHolder.getInstance().createGemFromCache(gemString,pobBuild.getClassName());
+                if(gem == null) {
+                    System.err.println(gemString);
+                    continue;
+                }
                 if(gem.isActive && sg.getActiveGem() == null){
                     sg.setActiveGem(gem);
                 }
                 sg.getGems().add(gem);//***check line 324 in GemsPanel_Controller;
             }
-            pobBuild.getSocketGroup().add(sg);
+            if(!sg.getGems().isEmpty()){
+                pobBuild.getSocketGroup().add(sg);
+                if(sg.getActiveGem() == null){
+                    sg.setActiveGem(sg.getGems().get(0));
+                }
+            }
+
         }
         //but we also need to link the build to the build panel
         //we do this by load method

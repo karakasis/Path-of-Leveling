@@ -19,16 +19,16 @@
             <Font name="Alegreya Sans SC" size="18.0" />
          </font>
       </Label>
-      <JFXToggleButton fx:id="toggle" alignment="CENTER_LEFT" layoutX="14.0" layoutY="38.0" onAction="#onToggle" prefHeight="47.0" size="6.0" text="Make the panel slide out automatically" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0">
+      <JFXToggleButton fx:id="toggle" alignment="CENTER_LEFT" layoutX="14.0" layoutY="38.0" onAction="#onToggle" prefHeight="36.0" prefWidth="299.0" size="6.0" styleClass="jfx-toggle-buttonCustom" text="Show zones with a slide effect" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0">
          <font>
             <Font name="Trebuchet MS" size="13.0" />
          </font></JFXToggleButton>
       <Separator layoutX="19.0" layoutY="277.0" prefHeight="8.0" prefWidth="285.0" />
-      <Label fx:id="hideText" layoutX="50.0" layoutY="78.0" text="Set a timer to hide the panel (sec)" AnchorPane.leftAnchor="34.0">
+      <Label fx:id="hideText" layoutX="50.0" layoutY="78.0" text="Set a timer to hide the panel (0 = no timer)" AnchorPane.leftAnchor="34.0">
          <font>
             <Font name="Trebuchet MS" size="13.0" />
          </font></Label>
-      <JFXSlider fx:id="sliderZones" blockIncrement="1.0" layoutX="29.0" layoutY="112.0" max="30.0" min="4.0" minorTickCount="10" prefHeight="16.0" prefWidth="285.0" value="6.0" />
+      <JFXSlider fx:id="sliderZones" blockIncrement="1.0" layoutX="29.0" layoutY="112.0" max="30.0" minorTickCount="10" prefHeight="16.0" prefWidth="285.0" value="6.0" />
       <Label layoutX="406.0" layoutY="19.0" text="Hotkeys :" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="19.0">
          <font>
             <Font name="Alegreya Sans SC" size="18.0" />
@@ -72,11 +72,11 @@
             </ImageView>
          </graphic></JFXButton>
       <Separator layoutX="19.0" layoutY="537.0" prefHeight="8.0" prefWidth="462.0" />
-      <JFXToggleButton fx:id="passive_toggle" alignment="CENTER_LEFT" layoutX="7.0" layoutY="126.0" prefHeight="60.0" size="6.0" text="Alert when zone has a passive point" AnchorPane.leftAnchor="20.0">
+      <JFXToggleButton fx:id="passive_toggle" alignment="CENTER_LEFT" layoutX="7.0" layoutY="126.0" prefHeight="60.0" size="6.0" style="jfx-size: 6;" text="Alert when zone has a passive point" AnchorPane.leftAnchor="20.0">
          <font>
             <Font name="Trebuchet MS" size="13.0" />
          </font></JFXToggleButton>
-      <JFXToggleButton fx:id="trial_toggle" alignment="CENTER_LEFT" layoutX="7.0" layoutY="162.0" prefHeight="47.0" size="6.0" text="Alert when zone has labyrinth trial" AnchorPane.leftAnchor="20.0">
+      <JFXToggleButton fx:id="trial_toggle" alignment="CENTER_LEFT" layoutX="7.0" layoutY="162.0" prefHeight="47.0" size="6.0" style="jfx-size: 6;" text="Alert when zone has labyrinth trial" AnchorPane.leftAnchor="20.0">
          <font>
             <Font name="Trebuchet MS" size="13.0" />
          </font></JFXToggleButton>
@@ -85,11 +85,11 @@
             <Font name="System Italic" size="9.0" />
          </font>
       </Label>
-      <JFXToggleButton fx:id="images_toggle" alignment="CENTER_LEFT" layoutX="7.0" layoutY="228.0" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" text="Show images " AnchorPane.leftAnchor="20.0">
+      <JFXToggleButton fx:id="images_toggle" alignment="CENTER_LEFT" layoutX="7.0" layoutY="228.0" onAction="#toggleZonesImages" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" style="jfx-size: 6;" text="Show images " AnchorPane.leftAnchor="20.0">
          <font>
             <Font name="Trebuchet MS" size="13.0" />
          </font></JFXToggleButton>
-      <JFXToggleButton fx:id="text_toggle" alignment="CENTER_LEFT" layoutX="143.0" layoutY="228.0" prefHeight="47.0" prefWidth="150.0" selected="true" size="6.0" text="Show text" AnchorPane.leftAnchor="163.0">
+      <JFXToggleButton fx:id="text_toggle" alignment="CENTER_LEFT" layoutX="143.0" layoutY="228.0" onAction="#toggleZonesText" prefHeight="47.0" prefWidth="150.0" selected="true" size="6.0" style="jfx-size: 6;" text="Show text" AnchorPane.leftAnchor="163.0">
          <font>
             <Font name="Trebuchet MS" size="13.0" />
          </font></JFXToggleButton>
@@ -117,7 +117,7 @@
             <Font name="System Italic" size="9.0" />
          </font>
       </Label>
-      <JFXToggleButton fx:id="recipe_toggle" alignment="CENTER_LEFT" layoutX="15.0" layoutY="198.0" prefHeight="47.0" size="6.0" text="Alert when zone has a crafting recipe" AnchorPane.leftAnchor="20.0">
+      <JFXToggleButton fx:id="recipe_toggle" alignment="CENTER_LEFT" layoutX="15.0" layoutY="198.0" prefHeight="47.0" size="6.0" style="jfx-size: 6;" text="Alert when zone has a crafting recipe" AnchorPane.leftAnchor="20.0">
          <font>
             <Font name="Trebuchet MS" size="13.0" />
          </font></JFXToggleButton>
@@ -138,7 +138,7 @@
             <Font name="Trebuchet MS" size="13.0" />
          </font></Label>
        <TextField fx:id="recipe_preview_hotkey" editable="false" layoutX="401.0" layoutY="231.0" prefHeight="25.0" prefWidth="79.0" AnchorPane.rightAnchor="19.0" />
-       <JFXToggleButton fx:id="betaGemUItoggle" alignment="CENTER_LEFT" layoutX="9.0" layoutY="385.0" onAction="#betaGemUItoggle_action" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" text="Beta Gem UI" AnchorPane.leftAnchor="20.0">
+       <JFXToggleButton fx:id="betaGemUItoggle" alignment="CENTER_LEFT" layoutX="9.0" layoutY="385.0" onAction="#betaGemUItoggle_action" prefHeight="47.0" prefWidth="167.0" selected="true" size="6.0" style="jfx-size: 6;" text="Beta Gem UI" AnchorPane.leftAnchor="20.0">
          <font>
             <Font name="Trebuchet MS" size="13.0" />
          </font></JFXToggleButton>

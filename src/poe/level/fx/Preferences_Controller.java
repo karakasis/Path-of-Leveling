@@ -282,15 +282,20 @@ public class Preferences_Controller implements Initializable {
 
     }
 
-    public static void updateRecipeFile(String zoneName){ // default is replace with true the false value
-
+    public static void updateRecipeFile(Zone zone_checkpoint){ // default is replace with true the false value
+        ActHandler.getInstance().recipeMap.replace(zone_checkpoint, false, true);
+        String zoneName = zone_checkpoint.name + " [L"
+                + zone_checkpoint.getZoneLevel() + "]";
         //replace the changes in prop file
         FileInputStream in = null;
+        Properties props = new Properties();
         try {
             in = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
-        } catch (FileNotFoundException ex) {
+            props.load(in);
+        } catch (IOException ex) {
             Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        }
+        finally {
             if (in != null) {
                 try {
                     in.close();
@@ -298,17 +303,6 @@ public class Preferences_Controller implements Initializable {
                     Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }
-        Properties props = new Properties();
-        try {
-            props.load(in);
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            in.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         FileOutputStream out = null;
@@ -378,12 +372,14 @@ public class Preferences_Controller implements Initializable {
     gameModeOn = false;
 
     hotkeyDefaults = new HashMap<>();
-    hotkeyDefaults.put("zones-hotkey-show_hide","F4");
-    hotkeyDefaults.put("level-hotkey-remind","F5");
-    hotkeyDefaults.put("recipe-hotkey-mark","F6");
-    hotkeyDefaults.put("recipe-hotkey-preview","F7");
-    hotkeyDefaults.put("level-hotkey-beta-next","F8");
-    hotkeyDefaults.put("level-hotkey-beta-previous","F9");
+    //changed the default keys
+    hotkeyDefaults = new HashMap<>();
+    hotkeyDefaults.put("zones-hotkey-show_hide","Numpad 7");
+    hotkeyDefaults.put("level-hotkey-remind","Numpad 8");
+    hotkeyDefaults.put("recipe-hotkey-mark","Page Down");
+    hotkeyDefaults.put("recipe-hotkey-preview","Page Up");
+    hotkeyDefaults.put("level-hotkey-beta-next","Right");
+    hotkeyDefaults.put("level-hotkey-beta-previous","Left");
     hotkeyDefaults.put("lock-keybinds","F12");
 
         // TODO
@@ -599,13 +595,17 @@ public class Preferences_Controller implements Initializable {
 
     private KeyCombination loadKeybinds(Properties prop, String propertyName, TextField kc_field){
         String loadProp = prop.getProperty(propertyName);
-        if(loadProp == null) loadProp = hotkeyDefaults.get(propertyName);
         KeyCombination keyCombination = null;
+        //this should load the keybind on the controller but not overwrite
+        if(loadProp == null){
+            //loadProp = hotkeyDefaults.get(propertyName); <- load default or
+            return KeyCombination.NO_MATCH;
+        }
         try{
             keyCombination = KeyCombination.keyCombination(loadProp);
-            System.out.println("-Preferences- Loaded key code : " + keyCombination.getName() + " for "+ propertyName);
+            System.out.println("-Preferences- Loaded keybind : " + keyCombination.getName() + " for "+ propertyName);
         }catch(Exception e){
-            System.out.println("-Preferences- Loading key code : " + keyCombination.getName() + " for "+ propertyName+" failed.");
+            System.out.println("-Preferences- Loading keybind for "+ propertyName+" failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         kc_field.setText(loadProp);
@@ -617,9 +617,9 @@ public class Preferences_Controller implements Initializable {
         KeyCombination keyCombination = null;
         try{
             keyCombination = KeyCombination.keyCombination(kc_field_text);
-            System.out.println("-Preferences- Saved key code : " + keyCombination.getName()+ " for "+propertyName);
+            System.out.println("-Preferences- Saved keybind : " + keyCombination.getName()+ " for "+propertyName);
         }catch(Exception e){
-            System.out.println("-Preferences- Saving key code : " + keyCombination.getName()+ " for "+propertyName + " failed.");
+            System.out.println("-Preferences- Saving keybind : for "+propertyName + " failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         return keyCombination;
@@ -1047,8 +1047,11 @@ public class Preferences_Controller implements Initializable {
                     prop.setProperty("zones-slider", String.valueOf(zones_slider));
                     prop.setProperty("level-slider", String.valueOf(level_slider));
 
-                    poe_log_dir = directory + "\\logs\\Client.txt";
-                    prop.setProperty("poe-dir",directory);
+                    if(!(directory == null || directory.isEmpty())){
+                        poe_log_dir = directory + "\\logs\\Client.txt";
+                        prop.setProperty("poe-dir",directory);
+                    }
+
 
                     //API
                     poe_account_name = txtAccountName.getText();
@@ -1098,6 +1101,20 @@ public class Preferences_Controller implements Initializable {
             parent_gameModeOn.closePlaceholderStage();
         } else {
             Logger.getLogger(Preferences_Controller.class.getName()).info("No way to close this controller in cancel()");
+        }
+    }
+
+    @FXML
+    private void toggleZonesImages(){
+        if(!images_toggle.isSelected() && !text_toggle.isSelected()){
+            text_toggle.setSelected(true);
+        }
+    }
+
+    @FXML
+    private void toggleZonesText(){
+        if(!images_toggle.isSelected() && !text_toggle.isSelected()){
+            images_toggle.setSelected(true);
         }
     }
 

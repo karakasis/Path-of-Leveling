@@ -57,11 +57,11 @@ public class POELevelFx extends Application {
     /***************************************************************************
      * Change to true if a build is being pushed to the master branch for public release.
      ***************************************************************************/
-    public static final boolean MASTER_RELEASE = false;
+    public static final boolean MASTER_RELEASE = true;
     /*************************************************************************************/
     /* Update this when you are pushing a new release version, must match the GitHub release tag name!!
     **************************************************************************************/
-    public static final String version = "v0.7-alpha";
+    public static final String version = "v0.73-beta";
 
 
     public static boolean DEBUG = false;
@@ -137,9 +137,9 @@ public class POELevelFx extends Application {
         KeyCombination keyCombination = null;
         try{
             keyCombination = KeyCombination.keyCombination(defaultValue);
-            System.out.println("-POELevelFx- Setting keybind for : " + keyCombination.getName());
+            System.out.println("-POELevelFx- Setting keybind for : " + keyCombination.getName() +" for " + propertyName);
         }catch(Exception e){
-            System.out.println("-POELevelFx- Setting keybind for :" + keyCombination.getName() + " failed.");
+            System.out.println("-POELevelFx- Setting keybind for :" + propertyName + " failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         return keyCombination;
@@ -148,13 +148,17 @@ public class POELevelFx extends Application {
     private KeyCombination loadKeybinds(Properties prop, String propertyName, String defaultValue){
         //check if hotkey is null, on older versions
         String loadProp = prop.getProperty(propertyName);
-        if(loadProp == null) loadProp = defaultValue;
         KeyCombination keyCombination = null;
+        //this should load the keybind on the controller but not overwrite
+        if(loadProp == null){
+            //loadProp = defaultValue; <- load default or
+            return KeyCombination.NO_MATCH;
+        }
         try{
             keyCombination = KeyCombination.keyCombination(loadProp);
-            System.out.println("-POELevelFx- Loading keybind for : " + keyCombination.getName());
+            System.out.println("-POELevelFx- Loading keybind " + keyCombination.getName() +" for " + propertyName);
         }catch(Exception e){
-            System.out.println("-POELevelFx- Loading keybind for : " + keyCombination.getName() + " failed.");
+            System.out.println("-POELevelFx- Loading keybind for " + propertyName+ " failed.");
             keyCombination = KeyCombination.NO_MATCH;
         }
         return keyCombination;
@@ -193,13 +197,14 @@ public class POELevelFx extends Application {
         }else{
 
             HashMap<String,String> hotkeyDefaults;
+            //changed the default keys
             hotkeyDefaults = new HashMap<>();
-            hotkeyDefaults.put("zones-hotkey-show_hide","F4");
-            hotkeyDefaults.put("level-hotkey-remind","F5");
-            hotkeyDefaults.put("recipe-hotkey-mark","F6");
-            hotkeyDefaults.put("recipe-hotkey-preview","F7");
-            hotkeyDefaults.put("level-hotkey-beta-next","F8");
-            hotkeyDefaults.put("level-hotkey-beta-previous","F9");
+            hotkeyDefaults.put("zones-hotkey-show_hide","Numpad 7");
+            hotkeyDefaults.put("level-hotkey-remind","Numpad 8");
+            hotkeyDefaults.put("recipe-hotkey-mark","Page Down");
+            hotkeyDefaults.put("recipe-hotkey-preview","Page Up");
+            hotkeyDefaults.put("level-hotkey-beta-next","Right");
+            hotkeyDefaults.put("level-hotkey-beta-previous","Left");
             hotkeyDefaults.put("lock-keybinds","F12");
 
             if (!new File(POELevelFx.directory + "\\Path of Leveling\\config.properties").isFile()) {
@@ -213,8 +218,8 @@ public class POELevelFx extends Application {
                     output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
 
                     // set the properties value
-                    prop.setProperty("zones-toggle", "false");
-                    Preferences_Controller.zones_toggle = false;
+                    prop.setProperty("zones-toggle", "true");
+                    Preferences_Controller.zones_toggle = true;
                     prop.setProperty("zones-text-toggle", "true");
                     Preferences_Controller.zones_text_toggle = true;
                     prop.setProperty("zones-trial-toggle", "true");
@@ -301,7 +306,7 @@ public class POELevelFx extends Application {
 
                 }
             }else{
-
+                    boolean patchKeybind = false;
                   Properties prop = new Properties();
                   InputStream input = null;
                   try {
@@ -430,6 +435,11 @@ public class POELevelFx extends Application {
                               ,hotkeyDefaults.get("lock-keybinds")
                       );
 
+                      if(prop.getProperty("level-hotkey-beta-next").equals("Left")
+                       && prop.getProperty("level-hotkey-beta-previous").equals("Right")) {
+                          patchKeybind = true;
+                      }
+
                   } catch (IOException ex) {
                           ex.printStackTrace();
                   } finally {
@@ -441,7 +451,31 @@ public class POELevelFx extends Application {
                               }
                       }
                   }
-            }
+                  if(patchKeybind) {
+                      OutputStream output = null;
+
+
+                      try {
+                          output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\config.properties");
+                          prop.setProperty("level-hotkey-beta-next","Right");
+                          prop.setProperty("level-hotkey-beta-previous","Left");
+                          prop.store(output, null);
+                      }    // save properties to project root folder
+                      catch (IOException io) {
+                          io.printStackTrace();
+                      } finally {
+                          if (output != null) {
+                              try {
+                                  output.close();
+                              } catch (IOException e) {
+                                  e.printStackTrace();
+                              }
+                          }
+                      }
+                  }
+
+                }
+
 
             // Only check for new JSON files when running in release mode
             if (!DEBUG) {
@@ -651,31 +685,55 @@ public class POELevelFx extends Application {
         }else{
             Properties prop = new Properties();
             InputStream input = null;
+            boolean writeStream = false;
             try {
 
-                    input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+                input = new FileInputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
 
-                    // load a properties file
-                    prop.load(input);
-                    for(Zone z : ActHandler.getInstance().getZonesWithRecipes()){
-                        String thanksGGG = z.name + " [L" + z.getZoneLevel() + "]";
-                        boolean parseBoolean = Boolean.parseBoolean(prop.getProperty(thanksGGG));
-                        ActHandler.getInstance().recipeMap.put(z, parseBoolean);
-                    }
+                // load a properties file
+                prop.load(input);
+                for(Zone z : ActHandler.getInstance().getZonesWithRecipes()){
+                    String thanksGGG = z.name + " [L" + z.getZoneLevel() + "]";
+                    writeStream = writeStream || !prop.containsKey(thanksGGG);
+                    String propVal = prop.getProperty(thanksGGG, "false");
+                    prop.put(thanksGGG, propVal);
+                    ActHandler.getInstance().recipeMap.put(z, Boolean.parseBoolean(propVal));
+                }
 
             } catch (IOException ex) {
-                    ex.printStackTrace();
+                ex.printStackTrace();
             } finally {
                 if (input != null) {
-                        try {
-                                input.close();
-                                System.out.println("Recipe properties loaded successfully ");
+                    try {
+                        input.close();
+                        System.out.println("Recipe properties loaded successfully ");
 
-                        } catch (IOException e) {
-                                e.printStackTrace();
-                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+            if(writeStream){
+                System.out.println("Need to update recipes");
+                OutputStream output = null;
+                try{
+                    output = new FileOutputStream(POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+                    prop.store(output, null);
+                    System.out.println("Recipe properties file PATCHED successfully in " + POELevelFx.directory + "\\Path of Leveling\\recipesFound.properties");
+                } catch (IOException ex) {
+                    Logger.getLogger(POELevelFx.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                    if (output != null) {
+                        try {
+                            output.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
+            }
+
         }
     }
 

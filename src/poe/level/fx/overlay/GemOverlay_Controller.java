@@ -71,6 +71,7 @@ public class GemOverlay_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        gem_overlay_container.setFocusTraversable(true);
     }
 
     public void socketGroupReplace(Gem add, Gem remove){

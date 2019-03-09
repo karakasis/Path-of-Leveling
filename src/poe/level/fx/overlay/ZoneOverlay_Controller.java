@@ -51,7 +51,7 @@ public class ZoneOverlay_Controller implements Initializable {
     private ImageView trial;
     @FXML
     private ImageView recipe;
-
+    @FXML
     private Label recipeMarkedLabel;
 
     private double initialX;
@@ -92,6 +92,23 @@ public class ZoneOverlay_Controller implements Initializable {
                 }
           }
         });
+    }
+
+    public void playTown(){
+        trial.setVisible(false);
+        recipe.setVisible(false);
+        passive_book.setVisible(false);
+        container.getChildren().clear();
+        cacheLabel.setText("Zone Unidentified");
+        container.getChildren().add(cacheLabel);
+    }
+
+    public void setOpacity(double value){
+        root.setOpacity(value);
+    }
+
+    public double getOpacity(){
+        return root.getOpacity();
     }
 
     public void init(Zone zone){
@@ -156,6 +173,7 @@ public class ZoneOverlay_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //root.setFocusTraversable(true);
         cacheLabel = (Label) container.getChildren().get(1);
         cacheLabelAlt = (Label) container.getChildren().get(0);
         container.getChildren().clear();
