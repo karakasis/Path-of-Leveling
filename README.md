@@ -88,6 +88,7 @@ If you have a suggestion I encourage you to start an issue.
 
 ## Changelog in v0.74
 New in this release:
+
 **New features**
 
 * Since a lot of people wanted the option to place their Zone overlay on locations other than the top oftheir screen, I had to find a way to change the slide animations.
