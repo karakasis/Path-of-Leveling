@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" maxHeight="169.0" maxWidth="-Infinity" minHeight="169.0" minWidth="-Infinity" prefHeight="169.0" style="-fx-background-color: rgba(0, 0, 0, 0);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.overlay.ZoneOverlay_Controller">
+<AnchorPane id="AnchorPane" fx:id="root" maxHeight="169.0" maxWidth="-Infinity" minHeight="169.0" minWidth="-Infinity" prefHeight="169.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poe.level.fx.overlay.ZoneOverlay_Controller">
    <children>
-      <HBox fx:id="container" layoutY="2.0" maxHeight="144.0" minHeight="144.0" prefHeight="144.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox fx:id="container" layoutY="2.0" maxHeight="144.0" minHeight="144.0" prefHeight="144.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label maxHeight="144.0" maxWidth="256.0" minHeight="144.0" minWidth="-Infinity" prefHeight="144.0" prefWidth="256.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" text="Look for waypoint first, then find Fairgraves, and move away from the plateau, generally up or down. Find the Cave entrance, leave a portal for later and find the next wack to the Cavern of Wrath." textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
