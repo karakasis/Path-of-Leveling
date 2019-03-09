@@ -1,32 +1,31 @@
 # Path of Leveling
 
-**read this**
->Since a lot of people seem to have the misconception that this is a Path of Building reader.
->
->Don't try to import a Pastebin that contains a Path of Building file via Import ..
->
->**it will not work**.
->
->This application **loads its own files**. You can import pastebin's that contain **ONLY** a Path of Leveling file, either  **created by you within the editor, or distributed by someone else in the community** .
->
->If you wish to simply **link** your Path of Building file with a certain build, please **use option Path of Building> Link active build with POB**. Once you have done this you can share your **Path of Leveling** build buy exporting it to Pastebin. The new Pastebin link will contain both of the "files" and it can only be opened with Path of Leveling. Thank you.
+Switching to beta with the introduction of the new UI.
 
-**This is an alpha version, bugs included**
+**~~This is an alpha version~~**, **bugs included, if you find an error or crash or bug please report it in this page**
+
+**and consider creating a pastebin with the latest log, found in your Documents/Path of Leveling folder.**
+
+
 
 *Assisting overlay with an advanced GUI editor written in Java for [Path of Exile](https://www.pathofexile.com/game).*
 
-*Get the [latest Version](https://github.com/karakasis/Path-of-Leveling/releases/tag/v0.6-alpha), updated January 4th 2019, Happy new year.*
+*[Reddit thread](https://www.reddit.com/r/pathofexile/comments/aca7vl/path_of_leveling_a_tool_written_in_java_with_an/)*
+
+*Get the [latest Version](https://github.com/karakasis/Path-of-Leveling/releases/tag/v0.74-beta), updated March 10th 2019*
 
 *Pastebin build example : [pastebin](https://pastebin.com/BDzwRww9)*
 
 *A quick overview of the application running can be found in this [video.](https://www.youtube.com/watch?v=xxiOxnJZM-A)*
 
+*Join Path of Leveling's [Dicord server](https://discord.gg/GdTCeMU) if you need help or have suggestions*
+
 ## What does it do
 
 This program currently does three things!
 - **Plan your leveling by selecting gems and links.** You can create complicated transitions between your gem setup, swap a gem for another one, or completely remove a Skill group for a different one. Get a popup on your in-game overlay when you reach certain levels.
-- **Navigate through the game's acts, with graphic representations from [Engineering Eternity](https://www.youtube.com/channel/UCaFHfrY-6uGSAvmczp_7a6Q/featured)** You can move the overlay around to suit your own needs. *Supporting only 1080p at this moment*
-- **Track your XP and find out when you are under/overleveled**. You can move the overlay around to suit your own needs.
+- **Navigate through the game's acts, with graphical representations of typical zone layouts from [Engineering Eternity](https://www.youtube.com/channel/UCaFHfrY-6uGSAvmczp_7a6Q/featured)** You can move the overlay around to suit your own needs. *Supporting only 1080p at this moment, which means that in smaller screens you will get bigger images, and in bigger screens smaller :).*
+- **Track your XP and find out when you are under/overleveled**. An overlay showing you your current level, the area level you are in, only in Acts not maps , calculates your effective xp multiplier in a 0-100% form.
 
 ## How does it work
 
@@ -61,13 +60,13 @@ That's all. Everything else is code.
 
 ## Known bugs
 *Will be updating this*
- - This may or may not be a bug im still trying to figure it out, just make sure you always have the XP option selected.
+ - some validation issues i will fix when i get some time with the new league.
 
 ## Future additions
 
 * ~~Link your leveling-build with your Path of Building tree, or a different planner~~ done check changelog v0.65 for more details on PoB import.
 * Support for more resolutions, and/or custom sized overlays
-* Find a more suitable way to place the overlays
+* ~~Find a more suitable way to place the overlays~~ I would like to believe I achieved that with new gem UI.
 
 Mentioned in the reddit comments :
 
@@ -83,9 +82,143 @@ Mentioned in the reddit comments :
 >
 >~~I recommend putting a box around "Start". Similar to how there is one around "Build" and "Editor"~~. done
 >
->There is no way to get back to the options menu once the start button has been pushed
+>~~There is no way to get back to the options menu once the start button has been pushed~~ done
 
 If you have a suggestion I encourage you to start an issue.
+
+## Changelog in v0.74
+New in this release:
+**New features**
+
+* Since a lot of people wanted the option to place their Zone overlay on locations other than the top oftheir screen, I had to find a way to change the slide animations.
+   * Settings > Show zones with a slide effect > On will be the slide and snap back to top of the screen.
+   * Settings > .. > Off will be place whereever u want but it wont slide at all, only fade in and out in place
+   * .. > On if timer is more than 0, you will get an auto slide out after X seconds
+   * .. > On if timer is 0 you will only get slide in and out on zone change
+
+**Bug fixes**
+
+* Fixed the bug where you had to add a build to play with only zones activated
+* Fixed the recipe saving bug where marking a recipe would overwrite your previous ones
+   * You will have to re-add the recipes you found so far. I added this option, since it was not therebefore
+   * Open your Editor> View> Recipes/Passives and select the checkboxes for the recipes you found,and then close the window and you mark recipes normally now.(dont click on reset)
+* Fixed an issue where you could move the overlays with middle, and right click
+* Fixed an issue where spam clicking the API Character select you open multiple windows.
+
+**Changes**
+
+* Changed missing keybind behaviour to "not-set".
+   * If you want to clear-remove a hotkey, open the config.properties in your Path of Leveling folderand remove the keybind line you don't want.
+
+## Changelog in v0.73
+New in this release:
+
+**Bug fixes**
+* Removed a high resolution image that would cause a memory heap.
+
+## Changelog in v0.72
+New in this release:
+
+**Bug fixes**
+* Fixed an error, where PoB has an Enchantment listed as skill, so the import would not work.
+
+## Changelog in v0.71
+New in this release:
+
+**Bug fixes**
+* Fixed bug when removing gems from a socketgroup introduced in v0.7-beta
+
+## Changelog in v0.70
+New in this release:
+
+**New features**
+
+* Added Path of Building import build. This is different to Link active build with POB.
+   * "Link" will simply link the PoL build with a PoB pastebin, that you can view in Poebuddyor keep a reference too.
+   * With this new feature, you can import your PoB pastebin, and the app will automaticallycreate a snapshot of the PoB build. All socket groups will be created, and all gems willget assigned. You can then edit the build normally to add transitions and replacements, or makeyour own additions/removals, as always. After saving the build it can be used as all others andexported to Pastebin and shared.
+   * If you are a build creator, and you want to use this tool, I recommend setting up your POB buildwith endgame gems, then import it to POL tweak it and provide both links. The POL link will include thePOB pastebin. This way you can save yourself some time from recreating the gems in POB/POL.
+* Added the option to pull all your characters using the POE Api . When starting POL now,you can choose to set your PoE account and choose your character from the PoE servers.
+   * (Your account info must be set to public in order for this to work properly)
+   * You can set your account name in the Settings if you don't want to type it in again.
+* Designed new UI, and changed the color scheme to Dark. (Colors are simillar to Discord)
+   * The old UI , and colors have been trashed, but if you want the option to go White again (weirdo)let me know and I might include it as a skin.
+* Designed new Overlay for the Gem pop-ups. The default is on, and you can change to the old onefrom beta UI toggle in settings menu.
+* Added gem tags to all Skill gems. You can now search in a new improved UI by filtering tags.
+* Added validation functionality.
+   * Now when you have a build that has some kind of error, you can choose to ignore itby making the build non validated. This will add a Non-valid tag to your build banner on the rightcolumn, where your builds are listed. Then you can go back to the launcher without having to resolve the issuebut you will not be able to select this build as your leveling guide.
+   * This introduced a bug, try to avoid making wonky builds :)
+* Added a confirmation dialogue when exiting the editor window.
+   * If you cancel any changes you made will not be saved.
+* Added crafting recipes. You can enable/disable them in the settings menu.
+   * Upon entering an area you get an icon (simillar to trial,passive) that indicates zone contains a recipe to find.
+   * Assign a keybind to Mark Recipe. Pressing the button will mark the recipe as foundand later you can revisit in a seperate window and check which recipes you missed during leveling.
+* Added a keybind lock hotkey. You are not getting any visuals but it should be at least handy.
+   * Locking -> any keybinds except the lock keybind, will not trigger any events .
+   * Locking -> your overlays will stay in place and cant be dragged.
+   * This will allow you to type in chat without the JNA going nuts.
+
+**Reddit requests**
+
+* You can now access the Settings panel, via the Icon tray icon while in "overlay" mode.
+   * (overlay->when you have set the build and pressed start and the overlays appear)
+* Your overlay positions will now persist between app restarts.
+* When you create a new gem group it should automatically bring up the attached window.
+* Auto-select the first non-support gem entered for each group as the default main gem, user can change later.
+
+**Bug fixes**
+
+* Fixed a bug with images in Dried Lake and Aqueduct in Act 4.
+* Fixed a typo in ascendancy names.
+* Fixed the version, and version changelog. Now they are pulled from the server.
+* Fixed numerous bugs related to build creation and management
+* Stability improvements (hopefully)
+
+**Changes**
+
+* Gem selection panel has been improved by "Protuhj". You can now search for gems with an auto-completion box andauto scrolling when choosing the gem. (possible improvements in the future)
+* Gem overlay has been moved to the left side of the screen, to prevent overlapping with an open inventory.If you have a suggestion about default positions please let me know.
+* The export to pastebin functions have been automated by "Linsane". Now clicking export will send an API requeststo pastebin, and you can copy the link by Copy button. In case of daily limit (10posts per day) you can click Opento open the pastebin website where the raw data will be placed automatically.
+   * This can be usefull if you want to store the pastebins in the website and not post as guest.
+* Character name is no longer case sensitive.
+* You can now resize the window, and not get frustrated with 720p windows in 4k monitors. :)
+* When updating to new version you get a confirmation dialogue.
+* Data and gem JSON files are now downloaded separately and are updated automatically.
+* Skill gem icons are now downloaded on demand. (The first load will take a while to download all of them)
+* Changed the graphics for xp bar. It is no longer a bar, this allows you to place both xp, and gems overlaysin the area between your potions and your skills.
+
+**Additions**
+
+* Updated the application to include Synthesis new skill gems.
+* Updated Skill gems to their renamed names. If you have a build that has a reference to an old gem name, it willautomatically get updated to the renamed version.
+* Updated Skill gems to their reworked level requirement.
+
+# Changelog in v0.65
+
+New in this release:
+
+**New features**
+
+* Added Path of Building support.
+   * Select your Path of Leveling build on the editor and link it with the Path of Building. You need to provide a valid pastebin link from PoB. You can then export this PoB to your clipboard when you need it, or view it directly in [https://poe.technology/poebuddy/](https://poe.technology/poebuddy/) . I have no affiliation whatsoever with the developers.
+* Now if you export your build, and it is linked to Path of Building, the pastebin IS INCLUDED. That means that you only need 1 pastebin link that will contain both a PoL build and a PoB build.
+
+**Reddit requests**
+
+* It is now possible to add notes to the socket groups. You can find the new icon on the top of the left panel in the editor.
+* It is now possible to duplicate socket groups. You can find the new icon on the top of the left panel in the editor.
+* There is now a box surrounding Start in the launcher to make it look more like a button.
+* You now get prompts when deleting a build, and when you close the editor from the X icon. Also the application no longers terminates, instead it returns to the Launcher screen.
+* Slightly moved the Poets pen that was blocking the Editor button, and placed it below the button.
+
+**Bug fixes**
+
+* Fixed a bug, where you had to select XP option, no matter what, or you would get no overlays.
+   * Now every option is independent, but running only the Zones options, now requests for character name and player level.
+* Fixed major bug, that forced application to update to itself, falling into a loop. Hopefully, it is solved now.
+
+**Changes**
+
+* Adjusted logs to provide less and more useful information
 
 ## Changelog in v0.65
 New in this release:
