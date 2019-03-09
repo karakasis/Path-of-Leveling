@@ -18,7 +18,7 @@ Switching to beta with the introduction of the new UI.
 
 *A quick overview of the application running can be found in this [video.](https://www.youtube.com/watch?v=xxiOxnJZM-A)*
 
-*Join Path of Leveling's [Dicord server](https://discord.gg/GdTCeMU) if you need help or have suggestions*
+*Join Path of Leveling's [Discord server](https://discord.gg/GdTCeMU) if you need help or have suggestions*
 
 ## What does it do
 
