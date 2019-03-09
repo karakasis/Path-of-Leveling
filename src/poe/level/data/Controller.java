@@ -293,12 +293,13 @@ public class Controller {
 
     public void start(){
         _tObj = new Tail();
-        //!POELevelFx.DEBUG
-        if (true) {
+        //true
+        if (!POELevelFx.DEBUG) {
             _tObj.setUpTailer(new File(path), this);
         } else {
             // Choose your poison (default to the game's log)
-            //_tObj.setUpTailer(new File("C:\\Users\\Christos\\Documents\\NetBeansProjects\\POE-level-fx\\src\\a.txt"), this);
+            //
+                       //_tObj.setUpTailer(new File(path), this);
             _tObj.setUpTailer(new File("src/logs.txt"), this);
             //_tObj.setUpTailer(new File(path), this);
         }

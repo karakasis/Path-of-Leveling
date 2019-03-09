@@ -85,6 +85,8 @@ public class ZoneOverlay_Stage  extends Stage{
             bindKeyEvent(scene);
             this.setScene(scene);
             controller.hookStage(this);
+            this.setX(prefX);
+            this.setY(prefY);
             fadeIn();
         }
     }

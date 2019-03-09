@@ -154,5 +154,15 @@
          </font>
       </Label>
       <JFXButton buttonType="RAISED" layoutX="28.0" layoutY="638.0" onAction="#save" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: LightSeaGreen;" text="Save" textFill="WHITE" />
+      <Label layoutX="175.0" layoutY="23.0" prefHeight="36.0" prefWidth="150.0" text="Restart app for better experience" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Italic" size="9.0" />
+         </font>
+      </Label>
+      <Label layoutX="175.0" layoutY="397.0" prefHeight="36.0" prefWidth="150.0" text="Restart app for better experience" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Italic" size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

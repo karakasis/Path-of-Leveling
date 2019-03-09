@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -122,6 +123,7 @@ public class CharacterInfo_Controller implements Initializable {
 
     @FXML
     public void buildPopup() {
+        btnSelectCharacter.setDisable(true);
         btnAutoStart.setDisable(true);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectCharacter_Popup.fxml"));
         try {
@@ -141,12 +143,16 @@ public class CharacterInfo_Controller implements Initializable {
             addBuildPopup.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
             //controller.passDialog(mLoad);
             addBuildPopup.show();
+            addBuildPopup.setOnDialogClosed(event -> btnSelectCharacter.setDisable(false));
         } catch (IOException ex) {
             Logger.getLogger(MainApp_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            btnSelectCharacter.setDisable(false);
         }
-
-
     }
+
+
+
+
 
     private void closePopup(CharacterInfo charInfo) {
         if (addBuildPopup != null) {

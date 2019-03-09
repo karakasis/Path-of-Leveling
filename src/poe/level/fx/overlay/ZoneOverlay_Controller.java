@@ -18,6 +18,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -145,6 +146,7 @@ public class ZoneOverlay_Controller implements Initializable {
         }
         if(Preferences_Controller.zones_images_toggle){
             if(zone.getImages().get(0).equals("none")){
+                cacheLabelAlt.setPadding(new Insets(0,10,0,10));
                 cacheLabelAlt.setText(zone.altImage());
                 container.getChildren().add(cacheLabelAlt);
             }else{
@@ -166,6 +168,7 @@ public class ZoneOverlay_Controller implements Initializable {
             }
         }
         if(Preferences_Controller.zones_text_toggle){
+            cacheLabel.setPadding(new Insets(0,10,0,10));
             cacheLabel.setText(zone.getZoneNote());
             container.getChildren().add(cacheLabel);
         }
