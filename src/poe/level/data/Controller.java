@@ -113,7 +113,7 @@ public class Controller {
     }
 
     public void gem_gui_next_event(){
-        if(Preferences_Controller.gem_UI_toggle){
+        if(Preferences_Controller.gem_UI_toggle && !level_stage_lock){
             Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
@@ -125,7 +125,7 @@ public class Controller {
     }
 
     public void gem_gui_previous_event(){
-        if(Preferences_Controller.gem_UI_toggle){
+        if(Preferences_Controller.gem_UI_toggle && !level_stage_lock){
             Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
