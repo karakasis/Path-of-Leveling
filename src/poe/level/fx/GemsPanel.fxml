@@ -55,7 +55,7 @@
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
-                  <Image url="@../../../icons/icons8-plus-math-50.png" />
+                  <Image url="@../../../icons/icons8-plus-math-50%20(3).png" />
                </image>
             </ImageView>
          </graphic>
@@ -70,7 +70,7 @@
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
-                  <Image url="@../../../icons/icons8-subtract-50.png" />
+                  <Image url="@../../../icons/icons8-subtract-50%20(1).png" />
                </image>
             </ImageView>
          </graphic>

@@ -18,6 +18,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -51,7 +52,7 @@ public class ZoneOverlay_Controller implements Initializable {
     private ImageView trial;
     @FXML
     private ImageView recipe;
-
+    @FXML
     private Label recipeMarkedLabel;
 
     private double initialX;
@@ -68,7 +69,8 @@ public class ZoneOverlay_Controller implements Initializable {
         container.setOnMousePressed(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
             // record a delta distance for the drag and drop operation.
-              if(!Controller.LOCK){
+              if(!Controller.LOCK && mouseEvent.isPrimaryButtonDown()){
+                  Controller.PRESS = true;
                   dragDelta.x = stage.getX() - mouseEvent.getScreenX();
                   dragDelta.y = stage.getY() - mouseEvent.getScreenY();
               }
@@ -77,7 +79,7 @@ public class ZoneOverlay_Controller implements Initializable {
         container.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(!Controller.LOCK) {
+                if(!Controller.LOCK && mouseEvent.isPrimaryButtonDown()) {
                     stage.setX(mouseEvent.getScreenX() + dragDelta.x);
                     stage.setY(mouseEvent.getScreenY() + dragDelta.y);
                     ZoneOverlay_Stage.prefX = mouseEvent.getScreenX() + dragDelta.x;
@@ -87,11 +89,29 @@ public class ZoneOverlay_Controller implements Initializable {
         });
         container.setOnMouseReleased(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent mouseEvent) {
-                if(!Controller.LOCK) {
+                if(!Controller.LOCK && Controller.PRESS) {
+                    Controller.PRESS = false;
                     Preferences_Controller.updateZonesPos(ZoneOverlay_Stage.prefX, ZoneOverlay_Stage.prefY);
                 }
           }
         });
+    }
+
+    public void playTown(){
+        trial.setVisible(false);
+        recipe.setVisible(false);
+        passive_book.setVisible(false);
+        container.getChildren().clear();
+        cacheLabel.setText("Zone Unidentified");
+        container.getChildren().add(cacheLabel);
+    }
+
+    public void setOpacity(double value){
+        root.setOpacity(value);
+    }
+
+    public double getOpacity(){
+        return root.getOpacity();
     }
 
     public void init(Zone zone){
@@ -126,6 +146,7 @@ public class ZoneOverlay_Controller implements Initializable {
         }
         if(Preferences_Controller.zones_images_toggle){
             if(zone.getImages().get(0).equals("none")){
+                cacheLabelAlt.setPadding(new Insets(0,10,0,10));
                 cacheLabelAlt.setText(zone.altImage());
                 container.getChildren().add(cacheLabelAlt);
             }else{
@@ -147,6 +168,7 @@ public class ZoneOverlay_Controller implements Initializable {
             }
         }
         if(Preferences_Controller.zones_text_toggle){
+            cacheLabel.setPadding(new Insets(0,10,0,10));
             cacheLabel.setText(zone.getZoneNote());
             container.getChildren().add(cacheLabel);
         }
@@ -156,6 +178,7 @@ public class ZoneOverlay_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //root.setFocusTraversable(true);
         cacheLabel = (Label) container.getChildren().get(1);
         cacheLabelAlt = (Label) container.getChildren().get(0);
         container.getChildren().clear();

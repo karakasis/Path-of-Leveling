@@ -1229,7 +1229,8 @@
             "available_to":[
                "Witch",
                "Shadow",
-               "Templar"
+               "Templar",
+               "Scion"
             ],
             "quest_name":"Lost in Love"
          },
@@ -1267,12 +1268,15 @@
       "name":"Bane",
       "isVaal":false,
       "gemTags":[
+         "Chaos",
+         "Trigger",
+         "Duration",
          "Spell",
          "Curse",
          "AoE",
          "Active"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/Bane.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/DarkRitualGem.png?scale=1",
       "isActive":true
    },
    {
@@ -5114,6 +5118,7 @@
             "act":3,
             "town":"The Sarn Encampment",
             "available_to":[
+               "Witch",
                "Scion",
                "Templar"
             ],
@@ -5153,12 +5158,13 @@
       "name":"Divine Ire",
       "isVaal":false,
       "gemTags":[
+          "Lightning",
          "Spell",
          "Channelling",
          "AoE",
          "Active"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/DivineIre.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/DivineTempest.png?scale=1",
       "isActive":true
    },
    {
@@ -6078,7 +6084,7 @@
       "gemTags":[
          "Support"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/EnergyLeechSupport.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/Support/EnergyShieldLeechsupport.png?scale=1",
       "isActive":false
    },
    {
@@ -7128,7 +7134,7 @@
          "Projectile",
          "Active"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/HolyFlameTotem.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/FlameTotem.png?scale=1",
       "isActive":true
    },
    {
@@ -9921,9 +9927,11 @@
       "name":"Intensify",
       "isVaal":false,
       "gemTags":[
-         "Support"
+         "Support",
+          "AoE",
+          "Spell"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/IntensifySupport.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/Support/SpellFocusSupport.png?scale=1",
       "isActive":false
    },
    {
@@ -11291,7 +11299,8 @@
             "town":"The Sarn Encampment",
             "available_to":[
                "Witch",
-               "Shadow"
+               "Shadow",
+                "Scion"
             ],
             "quest_name":"Lost in Love"
          },
@@ -11330,10 +11339,11 @@
       "isVaal":false,
       "gemTags":[
          "Aura",
+          "Spell",
          "AoE",
          "Active"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/Malevolence.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/Support/SpellFocusSupport.png?scale=1",
       "isActive":true
    },
    {
@@ -13081,7 +13091,10 @@
             "act":1,
             "town":"Lioneye's Watch",
             "available_to":[
-               "Templar"
+               "Templar",
+                "Witch",
+                "Shadow",
+                "Scion"
             ],
             "quest_name":"Enemy at the Gate"
          },
@@ -13119,11 +13132,13 @@
       "name":"Purifying Flame",
       "isVaal":false,
       "gemTags":[
+          "Fire",
          "Spell",
          "AoE",
+          "Duration",
          "Active"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/PurifyingFlame.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/PurifyingFlame.png?scale=1",
       "isActive":true
    },
    {
@@ -15079,7 +15094,8 @@
             "available_to":[
                "Witch",
                "Scion",
-               "Shadow"
+               "Shadow",
+                "Templar"
             ],
             "quest_name":"Sever the Right Hand"
          },
@@ -15117,12 +15133,14 @@
       "name":"Soulrend",
       "isVaal":false,
       "gemTags":[
+          "Chaos",
+          "Duration",
          "Spell",
          "Projectile",
          "AoE",
          "Active"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/Soulrend.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/Soulrend.png?scale=1",
       "isActive":true
    },
    {
@@ -15739,11 +15757,11 @@
       ],
       "isVaal":false,
       "gemTags":[
-         "Lightning",
+         "Duration",
          "Channelling",
          "Support"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/InfusedChannellingSupport.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/Support/StormBarrier.png?scale=1",
       "isActive":false
    },
    {
@@ -17299,9 +17317,10 @@
       "name":"Unleash",
       "isVaal":false,
       "gemTags":[
+          "Spell",
          "Support"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/UnleashSupport.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/Support/UnleashSupport.png?scale=1",
       "isActive":false
    },
    {
@@ -18989,7 +19008,10 @@
             "act":2,
             "town":"The Forest Encampment",
             "available_to":[
-               "Templar"
+               "Templar",
+                "Witch",
+                "Shadow",
+                "Scion"
             ],
             "quest_name":"The Root of the Problem"
          },
@@ -19027,11 +19049,14 @@
       "name":"Wave of Conviction",
       "isVaal":false,
       "gemTags":[
+          "Lightning",
+          "Fire",
+          "Duration",
          "Spell",
          "AoE",
          "Active"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/WaveofConviction.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/Purge.png?scale=1",
       "isActive":true
    },
    {
@@ -19421,7 +19446,10 @@
             "act":3,
             "town":"The Sarn Encampment",
             "available_to":[
-               "Templar"
+               "Templar",
+                "Witch",
+                "Scion",
+                "Shadow"
             ],
             "quest_name":"Lost in Love"
          },
@@ -19464,7 +19492,7 @@
          "AoE",
          "Active"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-03-07/Zealotry.png?scale=1",
+      "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/SpellDamageGem.png?scale=1",
       "isActive":true
    }
 ]

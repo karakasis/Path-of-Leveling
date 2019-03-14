@@ -35,14 +35,24 @@ public class SocketGroupsPanel_Controller implements Initializable {
         Label sgLabel;
         SocketGroup sg;
         GemsPanelLinker gpl;
+        SocketGroupsPanel_Controller sgpc;
         
         public SocketGroupLinker(SocketGroup sgroup){
             sg = sgroup;
             generateLabel();
         }
-        
+
+        public void hookSGPC(SocketGroupsPanel_Controller sgpc){
+            this.sgpc = sgpc;
+        }
+
+        public void triggerDelete(){
+            sgpc.removeSocketGroupIfEmpty(this);
+        }
+
         public SocketGroupLinker dupe(HashSet<Integer> s_id, HashSet<Integer> g_id){
             SocketGroupLinker sgl = new SocketGroupLinker(sg.dupe(s_id,g_id));
+            sgl.hookSGPC(sgpc);
             return sgl;
         }
         
@@ -165,6 +175,7 @@ public class SocketGroupsPanel_Controller implements Initializable {
         ObservableList<Label> list = FXCollections.observableArrayList();
         for(SocketGroupLinker sgl : linker){
             list.add(sgl.sgLabel);
+            sgl.hookSGPC(this);
         }
         socketGroupView.setItems(list);
         /*
@@ -180,11 +191,39 @@ public class SocketGroupsPanel_Controller implements Initializable {
     @FXML
     private void addSocketGroup(){
         SocketGroupLinker sgl_dum = new SocketGroupLinker(null);
+        sgl_dum.hookSGPC(this);
         linker.add(sgl_dum);
         socketGroupView.getItems().add(sgl_dum.sgLabel);
         bpc.addNewSocketGroup(sgl_dum.getSocketGroup());
     }
-    
+
+    public void removeSocketGroupIfEmpty(SocketGroupLinker sgl){
+        int remove = -1;
+        for(int i=0; i<linker.size(); i++){
+            if(linker.get(i).equals(sgl)){
+                remove = i;
+                break;
+            }
+        }
+
+        if(remove!= -1){
+            for(SocketGroupLinker a : linker){
+                if(a.sg.replaceGroup()){
+                    if(a.sg.getGroupReplaced().equals(linker.get(remove).sg))//if another group replaces with this one
+                        a.sg.setReplaceGroup(false);
+                }
+
+            }
+            bpc.removeSocketGroup(linker.get(remove).sg);
+            socketGroupView.getItems().remove(remove);
+            linker.remove(remove);
+            socketGroupView.getSelectionModel().clearSelection();
+            removeSocketGroup_button.setDisable(true);
+            gpc.hidePanel();
+        }
+
+    }
+
     @FXML
     private void removeSocketGroup(){
         int remove = socketGroupView.getSelectionModel().getSelectedIndex();

@@ -60,13 +60,13 @@
               </Menu>
                   <Menu mnemonicParsing="false" text="Run">
                     <items>
-                      <MenuItem fx:id="validateBuildMenuItem" mnemonicParsing="false" onAction="#validateBuild" text="Validate and view leveling progress" disable="true"/>
+                      <MenuItem fx:id="validateBuildMenuItem" disable="true" mnemonicParsing="false" onAction="#validateBuild" text="Validate and view leveling progress" />
                         <MenuItem mnemonicParsing="false" onAction="#validateToLauncher" text="Validate All and return to Launcher" />
                     </items>
                   </Menu>
               <Menu mnemonicParsing="false" text="View">
                 <items>
-                        <Menu mnemonicParsing="false" text="Skin">
+                        <Menu disable="true" mnemonicParsing="false" text="Skin">
                           <items>
                             <MenuItem disable="true" mnemonicParsing="false" text="Night Mode - Soon" />
                           </items>

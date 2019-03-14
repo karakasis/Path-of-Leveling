@@ -58,7 +58,7 @@ public class RecipeOverlay_Controller implements Initializable{
                     } catch (IOException ex) {
                         Logger.getLogger(RecipeOverlay_Controller.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    loader2.<RecipeArea_Controller>getController().init(z.name,z.rInfo.tooltip,recipeMap.get(z));
+                    loader2.<RecipeArea_Controller>getController().init(z,z.rInfo.tooltip,recipeMap.get(z));
                     loader.<RecipePane_Controller>getController().load(aPane);
                 }
                 accordion.getPanes().add(tPane);

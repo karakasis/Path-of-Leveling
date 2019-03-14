@@ -49,10 +49,8 @@ public class Controller {
             if(zone_checkpoint!=null
             && zone_checkpoint.hasRecipe
             && ActHandler.getInstance().recipeMap.get(zone_checkpoint) == false){
-                ActHandler.getInstance().recipeMap.replace(zone_checkpoint, false, true);
-                //need to save to file.
-                Preferences_Controller.updateRecipeFile(zone_checkpoint.name + " [L"
-                        + zone_checkpoint.getZoneLevel() + "]");
+                //need to save to file and change the map in the method below
+                Preferences_Controller.updateRecipeFile(zone_checkpoint);
 
                 Platform.runLater(new Runnable(){
                     @Override
@@ -115,7 +113,7 @@ public class Controller {
     }
 
     public void gem_gui_next_event(){
-        if(Preferences_Controller.gem_UI_toggle){
+        if(Preferences_Controller.gem_UI_toggle && !level_stage_lock){
             Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
@@ -127,7 +125,7 @@ public class Controller {
     }
 
     public void gem_gui_previous_event(){
-        if(Preferences_Controller.gem_UI_toggle){
+        if(Preferences_Controller.gem_UI_toggle && !level_stage_lock){
             Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
@@ -149,6 +147,7 @@ public class Controller {
     }
 
     public static boolean LOCK; //locs all overlays and keybinds
+    public static boolean PRESS; //locs all overlays and keybinds
     public int playerLevel;
     public String playerName;
     public int monsterLevel;
@@ -212,6 +211,7 @@ public class Controller {
     //public Controller(Stage zone, Stage xp, Stage level, Build build) {
     public Controller(boolean zone_b, boolean xp, boolean level, Build build) {
         LOCK = false;
+        PRESS = false;
         instance = this;
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         height = primScreenBounds.getHeight();
@@ -293,11 +293,13 @@ public class Controller {
 
     public void start(){
         _tObj = new Tail();
+        //true
         if (!POELevelFx.DEBUG) {
             _tObj.setUpTailer(new File(path), this);
         } else {
             // Choose your poison (default to the game's log)
-            //_tObj.setUpTailer(new File("C:\\Users\\Christos\\Documents\\NetBeansProjects\\POE-level-fx\\src\\a.txt"), this);
+            //
+                       //_tObj.setUpTailer(new File(path), this);
             _tObj.setUpTailer(new File("src/logs.txt"), this);
             //_tObj.setUpTailer(new File(path), this);
         }
