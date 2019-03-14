@@ -434,7 +434,7 @@ public class POELevelFx extends Application {
                               ,"lock-keybinds"
                               ,hotkeyDefaults.get("lock-keybinds")
                       );
-
+                      if(prop.containsKey("level-hotkey-beta-next") && prop.containsKey("level-hotkey-beta-previous"))
                       if(prop.getProperty("level-hotkey-beta-next").equals("Left")
                        && prop.getProperty("level-hotkey-beta-previous").equals("Right")) {
                           patchKeybind = true;
