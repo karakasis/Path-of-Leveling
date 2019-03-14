@@ -57,7 +57,7 @@ public class POELevelFx extends Application {
     /***************************************************************************
      * Change to true if a build is being pushed to the master branch for public release.
      ***************************************************************************/
-    public static final boolean MASTER_RELEASE = true;
+    public static final boolean MASTER_RELEASE = false;
     /*************************************************************************************/
     /* Update this when you are pushing a new release version, must match the GitHub release tag name!!
     **************************************************************************************/
