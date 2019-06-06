@@ -19512,11 +19512,26 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":4,
       "color":"red",
       "isReward":false,
       "isSupport":false,
       "buy":[
+         {
+            "npc":"Nessa",
+            "act":1,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Breaking Some Eggs"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19547,11 +19562,26 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":4,
       "color":"green",
       "isReward":false,
       "isSupport":false,
       "buy":[
+         {
+            "npc":"Nessa",
+            "act":1,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Breaking Some Eggs"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19583,11 +19613,22 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":28,
       "color":"red",
       "isReward":false,
       "isSupport":false,
       "buy":[
+         {
+            "npc":"Clarissa",
+            "act":3,
+            "town":"The Sarn Encampment",
+            "available_to":[
+               "Marauder",
+               "Scion",
+               "Duelist"
+            ],
+            "quest_name":"Sever the Right Hand"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19619,11 +19660,23 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":4,
       "color":"red",
       "isReward":false,
       "isSupport":false,
       "buy":[
+          {
+            "npc":"Nessa",
+            "act":1,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Duelist",
+                "Marauder",
+                "Ranger",
+                "Scion"
+            ],
+            "quest_name":"Breaking Some Eggs"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19652,11 +19705,22 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":34,
       "color":"red",
       "isReward":false,
       "isSupport":false,
       "buy":[
+         {
+            "npc":"Petarus and Vanja",
+            "act":4,
+            "town":"Highgate",
+            "available_to":[
+               "Marauder",
+               "Scion",
+               "Duelist"
+            ],
+            "quest_name":"Breaking the Seal"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19686,11 +19750,26 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":4,
       "color":"blue",
       "isReward":false,
       "isSupport":false,
       "buy":[
+         {
+            "npc":"Nessa",
+            "act":1,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Breaking Some Eggs"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19725,11 +19804,24 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":10,
       "color":"green",
       "isReward":false,
       "isSupport":false,
       "buy":[
+          {
+            "npc":"Nessa",
+            "act":1,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Duelist",
+               "Ranger",
+               "Templar",
+               "Marauder",
+                "Shadow"
+            ],
+            "quest_name":"The Caged Brute"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19760,11 +19852,22 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":16,
       "color":"red",
       "isReward":false,
       "isSupport":false,
       "buy":[
+          {
+            "npc":"Yeena",
+            "act":2,
+            "town":"The Forest Encampment",
+            "available_to":[
+               "Marauder",
+               "Scion",
+               "Duelist"
+            ],
+            "quest_name":"The Root of the Problem"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19795,11 +19898,26 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":24,
       "color":"red",
       "isReward":false,
       "isSupport":false,
       "buy":[
+         {
+            "npc":"Clarissa",
+            "act":3,
+            "town":"The Sarn Encampment",
+            "available_to":[
+               "Marauder",
+               "Duelist",
+               "Templar",
+               "Ranger",
+                "Shadow",
+                "Scion",
+                "Witch"
+            ],
+            "quest_name":"Lost in Love"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19831,11 +19949,23 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":1,
       "color":"green",
       "isReward":false,
       "isSupport":false,
       "buy":[
+         {
+            "npc":"Nessa",
+            "act":1,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Duelist",
+               "Marauder",
+               "Ranger",
+               "Scion"
+            ],
+            "quest_name":"Enemy at the Gate"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19866,11 +19996,22 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":12,
       "color":"red",
       "isReward":false,
       "isSupport":false,
       "buy":[
+          {
+            "npc":"Nessa",
+            "act":1,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Duelist",
+               "Scion"
+            ],
+            "quest_name":"The Siren's Cadence"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19903,11 +20044,24 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":28,
       "color":"red",
       "isReward":false,
       "isSupport":true,
       "buy":[
+         {
+            "npc":"Siosa",
+            "act":3,
+            "town":"Library",
+            "available_to":[
+               "Marauder",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Templar"
+            ],
+            "quest_name":"A Fixture of Fate"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -19971,11 +20125,24 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":28,
       "color":"green",
       "isReward":false,
       "isSupport":true,
       "buy":[
+         {
+            "npc":"Siosa",
+            "act":3,
+            "town":"Library",
+            "available_to":[
+               "Marauder",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow"
+            ],
+            "quest_name":"A Fixture of Fate"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -20005,11 +20172,23 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":18,
       "color":"red",
       "isReward":false,
       "isSupport":true,
       "buy":[
+          {
+            "npc":"Yeena",
+            "act":2,
+            "town":"The Forest Encampment",
+            "available_to":[
+               "Scion",
+               "Marauder",
+               "Templar",
+               "Duelist"
+            ],
+            "quest_name":"Sharp and Cruel"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -20040,11 +20219,25 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":18,
       "color":"green",
       "isReward":false,
       "isSupport":true,
       "buy":[
+         {
+            "npc":"Yeena",
+            "act":2,
+            "town":"The Forest Encampment",
+            "available_to":[
+               "Scion",
+               "Marauder",
+               "Templar",
+               "Duelist",
+                "Ranger",
+                "Shadow"
+            ],
+            "quest_name":"Sharp and Cruel"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,

@@ -64,7 +64,7 @@ public class POELevelFx extends Application {
     public static final String version = "v0.74-beta";
 
 
-    public static boolean DEBUG = false;
+    public static boolean DEBUG = true;
 
     private static final String DEBUG_BRANCH_NAME = "development";
     private static final String RELEASE_BRANCH_NAME = "master";
@@ -1611,7 +1611,7 @@ public class POELevelFx extends Application {
 
         System.out.println("Current Version: " + POELevelFx.version);
         System.out.println("New Version: " + releaseInfo.version);
-        if(POELevelFx.version.equalsIgnoreCase(releaseInfo.version)){
+        if(!POELevelFx.version.equalsIgnoreCase(releaseInfo.version)){
             POELevelFx.newReleaseInfo = releaseInfo;
             return true;
         } else {
