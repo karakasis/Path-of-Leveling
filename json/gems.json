@@ -1893,7 +1893,8 @@
          "Bow",
          "Duration",
          "Movement",
-         "Active"
+         "Active",
+         "Travel"
       ],
       "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/BlinkArrow.png?scale=1&w=1&h=1",
       "isActive":true
@@ -2164,7 +2165,8 @@
          "Fire",
          "AoE",
          "Movement",
-         "Active"
+         "Active",
+         "Travel"
       ],
       "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/CorpseWarp.png?scale=1",
       "isActive":true
@@ -7003,7 +7005,9 @@
          "Fire",
          "Duration",
          "Movement",
-         "Active"
+         "Active",
+         "Blink",
+         "Travel"
       ],
       "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/FlameDash.png?scale=1&w=1&h=1",
       "isActive":true
@@ -9478,7 +9482,8 @@
       "gemTags":[
          "Spell",
          "Duration",
-         "Active"
+         "Active",
+         "Guard"
       ],
       "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/ImmortalCall.png?scale=1&w=1&h=1",
       "isActive":true
@@ -10437,7 +10442,8 @@
          "AoE",
          "Melee",
          "Movement",
-         "Active"
+         "Active",
+         "Travel"
       ],
       "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/LeapSlam.png?scale=1&w=1&h=1",
       "isActive":true
@@ -11153,7 +11159,8 @@
          "AoE",
          "Duration",
          "Movement",
-         "Active"
+         "Active",
+         "Travel"
       ],
       "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/LightningWarp.png?scale=1&w=1&h=1",
       "isActive":true
@@ -11991,7 +11998,8 @@
          "Fire",
          "AoE",
          "Duration",
-         "Active"
+         "Active",
+         "Guard"
       ],
       "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/MoltenShell.png?scale=1&w=1&h=1",
       "isActive":true
@@ -12399,7 +12407,8 @@
          "Spell",
          "Duration",
          "Movement",
-         "Active"
+         "Active",
+         "Travel"
       ],
       "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/PhaseRun.png?scale=1&w=1&h=1",
       "isActive":true
@@ -14580,7 +14589,8 @@
          "AoE",
          "Melee",
          "Movement",
-         "Active"
+         "Active",
+         "Travel"
       ],
       "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/ShieldCharge.png?scale=1&w=1&h=1",
       "isActive":true
@@ -15073,7 +15083,8 @@
          "AoE",
          "Duration",
          "Movement",
-         "Active"
+         "Active",
+         "Travel"
       ],
       "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/SmokeBomb.png?scale=1&w=1&h=1",
       "isActive":true
@@ -16336,7 +16347,7 @@
             "quest_name":"Fallen from Grace"
          }
       ],
-      "name":"Summon Phantasm on Kill",
+      "name":"Summon Phantasm",
       "isVaal":false,
       "gemTags":[
          "Minion",
@@ -17966,7 +17977,8 @@
          "Duration",
          "Movement",
          "Vaal",
-         "Active"
+         "Active",
+         "Travel"
       ],
       "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/VaalGems/VaalLightningWarp.png?scale=1&w=1&h=1",
       "isActive":true
@@ -19116,7 +19128,8 @@
          "Attack",
          "Melee",
          "Movement",
-         "Active"
+         "Active",
+         "Travel"
       ],
       "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/WhirlingBlades.png?scale=1&w=1&h=1",
       "isActive":true
@@ -19494,5 +19507,568 @@
       ],
       "iconPath":"https://web.poecdn.com/image/Art/2DItems/Gems/SpellDamageGem.png?scale=1",
       "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"red",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Steelskin",
+      "isVaal":false,
+      "gemTags":[
+         "Active",
+         "Guard",
+          "Spell",
+          "Duration"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/Steelskin.png",
+      "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"green",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Dash",
+      "isVaal":false,
+      "gemTags":[
+         "Active",
+         "Blink",
+          "Spell",
+          "Movement",
+          "Travel"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/Dash.png",
+      "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"red",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Bladestorm",
+      "isVaal":false,
+      "gemTags":[
+         "Active",
+          "Attack",
+          "AoE",
+          "Duration",
+          "Melee"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/Bladestorm.png",
+      "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"red",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Blood and Sand",
+      "isVaal":false,
+      "gemTags":[
+         "Active",
+          "Spell"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/BloodandSand.png",
+      "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"red",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Berserk",
+      "isVaal":false,
+      "gemTags":[
+         "Active",
+          "Spell",
+          "Duration"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/Berserk.png",
+      "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Frostblink",
+      "isVaal":false,
+      "gemTags":[
+         "Active",
+         "Spell",
+          "Movement",
+          "Duration",
+          "Cold",
+          "Travel",
+          "Blink",
+          "AoE"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/Frostblink.png",
+      "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"green",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Precision",
+      "isVaal":false,
+      "gemTags":[
+         "Active",
+          "Spell",
+          "Aura",
+          "AoE"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/Precision.png",
+      "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"red",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Flesh and Stone",
+      "isVaal":false,
+      "gemTags":[
+         "Active",
+          "Spell",
+          "Aura",
+          "AoE"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/FleshandStone.png",
+      "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"red",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Pride",
+      "isVaal":false,
+      "gemTags":[
+         "Active",
+          "Spell",
+          "AoE",
+          "Aura",
+          "Physical"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/Pride.png",
+      "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"green",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Perforate",
+      "isVaal":false,
+      "gemTags":[
+         "Active",
+          "Attack",
+          "AoE",
+          "Melee"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/Perforate.png",
+      "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"red",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Chain Hook",
+      "isVaal":false,
+      "gemTags":[
+         "Active",
+          "Attack",
+          "AoE",
+          "Movement",
+          "Melee",
+          "Strike"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/ChainHook.png",
+      "isActive":true
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Pulverise",
+      "isVaal":false,
+      "gemTags":[
+         "Support",
+          "Melee",
+          "Attack"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/PulveriseSupport.png",
+      "isActive":false
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Rage",
+      "isVaal":false,
+      "gemTags":[
+         "Support",
+          "Melee",
+          "Attack"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/RageSupport.png",
+      "isActive":false
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Impale",
+      "isVaal":false,
+      "gemTags":[
+         "Support",
+          "Attack",
+          "Physical"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/ImpaleSupport.png",
+      "isActive":false
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Shockwave",
+      "isVaal":false,
+      "gemTags":[
+         "Support",
+          "Melee",
+          "Attack",
+          "AoE"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/ShockwaveSupport.png",
+      "isActive":false
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":99,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Close Combat",
+      "isVaal":false,
+      "gemTags":[
+         "Support",
+          "Melee",
+          "Attack",
+          "Duration"
+      ], "iconPath":"https://web.poecdn.com/public/news/2019-06-06/CloseCombatSupport.png",
+      "isActive":false
    }
 ]

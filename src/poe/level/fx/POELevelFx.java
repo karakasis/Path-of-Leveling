@@ -345,10 +345,9 @@ public class POELevelFx extends Application {
                           Preferences_Controller.level_slider = Double.parseDouble(prop.getProperty("level-slider"));
 
                           if(!(prop.getProperty("poe-dir")==null || prop.getProperty("poe-dir").equals(""))){
+                              System.out.println("Selected Path of exile installation : " + prop.getProperty("poe-dir"));
                               Preferences_Controller.poe_log_dir = prop.getProperty("poe-dir") + "\\logs\\Client.txt";
-
                               System.out.println("Selected Path of exile log location : " + Preferences_Controller.poe_log_dir);
-                              System.out.println(Preferences_Controller.poe_log_dir + "\\logs\\Client.txt");
                           }else{
                               System.out.println("Path of exile log location is not set.");
                           }
@@ -1612,7 +1611,7 @@ public class POELevelFx extends Application {
 
         System.out.println("Current Version: " + POELevelFx.version);
         System.out.println("New Version: " + releaseInfo.version);
-        if(!POELevelFx.version.equalsIgnoreCase(releaseInfo.version)){
+        if(POELevelFx.version.equalsIgnoreCase(releaseInfo.version)){
             POELevelFx.newReleaseInfo = releaseInfo;
             return true;
         } else {
