@@ -20044,7 +20044,7 @@
       "reward":{
 
       },
-      "required_lvl":28,
+      "required_lvl":31,
       "color":"red",
       "isReward":false,
       "isSupport":true,
@@ -20091,11 +20091,25 @@
       "reward":{
 
       },
-      "required_lvl":99,
+      "required_lvl":18,
       "color":"red",
       "isReward":false,
       "isSupport":true,
       "buy":[
+         {
+            "npc":"Yeena",
+            "act":2,
+            "town":"The Forest Encampment",
+            "available_to":[
+               "Marauder",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Sharp and Cruel"
+         },
          {
             "npc":"Lilly Roth",
             "act":6,
@@ -20125,7 +20139,7 @@
       "reward":{
 
       },
-      "required_lvl":28,
+      "required_lvl":31,
       "color":"green",
       "isReward":false,
       "isSupport":true,
