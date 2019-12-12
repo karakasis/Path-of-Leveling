@@ -1283,69 +1283,6 @@
       "reward":{
 
       },
-      "required_lvl":12,
-      "color":"green",
-      "isReward":false,
-      "isSupport":false,
-      "buy":[
-         {
-            "npc":"Nessa",
-            "act":1,
-            "town":"Lioneye's Watch",
-            "available_to":[
-               "Duelist",
-               "Ranger",
-               "Scion",
-               "Shadow"
-            ],
-            "quest_name":"The Siren's Cadence"
-         },
-         {
-            "npc":"Siosa",
-            "act":3,
-            "town":"Library",
-            "available_to":[
-               "Marauder",
-               "Witch",
-               "Scion",
-               "Ranger",
-               "Duelist",
-               "Shadow",
-               "Templar"
-            ],
-            "quest_name":"A Fixture of Fate"
-         },
-         {
-            "npc":"Lilly Roth",
-            "act":6,
-            "town":"Lioneye's Watch",
-            "available_to":[
-               "Marauder",
-               "Witch",
-               "Scion",
-               "Ranger",
-               "Duelist",
-               "Shadow",
-               "Templar"
-            ],
-            "quest_name":"Fallen from Grace"
-         }
-      ],
-      "name":"Barrage",
-      "isVaal":false,
-      "gemTags":[
-         "Attack",
-         "Projectile",
-         "Bow",
-         "Active"
-      ],
-      "iconPath":"http://webcdn.pathofexile.com/image/Art/2DItems/Gems/Barrage.png?scale=1&w=1&h=1",
-      "isActive":true
-   },
-   {
-      "reward":{
-
-      },
       "required_lvl":4,
       "color":"green",
       "isReward":false,
@@ -13478,7 +13415,10 @@
             "quest_name":"Fallen from Grace"
          }
       ],
-      "name":"Ranged Attack Totem",
+      "name":"Ballista Totem",
+       "alt_name":[
+         "Ranged Attack Totem"
+      ],
       "isVaal":false,
       "gemTags":[
          "Attack",
@@ -14432,7 +14372,10 @@
             "quest_name":"Fallen from Grace"
          }
       ],
-      "name":"Shrapnel Shot",
+      "name":"Galvanic Arrow",
+      "alt_name":[
+         "Shrapnel Shot"
+      ],
       "isVaal":false,
       "gemTags":[
          "Attack",
@@ -20180,8 +20123,7 @@
           "Physical",
           "Minion",
           "Spell",
-          "Golem",
-          "New Gems"
+          "Golem"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/SummonCarrionGolem.png",
       "isActive":true
    },
@@ -20242,8 +20184,7 @@
          "Active",
           "Chaos",
           "Attack",
-          "Projectile",
-          "New Gems"
+          "Projectile"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/CobraLash.png",
       "isActive":true
    },
@@ -20309,8 +20250,7 @@
           "Movement",
           "Blink",
           "Spell",
-          "Duration",
-          "New Gems"
+          "Duration"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/WitheringStep.png",
       "isActive":true
    },
@@ -20371,8 +20311,7 @@
          "Active",
           "Chaos",
           "Projectile",
-          "Attack",
-          "New Gems"
+          "Attack"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/VenomGyre.png",
       "isActive":true
    },
@@ -20434,8 +20373,7 @@
          "Active",
           "Chaos",
           "AoE",
-          "Spell",
-          "New Gems"
+          "Spell"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/PlagueBearer.png",
       "isActive":true
    },
@@ -20500,8 +20438,7 @@
           "Chaos",
           "AoE",
           "Strike",
-          "Duration",
-          "New Gems"
+          "Duration"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/PestilentStrike.png",
       "isActive":true
    },
@@ -20565,8 +20502,7 @@
           "Mine",
           "Lightning",
           "AoE",
-          "Aura",
-          "New Gems"
+          "Aura"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/StormblastMine.png",
       "isActive":true
    },
@@ -20633,8 +20569,7 @@
           "Aura",
           "Trap",
           "Minion",
-          "Cold",
-          "New Gems"
+          "Cold"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/SummonSkitterbots.png",
       "isActive":true
    },
@@ -20642,7 +20577,7 @@
       "reward":{
 
       },
-      "required_lvl":16,
+      "required_lvl":18,
       "color":"green",
       "isReward":false,
       "isSupport":true,
@@ -20665,6 +20600,7 @@
             "available_to":[
                "Marauder",
                "Witch",
+               "Scion",
                "Scion",
                "Ranger",
                "Duelist",
@@ -20693,8 +20629,7 @@
       "isVaal":false,
       "gemTags":[
          "Support",
-          "Attack",
-          "New Gems"
+          "Attack"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/NightbladeSupport.png",
       "isActive":false
    },
@@ -20754,8 +20689,7 @@
          "Support",
           "Fire",
           "AoE",
-          "Minion",
-          "New Gems"
+          "Minion"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/InfernalLegionSupport.png",
       "isActive":false
    },
@@ -20816,8 +20750,7 @@
          "Support",
           "Spell",
           "Duration",
-          "Minion",
-          "New Gems"
+          "Minion"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/DeathmarkSupport.png",
       "isActive":false
    },
@@ -20862,8 +20795,7 @@
       "gemTags":[
          "Support",
           "Duration",
-          "Minion",
-          "New Gems"
+          "Minion"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/FeedingFrenzySupport.png",
       "isActive":false
    },
@@ -20907,8 +20839,7 @@
       "isVaal":false,
       "gemTags":[
          "Support",
-          "Minion",
-          "New Gems"
+          "Minion"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/MeatShieldSupport.png",
       "isActive":false
    },
@@ -20970,8 +20901,7 @@
       "gemTags":[
          "Support",
           "Mine",
-          "Trap",
-          "New Gems"
+          "Trap"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/SwiftAssemblySupport.png",
       "isActive":false
    },
@@ -21015,8 +20945,7 @@
       "isVaal":false,
       "gemTags":[
          "Support",
-          "Mine",
-          "New Gems"
+          "Mine"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/ChargedMinesSupport.png",
       "isActive":false
    },
@@ -21062,8 +20991,7 @@
          "Support",
           "Mine",
           "AoE",
-          "Aura",
-          "New Gems"
+          "Aura"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/HighImpactMineSupport.png",
       "isActive":false
    },
@@ -21131,8 +21059,7 @@
           "AoE",
           "Aura",
           "Projectile",
-          "Fire",
-          "New Gems"
+          "Fire"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/PyroclastMine.png",
       "isActive":true
    },
@@ -21200,8 +21127,7 @@
           "AoE",
           "Aura",
           "Projectile",
-          "Cold",
-          "New Gems"
+          "Cold"
       ], "iconPath":"https://web.poecdn.com/public/news/2019-09-04/IcicleMine.png",
       "isActive":true
    },
@@ -21265,8 +21191,7 @@
       "isVaal":false,
       "gemTags":[
          "Mine",
-         "Support",
-          "New Gems"
+         "Support"
       ],
       "iconPath":"https://web.poecdn.com/public/news/2019-09-04/BlastchainMineSupport.png",
       "isActive":false
@@ -21311,8 +21236,7 @@
       "isVaal":false,
       "gemTags":[
          "Mine",
-         "Support",
-          "New Gems"
+         "Support"
       ],
       "iconPath":"https://web.poecdn.com/public/news/2019-09-04/MinefieldSupport.png",
       "isActive":false
@@ -21360,8 +21284,7 @@
       "isVaal":false,
       "gemTags":[
          "Minion",
-         "Support",
-          "New Gems"
+         "Support"
       ],
       "iconPath":"https://web.poecdn.com/public/news/2019-09-04/ElementalArmySupport.png",
       "isActive":false
@@ -21409,10 +21332,1144 @@
       ],
       "isVaal":false,
       "gemTags":[
+         "Support"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-09-04/InspirationSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":28,
+      "color":"green",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+          {
+            "npc":"Clarissa",
+            "act":3,
+            "town":"The Sarn Encampment",
+            "available_to":[
+                "Ranger",
+                "Shadow",
+               "Duelist",
+               "Marauder",
+               "Scion"
+            ],
+            "quest_name":"Sever the Right Hand"
+         },
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Artillery Ballista",
+      "isVaal":false,
+      "gemTags":[
+         "Attack",
+          "Totem",
+          "AoE",
+          "Fire",
+          "Projectile",
+          "Bow",
+          "Active",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/ArtilleryBallista.png",
+      "isActive":true
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":16,
+      "color":"green",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+          {
+            "npc":"Yeena",
+            "act":2,
+            "town":"The Forest Encampment",
+            "available_to":[
+               "Duelist",
+               "Ranger",
+               "Scion",
+               "Shadow"
+            ],
+            "quest_name":"The Root of the Problem"
+         },
+         {
+            "npc":"Siosa",
+            "act":3,
+            "town":"Library",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"A Fixture of Fate"
+         },
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Ensnaring Arrow",
+      "isVaal":false,
+      "gemTags":[
+         "Attack",
+          "AoE",
+          "Projectile",
+          "Bow",
+          "Active",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/EnsnaringArrow.png",
+      "isActive":true
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":4,
+      "color":"green",
+      "isReward":false,
+      "isSupport":false,
+      "buy":[
+          {
+            "npc":"Nessa",
+            "act":1,
+            "town":"Lioneye's Watch",
+            "available_to":[
+                "Ranger",
+               "Duelist",
+               "Marauder",
+               "Scion",
+               "Shadow"
+            ],
+            "quest_name":"Breaking Some Eggs"
+         },
+         {
+            "npc":"Siosa",
+            "act":3,
+            "town":"Library",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"A Fixture of Fate"
+         },
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Shrapnel Ballista",
+      "isVaal":false,
+      "gemTags":[
+         "Attack",
+          "Totem",
+          "Projectile",
+          "Bow",
+          "Physical"
+          "Active",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/ShrapnelBallista.png",
+      "isActive":true
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":8,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+         {
+            "npc":"Nessa",
+            "act":1,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Ranger",
+               "Scion",
+               "Shadow",
+               "Duelist"
+            ],
+            "quest_name":"The Caged Brute"
+         },
+         {
+            "npc":"Siosa",
+            "act":3,
+            "town":"Library",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"A Fixture of Fate"
+         },
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Arrow Nova",
+      "isVaal":false,
+      "gemTags":[
+         "Bow",
+          "Attack",
+          "Projectile"
          "Support",
           "New Gems"
       ],
-      "iconPath":"https://web.poecdn.com/public/news/2019-09-04/InspirationSupport.png",
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/ArrowNovaSupport.png",
+      "isActive":false
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":38,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+         {
+            "npc":"Petarus and Vanja",
+            "act":4,
+            "town":"Highgate",
+            "available_to":[
+                "Ranger",
+               "Scion",
+               "Shadow",
+               "Duelist"
+            ],
+            "quest_name":"The Eternal Nightmare"
+         },
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Barrage",
+      "isVaal":false,
+      "gemTags":[
+         "Attack",
+         "Projectile",
+         "Bow",
+         "Support",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/BarrageSupport.png",
+      "isActive":false
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":38,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+         {
+            "npc":"Petarus and Vanja",
+            "act":4,
+            "town":"Highgate",
+            "available_to":[
+                "Templar",
+                "Marauder",
+                "Witch",
+                "Ranger",
+               "Scion",
+               "Shadow",
+               "Duelist"
+            ],
+            "quest_name":"The Eternal Nightmare"
+         },
+         {
+            "npc":"Lilly Roth",
+            "act":6,
+            "town":"Lioneye's Watch",
+            "available_to":[
+               "Marauder",
+               "Witch",
+               "Scion",
+               "Ranger",
+               "Duelist",
+               "Shadow",
+               "Templar"
+            ],
+            "quest_name":"Fallen from Grace"
+         }
+      ],
+      "name":"Greater Volley",
+      "isVaal":false,
+      "gemTags":[
+         "Projectile",
+         "Support",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/GreaterVolleySupport.png",
+      "isActive":false
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Added Fire Damage",
+      "isVaal":false,
+      "gemTags":[
+          "Fire",
+          "Physical",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedAddedFireDamageSupport.png",
+      "isActive":false
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Ancestral Call",
+      "isVaal":false,
+      "gemTags":[
+          "Melee",
+          "Attack",
+          "Strike",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedAncestralCallSupport.png",
+      "isActive":false
+   },
+   {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Brutality",
+      "isVaal":false,
+      "gemTags":[
+          "Physical",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedBrutalitySupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Burning Damage",
+      "isVaal":false,
+      "gemTags":[
+          "Fire",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedBurningDamageSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Elemental Damage With Attacks",
+      "isVaal":false,
+      "gemTags":[
+          "Attack",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedElementalDamageWithAttacksSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Fire Penetration",
+      "isVaal":false,
+      "gemTags":[
+          "Fire",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedFirePenetrationSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Generosity",
+      "isVaal":false,
+      "gemTags":[
+          "Aura",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedGenerositySupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Melee Physical Damage",
+      "isVaal":false,
+      "gemTags":[
+          "Melee",
+          "Physical",
+          "Attack",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedMeleePhysicalDamageSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Melee Splash",
+      "isVaal":false,
+      "gemTags":[
+          "Melee",
+          "Attack",
+          "Strike",
+          "AoE",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedMeleeSplashSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"red",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Multistrike",
+      "isVaal":false,
+      "gemTags":[
+          "Attack",
+          "Melee",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedMultistrikeSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Added Cold Damage",
+      "isVaal":false,
+      "gemTags":[
+          "Cold",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedAddedColdDamageSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Arrow Nova",
+      "isVaal":false,
+      "gemTags":[
+          "Bow",
+          "Attack",
+          "Projectile"
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedArrowNovaSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Cast On Critical Strike",
+      "isVaal":false,
+      "gemTags":[
+          "Spell",
+          "Trigger",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedCastOnCriticalStrikeSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Chain",
+      "isVaal":false,
+      "gemTags":[
+          "Chaining",
+          "Projectile",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedChainSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Cold Penetration",
+      "isVaal":false,
+      "gemTags":[
+          "Cold",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedColdPenetrationSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Deadly Ailments",
+      "isVaal":false,
+      "gemTags":[
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedDeadlyAilmentsSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Fork",
+      "isVaal":false,
+      "gemTags":[
+          "Projectile",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedForkSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Greater Multiple Projectiles",
+      "isVaal":false,
+      "gemTags":[
+          "Projectile",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedGreaterMultipleProjectilesSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Swift Affliction",
+      "isVaal":false,
+      "gemTags":[
+          "Duration",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedSwiftAfflictionSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Vicious Projectiles",
+      "isVaal":false,
+      "gemTags":[
+          "Projectile",
+          "Attack",
+          "Chaos",
+          "Physical",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedViciousProjectilesSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"green",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Void Manipulation",
+      "isVaal":false,
+      "gemTags":[
+          "",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedVoidManipulationSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Added Chaos Damage",
+      "isVaal":false,
+      "gemTags":[
+          "Chaos",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedAddedChaosDamageSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Added Lightning Damage",
+      "isVaal":false,
+      "gemTags":[
+          "Lightning",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedAddedLightningDamageSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Blasphemy",
+      "isVaal":false,
+      "gemTags":[
+          "Aura",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedBlasphemySupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Cast While Channelling",
+      "isVaal":false,
+      "gemTags":[
+          "Channeling",
+          "Spell",
+          "Trigger",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedCastWhileChannellingSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Controlled Destruction Support",
+      "isVaal":false,
+      "gemTags":[
+          "Spell",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedControlledDestructionSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Curse On Hit Support",
+      "isVaal":false,
+      "gemTags":[
+          "Curse",
+          "Trigger",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedCurseOnHitSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Elemental Focus Support",
+      "isVaal":false,
+      "gemTags":[
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedElementalFocusSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Increased Area Of Effect Support",
+      "isVaal":false,
+      "gemTags":[
+          "AoE",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedIncreasedAreaOfEffectSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Lightning Penetration",
+      "isVaal":false,
+      "gemTags":[
+          "Lightning",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedLightningPenetrationSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Minion Damage",
+      "isVaal":false,
+      "gemTags":[
+          "Minion",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedMinionDamageSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Spell Cascade",
+      "isVaal":false,
+      "gemTags":[
+          "AoE",
+          "Spell",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedSpellCascadeSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Spell Echo",
+      "isVaal":false,
+      "gemTags":[
+          "Spell",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedSpellEchoSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Unbound Ailments Support",
+      "isVaal":false,
+      "gemTags":[
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedUnboundAilmentsSupport.png",
+      "isActive":false
+   },
+    {
+      "reward":{
+
+      },
+      "required_lvl":72,
+      "color":"blue",
+      "isReward":false,
+      "isSupport":true,
+      "buy":[
+
+      ],
+      "name":"Awakened Unleash",
+      "isVaal":false,
+      "gemTags":[
+          "Spell",
+         "Support",
+          "Awakened",
+          "New Gems"
+      ],
+      "iconPath":"https://web.poecdn.com/public/news/2019-12-12/AwakenedUnleashSupport.png",
       "isActive":false
    }
 ]
