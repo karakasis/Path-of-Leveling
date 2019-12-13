@@ -21954,7 +21954,7 @@
 		"buy": [
 
 		],
-		"name": "Awakened Controlled Destruction Support",
+		"name": "Awakened Controlled Destruction",
 		"isVaal": false,
 		"gemTags": [
 			"Spell",
@@ -21976,7 +21976,7 @@
 		"buy": [
 
 		],
-		"name": "Awakened Curse On Hit Support",
+		"name": "Awakened Curse On Hit",
 		"isVaal": false,
 		"gemTags": [
 			"Curse",
@@ -21999,7 +21999,7 @@
 		"buy": [
 
 		],
-		"name": "Awakened Elemental Focus Support",
+		"name": "Awakened Elemental Focus",
 		"isVaal": false,
 		"gemTags": [
 			"Support",
@@ -22020,7 +22020,7 @@
 		"buy": [
 
 		],
-		"name": "Awakened Increased Area Of Effect Support",
+		"name": "Awakened Increased Area Of Effect",
 		"isVaal": false,
 		"gemTags": [
 			"AoE",
@@ -22131,7 +22131,7 @@
 		"buy": [
 
 		],
-		"name": "Awakened Unbound Ailments Support",
+		"name": "Awakened Unbound Ailments",
 		"isVaal": false,
 		"gemTags": [
 			"Support",
