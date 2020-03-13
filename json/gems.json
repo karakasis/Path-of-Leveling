@@ -21080,8 +21080,7 @@
 			"Fire",
 			"Projectile",
 			"Bow",
-			"Active",
-			"New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/ArtilleryBallista.png",
 		"isActive": true
@@ -21144,8 +21143,7 @@
 			"AoE",
 			"Projectile",
 			"Bow",
-			"Active",
-			"New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/EnsnaringArrow.png",
 		"isActive": true
@@ -21210,8 +21208,7 @@
 			"Projectile",
 			"Bow",
 			"Physical",
-			"Active",
-			"New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/ShrapnelBallista.png",
 		"isActive": true
@@ -21273,8 +21270,7 @@
 			"Bow",
 			"Attack",
 			"Projectile",
-			"Support",
-			"New Gems"
+			"Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/ArrowNovaSupport.png",
 		"isActive": false
@@ -21321,8 +21317,7 @@
 			"Attack",
 			"Projectile",
 			"Bow",
-			"Support",
-			"New Gems"
+			"Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/BarrageSupport.png",
 		"isActive": false
@@ -21370,8 +21365,7 @@
 		"isVaal": false,
 		"gemTags": [
 			"Projectile",
-			"Support",
-			"New Gems"
+			"Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/GreaterVolleySupport.png",
 		"isActive": false
@@ -21393,8 +21387,7 @@
 			"Fire",
 			"Physical",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedAddedFireDamageSupport.png",
 		"isActive": false
@@ -21417,8 +21410,7 @@
 			"Attack",
 			"Strike",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedAncestralCallSupport.png",
 		"isActive": false
@@ -21439,8 +21431,7 @@
 		"gemTags": [
 			"Physical",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedBrutalitySupport.png",
 		"isActive": false
@@ -21461,8 +21452,7 @@
 		"gemTags": [
 			"Fire",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedBurningDamageSupport.png",
 		"isActive": false
@@ -21483,8 +21473,7 @@
 		"gemTags": [
 			"Attack",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedElementalDamageWithAttacksSupport.png",
 		"isActive": false
@@ -21505,8 +21494,7 @@
 		"gemTags": [
 			"Fire",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedFirePenetrationSupport.png",
 		"isActive": false
@@ -21527,8 +21515,7 @@
 		"gemTags": [
 			"Aura",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedGenerositySupport.png",
 		"isActive": false
@@ -21551,8 +21538,7 @@
 			"Physical",
 			"Attack",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedMeleePhysicalDamageSupport.png",
 		"isActive": false
@@ -21576,8 +21562,7 @@
 			"Strike",
 			"AoE",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedMeleeSplashSupport.png",
 		"isActive": false
@@ -21599,8 +21584,7 @@
 			"Attack",
 			"Melee",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedMultistrikeSupport.png",
 		"isActive": false
@@ -21621,8 +21605,7 @@
 		"gemTags": [
 			"Cold",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedAddedColdDamageSupport.png",
 		"isActive": false
@@ -21645,8 +21628,7 @@
 			"Attack",
 			"Projectile",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedArrowNovaSupport.png",
 		"isActive": false
@@ -21668,8 +21650,7 @@
 			"Spell",
 			"Trigger",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedCastOnCriticalStrikeSupport.png",
 		"isActive": false
@@ -21691,8 +21672,7 @@
 			"Chaining",
 			"Projectile",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedChainSupport.png",
 		"isActive": false
@@ -21713,8 +21693,7 @@
 		"gemTags": [
 			"Cold",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedColdPenetrationSupport.png",
 		"isActive": false
@@ -21734,8 +21713,7 @@
 		"isVaal": false,
 		"gemTags": [
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedDeadlyAilmentsSupport.png",
 		"isActive": false
@@ -21756,8 +21734,7 @@
 		"gemTags": [
 			"Projectile",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedForkSupport.png",
 		"isActive": false
@@ -21778,8 +21755,7 @@
 		"gemTags": [
 			"Projectile",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedGreaterMultipleProjectilesSupport.png",
 		"isActive": false
@@ -21800,8 +21776,7 @@
 		"gemTags": [
 			"Duration",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedSwiftAfflictionSupport.png",
 		"isActive": false
@@ -21825,8 +21800,7 @@
 			"Chaos",
 			"Physical",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedViciousProjectilesSupport.png",
 		"isActive": false
@@ -21847,8 +21821,7 @@
 		"gemTags": [
 			"",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedVoidManipulationSupport.png",
 		"isActive": false
@@ -21869,8 +21842,7 @@
 		"gemTags": [
 			"Chaos",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedAddedChaosDamageSupport.png",
 		"isActive": false
@@ -21891,8 +21863,7 @@
 		"gemTags": [
 			"Lightning",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedAddedLightningDamageSupport.png",
 		"isActive": false
@@ -21913,8 +21884,7 @@
 		"gemTags": [
 			"Aura",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedBlasphemySupport.png",
 		"isActive": false
@@ -21937,8 +21907,7 @@
 			"Spell",
 			"Trigger",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedCastWhileChannellingSupport.png",
 		"isActive": false
@@ -21959,8 +21928,7 @@
 		"gemTags": [
 			"Spell",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedControlledDestructionSupport.png",
 		"isActive": false
@@ -21982,8 +21950,7 @@
 			"Curse",
 			"Trigger",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedCurseOnHitSupport.png",
 		"isActive": false
@@ -22003,8 +21970,7 @@
 		"isVaal": false,
 		"gemTags": [
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedElementalFocusSupport.png",
 		"isActive": false
@@ -22025,8 +21991,7 @@
 		"gemTags": [
 			"AoE",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedIncreasedAreaOfEffectSupport.png",
 		"isActive": false
@@ -22047,8 +22012,7 @@
 		"gemTags": [
 			"Lightning",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedLightningPenetrationSupport.png",
 		"isActive": false
@@ -22069,8 +22033,7 @@
 		"gemTags": [
 			"Minion",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedMinionDamageSupport.png",
 		"isActive": false
@@ -22092,8 +22055,7 @@
 			"AoE",
 			"Spell",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedSpellCascadeSupport.png",
 		"isActive": false
@@ -22114,8 +22076,7 @@
 		"gemTags": [
 			"Spell",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedSpellEchoSupport.png",
 		"isActive": false
@@ -22135,8 +22096,7 @@
 		"isVaal": false,
 		"gemTags": [
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedUnboundAilmentsSupport.png",
 		"isActive": false
@@ -22157,10 +22117,405 @@
 		"gemTags": [
 			"Spell",
 			"Support",
-			"Awakened",
-			"New Gems"
+			"Awakened"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2019-12-12/AwakenedUnleashSupport.png",
+		"isActive": false
+	}
+ ,
+    {
+		"reward": {
+
+		},
+		"required_lvl": 16,
+		"color": "green",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [{
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Templar",
+					"Scion",
+					"Shadow"
+				],
+				"quest_name": "The Root of the Problem"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Blade Blast",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"AoE",
+			"Physical",
+			"New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/BladeBlast.png",
+		"isActive": true
+	},
+ {
+		"reward": {
+
+		},
+		"required_lvl": 16,
+		"color": "green",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [{
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Templar",
+					"Scion",
+					"Shadow",
+                    "Witch"
+				],
+				"quest_name": "The Root of the Problem"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Blade Blast",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"AoE",
+			"Physical",
+			"New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/BladeBlast.png",
+		"isActive": true
+	},
+ {
+		"reward": {
+
+		},
+		"required_lvl": 16,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [{
+				"npc": "Yeena",
+				"act": 2,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Templar",
+					"Scion",
+					"Shadow",
+                    "Witch"
+				],
+				"quest_name": "The Root of the Problem"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Blade Blast",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"Duration",
+			"Guard",
+            "Lightning",
+			"New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/ArcaneCloak.png",
+		"isActive": true
+	},
+ {
+		"reward": {
+
+		},
+		"required_lvl": 1,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [{
+				"npc": "Yeena",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Ranger",
+					"Scion",
+					"Shadow",
+                    "Witch"
+				],
+				"quest_name": "Enemy at the Gate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Kinetic Bolt",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"Duration",
+			"Guard",
+            "Lightning",
+			"New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/KineticBolt.png",
+		"isActive": true
+	},
+ {
+		"reward": {
+
+		},
+		"required_lvl": 28,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [{
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Templar",
+					"Scion",
+					"Shadow",
+                    "Witch"
+				],
+				"quest_name": "Sever the Right Hand"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Stormbind",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"AoE",
+			"Channeling",
+            "Lightning",
+            "Duration",
+			"New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/Stormbind.png",
+		"isActive": true
+	},
+ {
+		"reward": {
+
+		},
+		"required_lvl": 24,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [{
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Templar",
+					"Scion",
+					"Shadow",
+                    "Witch"
+				],
+				"quest_name": "Sever the Right Hand"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Spellslinger",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"Suport",
+			"New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/Spellslinger.png",
+		"isActive": false
+	},
+ {
+		"reward": {
+
+		},
+		"required_lvl": 31,
+		"color": "green",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "Library",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Second Wind",
+		"isVaal": false,
+		"gemTags": [
+			"Suport",
+			"New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/SecondWindSupport.png",
+		"isActive": false
+	},
+ {
+		"reward": {
+
+		},
+		"required_lvl": 31,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "Library",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Archmage",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "Lightning",
+			"Suport",
+			"New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/ArchmageSupport.png",
 		"isActive": false
 	}
 ]
