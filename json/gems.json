@@ -22174,6 +22174,55 @@
 		"reward": {
 
 		},
+		"required_lvl": 16,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Templar",
+					"Scion",
+					"Shadow",
+                    "Witch"
+				],
+				"quest_name": "The Root of the Problem"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Arcane Cloak",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"Duration",
+			"Guard",
+            "Lightning",
+			"New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/ArcaneCloak.png",
+		"isActive": true
+	},
+ {
+		"reward": {
+
+		},
 		"required_lvl": 1,
 		"color": "blue",
 		"isReward": false,
@@ -22209,10 +22258,8 @@
 		"name": "Kinetic Bolt",
 		"isVaal": false,
 		"gemTags": [
-			"Spell",
-			"Duration",
-			"Guard",
-            "Lightning",
+			"Attack",
+			"Projectile",
 			"New Gems"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/KineticBolt.png",
