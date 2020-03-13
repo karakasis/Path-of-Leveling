@@ -22123,52 +22123,6 @@
 		"isActive": false
 	}
  ,
-    {
-		"reward": {
-
-		},
-		"required_lvl": 16,
-		"color": "green",
-		"isReward": false,
-		"isSupport": false,
-		"buy": [{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Templar",
-					"Scion",
-					"Shadow"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
-				"npc": "Lilly Roth",
-				"act": 6,
-				"town": "Lioneye's Watch",
-				"available_to": [
-					"Marauder",
-					"Witch",
-					"Scion",
-					"Ranger",
-					"Duelist",
-					"Shadow",
-					"Templar"
-				],
-				"quest_name": "Fallen from Grace"
-			}
-		],
-		"name": "Blade Blast",
-		"isVaal": false,
-		"gemTags": [
-			"Spell",
-			"AoE",
-			"Physical",
-			"New Gems"
-		],
-		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/BladeBlast.png",
-		"isActive": true
-	},
  {
 		"reward": {
 
@@ -22214,69 +22168,6 @@
 			"New Gems"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/BladeBlast.png",
-		"isActive": true
-	},
- {
-		"reward": {
-
-		},
-		"required_lvl": 16,
-		"color": "blue",
-		"isReward": false,
-		"isSupport": false,
-		"buy": [{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "Lioneye's Watch",
-				"available_to": [
-					"Templar",
-					"Scion",
-					"Shadow",
-                    "Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
-				"npc": "Siosa",
-				"act": 3,
-				"town": "Library",
-				"available_to": [
-					"Marauder",
-					"Witch",
-					"Scion",
-					"Ranger",
-					"Duelist",
-					"Shadow",
-					"Templar"
-				],
-				"quest_name": "A Fixture of Fate"
-			},
-			{
-				"npc": "Lilly Roth",
-				"act": 6,
-				"town": "Lioneye's Watch",
-				"available_to": [
-					"Marauder",
-					"Witch",
-					"Scion",
-					"Ranger",
-					"Duelist",
-					"Shadow",
-					"Templar"
-				],
-				"quest_name": "Fallen from Grace"
-			}
-		],
-		"name": "Blade Blast",
-		"isVaal": false,
-		"gemTags": [
-			"Spell",
-			"Duration",
-			"Guard",
-            "Lightning",
-			"New Gems"
-		],
-		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/ArcaneCloak.png",
 		"isActive": true
 	},
  {
