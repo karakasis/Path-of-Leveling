@@ -61,6 +61,13 @@ That's all. Everything else is code.
 ## Known bugs
 *Will be updating this*
  - some validation issues i will fix when i get some time with the new league.
+ - Large transparent area blocking your inputs.
+ 
+1. Have POE running and stay in your current zone
+2.Open POL (put char name build etc) 
+3.Without changing zone press the remind area hotkey.
+4.This will bug out cause the app doesnt know your current location and cause
+some transparent overlay to appear that blocks half your screen.
 
 ## Future additions
 
