@@ -7,7 +7,23 @@
 		"color": "blue",
 		"isReward": false,
 		"isSupport": true,
-		"buy": [{
+		"buy": [
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+            {
 			"npc": "Lilly Roth",
 			"act": 6,
 			"town": "Lioneye's Watch",
@@ -54,7 +70,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -116,7 +132,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -176,7 +192,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -238,7 +254,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -284,14 +300,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Ranger",
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -344,7 +363,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -405,7 +424,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -455,7 +474,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -518,7 +537,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -582,7 +601,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -657,7 +676,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -718,7 +737,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -788,7 +807,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -840,18 +859,30 @@
 				"town": "The Forest Encampment",
 				"available_to": [
 					"Duelist",
-					"Ranger",
-					"Scion",
-					"Shadow",
 					"Templar",
-					"Witch"
+                    "Ranger",
+					"Shadow",
+                    "Witch",
+					"Scion"
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+                    "Ranger",
+					"Shadow",
+                    "Witch",
+					"Scion"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -901,7 +932,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -968,7 +999,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1031,7 +1062,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1050,7 +1081,8 @@
 				"available_to": [
 					"Ranger",
 					"Shadow",
-					"Witch"
+					"Duelist",
+                    "Scion"
 				],
 				"quest_name": "Lost in Love"
 			},
@@ -1075,7 +1107,7 @@
 		"gemTags": [
 			"Spell",
 			"Curse",
-			"AoE",
+			"Mark",
 			"Duration",
 			"Active"
 		],
@@ -1093,7 +1125,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1167,7 +1199,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1202,7 +1234,7 @@
 			"Trigger",
 			"Duration",
 			"Spell",
-			"Curse",
+			"Hex",
 			"AoE",
 			"Active"
 		],
@@ -1232,7 +1264,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1282,7 +1314,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1357,7 +1389,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1407,7 +1439,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1466,9 +1498,9 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1517,7 +1549,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1591,7 +1623,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1656,7 +1688,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1715,7 +1747,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1786,13 +1818,16 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Duelist",
 					"Marauder",
+					"Witch",
+					"Scion",
 					"Ranger",
+					"Duelist",
+					"Shadow",
 					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
@@ -1842,10 +1877,21 @@
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Ranger",
+					"Duelist",
+					"Shadow"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1906,23 +1952,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Duelist",
-					"Marauder",
-					"Ranger",
-					"Scion",
-					"Shadow",
-					"Templar"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -1984,7 +2016,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -2047,7 +2079,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -2146,15 +2178,25 @@
 				"available_to": [
 					"Marauder",
 					"Scion",
-					"Templar",
-					"Witch"
+                    "Witch",
+					"Templar"
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Witch",
+					"Templar"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -2258,7 +2300,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -2307,14 +2349,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
+					"Witch",
 					"Scion",
-					"Templar",
-					"Witch"
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -2662,7 +2707,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -2785,7 +2830,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -2846,7 +2891,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -2893,7 +2938,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -2958,13 +3003,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -3006,16 +3055,20 @@
 				"act": 1,
 				"town": "Lioneye's Watch",
 				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "The Caged Brute"
 			},
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3077,7 +3130,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3170,15 +3223,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Ranger",
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -3222,16 +3277,26 @@
 				"available_to": [
 					"Ranger",
 					"Scion",
-					"Shadow",
 					"Templar",
-					"Witch"
+                    "Witch",
+					"Shadow"
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Witch",
+					"Shadow"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3292,21 +3357,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Scion",
-					"Shadow",
-					"Templar",
-					"Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3367,7 +3420,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3425,21 +3478,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Scion",
-					"Shadow",
-					"Templar",
-					"Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3487,7 +3528,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3535,6 +3576,7 @@
 			"Lightning",
 			"AoE",
 			"Duration",
+            "Hex",
 			"Active"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/Conductivity.png?scale=1&w=1&h=1",
@@ -3551,7 +3593,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3627,7 +3669,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3688,21 +3730,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Scion",
-					"Shadow",
-					"Templar",
-					"Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3762,7 +3792,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3812,7 +3842,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3873,7 +3903,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -3951,24 +3981,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Marauder",
-					"Witch",
-					"Scion",
-					"Ranger",
-					"Duelist",
-					"Shadow",
-					"Templar"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4043,10 +4058,13 @@
 				"quest_name": "Fallen from Grace"
 			}
 		],
-		"name": "Curse On Hit",
+		"name": "Hextouch",
+        "alt_name": [
+			"Curse On Hit"
+		],
 		"isVaal": false,
 		"gemTags": [
-			"Curse",
+			"Hex",
 			"Trigger",
 			"Support"
 		],
@@ -4064,7 +4082,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4138,21 +4156,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Duelist",
-					"Marauder",
-					"Scion",
-					"Templar"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4200,7 +4206,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4275,23 +4281,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Duelist",
-					"Ranger",
-					"Scion",
-					"Shadow",
-					"Templar",
-					"Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4395,7 +4387,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4455,10 +4447,19 @@
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Witch"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4509,7 +4510,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4526,11 +4527,9 @@
 				"act": 3,
 				"town": "The Sarn Encampment",
 				"available_to": [
-					"Duelist",
 					"Ranger",
 					"Scion",
 					"Shadow",
-					"Templar",
 					"Witch"
 				],
 				"quest_name": "Lost in Love"
@@ -4559,6 +4558,7 @@
 			"Chaos",
 			"AoE",
 			"Duration",
+            "Hex",
 			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/image/Art/2DItems/Gems/Despair.png?scale=1",
@@ -4575,7 +4575,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4647,7 +4647,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4743,7 +4743,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4792,7 +4792,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4859,7 +4859,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4932,7 +4932,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -4983,7 +4983,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5059,7 +5059,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5108,7 +5108,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5185,7 +5185,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5234,7 +5234,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5295,14 +5295,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -5354,23 +5357,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Duelist",
-					"Marauder",
-					"Ranger",
-					"Scion",
-					"Shadow",
-					"Templar"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5428,21 +5417,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Scion",
-					"Shadow",
-					"Templar",
-					"Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5501,7 +5478,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5576,7 +5553,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5627,7 +5604,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5674,6 +5651,7 @@
 			"Curse",
 			"AoE",
 			"Duration",
+            "Hex",
 			"Active"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/ElementalWeakness.png?scale=1&w=1&h=1",
@@ -5719,21 +5697,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Duelist",
-					"Marauder",
-					"Scion",
-					"Templar"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5782,10 +5748,13 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
+					"Marauder",
 					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
 					"Templar"
 				],
@@ -5826,7 +5795,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -5873,6 +5842,7 @@
 			"Curse",
 			"AoE",
 			"Duration",
+            "Hex",
 			"Active"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/Enfeeble.png?scale=1&w=1&h=1",
@@ -5939,7 +5909,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6002,7 +5972,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6051,7 +6021,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6127,7 +6097,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6190,23 +6160,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Duelist",
-					"Marauder",
-					"Ranger",
-					"Scion",
-					"Shadow",
-					"Templar"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6264,21 +6220,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Scion",
-					"Shadow",
-					"Templar",
-					"Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6324,14 +6268,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Ranger",
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -6369,15 +6316,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -6429,7 +6378,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6494,7 +6443,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6538,25 +6487,27 @@
 		"reward": {
 
 		},
-		"required_lvl": 12,
+		"required_lvl": 28,
 		"color": "blue",
 		"isReward": false,
 		"isSupport": false,
-		"buy": [{
-				"npc": "Nessa",
-				"act": 1,
-				"town": "Lioneye's Watch",
+		"buy": [
+            {
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
 				"available_to": [
-					"Marauder",
-					"Templar",
-					"Witch"
+					"Witch",
+					"Scion",
+					"Shadow",
+					"Templar"
 				],
-				"quest_name": "The Siren's Cadence"
+				"quest_name": "Sever the Right Hand"
 			},
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6619,7 +6570,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6684,7 +6635,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6745,7 +6696,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6799,7 +6750,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6863,7 +6814,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6926,7 +6877,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -6975,6 +6926,7 @@
 			"Fire",
 			"AoE",
 			"Duration",
+            "Hex",
 			"Active"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/Flammability.png?scale=1&w=1&h=1",
@@ -7002,7 +6954,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7065,7 +7017,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7113,15 +7065,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Duelist",
-					"Ranger",
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -7159,14 +7113,15 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Duelist",
 					"Marauder",
-					"Ranger",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
 					"Templar"
 				],
@@ -7220,7 +7175,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7280,10 +7235,21 @@
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Scion",
+					"Ranger",
+					"Duelist"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7346,7 +7312,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7409,7 +7375,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7471,7 +7437,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7521,7 +7487,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7541,7 +7507,8 @@
 					"Scion",
 					"Shadow",
 					"Templar",
-					"Witch"
+					"Witch",
+                    "Ranger"
 				],
 				"quest_name": "Lost in Love"
 			},
@@ -7569,6 +7536,7 @@
 			"Cold",
 			"AoE",
 			"Duration",
+            "Hex",
 			"Active"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/FrostBite.png?scale=1&w=1&h=1",
@@ -7597,7 +7565,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7645,14 +7613,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
+					"Witch",
 					"Scion",
-					"Templar",
-					"Witch"
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -7692,7 +7663,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7711,7 +7682,8 @@
 				"available_to": [
 					"Shadow",
 					"Templar",
-					"Witch"
+					"Witch",
+                    "Scion"
 				],
 				"quest_name": "Sever the Right Hand"
 			},
@@ -7764,7 +7736,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7814,7 +7786,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7934,7 +7906,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -7984,7 +7956,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8046,7 +8018,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8123,7 +8095,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8181,10 +8153,20 @@
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Ranger",
+					"Shadow"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8232,12 +8214,13 @@
 		"color": "red",
 		"isReward": false,
 		"isSupport": false,
-		"buy": [{
+		"buy": [
+            {
 				"npc": "Yeena",
 				"act": 2,
 				"town": "The Forest Encampment",
 				"available_to": [
-					"Marauder",
+                    "Marauder",
 					"Witch",
 					"Scion",
 					"Ranger",
@@ -8245,12 +8228,12 @@
 					"Shadow",
 					"Templar"
 				],
-				"quest_name": "The Root of the Problem"
-			},
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8299,12 +8282,13 @@
 		"color": "green",
 		"isReward": false,
 		"isSupport": false,
-		"buy": [{
+		"buy": [
+            {
 				"npc": "Yeena",
 				"act": 2,
 				"town": "The Forest Encampment",
 				"available_to": [
-					"Marauder",
+                    "Marauder",
 					"Witch",
 					"Scion",
 					"Ranger",
@@ -8312,12 +8296,12 @@
 					"Shadow",
 					"Templar"
 				],
-				"quest_name": "The Root of the Problem"
-			},
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8381,7 +8365,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8429,12 +8413,13 @@
 		"color": "blue",
 		"isReward": false,
 		"isSupport": false,
-		"buy": [{
+		"buy": [
+            {
 				"npc": "Yeena",
 				"act": 2,
 				"town": "The Forest Encampment",
 				"available_to": [
-					"Marauder",
+                    "Marauder",
 					"Witch",
 					"Scion",
 					"Ranger",
@@ -8442,12 +8427,12 @@
 					"Shadow",
 					"Templar"
 				],
-				"quest_name": "The Root of the Problem"
-			},
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8497,16 +8482,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Duelist",
-					"Ranger",
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -8544,16 +8530,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Duelist",
-					"Ranger",
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -8593,7 +8580,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8670,7 +8657,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8731,7 +8718,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8796,7 +8783,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -8846,7 +8833,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9057,7 +9044,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9166,21 +9153,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Ranger",
-					"Scion",
-					"Shadow",
-					"Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9239,7 +9214,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9284,12 +9259,16 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Duelist",
 					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
 					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
@@ -9343,7 +9322,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9393,15 +9372,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Ranger",
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -9442,10 +9423,13 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
+					"Marauder",
 					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
 					"Templar"
 				],
@@ -9499,22 +9483,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Duelist",
-					"Marauder",
-					"Ranger",
-					"Scion",
-					"Templar"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9572,21 +9543,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Duelist",
-					"Marauder",
-					"Scion",
-					"Templar"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9632,14 +9591,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -9678,7 +9640,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9752,7 +9714,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9813,7 +9775,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9863,7 +9825,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9881,7 +9843,6 @@
 				"town": "The Sarn Encampment",
 				"available_to": [
 					"Duelist",
-					"Marauder",
 					"Ranger",
 					"Scion"
 				],
@@ -9937,7 +9898,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -9987,13 +9948,16 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Duelist",
 					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
 					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
@@ -10047,7 +10011,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10114,7 +10078,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10174,7 +10138,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10220,14 +10184,15 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Duelist",
 					"Marauder",
-					"Ranger",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
 					"Templar"
 				],
@@ -10279,7 +10244,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10329,14 +10294,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -10376,7 +10344,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10452,7 +10420,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10515,7 +10483,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10578,7 +10546,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10641,7 +10609,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10706,7 +10674,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10770,7 +10738,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10829,7 +10797,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -10877,15 +10845,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Duelist",
-					"Ranger",
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -10937,24 +10907,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Marauder",
-					"Witch",
-					"Scion",
-					"Ranger",
-					"Duelist",
-					"Shadow",
-					"Templar"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11018,7 +10973,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11079,7 +11034,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11136,20 +11091,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Scion",
-					"Templar",
-					"Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11206,20 +11150,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Scion",
-					"Templar",
-					"Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11280,7 +11213,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11365,7 +11298,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11429,7 +11362,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11541,7 +11474,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11660,7 +11593,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11719,7 +11652,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11831,23 +11764,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Duelist",
-					"Marauder",
-					"Ranger",
-					"Scion",
-					"Shadow",
-					"Templar"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11915,7 +11834,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11963,7 +11882,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -11982,7 +11901,8 @@
 				"available_to": [
 					"Duelist",
 					"Ranger",
-					"Shadow"
+					"Shadow",
+                    "Scion"
 				],
 				"quest_name": "Lost in Love"
 			},
@@ -12007,7 +11927,7 @@
 		"gemTags": [
 			"Spell",
 			"Curse",
-			"AoE",
+			"Mark",
 			"Duration",
 			"Active"
 		],
@@ -12035,21 +11955,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Duelist",
-					"Ranger",
-					"Scion",
-					"Shadow"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12096,13 +12004,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Ranger",
+					"Marauder",
+					"Witch",
 					"Scion",
-					"Shadow"
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -12172,21 +12084,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Ranger",
-					"Scion",
-					"Shadow",
-					"Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12244,7 +12144,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12293,7 +12193,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12312,7 +12212,8 @@
 				"available_to": [
 					"Duelist",
 					"Ranger",
-					"Shadow"
+					"Shadow",
+                    "Scion"
 				],
 				"quest_name": "Lost in Love"
 			},
@@ -12332,12 +12233,15 @@
 				"quest_name": "Fallen from Grace"
 			}
 		],
-		"name": "Projectile Weakness",
+		"name": "Sniper's Mark",
+        "alt_name": [
+			"Projectile Weakness"
+		],
 		"isVaal": false,
 		"gemTags": [
 			"Spell",
 			"Curse",
-			"AoE",
+			"Mark",
 			"Duration",
 			"Active"
 		],
@@ -12366,7 +12270,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12418,7 +12322,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12438,8 +12342,7 @@
 					"Duelist",
 					"Marauder",
 					"Scion",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "Lost in Love"
 			},
@@ -12466,6 +12369,8 @@
 			"Curse",
 			"AoE",
 			"Duration",
+            "Physical",
+            "Hex",
 			"Active"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/Punishment.png?scale=1&w=1&h=1",
@@ -12494,7 +12399,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12545,7 +12450,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12610,7 +12515,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12673,7 +12578,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12736,7 +12641,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12811,7 +12716,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12862,7 +12767,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12933,7 +12838,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -12994,7 +12899,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13059,7 +12964,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13120,7 +13025,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13183,7 +13088,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13246,7 +13151,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13308,7 +13213,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13378,7 +13283,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13439,7 +13344,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13490,7 +13395,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13565,7 +13470,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13615,7 +13520,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13680,7 +13585,6 @@
 				"town": "Lioneye's Watch",
 				"available_to": [
 					"Duelist",
-					"Marauder",
 					"Ranger",
 					"Scion"
 				],
@@ -13689,7 +13593,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13750,7 +13654,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13802,7 +13706,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13864,7 +13768,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -13936,7 +13840,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14002,7 +13906,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14064,7 +13968,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14114,14 +14018,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Duelist",
-					"Ranger",
+					"Marauder",
+					"Witch",
 					"Scion",
-					"Shadow"
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -14172,7 +14079,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14238,7 +14145,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14303,7 +14210,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14367,7 +14274,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14432,7 +14339,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14495,7 +14402,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14556,7 +14463,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14665,7 +14572,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14724,7 +14631,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14786,7 +14693,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14849,7 +14756,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14914,7 +14821,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -14977,7 +14884,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -15040,7 +14947,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -15103,7 +15010,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -15166,7 +15073,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -15325,7 +15232,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -15488,7 +15395,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -15547,7 +15454,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -15609,7 +15516,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -15721,7 +15628,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -15782,7 +15689,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -15830,15 +15737,17 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Ranger",
+					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
 					"Shadow",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -15878,7 +15787,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -15955,7 +15864,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -16006,7 +15915,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -16023,7 +15932,7 @@
 				"act": 3,
 				"town": "The Sarn Encampment",
 				"available_to": [
-					"Duelist",
+					"Witch",
 					"Ranger",
 					"Scion",
 					"Shadow"
@@ -16053,6 +15962,7 @@
 			"Curse",
 			"AoE",
 			"Duration",
+            "Hex",
 			"Active"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/TemporalChains.png?scale=1&w=1&h=1",
@@ -16069,7 +15979,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -16143,7 +16053,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -16209,7 +16119,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -16268,22 +16178,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Ranger",
-					"Scion",
-					"Shadow",
-					"Templar",
-					"Witch"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -16344,7 +16241,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -16404,7 +16301,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -17357,7 +17254,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -17428,20 +17325,9 @@
 				"quest_name": "Sharp and Cruel"
 			},
 			{
-				"npc": "Yeena",
-				"act": 2,
-				"town": "The Forest Encampment",
-				"available_to": [
-					"Duelist",
-					"Ranger",
-					"Scion"
-				],
-				"quest_name": "The Root of the Problem"
-			},
-			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -17503,7 +17389,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -17607,7 +17493,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -17651,14 +17537,30 @@
 		"reward": {
 
 		},
-		"required_lvl": 24,
+		"required_lvl": 10,
 		"color": "red",
 		"isReward": false,
 		"isSupport": false,
-		"buy": [{
+		"buy": [
+            {
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "The Caged Brute"
+			},
+            {
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -17669,17 +17571,6 @@
 					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
-			},
-			{
-				"npc": "Clarissa",
-				"act": 3,
-				"town": "The Sarn Encampment",
-				"available_to": [
-					"Duelist",
-					"Marauder",
-					"Templar"
-				],
-				"quest_name": "Lost in Love"
 			},
 			{
 				"npc": "Lilly Roth",
@@ -17732,7 +17623,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -17793,7 +17684,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -17857,7 +17748,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -17905,7 +17796,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -17968,7 +17859,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -17987,7 +17878,7 @@
 				"available_to": [
 					"Duelist",
 					"Marauder",
-					"Ranger",
+					"Templar",
 					"Scion"
 				],
 				"quest_name": "Lost in Love"
@@ -18015,6 +17906,8 @@
 			"Curse",
 			"AoE",
 			"Duration",
+            "Physical",
+            "Hex",
 			"Active"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/Vulnerability.png?scale=1&w=1&h=1",
@@ -18044,7 +17937,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18095,7 +17988,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18114,7 +18007,8 @@
 				"available_to": [
 					"Duelist",
 					"Marauder",
-					"Templar"
+					"Ranger",
+                    "Scion"
 				],
 				"quest_name": "Lost in Love"
 			},
@@ -18139,8 +18033,8 @@
 		"gemTags": [
 			"Spell",
 			"Curse",
-			"AoE",
 			"Duration",
+            "Mark",
 			"Active"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/WarlordsMark.png?scale=1&w=1&h=1",
@@ -18166,10 +18060,19 @@
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Templar"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18232,7 +18135,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18283,7 +18186,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18349,7 +18252,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18426,7 +18329,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18525,7 +18428,7 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18601,7 +18504,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18666,7 +18569,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18731,7 +18634,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18793,7 +18696,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18856,7 +18759,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -18964,7 +18867,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19020,18 +18923,20 @@
 				"act": 1,
 				"town": "Lioneye's Watch",
 				"available_to": [
-					"Duelist",
-					"Ranger",
-					"Templar",
 					"Marauder",
-					"Shadow"
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
 				],
 				"quest_name": "The Caged Brute"
 			},
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19089,10 +18994,19 @@
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Duelist"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19157,7 +19071,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19220,7 +19134,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19281,7 +19195,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19333,14 +19247,15 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
+					"Witch",
 					"Scion",
 					"Ranger",
 					"Duelist",
-					"Templar",
-					"Witch"
+					"Shadow",
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -19395,7 +19310,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19444,13 +19359,15 @@
 		"buy": [{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
+					"Witch",
 					"Scion",
 					"Ranger",
 					"Duelist",
-					"Shadow"
+					"Shadow",
+					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
 			},
@@ -19503,7 +19420,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19567,7 +19484,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19677,7 +19594,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19739,7 +19656,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19804,7 +19721,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19866,7 +19783,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19928,7 +19845,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -19993,7 +19910,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -20054,10 +19971,19 @@
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Shadow"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -20123,7 +20049,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -20182,7 +20108,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -20243,7 +20169,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -20271,7 +20197,10 @@
 				"quest_name": "Fallen from Grace"
 			}
 		],
-		"name": "Deathmark",
+		"name": "Predator",
+        "alt_name": [
+			"Deathmark"
+		],
 		"isVaal": false,
 		"gemTags": [
 			"Support",
@@ -20403,7 +20332,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -20562,7 +20491,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -20630,7 +20559,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -20699,7 +20628,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -20843,13 +20772,16 @@
 		"isReward": false,
 		"isSupport": true,
 		"buy": [{
-				"npc": "Clarissa",
+				"npc": "Siosa",
 				"act": 3,
-				"town": "The Sarn Encampment",
+				"town": "The Library",
 				"available_to": [
-					"Duelist",
 					"Marauder",
+					"Witch",
 					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
 					"Templar"
 				],
 				"quest_name": "A Fixture of Fate"
@@ -20952,10 +20884,19 @@
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Ranger"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -21019,7 +20960,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -21083,7 +21024,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -21791,10 +21732,13 @@
 		"buy": [
 
 		],
-		"name": "Awakened Curse On Hit",
+		"name": "Awakened Hextouch",
+        "alt_name": [
+			"Awakened Curse On Hit"
+		],
 		"isVaal": false,
 		"gemTags": [
-			"Curse",
+			"Hex",
 			"Trigger",
 			"Support",
 			"Awakened"
@@ -21986,10 +21930,20 @@
 					"Templar",
 					"Scion",
 					"Shadow",
-                    "Witch"
+                    "Witch",
+                    "Ranger"
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Shadow"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Lilly Roth",
 				"act": 6,
@@ -22030,13 +21984,24 @@
 				"act": 2,
 				"town": "The Forest Encampment",
 				"available_to": [
-					"Templar",
 					"Scion",
-					"Shadow",
+                    "Templar",
+				    "Shadow",
                     "Witch"
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+                    "Templar",
+				    "Shadow",
+                    "Witch"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Lilly Roth",
 				"act": 6,
@@ -22323,7 +22288,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -22384,7 +22349,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -22418,8 +22383,7 @@
 			"Warcry",
 			"AoE",
 			"Duration",
-			"Active",
-            "New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/EnduringCry.png",
 		"isActive": true
@@ -22447,7 +22411,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -22482,8 +22446,7 @@
 			"AoE",
 			"Duration",
             "Physical",
-			"Active",
-            "New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/IntimidatingCry.png",
 		"isActive": true
@@ -22511,7 +22474,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -22547,8 +22510,7 @@
 			"Slam",
             "Duration",
             "Melee",
-			"Active",
-            "New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/Earthshatter.png",
 		"isActive": true
@@ -22576,7 +22538,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -22612,8 +22574,7 @@
 			"Cold",
             "Duration",
             "Brand",
-			"Active",
-            "New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/WintertideBrand.png",
 		"isActive": true
@@ -22638,10 +22599,20 @@
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+                    "Marauder",
+					"Duelist"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -22675,8 +22646,7 @@
 			"Warcry",
 			"AoE",
 			"Duration",
-			"Active",
-            "New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/AncestralCry.png",
 		"isActive": true
@@ -22701,10 +22671,20 @@
 				],
 				"quest_name": "The Root of the Problem"
 			},
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+                    "Marauder",
+					"Duelist"
+				],
+				"quest_name": "Intruders in Black"
+            },
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -22738,8 +22718,7 @@
 			"Warcry",
 			"AoE",
 			"Duration",
-			"Active",
-            "New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/SeismicCry.png",
 		"isActive": true
@@ -22808,8 +22787,7 @@
 			"Duration",
             "Attack",
             "Melee",
-			"Active",
-            "New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/InfernalCry.png",
 		"isActive": true
@@ -22872,8 +22850,7 @@
 			"Warcry",
 			"AoE",
 			"Duration",
-			"Active",
-            "New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/GeneralsCry.png",
 		"isActive": true
@@ -22901,7 +22878,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -22935,8 +22912,7 @@
 			"Warcry",
 			"AoE",
 			"Duration",
-			"Active",
-            "New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/RallyingCry.png",
 		"isActive": true
@@ -22963,7 +22939,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -23000,8 +22976,7 @@
             "Lightning",
             "Duration",
             "Brand",
-			"Active",
-            "New Gems"
+			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/PenanceBrand.png",
 		"isActive": true
@@ -23018,7 +22993,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -23050,8 +23025,7 @@
 		"isVaal": false,
 		"gemTags": [
             "Brand",
-            "Support",
-            "New Gems"
+            "Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/SwiftbrandSupport.png",
 		"isActive": false
@@ -23099,8 +23073,7 @@
             "Spell",
             "Duration",
             "Brand",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/ArcanistBrand.png",
 		"isActive": true
@@ -23149,8 +23122,7 @@
             "Attack",
             "AoE",
             "Melee",
-            "Support",
-            "New Gems"
+            "Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/FistofWarSupport.png",
 		"isActive": false
@@ -23167,7 +23139,7 @@
 			{
 				"npc": "Siosa",
 				"act": 3,
-				"town": "Library",
+				"town": "The Library",
 				"available_to": [
 					"Marauder",
 					"Witch",
@@ -23199,10 +23171,607 @@
 		"isVaal": false,
 		"gemTags": [
             "Warcry",
+            "Support"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/UrgentOrdersSupport.png",
+		"isActive": false
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 1,
+		"color": "green",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+			{
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Scion",
+					"Ranger",
+					"Duelist"
+				],
+				"quest_name": "Enemy at the Gate"
+			},
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Splitting Steel",
+		"isVaal": false,
+		"gemTags": [
+            "Attack",
+            "Projectile",
+            "AoE",
+            "Physical",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorSplittingSteel.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 4,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+			{
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Breaking Some Eggs"
+			},
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Flame Wall",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "AoE",
+            "Duration",
+            "Fire",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorFlameWall.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 12,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+			{
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "The Siren's Cadence"
+			},
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Blazing Salvo",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "AoE",
+            "Projectile",
+            "Fire",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorBlazingSalvo.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 28,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+			{
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Sever the Right Hand"
+			},
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Crackling Lance",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "AoE",
+            "Lightning",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorCracklingLance.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 28,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+			{
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Sever the Right Hand"
+			},
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Hexblast",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "AoE",
+            "Chaos",
+            "Hex",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorHexblast.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 31,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Impending Doom",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "AoE",
+            "Chaos",
+            "Hex",
             "Support",
             "New Gems"
 		],
-		"iconPath": "https://web.poecdn.com/public/news/2020-06-18/UrgentOrdersSupport.png",
+		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorImpendingDoomSupport.png",
+		"isActive": false
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 31,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Pinpoint",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "Projectile",
+            "Support",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorPinpointSupport.png",
+		"isActive": false
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 34,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+			{
+				"npc": "Petarus and Vanja",
+				"act": 4,
+				"town": "Highgate",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Breaking the Seal"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Void Sphere",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "AoE",
+            "Chaos",
+            "Duration",
+            "Physical",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorVoidSphere.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 34,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+			{
+				"npc": "Petarus and Vanja",
+				"act": 4,
+				"town": "Highgate",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Breaking the Seal"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Frost Shield",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "AoE",
+            "Cold",
+            "Duration",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorFrostShield.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 34,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+			{
+				"npc": "Petarus and Vanja",
+				"act": 4,
+				"town": "Highgate",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Breaking the Seal"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Sigil of Power",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "AoE",
+            "Lightning",
+            "Duration",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorSigilofPower.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 31,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+
+		],
+		"name": "Elemental Penetration",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorElementalPenetrationSupport.png",
 		"isActive": false
 	}
 ]
