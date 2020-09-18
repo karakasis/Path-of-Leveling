@@ -353,7 +353,7 @@
           "level": 16,
           "name": "The Chamber of Sins Level 2",
           "haspassive": false,
-          "questRewardsSkills": false,
+          "questRewardsSkills": true,
           "altimage": "none",
           "quest": "Intruders in Black",
           "hasRecipe": false
