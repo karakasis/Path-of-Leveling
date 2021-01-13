@@ -5290,11 +5290,23 @@
 		"reward": {
 
 		},
-		"required_lvl": 31,
+		"required_lvl": 8,
 		"color": "blue",
 		"isReward": false,
 		"isSupport": true,
-		"buy": [{
+		"buy": [
+            {
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "The Caged Brute"
+			},{
 				"npc": "Siosa",
 				"act": 3,
 				"town": "The Library",
@@ -7410,6 +7422,7 @@
 			"Cold",
 			"AoE",
 			"Duration",
+            "Orb",
 			"Active"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/FrostBomb.png?scale=1&w=1&h=1",
@@ -10702,7 +10715,10 @@
 				"quest_name": "Fallen from Grace"
 			}
 		],
-		"name": "Magma Orb",
+		"name": "Rolling Magma",
+        "alt_name": [
+			"Magma Orb"
+		],
 		"isVaal": false,
 		"gemTags": [
 			"Spell",
@@ -11688,6 +11704,7 @@
 			"AoE",
 			"Chaining",
 			"Duration",
+            "Orb",
 			"Active"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/StormCloudGem.png?scale=1&w=1&h=1",
@@ -18301,6 +18318,7 @@
 			"Projectile",
 			"Channelling",
 			"Duration",
+            "Orb",
 			"Active"
 		],
 		"iconPath": "https://web.poecdn.com/image/Art/2DItems/Gems/FrostFury.png?scale=1",
@@ -23234,8 +23252,7 @@
             "Projectile",
             "AoE",
             "Physical",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorSplittingSteel.png",
 		"isActive": true
@@ -23299,8 +23316,7 @@
             "AoE",
             "Duration",
             "Fire",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorFlameWall.png",
 		"isActive": true
@@ -23364,8 +23380,7 @@
             "AoE",
             "Projectile",
             "Fire",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorBlazingSalvo.png",
 		"isActive": true
@@ -23428,8 +23443,7 @@
             "Spell",
             "AoE",
             "Lightning",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorCracklingLance.png",
 		"isActive": true
@@ -23493,8 +23507,7 @@
             "AoE",
             "Chaos",
             "Hex",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorHexblast.png",
 		"isActive": true
@@ -23546,8 +23559,7 @@
             "AoE",
             "Chaos",
             "Hex",
-            "Support",
-            "New Gems"
+            "Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorImpendingDoomSupport.png",
 		"isActive": false
@@ -23597,8 +23609,7 @@
 		"gemTags": [
             "Spell",
             "Projectile",
-            "Support",
-            "New Gems"
+            "Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorPinpointSupport.png",
 		"isActive": false
@@ -23648,8 +23659,8 @@
             "Chaos",
             "Duration",
             "Physical",
-            "Active",
-            "New Gems"
+            "Orb",
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorVoidSphere.png",
 		"isActive": true
@@ -23698,8 +23709,7 @@
             "AoE",
             "Cold",
             "Duration",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorFrostShield.png",
 		"isActive": true
@@ -23748,8 +23758,7 @@
             "AoE",
             "Lightning",
             "Duration",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorSigilofPower.png",
 		"isActive": true
@@ -23769,9 +23778,110 @@
 		"isVaal": false,
 		"gemTags": [
 			"Spell",
-            "New Gems"
+            "Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorElementalPenetrationSupport.png",
 		"isActive": false
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 18,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+			{
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Sharp and Cruel"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Trinity",
+		"isVaal": false,
+		"gemTags": [
+            "Support",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/protected/image/echoes/items/TrinitySupport.png?key=olxW4UsnblEXVX97PS6_MA",
+		"isActive": false
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 34,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+			{
+				"npc": "Petarus and Vanja",
+				"act": 4,
+				"town": "Highgate",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Breaking the Seal"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Hydrosphere",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "AoE",
+            "Cold",
+            "Lightning",
+            "Physical",
+            "Duration",
+            "Active",
+            "Orb",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/protected/image/echoes/items/Hydrosphere.png?key=I_7oZFEYQ3Dudya6rRg28w",
+		"isActive": true
 	}
 ]
