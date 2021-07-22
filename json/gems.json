@@ -840,7 +840,8 @@
 		"gemTags": [
 			"Spell",
 			"Duration",
-			"Support"
+			"Support",
+            "Arcane"
 		],
 		"iconPath": "https://web.poecdn.com/image/Art/2DItems/Gems/Support/ArcaneSurge.png?scale=1",
 		"isActive": false
@@ -1788,73 +1789,6 @@
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/BlinkArrow.png?scale=1&w=1&h=1",
 		"isActive": true
-	},
-	{
-		"reward": {
-
-		},
-		"required_lvl": 18,
-		"color": "green",
-		"isReward": false,
-		"isSupport": true,
-		"buy": [
-
-		],
-		"name": "Block Chance Reduction",
-		"isVaal": false,
-		"gemTags": [
-			"Duration",
-			"Support"
-		],
-		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/Support/BreakBlock.png?scale=1&w=1&h=1",
-		"isActive": false
-	},
-	{
-		"reward": {
-
-		},
-		"required_lvl": 31,
-		"color": "red",
-		"isReward": false,
-		"isSupport": true,
-		"buy": [{
-				"npc": "Siosa",
-				"act": 3,
-				"town": "The Library",
-				"available_to": [
-					"Marauder",
-					"Witch",
-					"Scion",
-					"Ranger",
-					"Duelist",
-					"Shadow",
-					"Templar"
-				],
-				"quest_name": "A Fixture of Fate"
-			},
-			{
-				"npc": "Lilly Roth",
-				"act": 6,
-				"town": "Lioneye's Watch",
-				"available_to": [
-					"Marauder",
-					"Witch",
-					"Scion",
-					"Ranger",
-					"Duelist",
-					"Shadow",
-					"Templar"
-				],
-				"quest_name": "Fallen from Grace"
-			}
-		],
-		"name": "Blood Magic",
-		"isVaal": false,
-		"gemTags": [
-			"Support"
-		],
-		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/Support/BloodMagic.png?scale=1&w=1&h=1",
-		"isActive": false
 	},
 	{
 		"reward": {
@@ -5529,7 +5463,8 @@
 			"Projectile",
 			"Melee",
 			"Bow",
-			"Active"
+			"Active",
+            "Prismatic"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/Elementalhit.png?scale=1&w=1&h=1",
 		"isActive": true
@@ -8660,8 +8595,8 @@
 				"act": 1,
 				"town": "Lioneye's Watch",
 				"available_to": [
+                    "Shadow",
 					"Scion",
-					"Shadow",
 					"Templar",
 					"Witch"
 				],
@@ -10119,7 +10054,10 @@
 				"quest_name": "Fallen from Grace"
 			}
 		],
-		"name": "Lesser Poison",
+		"name": "Chance to Poison",
+        "alt_name": [
+			"Lesser Poison"
+		],
 		"isVaal": false,
 		"gemTags": [
 			"Chaos",
@@ -12051,7 +11989,10 @@
 				"quest_name": "Fallen from Grace"
 			}
 		],
-		"name": "Poison",
+		"name": "Critical Strike Affliction",
+        "alt_name": [
+			"Poison"
+		],
 		"isVaal": false,
 		"gemTags": [
 			"Chaos",
@@ -14335,23 +14276,23 @@
 		"reward": {
 
 		},
-		"required_lvl": 12,
+		"required_lvl": 28,
 		"color": "green",
 		"isReward": false,
 		"isSupport": false,
-		"buy": [{
-				"npc": "Nessa",
-				"act": 1,
-				"town": "Lioneye's Watch",
+		"buy": [
+            {
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
 				"available_to": [
 					"Duelist",
-					"Marauder",
-					"Ranger",
 					"Scion",
-					"Shadow",
-					"Templar"
+					"Marauder",
+					"Templar",
+                    "Ranger"
 				],
-				"quest_name": "The Siren's Cadence"
+				"quest_name": "Sever the Right Hand"
 			},
 			{
 				"npc": "Siosa",
@@ -14892,9 +14833,9 @@
 				"act": 1,
 				"town": "Lioneye's Watch",
 				"available_to": [
+                    "Witch",
 					"Scion",
-					"Templar",
-					"Witch"
+					"Templar"
 				],
 				"quest_name": "The Siren's Cadence"
 			},
@@ -14954,10 +14895,9 @@
 				"act": 1,
 				"town": "Lioneye's Watch",
 				"available_to": [
-					"Witch",
+                    "Witch",
 					"Scion",
 					"Templar"
-
 				],
 				"quest_name": "The Siren's Cadence"
 			},
@@ -18253,7 +18193,8 @@
 			"Projectile",
 			"Melee",
 			"Chaining",
-			"Active"
+			"Active",
+            "Prismatic"
 		],
 		"iconPath": "http://webcdn.pathofexile.com/image/Art/2DItems/Gems/ElementalStrike.png?scale=1&w=1&h=1",
 		"isActive": true
@@ -22042,7 +21983,9 @@
 			"Spell",
 			"Duration",
 			"Guard",
-            "Lightning"
+            "Lightning",
+            "Active",
+            "Arcane"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/ArcaneCloak.png",
 		"isActive": true
@@ -22135,7 +22078,9 @@
 			"AoE",
 			"Channeling",
             "Lightning",
-            "Duration"
+            "Duration",
+            "Active",
+            "Arcane"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/Stormbind.png",
 		"isActive": true
@@ -22278,7 +22223,8 @@
 		"gemTags": [
             "Spell",
             "Lightning",
-			"Suport"
+			"Suport",
+            "Arcane"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-03-12/ArchmageSupport.png",
 		"isActive": false
@@ -22339,9 +22285,10 @@
 		"gemTags": [
 			"Attack",
 			"Projectile",
-			"Bow"
+			"Bow",
+            "Active"
 		],
-		"iconPath": "https://web.poecdn.com/image/Art/2DItems/Gems/Barrage.png",
+		"iconPath": "https://web.poecdn.com/image/Art/2DItems/Gems/Barrage.png?scale=1&w=1&h=1",
 		"isActive": false
 	},
     {
@@ -22546,7 +22493,7 @@
 				"act": 1,
 				"town": "Lioneye's Watch",
 				"available_to": [
-					"Witch",
+                    "Witch",
 					"Scion",
 					"Shadow",
 					"Templar"
@@ -23758,7 +23705,8 @@
             "AoE",
             "Lightning",
             "Duration",
-            "Active"
+            "Active",
+            "Arcane"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2020-09-17/SuperiorSigilofPower.png",
 		"isActive": true
@@ -23941,8 +23889,7 @@
             "Chaining",
             "Physical",
             "Duration",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2021-04-14/Exsanguinate.png",
 		"isActive": true
@@ -24005,8 +23952,7 @@
             "Spell",
             "Physical",
             "Duration",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2021-04-14/CorruptingFever.png",
 		"isActive": true
@@ -24067,8 +24013,7 @@
 		"isVaal": false,
 		"gemTags": [
             "Spell",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2021-04-14/PetrifiedBlood.png",
 		"isActive": true
@@ -24132,8 +24077,7 @@
             "AoE",
             "Physical",
             "Duration",
-            "Active",
-            "New Gems"
+            "Active"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2021-04-14/Reap.png",
 		"isActive": true
@@ -24183,8 +24127,7 @@
 		"gemTags": [
             "Attack",
             "Physical",
-            "Support",
-            "New Gems"
+            "Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2021-04-14/BloodthirstSupport.png",
 		"isActive": true
@@ -24248,8 +24191,7 @@
 		"isVaal": false,
 		"gemTags": [
             "Duration",
-            "Support",
-            "New Gems"
+            "Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2021-04-14/CrueltySupport.png",
 		"isActive": true
@@ -24295,14 +24237,16 @@
 			}
 		],
 		"name": "Arrogance",
+        "alt_name": [
+			"Blood Magic"
+		],
 		"isVaal": false,
 		"gemTags": [
             "Aura",
-            "Support",
-            "New Gems"
+            "Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2021-04-14/ArroganceSupport.png",
-		"isActive": true
+		"isActive": false
 	},
     {
 		"reward": {
@@ -24363,10 +24307,1242 @@
 		"isVaal": false,
 		"gemTags": [
             "Duration",
-            "Support",
-            "New Gems"
+            "Support"
 		],
 		"iconPath": "https://web.poecdn.com/public/news/2021-04-14/LifetapSupport.png",
+		"isActive": false
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 12,
+		"color": "red",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+			{
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Templar"
+				],
+				"quest_name": "The Siren's Cadence"
+			},
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Absolution",
+		"isVaal": false,
+		"gemTags": [
+            "Spell",
+            "Minion",
+            "Duration",
+            "AoE",
+            "Physical",
+            "Lightning",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/Absolution.png",
 		"isActive": true
 	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 28,
+		"color": "red",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+			{
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Templar",
+					"Scion",
+					"Duelist",
+					"Marauder"
+				],
+				"quest_name": "Sever the Right Hand"
+			},
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Battlemage's Cry",
+		"isVaal": false,
+		"gemTags": [
+            "Warcry",
+            "AoE",
+            "Duration",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/BattlemagesCry.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 28,
+		"color": "red",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+			{
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Marauder",
+					"Scion",
+					"Duelist",
+					"Templar"
+				],
+				"quest_name": "Sever the Right Hand"
+			},
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Boneshatter",
+		"isVaal": false,
+		"gemTags": [
+            "Attack",
+            "Melee",
+            "Strike",
+            "AoE",
+            "Duration",
+            "Physical",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/Boneshatter.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 16,
+		"color": "red",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+			{
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Marauder",
+					"Scion",
+					"Duelist",
+					"Templar"
+				],
+				"quest_name": "Intruders in Black"
+			},
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Defiance Banner",
+		"isVaal": false,
+		"gemTags": [
+            "AoE",
+            "Spell",
+            "Aura",
+            "Duration",
+            "Physical",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/DefianceBanner.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 28,
+		"color": "red",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+			{
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Marauder",
+					"Scion",
+					"Duelist",
+					"Templar"
+				],
+				"quest_name": "Sever the Right Hand"
+			},
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Rage Vortex",
+		"isVaal": false,
+		"gemTags": [
+            "Attack",
+            "AoE",
+            "Duration",
+            "Melee",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/RageVortex.png",
+		"isActive": true
+	},
+    {
+		"reward": {
+
+		},
+		"required_lvl": 1,
+		"color": "red",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+			{
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Duelist",
+					"Scion",
+					"Templar"
+				],
+				"quest_name": "Enemy at the Gate"
+			},
+            {
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Shield Crush",
+		"isVaal": false,
+		"gemTags": [
+            "Attack",
+            "AoE",
+            "Physical",
+            "Melee",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/ShieldCrush.png",
+		"isActive": true
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 34,
+		"color": "green",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+            {
+				"npc": "Petarus and Vanja",
+				"act": 4,
+				"town": "Highgate",
+				"available_to": [
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow"
+				],
+				"quest_name": "Breaking the Seal"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Ambush",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"Movement",
+            "Duration",
+            "Travel",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/Ambush.png",
+		"isActive": true
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 12,
+		"color": "green",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+            {
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Ranger",
+					"Scion",
+					"Shadow"
+				],
+				"quest_name": "The Siren's Cadence"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Blade Trap",
+		"isVaal": false,
+		"gemTags": [
+			"Trap",
+			"Attack",
+			"AoE",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/BladeTrap.png",
+		"isActive": true
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 28,
+		"color": "green",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+            {
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Duelist",
+					"Scion",
+					"Shadow",
+                    "Ranger"
+				],
+				"quest_name": "Sever the Right Hand"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Explosive Concoction",
+		"isVaal": false,
+		"gemTags": [
+            "Attack",
+            "AoE",
+            "Fire",
+			"Cold",
+            "Lightning",
+			"Projectile",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/ExplosiveConcoction.png",
+		"isActive": true
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 12,
+		"color": "green",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+            {
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "The Siren's Cadence"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Spectral Helix",
+		"isVaal": false,
+		"gemTags": [
+			"Attack",
+			"Projectile",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/SpectralHelix.png",
+		"isActive": true
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 28,
+		"color": "green",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+            {
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Duelist",
+					"Scion",
+					"Shadow",
+                    "Ranger"
+				],
+				"quest_name": "Sever the Right Hand"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Storm Rain",
+		"isVaal": false,
+		"gemTags": [
+            "Attack",
+            "AoE",
+			"Lightning",
+			"Projectile",
+            "Bow",
+            "Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/StormRain.png",
+		"isActive": true
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 28,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+            {
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Shadow",
+                    "Templar"
+				],
+				"quest_name": "Sever the Right Hand"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Eye of Winter",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"Projectile",
+			"Cold",
+			"Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/EyeofWinter.png",
+		"isActive": true
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 16,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+            {
+				"npc": "Yeena",
+				"act": 2,
+				"town": "The Forest Encampment",
+				"available_to": [
+					"Witch",
+					"Shadow",
+					"Scion"
+				],
+				"quest_name": "Intruders in Black"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Forbidden Rite",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+            "AoE",
+            "Chaos",
+			"Projectile",
+			"Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/ForbiddenRite.png",
+		"isActive": true
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 12,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [{
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Shadow",
+					"Templar",
+                    "Scion",
+					"Witch"
+				],
+				"quest_name": "The Siren's Cadence"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Manabond",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"AoE",
+			"Lightning",
+            "Arcane",
+			"Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/Manabond.png",
+		"isActive": true
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 28,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [
+            {
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Witch",
+					"Scion",
+					"Templar"
+				],
+				"quest_name": "Sever the Right Hand"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Summon Reaper",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"Physical",
+			"Minion",
+            "Spell",
+			"Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/SummonReaper.png",
+		"isActive": true
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 12,
+		"color": "blue",
+		"isReward": false,
+		"isSupport": false,
+		"buy": [{
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Shadow",
+					"Scion",
+					"Witch"
+				],
+				"quest_name": "The Siren's Cadence"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Voltaxic Burst",
+		"isVaal": false,
+		"gemTags": [
+			"Spell",
+			"AoE",
+			"Chaos",
+            "Lightning",
+            "Nova",
+            "Duration",
+			"Active",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/VoltaxicBurst.png",
+		"isActive": true
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 38,
+		"color": "red",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+            {
+				"npc": "Petarus and Vanja",
+				"act": 4,
+				"town": "Highgate",
+				"available_to": [
+					"Marauder",
+					"Scion",
+					"Duelist",
+					"Templar"
+				],
+				"quest_name": "The Eternal Nightmare"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Behead",
+		"isVaal": false,
+		"gemTags": [
+			"Support",
+			"Melee",
+			"Attack",
+            "Strike",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/BeheadSupport.png",
+		"isActive": false
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 8,
+		"color": "red",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [{
+				"npc": "Nessa",
+				"act": 1,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Templar",
+					"Duelist",
+                    "Scion"
+				],
+				"quest_name": "The Caged Brute"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Earthbreaker",
+		"isVaal": false,
+		"gemTags": [
+			"Attack",
+			"Melee",
+			"Slam",
+            "AoE",
+            "Support",
+            "Totem",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/EarthbreakerSupport.png",
+		"isActive": false
+	},
+	{
+		"reward": {
+
+		},
+		"required_lvl": 31,
+		"color": "green",
+		"isReward": false,
+		"isSupport": true,
+		"buy": [
+            {
+				"npc": "Clarissa",
+				"act": 3,
+				"town": "The Sarn Encampment",
+				"available_to": [
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Siosa",
+				"act": 3,
+				"town": "The Library",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "A Fixture of Fate"
+			},
+			{
+				"npc": "Lilly Roth",
+				"act": 6,
+				"town": "Lioneye's Watch",
+				"available_to": [
+					"Marauder",
+					"Witch",
+					"Scion",
+					"Ranger",
+					"Duelist",
+					"Shadow",
+					"Templar"
+				],
+				"quest_name": "Fallen from Grace"
+			}
+		],
+		"name": "Focused Ballista",
+		"isVaal": false,
+		"gemTags": [
+			"Projectile",
+			"Support",
+			"Totem",
+            "New Gems"
+		],
+		"iconPath": "https://web.poecdn.com/public/news/2021-07-22/gems/FocusedBallistaSupport.png",
+		"isActive": false
+	}
 ]
