@@ -3,7 +3,7 @@ title: Introduction
 cover-photo: assets/images/Path_of_Leveling_logo.png
 cover-photo-alt: Path of Leveling logo
 auto-header: none
-icon: fa-github
+icon: fa-user
 order: 1
 ---
 
