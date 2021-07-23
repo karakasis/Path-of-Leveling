@@ -36,7 +36,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   A tool written in Java, with an interactive UI, for Path of Exile.
 author: Karakasis Christos
 email: karakasisx@gmail.com
-avatar: assets/images/Path_of_Leveling_logo.png
+avatar:
 
 # You'll want to customize url and baseurl for your own site:
 baseurl: "/Path-of-Leveling" # the subpath of your site, e.g. /blog
