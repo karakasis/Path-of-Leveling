@@ -1,5 +1,7 @@
 # Path of Leveling
 
+[Latest Release](https://github.com/karakasis/Path-of-Leveling/releases/download/v0.74-beta/PathOfLeveling.jar)
+
 Switching to beta with the introduction of the new UI.
 
 **~~This is an alpha version~~**, **bugs included, if you find an error or crash or bug please report it in this page**
