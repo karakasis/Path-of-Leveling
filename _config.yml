@@ -35,7 +35,7 @@ subtitle: Plan your leveling, track your XP and navigate through the acts.
 description: >- # this means to ignore newlines until "baseurl:"
   A tool written in Java, with an interactive UI, for Path of Exile.
 author: Karakasis Christos
-email: karakasisx@gmail.com
+email: 
 avatar:
 
 # You'll want to customize url and baseurl for your own site:
