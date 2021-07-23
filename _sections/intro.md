@@ -1,4 +1,3 @@
-  
 ---
 title: Introduction
 cover-photo: assets/images/Path_of_Leveling_logo.png
