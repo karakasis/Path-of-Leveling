@@ -1,8 +1,8 @@
   
 ---
-title: Intro
-cover-photo: assets/images/banner.jpg
-cover-photo-alt: example cover photo
+title: Introduction
+cover-photo: assets/images/Path_of_Leveling_logo.png
+cover-photo-alt: Path of Leveling logo
 auto-header: none
 icon: fa-github
 order: 1
