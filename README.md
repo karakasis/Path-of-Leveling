@@ -54,8 +54,10 @@ That's all. Everything else is code.
 - - Locate the PATH variable.
 - - Append the path to the JDK (up to the bin folder) as the PATH value. For example, C:\Program Files\Java\jre1.8.0_191\bin.
 - - - Important: Use a semicolon to separate the JDK path from the other paths that are defined.
-- -Repeat the same for System variables.
-- -Click OK.
+- - Repeat the same for System variables.
+- - Click OK
+- Right Click on PathOfLeveling.jar 
+- Open with... JAVA(TM) Platform
 - Click the preferences gear button.
 - Select your Path of Exile folder located in Steam or Grinding Gear Games folder.
 
