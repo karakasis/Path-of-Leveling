@@ -44,6 +44,7 @@ That's all. Everything else is code.
 ## Launch
 
 - Run PathOfLeveling.jar (Java 8 required) - *[download java](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) jre-8u191-windows-x64.exe at the time of writting this*
+- Alternatively use Google to find jre-8u191-windows-x64.exe download
 - - Right-click the Computer icon on your desktop and select Properties.
 - - Click Advanced system settings.
 - - Click Environment variables.
