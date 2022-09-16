@@ -44,6 +44,18 @@ That's all. Everything else is code.
 ## Launch
 
 - Run PathOfLeveling.jar (Java 8 required) - *[download java](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) jre-8u191-windows-x64.exe at the time of writting this*
+- - Right-click the Computer icon on your desktop and select Properties.
+- - Click Advanced system settings.
+- - Click Environment variables.
+- - Under User variables, click New.
+- - Enter JAVA_HOME as the variable name.
+- - Enter the path to the JDK as the variable value. For example, C:\Program Files\Java\jre1.8.0_191.
+- - Click OK.
+- - Locate the PATH variable.
+- - Append the path to the JDK (up to the bin folder) as the PATH value. For example, C:\Program Files\Java\jre1.8.0_191\bin.
+- - - Important: Use a semicolon to separate the JDK path from the other paths that are defined.
+- -Repeat the same for System variables.
+- -Click OK.
 - Click the preferences gear button.
 - Select your Path of Exile folder located in Steam or Grinding Gear Games folder.
 
